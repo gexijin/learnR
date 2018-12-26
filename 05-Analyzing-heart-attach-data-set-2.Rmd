@@ -1,0 +1,272 @@
+# Analyzing heart attack data set II
+
+We continue to investigate the heart attack dataset. First, let’s read the data in again and change several variables to factors. Note that you must set the working directory to where the data file is stored on your computer. I encourage you to define a project associated with a folder.
+```{r}
+#setwd("C:/users/Xijin.Ge/R/week7") # set working directory, not necessary if loading a project 
+df <- read.table("heartatk4R.txt", sep = "\t", header = TRUE)  # read data
+df$DRG <- as.factor(df$DRG)  # convert DRG variable to factor
+df$DIED <- as.factor(df$DIED)
+df$DIAGNOSIS <- as.factor(df$DIAGNOSIS)
+df$SEX <- as.factor(df$SEX)
+str(df)  # double check 
+```
+
+## Scatter plot in ggplot2
+Hadley Wickham wrote the ggplot2 package in 2005 following Leland Wilkinson’s grammar of graphics, which provides a formal, structured way of visualizing data. Similarly, R was originally written by Robert Gentleman and Ross Ihaka in the 1990s; Linux was developed by Linus Torvalds, a student, at the same period. A few superheroes can make computing much easier for millions of people. ggplot2 uses a different approach to graphics. 
+
+```{r fig.keep='none'}
+#install.packages("ggplot2") # install the package
+library(ggplot2)  # load the package
+ggplot(df, aes(x = LOS, y = CHARGES))  # Specify data frame and aesthetic mapping
+```
+
+This line does not finish the plot; it just specifies the name of the data frame, which is the required input data type, and defines the so-called **aesthetic mapping**: LOS maps to x-axis while CHARGES maps to the y-axis.  To complete the plot, we use the geom_point function to add data points, which is called **geometric objects**. 
+```{r fig.keep='none', warning=FALSE}
+ggplot(df, aes(x = LOS, y = CHARGES)) + geom_point()   # scatter plot
+```
+
+Thus, it is a two-step process to generate a scatter plot. This seems cumbersome at first, but it is convenient to add additional features or customize the plot step by step.  Let’s add a trend line with a confidence interval. 
+```{r fig.keep='none', warning=FALSE}
+ggplot(df, aes(x = LOS, y = CHARGES)) + geom_point() + stat_smooth(method = lm)
+```
+
+As we keep adding elements to the plot, this line of code gets longer. So we break the code into multiple lines as below. The “+” at the end of the lines signifies that the plot is not finished and tell R to keep reading the next line. This code below does the same thing as the above, but it is easier to read.  I often use the tab key in the second line to remind myself that it is continued from the above line. 
+```{r fig.keep='none',warning=FALSE}
+ggplot(df, aes(x = LOS, y = CHARGES)) +  # aesthetic mapping
+	     geom_point() +                    # add data points    
+       stat_smooth(method = lm)          # add trend line
+```
+
+As you can see from this code, it also enables us to add comments for each step, making the code easy to read. This is important, as we often recycle our codes.  
+
+We can also customize the plot by adding additional lines of code (Figure \@ref(fig:15-1)):
+
+(ref:15-1) Scatter plot using ggplot2.
+
+```{r 15-1, warning=FALSE, fig.cap='(ref:15-1)', fig.align='center'}
+ggplot(df, aes(x = LOS, y = CHARGES)) +                 # aesthetic mapping
+       geom_point() +                                   # add data points    
+	     stat_smooth(method = lm) +                       # add trend line
+       xlim(0, 25) +         		                        # change plotting limits of x-axis 
+       labs(x = "Length of stay", y = "Charges ($)") +  # change x and y labels
+       annotate("text", x = 3, y = 45000, label = ("R = 0.74"))  # add text to plot coordinates
+```
+
+You can learn other ways to customize your plot by googling. For example, try to find a way to add title to the plot by using keyword “ggplot2 add title to plot”. 
+
+It is easy to represent other characteristics of data points (columns) using additional aesthetic mappings, such as linetype, color, size, fill (“inside” color). 
+```{r fig.keep='none', warning=FALSE}
+ggplot(df, aes(x = LOS, y = CHARGES)) + geom_point()               # basic scatter plot
+ggplot(df, aes(x = LOS, y = CHARGES, color = DRG)) + geom_point()  # map DRG to color
+```
+
+(ref:15-2) Changing color and shape to represent multivariate data in ggplot2.
+
+```{r 15-2, warning=FALSE, fig.cap='(ref:15-2)', fig.align='center'}
+ggplot(df, aes(x = LOS, y = CHARGES, color = DRG, shape = SEX)) +  # map SEX to shape
+       geom_point()
+```
+
+At each step, we add additional information about these patients (Figure \@ref(fig:15-2)). With ggplot2, we can visualize complex, multivariate data by mapping different columns into diverse types of aesthetics. Figure 1 shows a strong positive correlation between charges and length of hospital stay, which is expected as many itemized costs are billed daily. Note there are over 12,000 data points on these plots, many are plotted near or exactly at the same places, especially at the lower left corner.  stat_density2d() can be used to color code density.
+
+These plots are big in file size when you save it in a vector format (**metafile**), which often offer higher resolution. If you have many such plots in a paper or thesis, your file size can be big. These problems can be avoided if you use the **bitmap** format. 
+
+**Challenge 1**: Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis. 
+
+## Histograms and density plots
+In addition to data points(geom_points), there are many other **geometric objects**, such as histogram(geom_histogram), lines (geom_line), and bars (geom_bar), and so on. We can use these geometric objects to generate different types of plots.
+To plot a basic histogram:
+```{r fig.keep='none', message=FALSE}
+ggplot(df, aes(x = AGE)) + geom_histogram()
+```
+
+Then we can refine it and add a density curve (Figure \@ref(fig:15-3)):
+
+(ref:15-3) Histogram with density curve.
+
+```{r 15-3, message=FALSE, fig.cap='(ref:15-3)', fig.align='center'}
+ggplot(df, aes(x = AGE, y = ..density..)) + 
+       geom_histogram(fill = "cornsilk", 
+                      colour = "grey60", size = .2) +
+       geom_density()
+```
+
+Combined density plots are useful in comparing the distribution of subgroups of data points. 
+```{r fig.keep='none'}
+ggplot(df, aes(x = AGE)) + geom_density(alpha = 0.3)  # all data
+```
+
+Use color to differentiate sex:
+```{r fig.keep='none'} 
+ggplot(df, aes(x = AGE, color = SEX)) + geom_density(alpha = 0.3)  # Figure 15.4A
+```
+
+Here, we split the dataset into two portions, men and women, and plotted their density distribution on the same plot. Figure \@ref(fig:15-4)A shows that age distribution is very different between men and women. Women’s distribution is skewed to the right and they are on average over ten years older than men. This is surprising, given that this dataset contains all heart attack admissions in New York state in 1993. 
+
+The fill mapping changes the “inside” color:
+```{r fig.keep='none'}
+ggplot(df, aes(x = AGE, fill = SEX)) + geom_density(alpha = 0.3)  # Figure 15.4B
+```
+
+This plot shows the same information. It looks nicer, at least to me. We can **split the plot into multiple facets**, like what did with lattice package:
+```{r fig.keep='none'}
+ggplot(df, aes(x = AGE, fill = SEX)) + 
+       geom_density(alpha = 0.3) + facet_grid(DRG ~.)  # Figure 15.4C
+```
+
+(ref:15-4) Density plots.
+
+```{r 15-4, echo=FALSE, fig.cap='(ref:15-4)', fig.align='center'}
+knitr::include_graphics("images/img1504_density.png")
+```
+
+Recall the DRG=121 represents patients who survived but developed complications; DRG=122 denotes those without complications and DRG=123 are patients who did not survive.  Figure \@ref(fig:15-4)C suggests that women in all three groups are older than men counterparts. If we examine the distribution of male patients’ age distribution across facets, we can see that the distribution is skewed to the right in deceased patients (DRG=123), indicating that perhaps older people are less likely to survive a heart attack. Survivors without complications (DRG= 122) tend to be younger than survivors with complications. 
+
+
+**Challenge 2**:  Create density plots like Figure \@ref(fig:15-5) to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20. 
+
+(ref:15-5) Distribution of LOS by DRG groups grouped by SEX.
+
+```{r 15-5, echo=FALSE, warning=FALSE, fig.cap='(ref:15-5)', fig.align='center'}
+ggplot(df, aes(x = LOS,fill = DRG)) + geom_density(alpha = 0.3) + 
+       facet_grid(SEX ~ .) + xlim(0, 20)  # Figure 15.5
+```
+
+## Box plots and Violin plots
+We can follow the same rule to generate boxplots using the geom_boxplot ( ). Let’s start with a basic version.
+```{r fig.keep='none'}
+ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot()  # basic boxplot 
+ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot() + facet_grid(DRG ~ .)  # Figure 15.6A
+ggplot(df, aes(x = SEX, y = AGE)) + geom_violin() + facet_grid(DRG ~ .)  # Figure 15.6B
+```
+
+The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins. 
+
+**Challenge 3**: Generate a violin plot like Figure \@ref(fig:15-6)C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+
+(ref:15-6) Boxplot and violin plots using ggplot2.
+
+```{r 15-6, echo=FALSE, fig.cap='(ref:15-6)', fig.align='center'}
+knitr::include_graphics("images/img1506_boxviolin.png")
+```
+
+```{r echo=FALSE, fig.keep='none'}
+ggplot(df, aes(x = DRG, y = LOS)) + geom_violin()  + facet_grid(SEX ~ .) + 
+       labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20)  # Figure 15.6C
+```
+
+## Bar plot with error bars
+Suppose we are interested in examining whether people with certain diagnosis codes stays longer or shorter in the hospital after a heart attack. We can, of course, use the aggregate function to generate a table with means LOS by category.
+```{r warning=FALSE}
+aggregate(df, by = list(df$DIAGNOSIS), FUN = mean, na.rm = TRUE)
+```
+
+We can be happy with this table and call it quits. However, tables are often not as easy to interpret as a nicely formatted graph. Instead of the aggregate function, we use the powerful dplyr package to summarize the data and then to generate a bar plot showing both the means and standard errors.  I stole some code and ideas from R graphics cookbook and this website: [http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/](http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/)
+```{r message=FALSE}
+#install.packages("dplyr") # dplyr package for summary statistics by group
+library(dplyr)  # load the package
+```
+
+To summarize data by groups/factors, the dplyr package uses a similar type of grammar like ggplot2, where operations are added sequentially. Similar to pipes in Unix, commands separated by “%>%” are executed sequentially where the output of one step becomes the input of the next. The follow 6 lines are part of one command, consisting of three big steps.
+```{r}
+stats <- df %>%  # names of the new data frame and the data frame to be summarized
+  group_by(DIAGNOSIS) %>%  # grouping variable
+  summarise(mean = mean(LOS),  # mean of each group
+            sd   = sd(LOS),    # standard deviation of each group
+            n    = n(),        # sample size per group
+            se   = sd(LOS) / sqrt(n()))  # standard error of each group
+```
+
+The resultant data frame is a detailed summary of the data by DIAGNOSIS:
+```{r}
+stats
+```
+
+Now we can use ggplot2 to plot these statistics (Figure \@ref(fig:15-7)):
+
+(ref:15-7) Average LOS by DIAGNOSIS group with error bars representing standard error.
+
+```{r 15-7, fig.cap='(ref:15-7)', fig.align='center'}
+ggplot(stats, aes(x = DIAGNOSIS, y = mean)) +   # data & aesthetic mapping
+	     geom_bar(stat = "identity") +            # bars represent average
+	     geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)  # error bars
+```
+
+Note that the mean-se and mean+se refer to the two columns in the stats data frame and defines the error bars. Because we have an extremely large sample size, the standard errors are small. People with a diagnosis of 41031 stays shorter in the hospital. By looking up the IDC code in [http://www.nuemd.com](http://www.nuemd.com), we notice that this code represents “Acute myocardial infarction of inferoposterior wall, initial episode of care”, which probably makes sense.
+
+As we did previously, we want to define the LOS bars for men and women separately. We first need to go back and generate different summary statistics.
+```{r message=FALSE}
+stats2 <- df %>% 
+  group_by(DIAGNOSIS, SEX) %>%   # two grouping variables
+  summarise(mean = mean(LOS),  
+            sd   = sd(LOS), 
+            n    = n(),  
+            se   = sd(LOS) / sqrt(n())) 
+```
+
+The entire dataset was divided into 18 groups according to all possible combinations of DIAGNOSIS and SEX. For each group, the LOS numbers are summarized in terms of mean, standard deviation (sd), observations (n), and standard errors(se). Below is the resultant data frame with summary statistics:
+```{r}
+stats2
+```
+
+Now we are ready to generate bar plot for men and women separately using the fill aesthetic mapping:
+
+(ref:15-8) The length of stay summarized by diagnosis and sex. Error bars represent standard error.
+
+```{r 15-8, fig.cap='(ref:15-8)', fig.align='center'}
+ggplot(stats2, aes(x = DIAGNOSIS, y = mean, fill = SEX)) +  # mapping
+       geom_bar(stat = "identity", position = "dodge") +    # bars  mean LOS
+       labs(x = "Diagnosis codes", y = "Length of Stay") +  # axes labels
+       geom_errorbar(aes(ymin = mean - se, ymax = mean + se),  # error bars
+       position = position_dodge(.9), width = 0.2)
+```
+
+(ref:15-9) Mean ages for patients with different diagnosis and treatment outcome.
+
+```{r 15-9, echo=FALSE, message=FALSE, fig.cap='(ref:15-9)', fig.align='center'}
+stats3 <- df %>% 
+  group_by(DIAGNOSIS, DRG) %>%   # two grouping variables
+  summarise(mean = mean(AGE),  
+            sd   = sd(AGE), 
+            n    = n(),  
+            se   = sd(AGE) / sqrt(n())) 
+ggplot(stats3, aes(x = DIAGNOSIS, y = mean, fill = DRG)) +  # mapping
+       geom_bar(stat = "identity", position = "dodge") +         # bars  mean AGE
+       labs(x = "Diagnosis codes", y = "Age(yrs)") +             # axes labels
+       geom_errorbar(aes(ymin = mean - se, ymax = mean + se),     # error bars
+                     position = position_dodge(.9), width = 0.2)
+```
+
+**Challenge 4**. Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
+
+Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)
+
+As you could see from these plots, **ggplot2** generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users. 
+Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can **google it, try the example code**, and modify it to fit your needs. It is all free! All your questions have been asked and answered. I will buy you a beer if you can prove otherwise!  Enjoy coding!
+
+## Statistical models are easy; interpretations and verifications are not! 
+Be using pair-wised correlation analysis, we found that women have a much higher mortality rate than men due to heart attack. We also found that women are much older than men. These are obviously confounding effects.
+
+We need to **delineate the effects of multiple factors using multiple linear regression**.  In our model below, we express the charges as a function of all other factors using **multiple linear regression**.  
+```{r}
+fit <- lm(CHARGES ~ SEX + LOS + AGE + DRG + DIAGNOSIS)
+summary(fit) 
+```
+
+As we could see from above, one levels for factors (such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. This is really small number compared to overall charges and also the P value is just marginally significant for this large sample. This is in contrast to the **t.test(CHARGES ~ SEX)**, when we got the opposite conclusion. This is because we did not control for other factors. 
+
+The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the P values are cutoff at 2e-16, the **t value** is an indicator of significance.  LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males.   Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 410914, 1051 and 41071 incurred less charges compared with those with 41001.  
+
+To investigate mortality, which is a binary outcome, we use **logistic regression**.  
+```{r}
+fit <- glm(DIED ~ SEX + LOS + AGE + DIAGNOSIS, family = binomial( ))
+summary(fit)
+```
+
+Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.
+
+**Challenge 10**. Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model.   Interpret your results.
+
+This is not part of the challenge, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression. 
+
+We still need pair-wised examinations, because we cannot put two highly correlated factors in the same model.
