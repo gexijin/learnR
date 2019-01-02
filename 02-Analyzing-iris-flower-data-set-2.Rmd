@@ -26,7 +26,7 @@ y %*% t(z)         # Matrix multiplication, I never used this.
 ```
 
 ### Scatter plot matrix
-**Challenge 1**: Generate a scatter plot matrix using the first 4 columns of iris flower dataset. Use the species information to color-code the data points. Add legends, and provide brief interpretation.
+**Challenge 2a**: Generate a scatter plot matrix using the first 4 columns of iris flower dataset. Use the species information to color-code the data points. Add legends, and provide brief interpretation.
 
 ### Heatmap
 
@@ -36,7 +36,7 @@ y %*% t(z)         # Matrix multiplication, I never used this.
 x <- as.matrix(iris[, 1:4])   
 heatmap(x, scale = "column")  # Heatmap with hierarchical clustering trees.  Numbers are scaled by column.
 ```
-If you are a perfectionist, here is how to fine-tune the graph. We define a function called ppc ( ). As you may notice R works by calling the name of the function and the input to that function in parentheses. Multiple input parameters are separated by a comma. We also notice that the follow commands spans several lines. 
+If you are a perfectionist, here is how to fine-tune the graph. We define a function called ppc ( ). As you may notice R works by calling the name of the function and the input to that function in parentheses. Multiple input parameters are separated by a comma. We also notice that the follow commands span several lines. 
 
 ```{r fig.keep='none'}
 ppc <- function(x, ...){  # A distance function of 1-PPC (Pearson’s correlation coefficient)
@@ -55,9 +55,9 @@ knitr::include_graphics("images/img0207_heatmap.png")
 
 More advanced customization can be done with heatmap.2 in the ggplots package. 
 
-Note that yellow indicates relatively large numbers and red represent relatively small numbers.  Rows or columns that are bracketed closer are more similar. So the trees display a hierarchy of similarities. 
+Note that yellow indicates relatively large numbers and red represents relatively small numbers.  Rows or columns that are bracketed closer are more similar. So the trees display a hierarchy of similarities. 
 
-**Challenge 9**: Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers? 
+**Challenge 2b**: Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers? 
 
 Below is another solution for a heatmap of the iris flower data set. 
 
@@ -84,7 +84,7 @@ legend("topright", levels(iris$Species),
 ```
 
 ### Star plot Segment diagrams
-**Star plots uses stars to visualize multidimensional data.** Radar charts are a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!
+**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!
 ```{r fig.keep='none'}
 x = iris [, 1:4]
 stars(x)         # do I see any diamonds?  I want the bigger one!
@@ -92,10 +92,10 @@ stars(x, key.loc = c(17,0))    # What does this tell you?
 ```
 
 ### Segment diagrams
-The stars function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements. 
+The stars() function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements. 
 ```{r fig.keep='none'}
 stars(x, key.loc = c(18,0.5), draw.segments = T )    
-stars(state.x77, draw.segments = T, key.loc = c(13, 1.0))            # Where is South Dakota?
+stars(state.x77, draw.segments = T, key.loc = c(13, 1.0))  # Where is South Dakota?
 ```
 
 (ref:12-4) Star plots and segments diagrams.
@@ -104,7 +104,7 @@ stars(state.x77, draw.segments = T, key.loc = c(13, 1.0))            # Where is 
 knitr::include_graphics("images/img1204_starsegment.png")
 ```
 
-**Challenge 2**: Re-produce the segments diagram of the state data and offer some interpretation regarding South Dakota compared with other states. 
+**Challenge 2c**: Re-produce the segments diagram of the state data and offer some interpretation regarding South Dakota compared with other states. 
 
 ### Parallel coordinate plot
 Parallel coordinate plot is a straightforward way of visualizing multivariate data using lines.
@@ -130,10 +130,12 @@ The result is shown in Figure \@ref(fig:12-5). Note that each line represents a 
 ```{r 12-6, out.width='80%', fig.cap='(ref:12-6)', fig.align='center'}
 #boxplot(x)  # plain version. Column names may not shown properly
 par(mar = c(8, 2, 2, 2))  # set figure margins (bottom, left, top, right)
-boxplot(x, las = 2)   # Figure 12.6
+boxplot(x, las = 2)   # Figure 2.5
 ```
 
-Note the las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely. 
+Notice that las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely. 
+
+**Challenge 2d**: Write R code to generate Figure \@ref(fig:12-7). 
 
 (ref:12-7) Scatter plot shows the correlation of petal width and petal length.
 
@@ -145,8 +147,7 @@ legend("topleft", levels(Species), fill = rainbow(3))    # add legends on toplef
 abline(lm(Petal.Length ~ Petal.Width))
 ```
 
-**Challenge 3**: Write R code to generate Figure \@ref(fig:12-7). 
-
+**Challenge 2e**: Write R code to generate Figure \@ref(fig:12-8), which show the means of petal length for each of the species with error bars corresponding to standard deviations. 
 (ref:12-8) Bar plot of average petal lengths for 3 species.
 
 ```{r 12-8, echo=FALSE, message=FALSE, out.width='80%', fig.cap='(ref:12-8)', fig.align='center'}
@@ -164,8 +165,6 @@ arrows(xloc, Means - SDs,  # add error bars as arrows
 text(xloc, 0.5, paste("n=", Nsamples))   # add sample size to each group
 ```
 
-**Challenge 4**: Write R code to generate Figure \@ref(fig:12-8), which show the means of petal length for each of the species with error bars corresponding to standard deviations. 
-
 ## Combining plots
 It is possible to combine multiple plots at the same graphics window.
 
@@ -182,9 +181,9 @@ hist(Petal.Width)
 par(op)  # restore old parameters; otherwise affect all subsequent plots
 ```
 
-The result is shown in Figure \@ref(fig:13-1). This plot gives a good over view of the distribution of multiple variables. We can see that the overall distribution of petal length and petal width is quite unusual. 
+The result is shown in Figure \@ref(fig:13-1). This plot gives a good overview of the distribution of multiple variables. We can see that the overall distributions of petal length and petal width are quite unusual. 
 
-**Challenge 1**: Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations. 
+**Challenge 2f**: Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations. 
 
 ## Plot using principal component analysis (PCA)
 PCA is a linear projection method. As illustrated in Figure \@ref(fig:13-4), it tries to define a new set of orthogonal coordinates to represent the dataset such that the new coordinates can be ranked by the amount of variation or information it captures in the dataset. After running PCA, you get many pieces of information: 
@@ -226,7 +225,7 @@ plot(pca$x[, 1:2], pch = 1, col = iris$Species,
      legend("topright", levels(iris$Species), fill = rainbow(3))
 ```
 
-The result (left side of Figure \@ref(fig:13-5)) is a projection of the 4-dimentional iris flowering data on 2-dimensional space using the first two principal components. From this I observed that the first principal component alone can be used to distinguish the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris viginica. If -1 < PC1 < 1, then Iris versicolor.
+The result (left side of Figure \@ref(fig:13-5)) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. From this I observed that the first principal component alone can be used to distinguish the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
 
 (ref:13-5) PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
 
@@ -249,7 +248,7 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +   # starting 
 ```
 
 ## First attempt at ggplot2
-We mentioned the 3 big plotting systems in R: base graphics, lattice, and ggplot2. Now let’s try ggplot2. First, let’s construct a data frame as demanded by ggplot2.
+There are 3 big plotting systems in R: base graphics, lattice, and ggplot2. Now let’s try ggplot2. First, let’s construct a data frame as demanded by ggplot2.
 ```{r fig.keep='none'}
 pcaData <- as.data.frame(pca$x[, 1:2])
 pcaData <- cbind(pcaData, iris$Species)	
@@ -274,12 +273,12 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting g
     	 theme(aspect.ratio = 1)                                      # width and height ratio             
 ```
 
-The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional elements by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
+The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
 
-**Challenge 4**: Create PCA plot of the state.x77 data set. Use the state.region information to color code the states. Interpret your results. Use both R base graphics and ggplot2. Hint: do not forget normalization using the scale option. 
+**Challenge 2g**: Create PCA plot of the state.x77 data set. Use the state.region information to color code the states. Interpret your results. Use both R base graphics and ggplot2. Hint: do not forget normalization using the scale option. 
 
 ## Classification: Predicting the odds of binary outcomes 
-It is easy to distinguish *I. setosa* from the other two species, just based on petal length along. Here we focus on building a predictive model that can predict between *I. versicolor* and *I. virginica*. For this we use the logistic regression to model the odd ratio of being *I. virginica* as a function of all of the 4 measurements: 
+It is easy to distinguish *I. setosa* from the other two species, just based on petal length alone. Here we focus on building a predictive model that can predict between *I. versicolor* and *I. virginica*. For this we use the logistic regression to model the odd ratio of being *I. virginica* as a function of all of the 4 measurements: 
 
 $$ln(odds)=ln(\frac{p}{1-p})
                      =a×Sepal.Length + b×Sepal.Width + c×Petal.Length + d×Petal.Width+c+e.$$
@@ -296,10 +295,10 @@ Sepal length and width are not useful in distinguishing versicolor from *virgini
 If you do not fully understand the mathematics behind linear regression or logistic regression, do not worry about it too much.  Me either. In this class, I just want to show you how to do these analysis in R and interpret the results. 
 I do not understand how computers work. Yet I **use** it every day. 
 
-**Challenge 10**: So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:
+**Challenge 2h**: So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:
 
 •	What distinguishes these three species? 
 
 •	If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to?
 
-Review all the analysis we did this and last week, examine the raw data, and answer the above questions. Write a paragraph and provide evidence of your thinking. Do more analysis if needed. If you give wrong answer for the 2nd question, you may lose 50% of this week’s homework points. So think hard!  If you are uncertain, avoid assertive claims. 
+Review all the analysis we did, examine the raw data, and answer the above questions. Write a paragraph and provide evidence of your thinking. Do more analysis if needed. If you give wrong answer for the 2nd question, you may lose 50% of homework points. So think hard!  If you are uncertain, avoid assertive claims. 

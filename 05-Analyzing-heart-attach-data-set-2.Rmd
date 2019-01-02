@@ -67,11 +67,11 @@ ggplot(df, aes(x = LOS, y = CHARGES, color = DRG, shape = SEX)) +  # map SEX to 
        geom_point()
 ```
 
-At each step, we add additional information about these patients (Figure \@ref(fig:15-2)). With ggplot2, we can visualize complex, multivariate data by mapping different columns into diverse types of aesthetics. Figure 1 shows a strong positive correlation between charges and length of hospital stay, which is expected as many itemized costs are billed daily. Note there are over 12,000 data points on these plots, many are plotted near or exactly at the same places, especially at the lower left corner.  stat_density2d() can be used to color code density.
+At each step, we add additional information about these patients (Figure \@ref(fig:15-2)). With ggplot2, we can visualize complex, multivariate data by mapping different columns into diverse types of aesthetics. Figure \@ref(fig:15-1) shows a strong positive correlation between charges and length of hospital stay, which is expected as many itemized costs are billed daily. Note there are over 12,000 data points on these plots, many are plotted near or exactly at the same places, especially at the lower left corner.  stat_density2d() can be used to color code density.
 
 These plots are big in file size when you save it in a vector format (**metafile**), which often offer higher resolution. If you have many such plots in a paper or thesis, your file size can be big. These problems can be avoided if you use the **bitmap** format. 
 
-**Challenge 1**: Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis. 
+**Challenge 5a**: Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis. 
 
 ## Histograms and density plots
 In addition to data points(geom_points), there are many other **geometric objects**, such as histogram(geom_histogram), lines (geom_line), and bars (geom_bar), and so on. We can use these geometric objects to generate different types of plots.
@@ -98,20 +98,20 @@ ggplot(df, aes(x = AGE)) + geom_density(alpha = 0.3)  # all data
 
 Use color to differentiate sex:
 ```{r fig.keep='none'} 
-ggplot(df, aes(x = AGE, color = SEX)) + geom_density(alpha = 0.3)  # Figure 15.4A
+ggplot(df, aes(x = AGE, color = SEX)) + geom_density(alpha = 0.3)  # Figure 5.4A
 ```
 
 Here, we split the dataset into two portions, men and women, and plotted their density distribution on the same plot. Figure \@ref(fig:15-4)A shows that age distribution is very different between men and women. Women’s distribution is skewed to the right and they are on average over ten years older than men. This is surprising, given that this dataset contains all heart attack admissions in New York state in 1993. 
 
 The fill mapping changes the “inside” color:
 ```{r fig.keep='none'}
-ggplot(df, aes(x = AGE, fill = SEX)) + geom_density(alpha = 0.3)  # Figure 15.4B
+ggplot(df, aes(x = AGE, fill = SEX)) + geom_density(alpha = 0.3)  # Figure 5.4B
 ```
 
 This plot shows the same information. It looks nicer, at least to me. We can **split the plot into multiple facets**, like what did with lattice package:
 ```{r fig.keep='none'}
 ggplot(df, aes(x = AGE, fill = SEX)) + 
-       geom_density(alpha = 0.3) + facet_grid(DRG ~.)  # Figure 15.4C
+       geom_density(alpha = 0.3) + facet_grid(DRG ~.)  # Figure 5.4C
 ```
 
 (ref:15-4) Density plots.
@@ -123,26 +123,26 @@ knitr::include_graphics("images/img1504_density.png")
 Recall the DRG=121 represents patients who survived but developed complications; DRG=122 denotes those without complications and DRG=123 are patients who did not survive.  Figure \@ref(fig:15-4)C suggests that women in all three groups are older than men counterparts. If we examine the distribution of male patients’ age distribution across facets, we can see that the distribution is skewed to the right in deceased patients (DRG=123), indicating that perhaps older people are less likely to survive a heart attack. Survivors without complications (DRG= 122) tend to be younger than survivors with complications. 
 
 
-**Challenge 2**:  Create density plots like Figure \@ref(fig:15-5) to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20. 
+**Challenge 5b**:  Create density plots like Figure \@ref(fig:15-5) to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20. 
 
 (ref:15-5) Distribution of LOS by DRG groups grouped by SEX.
 
 ```{r 15-5, echo=FALSE, warning=FALSE, fig.cap='(ref:15-5)', fig.align='center'}
 ggplot(df, aes(x = LOS,fill = DRG)) + geom_density(alpha = 0.3) + 
-       facet_grid(SEX ~ .) + xlim(0, 20)  # Figure 15.5
+       facet_grid(SEX ~ .) + xlim(0, 20)  # Figure 5.5
 ```
 
 ## Box plots and Violin plots
 We can follow the same rule to generate boxplots using the geom_boxplot ( ). Let’s start with a basic version.
 ```{r fig.keep='none'}
 ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot()  # basic boxplot 
-ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot() + facet_grid(DRG ~ .)  # Figure 15.6A
-ggplot(df, aes(x = SEX, y = AGE)) + geom_violin() + facet_grid(DRG ~ .)  # Figure 15.6B
+ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot() + facet_grid(DRG ~ .)  # Figure 5.6A
+ggplot(df, aes(x = SEX, y = AGE)) + geom_violin() + facet_grid(DRG ~ .)  # Figure 5.6B
 ```
 
 The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins. 
 
-**Challenge 3**: Generate a violin plot like Figure \@ref(fig:15-6)C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+**Challenge 5c**: Generate a violin plot like Figure \@ref(fig:15-6)C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
 
 (ref:15-6) Boxplot and violin plots using ggplot2.
 
@@ -150,9 +150,9 @@ The last version is a violin plot. It shows more details about the distribution 
 knitr::include_graphics("images/img1506_boxviolin.png")
 ```
 
-```{r echo=FALSE, fig.keep='none'}
+```{r echo=FALSE, fig.keep='none', warning=FALSE}
 ggplot(df, aes(x = DRG, y = LOS)) + geom_violin()  + facet_grid(SEX ~ .) + 
-       labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20)  # Figure 15.6C
+       labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20)  # Figure 5.6C
 ```
 
 ## Bar plot with error bars
@@ -237,7 +237,7 @@ ggplot(stats3, aes(x = DIAGNOSIS, y = mean, fill = DRG)) +  # mapping
                      position = position_dodge(.9), width = 0.2)
 ```
 
-**Challenge 4**. Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
+**Challenge 5d**. Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
 
 Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)
 
@@ -245,7 +245,7 @@ As you could see from these plots, **ggplot2** generates nicely-looking, publica
 Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can **google it, try the example code**, and modify it to fit your needs. It is all free! All your questions have been asked and answered. I will buy you a beer if you can prove otherwise!  Enjoy coding!
 
 ## Statistical models are easy; interpretations and verifications are not! 
-Be using pair-wised correlation analysis, we found that women have a much higher mortality rate than men due to heart attack. We also found that women are much older than men. These are obviously confounding effects.
+By using pair-wised correlation analysis, we found that women have a much higher mortality rate than men due to heart attack. We also found that women are much older than men. These are obviously confounding effects.
 
 We need to **delineate the effects of multiple factors using multiple linear regression**.  In our model below, we express the charges as a function of all other factors using **multiple linear regression**.  
 ```{r}
@@ -265,7 +265,7 @@ summary(fit)
 
 Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.
 
-**Challenge 10**. Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model.   Interpret your results.
+**Challenge 5e**. Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model.   Interpret your results.
 
 This is not part of the challenge, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression. 
 

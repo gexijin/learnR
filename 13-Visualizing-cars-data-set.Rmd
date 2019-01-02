@@ -8,7 +8,7 @@ In addition to the graphics functions in base R, there are many other packages w
   
   We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table. 
   
-(ref:9-02) Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder.
+(ref:9-02) List of graphics functions in base R.
 
 ```{r 9-02, echo=FALSE, fig.cap='(ref:9-02)', fig.align='center'}
 knitr::include_graphics("images/img0902_function.png")
@@ -28,7 +28,7 @@ mtcars  # show the mtcars dataset
 We start with a basic scatter plot
 ```{r fig.show='hide'}
 attach(mtcars)  # attach dataset to memory
-plot(wt, mpg)  # weight (wt) and miles per gallon (mpg)
+plot(wt, mpg)  # weight (wt) and miles per gallon (mpg), see Figure 13.3
 ```
 
 This generates a basic scatter plot with default settings using wt as x and mpg as y. Each data points are represented as an open circle on the plot. As you could see,  heavier vehicles are less fuel efficient. We can add a regression line on this scatter plot using a lower-level graphics function **abline**:
@@ -80,7 +80,7 @@ Note that we added this legend at the (5, 30) position on the plot. To see all t
 
 This website lists all the parameters for R graphics: [http://www.statmethods.net/advgraphs/parameters.html](http://www.statmethods.net/advgraphs/parameters.html). Now we want to finish up this plot by adding axis labels, and title. We also changed the x-axis range to 1-6 using the xlim parameter to specify the limits. We finally put everything together. 
 
-(ref:9-4) Enhanced scatter plot of mtcars data. Also called bubble plot or ballon plot.
+(ref:9-4) Enhanced scatter plot of mtcars data. Also called bubble plot or balloon plot.
 
 ```{r 9-4, echo=FALSE, fig.cap='(ref:9-4)', fig.align='center'}
 plot(wt, mpg, pch = am, col = rainbow(8)[cyl], cex = hp/50,
@@ -96,7 +96,7 @@ legend(5.48, 28, c("4", "6", "8"),
 
 Note that this seemingly complicated chunk of code is built upon many smaller steps, and it involves trial-and-error. 
 
-**Challenge 2**:  Create a scatter plot similar to Figure \@ref(fig:9-4) using the mtcars dataset to highlight the correlation between hp and disp (displacement). You should use colors to represent carb ( # of carburetors), types of data points to denote the number of gears, and size of the data points proportional to qsec, the number of seconds the cars need run the first ¼ mile. Add regression line and legends. Note that you should follow the guideline on page 1 to start this challenge. Your code should include comments and mandatory commands like rm(list=ls()) and getwd(). Submit your code and plot in a PDF file. 
+**Challenge 13a**:  Create a scatter plot similar to Figure \@ref(fig:9-4) using the mtcars dataset to highlight the correlation between hp and disp (displacement). You should use colors to represent carb ( # of carburetors), types of data points to denote the number of gears, and size of the data points proportional to qsec, the number of seconds the cars need run the first ¼ mile. Add regression line and legends. Note that you should follow the guideline on page 1 to start this challenge. Your code should include comments and mandatory commands like rm(list=ls()) and getwd(). Submit your code and plot in a PDF file. 
 
 Hint: Go through the above example first. Then start small and add on step by step. 
 
@@ -123,14 +123,14 @@ legend("topright", c("4", "6", "8"), title = "Cylinders",
 
 This line adds a LOWESS smooth line determined by locally-weighted polynomial regression.
 
-**Challenge 3**. Finish up this plot to generate Figure \@ref(fig:9-5). You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot. 
+**Challenge 13b**. Finish up this plot to generate Figure \@ref(fig:9-5). You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot. 
 
 ## 3D scatter plot
 Even though I’ve never been a fan of 3D plots, it is possible in R using additional packages such as scatterplot3d.  Install this package and then try the following.
 
 (ref:9-6) 3D scatter plots are rarely useful.
 
-```{r 9-6, echo=FALSE, fig.cap='(ref:9-6)', fig.align='center'}
+```{r 9-6, fig.cap='(ref:9-6)', fig.align='center'}
 library(scatterplot3d) 
 scatterplot3d(wt, disp, mpg, color = rainbow(8)[cyl], type = "h", pch = 20)
 ```
@@ -142,22 +142,18 @@ scatterplot3d(wt, disp, mpg, color = rainbow(8)[cyl], type = "h", pch = 20)
 
 ^2^ Note that I was trying to avoid having spaces in column names. Instead of “Blood Pressure”, I used “BloodPressure”. This makes the columns easier to reference to.
 
-
-
-**plus original chapter 10 and 11
-
 We continue to investigate the mtcars dataset using scatter plot, hierarchical clustering, bar plots, mosaic plots.
 
 ## Detect correlations among variables
-Last week we used scatter plots to study the correlation between two variables, mpg and wt in the mtcars dataset. There are many such pairwise correlations. One simple yet useful plot of the entire dataset is scatter plot matrix (SPM). SPMs can be created by the pairs function, or just run plot on a data frame.
+In above material we used scatter plots to study the correlation between two variables, mpg and wt in the mtcars dataset. There are many such pairwise correlations. One simple yet useful plot of the entire dataset is scatter plot matrix (SPM). SPMs can be created by the pairs function, or just run plot on a data frame.
 ```{r fig.keep='none'}
-plot(mtcars)  # scatter plot matrix; same as pairs(mtcars) \
+plot(mtcars)  # scatter plot matrix; same as pairs(mtcars) 
 ```
 
 (ref:10-1) Scatter plot matrix of the mtcars dataset.
 
 ```{r 10-1, echo=FALSE, fig.cap='(ref:10-1)', fig.align='center'}
-pairs(mtcars[, 1:7],col = rainbow(8)[mtcars$cyl])  #Add color 
+pairs(mtcars[, 1:7],col = rainbow(8)[mtcars$cyl])  # Add color 
 ```
 
 We can spend all day studying this large plot, as it contains information on all pairs of variables. For example, mpg is negatively correlated with disp, hp, and wt, and positively correlated with drat. There are many variations of scatter plot matrix, for instance, the spm function in the car package. Also try this cool plot using ellipses: [http://www.r-graph-gallery.com/97-correlation-ellipses/](http://www.r-graph-gallery.com/97-correlation-ellipses/)
@@ -176,7 +172,7 @@ data_ord <- data[ord, ord]
 plotcorr(data_ord, col = my_colors[data_ord * 50 + 50], mar = c(1, 1, 1, 1))
 ```
 
-**Challenge 1**: Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type  ? **state** for more information and type **state.x77** to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?
+**Challenge 13c**: Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type  ? **state** for more information and type **state.x77** to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?
 
 If you examine the above code carefully, the ellipses are drawn just based on a matrix of Pearson's correlation coefficients. We can easily quantify the relationship between all variables by generating a matrix of Pearson’s correlation coefficient: 
 
@@ -205,7 +201,7 @@ Here we first subtracted the r values from 1 to define a distance measure. So pe
 
  As we can see from the tree, cyl is most highly correlated with disp and then hp and wt. Broadly, the variables form two groups, with high correlation within each cluster. This is an important insight into the overall correlation structure of this data set. 
 
-**Challenge 2**: Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. 
+**Challenge 13d**: Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. 
 Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions. 
 
 ```{r}
@@ -327,7 +323,7 @@ Sometimes we want error bars to represent standard error instead which is given 
 
 In R we can do complex statistical tests or regression analyses with just one line of code, for example, aov, glm. However, we went through all this trouble to generate just a bar chart! **What is the point?** We could click around in sigmaPlot, or GraphPad and get a barplot in less time. Well, once you figured how to do one, you can easily do this for 10 graphs.  More importantly, this code clearly recorded the plotting process, which is essential for reproducible research. 
 
-**Challenge 3**: Revise the above code to generate a bar chart showing the average weight of cars with either automatic or manual transmission. Include error bars, the number of samples and axis labels. 
+**Challenge 13e**: Revise the above code to generate a bar chart showing the average weight of cars with either automatic or manual transmission. Include error bars, the number of samples and axis labels. 
 
 **Bonus challenge. Optional earns 3 bonus points**. Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set. 
 
@@ -337,7 +333,7 @@ If we are interested in the correlation between two categorical variables, we ca
 counts <- table(cyl, am)
 ```
 
-This contingency table gives us the number of cars in each combination. Amon the 8-cylinder cars, there are 12 models with manual transmission, and only 2 models have automatic transmission. We obviously can feed this into a fisher’s exact test to test for independence. We could easily visualize this information with a bar chart.
+This contingency table gives us the number of cars in each combination. Among the 8-cylinder cars, there are 12 models with manual transmission, and only 2 models have automatic transmission. We obviously can feed this into a fisher’s exact test to test for independence. We could easily visualize this information with a bar chart.
 ```{r fig.keep='none'}
 barplot(counts)
 ```
@@ -376,7 +372,7 @@ Vertically, we divide the square into 3 parts, the area of each is proportional 
 
 While the height of the bars in the bar chart in Figure 5 represents absolute totals per category, in mosaic plots the height are equal. Thus we see proportions within each category.
 
-**Challenge 4**: Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results. 
+**Challenge 13f**: Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results. 
 
 ## Representing data using faces.   Serious scientific research only!
 Humans are sensitive to facial images. We can use this to visualize data.
@@ -416,7 +412,7 @@ In this basic heat map, data are scaled by row by default. Some numbers are mass
 We can figure out that we need an additional parameter: 
 
 ```{r fig.keep='none'}
-heatmap(mt, scale = "column") #Figure 11.2
+heatmap(mt, scale = "column")  # Figure 13.14
 ```
 
  Scaling is handled by the scale function, which subtracts the mean from each column and then divides by the standard division. Afterward, all the columns have the same mean of approximately 0 and standard deviation of 1. This is called standardization.
@@ -429,9 +425,9 @@ We can also handle scaling ourselves. We can use the apply function to subtract 
 mt <- apply(mt, 2, function(y)(y - mean(y)) / sd(y))
 ```
 
-Note that we defined a function, which marked in yellow, and ‘applied’ the function to each of the columns of mt. For each column, we first calculate the mean and standard deviation. Then the mean is subtracted before dividing by standard deviation. The second parameter “2” refers to do something with the column. Use “1” for row. 
+Note that we defined a function, and ‘applied’ the function to each of the columns of mt. For each column, we first calculate the mean and standard deviation. Then the mean is subtracted before being divided by standard deviation. The second parameter “2” refers to do something with the column. Use “1” for row. 
 
-Sometimes, we have columns with very little real variation. Dividing by standard deviation will amplify noise. In such cases, we just subtract the mean. This is called **centering**. Centering is less aggressive in transforming our data than standardization. 
+Sometimes, we have columns with very little real variation. Being divided by standard deviation will amplify noise. In such cases, we just subtract the mean. This is called **centering**. Centering is less aggressive in transforming our data than standardization. 
 ```{r results='hide'}
 apply(mt, 2, mean)  # compute column mean
 ```
@@ -447,7 +443,7 @@ Here sd( ) is the function that applied to each column.
 (ref:11-2) Heatmap of mtcars dataset.    Yellow- positive number / above average.
 
 ```{r 11-2, fig.cap='(ref:11-2)', fig.align='center'}
-heatmap(mt, scale = "none") #Figure 11.2
+heatmap(mt, scale = "none")  # Figure 13.14
 ```
 
 This produced Figure \@ref(fig:11-2). 
@@ -473,7 +469,7 @@ heatmap.2(mt, col = greenred(75),
 ```
 
 Note that the **last argument** gives a large right margin, so that the long names can show up un-truncated. 
-By default, the heatmap function scales the rows in the data matrix so that it has zero mean. In our case, we already did our scaling, so we use **scale="none"** as a parameter. Also, the dendrogram on the left and top are generated using the **hclust** function. The distance function is Euclidian distance. All of these can be changed. 
+By default, the heatmap function scales the rows in the data matrix so that it has zero mean. In our case, we already did our scaling, so we use **scale="none"** as a parameter. Also, the dendrogram on the left and top are generated using the **hclust** function. The distance function is Euclidean distance. All of these can be changed. 
 
 (ref:11-4) Single, complete and average linkage methods for hierarchical clustering.
 
@@ -481,11 +477,11 @@ By default, the heatmap function scales the rows in the data matrix so that it h
 knitr::include_graphics("images/img1001_linkage.png")
 ```
 
-We used the hclust function last week. Let’s dive into the details a little bit. First, each of the objects (columns or rows in *mtcars* data), is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all objects. At each iteration, the distances between clusters are recalculated according to one of the methods—*Single linkage, complete linkage, average linkage, and so on*. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances.  However, the default seems to be complete linkage. Thus we need to change that in our final version of the heat map.
+We used the hclust function before. Let’s dive into the details a little bit. First, each of the objects (columns or rows in *mtcars* data), is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all objects. At each iteration, the distances between clusters are recalculated according to one of the methods—*Single linkage, complete linkage, average linkage, and so on*. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances.  However, the default seems to be complete linkage. Thus we need to change that in our final version of the heat map.
 
 (ref:11-5) Final version of heatmap for mtcars data.
 
-```{r 11-5, echo=FALSE, fig.cap='(ref:11-5)', fig.align='center'}
+```{r 11-5, fig.cap='(ref:11-5)', fig.align='center'}
 library(gplots)
 hclust2 <- function(x, ...)  # average linkage method
   hclust(x, method="average", ...)
@@ -502,7 +498,7 @@ heatmap.2(mt,
 	        scale = "none", 
 	        RowSideColors = rainbow(8)[mtcars$cyl],    
 	        margins = c(5, 10) # bottom and right margins
-          ) 
+          )                                                                             
 legend("topright",as.character(c(4, 6, 8)),
        fill=rainbow(8)[c(4, 6, 8)])    # add legend 
 ```
@@ -531,16 +527,14 @@ where *m* is the dimension of the vectors. Note that Euclidean (and squared Eucl
 - City-block (Manhattan) distance. This distance is simply the average difference across dimensions. In most cases, this distance measure yields results similar to the simple Euclidean distance. However, note that in this measure, the effect of single large differences (outliers) is dampened (since they are not squared). The city-block distance is computed as:
 $Distance(x,y)  = \frac{1}{m}∑_{i=1}^{m}|x_i-y_i|$
 
-- Chebychev distance. This distance measure may be appropriate in cases when we want to define two objects as "different" if they are different on any one of the dimensions. The Chebychev distance is calculated by: 
+- Chebyshev distance. This distance measure may be appropriate in cases when we want to define two objects as "different" if they are different on any one of the dimensions. The Cheever distance is calculated by: 
 $Distance(x,y)  = Maximum|x_i-y_i|$
 
 - Percent disagreement. This measure is particularly useful if the data for the dimensions included in the analysis are categorical in nature. This distance is computed as:
 $Distance(x,y) = (Number of xi ≠ yi)/ m$
 
-**Challenge 1**: Generate a heatmap for the statistics of 50 states in the state.x77 dataset (for information ? state) using heatmap.2 in the gplots package.  Normalize your data properly before creating heatmap. Use the default Euclidean distance and complete linkage. Use *state.region* to color code the states and include an appropriate legend. Interpret your results. Discuss both trees.  
+**Challenge 13g**: Generate a heatmap for the statistics of 50 states in the state.x77 dataset (for information ? state) using heatmap.2 in the gplots package.  Normalize your data properly before creating heatmap. Use the default Euclidean distance and complete linkage. Use *state.region* to color code the states and include an appropriate legend. Interpret your results. Discuss both trees.  
 
-**Challenge 2**: Change distance function to 1-Pearson’s correlation coefficient. Change linkage method to average linkage. Turn off the clustering of the columns by reading the help information on **heatmap.2**.  Observe what is different in the clustering trees.
+**Challenge 13h**: Change distance function to 1-Pearson’s correlation coefficient. Change linkage method to average linkage. Turn off the clustering of the columns by reading the help information on **heatmap.2**.  Observe what is different in the clustering trees.
 
-**Challenge 3**: Generate a heat map for the iris flower dataset. For data normalization, do not use standardization, just use centering (subtract the means). Use the species information in a color bar and interpret your results. 
-
-Submit a PDF document that includes clearly commented code, plot, and interpretation.
+**Challenge 13i**: Generate a heat map for the iris flower dataset. For data normalization, do not use standardization, just use centering (subtract the means). Use the species information in a color bar and interpret your results. 

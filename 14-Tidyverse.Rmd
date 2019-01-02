@@ -1,0 +1,51 @@
+# Tidyverse
+
+## Tidyverse is collection of powerful R packages
+The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R.  Let’s try the dplyr package for manipulating data. 
+```{r message=FALSE}
+#install.packages("dplyr") 
+library(dplyr)
+```
+
+In dplyr, we use the pipe operator %>% to send data to the next stage. This is similar to the “+” operator we used in ggplot2. To create a new data frame for setosa with sepals longer than 4.0:
+```{r results='hide'}
+iris %>% 
+  filter(Species == "setosa", Sepal.Length > 4)
+```
+
+Add a new column that contains the ratios of sepal length to sepal width:
+```{r results='hide'}
+iris %>% 
+  mutate(ratio = Sepal.Length / Sepal.Width)
+```
+
+Sort by sepal length in ascending order:
+```{r results='hide'}
+iris %>% 
+  arrange(Sepal.Length)
+```
+
+The power of dplyr is that we can connect these pipe operators to define a work flow. Suppose we want to see the Iris setosa flowers with the largest ratio of sepal length to sepal width. 
+```{r}
+iris %>% 
+  filter(Species == "setosa") %>%                  # filter rows
+  select(Sepal.Length, Sepal.Width) %>%            # select two columns 
+  mutate(ratio = Sepal.Length / Sepal.Width) %>%   # add a new column
+  arrange(desc(ratio))   %>%                       # sort in descending order
+  head()   # only show top rows. No more pipes, end of sequence.
+```
+
+**filter**( ), **mutate**( ) and **arrange**( ) are 3 **“verbs”** that operate on the data frame sequentially. **head**( ) is the function that only shows the top rows. Notice the pipe operator %>% at the end of each line.  This code is much easier to read by humans, as it defines a sequence of operations.
+  
+Two other useful verbs are **group_by**( ) and **summarise**( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths, and then combine. So it is **“split-apply-combine”**.  
+```{r}
+iris %>% 
+  group_by(Species)  %>%  # split by Species 
+  summarise(avgSL = mean(Sepal.Length), avgSW = mean(Sepal.Length)) %>% 
+  arrange(avgSL)
+```
+
+Here we created a new data frame with the mean sepal length and sepal width for each of the 3 species. Obviously, we can change **mean**( ) to many other functions. This makes it very easy to summarize large data sets. 
+
+**Challenge 14a**: Read in the heart attack data, calculate the average cost per day for patients with different DIAGNOSIS codes. Restrict to females aged between 20 and 70 who stayed at least one day. Sort the results in descending order. Use the dplyr package. Use one command with multiple steps. Note: since we have missing values in CHARGES, remember to use the **na.rm =TRUE** option in the mean( ) function. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the **head** or **summary** function at the end to examine if the desired data is produced. 
+
