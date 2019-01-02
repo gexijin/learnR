@@ -2,7 +2,6 @@
 
 We continue to investigate the heart attack dataset. First, let’s read the data in again and change several variables to factors. Note that you must set the working directory to where the data file is stored on your computer. I encourage you to define a project associated with a folder.
 ```{r}
-#setwd("C:/users/Xijin.Ge/R/week7") # set working directory, not necessary if loading a project 
 df <- read.table("heartatk4R.txt", sep = "\t", header = TRUE)  # read data
 df$DRG <- as.factor(df$DRG)  # convert DRG variable to factor
 df$DIED <- as.factor(df$DIED)
@@ -249,7 +248,7 @@ By using pair-wised correlation analysis, we found that women have a much higher
 
 We need to **delineate the effects of multiple factors using multiple linear regression**.  In our model below, we express the charges as a function of all other factors using **multiple linear regression**.  
 ```{r}
-fit <- lm(CHARGES ~ SEX + LOS + AGE + DRG + DIAGNOSIS)
+fit <- lm(CHARGES ~ SEX + LOS + AGE + DRG + DIAGNOSIS, data = df)
 summary(fit) 
 ```
 
