@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Learning R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Learning R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Learning R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge">
+
+
+<meta name="date" content="2019-01-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="functions-1.html">
+<link rel="next" href="tidyverse.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Index</a></li>
+<li class="chapter" data-level="1" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html"><i class="fa fa-check"></i><b>1</b> Analyzing iris flower dataset I</a><ul>
+<li class="chapter" data-level="1.1" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.1</b> “Data frames” have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.2</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.3" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#students-t-test"><i class="fa fa-check"></i><b>1.3</b> Student’s t-test</a></li>
+<li class="chapter" data-level="1.4" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#test-for-normal-distribution"><i class="fa fa-check"></i><b>1.4</b> Test for normal distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.5</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.6" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#analyzing-the-relationship-between-two-columns-of-numbers"><i class="fa fa-check"></i><b>1.6</b> Analyzing the relationship between two columns of numbers</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>1.6.1</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="1.6.2" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#quantitative-analyses-of-correlation"><i class="fa fa-check"></i><b>1.6.2</b> Quantitative analyses of correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#visualizing-and-testing-the-differences-in-groups"><i class="fa fa-check"></i><b>1.7</b> Visualizing and testing the differences in groups</a></li>
+<li class="chapter" data-level="1.8" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#test-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.8</b> Test the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html"><i class="fa fa-check"></i><b>2</b> Analyzing iris flower data set II</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#visualizing-the-entire-dataset"><i class="fa fa-check"></i><b>2.1</b> Visualizing the entire dataset</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.1.1</b> A Matrix only contains numbers</a></li>
+<li class="chapter" data-level="2.1.2" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#scatter-plot-matrix-1"><i class="fa fa-check"></i><b>2.1.2</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.1.3" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#heatmap"><i class="fa fa-check"></i><b>2.1.3</b> Heatmap</a></li>
+<li class="chapter" data-level="2.1.4" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#star-plot-segment-diagrams"><i class="fa fa-check"></i><b>2.1.4</b> Star plot Segment diagrams</a></li>
+<li class="chapter" data-level="2.1.5" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#segment-diagrams"><i class="fa fa-check"></i><b>2.1.5</b> Segment diagrams</a></li>
+<li class="chapter" data-level="2.1.6" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.1.6</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.1.7" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#box-plot"><i class="fa fa-check"></i><b>2.1.7</b> Box plot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#combining-plots"><i class="fa fa-check"></i><b>2.2</b> Combining plots</a></li>
+<li class="chapter" data-level="2.3" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#plot-using-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.3</b> Plot using principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.4" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#first-attempt-at-ggplot2"><i class="fa fa-check"></i><b>2.4</b> First attempt at ggplot2</a></li>
+<li class="chapter" data-level="2.5" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.5</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>3</b> Data importing</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>3.1</b> Enter data manually</a></li>
+<li class="chapter" data-level="3.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.2</b> Reading data from file using Import dataset in Rstudio</a></li>
+<li class="chapter" data-level="3.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>3.3</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="3.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>3.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="3.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>3.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="3.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>3.6</b> Recommended workflow for EVERY project</a></li>
+<li class="chapter" data-level="3.7" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-a-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.7</b> Reading data from a file using Import dataset in Rstudio</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>4</b> Analyzing heart attack data set I</a><ul>
+<li class="chapter" data-level="4.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>4.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="4.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>4.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="4.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>4.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="4.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>4.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="4.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>4.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set II</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>5.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>5.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>5.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>5.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html"><i class="fa fa-check"></i><b>6</b> Intruduction to basic R</a><ul>
+<li class="chapter" data-level="6.1" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#expressions"><i class="fa fa-check"></i><b>6.1</b> Expressions</a></li>
+<li class="chapter" data-level="6.2" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#logical-values"><i class="fa fa-check"></i><b>6.2</b> Logical Values</a></li>
+<li class="chapter" data-level="6.3" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#variables"><i class="fa fa-check"></i><b>6.3</b> Variables</a></li>
+<li class="chapter" data-level="6.4" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>6.5</b> Looking for Help and Example Code</a></li>
+<li class="chapter" data-level="6.6" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#vectors"><i class="fa fa-check"></i><b>6.6</b> Vectors</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#sequence-vectors"><i class="fa fa-check"></i><b>6.6.1</b> Sequence Vectors</a></li>
+<li class="chapter" data-level="6.6.2" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#scatter-plots"><i class="fa fa-check"></i><b>6.6.2</b> Scatter Plots</a></li>
+<li class="chapter" data-level="6.6.3" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#missing-data-is-represented-as-na"><i class="fa fa-check"></i><b>6.6.3</b> Missing data is represented as NA</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#lists"><i class="fa fa-check"></i><b>6.7</b> Lists</a></li>
+<li class="chapter" data-level="6.8" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>6.8</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="6.9" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#matrix-operations"><i class="fa fa-check"></i><b>6.9</b> Matrix operations</a></li>
+<li class="chapter" data-level="6.10" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#operations-on-data-frames"><i class="fa fa-check"></i><b>6.10</b> Operations on data frames</a></li>
+<li class="chapter" data-level="6.11" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>6.11</b> For more in-depth exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="vectors-1.html"><a href="vectors-1.html"><i class="fa fa-check"></i><b>7</b> Vectors</a></li>
+<li class="chapter" data-level="8" data-path="matrics-and-arrays.html"><a href="matrics-and-arrays.html"><i class="fa fa-check"></i><b>8</b> Matrics and arrays</a></li>
+<li class="chapter" data-level="9" data-path="lists-1.html"><a href="lists-1.html"><i class="fa fa-check"></i><b>9</b> Lists</a></li>
+<li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a></li>
+<li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
+<li class="chapter" data-level="12" data-path="functions-1.html"><a href="functions-1.html"><i class="fa fa-check"></i><b>12</b> Functions</a><ul>
+<li class="chapter" data-level="12.1" data-path="functions-1.html"><a href="functions-1.html#define-your-very-own-r-function"><i class="fa fa-check"></i><b>12.1</b> Define your very own R function</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html"><i class="fa fa-check"></i><b>13</b> Visualizing cars data set</a><ul>
+<li class="chapter" data-level="13.1" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>13.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="13.2" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#plain-vs.refined-graphics"><i class="fa fa-check"></i><b>13.2</b> Plain vs. refined graphics</a></li>
+<li class="chapter" data-level="13.3" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#visualizing-the-mtcars-dataset-using-scatter-plot"><i class="fa fa-check"></i><b>13.3</b> Visualizing the mtcars dataset using scatter plot</a></li>
+<li class="chapter" data-level="13.4" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#customize-scatterplots"><i class="fa fa-check"></i><b>13.4</b> Customize scatterplots</a></li>
+<li class="chapter" data-level="13.5" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#d-scatter-plot"><i class="fa fa-check"></i><b>13.5</b> 3D scatter plot</a></li>
+<li class="chapter" data-level="13.6" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#detect-correlations-among-variables"><i class="fa fa-check"></i><b>13.6</b> Detect correlations among variables</a></li>
+<li class="chapter" data-level="13.7" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#barplot-with-error-bars"><i class="fa fa-check"></i><b>13.7</b> Barplot with error bars</a></li>
+<li class="chapter" data-level="13.8" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>13.8</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="13.9" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>13.9</b> Representing data using faces. Serious scientific research only!</a></li>
+<li class="chapter" data-level="13.10" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.10</b> Hierarchical clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>14</b> Tidyverse</a><ul>
+<li class="chapter" data-level="14.1" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-is-collection-of-powerful-r-packages"><i class="fa fa-check"></i><b>14.1</b> Tidyverse is collection of powerful R packages</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualizing-cars-data-set" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Visualizing cars data set</h1>
+<div id="basic-concepts-of-r-graphics" class="section level2">
+<h2><span class="header-section-number">13.1</span> Basic concepts of R graphics</h2>
+<p>In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics. The lattice package extends base R graphics and enables the creating of graphs in multiple panels. The ggplot2 is developed based on a so-called Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics using layers.</p>
+<p>Note the recommended textbook R Graphics Cookbook includes all kinds of R plots and code. Some are online: <a href="http://www.cookbook-r.com/Graphs/" class="uri">http://www.cookbook-r.com/Graphs/</a>. There are also websites lists all sorts of R graphics and example codes that you can use. <a href="http://www.r-graph-gallery.com/" class="uri">http://www.r-graph-gallery.com/</a> contains more than 200 such examples. Another one is here: <a href="http://bxhorn.com/r-graphics-gallery/" class="uri">http://bxhorn.com/r-graphics-gallery/</a></p>
+<p>We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:9-02"></span>
+<img src="images/img0902_function.png" alt="List of graphics functions in base R."  />
+<p class="caption">
+Figure 13.1: List of graphics functions in base R.
+</p>
+</div>
+</div>
+<div id="plain-vs.refined-graphics" class="section level2">
+<h2><span class="header-section-number">13.2</span> Plain vs. refined graphics</h2>
+<p>Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data. Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document.</p>
+</div>
+<div id="visualizing-the-mtcars-dataset-using-scatter-plot" class="section level2">
+<h2><span class="header-section-number">13.3</span> Visualizing the mtcars dataset using scatter plot</h2>
+<p>The mtcars data set is included in base R. It contains various statistics on 32 different types of cars from the 1973-74 model year. The data was obtained from the 1974 Motor Trend US magazine. Our objective is to use this dataset to learn the difference between them, possibly for choosing a car to buy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars  <span class="co"># show the mtcars dataset</span></code></pre></div>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? mtcars  <span class="co"># shows the information on this dataset</span></code></pre></div>
+</div>
+<div id="customize-scatterplots" class="section level2">
+<h2><span class="header-section-number">13.4</span> Customize scatterplots</h2>
+<p>We start with a basic scatter plot</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(mtcars)  <span class="co"># attach dataset to memory</span></code></pre></div>
+<pre><code>## The following object is masked from package:ggplot2:
+## 
+##     mpg</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg)  <span class="co"># weight (wt) and miles per gallon (mpg), see Figure 13.3</span></code></pre></div>
+<p>This generates a basic scatter plot with default settings using wt as x and mpg as y. Each data points are represented as an open circle on the plot. As you could see, heavier vehicles are less fuel efficient. We can add a regression line on this scatter plot using a lower-level graphics function <strong>abline</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abline</span>(<span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt))  <span class="co"># add regression line</span></code></pre></div>
+<p>Note that lm(mpg ~ wt) generates a linear regression model of mpg as a function of wt, which is then passed on to abline. We add other information about these cars to customize this plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am)  <span class="co"># am = 1 for automatic transmission</span></code></pre></div>
+<p><strong>“pch”</strong> is a parameter that specifies the types of data points on the plot. See Figure <a href="visualizing-cars-data-set.html#fig:9-3">13.2</a> for a whole list of possible values. The “am” column in mtcars dataset indicates whether the car is automatic transmission (am = 1) or not (am = 0).</p>
+
+<div class="figure" style="text-align: center"><span id="fig:9-3"></span>
+<img src="images/img0903_symbol.png" alt="Data point types in base R."  />
+<p class="caption">
+Figure 13.2: Data point types in base R.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">am</code></pre></div>
+<pre><code>##  [1] 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1</code></pre>
+<p>So R uses circles or squares according to this sequence for each of the data points. It draws a circle when am value is 1, and square when it is zero. See all the types in Figure <a href="visualizing-cars-data-set.html#fig:9-3">13.2</a>. We add a legend to the top-right corner using a low-level graphics function legend:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Automatic&quot;</span>, <span class="st">&quot;Manual&quot;</span>), <span class="dt">pch =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>) </code></pre></div>
+<p>This plot shows that heavier cars often use manual transmissions. Always slow down and interpret your plots in plain language. We can be happy about this plot, but we continue to fuss in more information on this graph. Using the same line of thinking, we can change the color of the data points according to other information, i.e. the number of cylinders.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl])</code></pre></div>
+<p>The rainbow(8) generates a vector of 8 colors. The values in the cyl column are used to choose the color from these 8 colors. Green, blue, and red, indicates 4, 6, and 8 cylinders, respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called <strong>bubble plots</strong> or <strong>balloon plots.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl], <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)
+<span class="kw">legend</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="kw">c</span>(<span class="st">&quot;4&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;8&quot;</span>), <span class="dt">title =</span> <span class="st">&quot;Cylinders&quot;</span>, <span class="dt">pch =</span> <span class="dv">15</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)])</code></pre></div>
+<p>Note that we added this legend at the (5, 30) position on the plot. To see all the options:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? plot</code></pre></div>
+<p>This website lists all the parameters for R graphics: <a href="http://www.statmethods.net/advgraphs/parameters.html" class="uri">http://www.statmethods.net/advgraphs/parameters.html</a>. Now we want to finish up this plot by adding axis labels, and title. We also changed the x-axis range to 1-6 using the xlim parameter to specify the limits. We finally put everything together.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:9-4"></span>
+<img src="book_files/figure-html/9-4-1.png" alt="Enhanced scatter plot of mtcars data. Also called bubble plot or balloon plot." width="672" />
+<p class="caption">
+Figure 13.3: Enhanced scatter plot of mtcars data. Also called bubble plot or balloon plot.
+</p>
+</div>
+<p>Note that this seemingly complicated chunk of code is built upon many smaller steps, and it involves trial-and-error.</p>
+<p><strong>Challenge 13a</strong>: Create a scatter plot similar to Figure <a href="visualizing-cars-data-set.html#fig:9-4">13.3</a> using the mtcars dataset to highlight the correlation between hp and disp (displacement). You should use colors to represent carb ( # of carburetors), types of data points to denote the number of gears, and size of the data points proportional to qsec, the number of seconds the cars need run the first ¼ mile. Add regression line and legends. Note that you should follow the guideline on page 1 to start this challenge. Your code should include comments and mandatory commands like rm(list=ls()) and getwd(). Submit your code and plot in a PDF file.</p>
+<p>Hint: Go through the above example first. Then start small and add on step by step.</p>
+<p>Figure <a href="visualizing-cars-data-set.html#fig:9-4">13.3</a> is perhaps a bit too busy. Let’s develop an elegant version.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl]) </code></pre></div>
+<p>Notes: x; y; solid circle; horsepowersize of bubble; color cylinder 4, 6, or 8</p>
+<p>Then we use a lower-level graphics function points to draw circles around each data point.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:9-5"></span>
+<img src="book_files/figure-html/9-5-1.png" alt="Scatter plot showing the weight and MPG, colored by the number of cylinders. A line at mpg = 20 separates the 4-cylinder cars from 8 cylinder cars." width="672" />
+<p class="caption">
+Figure 13.4: Scatter plot showing the weight and MPG, colored by the number of cylinders. A line at mpg = 20 separates the 4-cylinder cars from 8 cylinder cars.
+</p>
+</div>
+<p>This line adds a LOWESS smooth line determined by locally-weighted polynomial regression.</p>
+<p><strong>Challenge 13b</strong>. Finish up this plot to generate Figure <a href="visualizing-cars-data-set.html#fig:9-5">13.4</a>. You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot.</p>
+</div>
+<div id="d-scatter-plot" class="section level2">
+<h2><span class="header-section-number">13.5</span> 3D scatter plot</h2>
+<p>Even though I’ve never been a fan of 3D plots, it is possible in R using additional packages such as scatterplot3d. Install this package and then try the following.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scatterplot3d) 
+<span class="kw">scatterplot3d</span>(wt, disp, mpg, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl], <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:9-6"></span>
+<img src="book_files/figure-html/9-6-1.png" alt="3D scatter plots are rarely useful." width="672" />
+<p class="caption">
+Figure 13.5: 3D scatter plots are rarely useful.
+</p>
+</div>
+<p>3D plots are hard to interpret. So try to avoid them. However, it is fun when you can interact with them. Using example code at this website, you can create interactive 3D plots: <a href="http://www.statmethods.net/graphs/scatterplot.html" class="uri">http://www.statmethods.net/graphs/scatterplot.html</a></p>
+<p><sup>1</sup> I like to work directly from my <strong>Google Drive</strong>, which automatically backs up my files in the cloud and syncs across several of my computers. This is an insurance against disasters like my dog peeing on my computer and ruins my grant proposal just before the deadline.</p>
+<p><sup>2</sup> Note that I was trying to avoid having spaces in column names. Instead of “Blood Pressure”, I used “BloodPressure”. This makes the columns easier to reference to.</p>
+<p>We continue to investigate the mtcars dataset using scatter plot, hierarchical clustering, bar plots, mosaic plots.</p>
+</div>
+<div id="detect-correlations-among-variables" class="section level2">
+<h2><span class="header-section-number">13.6</span> Detect correlations among variables</h2>
+<p>In above material we used scatter plots to study the correlation between two variables, mpg and wt in the mtcars dataset. There are many such pairwise correlations. One simple yet useful plot of the entire dataset is scatter plot matrix (SPM). SPMs can be created by the pairs function, or just run plot on a data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mtcars)  <span class="co"># scatter plot matrix; same as pairs(mtcars) </span></code></pre></div>
+
+<div class="figure" style="text-align: center"><span id="fig:10-1"></span>
+<img src="book_files/figure-html/10-1-1.png" alt="Scatter plot matrix of the mtcars dataset." width="672" />
+<p class="caption">
+Figure 13.6: Scatter plot matrix of the mtcars dataset.
+</p>
+</div>
+<p>We can spend all day studying this large plot, as it contains information on all pairs of variables. For example, mpg is negatively correlated with disp, hp, and wt, and positively correlated with drat. There are many variations of scatter plot matrix, for instance, the spm function in the car package. Also try this cool plot using ellipses: <a href="http://www.r-graph-gallery.com/97-correlation-ellipses/" class="uri">http://www.r-graph-gallery.com/97-correlation-ellipses/</a></p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ellipse)  <span class="co"># install.packages(&quot;ellipses&quot;) </span>
+<span class="kw">library</span>(RColorBrewer)  <span class="co"># install.packages(&quot;RcolorBrewer&quot;) </span>
+data &lt;-<span class="st"> </span><span class="kw">cor</span>(mtcars)  <span class="co"># correlation matrix</span>
+my_colors &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">5</span>, <span class="st">&quot;Spectral&quot;</span>)  <span class="co"># Color Pannel </span>
+my_colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(my_colors)(<span class="dv">100</span>)
+ord &lt;-<span class="st"> </span><span class="kw">order</span>(data[<span class="dv">1</span>, ])  <span class="co"># Order the correlation matrix</span>
+data_ord &lt;-<span class="st"> </span>data[ord, ord]
+<span class="kw">plotcorr</span>(data_ord, <span class="dt">col =</span> my_colors[data_ord <span class="op">*</span><span class="st"> </span><span class="dv">50</span> <span class="op">+</span><span class="st"> </span><span class="dv">50</span>], <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:10-2"></span>
+<img src="book_files/figure-html/10-2-1.png" alt="Scatter plot matrix of the mtcars dataset." width="672" />
+<p class="caption">
+Figure 13.7: Scatter plot matrix of the mtcars dataset.
+</p>
+</div>
+<p><strong>Challenge 13c</strong>: Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type ? <strong>state</strong> for more information and type <strong>state.x77</strong> to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?</p>
+<p>If you examine the above code carefully, the ellipses are drawn just based on a matrix of Pearson’s correlation coefficients. We can easily quantify the relationship between all variables by generating a matrix of Pearson’s correlation coefficient:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(mtcars)  <span class="co"># correlation coefficient of all columns</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corMatrix  &lt;-<span class="st">  </span><span class="kw">cor</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">11</span>])
+<span class="kw">round</span>(corMatrix, <span class="dv">2</span>)  <span class="co"># Round to 2 digits</span></code></pre></div>
+<pre><code>##        mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+## mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+## cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
+## disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
+## hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
+## drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
+## wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
+## qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
+## vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
+## am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
+## gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
+## carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00</code></pre>
+<p>We used the round function to keep two digits after the decimal point. We can examine the coefficients in this matrix. Note that strong negative correlations are also interesting. For example, wt and mpg have a correlation of r= -0.87, meaning that heavier vehicles tend to have smaller mpg.</p>
+<p>We can visualize this matrix in other ways besides the ellipses. The most logical thing to do with a matrix of correlation coefficients is to generate a tree using hierarchical clustering.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>corMatrix)))  <span class="co"># hierarchical clustering</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:10-3"></span>
+<img src="book_files/figure-html/10-3-1.png" alt="Hierarchical clustering tree." width="672" />
+<p class="caption">
+Figure 13.8: Hierarchical clustering tree.
+</p>
+</div>
+<p>Here we first subtracted the r values from 1 to define a distance measure. So perfectly correlated variables with r = 1 have a distance of 0, while negatively correlated variables with r = -1 have a distance of 2. We did this operation on the entire matrix at once. You can try to run the 1- corMatrix from the command line to see the result. The result is then formatted as a distance matrix using as.dist, which is passed to the hclust function to create a hierarchical clustering tree. See more info on hclust by using</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? hclust</code></pre></div>
+<p>As we can see from the tree, cyl is most highly correlated with disp and then hp and wt. Broadly, the variables form two groups, with high correlation within each cluster. This is an important insight into the overall correlation structure of this data set.</p>
+<p><strong>Challenge 13d</strong>: Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">image</span>(corMatrix)  <span class="co"># translate a matrix into an image</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
+<p>Here we are using red and yellow colors to represent the positive and negative numbers, respectively. Since the row and column names are missing, we can use the heatmap function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(corMatrix, <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>)  <span class="co"># Generate heatmap</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p>Here a lot more things are going on. The orders are re-arranged and also a tree is drawn to summarize the similarity. We explain heatmap in details later.</p>
+<p>A more elegant way of show correlation matrix using ggplot2 is available here: <a href="http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization</a> Based on this code, I implemented an nice-looking heatmap in the iDEP software <a href="http://ge-lab.org:3838/idep/" class="uri">http://ge-lab.org:3838/idep/</a>. So as you can see, coding is not hard when you can steal ideas from others, thanks to Dr. Google and the thousands of contributors, who contribute code examples and answer questions online. R has a fantastic user community.</p>
+</div>
+<div id="barplot-with-error-bars" class="section level2">
+<h2><span class="header-section-number">13.7</span> Barplot with error bars</h2>
+<p>If we are interested in the difference between the cars with different numbers of cylinders. The 32 models are divided into 3 groups as cyl takes the values of 4, 6, or 8. We can use the aggregate function to generate some statistics by group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats &lt;-<span class="st"> </span><span class="kw">aggregate</span>(. <span class="op">~</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars, mean)
+stats </code></pre></div>
+<pre><code>##   cyl      mpg     disp        hp     drat       wt     qsec        vs
+## 1   4 26.66364 105.1364  82.63636 4.070909 2.285727 19.13727 0.9090909
+## 2   6 19.74286 183.3143 122.28571 3.585714 3.117143 17.97714 0.5714286
+## 3   8 15.10000 353.1000 209.21429 3.229286 3.999214 16.77214 0.0000000
+##          am     gear     carb
+## 1 0.7272727 4.090909 1.545455
+## 2 0.4285714 3.857143 3.428571
+## 3 0.1428571 3.285714 3.500000</code></pre>
+<p>This tells R to divide the cars into different groups by cyl and compute the average of all other columns for each group. The results above indicate many differences. As the number of cylinders increase, fuel efficiency measured by mpg decreases, while displacement and horsepower increases. We can obviously create a basic bar chart to show the difference in mpg.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(stats[, <span class="dv">2</span>])  <span class="co"># basic bar plot</span></code></pre></div>
+<p>The labels are missing from this basic plot. It is certainly possible to add the labels, but it is more convenient to use the tapply function, which generates a vector with names. First, we attach the mtcars data to memory so that we can refer to the columns directly by their names; then we use tapply to calculate the mean, standard deviation (sd) and the numbers of samples for each group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(mtcars)  <span class="co"># attach the data</span></code></pre></div>
+<pre><code>## The following objects are masked from mtcars (pos = 6):
+## 
+##     am, carb, cyl, disp, drat, gear, hp, mpg, qsec, vs, wt</code></pre>
+<pre><code>## The following object is masked from package:ggplot2:
+## 
+##     mpg</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Means &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), mean)  <span class="co"># Average mpg per group</span>
+Means</code></pre></div>
+<pre><code>##        4        6        8 
+## 26.66364 19.74286 15.10000</code></pre>
+<p>Note that it generates a vector and “4”, “6”, and “8” are names of each of the elements in this vector.</p>
+<p>tapply applies a function to a vector (mpg) according to grouping information defined by a factor (cyl) of the same length. Here it first groups the mpg numbers into 3 groups (cly= 4, 6, 8), and then within each group, the mean is calculated and returned. tapply is a member of a family of functions which includes apply, sapply, and lapply; all are powerful and efficient in computing than loops.</p>
+<p>Similarly, we can compute the standard deviation for each group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SDs &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), sd)  <span class="co"># SD per group for mpg</span>
+SDs</code></pre></div>
+<pre><code>##        4        6        8 
+## 4.509828 1.453567 2.560048</code></pre>
+<p>Now we can have a basic barplot with group names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(Means)</code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+<p>Our goal is to generate a graph like Figure <a href="visualizing-cars-data-set.html#fig:10-4">13.9</a> with both error bars and text annotation on the number of samples per group. We use two low-level graphics functions to add these elements to the plot, namely, text, and arrow. The text function adds any text to a plot to a position specified by x, y coordinates. Let’s try it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="st">&quot;n=11&quot;</span>)  <span class="co"># adding text to plot</span></code></pre></div>
+<p>The (0.5, and 5) are the x and y location of the text information. Try to change it to something else within the plotting range, meaning x within 0 to 3 and y between 0 and 25. You can place any text anywhere. We added sample size information for the first group. We can choose to do this for each of bar manually, but obvious there should be a better way to do this. The trick is to find the precise location of all the bars and place the text there, hopefully doing this once for all of them. To achieve this, we use the values returned by the barplot object.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xloc &lt;-<span class="st"> </span><span class="kw">barplot</span>(Means)  <span class="co"># get locations of the bars</span>
+xloc  <span class="co"># the center of each of bars on x</span></code></pre></div>
+<pre><code>##      [,1]
+## [1,]  0.7
+## [2,]  1.9
+## [3,]  3.1</code></pre>
+<p><strong>Yes, plotting functions not only generate graphs, they can also returns values<sup>1</sup></strong>. These values sometimes are useful in computing or refining the graph. In this case, we got an object containing the location of the center of the bars on x-axis. So the first bar is located on x=0.7. Since xloc has the location on all bars, we can add the information all at once:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Nsamples &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), length)  <span class="co">#number of samples per group</span>
+Nsamples</code></pre></div>
+<pre><code>##  4  6  8 
+## 11  7 14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(xloc, <span class="dv">2</span>, Nsamples)   <span class="co"># add sample size to each group</span></code></pre></div>
+<p>The xloc specifies the center of the bars on the x-axis, namely 07, 1.9, and 3.1. The y coordinates are all 2. Try change the y location from 2 to 10, and see what happens. Looking great! The sample sizes are labeled on all the bars! This method works even if you have 20 bars! Now we want to make it explicit that these numbers represent sample size. For the first bar, we want “n=11”, instead of just “11”.</p>
+<p>First, we will append “n=” to each number and generate a string vector using the paste function</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples)  <span class="co"># creating the strings to be added to the plot</span></code></pre></div>
+<pre><code>## [1] &quot;n= 11&quot; &quot;n= 7&quot;  &quot;n= 14&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(xloc, <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples))  <span class="co"># add sample size to each group</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-191-1.png" width="672" /></p>
+<p>Following a similar strategy, now we want to add error bars to represent standard deviations (SD) within each group. The plot is more informative as we visualize both the mean and variation within groups. For each bar, we need to draw an error bar from mean – SD to mean + SD.</p>
+<p>Let’s play with the arrows function, which draws arrows on plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrows</span>(<span class="dv">1</span>, <span class="dv">15</span>,  <span class="co"># x,y of the starting point</span>
+       <span class="dv">1</span>, <span class="dv">25</span>)  <span class="co"># x,y of the ending point</span>
+<span class="kw">arrows</span>(<span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">2</span>, <span class="dv">25</span>, <span class="dt">code =</span> <span class="dv">3</span>)  <span class="co"># arrows on both ends</span>
+<span class="kw">arrows</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">20</span>, <span class="dt">code =</span> <span class="dv">3</span>, <span class="dt">angle =</span> <span class="dv">90</span>)  <span class="co"># bend 90 degrees, flat</span></code></pre></div>
+<p>Now it’s beginning to look a lot like Christmas (error bar)! I learned this clever hack of arrows as error bars from (Beckerman 2017). We are ready to add the error bars using the data stored in xloc, Means and SDs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(Means)  <span class="co"># re-create bar plot</span>
+<span class="kw">arrows</span>(xloc, Means <span class="op">-</span><span class="st"> </span>SDs,   <span class="co"># define 3 beginning points</span>
+       xloc, Means <span class="op">+</span><span class="st"> </span>SDs,   <span class="co"># define 3 ending points</span>
+       <span class="dt">code =</span> <span class="dv">3</span>, <span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">length =</span> <span class="fl">0.1</span>)</code></pre></div>
+<p>Yes, we have a bar plot with error bars! We need to add a few refinements now such as colors, labels, and a title. As the first error bar is truncated, we need to adjust the range for y, by changing the ylim parameter. Putting everything together, we get this code chuck.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(mtcars)    <span class="co"># attach data, two columns: numbers and groups</span></code></pre></div>
+<pre><code>## The following objects are masked from mtcars (pos = 3):
+## 
+##     am, carb, cyl, disp, drat, gear, hp, mpg, qsec, vs, wt</code></pre>
+<pre><code>## The following objects are masked from mtcars (pos = 7):
+## 
+##     am, carb, cyl, disp, drat, gear, hp, mpg, qsec, vs, wt</code></pre>
+<pre><code>## The following object is masked from package:ggplot2:
+## 
+##     mpg</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Means &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), mean)  <span class="co">#compute means by group defined by cyl</span>
+SDs &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), sd)   <span class="co"># calculate standard deviation by group</span>
+Nsamples &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), length)  <span class="co"># number of samples per group</span>
+xloc &lt;-<span class="st"> </span><span class="kw">barplot</span>(Means,  <span class="co"># bar plot, returning the location of the bars</span>
+                <span class="dt">xlab =</span> <span class="st">&quot;Number of Cylinders&quot;</span>,
+                <span class="dt">ylab =</span> <span class="st">&quot;Average MPG&quot;</span>,
+                <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">35</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)
+<span class="kw">arrows</span> (xloc, Means <span class="op">-</span><span class="st"> </span>SDs,  <span class="co"># add error bars as arrows</span>
+        xloc, Means <span class="op">+</span><span class="st"> </span>SDs,
+        <span class="dt">code =</span> <span class="dv">3</span>, <span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">length =</span> <span class="fl">0.1</span>)
+<span class="kw">text</span>(xloc, <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples))  <span class="co"># add sample size to each group</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:10-4"></span>
+<img src="book_files/figure-html/10-4-1.png" alt="Bar chart with error bar representing standard deviation." width="672" />
+<p class="caption">
+Figure 13.9: Bar chart with error bar representing standard deviation.
+</p>
+</div>
+<p>Sometimes we want error bars to represent standard error instead which is given by σ/√n, where σ is standard deviation and n is sample size.</p>
+<p>In R we can do complex statistical tests or regression analyses with just one line of code, for example, aov, glm. However, we went through all this trouble to generate just a bar chart! <strong>What is the point?</strong> We could click around in sigmaPlot, or GraphPad and get a barplot in less time. Well, once you figured how to do one, you can easily do this for 10 graphs. More importantly, this code clearly recorded the plotting process, which is essential for reproducible research.</p>
+<p><strong>Challenge 13e</strong>: Revise the above code to generate a bar chart showing the average weight of cars with either automatic or manual transmission. Include error bars, the number of samples and axis labels.</p>
+<p><strong>Bonus challenge. Optional earns 3 bonus points</strong>. Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set.</p>
+</div>
+<div id="visualizing-correlation-between-categorical-variables" class="section level2">
+<h2><span class="header-section-number">13.8</span> Visualizing correlation between categorical variables</h2>
+<p>If we are interested in the correlation between two categorical variables, we can tabulate the frequencies from a data frame:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(cyl, am)</code></pre></div>
+<p>This contingency table gives us the number of cars in each combination. Among the 8-cylinder cars, there are 12 models with manual transmission, and only 2 models have automatic transmission. We obviously can feed this into a fisher’s exact test to test for independence. We could easily visualize this information with a bar chart.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(counts)</code></pre></div>
+<p>We generated a stacked barplot. Let’s refine it.</p>
+<p>We have a plot like the left of Figure <a href="visualizing-cars-data-set.html#fig:10-5">13.10</a>. We can also put the bars side-by-side, by setting the beside option to TRUE.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(counts, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>),
+        <span class="dt">xlab =</span><span class="st">&quot;Transmission&quot;</span>,
+        <span class="dt">ylab =</span> <span class="st">&quot;Number of cars&quot;</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="kw">rownames</span>(counts), 
+       <span class="dt">pch =</span> <span class="dv">15</span>, <span class="dt">title =</span> <span class="st">&quot;Cylinders&quot;</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))
+<span class="kw">barplot</span>(counts, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>),
+        <span class="dt">xlab =</span> <span class="st">&quot;Transmission&quot;</span>,
+        <span class="dt">ylab =</span> <span class="st">&quot;Number of cars&quot;</span>,
+        <span class="dt">beside =</span> <span class="ot">TRUE</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="kw">rownames</span>(counts), 
+       <span class="dt">pch =</span> <span class="dv">15</span>, <span class="dt">title =</span> <span class="st">&quot;Cylinders&quot;</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:10-5"></span>
+<img src="book_files/figure-html/10-5-1.png" alt="Bar plots showing the proportion of cars by cylinder and transmission." width="50%" /><img src="book_files/figure-html/10-5-2.png" alt="Bar plots showing the proportion of cars by cylinder and transmission." width="50%" />
+<p class="caption">
+Figure 13.10: Bar plots showing the proportion of cars by cylinder and transmission.
+</p>
+</div>
+<p>See the right side of Figure <a href="visualizing-cars-data-set.html#fig:10-5">13.10</a>. Given a large dataset, we can easily tabulate categorical variables and plot these to show the relative frequencies.</p>
+<p>Another easy plot is the mosaic plot:</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(counts, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:10-6"></span>
+<img src="book_files/figure-html/10-6-1.png" alt="Mosaic plot." width="672" />
+<p class="caption">
+Figure 13.11: Mosaic plot.
+</p>
+</div>
+<p>Vertically, we divide the square into 3 parts, the area of each is proportional to the number of cars with different cylinders. There are more 8-cylinder vehicles than those with 4 or 6. Horizontally, we divide the square according to the am variable, which represents automatic transmission (am =0) or manual transmission. Clearly, these two are not independent. As the number of cylinder increases, more cars are using manual transmission.</p>
+<p>While the height of the bars in the bar chart in Figure 5 represents absolute totals per category, in mosaic plots the height are equal. Thus we see proportions within each category.</p>
+<p><strong>Challenge 13f</strong>: Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results.</p>
+</div>
+<div id="representing-data-using-faces.-serious-scientific-research-only" class="section level2">
+<h2><span class="header-section-number">13.9</span> Representing data using faces. Serious scientific research only!</h2>
+<p>Humans are sensitive to facial images. We can use this to visualize data.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;TeachingDemos&quot;)</span>
+<span class="kw">library</span>(TeachingDemos)
+<span class="kw">faces</span>(mtcars) </code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:10-7"></span>
+<img src="book_files/figure-html/10-7-1.png" alt="Using faces to represent data." width="672" />
+<p class="caption">
+Figure 13.12: Using faces to represent data.
+</p>
+</div>
+<p>This is called Chernoff’s faces. Each column of data is used to define a facial feature. The features parameters of this implementation are: 1-height of face (“mpg”), 2-width of face (“cyl”) 3-shape of face (“disp”), 4-height of mouth (“hp”), 5-width of mouth (“drat”), 6-curve of smile (“wt”), 7-height of eyes (“qsec”), 8-width of eyes(“vs”), 9-height of hair(“am”), 10-width of hair (“gear”), 11-styling of hair (“carb”).</p>
+<p>It turns out that the longer, serious faces represent smaller cars that are environmentally-friendly, while big polluters are shown as cute, baby faces. What an irony!</p>
+<p>References: Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.</p>
+<p><sup>1</sup> Try this: h &lt;- hist( rnorm(100) ) and then type h to see the values returned by hist function.</p>
+</div>
+<div id="hierarchical-clustering" class="section level2">
+<h2><span class="header-section-number">13.10</span> Hierarchical clustering</h2>
+<p>In the mtcars dataset, we have 32 car models, each characterized by 11 parameters (dimensions, variables). We want to compare or group these cars using information about all of these parameters. We know that Honda Civic is similar to Toyota Corolla but different from a Cadillac. Quantitatively, we need to find a formula to measure the similarity. Given two models, we have 22 numbers. We need to boil them down to one number to measure relative similarity. This is often done by a distance function. The most popular one is Euclidean distance, (it is also the most abused metric):<span class="math inline">\(Eucliden Distance D=√((mpg_1-mpg_2)^2+(hp_1-hp_2)^2+(wt_1-wt_2)^2+⋯)\)</span>.If two cars have similar characteristics, they have similar numbers on all of these dimensions; their distance as calculated above is small. Therefore, this is a reasonable formula. Note that we democratically added the squared difference of all dimensions. We treated every dimension with equal weight. However, if we look at the raw data, we know that some characteristics, such as <em>hp</em>(horsepower), have much bigger numerical value than others. In other words, the difference in <em>hp</em> can overwhelm our magic formula and make other dimensions essentially meaningless. Since different columns of data are in very different scale, we need to do some normalization. We want to transform data so that they are comparable on scale. At the same time, we try to preserve as much information as we could.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt =<span class="st"> </span><span class="kw">as.matrix</span>(mtcars) 
+<span class="kw">heatmap</span>(mt) </code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:11-1"></span>
+<img src="book_files/figure-html/11-1-1.png" alt="Heatmap with all default settings. This is not correct. Normalization is needed. Do not go out naked." width="672" />
+<p class="caption">
+Figure 13.13: Heatmap with all default settings. This is not correct. Normalization is needed. Do not go out naked.
+</p>
+</div>
+<p>In this basic heat map, data are scaled by row by default. Some numbers are massive (<em>hp</em> and <em>disp</em>), and they are all in bright yellow. This is not democratic or reasonable as these big numbers dominate the clustering. We clearly need to do some normalization or scaling for each column which contains different statistics. Through check the help information by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? heatmap</code></pre></div>
+<p>We can figure out that we need an additional parameter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(mt, <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>)  <span class="co"># Figure 13.14</span></code></pre></div>
+<p>Scaling is handled by the scale function, which subtracts the mean from each column and then divides by the standard division. Afterward, all the columns have the same mean of approximately 0 and standard deviation of 1. This is called standardization.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? scale</code></pre></div>
+<p>We can also handle scaling ourselves. We can use the apply function to subtract the mean from each column and then divide by the standard division of each column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mt &lt;-<span class="st"> </span><span class="kw">apply</span>(mt, <span class="dv">2</span>, <span class="cf">function</span>(y)(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(y))</code></pre></div>
+<p>Note that we defined a function, and ‘applied’ the function to each of the columns of mt. For each column, we first calculate the mean and standard deviation. Then the mean is subtracted before being divided by standard deviation. The second parameter “2” refers to do something with the column. Use “1” for row.</p>
+<p>Sometimes, we have columns with very little real variation. Being divided by standard deviation will amplify noise. In such cases, we just subtract the mean. This is called <strong>centering</strong>. Centering is less aggressive in transforming our data than standardization.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(mt, <span class="dv">2</span>, mean)  <span class="co"># compute column mean</span></code></pre></div>
+<p>Here mean( ) is the function that applied to each column. The column means are close to zero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(mt)   <span class="co"># same as above</span>
+<span class="kw">apply</span>(mt, <span class="dv">2</span>, sd)   <span class="co"># compute sd for each column</span></code></pre></div>
+<p>Here sd( ) is the function that applied to each column.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(mt, <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>)  <span class="co"># Figure 13.14</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:11-2"></span>
+<img src="book_files/figure-html/11-2-1.png" alt="Heatmap of mtcars dataset. Yellow- positive number / above average." width="672" />
+<p class="caption">
+Figure 13.14: Heatmap of mtcars dataset. Yellow- positive number / above average.
+</p>
+</div>
+<p>This produced Figure <a href="visualizing-cars-data-set.html#fig:11-2">13.14</a>.</p>
+<p>Another function with much better coloring is heatmap.2 in the gplot package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;gplots&quot;) </span>
+<span class="kw">library</span>(gplots)
+<span class="kw">heatmap.2</span>(mt) <span class="co"># plain version </span></code></pre></div>
+<p>This basic heatmap is not very cool. So, we do some fine tuning. This function have a million parameters to tune:</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? heatmap.<span class="dv">2</span> 
+<span class="kw">heatmap.2</span>(mt, <span class="dt">col =</span> <span class="kw">greenred</span>(<span class="dv">75</span>),
+          <span class="dt">density.info =</span> <span class="st">&quot;none&quot;</span>, 
+          <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, 
+          <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>, 
+          <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:11-3"></span>
+<img src="book_files/figure-html/11-3-1.png" alt="Fine-tuned heatmap using heatmap.2 in gplots package." width="672" />
+<p class="caption">
+Figure 13.15: Fine-tuned heatmap using heatmap.2 in gplots package.
+</p>
+</div>
+<p>Note that the <strong>last argument</strong> gives a large right margin, so that the long names can show up un-truncated. By default, the heatmap function scales the rows in the data matrix so that it has zero mean. In our case, we already did our scaling, so we use <strong>scale=“none”</strong> as a parameter. Also, the dendrogram on the left and top are generated using the <strong>hclust</strong> function. The distance function is Euclidean distance. All of these can be changed.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:11-4"></span>
+<img src="images/img1001_linkage.png" alt="Single, complete and average linkage methods for hierarchical clustering."  />
+<p class="caption">
+Figure 13.16: Single, complete and average linkage methods for hierarchical clustering.
+</p>
+</div>
+<p>We used the hclust function before. Let’s dive into the details a little bit. First, each of the objects (columns or rows in <em>mtcars</em> data), is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all objects. At each iteration, the distances between clusters are recalculated according to one of the methods—<em>Single linkage, complete linkage, average linkage, and so on</em>. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances. However, the default seems to be complete linkage. Thus we need to change that in our final version of the heat map.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gplots)
+hclust2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...)  <span class="co"># average linkage method</span>
+  <span class="kw">hclust</span>(x, <span class="dt">method=</span><span class="st">&quot;average&quot;</span>, ...)
+dist2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...)  <span class="co">#distance method</span>
+  <span class="kw">as.dist</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">cor</span>(<span class="kw">t</span>(x), <span class="dt">method=</span><span class="st">&quot;pearson&quot;</span>))
+<span class="co"># Transform data</span>
+mt &lt;-<span class="st"> </span><span class="kw">apply</span>(mt, <span class="dv">2</span>, <span class="cf">function</span>(y)(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(y))
+<span class="kw">heatmap.2</span>(mt, 
+            <span class="dt">distfun =</span> dist2,  <span class="co"># use 1-Pearson as distance</span>
+            <span class="dt">hclustfun =</span> hclust2,  <span class="co"># use average linkage</span>
+            <span class="dt">col =</span> <span class="kw">greenred</span>(<span class="dv">75</span>),   <span class="co">#color green red</span>
+            <span class="dt">density.info =</span> <span class="st">&quot;none&quot;</span>, 
+            <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, 
+            <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>, 
+            <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[mtcars<span class="op">$</span>cyl],    
+            <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>) <span class="co"># bottom and right margins</span>
+          )                                                                             
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="kw">as.character</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)),
+       <span class="dt">fill=</span><span class="kw">rainbow</span>(<span class="dv">8</span>)[<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)])    <span class="co"># add legend </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:11-5"></span>
+<img src="book_files/figure-html/11-5-1.png" alt="Final version of heatmap for mtcars data." width="672" />
+<p class="caption">
+Figure 13.17: Final version of heatmap for mtcars data.
+</p>
+</div>
+<p>Here we defined and used our custom distance function <strong>dist2</strong> and used average linkage method for hclust. We also added a color bar to code for the number of cylinders. We can also add color bars for the columns, as long as we have some information for each of the column.</p>
+<p>Hierarchical clustering coupled with a heatmap is a very effective method to visualize and explore multidimensional data. It not only visualizes all data points but also highlights the correlation structure in both rows and columns. It is my favorite plot, and you can find such plots in many of my scientific publications!</p>
+<p>Let’s discuss how to interpret Figure <a href="visualizing-cars-data-set.html#fig:11-5">13.17</a>. First, the colors red and green represent positive and negative numbers, respectively. Bright red represent large positive numbers and bright green means negative numbers with large absolute values. Since we standardized our data, <strong>red indicates above average and green below average</strong>. The 8 cylinder cars which form a cluster in the bottom have bigger than average horsepower (<em>hp</em>), weight (<em>wt</em>). These cars have smaller than average fuel efficiency (<em>mpg</em>), acceleration(<em>qsec</em>), the number of gears. These cars share similar characteristics and form a tight cluster. The four-cylinder cars, on the other hand, have the opposite.</p>
+<p>The distance in the above dendrogram between two objects is proportional to some measure of dissimilarity (such as Euclidean distance) between them defined by the original data. This is true for both trees, the one on the top and the one on the left.</p>
+<p><strong>There are many ways to quantify the similarity between objects. </strong> The first step in hierarchical clustering is to define distance or dissimilarity between objects that are characterized by vectors.</p>
+<ul>
+<li><p>We have discussed that we can use Pearson’s correlation coefficient (PCC) to measure the correlation between two numerical vectors. We could thus easily generate a measure of dis-similarity/distance by a formula like: <span class="math inline">\(Distance(x,y) = 1-PCC(x,y)\)</span>. This score have a maximum of 2 and minimum of 0. Similar distance measure could be defined based on any non-parametric versions of correlation coefficients. In addition to these, there are many ways to quantify dis-similarity: (See: <a href="http://www.statsoft.com/textbook/cluster-analysis/" class="uri">http://www.statsoft.com/textbook/cluster-analysis/</a>)</p></li>
+<li><p>Euclidean distance. This is probably the most commonly chosen type of distance. It simply is the geometric distance in the multidimensional space. It is computed as:<br />
+<span class="math inline">\(Distance(x,y) = √(∑_{i=1}^{m}(x_i-y_i )^2 )\)</span>, where <em>m</em> is the dimension of the vectors. Note that Euclidean (and squared Euclidean) distances are usually computed from raw data, and not from standardized data. This method has certain advantages (e.g., the distance between any two objects is not affected by the addition of new objects to the analysis, which may be outliers). However, the distances can be greatly affected by differences in scale among the dimensions from which the distances are computed. For example, if one of the dimensions denotes a measured length in centimeters, and you then convert it to millimeters, the resulting Euclidean or squared Euclidean distances can be greatly affected, and consequently, the results of cluster analyses may be very different. It is good practice to transform the data, so they have similar scales.</p></li>
+<li><p>Squared Euclidean distance. You may want to square the standard Euclidean distance to place progressively greater weight on objects that are further apart.</p></li>
+<li><p>City-block (Manhattan) distance. This distance is simply the average difference across dimensions. In most cases, this distance measure yields results similar to the simple Euclidean distance. However, note that in this measure, the effect of single large differences (outliers) is dampened (since they are not squared). The city-block distance is computed as: <span class="math inline">\(Distance(x,y) = \frac{1}{m}∑_{i=1}^{m}|x_i-y_i|\)</span></p></li>
+<li><p>Chebyshev distance. This distance measure may be appropriate in cases when we want to define two objects as “different” if they are different on any one of the dimensions. The Cheever distance is calculated by: <span class="math inline">\(Distance(x,y) = Maximum|x_i-y_i|\)</span></p></li>
+<li><p>Percent disagreement. This measure is particularly useful if the data for the dimensions included in the analysis are categorical in nature. This distance is computed as: <span class="math inline">\(Distance(x,y) = (Number of xi ≠ yi)/ m\)</span></p></li>
+</ul>
+<p><strong>Challenge 13g</strong>: Generate a heatmap for the statistics of 50 states in the state.x77 dataset (for information ? state) using heatmap.2 in the gplots package. Normalize your data properly before creating heatmap. Use the default Euclidean distance and complete linkage. Use <em>state.region</em> to color code the states and include an appropriate legend. Interpret your results. Discuss both trees.</p>
+<p><strong>Challenge 13h</strong>: Change distance function to 1-Pearson’s correlation coefficient. Change linkage method to average linkage. Turn off the clustering of the columns by reading the help information on <strong>heatmap.2</strong>. Observe what is different in the clustering trees.</p>
+<p><strong>Challenge 13i</strong>: Generate a heat map for the iris flower dataset. For data normalization, do not use standardization, just use centering (subtract the means). Use the species information in a color bar and interpret your results.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="functions-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

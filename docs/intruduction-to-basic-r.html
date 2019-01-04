@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Learning R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Learning R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Learning R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge">
+
+
+<meta name="date" content="2019-01-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="analyzing-heart-attack-data-set-ii.html">
+<link rel="next" href="vectors-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Index</a></li>
+<li class="chapter" data-level="1" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html"><i class="fa fa-check"></i><b>1</b> Analyzing iris flower dataset I</a><ul>
+<li class="chapter" data-level="1.1" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.1</b> “Data frames” have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.2</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.3" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#students-t-test"><i class="fa fa-check"></i><b>1.3</b> Student’s t-test</a></li>
+<li class="chapter" data-level="1.4" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#test-for-normal-distribution"><i class="fa fa-check"></i><b>1.4</b> Test for normal distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.5</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.6" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#analyzing-the-relationship-between-two-columns-of-numbers"><i class="fa fa-check"></i><b>1.6</b> Analyzing the relationship between two columns of numbers</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>1.6.1</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="1.6.2" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#quantitative-analyses-of-correlation"><i class="fa fa-check"></i><b>1.6.2</b> Quantitative analyses of correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#visualizing-and-testing-the-differences-in-groups"><i class="fa fa-check"></i><b>1.7</b> Visualizing and testing the differences in groups</a></li>
+<li class="chapter" data-level="1.8" data-path="analyzing-iris-flower-dataset-i.html"><a href="analyzing-iris-flower-dataset-i.html#test-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.8</b> Test the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html"><i class="fa fa-check"></i><b>2</b> Analyzing iris flower data set II</a><ul>
+<li class="chapter" data-level="2.1" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#visualizing-the-entire-dataset"><i class="fa fa-check"></i><b>2.1</b> Visualizing the entire dataset</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.1.1</b> A Matrix only contains numbers</a></li>
+<li class="chapter" data-level="2.1.2" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#scatter-plot-matrix-1"><i class="fa fa-check"></i><b>2.1.2</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.1.3" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#heatmap"><i class="fa fa-check"></i><b>2.1.3</b> Heatmap</a></li>
+<li class="chapter" data-level="2.1.4" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#star-plot-segment-diagrams"><i class="fa fa-check"></i><b>2.1.4</b> Star plot Segment diagrams</a></li>
+<li class="chapter" data-level="2.1.5" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#segment-diagrams"><i class="fa fa-check"></i><b>2.1.5</b> Segment diagrams</a></li>
+<li class="chapter" data-level="2.1.6" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.1.6</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.1.7" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#box-plot"><i class="fa fa-check"></i><b>2.1.7</b> Box plot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#combining-plots"><i class="fa fa-check"></i><b>2.2</b> Combining plots</a></li>
+<li class="chapter" data-level="2.3" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#plot-using-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.3</b> Plot using principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.4" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#first-attempt-at-ggplot2"><i class="fa fa-check"></i><b>2.4</b> First attempt at ggplot2</a></li>
+<li class="chapter" data-level="2.5" data-path="analyzing-iris-flower-data-set-ii.html"><a href="analyzing-iris-flower-data-set-ii.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.5</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>3</b> Data importing</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>3.1</b> Enter data manually</a></li>
+<li class="chapter" data-level="3.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.2</b> Reading data from file using Import dataset in Rstudio</a></li>
+<li class="chapter" data-level="3.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>3.3</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="3.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>3.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="3.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>3.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="3.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>3.6</b> Recommended workflow for EVERY project</a></li>
+<li class="chapter" data-level="3.7" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-a-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.7</b> Reading data from a file using Import dataset in Rstudio</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>4</b> Analyzing heart attack data set I</a><ul>
+<li class="chapter" data-level="4.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>4.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="4.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>4.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="4.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>4.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="4.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>4.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="4.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>4.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set II</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>5.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>5.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>5.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>5.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>5.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html"><i class="fa fa-check"></i><b>6</b> Intruduction to basic R</a><ul>
+<li class="chapter" data-level="6.1" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#expressions"><i class="fa fa-check"></i><b>6.1</b> Expressions</a></li>
+<li class="chapter" data-level="6.2" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#logical-values"><i class="fa fa-check"></i><b>6.2</b> Logical Values</a></li>
+<li class="chapter" data-level="6.3" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#variables"><i class="fa fa-check"></i><b>6.3</b> Variables</a></li>
+<li class="chapter" data-level="6.4" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>6.5</b> Looking for Help and Example Code</a></li>
+<li class="chapter" data-level="6.6" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#vectors"><i class="fa fa-check"></i><b>6.6</b> Vectors</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#sequence-vectors"><i class="fa fa-check"></i><b>6.6.1</b> Sequence Vectors</a></li>
+<li class="chapter" data-level="6.6.2" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#scatter-plots"><i class="fa fa-check"></i><b>6.6.2</b> Scatter Plots</a></li>
+<li class="chapter" data-level="6.6.3" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#missing-data-is-represented-as-na"><i class="fa fa-check"></i><b>6.6.3</b> Missing data is represented as NA</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#lists"><i class="fa fa-check"></i><b>6.7</b> Lists</a></li>
+<li class="chapter" data-level="6.8" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>6.8</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="6.9" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#matrix-operations"><i class="fa fa-check"></i><b>6.9</b> Matrix operations</a></li>
+<li class="chapter" data-level="6.10" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#operations-on-data-frames"><i class="fa fa-check"></i><b>6.10</b> Operations on data frames</a></li>
+<li class="chapter" data-level="6.11" data-path="intruduction-to-basic-r.html"><a href="intruduction-to-basic-r.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>6.11</b> For more in-depth exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="vectors-1.html"><a href="vectors-1.html"><i class="fa fa-check"></i><b>7</b> Vectors</a></li>
+<li class="chapter" data-level="8" data-path="matrics-and-arrays.html"><a href="matrics-and-arrays.html"><i class="fa fa-check"></i><b>8</b> Matrics and arrays</a></li>
+<li class="chapter" data-level="9" data-path="lists-1.html"><a href="lists-1.html"><i class="fa fa-check"></i><b>9</b> Lists</a></li>
+<li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a></li>
+<li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
+<li class="chapter" data-level="12" data-path="functions-1.html"><a href="functions-1.html"><i class="fa fa-check"></i><b>12</b> Functions</a><ul>
+<li class="chapter" data-level="12.1" data-path="functions-1.html"><a href="functions-1.html#define-your-very-own-r-function"><i class="fa fa-check"></i><b>12.1</b> Define your very own R function</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html"><i class="fa fa-check"></i><b>13</b> Visualizing cars data set</a><ul>
+<li class="chapter" data-level="13.1" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>13.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="13.2" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#plain-vs.refined-graphics"><i class="fa fa-check"></i><b>13.2</b> Plain vs. refined graphics</a></li>
+<li class="chapter" data-level="13.3" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#visualizing-the-mtcars-dataset-using-scatter-plot"><i class="fa fa-check"></i><b>13.3</b> Visualizing the mtcars dataset using scatter plot</a></li>
+<li class="chapter" data-level="13.4" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#customize-scatterplots"><i class="fa fa-check"></i><b>13.4</b> Customize scatterplots</a></li>
+<li class="chapter" data-level="13.5" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#d-scatter-plot"><i class="fa fa-check"></i><b>13.5</b> 3D scatter plot</a></li>
+<li class="chapter" data-level="13.6" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#detect-correlations-among-variables"><i class="fa fa-check"></i><b>13.6</b> Detect correlations among variables</a></li>
+<li class="chapter" data-level="13.7" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#barplot-with-error-bars"><i class="fa fa-check"></i><b>13.7</b> Barplot with error bars</a></li>
+<li class="chapter" data-level="13.8" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>13.8</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="13.9" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>13.9</b> Representing data using faces. Serious scientific research only!</a></li>
+<li class="chapter" data-level="13.10" data-path="visualizing-cars-data-set.html"><a href="visualizing-cars-data-set.html#hierarchical-clustering"><i class="fa fa-check"></i><b>13.10</b> Hierarchical clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>14</b> Tidyverse</a><ul>
+<li class="chapter" data-level="14.1" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-is-collection-of-powerful-r-packages"><i class="fa fa-check"></i><b>14.1</b> Tidyverse is collection of powerful R packages</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intruduction-to-basic-r" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Intruduction to basic R</h1>
+<p>R data types and basic expressions<sup>1</sup> : Common <strong>data structures</strong> in R include <strong>scalars, vectors, factors, matrices, data frames</strong>, and <strong>lists</strong>. These data structures can contain one or more individual data elements of several types, namely <strong>numeric</strong> (2.5), <strong>character</strong> (“Go Jacks”), or <strong>logical</strong> (TRUE or FALSE).</p>
+<div id="expressions" class="section level2">
+<h2><span class="header-section-number">6.1</span> Expressions</h2>
+<p>Type anything at the prompt, and R will evaluate it and print the answer.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>There’s your result, <strong>2</strong>. It’s printed on the console right after your entry.</p>
+<p>Type the string <strong>“Go Jacks”</strong>. (Don’t forget the quotes!)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;Go Jacks&quot;</span></code></pre></div>
+<pre><code>## [1] &quot;Go Jacks&quot;</code></pre>
+<p><strong>Challenge 6a</strong>: Now try multiplying 45.6 by 78.9</p>
+</div>
+<div id="logical-values" class="section level2">
+<h2><span class="header-section-number">6.2</span> Logical Values</h2>
+<p>Some expressions return a “logical value”: <strong>TRUE</strong> or <strong>FALSE</strong>. (Many programming languages refer to these as “boolean” values.) Let’s try typing an expression that gives us a logical value:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>And another logical value (note that you need a double-equals sign to check whether two values are equal - a single-equals sign won’t work):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">5</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p><strong>T</strong> and <strong>F</strong> are shorthand for <strong>TRUE</strong> and <strong>FALSE</strong>. Try this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="variables" class="section level2">
+<h2><span class="header-section-number">6.3</span> Variables</h2>
+<p>As in other programming languages, you can store a value into a variable to access it later. Type <strong>x = 42</strong> to store a value in <strong>x</strong>. x is a <strong>scalar, with only one data element</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="dv">42</span></code></pre></div>
+<p>You can also use the following. This is a conventional, safer way to assign values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">42</span></code></pre></div>
+<p>x can now be used in expressions in place of the original result. Try dividing <strong>x</strong> by <strong>2</strong> (<strong>/</strong> is the division operator).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">/</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<p>You can re-assign any value to a variable at any time. Try assigning <strong>“Go Jacks!”</strong> to <strong>x</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;Go Jacks!&quot;</span></code></pre></div>
+<p>You can print the value of a variable at any time just by typing its name in the console. Try printing the current value of x.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x</code></pre></div>
+<pre><code>## [1] &quot;Go Jacks!&quot;</code></pre>
+<p>Now try assigning the <strong>TRUE</strong> logical value to <strong>x</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<p>You can store multiple values in a variable or object. That is called a <strong>vector</strong>, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a <strong>matrix</strong>, or <strong>data frame</strong>.</p>
+</div>
+<div id="functions" class="section level2">
+<h2><span class="header-section-number">6.4</span> Functions</h2>
+<p>You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Most of your R commands are functional calls. Let’s try using the sum function, to add up a few numbers. Enter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<p>Some arguments have names. For example, to repeat a value 3 times, you would call the <strong>rep</strong> function and provide its <strong>times</strong> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="st">&quot;Yo ho!&quot;</span>, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>## [1] &quot;Yo ho!&quot; &quot;Yo ho!&quot; &quot;Yo ho!&quot;</code></pre>
+</div>
+<div id="looking-for-help-and-example-code" class="section level2">
+<h2><span class="header-section-number">6.5</span> Looking for Help and Example Code</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? sum </code></pre></div>
+<p>A web page will pope up. This is the official help information for this function. At the bottom of the page is some example code. The quickest way to learn an R function is to run the example codes and see the input and output. You can easily copy, paste, and twist the example code to do your analysis.</p>
+<p><strong>example()</strong> brings up examples of usage for the given function. Try displaying examples for the min function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">example</span>(min)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">1</span>, pi)  <span class="co"># -&gt; one number</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Example commands and plots will show up automatically by typing Return in RStudio. In R, you need to click on the plots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">example</span>(boxplot)  <span class="co"># bring example of boxplot</span></code></pre></div>
+<p>I found a lot of help information about R through Google. <strong>Google tolerate typos, grammar errors, and different notations. Also, most (99 %) of your questions have been asked and answered on various forums. Many R gurus answered a ton of questions on web sites like</strong> <a href="stackoverflow.com" class="uri">stackoverflow.com</a><strong>, with example codes!</strong> I also use Google as a reference.</p>
+<p><strong>Challenge 6b</strong>: Try to find and run the two functions that sets and returns the current working directory.</p>
+<p><strong>Challenge 6c</strong>: Try to find and run the function that lists all the files in the current working folder.</p>
+<p>It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and repurpose our codes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)  <span class="co"># return the maximum value of a vector</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="vectors" class="section level2">
+<h2><span class="header-section-number">6.6</span> Vectors</h2>
+<p>A vector is an object that holds a sequence of values of the same type. A vector’s values can be numbers, strings, logical values, or any other type, as long as they’re all the same type. Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>)</code></pre></div>
+<pre><code>## [1] 7 3 9</code></pre>
+<p>The <strong>c</strong> function (<strong>c</strong> is short for Combine) creates a new vector by combining a set of values. If we want to continue to use the vector, we hold it in an object and give it a name:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>)
+fishes</code></pre></div>
+<pre><code>## [1] 7 3 9</code></pre>
+<p><strong>fishes</strong> is a vector with 3 data elements. There are many functions that operate on vectors. You can plot the vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(fishes)  <span class="co"># see figure 6.1A</span></code></pre></div>
+<p>You can compute the total:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(fishes)</code></pre></div>
+<pre><code>## [1] 19</code></pre>
+<p>We can access the individual elements by indices, starting at 1:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes[<span class="dv">3</span>]</code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<p><strong>Challenge 6d</strong>: Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the <strong>fishes</strong> vector and return a TRUE or FALSE value.</p>
+<p>Jerry protested that the ¼ inch long fish he caught and released per fishing rules was not counted properly. We can change the values in the 2nd element directly by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes[<span class="dv">2</span>] &lt;-<span class="st"> </span>fishes[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </code></pre></div>
+<p>On the left side, we take the current value of the 2nd element, which is 3, and add an 1 to it. The result (4) is assigned back to the 2nd element itself. As a result, the 2nd element is increased by 1. This is not an math equation, but a value assignment operation. More rigorously, we should write this as fishes[2] <strong>&lt;-</strong> fishes[2] + 1</p>
+<p>We can also directly overwrite the values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes[<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">4</span>
+fishes</code></pre></div>
+<pre><code>## [1] 7 4 9</code></pre>
+<p>They started a camp fire, and each ate 1 fish for dinner. Now the fishes left:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes2 &lt;-<span class="st"> </span>fishes <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+fishes2</code></pre></div>
+<pre><code>## [1] 6 3 8</code></pre>
+<p>Most arithmetic operations work just as well on vectors as they do on single values. <strong>R subtracts 1 from each individual element</strong>. If you add a scalar (a single value) to a vector, the scalar will be added to each value in the vector, returning a new vector with the results.</p>
+<p>While they are sleeping in their camping site, a fox stole 3 fishes from Jerry’s bucket, and 4 fishes from Mickey’s bucket. How many left?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stolen &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>)  <span class="co"># a new vector</span>
+fishes2 <span class="op">-</span><span class="st"> </span>stolen</code></pre></div>
+<pre><code>## [1] 6 0 4</code></pre>
+<p>If you add or subtract two vectors of the same length, R will take the corresponding values from each vector and add or subtract them. The 0 is necessary to keep the vector length the same.</p>
+<p>Proud of himself, Mickey wanted to make a 5ft x 5ft poster to show he is the best fisherman. Knowing that <strong>a picture worthes a thousand words</strong>, he learned R and started plotting. He absolutely needs his names on the plots. The data elements in a vector can have names or labels.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(fishes) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Jerry&quot;</span>, <span class="st">&quot;Mickey&quot;</span>)</code></pre></div>
+<p>The right side is a vector, holding 3 character values. These values are assigned as the names of the 3 elements in the fishes vector. names is a built-in function. Our vector looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes</code></pre></div>
+<pre><code>##    Tom  Jerry Mickey 
+##      7      4      9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(fishes)   <span class="co"># see figure 6.1B</span></code></pre></div>
+
+<div class="figure" style="text-align: center"><span id="fig:6-1"></span>
+<img src="images/img0601_fish.png" alt="Simple Bar plot" width="80%" />
+<p class="caption">
+Figure 6.1: Simple Bar plot
+</p>
+</div>
+<p>Assigning names for a vector also enables us to use labels to access each element. Try getting the value for Jerry:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes[<span class="st">&quot;Jerry&quot;</span>]</code></pre></div>
+<pre><code>## Jerry 
+##     4</code></pre>
+<p><strong>Challenge 6e</strong>: Now see if you can set the value for <strong>Tom</strong> to something other than 5 using the name rather than the index.</p>
+<p>Tom proposes that their goal for next fishing trip is to double their catches.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>fishes</code></pre></div>
+<pre><code>##    Tom  Jerry Mickey 
+##     14      8     18</code></pre>
+<p>Hopelessly optimistic, Jerry proposed that next time each should “square” their catches, so that together they may feed the entire school.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(fishes <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 146</code></pre>
+<p>Note that two operations are nested. You can obviously do it in two steps.</p>
+<p><strong>Challenge 6f</strong>: Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1. And create a bar plot to represent this information.</p>
+<p>Vectors cannot hold values with different modes (types). Try mixing modes and see what happens:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">TRUE</span>, <span class="st">&quot;three&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;1&quot;     &quot;TRUE&quot;  &quot;three&quot;</code></pre>
+<p>All the values were converted to a single mode (characters) so that the vector can hold them all. To hold diverse types of values, you will need a <strong>list</strong>, which is explained later in Part 3 of this document.</p>
+<div id="sequence-vectors" class="section level3">
+<h3><span class="header-section-number">6.6.1</span> Sequence Vectors</h3>
+<p>If you need a vector with a sequence of numbers you can create it with <strong>start:end</strong> notation. This is often used in loops and operations on the indices of vectors etc. Let’s make a vector with values from 5 through 9:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:</span><span class="dv">9</span></code></pre></div>
+<pre><code>## [1] 5 6 7 8 9</code></pre>
+<p>A more versatile way to make sequences is to call the <strong>seq</strong> function. Let’s do the same thing with <strong>seq</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">5</span>, <span class="dv">9</span>)</code></pre></div>
+<pre><code>## [1] 5 6 7 8 9</code></pre>
+<p>seq also allows you to use increments other than 1. Try it with steps of 0.5:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">5</span>, <span class="dv">9</span>, .<span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 5.0 5.5 6.0 6.5 7.0 7.5 8.0 8.5 9.0</code></pre>
+<p><strong>Challenge 6g</strong>: Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.</p>
+</div>
+<div id="scatter-plots" class="section level3">
+<h3><span class="header-section-number">6.6.2</span> Scatter Plots</h3>
+<p>The <strong>plot</strong> function takes two vectors, one for X values and one for Y values, and draws a graph of them. Let’s draw a graph showing the relationship of numbers and their sines.</p>
+<p>First, we’ll need some sample data. We’ll create a vector for you with some fractional values between 0 and 20, and store it in the x variable.</p>
+<p>Now, try creating a second vector with the sines of those values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="fl">0.1</span>)
+y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</code></pre></div>
+<p>Then simply call plot with your two vectors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x, y)</code></pre></div>
+<p>Great job! Notice on the graph that values from the first argument (x) are used for the horizontal axis, and values from the second (y) for the vertical.</p>
+<p><strong>Challenge 6h</strong>: Create a vector with 21 integers from -10 to 10, and store it in the x variable. Then create a scatterplot of x2 against x.</p>
+</div>
+<div id="missing-data-is-represented-as-na" class="section level3">
+<h3><span class="header-section-number">6.6.3</span> Missing data is represented as NA</h3>
+<p>Sometimes, when working with sample data, a given value isn’t available. But it’s not a good idea to just throw those values out. R has a value that explicitly indicates a sample was not available: <strong>NA</strong>. Many functions that work with vectors treat this value specially. We’ll create a vector for you with a missing sample, and store it in the <strong>a</strong> variable. Try to get the sum of its values, and see what the result is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="ot">NA</span>, <span class="dv">7</span>, <span class="dv">9</span>)
+<span class="kw">sum</span>(a)</code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>The sum is considered “not available” by default because one of the vector’s values was <strong>NA</strong>. This is the responsible thing to do; R won’t just blithely add up the numbers without warning you about the incomplete data. We can explicitly tell <strong>sum</strong> (and many other functions) to remove <strong>NA</strong> values before they do their calculations, however.</p>
+<p>Bring up documentation for the <strong>sum</strong> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? sum</code></pre></div>
+<p>sum pckage:base</p>
+<p>R Documentation …</p>
+<p>As you see in the documentation, <strong>sum</strong> can take an optional named argument, <strong>na.rm</strong>. It’s set to <strong>FALSE</strong> by default, but if you set it to <strong>TRUE</strong>, all <strong>NA</strong> arguments will be removed from the vector before the calculation is performed.</p>
+<p>Try calling <strong>sum</strong> again, with <strong>na.rm</strong> parameter set to <strong>TRUE</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p>To check if NA is in a vector, we use the function is.na( ). Note that the result is a vector holding logical values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(a)</code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<p><strong>Challenge 6i</strong>. Now compute the average of values in a. Ignore the missing values.</p>
+</div>
+</div>
+<div id="lists" class="section level2">
+<h2><span class="header-section-number">6.7</span> Lists</h2>
+<p>Vectors contain a set of values. But one vector can only contain one type of values, numbers, characters, or logical values. A list can store a series of objects of different types.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>,<span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>))  <span class="co"># a list with 3 components</span></code></pre></div>
+<p>If we want one of the items in its original form, we can extract it with double square brackets:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">3</span>]]</code></pre></div>
+<pre><code>## [1] 100  77</code></pre>
+<p>Alternatively, we can refer to the objects by using the dollar sign and the name of the object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y<span class="op">$</span>BP</code></pre></div>
+<pre><code>## [1] 100  77</code></pre>
+<p>Many R functions, such as <em>t.test()</em>, returns results as a <strong>list</strong>, which contain a series of components, such as a P value, a vector of residuals or coefficients, and even a matrix of data. A list is the natural way to represent this sort of thing as one big object that could be parsed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">t.test</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="kw">rnorm</span>(<span class="dv">100</span>))  <span class="co"># rnorm(100): 100 random number</span>
+result  <span class="co"># A list holds all  results of t-test</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  rnorm(100) and rnorm(100)
+## t = -0.023518, df = 196.46, p-value = 0.9813
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.2806888  0.2740732
+## sample estimates:
+##  mean of x  mean of y 
+## -0.1285633 -0.1252555</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
+<pre><code>## [1] 0.9812612</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
+<pre><code>##  mean of x  mean of y 
+## -0.1285633 -0.1252555</code></pre>
+<p>The help page of t.test contains information about what types of values are returned and their names.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? t.test</code></pre></div>
+<p>Value</p>
+<p>A list with class “htest” containing the following components:</p>
+<p><strong>statistic</strong>: …</p>
+<p><strong>p.value</strong>: the p-value for the test.</p>
+<p><strong>estimate</strong>: the estimated mean or difference in means depending on whether it was a one-sample test or a two-sample test.</p>
+<p>With this in mind, let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the P value. By repeating this process 500 times, we want to see the distribution of P values and count how many times we get significant result with P &lt; 0.05.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) {  <span class="co"># Loop: The values of i takes values from 1,2,3, …, 500</span>
+     result =<span class="st"> </span><span class="kw">t.test</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="kw">rnorm</span>(<span class="dv">100</span>))    
+     pvalues[i] =<span class="st"> </span>result<span class="op">$</span>p.value  <span class="co"># P values are stored in the i-th element in the vector</span>
+}  
+<span class="kw">hist</span>(pvalues)  <span class="co"># define</span>
+<span class="kw">summary</span>(pvalues)   
+<span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
+<p><strong>Challenge 6j</strong>. Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point.</p>
+</div>
+<div id="strings-and-string-vectors" class="section level2">
+<h2><span class="header-section-number">6.8</span> Strings and string vectors</h2>
+<p>We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.</p>
+<p>One <strong>String</strong>: Type <strong>x &lt;- “R is cool”</strong> and then try each one of these: <img src="images/img0701_string.png" /><!-- --></p>
+<p>A <strong>vector</strong> can hold many strings. This can be a column of names or IDs in a table.<br />
+Define a character vector by <strong>x &lt;- c(“ab”, “cde”, “d”, “ab”)</strong> then try these: <img src="images/img0702_vector.png" /><!-- --></p>
+<p>Using these functions, we can achieve many things. For example if we have a piece of DNA sequence:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DNA &lt;-<span class="st"> &quot;taaCCATTGtaaGAACATGGTTGTCcaaaCAAGATGCTAGT&quot;</span></code></pre></div>
+<p>Note that I am using the assignment operator “&lt;-”, instead of “=”, which also works most of the times but it could be ambiguous. First we need to convert everything to upper case.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DNA &lt;-<span class="st"> </span><span class="kw">toupper</span>(DNA)</code></pre></div>
+<p>Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to certain pattern.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segs &lt;-<span class="st"> </span><span class="kw">strsplit</span>(DNA, <span class="st">&quot;ATG&quot;</span>)</code></pre></div>
+<p>The result is contained in an object segs, which is a list. We needed the unlist( ) function to convert list to a string vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segs &lt;-<span class="st"> </span><span class="kw">unlist</span>(segs)   
+segs  <span class="co"># a vector of strings</span></code></pre></div>
+<pre><code>## [1] &quot;TAACCATTGTAAGAAC&quot; &quot;GTTGTCCAAACAAG&quot;   &quot;CTAGT&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">segs[<span class="dv">1</span>]  <span class="co"># first segment</span></code></pre></div>
+<pre><code>## [1] &quot;TAACCATTGTAAGAAC&quot;</code></pre>
+<p><strong>Challenge 6k</strong>. In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris “ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.</p>
+</div>
+<div id="matrix-operations" class="section level2">
+<h2><span class="header-section-number">6.9</span> Matrix operations</h2>
+<p>A <strong>matrix</strong> has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. Define a matrix using the Iris dataset x &lt;- as.matrix(iris[1:10, 1:4]) and try the following commands. <img src="images/img0703_matrix.png" /><!-- --></p>
+<p><strong>Challenge 6l</strong>: Take the first 4 columns of iris data set and format as a matrix. Compute the median for each column using the apply function.</p>
+</div>
+<div id="operations-on-data-frames" class="section level2">
+<h2><span class="header-section-number">6.10</span> Operations on data frames</h2>
+<p>Once data is read in as <strong>data frame</strong>, these are commands you can use to analyze it. Type <strong>x &lt;- iris</strong> and then try these commands:</p>
+<p><img src="images/img0704n.png" /><!-- --><img src="images/img0704n1.png" /><!-- --></p>
+<p>-<sup>1</sup> D.F.: data frame</p>
+<p><strong>Challenge 6m</strong>: A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a folder, download the data files into it, and create an Rstudio project in the folder.</p></li>
+<li><p>Read in these two files. Note that for the species file, DO NOT treat Strings as factors. Unselect this in the import wizard. Keep a copy of the import command into your R script.</p></li>
+<li><p>Change the species name from “no matching sequences/no significant similarity” to “no match”</p></li>
+<li><p>Plot histogram of infection across all experiments.</p></li>
+<li><p>Merge these two files according to Isolate ID.</p></li>
+<li><p>Show the number of rows and columns of the merged data.</p></li>
+<li>Show the first few rows of data.</li>
+<li><p>Show the column names</p></li>
+<li><p>Show summary descriptive statistics for all columns</p></li>
+<li><p>Show the data types of all columns in the merged data</p></li>
+<li><p>Create a pie chart by Species (hint: tabulate frequencies first)</p></li>
+<li><p>Generate a boxplot to compare infection percentage across species</p></li>
+<li><p>Sort the combined data by infection and show the most infectious species with highest percentages.</p></li>
+<li><p>Compute average infection for each of the species (use aggregate)</p></li>
+<li><p>Run linear regression for infection as a function of species, expt, and plant. We want to know if the technical replicate factors have significant impact on the data. Interpret your results.</p></li>
+</ol>
+<p>Provide interpretation of the plots or quantitative analyses.</p>
+<p>Submit R code and results. Please send me an email if you need help. <a href="mailto:Xijin.Ge@sdsate.edu">Xijin.Ge@sdsate.edu</a></p>
+<p>Hint: 1. Make sure the data is correctly imported in the desired type. Numeric, character or factor.</p>
+<p>Hint 2: Most R functions you need can be found in the <strong>Error! Reference source not found</strong>. 1-3 and previous notes.</p>
+<p>Hint 3: Structure your R code by partition into parts with comments.</p>
+</div>
+<div id="for-more-in-depth-exercises" class="section level2">
+<h2><span class="header-section-number">6.11</span> For more in-depth exercises</h2>
+<p>Go to: <a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a><br />
+This material is based on <a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analyzing-heart-attack-data-set-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vectors-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
