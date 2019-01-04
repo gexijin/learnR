@@ -135,7 +135,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>3.4</b> Reading file using read.table, read.csv, etc.</a></li>
 <li class="chapter" data-level="3.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>3.5</b> General procedure to read data into R:</a></li>
 <li class="chapter" data-level="3.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>3.6</b> Recommended workflow for EVERY project</a></li>
-<li class="chapter" data-level="3.7" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-a-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.7</b> Reading data from a file using Import dataset in Rstudio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>4</b> Analyzing heart attack data set I</a><ul>
 <li class="chapter" data-level="4.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>4.1</b> Begin your analysis by examining each column separately</a></li>
@@ -236,7 +235,7 @@ A                            <span class="co"># show the matrix</span></code></p
 <h2><span class="header-section-number">3.2</span> Reading data from file using Import dataset in Rstudio</h2>
 <p>Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and sooo amateur)! Do not even think about using Microsoft Word! I strongly recommend that you install a powerful text editor such as NotePad++ (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a>), or TextPad (<a href="https://www.textpad.com/" class="uri">https://www.textpad.com/</a>). If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (<a href="https://sourceforge.net/projects/npptor/" class="uri">https://sourceforge.net/projects/npptor/</a>) to send R commands from NotePad++ directly to R, and I love it!</p>
 <p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
-<p>Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or t as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
+<p>Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
 <p>Probably the most intuitive way to read data into Rstudio is to use the <strong>Import dataset</strong> function available at <strong>File-&gt;Import Datase</strong>t from the Rstudio menu. You can also click <strong>Import dataset</strong> button on the top-right of the Rstudio interface. The preferred format is CSV. But it is not required. You can open a text file with Excel, and save it as a CSV file.</p>
 <ol style="list-style-type: decimal">
 <li>Download data and read background information</li>
@@ -492,7 +491,7 @@ x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.
 <li>Change working directory to where the file was saved. Main menu: <strong>File-&gt;Change dir…</strong></li>
 <li>read.table ( ), or read.csv( ). For example, <strong>x &lt;- read.table(“somefile.txt”, sep = “<span class="math inline">\(\t\)</span>”, header = TRUE, missingstring = “NA”)</strong></li>
 <li>Double check the data with <strong>fix( x )</strong>, click on the column name to make sure each column is recognized correctly as <strong>“character”</strong> or <strong>“numeric”</strong>.<br />
-Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character. For example, <strong>x $ ids &lt;- as.character(x $ ids)</strong>, # x is the data frame and ids is the column name. Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These needs to be reformatted as <strong>factors</strong>. This could be done with something like <strong>x $ treatment &lt;- as.factor(x $ treatment)</strong>.</li>
+Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character. For example, <strong>x $ ids &lt;- as.character(x $ ids)</strong>, # x is the data frame and ids is the column name. Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as <strong>factors</strong>. This could be done with something like <strong>x $ treatment &lt;- as.factor(x $ treatment)</strong>.</li>
 </ol>
 <p>Refresher using cheat sheets that summarize many R functions is available here: <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a>. It is important to know the different types of R objects: <strong>scalars, vectors, data frames, matrix, and lists</strong>.</p>
 </div>
@@ -513,33 +512,6 @@ Pay attention to columns contain numbers but are actually IDs (i.e. student IDs
 Figure 3.3: Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder.
 </p>
 </div>
-<p>** from original chapter 4(summary for Import function)**</p>
-</div>
-<div id="reading-data-from-a-file-using-import-dataset-in-rstudio" class="section level2">
-<h2><span class="header-section-number">3.7</span> Reading data from a file using Import dataset in Rstudio</h2>
-<p>Probably the most intuitive (not the most convenient) way to read data into Rstudio is to use the Import Dataset function. Following these steps carefully to read in your data:</p>
-<ol style="list-style-type: decimal">
-<li>Create a folder called week3 on your computer.</li>
-<li>Download data file to that folder. Download the <strong>heartatk4R.txt</strong> file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a> It is also available in the Datasets folder on D2L. It is a tab-delimited text file, meaning the different columns are separated by tab.<br />
-</li>
-<li>Install <strong>NotePad++</strong> and open the data with it to take a look. For Mac users, try Text Edit.</li>
-<li><strong>Start Rstudio</strong>. If you already started it, save your scripts. Go to <strong>Help-&gt;Check for updates</strong> from the main menu. Download and install the latest version if yours is not.</li>
-<li>Create a new project by <strong>File-&gt;New Project-&gt;Existing Directory</strong>. Browse to select the week3 folder and click on <strong>Create Project</strong>.</li>
-<li>Start a script window by <strong>File-&gt;New file-&gt;R script</strong>. The script window is where you will be entering your commands. Then click the <strong>save button</strong> and name the file like <strong>week3_scripts.R</strong>. You should save the script often while working on it.</li>
-<li>Run and save scripts. In the script window, type <strong>sum(1:100)</strong>, then click the <strong>Run button</strong> on the top right. This command is sent to the console window and executed. You should see the result 5050. Click the <strong>save button</strong> to save your script before moving on. You can also highlight several lines of code and run them together. If you have an error message, you can edit your code and re-run.</li>
-<li>In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text (base)</strong>, and find the heartatk4R.txt file on your hard drive. You should double check the <strong>Delimiter</strong> is “tab”, and whether your data has column names as header. Inspect the preview to make sure the data is correctly parsed into multiple columns. After clicking Import, the awesome nerds at Rstudio actually helped you generated these 2 lines of code:</li>
-</ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#heartatk4R &lt;- read.delim(&quot;C:/week3/heartatk4R.txt&quot;)</span>
-<span class="co">#View(heartatk4R)   # shows the data</span></code></pre></div>
-<p><strong>Copy and paste</strong> this code to your script window. We like to keep a record of what happened. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on the heartatk4R object, which is a data frame named after the input file, in the <strong>Global Environment</strong> window that contains the names and sizes of all the variables or objects in the computer memory. R programming is all about creating and modifying these objects in the memory with clear, step-by-step instructions.</p>
-<ol start="9" style="list-style-type: decimal">
-<li><strong>Check and convert data type.</strong> Most of the times, R can guess the type of data (numbers vs. categories) in each column. But we need to double check and convert if necessary. First, we make a copy of the data. We will modify the new object (x) and leave the raw data (heartatk4R) as is. Type the following commands in the script window and execute them by clicking on the Run button.</li>
-</ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#x &lt;- heartatk4R  # Make a copy of the data for manipulation, call it x. </span>
-<span class="co">#str(x)  # structure of data object, data types for each column</span></code></pre></div>
-<ol start="10" style="list-style-type: decimal">
-<li>Sorting, subsetting, and creating new columns. Try not to attach the data when you are manipulation data like this.</li>
-</ol>
 
 </div>
 </div>

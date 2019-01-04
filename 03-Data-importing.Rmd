@@ -40,7 +40,7 @@ Before reading files into R, we often need to open the files to take a look. Not
 
 Regardless of their extensions in file names, all **plain text files** can be opened by these text editors. Plain text files only contain text without any formatting, links and images.  The file names can be “poems.txt”, “poems.tex”, “students.csv”,  or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”.  You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified. 
 
-Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or \textbackslash t as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
+Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
 
 Probably the most intuitive way to read data into Rstudio is to use the **Import dataset** function available at **File->Import Datase**t from the Rstudio menu. You can also click  **Import dataset** button on the top-right of the Rstudio interface. The preferred format is CSV.  But it is not required. You can open a text file with Excel, and save it as a CSV file.
 
@@ -213,7 +213,7 @@ knitr::kable(
 9.	read.table ( ),  or read.csv( ). For example,
  **x <- read.table(“somefile.txt”, sep = “$\t$”, header = TRUE, missingstring = “NA”)**
 10.	Double check the data with **fix( x )**, click on the column name to make sure each column is recognized correctly as **“character”** or **“numeric”**.  
-Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character.  For example, **x $ ids <- as.character(x $ ids)**,  # x is the data frame and ids is the column name.  Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These needs to be reformatted as **factors**. This could be done with something like **x $ treatment <- as.factor(x $ treatment)**. 
+Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character.  For example, **x $ ids <- as.character(x $ ids)**,  # x is the data frame and ids is the column name.  Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as **factors**. This could be done with something like **x $ treatment <- as.factor(x $ treatment)**. 
 
 Refresher using cheat sheets that summarize many R functions is available here: [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/). It is important to know the different types of R objects: **scalars, vectors, data frames, matrix, and lists**. 
 
@@ -236,32 +236,4 @@ It is best to create a separate folder that contains all related files. You can 
 knitr::include_graphics("images/img0901_rstudio.png")
 ```
 
-** from original chapter 4(summary for Import function)**
-
-## Reading data from a file using Import dataset in Rstudio
-
-Probably the most intuitive (not the most convenient) way to read data into Rstudio is to use the Import Dataset function.  Following these steps carefully to read in your data:
-
-1.	Create a folder called week3 on your computer. 
-2.	Download data file to that folder. Download the **heartatk4R.txt** file from this page [http://statland.org/R/RC/tables4R.htm](http://statland.org/R/RC/tables4R.htm) It is also available in the Datasets folder on D2L. It is a tab-delimited text file, meaning the different columns are separated by tab.  
-3.	Install **NotePad++** and open the data with it to take a look. For Mac users, try Text Edit.
-4.	**Start Rstudio**. If you already started it, save your scripts. Go to **Help->Check for updates** from the main menu. Download and install the latest version if yours is not. 
-5.	Create a new project by **File->New Project->Existing Directory**. Browse to select the week3 folder and click on **Create Project**. 
-6.	Start a script window by **File->New file->R script**. The script window is where you will be entering your commands. Then click the **save button** and name the file like **week3_scripts.R**. You should save the script often while working on it. 
-7.	Run and save scripts. In the script window, type **sum(1:100)**, then click the **Run button** on the top right. This command is sent to the console window and executed. You should see the result 5050. Click the **save button** to save your script before moving on. You can also highlight several lines of code and run them together.  If you have an error message, you can edit your code and re-run. 
-8.	In Rstudio, click **File->Import Dataset->From text (base)**, and find the heartatk4R.txt file on your hard drive. You should double check the **Delimiter** is “tab”, and whether your data has column names as header. Inspect the preview to make sure the data is correctly parsed into multiple columns. After clicking Import, the awesome nerds at Rstudio actually helped you generated these 2 lines of code:
-```{r}
-#heartatk4R <- read.delim("C:/week3/heartatk4R.txt")
-#View(heartatk4R)   # shows the data
-```
-
-**Copy and paste** this code to your script window. We like to keep a record of what happened. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on the heartatk4R object, which is a data frame named after the input file,  in the **Global Environment** window that contains the names and sizes of all the variables or objects in the computer memory. R programming is all about creating and modifying these objects in the memory with clear, step-by-step instructions. 
-
-9.	**Check and convert data type.** Most of the times, R can guess the type of data (numbers vs. categories) in each column. But we need to double check and convert if necessary. First, we make a copy of the data. We will modify the new object (x) and leave the raw data (heartatk4R) as is. Type the following commands in the script window and execute them by clicking on the Run button. 
-```{r results='hide'}
-#x <- heartatk4R  # Make a copy of the data for manipulation, call it x. 
-#str(x)  # structure of data object, data types for each column
-```
-
-10. Sorting, subsetting, and creating new columns. Try not to attach the data when you are manipulation data like this. 
 
