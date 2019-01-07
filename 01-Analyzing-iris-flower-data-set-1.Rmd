@@ -3,7 +3,7 @@
 
 **Getting started**
 
-1. Install R from [www.R-project.org](www.R-project.org).Choose the cloud server or any U.S. mirror site. 
+1. Install R from [www.R-project.org](www.R-project.org). Choose the cloud server or any U.S. mirror site. 
 2. Install RStudio Desktop from [www.RStudio.com](www.RStudio.com). Rstudio uses the R software you just installed in the background, but provides a more user-friendly interface. We will use Rstudio. R commands can be typed directly into the “Console” window. Or you can enter them in the “R Script” window and click the “Run” button. 
 
 ```{r echo=FALSE, out.width='80%'}
@@ -41,7 +41,7 @@ So the first 4 columns contain numeric values. The last one is species informati
 
 To have a look at the data in a spreadsheet, we can use the fix( ) function.
 ```{r}
-#fix(iris)  # examine data frame in a spreadsheet. 
+fix(iris)  # examine data frame in a spreadsheet. 
 ```
 
 Click on column names to double-check data types (numeric vs. character). Sometimes we need to overwrite data types guessed by R. For example, sometimes we use 1 for male and 0 for female. These are essentially categories; Values like 1.6 make no sense. In this case we need to enforce this column as characters. Note this window needs to be closed before proceeding to the next. 
@@ -57,7 +57,7 @@ iris[, 4]     # shows all of column 4
 iris[3, 1:4]  # shows row 3, columns 1 to 4. 
 ```
 
-**Challenge 1a**:display data in rows 1 to 10 from columns 2 to 5.  Start a new Word document. Copy and paste your R code and the results to the document. This document need to be saved as PDF and submitted to D2L. 
+**Challenge 1a**:display data in rows 1 to 10 from columns 2 to 5.  Start a new Word document. Copy and paste your R code and the results to the document and save it as PDF. 
 
 ```{r echo=FALSE, out.width='45%', fig.align='center'}
 knitr::include_graphics("images/img0100_tips.png")
@@ -157,7 +157,7 @@ Histogram shows the distribution of data. The histogram top right of Figure \@re
 
 Lag plot is a scatter plot against the same set of number with an offset of 1. Any structure in lag plot indicate non-randomness in the order in which the data is presented.
 
-Q-Q plot can help check if data follows a Gaussian distribution, which is widely observed in many situations. Also referred to as normal distribution, it is the pre-requisite for many statistical methods. See Figure 5 for an example of normal distribution. Quantiles of the data is compared against those in a normal distribution.   If the normal Q-Q plot is close to the reference line produced by qqline( ), then the data has a normal distribution.
+Q-Q plot can help check if data follows a Gaussian distribution, which is widely observed in many situations. Also referred to as normal distribution, it is the pre-requisite for many statistical methods. See Figure \@ref(fig:1-5) for an example of normal distribution. Quantiles of the data is compared against those in a normal distribution.   If the normal Q-Q plot is close to the reference line produced by qqline( ), then the data has a normal distribution.
 
 **Challenge 1e**: Generate 500 random numbers from the standard normal distribution and generate sequence plots, histogram, lag plot, and Q-Q plot. You should get plots like those in Figure \@ref(fig:1-5).  Hint: Run x = rnorm(500) to generate these numbers, and then re-run the last 5 lines of code on this page. They are also shown on Figure \@ref(fig:1-4).
 
@@ -175,7 +175,7 @@ qqline(x)
 **Challenge 1f**:  Investigate Septal Length distribution using these techniques and summarize your observations in PLAIN English.  Hint: assign x with the values in the sepal length column (x = Sepal.Length), and re-run all the code in this section. 
 
 ## Student’s t-test 
-In hypothesis testing, we evaluate how likely the observed data can be generated if we assume a certain hypothesis is true. If this probability (P value) is very small (<0.05, typically), we reject that hypothesis. 
+In hypothesis testing, we evaluate how likely the observed data can be generated if we assume a certain hypothesis is true. If this probability (p value) is very small (< 0.05, typically), we reject that hypothesis. 
 Are the petal lengths of iris setosa significantly different from these of iris versicolor? 
 ```{r}
 x <- Petal.Length[1:50]  # the first 50 values of Sepal.Length are for iris setosa
@@ -183,7 +183,7 @@ y <- Petal.Length[51:100]  # the next 50 values of Sepal.Length are for iris ver
 t.test(x, y)  # t.test( ) is an R function for student’s t-test
 ```
 
-The null hypothesis is that the true mean is the same. Since P value is really small, we reject this hypothesis. Iris versicolor has longer sepals than iris setosa.  
+The null hypothesis is that the true mean is the same. Since p value is really small, we reject this hypothesis. Iris versicolor has longer sepals than iris setosa.  
 
 **Challenge 1g**:  Are iris setosa and iris versicolor significantly different in sepal width?  Hint: Replace Petal.Length with something else and re-run above code.
 
@@ -192,7 +192,7 @@ We can also do t-test on one set of numbers. This is a one-sample T-test of mean
 t.test(Sepal.Length, mu = 5.8)
 ```
 
-In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8.   Since P value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98. 
+In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8.   Since p value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98. 
 
 **Challenge 1h**: Compute 95% confidence interval of petal length. 
 
@@ -223,7 +223,7 @@ Pie charts are very effective in showing proportions.
 We can see that the three species are each represented with 50 observations.
 
 ## Analyzing the relationship between two columns of numbers 
-Scatter plot is a very effective in visualizing correlation between two columns of numbers. 
+Scatter plot is very effective in visualizing correlation between two columns of numbers. 
 
 (ref:2-1) Scatter plot of petal width and petal length.
 
@@ -235,7 +235,7 @@ plot(x, y)        # scatterplot,  refined version in Figure 1.8
 ```
 
 Figure \@ref(fig:2-1) shows that there is a positive correlation between petal length and petal width. In other words, flowers with longer petals are often wider. So the petals are getting bigger substantially, when both dimensions increase.   
-Another unusual feature is that there seems to be two clusters of points. Do the points in the small cluster represent one particular species of Iris? We need to further investigate this. The following will produce a plot with the species information color-coded. The resultant Figure \@ref(fig:2-2) clearly show that indeed one particular species, *I. setosa constitutes* the smaller cluster in the low left. The other two species also show difference in this plot, even though they are not easily separated. This is a very important insight into this dataset. 
+Another unusual feature is that there seems to be two clusters of points. Do the points in the small cluster represent one particular species of Iris? We need to further investigate this. The following will produce a plot with the species information color-coded. The resultant Figure \@ref(fig:2-2) clearly shows  that indeed one particular species, *I. setosa* constitutes the smaller cluster in the low left. The other two species also show difference in this plot, even though they are not easily separated. This is a very important insight into this dataset. 
 
 (ref:2-2) Scatter plot shows the correlation of petal width and petal length.
 
@@ -250,7 +250,7 @@ The rainbow( ) function generates 3 colors and Species information is used to ch
 str(iris)  # show the structure of data object
 ```
 
-Perhaps due to adaption to environment, change in petal length lead to better survival. With the smallest petals, *Iris Setosa* is found in Arctic regions. *Iris versicolor* is often found in the Eastern United States and Eastern Canada. *Iris virginica* “is common along the coastal plain from Florida to Georgia in the Southeastern United States [Wikipedia].” It appears the iris flowers in warmer places are much larger than those in colder ones. With R, it is very easy to generate lots of graphics. But we still have to do the thinking. It requires put the plots in context.
+Perhaps due to adaption to environment, change in petal length lead to better survival. With the smallest petals, *Iris Setosa* is found in Arctic regions. *Iris versicolor* is often found in the Eastern United States and Eastern Canada. *Iris virginica* “is common along the coastal plain from Florida to Georgia in the Southeastern United States [Wikipedia].” It appears the iris flowers in warmer places are much larger than those in colder ones. With R, it is very easy to generate lots of graphics. But we still have to do the thinking. It requires to put the plots in context.
 
 ### Scatter plot matrix
 We can generate a matrix of scatter plots simply by:
@@ -281,14 +281,14 @@ Note that Pearson’s correlation coefficient is not robust against outliers and
 ?cor  # show help info on cor ( )
 ```
 We can also determine the equation that links petal length and petal width. This is so called regression analysis. We assume 
-         Petal.Length = α × Petal.Width + c + e, 
-where α is the slope parameter, c is a constant, and e is some random error.   This linear model can be determined by a method that minimizes the least squared-error:
+         Petal.Length = *a* × Petal.Width + *c* + *e*, 
+where *a* is the slope parameter, *c* is a constant, and *e* is some random error.   This linear model can be determined by a method that minimizes the least squared-error:
 ```{r}
 model <- lm(y ~ x)  # Linear Model (lm): petal length as a function of petal width
 summary(model)      # shows the details
 ```
 
-As we can see, we estimated that α=2.22944 and c=1.08356. Both parameters are significantly different from zero as the P values are <2×10^-16^ in both cases. In other words, we can reliably predict 
+As we can see, we estimated that *a*=2.22944 and *c*=1.08356. Both parameters are significantly different from zero as the p values are <2×10^-16^ in both cases. In other words, we can reliably predict 
 Petal.Length = 2.22944 × Petal.Width + 1.08356.  This model can be put on the scatter plot as a line.
 ```{r fig.keep='none'}
 plot(model)
@@ -311,7 +311,7 @@ boxplot(Petal.Length ~ Species)  # Generate boxplot: Petal length by species, se
 ```{r 2-4, echo=FALSE, fig.cap='(ref:2-4)', fig.align='center'}
 knitr::include_graphics("images/img0204_LengthSpecies.png")
 ```
-From the boxplot, it is obvious that *I. Setosa* has much shorter petals. But are there significant differences between *I. versicolor* and *I. virginica*?  We only had a small sample of 50 flowers for each species. But we want to draw some conclusion about the two species in general.We could measure all the iris flowers across the world; or we could use statistics to make inference. First we need to extract these data
+From the boxplot, it is obvious that *I. Setosa* has much shorter petals. But are there significant differences between *I. versicolor* and *I. virginica*?  We only had a small sample of 50 flowers for each species. But we want to draw some conclusion about the two species in general. We could measure all the iris flowers across the world; Or we could use statistics to make inference. First we need to extract these data
 ```{r results='hide'}
 x <- Petal.Length[51:100]  # extract Petal Length of iris versicolor, from No.51 to No.100
 x  # x contain 50 measurements
@@ -323,7 +323,7 @@ y  # y contain 50 measurements
 boxplot(x, y)  # a boxplot of the two groups of values
 t.test(x, y)
 ```
-In this student’s T-test, our hypothesis is that the mean petal length is the same for *I. versicolor* and *I. virginica*. A small P-value of 2.2x10^-16^ indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the true mean is different. If we measure all *I. versicolor* and *I. virginica* flowers in the world and compute their true average petal lengths, it is very likely that the two averages will differ. On the other hand, if P-value is larger than a threshold, typically 0.05, we will accept the null hypothesis and conclude that real average petal length is the same. 
+In this student’s t-test, our null hypothesis is that the mean petal length is the same for *I. versicolor* and *I. virginica*. A small p-value of 2.2x10^-16^ indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the true mean is different. If we measure all *I. versicolor* and *I. virginica* flowers in the world and compute their true average petal lengths, it is very likely that the two averages will differ. On the other hand, if p-value is larger than a threshold, typically 0.05, we will accept the null hypothesis and conclude that real average petal length is the same. 
 
 We actually do not need to separate two set of numbers into two data objects in order to do t-test or compare them side-by-side on one plot. We can do it right within the data frame. R can separate data points by another column.
 ```{r results='hide', fig.keep='none'}

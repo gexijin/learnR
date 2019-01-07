@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-04">
+<meta name="date" content="2019-01-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,7 +135,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>3.4</b> Reading file using read.table, read.csv, etc.</a></li>
 <li class="chapter" data-level="3.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>3.5</b> General procedure to read data into R:</a></li>
 <li class="chapter" data-level="3.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>3.6</b> Recommended workflow for EVERY project</a></li>
-<li class="chapter" data-level="3.7" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-a-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.7</b> Reading data from a file using Import dataset in Rstudio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>4</b> Analyzing heart attack data set I</a><ul>
 <li class="chapter" data-level="4.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>4.1</b> Begin your analysis by examining each column separately</a></li>
@@ -398,10 +397,10 @@ Figure 13.8: Hierarchical clustering tree.
 <p>As we can see from the tree, cyl is most highly correlated with disp and then hp and wt. Broadly, the variables form two groups, with high correlation within each cluster. This is an important insight into the overall correlation structure of this data set.</p>
 <p><strong>Challenge 13d</strong>: Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">image</span>(corMatrix)  <span class="co"># translate a matrix into an image</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
 <p>Here we are using red and yellow colors to represent the positive and negative numbers, respectively. Since the row and column names are missing, we can use the heatmap function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(corMatrix, <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>)  <span class="co"># Generate heatmap</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>Here a lot more things are going on. The orders are re-arranged and also a tree is drawn to summarize the similarity. We explain heatmap in details later.</p>
 <p>A more elegant way of show correlation matrix using ggplot2 is available here: <a href="http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization</a> Based on this code, I implemented an nice-looking heatmap in the iDEP software <a href="http://ge-lab.org:3838/idep/" class="uri">http://ge-lab.org:3838/idep/</a>. So as you can see, coding is not hard when you can steal ideas from others, thanks to Dr. Google and the thousands of contributors, who contribute code examples and answer questions online. R has a fantastic user community.</p>
 </div>
@@ -441,7 +440,7 @@ SDs</code></pre></div>
 ## 4.509828 1.453567 2.560048</code></pre>
 <p>Now we can have a basic barplot with group names:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(Means)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
 <p>Our goal is to generate a graph like Figure <a href="visualizing-cars-data-set.html#fig:10-4">13.9</a> with both error bars and text annotation on the number of samples per group. We use two low-level graphics functions to add these elements to the plot, namely, text, and arrow. The text function adds any text to a plot to a position specified by x, y coordinates. Let’s try it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="st">&quot;n=11&quot;</span>)  <span class="co"># adding text to plot</span></code></pre></div>
 <p>The (0.5, and 5) are the x and y location of the text information. Try to change it to something else within the plotting range, meaning x within 0 to 3 and y between 0 and 25. You can place any text anywhere. We added sample size information for the first group. We can choose to do this for each of bar manually, but obvious there should be a better way to do this. The trick is to find the precise location of all the bars and place the text there, hopefully doing this once for all of them. To achieve this, we use the values returned by the barplot object.</p>
@@ -462,7 +461,7 @@ Nsamples</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples)  <span class="co"># creating the strings to be added to the plot</span></code></pre></div>
 <pre><code>## [1] &quot;n= 11&quot; &quot;n= 7&quot;  &quot;n= 14&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(xloc, <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples))  <span class="co"># add sample size to each group</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-191-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-189-1.png" width="672" /></p>
 <p>Following a similar strategy, now we want to add error bars to represent standard deviations (SD) within each group. The plot is more informative as we visualize both the mean and variation within groups. For each bar, we need to draw an error bar from mean – SD to mean + SD.</p>
 <p>Let’s play with the arrows function, which draws arrows on plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrows</span>(<span class="dv">1</span>, <span class="dv">15</span>,  <span class="co"># x,y of the starting point</span>

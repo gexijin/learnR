@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-04">
+<meta name="date" content="2019-01-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,7 +135,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>3.4</b> Reading file using read.table, read.csv, etc.</a></li>
 <li class="chapter" data-level="3.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>3.5</b> General procedure to read data into R:</a></li>
 <li class="chapter" data-level="3.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>3.6</b> Recommended workflow for EVERY project</a></li>
-<li class="chapter" data-level="3.7" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-a-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>3.7</b> Reading data from a file using Import dataset in Rstudio</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>4</b> Analyzing heart attack data set I</a><ul>
 <li class="chapter" data-level="4.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>4.1</b> Begin your analysis by examining each column separately</a></li>
@@ -516,8 +515,8 @@ Figure 4.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 <p>We already know that we could use scatter plots to visualize correlation between two numeric columns. But when there are many data points, in this case we have over 12,000, it could be hard to comprehend. This is especially the case, when the data is integers and there are a lot of data points overlap on top of each other. Yes, graphics can be misleading.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(AGE, LOS)  <span class="co"># standard scatter plot    </span>
 <span class="kw">smoothScatter</span>(AGE, LOS)  <span class="co"># a smoothed color density representation of a scatterplot  </span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-73"></span>
-<img src="book_files/figure-html/unnamed-chunk-73-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-73-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-71"></span>
+<img src="book_files/figure-html/unnamed-chunk-71-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-71-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
 <p class="caption">
 Figure 4.4: Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points.
 </p>
@@ -610,7 +609,7 @@ Figure 4.7: Mosaic plot of three factors.
 <span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </code></pre></div>
 <p>This is a mosaic plot of the whole Titanic dataset</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
 <p><strong>Challenge 4d</strong>: The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use <strong>table</strong> to generate the counts and then visualize.</p>
 <p><strong>Challenge 4e</strong>. Use these approaches to investigate whether men and women differ in their diagnosis.</p>
@@ -671,7 +670,7 @@ Figure 4.10: Multiple boxplots by lattice package.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(LOS <span class="op">~</span><span class="st"> </span>AGE)  <span class="co"># scatterplot of LOS vs. AGE</span>
 <span class="kw">xyplot</span>(LOS <span class="op">~</span><span class="st"> </span>AGE <span class="op">|</span><span class="st"> </span>SEX)  <span class="co"># scatterplot of LOS vs. AGE, divided by SEX</span>
 <span class="kw">xyplot</span>(LOS <span class="op">~</span><span class="st"> </span>AGE  <span class="op">|</span><span class="st"> </span>SEX, <span class="dt">groups =</span> DIED)  <span class="co"># scatterplot colored by DIED</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 <p>Note that xyplot(LOS ~ AGE | SEX) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while xyplot(LOS ~ AGE, groups=SEX) will add these two color-coded scatter plots into the same figure. This is applicable to not only xyplot but also most of the functions in lattice package.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:5-7"></span>
