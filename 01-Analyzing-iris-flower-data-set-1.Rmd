@@ -174,8 +174,8 @@ qqline(x)
 
 **Challenge 1f**:  Investigate Septal Length distribution using these techniques and summarize your observations in PLAIN English.  Hint: assign x with the values in the sepal length column (x = Sepal.Length), and re-run all the code in this section. 
 
-## Student’s t-test 
-In hypothesis testing, we evaluate how likely the observed data can be generated if we assume a certain hypothesis is true. If this probability (p value) is very small (< 0.05, typically), we reject that hypothesis. 
+## Student’s T-test 
+In hypothesis testing, we evaluate how likely the observed data can be generated if we assume a certain hypothesis is true. If this probability (P value) is very small (< 0.05, typically), we reject that hypothesis. 
 Are the petal lengths of iris setosa significantly different from these of iris versicolor? 
 ```{r}
 x <- Petal.Length[1:50]  # the first 50 values of Sepal.Length are for iris setosa
@@ -183,16 +183,16 @@ y <- Petal.Length[51:100]  # the next 50 values of Sepal.Length are for iris ver
 t.test(x, y)  # t.test( ) is an R function for student’s t-test
 ```
 
-The null hypothesis is that the true mean is the same. Since p value is really small, we reject this hypothesis. Iris versicolor has longer sepals than iris setosa.  
+The null hypothesis is that the true mean is the same. Since P value is really small, we reject this hypothesis. Iris versicolor has longer sepals than iris setosa.  
 
 **Challenge 1g**:  Are iris setosa and iris versicolor significantly different in sepal width?  Hint: Replace Petal.Length with something else and re-run above code.
 
-We can also do t-test on one set of numbers. This is a one-sample T-test of mean:
+We can also do T-test on one set of numbers. This is a one-sample T-test of mean:
 ```{r}
 t.test(Sepal.Length, mu = 5.8)
 ```
 
-In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8.   Since p value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98. 
+In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8.   Since P value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98. 
 
 **Challenge 1h**: Compute 95% confidence interval of petal length. 
 
@@ -252,18 +252,6 @@ str(iris)  # show the structure of data object
 
 Perhaps due to adaption to environment, change in petal length lead to better survival. With the smallest petals, *Iris Setosa* is found in Arctic regions. *Iris versicolor* is often found in the Eastern United States and Eastern Canada. *Iris virginica* “is common along the coastal plain from Florida to Georgia in the Southeastern United States [Wikipedia].” It appears the iris flowers in warmer places are much larger than those in colder ones. With R, it is very easy to generate lots of graphics. But we still have to do the thinking. It requires to put the plots in context.
 
-### Scatter plot matrix
-We can generate a matrix of scatter plots simply by:
-```{r fig.keep="none"}
-pairs(iris[, 1:4]) 
-```
-
-```{r fig.cap='Scatter plot matrix.', fig.align='center'}
-pairs(iris[, 1:4], col = rainbow(3)[Species])  # Figure 1.10
-```
-
-**Challenge 1j**: Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots. 
-
 ### Quantitative analyses of correlation
 We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, such as Pearson’s correlation coefficient, r.  It ranges from -1 to 1.   
 ```{r}
@@ -288,7 +276,7 @@ model <- lm(y ~ x)  # Linear Model (lm): petal length as a function of petal wid
 summary(model)      # shows the details
 ```
 
-As we can see, we estimated that *a*=2.22944 and *c*=1.08356. Both parameters are significantly different from zero as the p values are <2×10^-16^ in both cases. In other words, we can reliably predict 
+As we can see, we estimated that *a*=2.22944 and *c*=1.08356. Both parameters are significantly different from zero as the P values are <2×10^-16^ in both cases. In other words, we can reliably predict 
 Petal.Length = 2.22944 × Petal.Width + 1.08356.  This model can be put on the scatter plot as a line.
 ```{r fig.keep='none'}
 plot(model)
@@ -296,7 +284,7 @@ abline(model)  # add regression line to existing scatter plot. Finishes Figure 1
 ```
 
 Sometimes, we use this type of regression analysis to investigate whether variables are associated. 
-**Challenge 1k**: Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
+**Challenge 1j**: Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
 
 ## Visualizing and testing the differences in groups
 Are boys taller than girls of the same age? Such situations are common. We have measurements of two groups of objects and want to know if the observed differences are real or due to random sampling error.   
@@ -323,15 +311,15 @@ y  # y contain 50 measurements
 boxplot(x, y)  # a boxplot of the two groups of values
 t.test(x, y)
 ```
-In this student’s t-test, our null hypothesis is that the mean petal length is the same for *I. versicolor* and *I. virginica*. A small p-value of 2.2x10^-16^ indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the true mean is different. If we measure all *I. versicolor* and *I. virginica* flowers in the world and compute their true average petal lengths, it is very likely that the two averages will differ. On the other hand, if p-value is larger than a threshold, typically 0.05, we will accept the null hypothesis and conclude that real average petal length is the same. 
+In this student’s T-test, our null hypothesis is that the mean petal length is the same for *I. versicolor* and *I. virginica*. A small p-value of 2.2x10^-16^ indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the true mean is different. If we measure all *I. versicolor* and *I. virginica* flowers in the world and compute their true average petal lengths, it is very likely that the two averages will differ. On the other hand, if P-value is larger than a threshold, typically 0.05, we will accept the null hypothesis and conclude that real average petal length is the same. 
 
-We actually do not need to separate two set of numbers into two data objects in order to do t-test or compare them side-by-side on one plot. We can do it right within the data frame. R can separate data points by another column.
+We actually do not need to separate two set of numbers into two data objects in order to do T-test or compare them side-by-side on one plot. We can do it right within the data frame. R can separate data points by another column.
 ```{r results='hide', fig.keep='none'}
 x2 <- iris[51:150, ]  # Extract rows 51 to 150
 t.test(Petal.Length ~ Species, data = x2)  # t-test of Petal.Length column, divided by the Species column in x2. 
 boxplot(Petal.Length ~ Species, data = droplevels(x2))  # droplevels( ) removes empty levels in Species
 ```
-**Challenge 1l**: Use boxplot and t-test to investigate whether sepal width is different between *I. versicolor* and *I. virginica*. Interpret your results. 
+**Challenge 1k**: Use boxplot and T-test to investigate whether sepal width is different between *I. versicolor* and *I. virginica*. Interpret your results. 
 
 ## Test the difference among multiple groups (Analysis of Variance: ANOVA)
 As indicated by Figure \@ref(fig:2-4), sepal width has small variation, even across 3 species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).
@@ -369,5 +357,5 @@ densityplot(~ Petal.Length, groups = Species, auto.key = list(columns = 3))
 ```{r 2-6, echo=FALSE, fig.cap='(ref:2-6)', fig.align='center'}
 knitr::include_graphics("images/img0206_HistDensity.png")
 ```
-**Challenge 1m**: Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies. 
+**Challenge 1l**: Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies. 
 

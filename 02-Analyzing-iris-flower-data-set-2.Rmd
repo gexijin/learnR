@@ -1,6 +1,6 @@
 # Analyzing iris flower data set II 
 
-## Visualizing the entire dataset 
+## Visualizing multivariate data 
 
 ### A Matrix only contains numbers
 
@@ -12,6 +12,7 @@ colSums(x)
 ```
 The same thing can be done with rows via **rowMeans(x)** and **rowSums(x)**. 
 
+Here are some matrix algebra.
 ```{r results='hide'}
 y <- iris[1:10, 1:4]  # extract the first 10 rows of iris data in columns 1 to 4. 
 y
@@ -26,17 +27,25 @@ y %*% t(z)         # Matrix multiplication, I never used this.
 ```
 
 ### Scatter plot matrix
-**Challenge 2a**: Generate a scatter plot matrix using the first 4 columns of iris flower dataset. Use the species information to color-code the data points. Add legends, and provide brief interpretation.
+We can generate a matrix of scatter plots simply by:
+```{r fig.keep="none"}
+pairs(iris[, 1:4]) 
+```
+
+```{r fig.cap='Scatter plot matrix.', fig.align='center'}
+pairs(iris[, 1:4], col = rainbow(3)[Species])  # Figure 1.10
+```
+
+**Challenge 2a**: Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots. 
 
 ### Heatmap
-
 **Heatmaps** with hierarchical clustering are my favorite way to visualize data matrices. The rows and columns are kept in place, values are coded by colors. Heatmaps can directly visualize millions of numbers in one plot. The hierarchical trees also shows the similarity among rows or columns: closely connected rows or columns are similar. 
 
 ```{r  fig.keep='none'}
 x <- as.matrix(iris[, 1:4])   
 heatmap(x, scale = "column")  # Heatmap with hierarchical clustering trees.  Numbers are scaled by column.
 ```
-If you are a perfectionist, here is how to fine-tune the graph. We define a function called ppc ( ). As you may notice R works by calling the name of the function and the input to that function in parentheses. Multiple input parameters are separated by a comma. We also notice that the follow commands span several lines. 
+If you are a perfectionist, here is how to fine-tune the graph. We define a function called ppc( ). As you may notice R works by calling the name of the function and the input to that function in parentheses. Multiple input parameters are separated by a comma. We also notice that the follow commands span several lines. 
 
 ```{r fig.keep='none'}
 ppc <- function(x, ...){  # A distance function of 1-PPC (Pearson’s correlation coefficient)
@@ -53,13 +62,9 @@ legend("topleft", levels(iris$Species), fill = rainbow(3))  # add legend in a se
 knitr::include_graphics("images/img0207_heatmap.png")
 ```
 
-More advanced customization can be done with heatmap.2 in the ggplots package. 
-
 Note that yellow indicates relatively large numbers and red represents relatively small numbers.  Rows or columns that are bracketed closer are more similar. So the trees display a hierarchy of similarities. 
 
-**Challenge 2b**: Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers? 
-
-Below is another solution for a heatmap of the iris flower data set. 
+More advanced customization can be done with heatmap.2 in the gplots package. Below is another solution for a heatmap of the iris flower data set. 
 
 (ref:12-3) Heatmap for iris flower dataset.
 
@@ -91,6 +96,8 @@ stars(x)         # do I see any diamonds?  I want the bigger one!
 stars(x, key.loc = c(17,0))    # What does this tell you?
 ```
 
+**Challenge 2b**: Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers? 
+
 ### Segment diagrams
 The stars() function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements. 
 ```{r fig.keep='none'}
@@ -121,14 +128,16 @@ text(c(1.2, 2, 3, 3.8), 0, colnames(x))  # manually add names
 
 The result is shown in Figure \@ref(fig:12-5). Note that each line represents a flower. The four measurements are used to define the line. We can clearly see that I. setosa have smaller petals. 
 
- In addition to this, the “lattice” package has something nicer called “parallelplot”. That function can handle columns with different scales. 
+In addition to this, the “lattice” package has something nicer called “parallelplot”. That function can handle columns with different scales. 
  
 ### Box plot
+```{r}
+boxplot(x)  # plain version. Column names may not shown properly
+```
 
 (ref:12-6) Box plot of all 4 columns.
 
-```{r 12-6, out.width='80%', fig.cap='(ref:12-6)', fig.align='center'}
-#boxplot(x)  # plain version. Column names may not shown properly
+```{r 12-6, message=FALSE, out.width='80%', fig.cap='(ref:12-6)', fig.align='center'}
 par(mar = c(8, 2, 2, 2))  # set figure margins (bottom, left, top, right)
 boxplot(x, las = 2)   # Figure 2.5
 ```
