@@ -1,0 +1,825 @@
+# Visualizing data set-Analyzing cars and iris flower data sets
+
+## Basic concepts of R graphics
+
+In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics.  The lattice package extends base R graphics and enables the creating of graphs in multiple panels. The ggplot2 is developed based on a so-called Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics using layers.  
+   
+  Note the recommended textbook R Graphics Cookbook includes all kinds of R plots and code. Some are online: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/). There are also websites lists all sorts of R graphics and example codes that you can use. [http://www.r-graph-gallery.com/](http://www.r-graph-gallery.com/) contains more than 200 such examples. Another one is here: [http://bxhorn.com/r-graphics-gallery/](http://bxhorn.com/r-graphics-gallery/)  
+  
+  We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table. 
+  
+(ref:9-02) List of graphics functions in base R.
+
+```{r 9-02, echo=FALSE, fig.cap='(ref:9-02)', fig.align='center'}
+knitr::include_graphics("images/img0902_function.png")
+```  
+  
+## Plain vs. refined graphics
+Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data.  Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
+
+## Visualizing mtcars dataset 
+
+###scatter plot
+The mtcars data set is included in base R. It contains various statistics on 32 different types of cars from the 1973-74 model year. The data was obtained from the 1974 Motor Trend US magazine. Our objective is to use this dataset to learn the difference between them, possibly for choosing a car to buy.
+
+```{r message=FALSE}
+mtcars  # show the mtcars dataset
+? mtcars  # shows the information on this dataset
+```
+
+####Customize scatterplots
+We start with a basic scatter plot. First, we attach the mtcars data to memory so that we can refer to the columns directly by their names.
+```{r fig.show='hide'}
+attach(mtcars)  # attach dataset to memory
+plot(wt, mpg)  # weight (wt) and miles per gallon (mpg), see Figure 2.3
+```
+
+This generates a basic scatter plot with default settings using wt as x and mpg as y. Each data points are represented as an open circle on the plot. As you could see,  heavier vehicles are less fuel efficient. We can add a regression line on this scatter plot using a lower-level graphics function **abline**:
+
+```{r echo=c(2), fig.show='hide'}
+plot(wt, mpg)
+abline(lm(mpg ~ wt))  # add regression line
+```
+
+Note that lm(mpg ~ wt) generates a linear regression model of mpg as a function of wt, which is then passed on to abline. We add other information about these cars to customize this plot. 
+
+```{r fig.show='hide'}
+plot(wt, mpg, pch = am)  # am = 1 for automatic transmission
+```
+
+**“pch”** is a parameter that specifies the types of data points on the plot. See Figure \@ref(fig:9-3) for a whole list of possible values. The “am” column in mtcars dataset indicates whether the car is automatic transmission (am = 1) or not (am = 0). 
+
+(ref:9-3) Data point types in base R.
+
+```{r 9-3, echo=FALSE, fig.cap='(ref:9-3)', fig.align='center'}
+knitr::include_graphics("images/img0903_symbol.png")
+```  
+
+```{r}
+am
+```
+
+So R uses circles or squares according to this sequence for each of the data points. It draws a circle when am value is 1, and square when it is zero. See all the types in Figure \@ref(fig:9-3).  We add a legend to the top-right corner using a low-level graphics function legend:
+
+```{r echo=c(2), fig.show='hide'}
+plot (wt, mpg, pch = am) 
+legend("topright", c("Automatic", "Manual"), pch = 0:1) 
+```
+
+This plot shows that heavier cars often use manual transmissions. Always slow down and interpret your plots in plain language. We can be happy about this plot, but we continue to fuss in more information on this graph.  Using the same line of thinking, we can change the color of the data points according to other information, i.e. the number of cylinders. 
+
+```{r fig.show='hide'}
+plot(wt, mpg, pch = am, col = rainbow(8)[cyl])
+```
+
+The rainbow(8) generates a vector of 8 colors. The values in the cyl column are used to choose the color from these 8 colors. Green, blue, and red, indicates 4, 6, and 8 cylinders, respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called **bubble plots** or **balloon plots.** 
+
+```{r fig.show='hide'}
+plot(wt, mpg, pch = am, col = rainbow(8)[cyl], cex = hp / 50)
+legend(5, 30, c("4", "6", "8"), title = "Cylinders", pch = 15, col = rainbow(8)[c(4, 6, 8)])
+```
+
+Note that we added this legend at the (5, 30) position on the plot. To see all the options: 
+```{r}
+? plot
+```
+
+This website lists all the parameters for R graphics: [http://www.statmethods.net/advgraphs/parameters.html](http://www.statmethods.net/advgraphs/parameters.html). Now we want to finish up this plot by adding axis labels, and title. We also changed the x-axis range to 1-6 using the xlim parameter to specify the limits. We finally put everything together. 
+
+(ref:9-4) Enhanced scatter plot of mtcars data. Also called bubble plot or balloon plot.
+
+```{r 9-4, echo=FALSE, fig.cap='(ref:9-4)', fig.align='center'}
+plot(wt, mpg, pch = am, col = rainbow(8)[cyl], cex = hp/50,
+     xlab = "Weight (1000 lbs)", ylab = "Miles per gallon", 
+     main = "Weight and MPG", xlim = c(1, 6))
+abline(lm(mpg ~ wt))    # add regression line
+legend("topright", c("Automatic", "Manual"), pch = 0:1)  # marker 
+legend(5.48, 28, c("4", "6", "8"), 
+       title = "Cylinders", 
+       pch = 15,
+       col = rainbow(8)[c(4, 6, 8)])  # legend for color
+```
+
+Note that this seemingly complicated chunk of code is built upon many smaller steps, and it involves trial-and-error. 
+
+**Challenge 2a**:  Create a scatter plot similar to Figure \@ref(fig:9-4) using the mtcars dataset to highlight the correlation between hp and disp (displacement). You should use colors to represent carb ( # of carburetors), types of data points to denote the number of gears, and size of the data points proportional to qsec, the number of seconds the cars need run the first ¼ mile. Add regression line and legends. Note that you should follow the guideline on page 1 to start this challenge. Your code should include comments and mandatory commands like rm(list=ls()) and getwd(). Submit your code and plot in a PDF file. 
+
+Hint: Go through the above example first. Then start small and add on step by step. 
+
+Figure \@ref(fig:9-4) is perhaps a bit too busy. Let’s develop an elegant version.
+
+```{r fig.show='hide'}
+plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl]) 
+```
+
+Notes: x; y; solid circle; horsepowersize of bubble; color cylinder 4, 6, or 8
+
+Then we use a lower-level graphics function points to draw circles around each data point.
+
+(ref:9-5) Scatter plot showing the weight and MPG, colored by the number of cylinders. A line at mpg = 20 separates the 4-cylinder cars from 8 cylinder cars.
+
+```{r 9-5, echo=c(2, 3), echo=FALSE, fig.cap='(ref:9-5)', fig.align='center'}
+plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl]) 
+abline(h = 20, col = "red", lwd = 2, lty = 2)
+points(wt, mpg, cex = hp / 50)
+lines(lowess(wt, mpg), col = "blue")  # lowess line
+legend("topright", c("4", "6", "8"), title = "Cylinders", 
+       pch = 15, col = rainbow(8)[c(4, 6, 8)])
+```
+
+This line adds a LOWESS smooth line determined by locally-weighted polynomial regression.
+
+**Challenge 2b**. Finish up this plot to generate Figure \@ref(fig:9-5). You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot. 
+
+#### 3D scatter plot
+Even though I’ve never been a fan of 3D plots, it is possible in R using additional packages such as scatterplot3d.  Install this package and then try the following.
+
+(ref:9-6) 3D scatter plots are rarely useful.
+
+```{r 9-6, fig.cap='(ref:9-6)', fig.align='center'}
+library(scatterplot3d) 
+scatterplot3d(wt, disp, mpg, color = rainbow(8)[cyl], type = "h", pch = 20)
+```
+
+3D plots are hard to interpret. So try to avoid them. However, it is fun when you can interact with them. Using example code at this website, you can create interactive 3D plots: [http://www.statmethods.net/graphs/scatterplot.html](http://www.statmethods.net/graphs/scatterplot.html)
+
+
+^1^ I like to work directly from my **Google Drive**, which automatically backs up my files in the cloud and syncs across several of my computers. This is an insurance against disasters like my dog peeing on my computer and ruins my grant proposal just before the deadline.
+
+^2^ Note that I was trying to avoid having spaces in column names. Instead of “Blood Pressure”, I used “BloodPressure”. This makes the columns easier to reference to.
+
+###Barplot with error bars
+If we are interested in the difference between the cars with different numbers of cylinders. The 32 models are divided into 3 groups as cyl takes the values of 4, 6, or 8. We can use the aggregate function to generate some statistics by group. 
+
+```{r}
+stats <- aggregate(. ~ cyl, data = mtcars, mean)
+stats 
+```
+
+This tells R to divide the cars into different groups by cyl and compute the average of all other columns for each group. The results above indicate many differences. As the number of cylinders increase, fuel efficiency measured by mpg decreases, while displacement and horsepower increases. We can obviously create a basic bar chart to show the difference in mpg. 
+```{r fig.keep='none'}
+barplot(stats[, 2])  # basic bar plot
+```
+
+The labels are missing from this basic plot. It is certainly possible to add the labels, but it is more convenient to use the tapply function, which generates a vector with names. We use tapply to calculate the mean, standard deviation (sd) and the numbers of samples for each group. 
+```{r}
+Means <- tapply(mpg, list(cyl), mean)  # Average mpg per group
+Means
+```
+
+Note that it generates a vector and “4”, “6”, and “8” are names of each of the elements in this vector. 
+
+tapply applies a function to a vector (mpg) according to grouping information defined by a factor (cyl) of the same length. Here it first groups the mpg numbers into 3 groups (cly= 4, 6, 8), and then within each group, the mean is calculated and returned. tapply is a member of a family of functions which includes apply, sapply, and lapply; all are powerful and efficient in computing than loops.
+
+Similarly, we can compute the standard deviation for each group.
+```{r}
+SDs <- tapply(mpg, list(cyl), sd)  # SD per group for mpg
+SDs
+```
+
+Now we can have a basic barplot with group names:
+```{r}
+barplot(Means)
+```
+
+Our goal is to generate a graph like Figure \@ref(fig:10-4) with both error bars and text annotation on the number of samples per group. We use two low-level graphics functions to add these elements to the plot, namely, text, and arrow. The text function adds any text to a plot to a position specified by x, y coordinates. Let’s try it. 
+```{r echo=c(2), fig.keep='none'}
+barplot(Means)
+text(0.5, 5, "n=11")  # adding text to plot
+```
+
+The (0.5, and 5) are the x and y location of the text information. Try to change it to something else within the plotting range, meaning x within 0 to 3 and y between 0 and 25. You can place any text anywhere. We added sample size information for the first group. We can choose to do this for each of bar manually, but obvious there should be a better way to do this. The trick is to find the precise location of all the bars and place the text there, hopefully doing this once for all of them. To achieve this, we use the values returned by the barplot object. 
+```{r fig.keep='none'}
+xloc <- barplot(Means)  # get locations of the bars
+xloc  # the center of each of bars on x
+```
+
+**Yes, plotting functions not only generate graphs, they can also returns values^1^**. These values sometimes are useful in computing or refining the graph. In this case, we got an object containing the location of the center of the bars on x-axis. So the first bar is located on x=0.7. Since xloc has the location on all bars, we can add the information all at once:
+```{r echo=c(1, 2, 4), fig.keep='none'}
+Nsamples <- tapply(mpg, list(cyl), length)  #number of samples per group
+Nsamples
+barplot(Means)
+text(xloc, 2, Nsamples)   # add sample size to each group
+```
+
+The xloc specifies the center of the bars on the x-axis, namely 07, 1.9, and 3.1. The y coordinates are all 2. Try change the y location from 2 to 10, and see what happens. Looking great! The sample sizes are labeled on all the bars! This method works even if you have 20 bars! Now we want to make it explicit that these numbers represent sample size. For the first bar, we want “n=11”, instead of just “11”. 
+
+First, we will append “n=” to each number and generate a string vector using the paste function 
+```{r echo=c(1, 3)}
+paste("n=", Nsamples)  # creating the strings to be added to the plot
+barplot(Means)  # re-create bar plot
+text(xloc, 2, paste("n=", Nsamples))  # add sample size to each group
+```
+
+Following a similar strategy, now we want to add error bars to represent standard deviations (SD) within each group. The plot is more informative as we visualize both the mean and variation within groups. For each bar, we need to draw an error bar from mean – SD to mean + SD. 
+
+Let’s play with the arrows function, which draws arrows on plots. 
+```{r echo=c(2, 3, 4), fig.keep='none'}
+barplot(Means)
+arrows(1, 15,  # x,y of the starting point
+       1, 25)  # x,y of the ending point
+arrows(2, 15, 2, 25, code = 3)  # arrows on both ends
+arrows(3, 10, 3, 20, code = 3, angle = 90)  # bend 90 degrees, flat
+```
+
+Now it's beginning to look a lot like Christmas (error bar)!  I learned this clever hack of arrows as error bars from (Beckerman 2017).  We are ready to add the error bars using the data stored in xloc, Means and SDs.
+```{r fig.keep='none'}
+barplot(Means)  # re-create bar plot
+arrows(xloc, Means - SDs,   # define 3 beginning points
+       xloc, Means + SDs,   # define 3 ending points
+       code = 3, angle = 90, length = 0.1)
+```
+
+Yes, we have a bar plot with error bars! We need to add a few refinements now such as colors, labels, and a title. As the first error bar is truncated, we need to adjust the range for y, by changing the ylim parameter. Putting everything together, we get this code chuck.
+
+(ref:10-4) Bar chart with error bar representing standard deviation. 
+
+```{r 10-4, fig.cap='(ref:10-4)', fig.align='center'}
+attach(mtcars)    # attach data, two columns: numbers and groups
+Means <- tapply(mpg, list(cyl), mean)  #compute means by group defined by cyl
+SDs <- tapply(mpg, list(cyl), sd)   # calculate standard deviation by group
+Nsamples <- tapply(mpg, list(cyl), length)  # number of samples per group
+xloc <- barplot(Means,  # bar plot, returning the location of the bars
+                xlab = "Number of Cylinders",
+                ylab = "Average MPG",
+                ylim = c(0,35), col = "green")
+arrows (xloc, Means - SDs,  # add error bars as arrows
+        xloc, Means + SDs,
+        code = 3, angle = 90, length = 0.1)
+text(xloc, 2, paste("n=", Nsamples))  # add sample size to each group
+```
+
+Sometimes we want error bars to represent standard error instead which is given by  σ/√n, where σ is standard deviation and n is sample size.  
+
+In R we can do complex statistical tests or regression analyses with just one line of code, for example, aov, glm. However, we went through all this trouble to generate just a bar chart! **What is the point?** We could click around in sigmaPlot, or GraphPad and get a barplot in less time. Well, once you figured how to do one, you can easily do this for 10 graphs.  More importantly, this code clearly recorded the plotting process, which is essential for reproducible research. 
+
+**Challenge 2c**: Revise the above code to generate a bar chart showing the average weight of cars with either automatic or manual transmission. Include error bars, the number of samples and axis labels. 
+
+**Bonus challenge**. Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set. 
+
+### Visualizing correlation between categorical variables
+If we are interested in the correlation between two categorical variables, we can tabulate the frequencies from a data frame:
+```{r}
+counts <- table(cyl, am)
+```
+
+This contingency table gives us the number of cars in each combination. Among the 8-cylinder cars, there are 12 models with manual transmission, and only 2 models have automatic transmission. We obviously can feed this into a fisher’s exact test to test for independence. We could easily visualize this information with a bar chart.
+```{r fig.keep='none'}
+barplot(counts)
+```
+
+We generated a stacked barplot. Let’s refine it. 
+
+We have a plot like the left of Figure \@ref(fig:10-5). We can also put the bars side-by-side, by setting the beside option to TRUE. 
+
+(ref:10-5) Bar plots showing the proportion of cars by cylinder and transmission.
+
+```{r 10-5, fig.show='hold', out.width='50%', fig.cap='(ref:10-5)', fig.align='center'}
+barplot(counts, col = rainbow(3),
+        xlab ="Transmission",
+        ylab = "Number of cars")
+legend("topright",rownames(counts), 
+       pch = 15, title = "Cylinders", col = rainbow(3))
+barplot(counts, col = rainbow(3),
+        xlab = "Transmission",
+        ylab = "Number of cars",
+        beside = TRUE)
+legend("topright",rownames(counts), 
+       pch = 15, title = "Cylinders", col = rainbow(3))
+```
+
+See the right side of Figure \@ref(fig:10-5). Given a large dataset, we can easily tabulate categorical variables and plot these to show the relative frequencies.
+
+Another easy plot is the mosaic plot:
+
+(ref:10-6) Mosaic plot.
+
+```{r 10-6, fig.cap='(ref:10-6)', fig.align='center'}
+mosaicplot(counts, col = c("red", "green"))
+```
+
+Vertically, we divide the square into 3 parts, the area of each is proportional to the number of cars with different cylinders. There are more 8-cylinder vehicles than those with 4 or 6. Horizontally, we divide the square according to the am variable, which represents automatic transmission (am =0) or manual transmission. Clearly, these two are not independent. As the number of cylinder increases, more cars are using manual transmission. 
+
+While the height of the bars in the bar chart in Figure 5 represents absolute totals per category, in mosaic plots the height are equal. Thus we see proportions within each category.
+
+**Challenge 2d**: Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results. 
+
+
+### Detect correlations among variables
+In ther beginning of this chapter we used scatter plots to study the correlation between two variables, mpg and wt in the mtcars dataset. There are many such pairwise correlations. One simple yet useful plot of the entire dataset is scatter plot matrix (SPM). SPMs can be created by the pairs function, or just run plot on a data frame.
+```{r fig.keep='none'}
+plot(mtcars)  # scatter plot matrix; same as pairs(mtcars) 
+```
+
+(ref:10-1) Scatter plot matrix of the mtcars dataset.
+
+```{r 10-1, echo=FALSE, fig.cap='(ref:10-1)', fig.align='center'}
+pairs(mtcars[, 1:7],col = rainbow(8)[mtcars$cyl])  # Add color 
+```
+
+We can spend all day studying this large plot, as it contains information on all pairs of variables. For example, mpg is negatively correlated with disp, hp, and wt, and positively correlated with drat. There are many variations of scatter plot matrix, for instance, the spm function in the car package. Also try this cool plot using ellipses: [http://www.r-graph-gallery.com/97-correlation-ellipses/](http://www.r-graph-gallery.com/97-correlation-ellipses/)
+
+
+(ref:10-2) Showing correlation matrix with ellipses.
+
+```{r 10-2, message=FALSE, fig.cap='(ref:10-1)', fig.align='center'}
+library(ellipse)  # install.packages("ellipses") 
+library(RColorBrewer)  # install.packages("RcolorBrewer") 
+data <- cor(mtcars)  # correlation matrix
+my_colors <- brewer.pal(5, "Spectral")  # Color Pannel 
+my_colors <- colorRampPalette(my_colors)(100)
+ord <- order(data[1, ])  # Order the correlation matrix
+data_ord <- data[ord, ord]
+plotcorr(data_ord, col = my_colors[data_ord * 50 + 50], mar = c(1, 1, 1, 1))
+```
+
+**Challenge 2e**: Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type  ? **state** for more information and type **state.x77** to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?
+
+If you examine the above code carefully, the ellipses are drawn just based on a matrix of Pearson's correlation coefficients. We can easily quantify the relationship between all variables by generating a matrix of Pearson’s correlation coefficient: 
+
+```{r results='hide'}
+cor(mtcars)  # correlation coefficient of all columns
+```
+```{r}
+corMatrix  <-  cor(mtcars[, 1:11])
+round(corMatrix, 2)  # Round to 2 digits
+```
+
+We used the round function to keep two digits after the decimal point. We can examine the coefficients in this matrix. Note that strong negative correlations are also interesting. For example, wt and mpg have a correlation of r= -0.87, meaning that heavier vehicles tend to have smaller mpg. 
+
+ We can visualize this matrix in other ways besides the ellipses. The most logical thing to do with a matrix of correlation coefficients is to generate a tree using hierarchical clustering.  
+ 
+(ref:10-3) Hierarchical clustering tree. 
+
+```{r 10-3, fig.cap='(ref:10-3)', fig.align='center'}
+plot(hclust(as.dist(1 - corMatrix)))  # hierarchical clustering
+```
+ 
+Here we first subtracted the r values from 1 to define a distance measure. So perfectly correlated variables with r = 1 have a distance of 0, while negatively correlated variables with r = -1 have a distance of 2. We did this operation on the entire matrix at once. You can try to run the 1- corMatrix from the command line to see the result. The result is then formatted as a distance matrix using as.dist, which is passed to the hclust function to create a hierarchical clustering tree. See more info on hclust by using 
+```{r message=FALSE}
+? hclust
+```
+
+ As we can see from the tree, cyl is most highly correlated with disp and then hp and wt. Broadly, the variables form two groups, with high correlation within each cluster. This is an important insight into the overall correlation structure of this data set. 
+
+**Challenge 2f**: Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. 
+Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions. 
+
+```{r}
+image(corMatrix)  # translate a matrix into an image
+```
+
+Here we are using red and yellow colors to represent the positive and negative numbers, respectively. Since the row and column names are missing, we can use the heatmap function.
+```{r}
+heatmap(corMatrix, scale = "none")  # Generate heatmap
+```
+
+Here a lot more things are going on. The orders are re-arranged and also a tree is drawn to summarize the similarity. We explain heatmap in details later. 
+
+A more elegant way of show correlation matrix using ggplot2 is available here: http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization. So as you can see, coding is not hard when you can steal ideas from others, thanks to Dr. Google and the thousands of contributors, who contribute code examples and answer questions online. R has a fantastic user community. 
+
+### Hierarchical clustering    
+In the mtcars dataset, we have 32 car models, each characterized by 11 parameters (dimensions, variables). We want to compare or group these cars using information about all of these parameters.  We know that Honda Civic is similar to Toyota Corolla but different from a Cadillac. Quantitatively, we need to find a formula to measure the similarity. Given two models, we have 22 numbers. We need to boil them down to one number to measure relative similarity.  This is often done by a distance function. The most popular one is Euclidean distance, (it is also the most abused metric):$Eucliden Distance  D=√((mpg_1-mpg_2)^2+(hp_1-hp_2)^2+(wt_1-wt_2)^2+⋯)$.If two cars have similar characteristics, they have similar numbers on all of these dimensions; their distance as calculated above is small. Therefore, this is a reasonable formula. Note that we democratically added the squared difference of all dimensions.  We treated every dimension with equal weight. However, if we look at the raw data, we know that some characteristics, such as *hp*(horsepower), have much bigger numerical value than others. In other words, the difference in *hp* can overwhelm our magic formula and make other dimensions essentially meaningless. Since different columns of data are in very different scale, we need to do some normalization.  We want to transform data so that they are comparable on scale. At the same time, we try to preserve as much information as we could.   
+
+(ref:11-1) Heatmap with all default settings. This is not correct. Normalization is needed. Do not go out naked.
+
+```{r 11-1, fig.cap='(ref:11-1)', fig.align='center'}
+mt = as.matrix(mtcars) 
+heatmap(mt) 
+```
+
+In this basic heat map, data are scaled by row by default. Some numbers are massive (*hp* and *disp*), and they are all in bright yellow. This is not democratic or reasonable as these big numbers dominate the clustering. We clearly need to do some normalization or scaling for each column which contains different statistics. Through check the help information by:
+```{r message=FALSE}
+? heatmap
+```
+
+We can figure out that we need an additional parameter: 
+
+```{r fig.keep='none'}
+heatmap(mt, scale = "column")  # Figure 2.13
+```
+
+ Scaling is handled by the scale function, which subtracts the mean from each column and then divides by the standard division. Afterward, all the columns have the same mean of approximately 0 and standard deviation of 1. This is called standardization.
+```{r}
+? scale
+```
+
+We can also handle scaling ourselves. We can use the apply function to subtract the mean from each column and then divide by the standard division of each column. 
+```{r}
+mt <- apply(mt, 2, function(y)(y - mean(y)) / sd(y))
+```
+
+Note that we defined a function, and ‘applied’ the function to each of the columns of mt. For each column, we first calculate the mean and standard deviation. Then the mean is subtracted before being divided by standard deviation. The second parameter “2” refers to do something with the column. Use “1” for row. 
+
+Sometimes, we have columns with very little real variation. Being divided by standard deviation will amplify noise. In such cases, we just subtract the mean. This is called **centering**. Centering is less aggressive in transforming our data than standardization. 
+```{r results='hide'}
+apply(mt, 2, mean)  # compute column mean
+```
+
+Here mean( ) is the function that applied to each column.  The column means are close to zero. 
+```{r results='hide'}
+colMeans(mt)   # same as above
+apply(mt, 2, sd)   # compute sd for each column
+```
+
+Here sd( ) is the function that applied to each column. 
+
+(ref:11-2) Heatmap of mtcars dataset.    Yellow- positive number / above average.
+
+```{r 11-2, fig.cap='(ref:11-2)', fig.align='center'}
+heatmap(mt, scale = "none")  # Figure 2.13
+```
+
+This produced Figure \@ref(fig:11-2). 
+
+Another function with much better coloring is heatmap.2 in the gplot package.
+```{r fig.keep='none', message=FALSE}
+#install.packages("gplots") 
+library(gplots)
+heatmap.2(mt) # plain version 
+```
+
+This basic heatmap is not very cool. So, we do some fine tuning. This function have a million parameters to tune:
+
+(ref:11-3) Fine-tuned heatmap using heatmap.2 in gplots package.
+
+```{r 11-3, fig.cap='(ref:11-3)', fig.align='center'}
+? heatmap.2 
+heatmap.2(mt, col = greenred(75),
+          density.info = "none", 
+          trace = "none", 
+          scale = "none", 
+          margins = c(5, 10))
+```
+
+Note that the **last argument** gives a large right margin, so that the long names can show up un-truncated. 
+By default, the heatmap function scales the rows in the data matrix so that it has zero mean. In our case, we already did our scaling, so we use **scale="none"** as a parameter. Also, the dendrogram on the left and top are generated using the **hclust** function. The distance function is Euclidean distance. All of these can be changed. 
+
+(ref:11-4) Single, complete and average linkage methods for hierarchical clustering.
+
+```{r 11-4, echo=FALSE, fig.cap='(ref:11-4)', fig.align='center'}
+knitr::include_graphics("images/img1001_linkage.png")
+```
+
+We used the hclust function before. Let’s dive into the details a little bit. First, each of the objects (columns or rows in *mtcars* data), is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all objects. At each iteration, the distances between clusters are recalculated according to one of the methods—*Single linkage, complete linkage, average linkage, and so on*. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances.  However, the default seems to be complete linkage. Thus we need to change that in our final version of the heat map.
+
+(ref:11-5) Final version of heatmap for mtcars data.
+
+```{r 11-5, fig.cap='(ref:11-5)', fig.align='center'}
+library(gplots)
+hclust2 <- function(x, ...)  # average linkage method
+  hclust(x, method="average", ...)
+dist2 <- function(x, ...)  #distance method
+  as.dist(1-cor(t(x), method="pearson"))
+# Transform data
+mt <- apply(mt, 2, function(y)(y - mean(y)) / sd(y))
+heatmap.2(mt, 
+	        distfun = dist2,  # use 1-Pearson as distance
+	        hclustfun = hclust2,  # use average linkage
+	        col = greenred(75),   #color green red
+	        density.info = "none", 
+	        trace = "none", 
+	        scale = "none", 
+	        RowSideColors = rainbow(8)[mtcars$cyl],    
+	        margins = c(5, 10) # bottom and right margins
+          )                                                                             
+legend("topright",as.character(c(4, 6, 8)),
+       fill=rainbow(8)[c(4, 6, 8)])    # add legend 
+```
+
+Here we defined and used our custom distance function **dist2** and used average linkage method for hclust. We also added a color bar to code for the number of cylinders. We can also add color bars for the columns, as long as we have some information for each of the column.
+
+Hierarchical clustering coupled with a heatmap is a very effective method to visualize and explore multidimensional data. It not only visualizes all data points but also highlights the correlation structure in both rows and columns. It is my favorite plot, and you can find such plots in many of my scientific publications! 
+
+Let’s discuss how to interpret Figure \@ref(fig:11-5). First, the colors red and green represent positive and negative numbers, respectively. Bright red represent large positive numbers and bright green means negative numbers with large absolute values. Since we standardized our data, **red indicates above average and green below average**.  The 8 cylinder cars which form a cluster in the bottom have bigger than average horsepower (*hp*), weight (*wt*). These cars have smaller than average fuel efficiency (*mpg*), acceleration(*qsec*), the number of gears. These cars share similar characteristics and form a tight cluster.   The four-cylinder cars, on the other hand, have the opposite.
+
+The distance in the above dendrogram between two objects is proportional to some measure of dissimilarity (such as Euclidean distance) between them defined by the original data. This is true for both trees, the one on the top and the one on the left. 
+
+**There are many ways to quantify the similarity between objects. **
+The first step in hierarchical clustering is to define distance or dissimilarity between objects that are characterized by vectors. 
+
+- We have discussed that we can use Pearson’s correlation coefficient (PCC) to measure the correlation between two numerical vectors. We could thus easily generate a measure of dis-similarity/distance by a formula like: 
+$Distance(x,y) = 1-PCC(x,y)$.
+This score have a maximum of 2 and minimum of 0.  Similar distance measure could be defined based on any non-parametric versions of correlation coefficients. In addition to these, there are many ways to quantify dis-similarity: (See: http://www.statsoft.com/textbook/cluster-analysis/)
+
+- Euclidean distance. This is probably the most commonly chosen type of distance. It simply is the geometric distance in the multidimensional space. It is computed as:  
+$Distance(x,y) = √(∑_{i=1}^{m}(x_i-y_i )^2 )$,
+where *m* is the dimension of the vectors. Note that Euclidean (and squared Euclidean) distances are usually computed from raw data, and not from standardized data. This method has certain advantages (e.g., the distance between any two objects is not affected by the addition of new objects to the analysis, which may be outliers). However, the distances can be greatly affected by differences in scale among the dimensions from which the distances are computed. For example, if one of the dimensions denotes a measured length in centimeters, and you then convert it to millimeters, the resulting Euclidean or squared Euclidean distances can be greatly affected, and consequently, the results of cluster analyses may be very different. It is good practice to transform the data, so they have similar scales.
+
+- Squared Euclidean distance. You may want to square the standard Euclidean distance to place progressively greater weight on objects that are further apart.
+
+- City-block (Manhattan) distance. This distance is simply the average difference across dimensions. In most cases, this distance measure yields results similar to the simple Euclidean distance. However, note that in this measure, the effect of single large differences (outliers) is dampened (since they are not squared). The city-block distance is computed as:
+$Distance(x,y)  = \frac{1}{m}∑_{i=1}^{m}|x_i-y_i|$
+
+- Chebyshev distance. This distance measure may be appropriate in cases when we want to define two objects as "different" if they are different on any one of the dimensions. The Cheever distance is calculated by: 
+$Distance(x,y)  = Maximum|x_i-y_i|$
+
+- Percent disagreement. This measure is particularly useful if the data for the dimensions included in the analysis are categorical in nature. This distance is computed as:
+$Distance(x,y) = (Number of xi ≠ yi)/ m$
+
+**Challenge 2g**: Generate a heatmap for the statistics of 50 states in the state.x77 dataset (for information ? state) using heatmap.2 in the gplots package.  Normalize your data properly before creating heatmap. Use the default Euclidean distance and complete linkage. Use *state.region* to color code the states and include an appropriate legend. Interpret your results. Discuss both trees.  
+
+**Challenge 2h**: Change distance function to 1-Pearson’s correlation coefficient. Change linkage method to average linkage. Turn off the clustering of the columns by reading the help information on **heatmap.2**.  Observe what is different in the clustering trees.
+
+**Challenge 2i**: Generate a heat map for the iris flower dataset. For data normalization, do not use standardization, just use centering (subtract the means). Use the species information in a color bar and interpret your results. 
+
+### Representing data using faces. Serious scientific research only!
+Humans are sensitive to facial images. We can use this to visualize data.
+
+(ref:10-7) Using faces to represent data.
+
+```{r 10-7, fig.cap='(ref:10-7)', fig.align='center'}
+#install.packages("TeachingDemos")
+library(TeachingDemos)
+faces(mtcars) 
+```
+
+This is called Chernoff’s faces. Each column of data is used to define a facial feature. The features parameters of this implementation are: 1-height of face ("mpg"), 2-width of face ("cyl")   3-shape of face (“disp”), 4-height of mouth (“hp”), 5-width of mouth (“drat”), 6-curve of smile (“wt”), 7-height of eyes (“qsec”), 8-width of eyes(“vs”), 9-height of hair(“am”), 10-width of hair (“gear”), 11-styling of hair (“carb”). 
+
+It turns out that the longer, serious faces represent smaller cars that are environmentally-friendly, while big polluters are shown as cute, baby faces. What an irony!
+
+References:
+Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.
+
+^1^  Try this: h <- hist( rnorm(100) ) and then type h to see the values returned by hist function. 
+
+
+## Visualizing iris data set
+
+### A Matrix only contains numbers
+
+While data frames can have a mix of numbers and characters in different columns, a **matrix is often only contain numbers**.  Let’s extract first 4 columns from the data frame iris and convert to a matrix:
+```{r}
+attach(iris)
+x <- as.matrix(iris[, 1:4])  # convert to matrix
+colMeans(x)  # column means for matrix
+colSums(x)
+```
+The same thing can be done with rows via **rowMeans(x)** and **rowSums(x)**. 
+
+Here is some matrix algebra.
+```{r results='hide'}
+y <- iris[1:10, 1:4]  # extract the first 10 rows of iris data in columns 1 to 4. 
+y
+t(y)          # transpose 
+z <- y + 5    # add a number to all numbers in a matrix
+z <- y * 1.5  # multiply a factor 
+z + y         # adding corresponding elements 
+y * z         # multiplying corresponding elements
+y <- as.matrix(y)  # convert the data.frame y to a matrix
+z <- as.matrix(z)  # convert the data.frame z to a matrix
+y %*% t(z)         # Matrix multiplication
+```
+
+### Scatter plot matrix
+We can generate a matrix of scatter plots simply by:
+```{r fig.keep="none"}
+pairs(iris[, 1:4]) 
+```
+
+```{r fig.cap='Scatter plot matrix.', fig.align='center'}
+pairs(iris[, 1:4], col = rainbow(3)[Species])  # Figure 2.18
+```
+
+**Challenge 2j**: Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots. 
+
+### Heatmap
+**Heatmaps** with hierarchical clustering are my favorite way to visualize data matrices. The rows and columns are kept in place, and the values are coded by colors. Heatmaps can directly visualize millions of numbers in one plot. The hierarchical trees also show the similarity among rows and columns: closely connected rows or columns are similar. 
+
+(ref:12-3) Heatmap for iris flower dataset.
+
+```{r 12-3, message=FALSE, fig.cap='(ref:12-3)', fig.align='center'}
+library(gplots)
+hclust2 <- function(x, ...)
+  hclust(x, method="average", ...)
+x <- as.matrix( iris[, 1:4])
+x <- apply(x, 2, function(y) (y - mean(y)))
+heatmap.2(x, 	
+	        hclustfun = hclust2,  # use average linkage
+	        col = greenred(75),   #color green red
+         	density.info = "none", 
+	        trace = "none", 
+	        scale = "none", 
+	        labRow = FALSE,   # no row names
+        	RowSideColors = rainbow(3)[iris$Species], 
+        	srtCol = 45,	# column labels at 45 degree
+	        margins = c(10, 10))  # bottom and right margins
+legend("topright", levels(iris$Species),       
+       fill = rainbow(3)[1:3])
+```
+
+### Star plot
+**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!
+```{r fig.keep='none'}
+x = iris [, 1:4]
+stars(x)         # do I see any diamonds in Figure 2.20, left?  I want the bigger one!
+stars(x, key.loc = c(17,0))    # What does this tell you?
+```
+
+**Challenge 2k**: Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers? 
+
+### Segment diagrams
+The stars() function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements. 
+```{r fig.keep='none'}
+stars(x, key.loc = c(20,0.5), draw.segments = T )    
+```
+
+(ref:12-4) Star plots and segments diagrams.
+
+```{r 12-4, echo=FALSE, fig.cap='(ref:12-4)', fig.align='center'}
+knitr::include_graphics("images/img1204n_starsegment.png")
+```
+
+**Challenge 2l**: Produce the segments diagram of the state data(state.x77) and offer some interpretation regarding South Dakota compared with other states. 
+
+### Parallel coordinate plot
+Parallel coordinate plot is a straightforward way of visualizing multivariate data using lines.
+
+(ref:12-5) Parallel coordinate plots directly visualize high-dimensional data by drawing lines.
+
+```{r 12-5, fig.cap='(ref:12-5)', fig.align='center'}
+x = iris[, 1:4]
+matplot(t(x), type = 'l',                #“l” is lower case L for “line”.
+        col = rainbow(3)[iris$Species])  # Species information is color coded
+legend("topright", levels(iris$Species), fill = rainbow(3))  # add legend to figure.
+text(c(1.2, 2, 3, 3.8), 0, colnames(x))  # manually add names
+```
+
+The result is shown in Figure \@ref(fig:12-5). Note that each line represents a flower. The four measurements are used to define the line. We can clearly see that I. setosa have smaller petals. 
+
+In addition to this, the “lattice” package has something nicer called “parallelplot”. That function can handle columns with different scales. 
+ 
+### Box plot
+```{r fig.keep='none'}
+boxplot(x)  # plain version. Column names may not shown properly
+```
+
+(ref:12-6) Box plot of all 4 columns
+
+```{r 12-6, message=FALSE, out.width='80%', fig.cap='(ref:12-6)', fig.align='center'}
+par(mar = c(8, 2, 2, 2))  # set figure margins (bottom, left, top, right)
+boxplot(x, las = 2)   # Figure 2.22
+```
+
+Notice that las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely. 
+
+### Bar plot with error bar
+
+(ref:12-8) Bar plot of average petal lengths for 3 species
+
+```{r 12-8, echo=FALSE, message=FALSE, out.width='80%', fig.cap='(ref:12-8)', fig.align='center'}
+attach(iris)  # attach the data set
+Means <- tapply(Petal.Length, list(Species), mean)  # compute means by group defined by Species
+SDs <- tapply(Petal.Length, list(Species), sd)   # calculate standard deviation by group
+Nsamples <- tapply(Petal.Length, list(Species), length) # number of samples per group
+xloc <- barplot(Means,  # bar plot, returning the location of the bars
+                xlab = "",
+                ylab = "Measurements(cm)",
+                main = "Petal Length",
+                ylim = c(0, 7), col = "green")
+arrows(xloc, Means - SDs,  # add error bars as arrows
+       xloc, Means + SDs,
+       code = 3, angle = 90, length = 0.1)
+text(xloc, 0.5, paste("n=", Nsamples))   # add sample size to each group
+```
+
+**Challenge 2m**: Write R code to generate Figure \@ref(fig:12-8), which show the means of petal length for each of the species with error bars corresponding to standard deviations. 
+(ref:12-8) Bar plot of average petal lengths for 3 species.
+
+### Combining plots
+It is possible to combine multiple plots at the same graphics window.
+
+(ref:13-1) Combine multiple histograms.  
+
+```{r 13-1, message=FALSE, fig.show='hold', out.width='50%',out.height='50%', fig.cap='(ref:13-1)', fig.align='center'}
+op <- par(no.readonly = TRUE)  # get old parameters
+par(mfrow= c(2, 2))  # nrows = 2; ncols= 2
+attach(iris)
+hist(Sepal.Length)
+hist(Sepal.Width)
+hist(Petal.Length)
+hist(Petal.Width)
+par(op)  # restore old parameters; otherwise affect all subsequent plots
+```
+
+The result is shown in Figure \@ref(fig:13-1). This plot gives a good overview of the distribution of multiple variables. We can see that the overall distributions of petal length and petal width are quite unusual. 
+
+**Challenge 2n**: Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations. 
+
+### Plot using principal component analysis (PCA)
+PCA is a linear projection method. As illustrated in Figure \@ref(fig:13-4), it tries to define a new set of orthogonal coordinates to represent the dataset such that the new coordinates can be ranked by the amount of variation or information it captures in the dataset. After running PCA, you get many pieces of information: 
+
+•	How the new coordinates are defined, 
+
+•	The percentage of variances captured by each of the new coordinates,
+
+•	A representation of all the data points onto the new coordinates.
+
+(ref:13-4) Concept of PCA. Here the first component x’ gives a relatively accurate representation of the data.
+
+```{r 13-4, echo=FALSE, out.width='75%', fig.cap='(ref:13-4)', fig.align='center'}
+knitr::include_graphics("images/img1304_PCA.png")
+```
+
+Here’s an example of running PCA in R. Note that “scale=T” in the following command means that the data is normalized before conduction PCA so that each variable has unite variance. 
+```{r message=FALSE}
+? prcomp
+pca = prcomp(iris[, 1:4], scale = T)   
+pca  # Have a look at the results.
+```
+
+Note that the first principal component is positively correlated with Sepal length, petal length, and petal width. Recall that these three variables are highly correlated. Sepal width is the variable that is almost the same across three species with small standard deviation. PC2 is mostly determined by sepal width, less so by sepal length.
+```{r results='hide', fig.keep='none'}
+plot(pca)  # plot the amount of variance each principal components captures.
+str(pca)   # this shows the structure of the object, listing all parts. 
+```
+
+```{r}
+head(pca$x)  # the new coordinate values for each of the 150 samples
+```
+
+These numbers can be used to plot the distribution of the 150 data points. 
+```{r fig.keep='none'}
+plot(pca$x[, 1:2], pch = 1, col = iris$Species,
+		 xlab = "1st principal component", 
+		 ylab = "2nd Principal Component")
+     legend("topright", levels(iris$Species), fill = rainbow(3))
+```
+
+The result (left side of Figure \@ref(fig:13-5)) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. From this I observed that the first principal component alone can be used to distinguish the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
+
+(ref:13-5) PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
+
+```{r 13-5, echo=FALSE, fig.show='hold', out.width='50%', fig.cap='(ref:13-5)', fig.align='center'}
+plot(pca$x[, 1:2], pch = 1, col = iris$Species,
+		 xlab = "1st principal component", 
+		 ylab = "2nd Principal Component")
+legend("topright", levels(iris$Species), fill = rainbow(3))
+pcaData <- as.data.frame(pca$x[, 1:2])
+pcaData <- cbind(pcaData, iris$Species)	
+colnames(pcaData) <- c("PC1", "PC2", "Species")
+percentVar <- round(100 * summary(pca)$importance[2, 1:2], 0) 	# compute % variances
+library(ggplot2)
+ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +   # starting ggplot2
+	     geom_point(size = 2) +                                        # add data points
+       xlab(paste0("PC1: ", percentVar[1], "% variance")) +          # x label
+       ylab(paste0("PC2: ", percentVar[2], "% variance")) +          # y  label
+	     ggtitle("Principal component analysis (PCA)") +               # title              
+       theme(aspect.ratio = 1)                                       # width and height ratio   
+```
+
+### Attempt at ggplot2
+There are 3 big plotting systems in R: base graphics, lattice, and ggplot2. Now let’s try ggplot2. First, let’s construct a data frame as demanded by ggplot2.
+```{r fig.keep='none'}
+pcaData <- as.data.frame(pca$x[, 1:2])
+pcaData <- cbind(pcaData, iris$Species)	
+colnames(pcaData) <- c("PC1", "PC2", "Species")
+
+#install.packages("ggplot2")
+library(ggplot2)
+ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +   # define plot area
+	     geom_point(size = 2)                                          # adding data points
+```
+
+Now we have a basic plot. As you could see this plot is very different from those from R base graphics. We are adding elements one by one using the “+” sign at the end of the first line.
+
+We will add details to this plot. 
+```{r fig.keep='none'}
+percentVar <- round(100 * summary(pca)$importance[2, 1:2], 0)	  # compute % variances
+ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting ggplot2
+	     geom_point(size = 2) +                                       # add data points
+	     xlab(paste0("PC1: ", percentVar[1], "% variance")) +         # x label
+	     ylab(paste0("PC2: ", percentVar[2], "% variance")) +         # y  label
+	     ggtitle("Principal component analysis (PCA)") +              # title            
+    	 theme(aspect.ratio = 1)                                      # width and height ratio             
+```
+
+The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
+
+**Challenge 2o**: Create PCA plot of the state.x77 data set. Use the state.region information to color code the states. Interpret your results. Use both R base graphics and ggplot2. Hint: do not forget normalization using the scale option. 
+
+### Classification: Predicting the odds of binary outcomes 
+It is easy to distinguish *I. setosa* from the other two species, just based on petal length alone. Here we focus on building a predictive model that can predict between *I. versicolor* and *I. virginica*. For this we use the logistic regression to model the odd ratio of being *I. virginica* as a function of all of the 4 measurements: 
+
+$$ln(odds)=ln(\frac{p}{1-p})
+                     =a×Sepal.Length + b×Sepal.Width + c×Petal.Length + d×Petal.Width+c+e.$$
+
+```{r}
+iris2 <- iris[51:150, ]  # removes the first 50 samples, which represent I. setosa
+iris2 <- droplevels(iris2)  # removes setosa, an empty levels of species.
+model <- glm(Species ~ . , family = binomial(link = 'logit'), 
+             data = iris2)  # Species ~ . species as a function of everything else in the dataset
+summary(model)
+```
+Sepal length and width are not useful in distinguishing versicolor from *virginica*. The most significant (P=0.0465) factor is Petal.Length. One unit increase in petal length will increase the log-odd of being *virginica* by 9.429.  Marginally significant effect is found for Petal.Width. 
+
+If you do not fully understand the mathematics behind linear regression or logistic regression, do not worry about it too much.  Me either. In this class, I just want to show you how to do these analysis in R and interpret the results. 
+I do not understand how computers work. Yet I **use** it every day. 
+
+**Challenge 2p**: So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:
+
+•	What distinguishes these three species? 
+
+•	If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to?
+
+Review all the analysis we did, examine the raw data, and answer the above questions. Write a paragraph and provide evidence of your thinking. Do more analysis if needed.
