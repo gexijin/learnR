@@ -38,10 +38,10 @@ So the first 4 columns contain numeric values. The last one is species informati
 
 To have a look at the data in a spreadsheet, we can use the fix( ) function.
 ```{r}
-fix(iris)  # examine data frame in a spreadsheet. 
+#fix(iris)  # examine data frame in a spreadsheet. 
 ```
 
-Click on column names to double-check data types (numeric vs. character). Sometimes we need to overwrite data types guessed by R. For example, sometimes we use 1 for male and 0 for female. These are essentially categories; Values like 1.6 make no sense. In this case we need to enforce this column as characters. Note this window needs to be closed before proceeding to the next. 
+Click on column names to double-check data types (numeric vs. character). Sometimes we need to overwrite data types guessed by R. For example, sometimes we use 1 for male and 0 for female. These are essentially categories; Values like 1.6 make no sense. In this case we need to enforce this column as characters. **Note this window needs to be closed before proceeding to the next**. 
 ```{r echo=TRUE, results='hide'}
 View(iris)  # this Rstudio function also shows data. Note R is case sensitive. 
 ```
@@ -249,7 +249,6 @@ str(iris)  # show the structure of data object
 
 Perhaps due to adaption to environment, change in petal length lead to better survival. With the smallest petals, *Iris Setosa* is found in Arctic regions. *Iris versicolor* is often found in the Eastern United States and Eastern Canada. *Iris virginica* “is common along the coastal plain from Florida to Georgia in the Southeastern United States [Wikipedia].” It appears the iris flowers in warmer places are much larger than those in colder ones. With R, it is very easy to generate lots of graphics. But we still have to do the thinking. It requires to put the plots in context.
 
-### Quantitative analyses of correlation
 We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, such as Pearson’s correlation coefficient, r.  It ranges from -1 to 1.   
 ```{r}
 cor(x, y) 
@@ -345,9 +344,14 @@ Figure \@ref(fig:2-6)A shows an interesting feature in how sepal width is distri
 We can also have density plots side-by-side (Figure \@ref(fig:2-6)B):
 
 ```{r fig.keep='none'}
-ggplot(iris, aes(x = Sepal.Width)) + geom_histogram(binwidth=.2, colour="black", fill="lightblue") + 
-    facet_grid(Species ~ .)
-ggplot(iris, aes(x = Petal.Width, fill = Species)) + geom_density(alpha=.3)
+ggplot(iris, aes(x = Sepal.Width, group = Species, 
+                 y = c(..count..[..group.. == 1]/sum(..count..[..group.. == 1]),
+                       ..count..[..group.. == 2]/sum(..count..[..group.. == 2]),
+                       ..count..[..group.. == 3]/sum(..count..[..group.. == 3])) * 100)) + 
+  geom_histogram(binwidth = .2, colour = "black", fill = "lightblue") + 
+  facet_grid(Species ~ .) +
+  labs(y = "Percent of Total")
+ggplot(iris, aes(x = Petal.Length, fill = Species)) + geom_density(alpha = .3)
 ```
 
 

@@ -13,8 +13,7 @@ In addition to the graphics functions in base R, there are many other packages w
 ```{r 9-02, echo=FALSE, fig.cap='(ref:9-02)', fig.align='center'}
 knitr::include_graphics("images/img0902_function.png")
 ```  
-  
-## Plain vs. refined graphics
+
 Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data.  Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
 
 ## Visualizing mtcars dataset 
@@ -305,7 +304,7 @@ While the height of the bars in the bar chart in Figure 5 represents absolute to
 **Challenge 2d**: Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results. 
 
 
-### Detect correlations among variables
+### Detecting correlations among variables
 In ther beginning of this chapter we used scatter plots to study the correlation between two variables, mpg and wt in the mtcars dataset. There are many such pairwise correlations. One simple yet useful plot of the entire dataset is scatter plot matrix (SPM). SPMs can be created by the pairs function, or just run plot on a data frame.
 ```{r fig.keep='none'}
 plot(mtcars)  # scatter plot matrix; same as pairs(mtcars) 
@@ -612,7 +611,7 @@ legend("topright", levels(iris$Species),
 **Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!
 ```{r fig.keep='none'}
 x = iris [, 1:4]
-stars(x)         # do I see any diamonds in Figure 2.20, left?  I want the bigger one!
+stars(x)         # do I see any diamonds in Figure 2.20A?  I want the bigger one!
 stars(x, key.loc = c(17,0))    # What does this tell you?
 ```
 

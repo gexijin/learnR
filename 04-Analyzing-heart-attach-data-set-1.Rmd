@@ -205,7 +205,7 @@ Another way of showing the proportions is mosaic plot.
 
 (ref:5-2) Mosaic plot of DIED by SEX.
 
-```{r 5-2, fig.cap='(ref:5-2)', fig.align='center'}
+```{r 5-2, fig.width=6, fig.height=4, fig.cap='(ref:5-2)', fig.align='center'}
 mosaicplot(table(SEX, DIED), color = T)  # Figure 4.6
 ```
 
@@ -239,91 +239,114 @@ Did men and women survived by equal proportion? Did girls and women survived by 
 **Challenge 4e**. Use these approaches to investigate whether men and women differ in their diagnosis. 
 
 ## Associations between a categorical and a numeric variables? 
-Do women stay longer in the hospital? Does the charges differ for people with different diagnosis (part of the heart affected)?  We should know by now how to answer these questions with T-test, and more generally ANOVA, following our examples commands used in our analysis of the Iris flower data set. For data visualization, **boxplot** is the most straight forward way. But beyond boxplot, we can use the lattice package for more detailed examination of distribution of variables in two or more groups.  
+Do women stay longer in the hospital? Does the charges differ for people with different diagnosis (part of the heart affected)?  We should know by now how to answer these questions with T-test, and more generally ANOVA, following our examples commands used in our analysis of the Iris flower data set. For data visualization, **boxplot** is the most straight forward way. But beyond boxplot, we can use the ggplot2 package for more detailed examination of distribution of variables in two or more groups.  
 
-The R **lattice** package is a powerful and complex system implementing William Cleveland's Trellis graphics (Cleveland 1985) -- a system focusing on the **display of multivariate data in panels**. Trellis was one of the many ideas that came from a particularly notable generation in the history of statistical developments at Bell Labs -- a period that also included the S programming language (Becker, Chambers, and Wilks 1988). [http://www.jstatsoft.org/v25/b02/paper](http://www.jstatsoft.org/v25/b02/paper)
-```{r fig.keep='none'}
-library(lattice)   # You need to install this package first. 
-histogram(~ AGE | SEX)   # age distribution separated by SEX.
-histogram(~ AGE | SEX,   # result shows in Figure 4.8A. 
-          layout = c(1, 2))  # The layout is one column two rows. 
+(ref:new1) Histogram of AGE by SEX using ggplot2 package
+
+```{r new1, fig.width=6, fig.height=4, fig.cap='(ref:new1)', fig.align='center'}
+library(ggplot2)
+ggplot(heartatk4R, aes(x = AGE, group = SEX, 
+                       y = c(..count..[..group.. == 1]/sum(..count..[..group.. == 1]),
+                             ..count..[..group.. == 2]/sum(..count..[..group.. == 2])) * 100)) + 
+  geom_histogram(binwidth = 6, colour = "black", fill = "lightblue") + 
+  facet_grid(SEX ~ .) +
+  labs(y = "Percent of Total")
 ```
 
 Now the two histograms are arranged, and it is very easy to see that women’s age are more skewed to the right, meaning women are considerably older than men. I am surprised at first by this huge difference, as the average age of women if bigger by 11. Further research shows that for women the symptoms of heart attacks are milder and often go unnoticed. 
 
 We can further divide the population according to survival status by adding another factor:
-```{r fig.keep='none'}
-histogram(~ AGE | SEX + DIED, layout = c(1, 4))  # Figure 4.8B
+
+(ref:new2) Histogram of AGE by SEX and DIED using ggplot2 package
+
+```{r new2, fig.cap='(ref:new2)', fig.align='center'}
+library(dplyr)
+heartatk4R %>% mutate(GROUP = paste(DIED, SEX, sep = "-")) %>% 
+ggplot(aes(x = AGE, group = GROUP, 
+           y = c(..count..[..group.. == 1]/sum(..count..[..group.. == 1]),
+                 ..count..[..group.. == 2]/sum(..count..[..group.. == 2]),
+                 ..count..[..group.. == 3]/sum(..count..[..group.. == 3]),
+                 ..count..[..group.. == 4]/sum(..count..[..group.. == 4])) * 100))+  
+  geom_histogram(binwidth = 5, colour = "black", fill = "lightblue") +
+  facet_grid(DIED ~ SEX) +
+  labs(y = "Percent of Total")
+detach("package:dplyr")
 ```
 
 We can see that patients who did not survive heart attack tend to be older, for both men and women. This is perhaps better illustrated with density plot:
-```{r fig.keep='none'}
-densityplot(~ AGE | SEX, plot.points = F, auto.key = list(columns = 2), layout = c(1, 2)) 
+
+(ref:new3) Density plot of AGE by SEX using ggplot2 package
+
+```{r new3, fig.width=6, fig.height=3, fig.cap='(ref:new3)', fig.align='center'}
+ggplot(heartatk4R, aes(x = AGE, fill = SEX)) + geom_density(alpha = .3) 
 ```
 
-The result is similar to Figure \@ref(fig:14-3)A, but as a density plot.  
+The result is similar to Figure \@ref(fig:new1), but as a density plot.  
 
-Now for each gender, we further divide the patients by their survival status using the groups=DIED options. Instead of splitting into multiple panels, the curves are overlaid. 
-```{r fig.keep='none'}
-densityplot(~ AGE | SEX, groups = DIED, plot.points = F, 
-            auto.key = list(columns = 2), layout = c(1, 2))  #Figure 4.8C
+Now for each gender, we further divide the patients by their survival status. Instead of splitting into multiple panels, the curves are overlaid. 
+
+(ref:new4) Density plot of AGE by SEX and DIED using ggplot2 package
+
+```{r new4, fig.width=6, fig.height=4, fig.cap='(ref:new4)', fig.align='center'}
+ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + geom_density(alpha = .3) + facet_grid(SEX ~ .) 
 ```
 
-(ref:14-3) Plotting of heart attack data using lattice package.
-
-```{r 14-3, echo=FALSE, fig.cap='(ref:14-3)', fig.align='center'}
-knitr::include_graphics("images/img1403_lattice.png")
-```
 
 **Challenge 4f**: Generate the pie chart for each of the categorical variables in heart attack dataset. Generate histogram for each of the numerical variables. Interpret each plot.
 
-**Challenge 4g**. Use the lattice package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results. 
+**Challenge 4g**. Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results. 
 
-**Challenge 4h**.  Use the lattice package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:14-3)C). 
+**Challenge 4h**.  Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:new4). 
 
 
-**Challenge 4i**. Use student’s t-test, boxplot, and the figures like Figure \@ref(fig:14-3) to compare the age distribution between survived and those who didn’t. 
+**Challenge 4i**. Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t. 
 
-**Challenge 4j**. Use ANOVA, boxplot, and the figures like in Figure \@ref(fig:14-3) to compare the charges among people who have different DRG codes. 
+**Challenge 4j**. Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes. 
 
 ## Associations between multiple columns? 
 We can use the lattice package to investigate correlations among multiple columns with figures with multiple panels.
 
-(ref:5-6) Multiple boxplots by lattice package.
+(ref:5-6) Multiple boxplots by ggplot2 package.
 
-```{r 5-6, fig.cap='(ref:5-6)', fig.align='center'}
-bwplot(AGE ~ DRG | SEX)  # Figure 4.9
+```{r 5-6, fig.width=6, fig.height=4, fig.cap='(ref:5-6)', fig.align='center'}
+ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_boxplot(color = "blue") + facet_grid(SEX ~ .)
 ```
 
 Recall that 121 indicate survivors with complication, 122 survivors with no complication, and 123, died. As you could see this clearly indicate our previous observation people who died in hospital are older than survivors and that patients who developed complications seems to be older than those that did not. Did people with complications stayed longer in the hospital? 
 
 **Challenge 4k**: Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
 
-**Challenge 4l**: Use the lattice package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure \@ref(fig:14-5).  Offer interpretation.
+**Challenge 4l**: Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure \@ref(fig:14-5).  Offer interpretation.
 
-(ref:14-5) Multiple boxplots by lattice package.
+(ref:14-5) Multiple boxplots by ggplot2 package.
 
-```{r 14-5, echo=FALSE, fig.cap='(ref:14-5)', fig.align='center'}
-bwplot(AGE ~ SEX | DRG)   # Figure 4.10
+```{r 14-5, echo=FALSE, fig.width=6, fig.height=4, fig.cap='(ref:14-5)', fig.align='center'}
+ggplot(heartatk4R, aes(x = SEX, y = AGE)) + geom_boxplot(color = "blue") + coord_flip() + facet_grid(DRG ~ .)
 ```
 
   All of these techniques we introduced so far enable us to **LEARN** about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc. 
   
   You should also **INTERACT** with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives. 
-```{r fig.keep='last'}
-xyplot(LOS ~ AGE)  # scatterplot of LOS vs. AGE
-xyplot(LOS ~ AGE | SEX)  # scatterplot of LOS vs. AGE, divided by SEX
-xyplot(LOS ~ AGE  | SEX, groups = DIED)  # scatterplot colored by DIED
+
+```{r fig.width=6, fig.height=4, fig.keep='last', fig.align='center'}
+# scatterplot of LOS vs. AGE
+ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() 
+# scatterplot of LOS vs. AGE, divided by SEX
+ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .)  
+# scatterplot colored by DIED
+ggplot(heartatk4R, aes(x = AGE, y = LOS, color = DIED)) + geom_point() + facet_grid(SEX ~ .)  
 ```
 
-Note that xyplot(LOS ~ AGE  | SEX) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while xyplot(LOS ~ AGE, groups=SEX) will add these two color-coded scatter plots into the same figure. This is applicable to not only xyplot but also most of the functions in lattice package. 
+
+Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure. 
 
 (ref:5-7) A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
 
 ```{r 5-7, echo=FALSE, fig.cap='(ref:5-7)', fig.align='center'}
-
-xyplot(LOS ~ AGE | SEX + DIED)  # scatterplot of LOS vs. AGE, divided by SEX and DIED
+# scatterplot of LOS vs. AGE, divided by SEX and DIED
+ggplot(heartatk4R, aes(x = AGE, y = LOS)) + geom_point(color = "blue") + facet_grid(SEX ~ DIED)  
 ```
+
 
 Figure \@ref(fig:5-7) seems to suggest that the positive association between AGE and LOS is noticeable in patients who did not die in hospital, regardless of sex. This is a statistician’s language. Try this instead that could be understood by both the statistician and his/her grandmother. Older patients tend to stay longer in the hospital after surviving a heart attack. This is true for both men and women. 
 

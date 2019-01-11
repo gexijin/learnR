@@ -354,10 +354,113 @@ One **String**:  Type  **x <- "R is cool"**  and then try each one of these:
 knitr::include_graphics("images/img0701_string.png")
 ```
 
+Define a **string** x: "R is cool"
+```{r}
+x <- "R is cool"
+```
+
+If we want to know the number of character of the string:
+```{r}
+nchar(x)
+```
+
+We can concatenate strings. By default a space is added.
+```{r}
+paste(x, "!!")
+```
+
+If we want to extract sub-string from position of 6 and 9:
+```{r}
+substr(x, 6, 9)
+```
+
+Split string into a list which is seperated by space:
+```{r}
+strsplit(x, " ")
+```
+
+Find pattern "R" and replace with "Tim":
+```{r}
+gsub("R", "Tim", x)
+```
+
+Or remove space followed by anything:
+```{r}
+gsub(" .*", "", x)
+```
+
+We can search for pattern like "is" in the string.
+```{r}
+grepl("is", x)
+```
+
+We can also convert the whole string into low case or upper case by "tolower" or "toupper" function.
+```{r}
+tolower(x)
+toupper(x)
+```
+
 A **vector** can hold many strings. This can be a column of names or IDs in a table.  
 Define a character vector by   **x <- c("ab",  "cde",  "d",  "ab")** then try these:
 ```{r echo=FALSE}
 knitr::include_graphics("images/img0702_vector.png")
+```
+
+A **vector** can hold many strings. This can be a column of names or IDs in a table.  
+First let's define a character vector x of: "ab",  "cde",  "d",  "ab".
+```{r}
+x <- c("ab", "cde", "d", "ab") 
+```
+
+If we are interested in the 2nd element:
+```{r}
+x[2]
+```
+
+Now we need to know the number of strings in the vector:
+```{r}
+length(x)
+```
+
+We can find out a vector of unique elements
+```{r}
+unique(x)
+```
+
+Is there any duplicated element in the vector?
+```{r}
+duplicated(x)
+```
+The last element is duplicated. F denotes FALSE, and T for TRUE.
+If we want to know the number of characters in each of the element:
+```{r}
+nchar(x)
+```
+
+We can also unite two vectors x and y if we define another vector y first:
+```{r}
+y <- c("ab", "e")
+union(x, y)
+```
+
+Is there intersept among these two sets of strings?
+```{r}
+intersect(x, y)
+```
+
+We can add something like "Q" to each element:
+```{r}
+paste(x, "Q")
+```
+
+To get rid of the space between these element and "Q", try paste0:
+```{r}
+paste0(x, "Q")
+```
+
+If we want to collapse multiple strings into one, which is joined by space:
+```{r}
+paste(x, collapse = " ")
 ```
 
 Using these functions, we can achieve many things. For example if we have a piece of DNA sequence: 
@@ -385,11 +488,64 @@ segs[1]  # first segment
 **Challenge 6k**. In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris “ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
 
 ## Matrix operations
-A **matrix** has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values.   Define a matrix using the Iris dataset 
-x <- as.matrix(iris[1:10, 1:4])
-and try the following commands.
+A **matrix** has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values.   Define a matrix using the Iris dataset and try the following commands.
+
 ```{r echo=FALSE}
 knitr::include_graphics("images/img0703_matrix.png")
+```
+
+```{r}
+x <- as.matrix(iris[1:10, 1:4])
+```
+
+First let's show the fist few rows
+```{r}
+head(x)
+```
+
+You can transform the matrix if you want, for the convenience of view and analysis.
+```{r}
+t(x)
+```
+
+We can produce a new matrix by each element is doubled and added 5
+```{r}
+y <- 2*x+5
+y
+```
+
+Also we can do other calculation by adding or multiplying matrics.
+```{r}
+x + y
+x * y
+```
+
+We can also get a logical matrix using logical code like:
+```{r}
+x>3
+```
+
+Now if we want to know the mean and sum of these rows and columns, try rowMeans(), colMeans(), rowSums(), colSums().
+```{r}
+rowMeans(x)
+colMeans(x)
+rowSums(x)
+colSums(x)
+```
+
+Here we are computing the standard deviation by columns, using 2 for columns.
+```{r}
+apply(x, 2, sd)
+```
+
+Or median by rows, using 1 for rows. 
+```{r}
+apply(x, 1, median)
+```
+
+Heatmap is my favorite type of graph for visualizing a large matrix data.
+```{r}
+heatmap(x, scale = "column", margins = c(10,5))
 ```
 
 **Challenge 6l**: Take the first 4 columns of iris data set and format as a matrix. Compute the median for each column using the apply function. 
@@ -405,6 +561,73 @@ knitr::include_graphics("images/img0704n1.png")
 ```
 
 -^1^ D.F.: data frame
+
+
+
+Read in data frame x:
+```{r}
+x <- iris
+```
+
+Using summary() we can get descriptive statistics of each column.
+```{r}
+summary(x)
+```
+
+head() and tail() functions show the fist and last few rows.
+```{r}
+head(x)
+tail(x)
+```
+
+If we want to know both number of rows and number of columns of the data frame:
+```{r}
+dim(x)
+```
+
+We can just get number of rows or number of columns seperately:
+```{r}
+nrow(x)
+ncol(x)
+```
+
+If we are intersted in the column names or row names, which should be a vector of strings:
+```{r}
+colnames(x)
+rownames(x)
+```
+
+str() is a very useful function, which shows data types for all columns.
+```{r}
+str(x)
+```
+
+Like string and vector, we can select one elememt in the data frame, like elemnet in 2nd row and 3rd column.
+```{r}
+x[2, 3]
+```
+
+Also we can subset a smaller data frame from x, such as columns 2 to 4 and rows 1 to 10:
+```{r}
+x[1:10, 2:4]
+```
+
+We can only retrieve all of the first column:
+```{r}
+x[, 1]
+```
+
+Using the data frame name x followed column name has the same effect.
+```{r}
+x$Sepal.Length
+```
+
+If we need to know the average Sepal Length, we use mean() function. By the way, expressions can be nested.
+```{r}
+mean(x$Sepal.Length)
+```
+
+It's very common to select a subset of data by certain column. Note "==" is for comparison and "=" is for assign value.
 
 **Challenge 6m**:  A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity.  These two files are available here and both are tab-deliminated text files.
 
