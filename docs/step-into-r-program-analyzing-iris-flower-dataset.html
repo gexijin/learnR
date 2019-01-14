@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-11">
+<meta name="date" content="2019-01-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -241,7 +241,11 @@ Figure 1.2: Example of a data frame.
 iris[<span class="dv">3</span>, ]     <span class="co"># shows all of row 3</span>
 iris[, <span class="dv">4</span>]     <span class="co"># shows all of column 4</span>
 iris[<span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]  <span class="co"># shows row 3, columns 1 to 4. </span></code></pre></div>
-<p><strong>Challenge 1a</strong>:display data in rows 1 to 10 from columns 2 to 5. Start a new Word document. Copy and paste your R code and the results to the document and save it as PDF.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 1.1  </strong></span>Display data in rows 1 to 10 from columns 2 to 5. Start a new Word document. Copy and paste your R code and the results to the document and save it as PDF.
+</div>
+
 <p><img src="images/img0100_tips.png" width="45%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(iris)  <span class="co"># Column names. </span></code></pre></div>
 <pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
@@ -252,9 +256,17 @@ Petal.Length  <span class="co"># after attaching, we can just use column names t
 <p>R is case-sensitive. “petal.length” will not be recognized.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(Petal.Length)   <span class="co"># mean( ) is a function that operates on Petal.Length, a vector of 150 umbers</span></code></pre></div>
 <pre><code>## [1] 3.758</code></pre>
-<p><strong>Challenge 1b</strong>: Compute average sepal length. Hint: replace <strong>Petal.Length</strong> with <strong>Sepal.Length</strong>.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 1.2  </strong></span>Compute average sepal length. Hint: replace <strong>Petal.Length</strong> with <strong>Sepal.Length</strong>.
+</div>
+
 <p>The best way to learn about other R functions is Google search.</p>
-<p><strong>Challenge 1c</strong>: Google “R square root function” to find the R function, and compute the value of <span class="math inline">\(\sqrt(123.456)\)</span>.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 1.3  </strong></span>Google “R square root function” to find the R function, and compute the value of <span class="math inline">\(\sqrt(123.456)\)</span>.
+</div>
+
 </div>
 <div id="analyzing-one-set-of-numbers" class="section level2">
 <h2><span class="header-section-number">1.2</span> Analyzing one set of numbers</h2>
@@ -279,7 +291,11 @@ Figure 1.3: Boxplot of petal length (A) and of all 4 columns (B).
 </p>
 </div>
 <p>In Rstudio, you can copy a plot to clipboard using the <strong>Export</strong> button on top of the plot area. Or you can click <strong>zoom</strong>, right click on the popup plot and select <strong>“Copy Image”</strong>. Then you can paste the plot into Word. If you are using R software, instead of Rstudio, you can right click on the plots and copy as meta-file.</p>
-<p><strong>Challenge 1d</strong>: What can we tell from this boxplot (Figire <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-3">1.3</a>B)? Summarize your observations in PLAIN English. Note the differences in median and the spread (tall boxes). What is the most variable characteristics?</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 1.4  </strong></span>What can we tell from this boxplot (Figire <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-3">1.3</a>B)? Summarize your observations in PLAIN English. Note the differences in median and the spread (tall boxes). What is the most variable characteristics?
+</div>
+
 To quantify the variance, we can compute the <strong>standard deviation</strong> σ:
 <span class="math display">\[\begin{align}
 σ=\sqrt{\frac{1}{N}[(x_{1}-u)^2+(x_{2}-u)^2+...+(x_{N}-u)^2]}    
@@ -296,8 +312,8 @@ u=\frac{1}{N}(x_{1}+x_{2}+...x_{N})
 <p>As we can see, these flowers have similar sepal width. They differ widely in petal length. This is consistent with the boxplot above. Perhaps changes in petal length lead to better survival in different habitats.</p>
 <p>With R it is very easy to generate graphs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(x)</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
-<img src="book_files/figure-html/unnamed-chunk-15-1.png" alt="Barplot of petal length" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="book_files/figure-html/unnamed-chunk-19-1.png" alt="Barplot of petal length" width="80%" />
 <p class="caption">
 Figure 1.4: Barplot of petal length
 </p>
@@ -318,15 +334,23 @@ Figure 1.5: Sequence plot, histogram, lag plot and normal Q-Q plot.
 <p>Histogram shows the distribution of data. The histogram top right of Figure <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-4">1.5</a> shows that there are more flowers with Petal Length between 1 and 1.5. It also shows that the data does not show a bell-curved distribution.</p>
 <p>Lag plot is a scatter plot against the same set of number with an offset of 1. Any structure in lag plot indicate non-randomness in the order in which the data is presented.</p>
 <p>Q-Q plot can help check if data follows a Gaussian distribution, which is widely observed in many situations. Also referred to as normal distribution, it is the pre-requisite for many statistical methods. See Figure <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-5">1.6</a> for an example of normal distribution. Quantiles of the data is compared against those in a normal distribution. If the normal Q-Q plot is close to the reference line produced by qqline( ), then the data has a normal distribution.</p>
-<p><strong>Challenge 1e</strong>: Generate 500 random numbers from the standard normal distribution and generate sequence plots, histogram, lag plot, and Q-Q plot. You should get plots like those in Figure <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-5">1.6</a>. Hint: Run x = rnorm(500) to generate these numbers, and then re-run the last 5 lines of code on this page. They are also shown on Figure <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-4">1.5</a>.</p>
 
+<div class="exercise">
+<span id="exr:unnamed-chunk-20" class="exercise"><strong>Exercise 1.5  </strong></span>Generate 500 random numbers from the standard normal distribution and generate sequence plots, histogram, lag plot, and Q-Q plot. You should get plots like those in Figure <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-5">1.6</a>. Hint: Run x = rnorm(500) to generate these numbers, and then re-run the last 5 lines of code on this page. They are also shown on Figure <a href="step-into-r-program-analyzing-iris-flower-dataset.html#fig:1-4">1.5</a>.
+</div>
+
+(ref:1-5) Plots for random generated numbers following a normal distribution. This is for reference.
 <div class="figure" style="text-align: center"><span id="fig:1-5"></span>
-<img src="book_files/figure-html/1-5-1.png" alt="Plots for random generated numbers following a normal distribution. This is for reference." width="50%" /><img src="book_files/figure-html/1-5-2.png" alt="Plots for random generated numbers following a normal distribution. This is for reference." width="50%" /><img src="book_files/figure-html/1-5-3.png" alt="Plots for random generated numbers following a normal distribution. This is for reference." width="50%" /><img src="book_files/figure-html/1-5-4.png" alt="Plots for random generated numbers following a normal distribution. This is for reference." width="50%" />
+<img src="book_files/figure-html/1-5-1.png" alt="(ref:1-5)" width="50%" /><img src="book_files/figure-html/1-5-2.png" alt="(ref:1-5)" width="50%" /><img src="book_files/figure-html/1-5-3.png" alt="(ref:1-5)" width="50%" /><img src="book_files/figure-html/1-5-4.png" alt="(ref:1-5)" width="50%" />
 <p class="caption">
-Figure 1.6: Plots for random generated numbers following a normal distribution. This is for reference.
+Figure 1.6: (ref:1-5)
 </p>
 </div>
-<p><strong>Challenge 1f</strong>: Investigate Septal Length distribution using these techniques and summarize your observations in PLAIN English. Hint: assign x with the values in the sepal length column (x = Sepal.Length), and re-run all the code in this section.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-21" class="exercise"><strong>Exercise 1.6  </strong></span>Investigate Septal Length distribution using these techniques and summarize your observations in PLAIN English. Hint: assign x with the values in the sepal length column (x = Sepal.Length), and re-run all the code in this section.
+</div>
+
 </div>
 <div id="students-t-test" class="section level2">
 <h2><span class="header-section-number">1.3</span> Student’s t-test</h2>
@@ -346,7 +370,11 @@ y &lt;-<span class="st"> </span>Petal.Length[<span class="dv">51</span><span cla
 ## mean of x mean of y 
 ##     1.462     4.260</code></pre>
 <p>The null hypothesis is that the true mean is the same. Since p value is really small, we reject this hypothesis. Iris versicolor has longer sepals than iris setosa.</p>
-<p><strong>Challenge 1g</strong>: Are iris setosa and iris versicolor significantly different in sepal width? Hint: Replace Petal.Length with something else and re-run above code.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-23" class="exercise"><strong>Exercise 1.7  </strong></span>Are iris setosa and iris versicolor significantly different in sepal width? Hint: Replace Petal.Length with something else and re-run above code.
+</div>
+
 <p>We can also do t-test on one set of numbers. This is a one-sample t-test of mean:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(Sepal.Length, <span class="dt">mu =</span> <span class="fl">5.8</span>)</code></pre></div>
 <pre><code>## 
@@ -361,7 +389,11 @@ y &lt;-<span class="st"> </span>Petal.Length[<span class="dv">51</span><span cla
 ## mean of x 
 ##  5.843333</code></pre>
 <p>In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8. Since p value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98.</p>
-<p><strong>Challenge 1h</strong>: Compute 95% confidence interval of petal length.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercise 1.8  </strong></span>Compute 95% confidence interval of petal length.
+</div>
+
 </div>
 <div id="test-for-normal-distribution" class="section level2">
 <h2><span class="header-section-number">1.4</span> Test for normal distribution</h2>
@@ -373,7 +405,11 @@ y &lt;-<span class="st"> </span>Petal.Length[<span class="dv">51</span><span cla
 ## data:  Petal.Length
 ## W = 0.87627, p-value = 7.412e-10</code></pre>
 <p>If petal length is normally distributed, there is only 7.412×10<sup>-10</sup> chance of getting a test statistic of 0.87627, which is observed in our sample of 150 flowers. In other words, it is highly unlikely that petal length follows a normal distribution. We reject the normal distribution hypothesis.</p>
-<p><strong>Challenge 1i</strong>: Is sepal width normally distributed? Run Shapiro’s test and also generate histogram and normal Q-Q plot.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercise 1.9  </strong></span>Is sepal width normally distributed? Run Shapiro’s test and also generate histogram and normal Q-Q plot.
+</div>
+
 </div>
 <div id="analyzing-a-column-of-categorical-values" class="section level2">
 <h2><span class="header-section-number">1.5</span> Analyzing a column of categorical values</h2>
@@ -385,8 +421,8 @@ counts</code></pre></div>
 ##         50         50         50</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pie</span>(counts)  <span class="co"># See Figure 1.7A</span>
 <span class="kw">barplot</span>(counts)  <span class="co"># See Figure 1.7B</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
-<img src="book_files/figure-html/unnamed-chunk-19-1.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" /><img src="book_files/figure-html/unnamed-chunk-19-2.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<img src="book_files/figure-html/unnamed-chunk-28-1.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" /><img src="book_files/figure-html/unnamed-chunk-28-2.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" />
 <p class="caption">
 Figure 1.7: Frequencies of categorical values visualized by Pie chart (A) and bar chart (B).
 </p>
@@ -470,7 +506,12 @@ Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 <p>As we can see, we estimated that <em>a</em>=2.22944 and <em>c</em>=1.08356. Both parameters are significantly different from zero as the p values are &lt;2×10<sup>-16</sup> in both cases. In other words, we can reliably predict Petal.Length = 2.22944 × Petal.Width + 1.08356. This model can be put on the scatter plot as a line.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(model)
 <span class="kw">abline</span>(model)  <span class="co"># add regression line to existing scatter plot. Finishes Figure 1.8.</span></code></pre></div>
-<p>Sometimes, we use this type of regression analysis to investigate whether variables are associated. <strong>Challenge 1j</strong>: Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.</p>
+<p>Sometimes, we use this type of regression analysis to investigate whether variables are associated.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-35" class="exercise"><strong>Exercise 1.10  </strong></span>Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
+</div>
+
 </div>
 <div id="visualizing-and-testing-the-differences-in-groups" class="section level2">
 <h2><span class="header-section-number">1.7</span> Visualizing and testing the differences in groups</h2>
@@ -507,7 +548,11 @@ y  <span class="co"># y contain 50 measurements</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span>iris[<span class="dv">51</span><span class="op">:</span><span class="dv">150</span>, ]  <span class="co"># Extract rows 51 to 150</span>
 <span class="kw">t.test</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> x2)  <span class="co"># t-test of Petal.Length column, divided by the Species column in x2. </span>
 <span class="kw">boxplot</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> <span class="kw">droplevels</span>(x2))  <span class="co"># droplevels( ) removes empty levels in Species</span></code></pre></div>
-<p><strong>Challenge 1k</strong>: Use boxplot and t-test to investigate whether sepal width is different between <em>I. versicolor</em> and <em>I. virginica</em>. Interpret your results.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-40" class="exercise"><strong>Exercise 1.11  </strong></span>Use boxplot and t-test to investigate whether sepal width is different between <em>I. versicolor</em> and <em>I. virginica</em>. Interpret your results.
+</div>
+
 </div>
 <div id="testing-the-difference-among-multiple-groups-analysis-of-variance-anova" class="section level2">
 <h2><span class="header-section-number">1.8</span> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</h2>
@@ -548,7 +593,11 @@ Figure 1.11: Boxplot of sepal width across 3 species.
 Figure 1.12: Visualizing data using the ggplot2 package.
 </p>
 </div>
-<p><strong>Challenge 1l</strong>: Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-44" class="exercise"><strong>Exercise 1.12  </strong></span>Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies.
+</div>
+
 
 </div>
 </div>

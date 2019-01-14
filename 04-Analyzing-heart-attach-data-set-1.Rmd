@@ -1,7 +1,7 @@
 # Analyzing heart attack data set I
 The heart attack data set (http://statland.org/R/RC/tables4R.htm), included in the ActivStats^1^ CD, contains all 12,844 cases of hospital discharges of the patients admitted for heart attack but did not have surgery in New York State in 1993. This information is essential for the interpretation of our results, as this is a purely **observational study**. It is not a random sample or **controlled experiment**. 
 
-The data set is formatted as a table (Table \@ref(tab:4-01)) with rows representing cases and columns representing characteristics, which is a typical format for many datasets. If you download and open the file in NotePad++ or Excel, you can see that the columns are separated by tabs, and there are **missing values** noted by “NA”. Four columns (DIAGNOSIS, SEX, DRG, DIED, highlighted in yellow) contain **nominal** values, representing labels of **categories**. See an excellent explanation of data types [here](http://www.mymarketresearchmethods.com/types-of-data-nominal-ordinal-interval-ratio/). DIAGNOSIS column contains codes defined in the International Classification of Diseases (IDC), 9th Edition. This is the code that your doctor sends to your insurance company for billing. The numbers, such as 41041, actually code for which part of the heart was affected. Although these are numbers, it does not make any sense to add or subtract or compute the mean. If I have a room of 30 students each with student ids, such as 732324, it does not make any sense to compute the average of these numbers. Such **categorical data needs to be recognized as factors in R**. Similarly, DRG column has three possible numbers, 121 for survivors with cardiovascular complications, 122 for survivors without complications, and 123 for patients who died.  Moreover, DIED also codes for prognosis, it is 1 if the patient passed away, and 0 if survived. 
+The data set is formatted as a table (Table \@ref(tab:4-01)) with rows representing cases and columns representing characteristics, which is a typical format for many datasets. If you download and open the file in NotePad++ or Excel, you can see that the columns are separated by tabs, and there are **missing values** noted by “NA”. Four columns (DIAGNOSIS, SEX, DRG, DIED) contain **nominal** values, representing labels of **categories**. See an excellent explanation of data types [here](http://www.mymarketresearchmethods.com/types-of-data-nominal-ordinal-interval-ratio/). DIAGNOSIS column contains codes defined in the International Classification of Diseases (IDC), 9th Edition. This is the code that your doctor sends to your insurance company for billing. The numbers, such as 41041, actually code for which part of the heart was affected. Although these are numbers, it does not make any sense to add or subtract or compute the mean. If I have a room of 30 students each with student ids, such as 732324, it does not make any sense to compute the average of these numbers. Such **categorical data needs to be recognized as factors in R**. Similarly, DRG column has three possible numbers, 121 for survivors with cardiovascular complications, 122 for survivors without complications, and 123 for patients who died.  Moreover, DIED also codes for prognosis, it is 1 if the patient passed away, and 0 if survived. 
 
 ```{r 4-01, echo=FALSE}
 heartatk4R <- read.table("http://statland.org/R/RC/heartatk4R.txt", 
@@ -32,23 +32,25 @@ str(x)  # structure of data object, data types for each column
 ```
 
 ## Begin your analysis by examining each column separately
-If you are single and meet someone in a bar, you typically start with small talks and learn some basic information about him/her. We should do the same thing with data.  But too often, we go right to the business of building models or testing hypothesis without exploring our data. This is similar to making babies on first dates. 
+If you are single and meet someone in a bar, you typically start with small talks and learn some basic information about him/her. We should do the same thing with data.  But too often, we go right to the business of building models or testing hypothesis without exploring our data. 
 
-As a first step, we are going to examine each column separately. This can be very basic things such as mean, median, ranges, distributions, and normality. This is important because sometimes the data is so skewed or far from normal distribution that we need to use **non-parametric tests**, or **transform the raw data** using log transformation, or more generally box-cox transformation, before conducting other analyses. 
+As a first step, we are going to examine each column separately. This can be very basic things such as mean, median, ranges, distributions, and normality. This is important because sometimes the data is so skewed or far from normal distribution that we need to use **non-parametric tests**, or **transformate the raw data** using log transformation, or more generally box-cox transformation, before conducting other analyses. 
 
-**Challenge 4a**: Perform the following analysis on your own. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google. 
+```{exercise}
+Perform the following analysis on your own. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google. 
 
 a.	Graphical EDA: Plot distribution of **charges** using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running **temp = CHARGES [ ! is.na (CHARGES)  ]**  and then run your plot on **temp**. 
 
 b.	Quantitative EDA: test of normality, and confidence interval. Note that if the Shapiro-Wilk normality test cannot handle the 12,000 data points, you can either try to find other tests in the nortest library or sample randomly by running **temp = sample( CHARGES, 4000)** 
+```
 
 You can attach your data set if you want to refer to the columns directly by name, such as LOS instead of x$LOS. 
 ```{r}
 attach(x) 
 ```
 
-For categorical columns, we wants to know how many different levels, their frequencies. In addition to quantitative analysis, we also use various charts.
-For categorical values such as sex and DIAGNOSIS, we can produce **pie charts and bar plots**, or percentages using the **table( )** function followed by **pie( )** and **barplot()**. 
+For categorical columns, we want to know how many different levels, and their frequencies. In addition to quantitative analysis, we also use various charts.
+For categorical values such as SEX and DIAGNOSIS, we can produce **pie charts and bar plots**, or percentages using the **table( )** function followed by **pie( )** and **barplot()**. 
 
 ```{r fig.keep='none'}
 barplot(table(DIAGNOSIS))
@@ -64,7 +66,7 @@ percentages <- 100 * counts / length(DIAGNOSIS)  # convert to %
 barplot(percentages, las = 3, ylab = "Percentage", col = "green")  # Figure 4.1
 ```
 
-Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line: barplot(100* sort(table(DIAGNOSIS), decreasing=T) / length(DIAGNOSIS), las = 3, ylab = "Percentage", col = "green")
+Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line: barplot(100* sort(table(DIAGNOSIS), decreasing=T) / length(DIAGNOSIS), las = 3, ylab = "Percentage", col = "green").
 
 (ref:14-2) Pie chart of patients by SEX.
 
@@ -73,12 +75,14 @@ table(SEX)  # tabulate the frequencies of M and F
 pie(table(SEX))  # pie chart
 ```
 
-**Challenge 4b**: Compute the counts and percentages of each levels of DRG. Use pie charts and bar plot similar to Figure \@ref(fig:4-1) to visualize. Briefly discuss your results.
+```{exercise}
+Compute the counts and percentages of each levels of DRG. Use bar plot and pie charts similar to Figure \@ref(fig:4-1) and Figure \@ref(fig:14-2) to visualize. Briefly discuss your results.
+```
 
 ## Possible correlation between two numeric columns? 
 This is done using various measures of correlation coefficients such as Pearson’s correlation coefficients (PPC), which is given by $$r=∑_{i=1}^{n}(\frac{x_i-\overline{x}}{s_x}) (\frac{y_i-\overline{y}}{s_y})$$ 
 
-where x ~i~ and y ~i~  are the i-^th^ values, $\overline{x}$ and $\overline{y}$ are sample means, and s ~x~ and s ~y~ are sample standard deviations. 
+where x ~i~ and y ~i~  are the i^th^ values, $\overline{x}$ and $\overline{y}$ are sample means, and s ~x~ and s ~y~ are sample standard deviations. 
 
 Note that Pearson’s correlation ranges from -1 to 1, with -1 indicating perfect negative correlation. **Negative correlation is just as important and informative as positive ones**. 
 
@@ -141,8 +145,9 @@ smoothScatter(AGE, LOS)  # a smoothed color density representation of a scatterp
 text(37, 37, labels = "smoothScatter(AGE, LOS)", col = "red")
 ```
  
-
-**Challenge 4c** Investigate the correlation between length of stay and charges. Try both parametric and non-parametric methods to quantify correlation and use graphs. Remember to include plain English interpretation of your results even your grandpa can understand. 
+```{exercise}
+Investigate the correlation between length of stay and charges. Try both parametric and non-parametric methods to quantify correlation and use graphs. Remember to include plain English interpretation of your results even your grandpa can understand. 
+```
 
 ## Associations between categorical variables? 
 There are four columns in the heart attack data set that contain categorical values (DIAGNOSIS, DRG, SEX, and DIED). These columns could be associated with each other. For example, there is a correlation between SEX and DIED. Are men and women equally likely to survive a heart attack? 
@@ -234,9 +239,13 @@ mosaicplot(Titanic, color = rainbow(2))
 
 Did men and women survived by equal proportion? Did girls and women survived by equal proportion?
 
-**Challenge 4d**: The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use **table** to generate the counts and then visualize.
+```{exercise}
+The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use **table** to generate the counts and then visualize.
+```
 
-**Challenge 4e**. Use these approaches to investigate whether men and women differ in their diagnosis. 
+```{exercise}
+Use these approaches to investigate whether men and women differ in their diagnosis. 
+```
 
 ## Associations between a categorical and a numeric variables? 
 Do women stay longer in the hospital? Does the charges differ for people with different diagnosis (part of the heart affected)?  We should know by now how to answer these questions with T-test, and more generally ANOVA, following our examples commands used in our analysis of the Iris flower data set. For data visualization, **boxplot** is the most straight forward way. But beyond boxplot, we can use the ggplot2 package for more detailed examination of distribution of variables in two or more groups.  
@@ -291,17 +300,26 @@ Now for each gender, we further divide the patients by their survival status. In
 ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + geom_density(alpha = .3) + facet_grid(SEX ~ .) 
 ```
 
+```{exercise}
+Generate the pie chart for each of the categorical variables in heart attack dataset. Generate histogram for each of the numerical variables. Interpret each plot.
+```
 
-**Challenge 4f**: Generate the pie chart for each of the categorical variables in heart attack dataset. Generate histogram for each of the numerical variables. Interpret each plot.
+```{exercise}
+Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results. 
+```
 
-**Challenge 4g**. Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results. 
+```{exercise}
+Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:new4). 
+```
 
-**Challenge 4h**.  Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:new4). 
+```{exercise}
+Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t. 
 
+```
 
-**Challenge 4i**. Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t. 
-
-**Challenge 4j**. Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes. 
+```{exercise}
+Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes. 
+```
 
 ## Associations between multiple columns? 
 We can use the lattice package to investigate correlations among multiple columns with figures with multiple panels.
@@ -314,9 +332,13 @@ ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_boxplot(color = "blue") + facet
 
 Recall that 121 indicate survivors with complication, 122 survivors with no complication, and 123, died. As you could see this clearly indicate our previous observation people who died in hospital are older than survivors and that patients who developed complications seems to be older than those that did not. Did people with complications stayed longer in the hospital? 
 
-**Challenge 4k**: Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
+```{exercise}
+Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
+```
 
-**Challenge 4l**: Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure \@ref(fig:14-5).  Offer interpretation.
+```{exercise}
+Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure \@ref(fig:14-5).  Offer interpretation.
+```
 
 (ref:14-5) Multiple boxplots by ggplot2 package.
 

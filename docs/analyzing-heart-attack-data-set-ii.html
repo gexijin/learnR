@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-11">
+<meta name="date" content="2019-01-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -264,7 +264,11 @@ Figure 5.2: Changing color and shape to represent multivariate data in ggplot2.
 </div>
 <p>At each step, we add additional information about these patients (Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-2">5.2</a>). With ggplot2, we can visualize complex, multivariate data by mapping different columns into diverse types of aesthetics. Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-1">5.1</a> shows a strong positive correlation between charges and length of hospital stay, which is expected as many itemized costs are billed daily. Note there are over 12,000 data points on these plots, many are plotted near or exactly at the same places, especially at the lower left corner. stat_density2d() can be used to color code density.</p>
 <p>These plots are big in file size when you save it in a vector format (<strong>metafile</strong>), which often offer higher resolution. If you have many such plots in a paper or thesis, your file size can be big. These problems can be avoided if you use the <strong>bitmap</strong> format.</p>
-<p><strong>Challenge 5a</strong>: Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-162" class="exercise"><strong>Exercise 5.1  </strong></span>Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis.
+</div>
+
 </div>
 <div id="histograms-and-density-plots" class="section level2">
 <h2><span class="header-section-number">5.2</span> Histograms and density plots</h2>
@@ -300,7 +304,11 @@ Figure 5.4: Density plots.
 </p>
 </div>
 <p>Recall the DRG=121 represents patients who survived but developed complications; DRG=122 denotes those without complications and DRG=123 are patients who did not survive. Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-4">5.4</a>C suggests that women in all three groups are older than men counterparts. If we examine the distribution of male patients’ age distribution across facets, we can see that the distribution is skewed to the right in deceased patients (DRG=123), indicating that perhaps older people are less likely to survive a heart attack. Survivors without complications (DRG= 122) tend to be younger than survivors with complications.</p>
-<p><strong>Challenge 5b</strong>: Create density plots like Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-5">5.5</a> to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-168" class="exercise"><strong>Exercise 5.2  </strong></span>Create density plots like Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-5">5.5</a> to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.
+</div>
+
 
 <div class="figure" style="text-align: center"><span id="fig:15-5"></span>
 <img src="book_files/figure-html/15-5-1.png" alt="Distribution of LOS by DRG groups grouped by SEX." width="576" />
@@ -316,7 +324,11 @@ Figure 5.5: Distribution of LOS by DRG groups grouped by SEX.
 <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 5.6A</span>
 <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 5.6B</span></code></pre></div>
 <p>The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins.</p>
-<p><strong>Challenge 5c</strong>: Generate a violin plot like Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-6">5.6</a>C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-170" class="exercise"><strong>Exercise 5.3  </strong></span>Generate a violin plot like Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-6">5.6</a>C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+</div>
+
 
 <div class="figure" style="text-align: center"><span id="fig:15-6"></span>
 <img src="images/img1506_boxviolin.png" alt="Boxplot and violin plots using ggplot2."  />
@@ -426,7 +438,11 @@ Figure 5.8: The length of stay summarized by diagnosis and sex. Error bars repre
 Figure 5.9: Mean ages for patients with different diagnosis and treatment outcome.
 </p>
 </div>
-<p><strong>Challenge 5d</strong>. Generate Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-9">5.9</a> and offer your interpretation. Hint: Modify both the summarizing script and the plotting script.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-178" class="exercise"><strong>Exercise 5.4  </strong></span>Generate Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-9">5.9</a> and offer your interpretation. Hint: Modify both the summarizing script and the plotting script.
+</div>
+
 <p>Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)</p>
 <p>As you could see from these plots, <strong>ggplot2</strong> generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users. Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can <strong>google it, try the example code</strong>, and modify it to fit your needs. It is all free! All your questions have been asked and answered. I will buy you a beer if you can prove otherwise! Enjoy coding!</p>
 </div>
@@ -505,8 +521,12 @@ Figure 5.9: Mean ages for patients with different diagnosis and treatment outcom
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
 <p>Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.</p>
-<p><strong>Challenge 5e</strong>. Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model. Interpret your results.</p>
-<p>This is not part of the challenge, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-181" class="exercise"><strong>Exercise 5.5  </strong></span>Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model. Interpret your results.
+</div>
+
+<p>This is not part of the exercise, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression.</p>
 <p>We still need pair-wised examinations, because we cannot put two highly correlated factors in the same model.</p>
 
 </div>

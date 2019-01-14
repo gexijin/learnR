@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-11">
+<meta name="date" content="2019-01-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -298,8 +298,11 @@ Figure 2.3: Enhanced scatter plot of mtcars data. Also called bubble plot or bal
 </p>
 </div>
 <p>Note that this seemingly complicated chunk of code is built upon many smaller steps, and it involves trial-and-error.</p>
-<p><strong>Challenge 2a</strong>: Create a scatter plot similar to Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-4">2.3</a> using the mtcars dataset to highlight the correlation between hp and disp (displacement). You should use colors to represent carb ( # of carburetors), types of data points to denote the number of gears, and size of the data points proportional to qsec, the number of seconds the cars need run the first ¼ mile. Add regression line and legends. Note that you should follow the guideline on page 1 to start this challenge. Your code should include comments and mandatory commands like rm(list=ls()) and getwd(). Submit your code and plot in a PDF file.</p>
-<p>Hint: Go through the above example first. Then start small and add on step by step.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-54" class="exercise"><strong>Exercise 2.1  </strong></span>Create a scatter plot similar to Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-4">2.3</a> using the mtcars dataset to highlight the correlation between hp and disp (displacement). You should use colors to represent carb ( # of carburetors), types of data points to denote the number of gears, and size of the data points proportional to qsec, the number of seconds the cars need run the first ¼ mile. Add regression line and legends. Note that you should follow the guideline on page 1 to start this challenge. Your code should include comments and mandatory commands like rm(list=ls()) and getwd(). Submit your code and plot in a PDF file. Hint: Go through the above example first. Then start small and add on step by step.
+</div>
+
 <p>Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-4">2.3</a> is perhaps a bit too busy. Let’s develop an elegant version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl]) </code></pre></div>
 <p>Notes: x; y; solid circle; horsepowersize of bubble; color cylinder 4, 6, or 8</p>
@@ -312,7 +315,11 @@ Figure 2.4: Scatter plot showing the weight and MPG, colored by the number of cy
 </p>
 </div>
 <p>This line adds a LOWESS smooth line determined by locally-weighted polynomial regression.</p>
-<p><strong>Challenge 2b</strong>. Finish up this plot to generate Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-5">2.4</a>. You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-56" class="exercise"><strong>Exercise 2.2  </strong></span>Finish up this plot to generate Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-5">2.4</a>. You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot.
+</div>
+
 </div>
 <div id="d-scatter-plot" class="section level4">
 <h4><span class="header-section-number">2.2.1.2</span> 3D scatter plot</h4>
@@ -327,8 +334,8 @@ Figure 2.5: 3D scatter plots are rarely useful.
 </p>
 </div>
 <p>3D plots are hard to interpret. So try to avoid them. However, it is fun when you can interact with them. Using example code at this website, you can create interactive 3D plots: <a href="http://www.statmethods.net/graphs/scatterplot.html" class="uri">http://www.statmethods.net/graphs/scatterplot.html</a></p>
-<p><sup>1</sup> I like to work directly from my <strong>Google Drive</strong>, which automatically backs up my files in the cloud and syncs across several of my computers. This is an insurance against disasters like my dog peeing on my computer and ruins my grant proposal just before the deadline.</p>
-<p><sup>2</sup> Note that I was trying to avoid having spaces in column names. Instead of “Blood Pressure”, I used “BloodPressure”. This makes the columns easier to reference to.</p>
+<p>1 I like to work directly from my <strong>Google Drive</strong>, which automatically backs up my files in the cloud and syncs across several of my computers. This is an insurance against disasters like my dog peeing on my computer and ruins my grant proposal just before the deadline.</p>
+<p>2 Note that I was trying to avoid having spaces in column names. Instead of “Blood Pressure”, I used “BloodPressure”. This makes the columns easier to reference to.</p>
 </div>
 </div>
 <div id="barplot-with-error-bars" class="section level3">
@@ -360,7 +367,7 @@ SDs</code></pre></div>
 ## 4.509828 1.453567 2.560048</code></pre>
 <p>Now we can have a basic barplot with group names:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(Means)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
 <p>Our goal is to generate a graph like Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:10-4">2.6</a> with both error bars and text annotation on the number of samples per group. We use two low-level graphics functions to add these elements to the plot, namely, text, and arrow. The text function adds any text to a plot to a position specified by x, y coordinates. Let’s try it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(<span class="fl">0.5</span>, <span class="dv">5</span>, <span class="st">&quot;n=11&quot;</span>)  <span class="co"># adding text to plot</span></code></pre></div>
 <p>The (0.5, and 5) are the x and y location of the text information. Try to change it to something else within the plotting range, meaning x within 0 to 3 and y between 0 and 25. You can place any text anywhere. We added sample size information for the first group. We can choose to do this for each of bar manually, but obvious there should be a better way to do this. The trick is to find the precise location of all the bars and place the text there, hopefully doing this once for all of them. To achieve this, we use the values returned by the barplot object.</p>
@@ -370,7 +377,8 @@ xloc  <span class="co"># the center of each of bars on x</span></code></pre></di
 ## [1,]  0.7
 ## [2,]  1.9
 ## [3,]  3.1</code></pre>
-<p><strong>Yes, plotting functions not only generate graphs, they can also returns values<sup>1</sup></strong>. These values sometimes are useful in computing or refining the graph. In this case, we got an object containing the location of the center of the bars on x-axis. So the first bar is located on x=0.7. Since xloc has the location on all bars, we can add the information all at once:</p>
+<p><strong>Yes, plotting functions not only generate graphs, they can also returns values</strong>. These values sometimes are useful in computing or refining the graph. Try this: h &lt;- hist( rnorm(100) ) and then type h to see the values returned by hist function.</p>
+<p>In our barplot case, we got an object containing the location of the center of the bars on x-axis. So the first bar is located on x=0.7. Since xloc has the location on all bars, we can add the information all at once:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Nsamples &lt;-<span class="st"> </span><span class="kw">tapply</span>(mpg, <span class="kw">list</span>(cyl), length)  <span class="co">#number of samples per group</span>
 Nsamples</code></pre></div>
 <pre><code>##  4  6  8 
@@ -381,14 +389,14 @@ Nsamples</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples)  <span class="co"># creating the strings to be added to the plot</span></code></pre></div>
 <pre><code>## [1] &quot;n= 11&quot; &quot;n= 7&quot;  &quot;n= 14&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">text</span>(xloc, <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples))  <span class="co"># add sample size to each group</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>Following a similar strategy, now we want to add error bars to represent standard deviations (SD) within each group. The plot is more informative as we visualize both the mean and variation within groups. For each bar, we need to draw an error bar from mean – SD to mean + SD.</p>
 <p>Let’s play with the arrows function, which draws arrows on plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrows</span>(<span class="dv">1</span>, <span class="dv">15</span>,  <span class="co"># x,y of the starting point</span>
        <span class="dv">1</span>, <span class="dv">25</span>)  <span class="co"># x,y of the ending point</span>
 <span class="kw">arrows</span>(<span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">2</span>, <span class="dv">25</span>, <span class="dt">code =</span> <span class="dv">3</span>)  <span class="co"># arrows on both ends</span>
 <span class="kw">arrows</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">20</span>, <span class="dt">code =</span> <span class="dv">3</span>, <span class="dt">angle =</span> <span class="dv">90</span>)  <span class="co"># bend 90 degrees, flat</span></code></pre></div>
-<p>Now it’s beginning to look a lot like Christmas (error bar)! I learned this clever hack of arrows as error bars from (Beckerman 2017). We are ready to add the error bars using the data stored in xloc, Means and SDs.</p>
+<p>Now it’s beginning to look a lot like Christmas (error bar)! I learned this clever hack of arrows as error bars from (Beckerman 2017)<sup>1</sup>. We are ready to add the error bars using the data stored in xloc, Means and SDs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(Means)  <span class="co"># re-create bar plot</span>
 <span class="kw">arrows</span>(xloc, Means <span class="op">-</span><span class="st"> </span>SDs,   <span class="co"># define 3 beginning points</span>
        xloc, Means <span class="op">+</span><span class="st"> </span>SDs,   <span class="co"># define 3 ending points</span>
@@ -421,8 +429,16 @@ Figure 2.6: Bar chart with error bar representing standard deviation.
 </div>
 <p>Sometimes we want error bars to represent standard error instead which is given by σ/√n, where σ is standard deviation and n is sample size.</p>
 <p>In R we can do complex statistical tests or regression analyses with just one line of code, for example, aov, glm. However, we went through all this trouble to generate just a bar chart! <strong>What is the point?</strong> We could click around in sigmaPlot, or GraphPad and get a barplot in less time. Well, once you figured how to do one, you can easily do this for 10 graphs. More importantly, this code clearly recorded the plotting process, which is essential for reproducible research.</p>
-<p><strong>Challenge 2c</strong>: Revise the above code to generate a bar chart showing the average weight of cars with either automatic or manual transmission. Include error bars, the number of samples and axis labels.</p>
-<p><strong>Bonus challenge</strong>. Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-68" class="exercise"><strong>Exercise 2.3  </strong></span>Revise the above relative code to generate a bar chart showing the average weight of cars with either automatic or manual transmission. Include error bars, the number of samples and axis labels.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-69" class="exercise"><strong>Exercise 2.4  </strong></span>Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set.
+</div>
+
 </div>
 <div id="visualizing-correlation-between-categorical-variables" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> Visualizing correlation between categorical variables</h3>
@@ -462,7 +478,11 @@ Figure 2.8: Mosaic plot.
 </div>
 <p>Vertically, we divide the square into 3 parts, the area of each is proportional to the number of cars with different cylinders. There are more 8-cylinder vehicles than those with 4 or 6. Horizontally, we divide the square according to the am variable, which represents automatic transmission (am =0) or manual transmission. Clearly, these two are not independent. As the number of cylinder increases, more cars are using manual transmission.</p>
 <p>While the height of the bars in the bar chart in Figure 5 represents absolute totals per category, in mosaic plots the height are equal. Thus we see proportions within each category.</p>
-<p><strong>Challenge 2d</strong>: Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-72" class="exercise"><strong>Exercise 2.5  </strong></span>Use bar plot and mosaic plot to investigate the correlation between cyl and gear. Interpret your results.
+</div>
+
 </div>
 <div id="detecting-correlations-among-variables" class="section level3">
 <h3><span class="header-section-number">2.2.4</span> Detecting correlations among variables</h3>
@@ -491,7 +511,11 @@ data_ord &lt;-<span class="st"> </span>data[ord, ord]
 Figure 2.10: Scatter plot matrix of the mtcars dataset.
 </p>
 </div>
-<p><strong>Challenge 2e</strong>: Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type ? <strong>state</strong> for more information and type <strong>state.x77</strong> to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-74" class="exercise"><strong>Exercise 2.6  </strong></span>Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type ? <strong>state</strong> for more information and type <strong>state.x77</strong> to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?
+</div>
+
 <p>If you examine the above code carefully, the ellipses are drawn just based on a matrix of Pearson’s correlation coefficients. We can easily quantify the relationship between all variables by generating a matrix of Pearson’s correlation coefficient:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(mtcars)  <span class="co"># correlation coefficient of all columns</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corMatrix  &lt;-<span class="st">  </span><span class="kw">cor</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">11</span>])
@@ -521,12 +545,16 @@ Figure 2.11: Hierarchical clustering tree.
 <p>Here we first subtracted the r values from 1 to define a distance measure. So perfectly correlated variables with r = 1 have a distance of 0, while negatively correlated variables with r = -1 have a distance of 2. We did this operation on the entire matrix at once. You can try to run the 1- corMatrix from the command line to see the result. The result is then formatted as a distance matrix using as.dist, which is passed to the hclust function to create a hierarchical clustering tree. See more info on hclust by using</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? hclust</code></pre></div>
 <p>As we can see from the tree, cyl is most highly correlated with disp and then hp and wt. Broadly, the variables form two groups, with high correlation within each cluster. This is an important insight into the overall correlation structure of this data set.</p>
-<p><strong>Challenge 2f</strong>: Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-78" class="exercise"><strong>Exercise 2.7  </strong></span>Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions.
+</div>
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">image</span>(corMatrix)  <span class="co"># translate a matrix into an image</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
 <p>Here we are using red and yellow colors to represent the positive and negative numbers, respectively. Since the row and column names are missing, we can use the heatmap function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(corMatrix, <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>)  <span class="co"># Generate heatmap</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>Here a lot more things are going on. The orders are re-arranged and also a tree is drawn to summarize the similarity. We explain heatmap in details later.</p>
 <p>A more elegant way of show correlation matrix using ggplot2 is available here: <a href="http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization</a>. So as you can see, coding is not hard when you can steal ideas from others, thanks to Dr. Google and the thousands of contributors, who contribute code examples and answer questions online. R has a fantastic user community.</p>
 </div>
@@ -633,9 +661,21 @@ Figure 2.16: Final version of heatmap for mtcars data.
 <li><p>Chebyshev distance. This distance measure may be appropriate in cases when we want to define two objects as “different” if they are different on any one of the dimensions. The Cheever distance is calculated by: <span class="math inline">\(Distance(x,y) = Maximum|x_i-y_i|\)</span></p></li>
 <li><p>Percent disagreement. This measure is particularly useful if the data for the dimensions included in the analysis are categorical in nature. This distance is computed as: <span class="math inline">\(Distance(x,y) = (Number of xi ≠ yi)/ m\)</span></p></li>
 </ul>
-<p><strong>Challenge 2g</strong>: Generate a heatmap for the statistics of 50 states in the state.x77 dataset (for information ? state) using heatmap.2 in the gplots package. Normalize your data properly before creating heatmap. Use the default Euclidean distance and complete linkage. Use <em>state.region</em> to color code the states and include an appropriate legend. Interpret your results. Discuss both trees.</p>
-<p><strong>Challenge 2h</strong>: Change distance function to 1-Pearson’s correlation coefficient. Change linkage method to average linkage. Turn off the clustering of the columns by reading the help information on <strong>heatmap.2</strong>. Observe what is different in the clustering trees.</p>
-<p><strong>Challenge 2i</strong>: Generate a heat map for the iris flower dataset. For data normalization, do not use standardization, just use centering (subtract the means). Use the species information in a color bar and interpret your results.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-88" class="exercise"><strong>Exercise 2.8  </strong></span>Generate a heatmap for the statistics of 50 states in the state.x77 dataset (for information ? state) using heatmap.2 in the gplots package. Normalize your data properly before creating heatmap. Use the default Euclidean distance and complete linkage. Use <em>state.region</em> to color code the states and include an appropriate legend. Interpret your results. Discuss both trees.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-89" class="exercise"><strong>Exercise 2.9  </strong></span>Change distance function to 1-Pearson’s correlation coefficient. Change linkage method to average linkage. Turn off the clustering of the columns by reading the help information on <strong>heatmap.2</strong>. Observe what is different in the clustering trees.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-90" class="exercise"><strong>Exercise 2.10  </strong></span>Generate a heat map for the iris flower dataset. For data normalization, do not use standardization, just use centering (subtract the means). Use the species information in a color bar and interpret your results.
+</div>
+
 </div>
 <div id="representing-data-using-faces.-serious-scientific-research-only" class="section level3">
 <h3><span class="header-section-number">2.2.6</span> Representing data using faces. Serious scientific research only!</h3>
@@ -652,8 +692,6 @@ Figure 2.17: Using faces to represent data.
 </div>
 <p>This is called Chernoff’s faces. Each column of data is used to define a facial feature. The features parameters of this implementation are: 1-height of face (“mpg”), 2-width of face (“cyl”) 3-shape of face (“disp”), 4-height of mouth (“hp”), 5-width of mouth (“drat”), 6-curve of smile (“wt”), 7-height of eyes (“qsec”), 8-width of eyes(“vs”), 9-height of hair(“am”), 10-width of hair (“gear”), 11-styling of hair (“carb”).</p>
 <p>It turns out that the longer, serious faces represent smaller cars that are environmentally-friendly, while big polluters are shown as cute, baby faces. What an irony!</p>
-<p>References: Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.</p>
-<p><sup>1</sup> Try this: h &lt;- hist( rnorm(100) ) and then type h to see the values returned by hist function.</p>
 </div>
 </div>
 <div id="visualizing-iris-data-set" class="section level2">
@@ -696,13 +734,17 @@ y <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(
 <p>We can generate a matrix of scatter plots simply by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[Species])  <span class="co"># Figure 2.18</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-72"></span>
-<img src="book_files/figure-html/unnamed-chunk-72-1.png" alt="Scatter plot matrix." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-94"></span>
+<img src="book_files/figure-html/unnamed-chunk-94-1.png" alt="Scatter plot matrix." width="672" />
 <p class="caption">
 Figure 2.18: Scatter plot matrix.
 </p>
 </div>
-<p><strong>Challenge 2j</strong>: Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-95" class="exercise"><strong>Exercise 2.11  </strong></span>Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots.
+</div>
+
 </div>
 <div id="heatmap" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> Heatmap</h3>
@@ -738,7 +780,11 @@ Figure 2.19: Heatmap for iris flower dataset.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span>iris [, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
 <span class="kw">stars</span>(x)         <span class="co"># do I see any diamonds in Figure 2.20A?  I want the bigger one!</span>
 <span class="kw">stars</span>(x, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">0</span>))    <span class="co"># What does this tell you?</span></code></pre></div>
-<p><strong>Challenge 2k</strong>: Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers?</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-97" class="exercise"><strong>Exercise 2.12  </strong></span>Based on heatmap and the star plot, what is your overall impression regarding the differences among these 3 species of flowers?
+</div>
+
 </div>
 <div id="segment-diagrams" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> Segment diagrams</h3>
@@ -751,7 +797,11 @@ Figure 2.19: Heatmap for iris flower dataset.
 Figure 2.20: Star plots and segments diagrams.
 </p>
 </div>
-<p><strong>Challenge 2l</strong>: Produce the segments diagram of the state data(state.x77) and offer some interpretation regarding South Dakota compared with other states.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-99" class="exercise"><strong>Exercise 2.13  </strong></span>Produce the segments diagram of the state data(state.x77) and offer some interpretation regarding South Dakota compared with other states.
+</div>
+
 </div>
 <div id="parallel-coordinate-plot" class="section level3">
 <h3><span class="header-section-number">2.3.6</span> Parallel coordinate plot</h3>
@@ -794,7 +844,11 @@ Figure 2.22: Box plot of all 4 columns
 Figure 2.23: Bar plot of average petal lengths for 3 species
 </p>
 </div>
-<p><strong>Challenge 2m</strong>: Write R code to generate Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:12-8">2.23</a>, which show the means of petal length for each of the species with error bars corresponding to standard deviations. Bar plot of average petal lengths for 3 species Bar plot of average petal lengths for 3 species.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-101" class="exercise"><strong>Exercise 2.14  </strong></span>Write R code to generate Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:12-8">2.23</a>, which show the means of petal length for each of the species with error bars corresponding to standard deviations. Bar plot of average petal lengths for 3 species Bar plot of average petal lengths for 3 species.
+</div>
+
 </div>
 <div id="combining-plots" class="section level3">
 <h3><span class="header-section-number">2.3.9</span> Combining plots</h3>
@@ -815,7 +869,11 @@ Figure 2.24: Combine multiple histograms.
 </p>
 </div>
 <p>The result is shown in Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:13-1">2.24</a>. This plot gives a good overview of the distribution of multiple variables. We can see that the overall distributions of petal length and petal width are quite unusual.</p>
-<p><strong>Challenge 2n</strong>: Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-102" class="exercise"><strong>Exercise 2.15  </strong></span>Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations.
+</div>
+
 </div>
 <div id="plot-using-principal-component-analysis-pca" class="section level3">
 <h3><span class="header-section-number">2.3.10</span> Plot using principal component analysis (PCA)</h3>
@@ -889,7 +947,11 @@ pcaData &lt;-<span class="st"> </span><span class="kw">cbind</span>(pcaData, iri
 <span class="st">         </span><span class="kw">ggtitle</span>(<span class="st">&quot;Principal component analysis (PCA)&quot;</span>) <span class="op">+</span><span class="st">              </span><span class="co"># title            </span>
 <span class="st">         </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> <span class="dv">1</span>)                                      <span class="co"># width and height ratio             </span></code></pre></div>
 <p>The result is shown in right side of Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:13-5">2.26</a>. You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it.</p>
-<p><strong>Challenge 2o</strong>: Create PCA plot of the state.x77 data set. Use the state.region information to color code the states. Interpret your results. Use both R base graphics and ggplot2. Hint: do not forget normalization using the scale option.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-109" class="exercise"><strong>Exercise 2.16  </strong></span>Create PCA plot of the state.x77 data set. Use the state.region information to color code the states. Interpret your results. Use both R base graphics and ggplot2. Hint: do not forget normalization using the scale option.
+</div>
+
 </div>
 <div id="classification-predicting-the-odds-of-binary-outcomes" class="section level3">
 <h3><span class="header-section-number">2.3.12</span> Classification: Predicting the odds of binary outcomes</h3>
@@ -929,10 +991,15 @@ model &lt;-<span class="st"> </span><span class="kw">glm</span>(Species <span cl
 ## Number of Fisher Scoring iterations: 10</code></pre>
 <p>Sepal length and width are not useful in distinguishing versicolor from <em>virginica</em>. The most significant (P=0.0465) factor is Petal.Length. One unit increase in petal length will increase the log-odd of being <em>virginica</em> by 9.429. Marginally significant effect is found for Petal.Width.</p>
 <p>If you do not fully understand the mathematics behind linear regression or logistic regression, do not worry about it too much. Me either. In this class, I just want to show you how to do these analysis in R and interpret the results. I do not understand how computers work. Yet I <strong>use</strong> it every day.</p>
-<p><strong>Challenge 2p</strong>: So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-111" class="exercise"><strong>Exercise 2.17  </strong></span>So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:</p>
 <p>• What distinguishes these three species?</p>
 <p>• If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to?</p>
-<p>Review all the analysis we did, examine the raw data, and answer the above questions. Write a paragraph and provide evidence of your thinking. Do more analysis if needed.</p>
+Review all the analysis we did, examine the raw data, and answer the above questions. Write a paragraph and provide evidence of your thinking. Do more analysis if needed.
+</div>
+
+<p>References: 1 Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.</p>
 
 </div>
 </div>

@@ -54,7 +54,9 @@ iris[, 4]     # shows all of column 4
 iris[3, 1:4]  # shows row 3, columns 1 to 4. 
 ```
 
-**Challenge 1a**:display data in rows 1 to 10 from columns 2 to 5.  Start a new Word document. Copy and paste your R code and the results to the document and save it as PDF. 
+```{exercise}
+Display data in rows 1 to 10 from columns 2 to 5.  Start a new Word document. Copy and paste your R code and the results to the document and save it as PDF.
+```
 
 ```{r echo=FALSE, out.width='45%', fig.align='center'}
 knitr::include_graphics("images/img0100_tips.png")
@@ -74,13 +76,16 @@ R is case-sensitive. “petal.length” will not be recognized.
 mean(Petal.Length)   # mean( ) is a function that operates on Petal.Length, a vector of 150 umbers
 ```
 
-**Challenge 1b**: Compute average sepal length. Hint: replace **Petal.Length** with **Sepal.Length**.
+```{exercise}
+Compute average sepal length. Hint: replace **Petal.Length** with **Sepal.Length**.
+```
 
 The best way to learn about other R functions is Google search. 
 
-**Challenge 1c**: Google “R square root function” to find the R function, and compute the value of 
+```{exercise}
+Google “R square root function” to find the R function, and compute the value of 
  $\sqrt(123.456)$.
-
+```
 
 ## Analyzing one set of numbers
 
@@ -110,7 +115,9 @@ legend("topleft", inset = .001, legend = "B",  box.lty = 0)
 
 In Rstudio, you can copy a plot to clipboard using the **Export** button on top of the plot area. Or you can click **zoom**,  right click on the popup plot and select **“Copy Image”**.  Then you can paste the plot into Word.  If you are using R software, instead of Rstudio, you can right click on the plots and copy as meta-file. 
 
-**Challenge 1d**: What can we tell from this boxplot (Figire \@ref(fig:1-3)B)? Summarize your observations in PLAIN English. Note the differences in median and the spread (tall boxes). What is the most variable characteristics? 
+```{exercise}
+What can we tell from this boxplot (Figire \@ref(fig:1-3)B)? Summarize your observations in PLAIN English. Note the differences in median and the spread (tall boxes). What is the most variable characteristics?
+```
 
 To quantify the variance, we can compute the **standard deviation** σ:
 \begin{align}
@@ -156,10 +163,11 @@ Lag plot is a scatter plot against the same set of number with an offset of 1. A
 
 Q-Q plot can help check if data follows a Gaussian distribution, which is widely observed in many situations. Also referred to as normal distribution, it is the pre-requisite for many statistical methods. See Figure \@ref(fig:1-5) for an example of normal distribution. Quantiles of the data is compared against those in a normal distribution.   If the normal Q-Q plot is close to the reference line produced by qqline( ), then the data has a normal distribution.
 
-**Challenge 1e**: Generate 500 random numbers from the standard normal distribution and generate sequence plots, histogram, lag plot, and Q-Q plot. You should get plots like those in Figure \@ref(fig:1-5).  Hint: Run x = rnorm(500) to generate these numbers, and then re-run the last 5 lines of code on this page. They are also shown on Figure \@ref(fig:1-4).
+```{exercise}
+Generate 500 random numbers from the standard normal distribution and generate sequence plots, histogram, lag plot, and Q-Q plot. You should get plots like those in Figure \@ref(fig:1-5).  Hint: Run x = rnorm(500) to generate these numbers, and then re-run the last 5 lines of code on this page. They are also shown on Figure \@ref(fig:1-4).
+```
 
 (ref:1-5) Plots for random generated numbers following a normal distribution. This is for reference. 
-
 ```{r 1-5, echo=FALSE, fig.show='hold', out.width='50%', out.length='50%', fig.cap='(ref:1-5)', fig.align='center'}
 x <- rnorm(500)
 plot(x)   # Run sequence plot    
@@ -169,7 +177,9 @@ qqnorm(x)  #Q-Q plot for normal distribution
 qqline(x) 
 ```
 
-**Challenge 1f**:  Investigate Septal Length distribution using these techniques and summarize your observations in PLAIN English.  Hint: assign x with the values in the sepal length column (x = Sepal.Length), and re-run all the code in this section. 
+```{exercise}
+Investigate Septal Length distribution using these techniques and summarize your observations in PLAIN English.  Hint: assign x with the values in the sepal length column (x = Sepal.Length), and re-run all the code in this section.
+```
 
 ## Student’s t-test 
 In hypothesis testing, we evaluate how likely the observed data can be generated if a certain hypothesis is true. If this probability (p value) is very small (< 0.05, typically), we reject that hypothesis. 
@@ -182,7 +192,9 @@ t.test(x, y)  # t.test( ) is an R function for student’s t-test
 
 The null hypothesis is that the true mean is the same. Since p value is really small, we reject this hypothesis. Iris versicolor has longer sepals than iris setosa.  
 
-**Challenge 1g**:  Are iris setosa and iris versicolor significantly different in sepal width?  Hint: Replace Petal.Length with something else and re-run above code.
+```{exercise}
+Are iris setosa and iris versicolor significantly different in sepal width?  Hint: Replace Petal.Length with something else and re-run above code.
+```
 
 We can also do t-test on one set of numbers. This is a one-sample t-test of mean:
 ```{r}
@@ -191,7 +203,9 @@ t.test(Sepal.Length, mu = 5.8)
 
 In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8.   Since p value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98. 
 
-**Challenge 1h**: Compute 95% confidence interval of petal length. 
+```{exercise}
+Compute 95% confidence interval of petal length. 
+```
 
 ## Test for normal distribution
 We can perform hypothesis testing on whether a set of numbers derived from normal distribution. The null hypothesis is that the data is from a normal distribution. 
@@ -201,7 +215,9 @@ shapiro.test(Petal.Length)
 
 If petal length is normally distributed, there is only 7.412×10^-10^ chance of getting a test statistic of 0.87627, which is observed in our sample of 150 flowers. In other words, it is highly unlikely that petal length follows a normal distribution. We reject the normal distribution hypothesis.
 
-**Challenge 1i**: Is sepal width normally distributed? Run Shapiro’s test and also generate histogram and normal Q-Q plot.
+```{exercise}
+Is sepal width normally distributed? Run Shapiro’s test and also generate histogram and normal Q-Q plot.
+```
 
 ## Analyzing a column of categorical values
 
@@ -280,7 +296,10 @@ abline(model)  # add regression line to existing scatter plot. Finishes Figure 1
 ```
 
 Sometimes, we use this type of regression analysis to investigate whether variables are associated. 
-**Challenge 1j**: Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
+
+```{exercise}
+Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
+```
 
 ## Visualizing and testing the differences in groups
 Are boys taller than girls of the same age? Such situations are common. We have measurements of two groups of objects and want to know if the observed differences are real or due to random sampling error.   
@@ -315,7 +334,10 @@ x2 <- iris[51:150, ]  # Extract rows 51 to 150
 t.test(Petal.Length ~ Species, data = x2)  # t-test of Petal.Length column, divided by the Species column in x2. 
 boxplot(Petal.Length ~ Species, data = droplevels(x2))  # droplevels( ) removes empty levels in Species
 ```
-**Challenge 1k**: Use boxplot and t-test to investigate whether sepal width is different between *I. versicolor* and *I. virginica*. Interpret your results. 
+
+```{exercise}
+Use boxplot and t-test to investigate whether sepal width is different between *I. versicolor* and *I. virginica*. Interpret your results. 
+```
 
 ## Testing the difference among multiple groups (Analysis of Variance: ANOVA)
 As indicated by Figure \@ref(fig:2-4), sepal width has small variation, even across 3 species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).
@@ -360,5 +382,7 @@ ggplot(iris, aes(x = Petal.Length, fill = Species)) + geom_density(alpha = .3)
 ```{r 2-6, echo=FALSE, fig.cap='(ref:2-6)', fig.align='center'}
 knitr::include_graphics("images/img0206n_HistDensity.png")
 ```
-**Challenge 1l**: Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies. 
 
+```{exercise}
+Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies. 
+```

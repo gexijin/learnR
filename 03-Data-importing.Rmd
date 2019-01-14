@@ -13,10 +13,6 @@ knitr::include_graphics("images/img0900_note.png")
 
 ## Enter data manually
 ```{r}
-options(knitr.graphics.auto_pdf = TRUE)
-```
-
-```{r}
 x <- c(2.1, 3.1, 3.2, 5.4)
 sum(x)
 A <- matrix(
@@ -25,12 +21,11 @@ A <- matrix(
        ncol = 3)             # number of columns                     
 A                            # show the matrix
 x <- scan()  # Enter values from keyboard, separated by Return key. End by empty line. 
-```
 2.1
-
 3.1
-
 4.1
+
+```
 
 Note that you can paste a column of numbers from Excel.
 
@@ -43,13 +38,12 @@ Regardless of their extensions in file names, all **plain text files** can be op
 Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
 
 Probably the most intuitive way to read data into Rstudio is to use the **Import dataset** function available at **File->Import Datase**t from the Rstudio menu. You can also click  **Import dataset** button on the top-right of the Rstudio interface. The preferred format is CSV.  But it is not required. You can open a text file with Excel, and save it as a CSV file.
-
 1.	Download data and read background information 
 
-Download the heartatk4R.txt file from this page http://statland.org/R/RC/tables4R.htm. It is also available in the Datasets folder on D2L. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the "$\t$" above.  
+Download the heartatk4R.txt file from this page http://statland.org/R/RC/tables4R.htm. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the "$\t$" above.  
 2.	In Rstudio, click **File->Import Dataset->From CSV…**, find the file on your hard drive. You should change the **Delimiter** to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to **“x”** on the lower left of the import interface. See Figure \@ref(fig:3-1). 
 
-The awesome nerds at Rstudio actually helped you generated these 3 lines of code:
+The awesome nerds at Rstudio actually helped you generating these 3 lines of code:
 ```{r results='hide', message=FALSE}
 library(readr)
 x <- read_delim("heartatk4R.txt","\t", 
@@ -65,7 +59,9 @@ Before you click **Import**, I highly recommend that you select all the codes an
 knitr::include_graphics("images/img0301_importdata.png")
 ```
 
-3.	**Check data type**. Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using the as.numeric, as.factor, or as.character functions.
+3.	**Check data type**. 
+
+Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using as.numeric, as.factor, or as.character functions.
 ```{r}
 str(x)  # structure of data object, data types for each column
 ```
@@ -131,32 +127,34 @@ Each box represents an age group. Older patients tends to stay longer in the hos
 
 You can extract a subset of cases:
 ```{r}
-x2 <- subset(x, SEX == "F")  #  Only females “==” is for comparison and “=” is for assign value.
+x2 <- subset(x, SEX == "F")  #  Only females. “==” is for comparison and “=” is for assign value.
 x3 <- subset(x, AGE > 80)  # only people older than 80
 summary(x3)   
 ```
 
 Try not to attach the data when you are manipulation data like this. 
 
-**Challenge 3a**: Generate a histogram of cost per day for middle-aged men aged between 40 and 60. Hint: subset your data step by step. 
+```{exercise}
+Generate a histogram of cost per day for middle-aged men aged between 40 and 60. Hint: subset your data step by step.
+```
 
 ## Reading file using read.table, read.csv, etc.
 As you get more experience with R programming, there are many other options to import data.
 
 1.	Create a new project folder by File->New Project->New Directory->Empty Project and then create a new folder.
-2.	Download and save the heartatk4R.txt file to that new folder. That folder becomes your **default working directory**.  You can read the file like this.
-3.	Now you can read the data yourself.
+2.	Download and save the heartatk4R.txt file to that new folder. That folder becomes your **default working directory**.
+3.	Now you can read the data by yourself.
 ```{r}
 heartatk4R <- read.table("heartatk4R.txt", header = TRUE, sep = "\t")
 ```
 
-4.	Then we can repeat the above commands to check and adjust data types for the columns. 
+4.	Then we can repeat the above commands to check and adjust data types for the columns, using str(), as.factor(), and as.numeric() functions.
 
 In summary, we have the following code to read in the data. 
 ```{r results='hide'}
 # Reading the heart attack dataset. I am not using the Import Dataset in Rstudio.
 # We have to make sure the file is in the current working directory
-# To set working directory from Rstudio main menu, go to Session  Set Working Directory
+# To set working directory from Rstudio main menu, go to Session -> Set Working Directory
 rm(list = ls())  # Erase all objects in memory
 getwd()  # show working directory
 x <- read.table("heartatk4R.txt", sep="\t", header = TRUE)
@@ -181,7 +179,9 @@ x <- read.table("http://statland.org/R/RC/heartatk4R.txt",
 
 We are reading data directly from the internet with the URL. And we are specifying the data type for each column. 
 
-**Challenge 3b**: Type in Table \@ref(tab:9-01) in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Create a script file with comments and starting scripts, including the rm(ls()) and getwd() command. Copy the CSV file to the new folder.  Import to Rstudio. Convert data types. Copy the generated R code similar to those shown in Figure \@ref(fig:9-2) into the script file. Submit your R code and the results from the **str(patients)** function to show the data structure and **head(patients)** to show the data. 
+```{exercise}
+Type in Table \@ref(tab:9-01) in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Create a script file with comments and starting scripts, including the rm(ls()) and getwd() command. Copy the CSV file to the new folder.  Import to Rstudio. Convert data types. Copy the generated R code similar to those shown in Figure \@ref(fig:9-2) into the script file. Submit your R code and the results from the **str(patients)** function to show the data structure and **head(patients)** to show the data. 
+```
 
 ```{r echo=FALSE, results='hide'}
 LastName <- c("Smith", "Bird", "Wilson")
@@ -212,15 +212,15 @@ knitr::kable(
 8.	Change working directory to where the file was saved. Main menu: **File->Change dir…**
 9.	read.table ( ),  or read.csv( ). For example,
  **x <- read.table(“somefile.txt”, sep = “$\t$”, header = TRUE, missingstring = “NA”)**
-10.	Double check the data with **fix( x )**, click on the column name to make sure each column is recognized correctly as **“character”** or **“numeric”**.  
-Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character.  For example, **x $ ids <- as.character(x $ ids)**,  # x is the data frame and ids is the column name.  Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as **factors**. This could be done with something like **x $ treatment <- as.factor(x $ treatment)**. 
+10.	Double check the data with **str( x )**, make sure each column is recognized correctly as **“character”**, **“factor”** and **“numeric”**. 
+Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character.  For example, **x $ ids <- as.character(x $ ids)**,  here x is the data frame and ids is the column name.  Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as **factors**. This could be done with something like **x $ treatment <- as.factor(x $ treatment)**. 
 
-Refresher using cheat sheets that summarize many R functions is available here: [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/). It is important to know the different types of R objects: **scalars, vectors, data frames, matrix, and lists**. 
+Refresher using cheat sheets that summarize many R functions is available here: [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/). It is important to know the different types of R objects: **scalars, vectors, data frames, matrix, and lists**. We will show you the detail in chapter 6.
 
 ## Recommended workflow for EVERY project 
 
 It is best to create a separate folder that contains all related files. You can do the same for research projects.  In Rstudio, this is called a **Project**.  
-1.	**Create a project in a new folder**. I recommend you to start by setting up a project in a new folder by going to **File->New project->New Directory->Empty Project**. Then choose where the directory will be created on your hard drive. I created a directory called “week1” under  "C:\textbackslash Users \textbackslash Xijin.Ge \textbackslash Google Drive \textbackslash teaching \textbackslash 2017 R data visualization"^1^ .  Rstudio creates a Project file named like “week1.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from **File->Open**. You get everything ready to go on a particular assignment or research project. 
+1.	**Create a project in a new folder**. I recommend you to start by setting up a project in a new folder by going to **File->New project->New Directory->Empty Project**. Then choose where the directory will be created on your hard drive. I created a directory called “week1” under  "C:\\Users \\ Xijin.Ge \\ Google Drive \\ teaching \\ 2017 R data visualization" .  Rstudio creates a Project file named like “week1.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from **File->Open**. You get everything ready to go on a particular assignment or research project. 
 
 2.	**Copy required data files to the new directory**. From Windows or Mac operation systems, you can now copy all required data files to the directory just created. 
 

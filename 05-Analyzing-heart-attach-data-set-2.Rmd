@@ -70,7 +70,9 @@ At each step, we add additional information about these patients (Figure \@ref(f
 
 These plots are big in file size when you save it in a vector format (**metafile**), which often offer higher resolution. If you have many such plots in a paper or thesis, your file size can be big. These problems can be avoided if you use the **bitmap** format. 
 
-**Challenge 5a**: Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis. 
+```{exercise}
+Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis. 
+```
 
 ## Histograms and density plots
 In addition to data points(geom_points), there are many other **geometric objects**, such as histogram(geom_histogram), lines (geom_line), and bars (geom_bar), and so on. We can use these geometric objects to generate different types of plots.
@@ -121,8 +123,9 @@ knitr::include_graphics("images/img1504_density.png")
 
 Recall the DRG=121 represents patients who survived but developed complications; DRG=122 denotes those without complications and DRG=123 are patients who did not survive.  Figure \@ref(fig:15-4)C suggests that women in all three groups are older than men counterparts. If we examine the distribution of male patients’ age distribution across facets, we can see that the distribution is skewed to the right in deceased patients (DRG=123), indicating that perhaps older people are less likely to survive a heart attack. Survivors without complications (DRG= 122) tend to be younger than survivors with complications. 
 
-
-**Challenge 5b**:  Create density plots like Figure \@ref(fig:15-5) to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20. 
+```{exercise}
+Create density plots like Figure \@ref(fig:15-5) to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20. 
+```
 
 (ref:15-5) Distribution of LOS by DRG groups grouped by SEX.
 
@@ -141,7 +144,9 @@ ggplot(df, aes(x = SEX, y = AGE)) + geom_violin() + facet_grid(DRG ~ .)  # Figur
 
 The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins. 
 
-**Challenge 5c**: Generate a violin plot like Figure \@ref(fig:15-6)C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+```{exercise}
+Generate a violin plot like Figure \@ref(fig:15-6)C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+```
 
 (ref:15-6) Boxplot and violin plots using ggplot2.
 
@@ -236,7 +241,9 @@ ggplot(stats3, aes(x = DIAGNOSIS, y = mean, fill = DRG)) +  # mapping
                      position = position_dodge(.9), width = 0.2)
 ```
 
-**Challenge 5d**. Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
+```{exercise}
+Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
+```
 
 Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)
 
@@ -264,8 +271,10 @@ summary(fit)
 
 Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.
 
-**Challenge 5e**. Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model.   Interpret your results.
+```{exercise}
+Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model. Interpret your results.
+```
 
-This is not part of the challenge, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression. 
+This is not part of the exercise, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression. 
 
 We still need pair-wised examinations, because we cannot put two highly correlated factors in the same model.
