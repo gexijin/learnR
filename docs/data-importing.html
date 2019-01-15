@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-14">
+<meta name="date" content="2019-01-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -233,18 +233,18 @@ A                            <span class="co"># show the matrix</span></code></p
 <p>Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and sooo amateur)! Do not even think about using Microsoft Word! I strongly recommend that you install a powerful text editor such as NotePad++ (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a>), or TextPad (<a href="https://www.textpad.com/" class="uri">https://www.textpad.com/</a>). If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (<a href="https://sourceforge.net/projects/npptor/" class="uri">https://sourceforge.net/projects/npptor/</a>) to send R commands from NotePad++ directly to R, and I love it!</p>
 <p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
 <p>Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
-<p>Probably the most intuitive way to read data into Rstudio is to use the <strong>Import dataset</strong> function available at <strong>File-&gt;Import Datase</strong>t from the Rstudio menu. You can also click <strong>Import dataset</strong> button on the top-right of the Rstudio interface. The preferred format is CSV. But it is not required. You can open a text file with Excel, and save it as a CSV file. 1. Download data and read background information</p>
+<p>Probably the most intuitive way to read data into Rstudio is to use the <strong>Import dataset</strong> function available at <strong>File-&gt;Import Dataset</strong> from the Rstudio menu. You can also click <strong>Import dataset</strong> button on the top-right of the Rstudio interface. The preferred format is CSV. But it is not required. You can open a text file with Excel, and save it as a CSV file. 1. Download data and read background information</p>
 <p>Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the “<span class="math inline">\(\t\)</span>” above.<br />
-2. In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From CSV…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“x”</strong> on the lower left of the import interface. See Figure <a href="data-importing.html#fig:3-1">3.1</a>.</p>
+2. In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“x”</strong> on the lower left of the import interface. See Figure <a href="data-importing.html#fig:3-1">3.1</a>.</p>
 <p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
+x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
                 <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
 <span class="kw">View</span>(x)  <span class="co"># shows the data, will change if you modify it. </span></code></pre></div>
 <p>Before you click <strong>Import</strong>, I highly recommend that you select all the codes and copy it to your clipboard. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:3-1"></span>
-<img src="images/img0301_importdata.png" alt="Importing data into R."  />
+<img src="images/img0301n_importdata.png" alt="Importing data into R."  />
 <p class="caption">
 Figure 3.1: Importing data into R.
 </p>
@@ -347,7 +347,7 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 <p>After locating the file, you can click on the automatically detected data type under each of the column names as shown in Figure <a href="data-importing.html#fig:9-2">3.2</a>. By selecting “Factor” from the drop down and enter all possible levels separated by commas, you can successfully format this column as a factor.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-2"></span>
-<img src="images/img0902_datatype.png" alt="Changing data types while importing data into Rstudio." width="80%" />
+<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio."  />
 <p class="caption">
 Figure 3.2: Changing data types while importing data into Rstudio.
 </p>
@@ -409,7 +409,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span cla
 <li>Download and save the heartatk4R.txt file to that new folder. That folder becomes your <strong>default working directory</strong>.</li>
 <li>Now you can read the data by yourself.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;heartatk4R.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Then we can repeat the above commands to check and adjust data types for the columns, using str(), as.factor(), and as.numeric() functions.</li>
 </ol>
@@ -419,7 +419,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span cla
 <span class="co"># To set working directory from Rstudio main menu, go to Session -&gt; Set Working Directory</span>
 <span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())  <span class="co"># Erase all objects in memory</span>
 <span class="kw">getwd</span>()  <span class="co"># show working directory</span>
-x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;heartatk4R.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 <span class="kw">head</span>(x)  <span class="co"># show the first few rows</span>
 <span class="co"># change several columns to factors</span>
 x<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DRG)
@@ -500,7 +500,7 @@ x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.
 <div id="recommended-workflow-for-every-project" class="section level2">
 <h2><span class="header-section-number">3.6</span> Recommended workflow for EVERY project</h2>
 <p>It is best to create a separate folder that contains all related files. You can do the same for research projects. In Rstudio, this is called a <strong>Project</strong>.<br />
-1. <strong>Create a project in a new folder</strong>. I recommend you to start by setting up a project in a new folder by going to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose where the directory will be created on your hard drive. I created a directory called “week1” under “C:\Users \ Xijin.Ge \ Google Drive \ teaching \ 2017 R data visualization” . Rstudio creates a Project file named like “week1.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from <strong>File-&gt;Open</strong>. You get everything ready to go on a particular assignment or research project.</p>
+1. <strong>Create a project in a new folder</strong>. I recommend you to start by setting up a project in a new folder by going to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose where the directory will be created on your hard drive. I created a directory called “learnR” under “C:\Ge working \ RBook” . Rstudio creates a Project file named like “learnR.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from <strong>File-&gt;Open</strong>. You get everything ready to go on a particular assignment or research project.</p>
 <ol start="2" style="list-style-type: decimal">
 <li><p><strong>Copy required data files to the new directory</strong>. From Windows or Mac operation systems, you can now copy all required data files to the directory just created.</p></li>
 <li><p><strong>Creating a script file</strong>. Once you have a new project created, the first step is to start a new script file by clicking the <strong>File +</strong> button or go to <strong>File-&gt;New file</strong> and choose <strong>R script file</strong>. By default, the script file is called Untitled1.R. Rstudio will ask you to change it the first time you hit “Save” button .</p></li>

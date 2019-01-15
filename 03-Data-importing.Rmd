@@ -37,16 +37,16 @@ Regardless of their extensions in file names, all **plain text files** can be op
 
 Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
 
-Probably the most intuitive way to read data into Rstudio is to use the **Import dataset** function available at **File->Import Datase**t from the Rstudio menu. You can also click  **Import dataset** button on the top-right of the Rstudio interface. The preferred format is CSV.  But it is not required. You can open a text file with Excel, and save it as a CSV file.
+Probably the most intuitive way to read data into Rstudio is to use the **Import dataset** function available at **File->Import Dataset** from the Rstudio menu. You can also click  **Import dataset** button on the top-right of the Rstudio interface. The preferred format is CSV.  But it is not required. You can open a text file with Excel, and save it as a CSV file.
 1.	Download data and read background information 
 
 Download the heartatk4R.txt file from this page http://statland.org/R/RC/tables4R.htm. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the "$\t$" above.  
-2.	In Rstudio, click **File->Import Dataset->From CSV…**, find the file on your hard drive. You should change the **Delimiter** to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to **“x”** on the lower left of the import interface. See Figure \@ref(fig:3-1). 
+2.	In Rstudio, click **File->Import Dataset->From text(readr)…**, find the file on your hard drive. You should change the **Delimiter** to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to **“x”** on the lower left of the import interface. See Figure \@ref(fig:3-1). 
 
 The awesome nerds at Rstudio actually helped you generating these 3 lines of code:
 ```{r results='hide', message=FALSE}
 library(readr)
-x <- read_delim("heartatk4R.txt","\t", 
+x <- read_delim("datasets/heartatk4R.txt","\t", 
                 escape_double = FALSE, trim_ws = TRUE)
 View(x)  # shows the data, will change if you modify it. 
 ```
@@ -56,7 +56,7 @@ Before you click **Import**, I highly recommend that you select all the codes an
 (ref:3-1) Importing data into R.
 
 ```{r 3-1, echo=FALSE, fig.cap='(ref:3-1)', fig.align='center'}
-knitr::include_graphics("images/img0301_importdata.png")
+knitr::include_graphics("images/img0301n_importdata.png")
 ```
 
 3.	**Check data type**. 
@@ -93,8 +93,8 @@ After locating the file, you can click on the automatically detected data type u
 
 (ref:9-2) Changing data types while importing data into Rstudio.
 
-```{r 9-2, echo=FALSE, out.width='80%', fig.cap='(ref:9-2)', fig.align='center'}
-knitr::include_graphics("images/img0902_datatype.png")
+```{r 9-2, echo=FALSE, fig.cap='(ref:9-2)', fig.align='center'}
+knitr::include_graphics("images/img0902m_datatype.png")
 ```   
 
 But if the column has too many levels, it is trouble to type in manually. We can read the column in as character first and then do as.facter conversion.
@@ -145,7 +145,7 @@ As you get more experience with R programming, there are many other options to i
 2.	Download and save the heartatk4R.txt file to that new folder. That folder becomes your **default working directory**.
 3.	Now you can read the data by yourself.
 ```{r}
-heartatk4R <- read.table("heartatk4R.txt", header = TRUE, sep = "\t")
+heartatk4R <- read.table("datasets/heartatk4R.txt", header = TRUE, sep = "\t")
 ```
 
 4.	Then we can repeat the above commands to check and adjust data types for the columns, using str(), as.factor(), and as.numeric() functions.
@@ -157,7 +157,7 @@ In summary, we have the following code to read in the data.
 # To set working directory from Rstudio main menu, go to Session -> Set Working Directory
 rm(list = ls())  # Erase all objects in memory
 getwd()  # show working directory
-x <- read.table("heartatk4R.txt", sep="\t", header = TRUE)
+x <- read.table("datasets/heartatk4R.txt", sep="\t", header = TRUE)
 head(x)  # show the first few rows
 # change several columns to factors
 x$DRG <- as.factor(x$DRG)
@@ -220,7 +220,7 @@ Refresher using cheat sheets that summarize many R functions is available here: 
 ## Recommended workflow for EVERY project 
 
 It is best to create a separate folder that contains all related files. You can do the same for research projects.  In Rstudio, this is called a **Project**.  
-1.	**Create a project in a new folder**. I recommend you to start by setting up a project in a new folder by going to **File->New project->New Directory->Empty Project**. Then choose where the directory will be created on your hard drive. I created a directory called “week1” under  "C:\\Users \\ Xijin.Ge \\ Google Drive \\ teaching \\ 2017 R data visualization" .  Rstudio creates a Project file named like “week1.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from **File->Open**. You get everything ready to go on a particular assignment or research project. 
+1.	**Create a project in a new folder**. I recommend you to start by setting up a project in a new folder by going to **File->New project->New Directory->Empty Project**. Then choose where the directory will be created on your hard drive. I created a directory called “learnR” under  "C:\\Ge working \\ RBook" .  Rstudio creates a Project file named like “learnR.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from **File->Open**. You get everything ready to go on a particular assignment or research project. 
 
 2.	**Copy required data files to the new directory**. From Windows or Mac operation systems, you can now copy all required data files to the directory just created. 
 

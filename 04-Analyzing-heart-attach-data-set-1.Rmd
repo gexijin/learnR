@@ -115,7 +115,7 @@ There is a small, but statistically significant correlation between age and leng
 ```{r}
 cor.test(AGE, LOS)
 ```
-Note that the correlation coefficient r and the P value measures two different things. r indicates the size of effect, while P value tell us statistical significance. Based on the statistic sample, P value tells how certain we are about the difference being real, namely not due to random fluctuation. If we have a large sample, we could detect very small correlation with significance. Conversely, if we only have a few observations, a large r could have large P value, hence not significant. More generally, we need to distinguish effect size and significance in statistical analyses. 
+Note that the correlation coefficient r and the p value measure two different things. r indicates the size of effect, while p value tells us statistical significance. Based on the statistic sample, p value tells how certain we are about the difference being real, namely not due to random fluctuation. If we have a large sample, we could detect very small correlation with significance. Conversely, if we only have a few observations, a large r could have large p value, hence not significant. More generally, we need to distinguish effect size and significance in statistical analyses. 
 
 ```{r echo=FALSE, out.width='80%', fig.align='center'}
 knitr::include_graphics("images/img0400_sample.png")
@@ -152,12 +152,6 @@ Investigate the correlation between length of stay and charges. Try both paramet
 ## Associations between categorical variables? 
 There are four columns in the heart attack data set that contain categorical values (DIAGNOSIS, DRG, SEX, and DIED). These columns could be associated with each other. For example, there is a correlation between SEX and DIED. Are men and women equally likely to survive a heart attack? 
 ```{r results='hide', message=FALSE}
-x <- read.table("http://statland.org/R/RC/heartatk4R.txt", header = TRUE)  # read data
-x$DIAGNOSIS <- as.factor(x$DIAGNOSIS)
-x$DRG <- as.factor(x$DRG)
-x$DIED <- as.factor(x$DIED)
-str(x)
-attach(x)   
 counts <- table(SEX, DIED)  # tabulates SEX and DIED and generate counts in a 2d array.
 counts
 ```
@@ -189,9 +183,10 @@ chisq.test(counts)
 You have seen this p-value before? Probably! It is the smallest non-zero number R shows for lots of tests. However, p is definitely small! Hence we reject the hypothesis that the mortality rate is the same for men and women. Looking at the data, it is higher for women. The chi-square test for a 2x2 contingency table gives accurate p-values provided that the number of expected observation is greater than 5. If this is not true, then you should use the Fisher Exact test. The chi-square test is an approximation to the Fisher Exact test. The Fisher Exact test is computationally intensive; Karl Pearson developed the chi-square approximation before we had computers to do the work. With fast computers available today, you can use the Fisher Exact test for quite large data sets, and be more confident in the p-values.
 
 You can use the chi-square test for contingency tables that have more than two rows or two columns. For contingency tables that have more than two rows or two columns, the p-value computed by the chi square approximation is reasonably accurate provided that the expected number of observations in every cell is greater than 1, and that no more than 20 percent of the cells have an expected number of observations less than 5.  Again, the Fisher Exact test can handle quite large data sets with today’s computers, and avoid the problems with chi-square test.
-```{r results='hide'}
+```{r }
 fisher.test(counts)  # Fisher’s Exact test
 ```
+In this case, the result of fisher's test is the same as chi-square test.
 
 If you want to make your point to a boss who is either stupid or too busy, you need a chart. Below we show two barplots, one stacked and one side by side.  
 
@@ -227,7 +222,7 @@ mosaicplot(table(SEX, DIED, DRG), color = rainbow(3))  # Figure 4.7
 Here we nested the tabulate command inside the mosaic plot. As shown in Figure \@ref(fig:5-3), we further divided each of the 4 quadrants of Figure \@ref(fig:5-2) into three parts according to DRG codes, in red, green and blue. One thing we could tell is that a smaller proportion of surviving males developed complications, compared with females. 
 
 Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).
-```{r message=FALSE, fig.keep='none'}
+```{r message=FALSE}
 ? Titanic   # this leads you to information about the famous Titanic dataset. 
 mosaicplot(~ Sex + Age + Survived, data = Titanic, color = rainbow(2))  
 ```
@@ -268,7 +263,7 @@ We can further divide the population according to survival status by adding anot
 
 (ref:new2) Histogram of AGE by SEX and DIED using ggplot2 package
 
-```{r new2, fig.cap='(ref:new2)', fig.align='center'}
+```{r new2, message=FALSE, fig.cap='(ref:new2)', fig.align='center'}
 library(dplyr)
 heartatk4R %>% mutate(GROUP = paste(DIED, SEX, sep = "-")) %>% 
 ggplot(aes(x = AGE, group = GROUP, 
@@ -309,7 +304,7 @@ Use the ggplot2 package to compare the distribution of lengths of stay among pat
 ```
 
 ```{exercise}
-Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:new4). 
+Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:new4)). 
 ```
 
 ```{exercise}
@@ -322,11 +317,11 @@ Use ANOVA, boxplot, and histogram and density plots to compare the charges among
 ```
 
 ## Associations between multiple columns? 
-We can use the lattice package to investigate correlations among multiple columns with figures with multiple panels.
+We can use the ggplot2 package to investigate correlations among multiple columns by figures with multiple panels.
 
 (ref:5-6) Multiple boxplots by ggplot2 package.
 
-```{r 5-6, fig.width=6, fig.height=4, fig.cap='(ref:5-6)', fig.align='center'}
+```{r 5-6, fig.width=5, fig.height=3, fig.cap='(ref:5-6)', fig.align='center'}
 ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_boxplot(color = "blue") + facet_grid(SEX ~ .)
 ```
 
@@ -376,7 +371,7 @@ Another way to visualize complex correlation is bubble plot. **Bubble plot** is 
 
 (ref:5-8) Bubble plot example.
 
-```{r 5-8, echo=FALSE, fig.cap='(ref:5-8)', fig.align='center'}
+```{r 5-8, fig.cap='(ref:5-8)', fig.align='center'}
 y <- x[sample(1:12844, 200), ]   # randomly sample 200 patients
 plot(y$AGE, y$LOS, cex = y$CHARGES / 6000, col = rainbow(2)[y$SEX], xlab = "AGE", ylab = "LOS")
 legend("topleft", levels(y$SEX), col = rainbow(2), pch = 1)

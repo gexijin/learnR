@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-14">
+<meta name="date" content="2019-01-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,7 +205,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="analyzing-heart-attack-data-set-ii" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Analyzing heart attack data set II</h1>
 <p>We continue to investigate the heart attack dataset. First, let’s read the data in again and change several variables to factors. Note that you must set the working directory to where the data file is stored on your computer. I encourage you to define a project associated with a folder.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;heartatk4R.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)  <span class="co"># read data</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set working directory, not necessary if loading a project</span>
+<span class="co">#setwd(&quot;C:/Ge working/RBook/learnR/datasets&quot;)  </span>
+df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;heartatk4R.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)  <span class="co"># read data</span>
 df<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DRG)  <span class="co"># convert DRG variable to factor</span>
 df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIED)
 df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIAGNOSIS)
@@ -244,7 +246,7 @@ df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as
 <span class="st">       </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length of stay&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Charges ($)&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># change x and y labels</span>
 <span class="st">       </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">45000</span>, <span class="dt">label =</span> (<span class="st">&quot;R = 0.74&quot;</span>))  <span class="co"># add text to plot coordinates</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:15-1"></span>
-<img src="book_files/figure-html/15-1-1.png" alt="Scatter plot using ggplot2." width="576" />
+<img src="book_files/figure-html/15-1-1.png" alt="Scatter plot using ggplot2." width="480" />
 <p class="caption">
 Figure 5.1: Scatter plot using ggplot2.
 </p>
@@ -293,7 +295,7 @@ Figure 5.3: Histogram with density curve.
 <p>Here, we split the dataset into two portions, men and women, and plotted their density distribution on the same plot. Figure <a href="analyzing-heart-attack-data-set-ii.html#fig:15-4">5.4</a>A shows that age distribution is very different between men and women. Women’s distribution is skewed to the right and they are on average over ten years older than men. This is surprising, given that this dataset contains all heart attack admissions in New York state in 1993.</p>
 <p>The fill mapping changes the “inside” color:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 5.4B</span></code></pre></div>
-<p>This plot shows the same information. It looks nicer, at least to me. We can <strong>split the plot into multiple facets</strong>, like what did with lattice package:</p>
+<p>This plot shows the same information. It looks nicer, at least to me. We can <strong>split the plot into multiple facets</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span>
 <span class="st">       </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span>.)  <span class="co"># Figure 5.4C</span></code></pre></div>
 
@@ -421,7 +423,7 @@ Figure 5.7: Average LOS by DIAGNOSIS group with error bars representing standard
 <p>Now we are ready to generate bar plot for men and women separately using the fill aesthetic mapping:</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(stats2, <span class="kw">aes</span>(<span class="dt">x =</span> DIAGNOSIS, <span class="dt">y =</span> mean, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st">  </span><span class="co"># mapping</span>
-<span class="st">       </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st">    </span><span class="co"># bars  mean LOS</span>
+<span class="st">       </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st">    </span><span class="co"># bars for mean of LOS</span>
 <span class="st">       </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Diagnosis codes&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Length of Stay&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># axes labels</span>
 <span class="st">       </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mean <span class="op">-</span><span class="st"> </span>se, <span class="dt">ymax =</span> mean <span class="op">+</span><span class="st"> </span>se),  <span class="co"># error bars</span>
        <span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">9</span>), <span class="dt">width =</span> <span class="fl">0.2</span>)</code></pre></div>
@@ -444,7 +446,7 @@ Figure 5.9: Mean ages for patients with different diagnosis and treatment outcom
 </div>
 
 <p>Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)</p>
-<p>As you could see from these plots, <strong>ggplot2</strong> generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users. Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can <strong>google it, try the example code</strong>, and modify it to fit your needs. It is all free! All your questions have been asked and answered. I will buy you a beer if you can prove otherwise! Enjoy coding!</p>
+<p>As you could see from these plots, <strong>ggplot2</strong> generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users. Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can <strong>google it, try the example code</strong>, and modify it to fit your needs. It is all free! Enjoy coding!</p>
 </div>
 <div id="statistical-models-are-easy-interpretations-and-verifications-are-not" class="section level2">
 <h2><span class="header-section-number">5.5</span> Statistical models are easy; interpretations and verifications are not!</h2>
@@ -483,8 +485,8 @@ Figure 5.9: Mean ages for patients with different diagnosis and treatment outcom
 ##   (699 observations deleted due to missingness)
 ## Multiple R-squared:  0.569,  Adjusted R-squared:  0.5685 
 ## F-statistic:  1232 on 13 and 12131 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>As we could see from above, one levels for factors (such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. This is really small number compared to overall charges and also the P value is just marginally significant for this large sample. This is in contrast to the <strong>t.test(CHARGES ~ SEX)</strong>, when we got the opposite conclusion. This is because we did not control for other factors.</p>
-<p>The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the P values are cutoff at 2e-16, the <strong>t value</strong> is an indicator of significance. LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males. Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 410914, 1051 and 41071 incurred less charges compared with those with 41001.</p>
+<p>As we could see from above, one levels for factors (such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. This is really small number compared to overall charges and also the p value is just marginally significant for this large sample. This is in contrast to the <strong>t.test(CHARGES ~ SEX)</strong>, when we got the opposite conclusion. This is because we did not control for other factors.</p>
+<p>The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the <strong>t value</strong> is an indicator of significance. LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males. Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 410914, 1051 and 41071 incurred less charges compared with those with 41001.</p>
 <p>To investigate mortality, which is a binary outcome, we use <strong>logistic regression</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">glm</span>(DIED <span class="op">~</span><span class="st"> </span>SEX <span class="op">+</span><span class="st"> </span>LOS <span class="op">+</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>DIAGNOSIS, <span class="dt">family =</span> <span class="kw">binomial</span>( ))
 <span class="kw">summary</span>(fit)</code></pre></div>
@@ -523,10 +525,10 @@ Figure 5.9: Mean ages for patients with different diagnosis and treatment outcom
 <p>Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-181" class="exercise"><strong>Exercise 5.5  </strong></span>Use multiple linear regression to investigate the factors associated with length of stay. Obvious we need to exclude charges in our model. Interpret your results.
+<span id="exr:unnamed-chunk-181" class="exercise"><strong>Exercise 5.5  </strong></span>Use multiple linear regression to investigate the factors associated with length of stay. Obviously we need to exclude charges in our model. Interpret your results.
 </div>
 
-<p>This is not part of the exercise, but another problem we could look into is who are more likely to have complications. We should only focusing on the surviving patients and do logistic regression.</p>
+<p>This is not part of the exercise, but another problem we could look into is who are more likely to have complications. We should only focuse on the surviving patients and do logistic regression.</p>
 <p>We still need pair-wised examinations, because we cannot put two highly correlated factors in the same model.</p>
 
 </div>

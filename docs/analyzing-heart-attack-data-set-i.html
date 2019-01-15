@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-14">
+<meta name="date" content="2019-01-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -495,7 +495,7 @@ Figure 4.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 ## sample estimates:
 ##       cor 
 ## 0.1822609</code></pre>
-<p>Note that the correlation coefficient r and the P value measures two different things. r indicates the size of effect, while P value tell us statistical significance. Based on the statistic sample, P value tells how certain we are about the difference being real, namely not due to random fluctuation. If we have a large sample, we could detect very small correlation with significance. Conversely, if we only have a few observations, a large r could have large P value, hence not significant. More generally, we need to distinguish effect size and significance in statistical analyses.</p>
+<p>Note that the correlation coefficient r and the p value measure two different things. r indicates the size of effect, while p value tells us statistical significance. Based on the statistic sample, p value tells how certain we are about the difference being real, namely not due to random fluctuation. If we have a large sample, we could detect very small correlation with significance. Conversely, if we only have a few observations, a large r could have large p value, hence not significant. More generally, we need to distinguish effect size and significance in statistical analyses.</p>
 <p><img src="images/img0400_sample.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Like many commonly-used parametric statistical methods which rely on means and standard deviations, the Pearson’s correlation coefficient is not robust, meaning its value are sensitive to outliers and can be misleading. It is also very sensitive to distribution.</p>
 <p><strong>Non-parametric</strong> approaches typically rank original data and do calculations on the ranks instead of raw data. They are often more robust. The only drawback might be loss of sensitivity. There are corresponding non-parametric versions for most of the parametric tests.</p>
@@ -533,13 +533,7 @@ Figure 4.4: Smoothed Scatter plots use colors to code for the density of data po
 <div id="associations-between-categorical-variables" class="section level2">
 <h2><span class="header-section-number">4.3</span> Associations between categorical variables?</h2>
 <p>There are four columns in the heart attack data set that contain categorical values (DIAGNOSIS, DRG, SEX, and DIED). These columns could be associated with each other. For example, there is a correlation between SEX and DIED. Are men and women equally likely to survive a heart attack?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)  <span class="co"># read data</span>
-x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)
-x<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DRG)
-x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIED)
-<span class="kw">str</span>(x)
-<span class="kw">attach</span>(x)   
-counts &lt;-<span class="st"> </span><span class="kw">table</span>(SEX, DIED)  <span class="co"># tabulates SEX and DIED and generate counts in a 2d array.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(SEX, DIED)  <span class="co"># tabulates SEX and DIED and generate counts in a 2d array.</span>
 counts</code></pre></div>
 <table>
 <caption><span id="tab:5-01">Table 4.3: </span>A 2x2 contingency table summarizing the distribution of DIED frequency by SEX.</caption>
@@ -579,6 +573,18 @@ counts</code></pre></div>
 <p>You have seen this p-value before? Probably! It is the smallest non-zero number R shows for lots of tests. However, p is definitely small! Hence we reject the hypothesis that the mortality rate is the same for men and women. Looking at the data, it is higher for women. The chi-square test for a 2x2 contingency table gives accurate p-values provided that the number of expected observation is greater than 5. If this is not true, then you should use the Fisher Exact test. The chi-square test is an approximation to the Fisher Exact test. The Fisher Exact test is computationally intensive; Karl Pearson developed the chi-square approximation before we had computers to do the work. With fast computers available today, you can use the Fisher Exact test for quite large data sets, and be more confident in the p-values.</p>
 <p>You can use the chi-square test for contingency tables that have more than two rows or two columns. For contingency tables that have more than two rows or two columns, the p-value computed by the chi square approximation is reasonably accurate provided that the expected number of observations in every cell is greater than 1, and that no more than 20 percent of the cells have an expected number of observations less than 5. Again, the Fisher Exact test can handle quite large data sets with today’s computers, and avoid the problems with chi-square test.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fisher.test</span>(counts)  <span class="co"># Fisher’s Exact test</span></code></pre></div>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  counts
+## p-value &lt; 2.2e-16
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.4509331 0.5653197
+## sample estimates:
+## odds ratio 
+##  0.5049435</code></pre>
+<p>In this case, the result of fisher’s test is the same as chi-square test.</p>
 <p>If you want to make your point to a boss who is either stupid or too busy, you need a chart. Below we show two barplots, one stacked and one side by side.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(DIED, SEX)  <span class="co"># SEX define columns now, as I want the bars to represent M or F. </span>
@@ -614,6 +620,7 @@ Figure 4.7: Mosaic plot of three factors.
 <p>Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset. </span>
 <span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
 <p>This is a mosaic plot of the whole Titanic dataset</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
@@ -649,16 +656,8 @@ Figure 4.8: Histogram of AGE by SEX using ggplot2 package
 <p>Now the two histograms are arranged, and it is very easy to see that women’s age are more skewed to the right, meaning women are considerably older than men. I am surprised at first by this huge difference, as the average age of women if bigger by 11. Further research shows that for women the symptoms of heart attacks are milder and often go unnoticed.</p>
 <p>We can further divide the population according to survival status by adding another factor:</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, 
            <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),
                  ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),
@@ -705,7 +704,7 @@ Figure 4.11: Density plot of AGE by SEX and DIED using ggplot2 package
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-150" class="exercise"><strong>Exercise 4.8  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:new4">4.11</a>.
+<span id="exr:unnamed-chunk-150" class="exercise"><strong>Exercise 4.8  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:new4">4.11</a>).
 </div>
 
 
@@ -721,11 +720,11 @@ Figure 4.11: Density plot of AGE by SEX and DIED using ggplot2 package
 </div>
 <div id="associations-between-multiple-columns" class="section level2">
 <h2><span class="header-section-number">4.5</span> Associations between multiple columns?</h2>
-<p>We can use the lattice package to investigate correlations among multiple columns with figures with multiple panels.</p>
+<p>We can use the ggplot2 package to investigate correlations among multiple columns by figures with multiple panels.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-6"></span>
-<img src="book_files/figure-html/5-6-1.png" alt="Multiple boxplots by ggplot2 package." width="576" />
+<img src="book_files/figure-html/5-6-1.png" alt="Multiple boxplots by ggplot2 package." width="480" />
 <p class="caption">
 Figure 4.12: Multiple boxplots by ggplot2 package.
 </p>
@@ -768,6 +767,9 @@ Figure 4.14: A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
 <p>Figure <a href="analyzing-heart-attack-data-set-i.html#fig:5-7">4.14</a> seems to suggest that the positive association between AGE and LOS is noticeable in patients who did not die in hospital, regardless of sex. This is a statistician’s language. Try this instead that could be understood by both the statistician and his/her grandmother. Older patients tend to stay longer in the hospital after surviving a heart attack. This is true for both men and women.</p>
 <p>Another way to visualize complex correlation is bubble plot. <strong>Bubble plot</strong> is an extension of scatter plot. It uses an additional dimension of data to determine the size of the symbols. Interesting video using bubble plot: <a href="http://youtu.be/jbkSRLYSojo" class="uri">http://youtu.be/jbkSRLYSojo</a></p>
 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span>x[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12844</span>, <span class="dv">200</span>), ]   <span class="co"># randomly sample 200 patients</span>
+<span class="kw">plot</span>(y<span class="op">$</span>AGE, y<span class="op">$</span>LOS, <span class="dt">cex =</span> y<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span><span class="dv">6000</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)[y<span class="op">$</span>SEX], <span class="dt">xlab =</span> <span class="st">&quot;AGE&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;LOS&quot;</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">levels</span>(y<span class="op">$</span>SEX), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-8"></span>
 <img src="book_files/figure-html/5-8-1.png" alt="Bubble plot example." width="672" />
 <p class="caption">
