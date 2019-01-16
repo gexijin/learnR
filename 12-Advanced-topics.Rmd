@@ -1,4 +1,4 @@
-# Advanced topic
+# Advanced topics
 
 ## Functions
 Many times, we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Functions are fundamental building blocks of R. Most of the times when we run R commands, we are calling and executing functions.  We can easily define our very own functions.
@@ -46,10 +46,9 @@ Write an R function to implement this arithmetic function:  f(x)= √(|x|)+5x-6.
 Go over the **R cheat sheet**, find some function that was not covered in class and show some demo. 
 ```
 
-# Tidyverse
+## Tidyverse
 
-## Tidyverse is collection of powerful R packages
-The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R.  Let’s try the dplyr package for manipulating data. 
+Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. We even already start to use this package in chapter 5. Now Let’s explain the dplyr package in a little detail for manipulating iris data set. 
 ```{r message=FALSE}
 #install.packages("dplyr") 
 library(dplyr)
@@ -85,11 +84,11 @@ iris %>%
 
 **filter**( ), **mutate**( ) and **arrange**( ) are 3 **“verbs”** that operate on the data frame sequentially. **head**( ) is the function that only shows the top rows. Notice the pipe operator %>% at the end of each line.  This code is much easier to read by humans, as it defines a sequence of operations.
   
-Two other useful verbs are **group_by**( ) and **summarise**( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths, and then combine. So it is **“split-apply-combine”**.  
+Two other useful verbs are **group_by**( ) and **summarise**( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths and width, and then combine. So it is **“split-apply-combine”**.  
 ```{r}
 iris %>% 
   group_by(Species)  %>%  # split by Species 
-  summarise(avgSL = mean(Sepal.Length), avgSW = mean(Sepal.Length)) %>% 
+  summarise(avgSL = mean(Sepal.Length), avgSW = mean(Sepal.Width)) %>% 
   arrange(avgSL)
 ```
 
@@ -99,37 +98,72 @@ Here we created a new data frame with the mean sepal length and sepal width for 
 Read in the heart attack data, calculate the average cost per day for patients with different DIAGNOSIS codes. Restrict to females aged between 20 and 70 who stayed at least one day. Sort the results in descending order. Use the dplyr package. Use one command with multiple steps. Note: since we have missing values in CHARGES, remember to use the **na.rm =TRUE** option in the mean( ) function. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the **head** or **summary** function at the end to examine if the desired data is produced. 
 ```
 
-
 ## Shiny Apps and interactive plots 
 Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP http://ge-lab.org/idep/ ) to enable biologists to analyze genomic data on their own.  My blog (http://gex.netlify.com ) is also created in Rstudio. 
+
 1.	Install the Shiny package by typing this in the console.
-> install.packages("shiny")
+ 
+```{r}
+#install.packages("shiny")
+```
+
 2.	Create a Shiny web app is a piece of cake
-Start a new Shiny app use the shortcut shown in Figure 13. Or, select File  New File  Shiny Web App from the RStudio main menu. Give your app a name like test1 and note where the app will be stored. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called app.R. Click on Run App on the top right of the script window; you have a histogram that can be customized by a sliding bar. There are two functions: ui() defines the user interface, and server() specifies the logic.  
+
+Start a new Shiny app use the shortcut shown in Figure 13. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name like test1 and note where the app will be stored. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called app.R. Click on **Run App** on the top right of the script window; you have a histogram that can be customized by a sliding bar. There are two **functions**: *ui()* defines the user interface, and *server()* specifies the logic. 
+
 3.	Let’s play!
-a.	Change the color by changing the col = 'darkgray' in line 44 to your favorite color, such as 'green', 'red', etc. To make it colorful, set it to col = rainbow(10) so we can use ten colors on a rolling basis.
-b.	Switch the data. Change line 40 to visualize the iris dataset.
-x <- iris[,'Sepal.Length']
+
+a.	Change the color by changing the col = **'darkgray'** in line 44 to your favorite color, such as **'green', 'red'**, etc. To make it colorful, set it to col = **rainbow(10)** so we can use ten colors on a rolling basis.
+
+b.	Switch the data. Change line 40 to visualize the iris dataset: x <- iris[,'Sepal.Length']
+
 c.	The default number of bins of 30, specified at line 25, is probably too big. Change it to: value = 12
-d.	We obviously can change 'Sepal.Length' to other columns. Would it be cool if the user can choose? We need to add a control widget by inserting this line of code after line 20:
-selectInput("cid", "Column", choices = colnames( iris ) ),
-        Do not forget the comma at the very end! Now run this app. We can now select the columns, but the app does not do anything with it. We need to use the selected column in the server logic to customize the plot. We will change the line 41 to this: x <- iris[ , input$cid ] 
-Challenge 11: Find and solve the error in this app when choosing the last column by limiting to first 4 columns. 
-Challenge 12: Change the title from “Histogram of x” to the name of the selected variable like “Sepal.Length” 
-e.	We can build a more complex app by adding a normal distribution line by expanding line 44 into these:
-      h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
+
+d.	We obviously can change 'Sepal.Length' to other columns. Would it be cool if the user can choose? We need to add a control widget by inserting this line of code **after line 20**: selectInput("cid", "Column", choices = colnames( iris ) ),
+
+Do not forget the comma at the very end! Now run this app. We can now select the columns, but the app does not do anything with it. We need to use the selected column in the server logic to customize the plot. We will **change the line 41** to this: x <- iris[ , input$cid ] 
+
+```{exercise}
+Find and solve the error in this app when choosing the last column by limiting to first 4 columns. 
+```
+
+```{exercise}
+Change the title from “Histogram of x” to the name of the selected variable like “Sepal.Length”
+```
+
+e.	We can build a more complex app by adding a normal distribution line by **expanding line 44** into these:
+
+     h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
+
       yfit <- dnorm(bins, mean = mean(x), sd = sd(x)) 
+      
       yfit <- yfit *  diff( h$mids[1:2]) * length(x) 
+      
       lines(bins, yfit, col = "blue")
-Challenge 13: Solve the error message in this app by plotting a pie chart when the Species column is selected.
-Challenge 14: Publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. And show it off to your friend by sending them an URL.
-Solutions to these challenges can be found at GitHub https://github.com/gexijin/teach/blob/master/app.R 
-To learn more, follow these excellent tutorials: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/ 
+
+```{exercise}
+Solve the error message in this app by plotting a pie chart when the Species column is selected.
+```
+
+```{exercise}
+Publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. And show it off to your friend by sending them an URL.
+```
+
+
+Solutions to these challenges can be found at GitHub [https://github.com/gexijin/teach/blob/master/app.R](https://github.com/gexijin/teach/blob/master/app.R)
+
+To learn more, follow these excellent tutorials: [https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/) 
+
 
 4.	Interactive plots made easy with Plotly
-install.packages("plotly")
+
+```{r message=FALSE}
+#install.packages("plotly")
 library(plotly)
 g <- ggplot(iris, aes(Petal.Width, Petal.Length , color = Species)) + geom_point() 
 ggplotly( g )
+```
+
 We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in. 
-The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc.
+
+The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc. Here are some helpful websites and information:

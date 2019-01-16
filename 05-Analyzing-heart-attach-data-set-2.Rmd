@@ -247,7 +247,6 @@ ggplot(stats3, aes(x = DIAGNOSIS, y = mean, fill = DRG)) +  # mapping
 Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
 ```
 
-
 Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)
 
 As you could see from these plots, **ggplot2** generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users. 
@@ -268,7 +267,7 @@ The most pronounced effect is LOS. This is not surprising, as many hospitals hav
 
 To investigate mortality, which is a binary outcome, we use **logistic regression**.  
 ```{r}
-fit <- glm(DIED ~ SEX + LOS + AGE + DIAGNOSIS, family = binomial( ))
+fit <- glm(DIED ~ SEX + LOS + AGE + DIAGNOSIS, family = binomial( ), data = df)
 summary(fit)
 ```
 

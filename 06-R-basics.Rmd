@@ -3,7 +3,8 @@
 R data types and basic expressions^1^ :
 Common **data structures** in R include **scalars, vectors, factors, matrices, data frames**, and **lists**. These data structures can contain one or more individual data elements of several types, namely **numeric** (2.5), **character** (“Go Jacks”), or **logical** (TRUE or FALSE). 
 
-##	Expressions
+## Basic concepts
+###	Expressions
 Type anything at the prompt, and R will evaluate it and print the answer.
 ```{r}
 1 + 1
@@ -20,7 +21,7 @@ Type the string **"Go Jacks"**. (Don't forget the quotes!)
 Now try multiplying 45.6 by 78.9
 ```
 
-##	Logical Values
+###	Logical Values
 
 Some expressions return a "logical value": **TRUE** or **FALSE**. (Many programming languages refer to these as "boolean" values.) Let's try typing an expression that gives us a logical value:
 ```{r}
@@ -38,7 +39,7 @@ T == TRUE
 ```
 
 
-##	Variables
+###	Variables
 As in other programming languages, you can store a value into a variable to access it later. Type **x = 42** to store a value in **x**.  x is a **scalar, with only one data element**. 
 ```{r}
 x = 42
@@ -75,7 +76,7 @@ x <- TRUE
 
 You can store multiple values in a variable or object. That is called a **vector**, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a **matrix**, or **data frame**. 
 
-##	Functions
+###	Functions
 You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Most of your R commands are functional calls. Let's try using the sum function, to add up a few numbers. Enter:
 ```{r}
 sum(1, 3, 5)
@@ -94,7 +95,7 @@ Try to find and run the two functions that sets and returns the current working 
 Try to find and run the function that lists all the files in the current working folder. 
 ```
 
-##	Looking for Help and Example Code
+###	Looking for Help and Example Code
 ```{r message=FALSE, results='hide'}
 ? sum 
 ```
@@ -123,7 +124,8 @@ It is important to add comments to your code. Everything after the “#” will 
 max(1, 3, 5)  # return the maximum value of a vector
 ```
 
-##	Vectors
+## Data structures
+###	Vectors
 A vector is an object that holds a sequence of values of the same type. A vector's values can be numbers, strings, logical values, or any other type, as long as they're all the same type. They can come from a column of a data frame. if we have a vector x:
 ```{r}
 x <- c(5, 2, 22, 11, 5)
@@ -156,7 +158,7 @@ seq(5, 9, .5)
 Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
 ```
 
-### Commands about vector
+#### Commands about vector
 Next we will try those commands about vector. First let's find out what is the 4th element of our vector x, or the elements from 2 to 4.
 ```{r}
 x[4]
@@ -308,7 +310,7 @@ sum(z, na.rm = TRUE)
 Now compute the average of values in z. Ignore the missing values.
 ```
 
-###	Scatter Plots     
+####	Scatter Plots of two vectors  
 The **plot** function takes two vectors, one for X values and one for Y values, and draws a graph of them. Let's draw a graph showing the relationship of numbers and their sines.
 
 ```{r}
@@ -327,7 +329,7 @@ Great job! Notice on the graph that values from the first argument (x) are used 
 Create a vector with 21 integers from -10 to 10, and store it in the x variable.  Then create a scatterplot of x^2 against x. 
 ```
 
-### Fish example of vector
+#### Fish example of vector
 Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:
 ```{r}
 c(7, 3, 9)
@@ -429,7 +431,7 @@ Note that two operations are nested. You can obviously do it in two steps.
 Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1.  And create a bar plot to represent this information. 
 ```
 
-## Lists
+### Lists
 Vectors contain a set of values. But one vector can only contain one type of values, numbers, characters, or logical values.  A list can store a series of objects of different types. 
 ```{r}
 y <- list(height = 5,name = "John Doe", BP = c(100, 77))  # a list with 3 components
@@ -485,7 +487,7 @@ sum(pvalues < 0.05)  # Count how many P values are less than 0.05.
 Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point. 
 ```
 
-## Strings and string vectors
+### Strings and string vectors
 We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
 
 Define a **string** x: "R is cool"
@@ -617,7 +619,7 @@ segs[1]  # first segment
 In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris “ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
 ```
 
-## Matrix operations
+### Matrix operations
 A **matrix** has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. Define a matrix using the Iris dataset.
 
 ```{r}
@@ -678,7 +680,7 @@ heatmap(x, scale = "column", margins = c(10,5))
 Take the first 4 columns of iris data set and format as a matrix. Compute the median for each column using the apply function.
 ```
 
-## Operations on data frames
+### Operations on data frames
 Once data is read in as **data frame**, these are commands you can use to analyze it. 
 
 Read in data frame x:

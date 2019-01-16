@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-01-15">
+<meta name="date" content="2019-01-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,6 +47,13 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -158,33 +165,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>5.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>6</b> Data structures</a><ul>
-<li class="chapter" data-level="6.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>6.1</b> Expressions</a></li>
-<li class="chapter" data-level="6.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>6.2</b> Logical Values</a></li>
-<li class="chapter" data-level="6.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>6.3</b> Variables</a></li>
-<li class="chapter" data-level="6.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>6.4</b> Functions</a></li>
-<li class="chapter" data-level="6.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>6.5</b> Looking for Help and Example Code</a></li>
-<li class="chapter" data-level="6.6" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>6.6</b> Vectors</a><ul>
-<li class="chapter" data-level="6.6.1" data-path="data-structures.html"><a href="data-structures.html#commands-about-vector"><i class="fa fa-check"></i><b>6.6.1</b> Commands about vector</a></li>
-<li class="chapter" data-level="6.6.2" data-path="data-structures.html"><a href="data-structures.html#scatter-plots"><i class="fa fa-check"></i><b>6.6.2</b> Scatter Plots</a></li>
-<li class="chapter" data-level="6.6.3" data-path="data-structures.html"><a href="data-structures.html#fish-example-of-vector"><i class="fa fa-check"></i><b>6.6.3</b> Fish example of vector</a></li>
+<li class="chapter" data-level="6.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>6.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>6.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="6.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>6.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="6.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>6.1.3</b> Variables</a></li>
+<li class="chapter" data-level="6.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>6.1.4</b> Functions</a></li>
+<li class="chapter" data-level="6.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>6.1.5</b> Looking for Help and Example Code</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>6.7</b> Lists</a></li>
-<li class="chapter" data-level="6.8" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>6.8</b> Strings and string vectors</a></li>
-<li class="chapter" data-level="6.9" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>6.9</b> Matrix operations</a></li>
-<li class="chapter" data-level="6.10" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>6.10</b> Operations on data frames</a></li>
-<li class="chapter" data-level="6.11" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>6.11</b> For more in-depth exercises</a></li>
+<li class="chapter" data-level="6.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>6.2</b> Data structures</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>6.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>6.2.2</b> Lists</a></li>
+<li class="chapter" data-level="6.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>6.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="6.2.4" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>6.2.4</b> Matrix operations</a></li>
+<li class="chapter" data-level="6.2.5" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>6.2.5</b> Operations on data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>6.3</b> For more in-depth exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="vectors-1.html"><a href="vectors-1.html"><i class="fa fa-check"></i><b>7</b> Vectors</a></li>
 <li class="chapter" data-level="8" data-path="matrics-and-arrays.html"><a href="matrics-and-arrays.html"><i class="fa fa-check"></i><b>8</b> Matrics and arrays</a></li>
 <li class="chapter" data-level="9" data-path="lists-1.html"><a href="lists-1.html"><i class="fa fa-check"></i><b>9</b> Lists</a></li>
 <li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a></li>
 <li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
-<li class="chapter" data-level="12" data-path="functions-1.html"><a href="functions-1.html"><i class="fa fa-check"></i><b>12</b> Functions</a><ul>
-<li class="chapter" data-level="12.1" data-path="functions-1.html"><a href="functions-1.html#define-your-very-own-r-function"><i class="fa fa-check"></i><b>12.1</b> Define your very own R function</a></li>
+<li class="chapter" data-level="12" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>12</b> Advanced topics</a><ul>
+<li class="chapter" data-level="12.1" data-path="advanced-topics.html"><a href="advanced-topics.html#functions-1"><i class="fa fa-check"></i><b>12.1</b> Functions</a></li>
+<li class="chapter" data-level="12.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>12.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.3" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps-and-interactive-plots"><i class="fa fa-check"></i><b>12.3</b> Shiny Apps and interactive plots</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>13</b> Tidyverse</a><ul>
-<li class="chapter" data-level="13.1" data-path="tidyverse.html"><a href="tidyverse.html#tidyverse-is-collection-of-powerful-r-packages"><i class="fa fa-check"></i><b>13.1</b> Tidyverse is collection of powerful R packages</a></li>
-</ul></li>
+<li class="chapter" data-level="13" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html"><i class="fa fa-check"></i><b>13</b> Data exploring of state dataset</a></li>
+<li class="chapter" data-level="14" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>14</b> Data exploring of game sale dataset</a></li>
+<li class="chapter" data-level="15" data-path="data-exploring-of-employee-salary-dataset.html"><a href="data-exploring-of-employee-salary-dataset.html"><i class="fa fa-check"></i><b>15</b> Data exploring of employee salary dataset</a></li>
 </ul>
 
       </nav>
@@ -205,8 +214,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="data-structures" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Data structures</h1>
 <p>R data types and basic expressions<sup>1</sup> : Common <strong>data structures</strong> in R include <strong>scalars, vectors, factors, matrices, data frames</strong>, and <strong>lists</strong>. These data structures can contain one or more individual data elements of several types, namely <strong>numeric</strong> (2.5), <strong>character</strong> (“Go Jacks”), or <strong>logical</strong> (TRUE or FALSE).</p>
-<div id="expressions" class="section level2">
-<h2><span class="header-section-number">6.1</span> Expressions</h2>
+<div id="basic-concepts" class="section level2">
+<h2><span class="header-section-number">6.1</span> Basic concepts</h2>
+<div id="expressions" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Expressions</h3>
 <p>Type anything at the prompt, and R will evaluate it and print the answer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
@@ -220,8 +231,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 </div>
-<div id="logical-values" class="section level2">
-<h2><span class="header-section-number">6.2</span> Logical Values</h2>
+<div id="logical-values" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Logical Values</h3>
 <p>Some expressions return a “logical value”: <strong>TRUE</strong> or <strong>FALSE</strong>. (Many programming languages refer to these as “boolean” values.) Let’s try typing an expression that gives us a logical value:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
@@ -232,8 +243,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="variables" class="section level2">
-<h2><span class="header-section-number">6.3</span> Variables</h2>
+<div id="variables" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Variables</h3>
 <p>As in other programming languages, you can store a value into a variable to access it later. Type <strong>x = 42</strong> to store a value in <strong>x</strong>. x is a <strong>scalar, with only one data element</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="dv">42</span></code></pre></div>
 <p>You can also use the following. This is a conventional, safer way to assign values.</p>
@@ -258,8 +269,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <p>You can store multiple values in a variable or object. That is called a <strong>vector</strong>, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a <strong>matrix</strong>, or <strong>data frame</strong>.</p>
 </div>
-<div id="functions" class="section level2">
-<h2><span class="header-section-number">6.4</span> Functions</h2>
+<div id="functions" class="section level3">
+<h3><span class="header-section-number">6.1.4</span> Functions</h3>
 <p>You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Most of your R commands are functional calls. Let’s try using the sum function, to add up a few numbers. Enter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] 9</code></pre>
@@ -277,8 +288,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 
 </div>
-<div id="looking-for-help-and-example-code" class="section level2">
-<h2><span class="header-section-number">6.5</span> Looking for Help and Example Code</h2>
+<div id="looking-for-help-and-example-code" class="section level3">
+<h3><span class="header-section-number">6.1.5</span> Looking for Help and Example Code</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? sum </code></pre></div>
 <p>A web page will pope up. This is the official help information for this function. At the bottom of the page is some example code. The quickest way to learn an R function is to run the example codes and see the input and output. You can easily copy, paste, and twist the example code to do your analysis.</p>
 <p><strong>example()</strong> brings up examples of usage for the given function. Try displaying examples for the min function:</p>
@@ -295,11 +306,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.5415955 -0.4875906  0.1368291  0.8030798  1.3500000
+## [1] -2.051145644 -0.818063058 -0.005700928  0.517765380  1.350000000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##         0%        25%        50%        75%       100% 
-## -2.5415955 -0.4875906  0.1368291  0.8030798  1.3500000 
+##           0%          25%          50%          75%         100% 
+## -2.051145644 -0.818063058 -0.005700928  0.517765380  1.350000000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -327,8 +338,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)  <span class="co"># return the maximum value of a vector</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
-<div id="vectors" class="section level2">
-<h2><span class="header-section-number">6.6</span> Vectors</h2>
+</div>
+<div id="data-structures-1" class="section level2">
+<h2><span class="header-section-number">6.2</span> Data structures</h2>
+<div id="vectors" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Vectors</h3>
 <p>A vector is an object that holds a sequence of values of the same type. A vector’s values can be numbers, strings, logical values, or any other type, as long as they’re all the same type. They can come from a column of a data frame. if we have a vector x:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)</code></pre></div>
 <p>Here <strong>c</strong> is for combine, do not use it as variable name. It is as special as you!</p>
@@ -350,8 +364,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span id="exr:unnamed-chunk-208" class="exercise"><strong>Exercise 6.4  </strong></span>Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
 </div>
 
-<div id="commands-about-vector" class="section level3">
-<h3><span class="header-section-number">6.6.1</span> Commands about vector</h3>
+<div id="commands-about-vector" class="section level4">
+<h4><span class="header-section-number">6.2.1.1</span> Commands about vector</h4>
 <p>Next we will try those commands about vector. First let’s find out what is the 4th element of our vector x, or the elements from 2 to 4.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">4</span>]</code></pre></div>
 <pre><code>## [1] 11</code></pre>
@@ -431,7 +445,7 @@ y</code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>We can randomly chose some elements from the vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(x, <span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 11 22</code></pre>
+<pre><code>## [1] 11  2</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
 x</code></pre></div>
@@ -470,8 +484,8 @@ z</code></pre></div>
 </div>
 
 </div>
-<div id="scatter-plots" class="section level3">
-<h3><span class="header-section-number">6.6.2</span> Scatter Plots</h3>
+<div id="scatter-plots-of-two-vectors" class="section level4">
+<h4><span class="header-section-number">6.2.1.2</span> Scatter Plots of two vectors</h4>
 <p>The <strong>plot</strong> function takes two vectors, one for X values and one for Y values, and draws a graph of them. Let’s draw a graph showing the relationship of numbers and their sines.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="fl">0.1</span>)
 y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</code></pre></div>
@@ -485,8 +499,8 @@ y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</code></pre></di
 </div>
 
 </div>
-<div id="fish-example-of-vector" class="section level3">
-<h3><span class="header-section-number">6.6.3</span> Fish example of vector</h3>
+<div id="fish-example-of-vector" class="section level4">
+<h4><span class="header-section-number">6.2.1.3</span> Fish example of vector</h4>
 <p>Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>)</code></pre></div>
 <pre><code>## [1] 7 3 9</code></pre>
@@ -562,8 +576,8 @@ Figure 6.1: Simple Bar plot
 
 </div>
 </div>
-<div id="lists" class="section level2">
-<h2><span class="header-section-number">6.7</span> Lists</h2>
+<div id="lists" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Lists</h3>
 <p>Vectors contain a set of values. But one vector can only contain one type of values, numbers, characters, or logical values. A list can store a series of objects of different types.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>,<span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>))  <span class="co"># a list with 3 components</span></code></pre></div>
 <p>If we want one of the items in its original form, we can extract it with double square brackets:</p>
@@ -579,18 +593,18 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 ##  Welch Two Sample t-test
 ## 
 ## data:  rnorm(100) and rnorm(100)
-## t = 0.075462, df = 196.42, p-value = 0.9399
+## t = -1.4095, df = 197.68, p-value = 0.1603
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.2617242  0.2825505
+##  -0.50123891  0.08337985
 ## sample estimates:
 ##  mean of x  mean of y 
-## 0.04727005 0.03685690</code></pre>
+## 0.03719948 0.24612902</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
-<pre><code>## [1] 0.9399242</code></pre>
+<pre><code>## [1] 0.1602518</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
 <pre><code>##  mean of x  mean of y 
-## 0.04727005 0.03685690</code></pre>
+## 0.03719948 0.24612902</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? t.test</code></pre></div>
 <p>Value</p>
@@ -608,7 +622,7 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 <p><img src="book_files/figure-html/unnamed-chunk-258-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0008066 0.2529858 0.5158667 0.5036717 0.7603644 0.9994468</code></pre>
+## 0.0000943 0.2645922 0.5014414 0.5125963 0.7789147 0.9997134</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
 <pre><code>## [1] 25</code></pre>
 
@@ -617,8 +631,8 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 </div>
 
 </div>
-<div id="strings-and-string-vectors" class="section level2">
-<h2><span class="header-section-number">6.8</span> Strings and string vectors</h2>
+<div id="strings-and-string-vectors" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Strings and string vectors</h3>
 <p>We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.</p>
 <p>Define a <strong>string</strong> x: “R is cool”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;R is cool&quot;</span></code></pre></div>
@@ -700,8 +714,8 @@ segs  <span class="co"># a vector of strings</span></code></pre></div>
 </div>
 
 </div>
-<div id="matrix-operations" class="section level2">
-<h2><span class="header-section-number">6.9</span> Matrix operations</h2>
+<div id="matrix-operations" class="section level3">
+<h3><span class="header-section-number">6.2.4</span> Matrix operations</h3>
 <p>A <strong>matrix</strong> has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. Define a matrix using the Iris dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</code></pre></div>
 <p>First let’s show the first few rows.</p>
@@ -802,8 +816,8 @@ y</code></pre></div>
 </div>
 
 </div>
-<div id="operations-on-data-frames" class="section level2">
-<h2><span class="header-section-number">6.10</span> Operations on data frames</h2>
+<div id="operations-on-data-frames" class="section level3">
+<h3><span class="header-section-number">6.2.5</span> Operations on data frames</h3>
 <p>Once data is read in as <strong>data frame</strong>, these are commands you can use to analyze it.</p>
 <p>Read in data frame x:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris</code></pre></div>
@@ -954,13 +968,13 @@ y</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">150</span>)
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(x, y)
 <span class="kw">head</span>(x2)</code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id          y
-## 1          5.1         3.5          1.4         0.2  setosa  1  0.7897600
-## 2          4.9         3.0          1.4         0.2  setosa  2 -0.9624601
-## 3          4.7         3.2          1.3         0.2  setosa  3 -0.3050632
-## 4          4.6         3.1          1.5         0.2  setosa  4 -0.1596591
-## 5          5.0         3.6          1.4         0.2  setosa  5 -0.2382494
-## 6          5.4         3.9          1.7         0.4  setosa  6  1.6762980</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id           y
+## 1          5.1         3.5          1.4         0.2  setosa  1  1.26813483
+## 2          4.9         3.0          1.4         0.2  setosa  2 -0.06500598
+## 3          4.7         3.2          1.3         0.2  setosa  3  0.19988587
+## 4          4.6         3.1          1.5         0.2  setosa  4  0.61722072
+## 5          5.0         3.6          1.4         0.2  setosa  5 -0.64868923
+## 6          5.4         3.9          1.7         0.4  setosa  6  1.36103267</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1034,30 +1048,30 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
 <pre><code>##   id       rand
-## 1  1 -0.5830830
-## 2  2 -0.6535493
-## 3  3 -0.5573760
-## 4  4 -0.2960602
-## 5  5 -1.4488894
-## 6  6 -1.2919802</code></pre>
+## 1  1  0.2230367
+## 2  2 -0.4808177
+## 3  3 -0.4212527
+## 4  4  0.4111252
+## 5  5  0.4948404
+## 6  6 -1.6344122</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
-<pre><code>##      id       rand
-## 95   95  1.5276659
-## 96   96  1.2094064
-## 97   97  2.3809391
-## 98   98 -0.5009276
-## 99   99  1.3087818
-## 100 100 -1.4220533</code></pre>
+<pre><code>##      id        rand
+## 95   95  0.41891571
+## 96   96  0.90210624
+## 97   97 -0.35872185
+## 98   98 -1.22419705
+## 99   99  0.04558426
+## 100 100 -0.46803430</code></pre>
 <p>Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -0.5830830
-## 2  2          4.9         3.0          1.4         0.2  setosa -0.6535493
-## 3  3          4.7         3.2          1.3         0.2  setosa -0.5573760
-## 4  4          4.6         3.1          1.5         0.2  setosa -0.2960602
-## 5  5          5.0         3.6          1.4         0.2  setosa -1.4488894
-## 6  6          5.4         3.9          1.7         0.4  setosa -1.2919802</code></pre>
+## 1  1          5.1         3.5          1.4         0.2  setosa  0.2230367
+## 2  2          4.9         3.0          1.4         0.2  setosa -0.4808177
+## 3  3          4.7         3.2          1.3         0.2  setosa -0.4212527
+## 4  4          4.6         3.1          1.5         0.2  setosa  0.4111252
+## 5  5          5.0         3.6          1.4         0.2  setosa  0.4948404
+## 6  6          5.4         3.9          1.7         0.4  setosa -1.6344122</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1067,12 +1081,12 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
 ##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-2.47312  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.78928  
-##  Median :0.800   virginica : 0   Median :-0.18936  
-##  Mean   :0.786                   Mean   :-0.09095  
-##  3rd Qu.:1.300                   3rd Qu.: 0.52773  
-##  Max.   :1.800                   Max.   : 3.20505</code></pre>
+##  Min.   :0.100   setosa    :50   Min.   :-2.92901  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.68461  
+##  Median :0.800   virginica : 0   Median :-0.08454  
+##  Mean   :0.786                   Mean   :-0.04543  
+##  3rd Qu.:1.300                   3rd Qu.: 0.70965  
+##  Max.   :1.800                   Max.   : 2.03734</code></pre>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-319" class="exercise"><strong>Exercise 6.13  </strong></span>A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
@@ -1099,8 +1113,9 @@ Hint 2: Structure your R code by partition into parts with comments.
 </div>
 
 </div>
+</div>
 <div id="for-more-in-depth-exercises" class="section level2">
-<h2><span class="header-section-number">6.11</span> For more in-depth exercises</h2>
+<h2><span class="header-section-number">6.3</span> For more in-depth exercises</h2>
 <p>Go to: <a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p>
 <p>1 This material is based on <a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p>
 

@@ -118,7 +118,7 @@ Then we use a lower-level graphics function points to draw circles around each d
 
 (ref:9-5) Scatter plot showing the weight and MPG, colored by the number of cylinders. A line at mpg = 20 separates the 4-cylinder cars from 8 cylinder cars.
 
-```{r 9-5, echo=c(2, 3), echo=FALSE, fig.cap='(ref:9-5)', fig.align='center'}
+```{r 9-5, echo=FALSE, fig.cap='(ref:9-5)', fig.align='center'}
 plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl]) 
 abline(h = 20, col = "red", lwd = 2, lty = 2)
 points(wt, mpg, cex = hp / 50)
@@ -131,7 +131,7 @@ This line adds a LOWESS smooth line determined by locally-weighted polynomial re
 
 
 ```{exercise}
-Finish up this plot to generate Figure \@ref(fig:9-5). You need to figure out a way to put a dotted horizontal line at y=20. Use Google and R help documents. Submit code and plot. 
+Generate the bubble plot Figure \@ref(fig:9-5) based on the code:"plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl])". Submit your complete code and the generated plot. Give a brief interpretation about your plot.
 ```
 
 #### 3D scatter plot
@@ -263,7 +263,7 @@ Revise the above relative code to generate a bar chart showing the average weigh
 ```
 
 ```{exercise}
-Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set. 
+Create a bar chart with error bars to show the average illiteracy rate by region, using the illiteracy rate in the state.x77 data and regions defined by state.region in the state data set. Hints: 1, Check the type of data set using class(state.x77); 2, Convert the matrix dataset to data frame using df.state.x77 <- as.data.frame(state.x77); 3, Attach df.state.x77.
 ```
 
 ### Visualizing correlation between categorical variables
@@ -344,7 +344,7 @@ plotcorr(data_ord, col = my_colors[data_ord * 50 + 50], mar = c(1, 1, 1, 1))
 ```
 
 ```{exercise}
-Generate a scatter plot matrix of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type  ? **state** for more information and type **state.x77** to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting?
+Generate a scatter plot **matrix** of the state.x77 data in the state data set included in base R. It includes various statistics on the 50 U.S. states. Type  ? **state** for more information and type **state.x77** to see the data. Also, visualize the correlation using the ellipses shown above. Interpret your results. What types of correlation do you find interesting? Hint: The class(state.x77) should be "matrix" not "data frame", otherewise convert it to a "matrix".
 ```
 
 If you examine the above code carefully, the ellipses are drawn just based on a matrix of Pearson's correlation coefficients. We can easily quantify the relationship between all variables by generating a matrix of Pearson’s correlation coefficient: 
@@ -375,7 +375,7 @@ Here we first subtracted the r values from 1 to define a distance measure. So pe
  As we can see from the tree, cyl is most highly correlated with disp and then hp and wt. Broadly, the variables form two groups, with high correlation within each cluster. This is an important insight into the overall correlation structure of this data set. 
 
 ```{exercise}
-Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. 
+Generate a hierarchical clustering tree for the 32 car models in the mtcars dataset and discuss your results. Hint: You can transpose the dataset using function t(), so that rows becomes columns and columns become rows. Then you should be able to produce a similar tree for the cars. 
 Another straight forward method is to translate the numbers in the correlation matrix into colors using the image functions. 
 ```
 
@@ -649,7 +649,7 @@ knitr::include_graphics("images/img1204n_starsegment.png")
 ```
 
 ```{exercise}
-Produce the segments diagram of the state data(state.x77) and offer some interpretation regarding South Dakota compared with other states. 
+Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 <- as.data.frame(state.x77),then attach df.state.x77.
 ```
 
 ### Parallel coordinate plot
@@ -821,7 +821,7 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting g
 The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
 
 ```{exercise}
-Create PCA plot of the state.x77 data set. Use the state.region information to color code the states. Interpret your results. Use both R base graphics and ggplot2. Hint: do not forget normalization using the scale option. 
+Create PCA plot of the state.x77 data set (convert matrix to data frame). Use the state.region information to color code the states. Interpret your results. Hint: do not forget normalization using the scale option. 
 ```
 
 ### Classification: Predicting the odds of binary outcomes 
