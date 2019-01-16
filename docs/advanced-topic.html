@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="advanced-topic.html">
-<link rel="next" href="tidyverse-1.html">
+<link rel="prev" href="strings.html">
+<link rel="next" href="tidyverse.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -199,62 +199,46 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tidyverse" class="section level1">
-<h1><span class="header-section-number">Chapter 13</span> Tidyverse</h1>
-<div id="tidyverse-is-collection-of-powerful-r-packages" class="section level2">
-<h2><span class="header-section-number">13.1</span> Tidyverse is collection of powerful R packages</h2>
-<p>The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. Let’s try the dplyr package for manipulating data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;dplyr&quot;) </span>
-<span class="kw">library</span>(dplyr)</code></pre></div>
-<p>In dplyr, we use the pipe operator %&gt;% to send data to the next stage. This is similar to the “+” operator we used in ggplot2. To create a new data frame for setosa with sepals longer than 4.0:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>, Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div>
-<p>Add a new column that contains the ratios of sepal length to sepal width:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> Sepal.Length <span class="op">/</span><span class="st"> </span>Sepal.Width)</code></pre></div>
-<p>Sort by sepal length in ascending order:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(Sepal.Length)</code></pre></div>
-<p>The power of dplyr is that we can connect these pipe operators to define a work flow. Suppose we want to see the Iris setosa flowers with the largest ratio of sepal length to sepal width.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>) <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># filter rows</span>
-<span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># select two columns </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> Sepal.Length <span class="op">/</span><span class="st"> </span>Sepal.Width) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># add a new column</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ratio))   <span class="op">%&gt;%</span><span class="st">                       </span><span class="co"># sort in descending order</span>
-<span class="st">  </span><span class="kw">head</span>()   <span class="co"># only show top rows. No more pipes, end of sequence.</span></code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width    ratio
-## 1          4.5         2.3 1.956522
-## 2          5.0         3.0 1.666667
-## 3          4.9         3.0 1.633333
-## 4          4.8         3.0 1.600000
-## 5          4.8         3.0 1.600000
-## 6          5.4         3.4 1.588235</code></pre>
-<p><strong>filter</strong>( ), <strong>mutate</strong>( ) and <strong>arrange</strong>( ) are 3 <strong>“verbs”</strong> that operate on the data frame sequentially. <strong>head</strong>( ) is the function that only shows the top rows. Notice the pipe operator %&gt;% at the end of each line. This code is much easier to read by humans, as it defines a sequence of operations.</p>
-<p>Two other useful verbs are <strong>group_by</strong>( ) and <strong>summarise</strong>( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths, and then combine. So it is <strong>“split-apply-combine”</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Species)  <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># split by Species </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avgSL =</span> <span class="kw">mean</span>(Sepal.Length), <span class="dt">avgSW =</span> <span class="kw">mean</span>(Sepal.Length)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(avgSL)</code></pre></div>
-<pre><code>## # A tibble: 3 x 3
-##   Species    avgSL avgSW
-##   &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
-## 1 setosa      5.01  5.01
-## 2 versicolor  5.94  5.94
-## 3 virginica   6.59  6.59</code></pre>
-<p>Here we created a new data frame with the mean sepal length and sepal width for each of the 3 species. Obviously, we can change <strong>mean</strong>( ) to many other functions. This makes it very easy to summarize large data sets.</p>
+<div id="advanced-topic" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Advanced topic</h1>
+<div id="functions" class="section level2">
+<h2><span class="header-section-number">12.1</span> Functions</h2>
+<p>Many times, we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Functions are fundamental building blocks of R. Most of the times when we run R commands, we are calling and executing functions. We can easily define our very own functions.</p>
+<p>For example, we have the following arithmetic function:</p>
+<p><span class="math display">\[f(x)=1.5 x^3+ x^2-2x+1\]</span></p>
+<p>Obviously, we can use the following code to do the computing:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">5</span>
+<span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] 212.6813</code></pre>
+<p>This will work, but every time we have to re-write this code. So let’s try to define our own function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myf &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+       y =<span class="st"> </span><span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+       <span class="kw">return</span>(y)
+}</code></pre></div>
+<p>Note that “{” and “}” signify the beginning and end of a block of code. <strong>“function”</strong> tells R that a function is going to be defined. At the end, the <strong>“return”</strong> statement returns the desired value.</p>
+<p>You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myf</span>(<span class="dv">5</span>)  <span class="co"># or myf(x = 5)</span></code></pre></div>
+<pre><code>## [1] 212.6813</code></pre>
+<p>As you can see you get the same results when x=5. But now you can use this in many ways.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">10</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>  <span class="co"># x now is a vector  with 21 numbers -10, -9, … 10</span>
+<span class="kw">myf</span>(x) </code></pre></div>
+<pre><code>##  [1] -1452.45000 -1047.04505  -724.60640  -475.69335  -290.86520
+##  [6]  -160.68125   -75.70080   -26.48315    -3.58760     2.42655
+## [11]     1.00000     1.57345    13.58760    46.48315   109.70080
+## [16]   212.68125   364.86520   575.69335   854.60640  1211.04505
+## [21]  1654.45000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x, <span class="kw">myf</span>(x))  <span class="co"># see plot on the right.</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Obviously functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-13" class="exercise"><strong>Exercise 13.1  </strong></span>Read in the heart attack data, calculate the average cost per day for patients with different DIAGNOSIS codes. Restrict to females aged between 20 and 70 who stayed at least one day. Sort the results in descending order. Use the dplyr package. Use one command with multiple steps. Note: since we have missing values in CHARGES, remember to use the <strong>na.rm =TRUE</strong> option in the mean( ) function. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the <strong>head</strong> or <strong>summary</strong> function at the end to examine if the desired data is produced.
+<span id="exr:unnamed-chunk-5" class="exercise"><strong>Exercise 12.1  </strong></span>Write an R function to implement this arithmetic function: f(x)= √(|x|)+5x-6. Note |x| means the absolute value of x. Use this function to find f(4.534), and also try to produce a plot like the one above.
 </div>
 
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-6" class="exercise"><strong>Exercise 12.2  </strong></span>Go over the <strong>R cheat sheet</strong>, find some function that was not covered in class and show some demo.
 </div>
-<div id="shiny-apps-and-interactive-plots" class="section level2">
-<h2><span class="header-section-number">13.2</span> Shiny Apps and interactive plots</h2>
-<p>Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP <a href="http://ge-lab.org/idep/" class="uri">http://ge-lab.org/idep/</a> ) to enable biologists to analyze genomic data on their own. My blog (<a href="http://gex.netlify.com" class="uri">http://gex.netlify.com</a> ) is also created in Rstudio. 1. Install the Shiny package by typing this in the console. &gt; install.packages(“shiny”) 2. Create a Shiny web app is a piece of cake Start a new Shiny app use the shortcut shown in Figure 13. Or, select File  New File  Shiny Web App from the RStudio main menu. Give your app a name like test1 and note where the app will be stored. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called app.R. Click on Run App on the top right of the script window; you have a histogram that can be customized by a sliding bar. There are two functions: ui() defines the user interface, and server() specifies the logic.<br />
-3. Let’s play! a. Change the color by changing the col = ‘darkgray’ in line 44 to your favorite color, such as ‘green’, ‘red’, etc. To make it colorful, set it to col = rainbow(10) so we can use ten colors on a rolling basis. b. Switch the data. Change line 40 to visualize the iris dataset. x &lt;- iris[,‘Sepal.Length’] c. The default number of bins of 30, specified at line 25, is probably too big. Change it to: value = 12 d. We obviously can change ‘Sepal.Length’ to other columns. Would it be cool if the user can choose? We need to add a control widget by inserting this line of code after line 20: selectInput(“cid”, “Column”, choices = colnames( iris ) ), Do not forget the comma at the very end! Now run this app. We can now select the columns, but the app does not do anything with it. We need to use the selected column in the server logic to customize the plot. We will change the line 41 to this: x &lt;- iris[ , input$cid ] Challenge 11: Find and solve the error in this app when choosing the last column by limiting to first 4 columns. Challenge 12: Change the title from “Histogram of x” to the name of the selected variable like “Sepal.Length” e. We can build a more complex app by adding a normal distribution line by expanding line 44 into these: h &lt;- hist(x, breaks = bins, col = rainbow(10), border = ‘white’) yfit &lt;- dnorm(bins, mean = mean(x), sd = sd(x)) yfit &lt;- yfit * diff( h$mids[1:2]) * length(x) lines(bins, yfit, col = “blue”) Challenge 13: Solve the error message in this app by plotting a pie chart when the Species column is selected. Challenge 14: Publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. And show it off to your friend by sending them an URL. Solutions to these challenges can be found at GitHub <a href="https://github.com/gexijin/teach/blob/master/app.R" class="uri">https://github.com/gexijin/teach/blob/master/app.R</a> To learn more, follow these excellent tutorials: <a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/" class="uri">https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</a></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Interactive plots made easy with Plotly install.packages(“plotly”) library(plotly) g &lt;- ggplot(iris, aes(Petal.Width, Petal.Length , color = Species)) + geom_point() ggplotly( g ) We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in. The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc.</li>
-</ol>
 
 </div>
 </div>
@@ -263,8 +247,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="advanced-topic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tidyverse-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="strings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
