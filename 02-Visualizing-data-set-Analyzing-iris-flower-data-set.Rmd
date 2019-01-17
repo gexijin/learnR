@@ -494,11 +494,11 @@ heatmap.2(mt,
 	        density.info = "none", 
 	        trace = "none", 
 	        scale = "none", 
-	        RowSideColors = rainbow(8)[mtcars$cyl],    
+	        RowSideColors = rainbow(3)[as.factor(mtcars$cyl)],    
 	        margins = c(5, 10) # bottom and right margins
           )                                                                             
-legend("topright",as.character(c(4, 6, 8)),
-       fill=rainbow(8)[c(4, 6, 8)])    # add legend 
+legend("topright",levels(as.factor(mtcars$cyl)),
+       fill=rainbow(3))    # add legend 
 ```
 
 Here we defined and used our custom distance function **dist2** and used average linkage method for hclust. We also added a color bar to code for the number of cylinders. We can also add color bars for the columns, as long as we have some information for each of the column.
