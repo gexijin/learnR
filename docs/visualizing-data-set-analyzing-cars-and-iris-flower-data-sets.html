@@ -292,10 +292,10 @@ Figure 2.2: Data point types in base R.
 <p>So R uses circles or squares according to this sequence for each of the data points. It draws a circle when am value is 1, and square when it is zero. See all the types in Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-3">2.2</a>. We add a legend to the top-right corner using a low-level graphics function legend:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;Automatic&quot;</span>, <span class="st">&quot;Manual&quot;</span>), <span class="dt">pch =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>) </code></pre></div>
 <p>This plot shows that heavier cars often use manual transmissions. Always slow down and interpret your plots in plain language. We can be happy about this plot, but we continue to fuss in more information on this graph. Using the same line of thinking, we can change the color of the data points according to other information, i.e. the number of cylinders.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl])</code></pre></div>
-<p>The rainbow(8) generates a vector of 8 colors. The values in the cyl column are used to choose the color from these 8 colors. Green, blue, and red, indicates 4, 6, and 8 cylinders, respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called <strong>bubble plots</strong> or <strong>balloon plots.</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl], <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)
-<span class="kw">legend</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="kw">c</span>(<span class="st">&quot;4&quot;</span>, <span class="st">&quot;6&quot;</span>, <span class="st">&quot;8&quot;</span>), <span class="dt">title =</span> <span class="st">&quot;Cylinders&quot;</span>, <span class="dt">pch =</span> <span class="dv">15</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)]) <span class="co">#Generate 3 colors for the 3 types of cyl.</span></code></pre></div>
+<p>The rainbow(3) generates a vector of 3 colors. The 3 levels of the cylinders will be assigned to three colors respectively. The red, green and blue represent the cylinder 4, 6, and 8 respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called <strong>bubble plots</strong> or <strong>balloon plots.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> am, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)], <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)
+<span class="kw">legend</span>(<span class="fl">4.5</span>, <span class="dv">34</span>, <span class="kw">levels</span>(<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)), <span class="dt">title =</span> <span class="st">&quot;Cylinders&quot;</span>, <span class="dt">pch =</span> <span class="dv">15</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))</code></pre></div>
 <p>Note that we added this legend at the (5, 30) position on the plot. To see all the options:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? plot</code></pre></div>
 <p>This website lists all the parameters for R graphics: <a href="http://www.statmethods.net/advgraphs/parameters.html" class="uri">http://www.statmethods.net/advgraphs/parameters.html</a>. Now we want to finish up this plot by adding axis labels, and title. We also changed the x-axis range to 1-6 using the xlim parameter to specify the limits. We finally put everything together.</p>
@@ -313,7 +313,7 @@ Figure 2.3: Enhanced scatter plot of mtcars data. Also called bubble plot or bal
 </div>
 
 <p>Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-4">2.3</a> is perhaps a bit too busy. Let’s develop an elegant version.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl]) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(wt, mpg, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> hp <span class="op">/</span><span class="st"> </span><span class="dv">50</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)]) </code></pre></div>
 <p>Notes: x; y; solid circle; horsepowersize of bubble; color cylinder 4, 6, or 8</p>
 <p>Then we use a lower-level graphics function points to draw circles around each data point.</p>
 
@@ -326,7 +326,7 @@ Figure 2.4: Scatter plot showing the weight and MPG, colored by the number of cy
 <p>This line adds a LOWESS smooth line determined by locally-weighted polynomial regression.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-56" class="exercise"><strong>Exercise 2.2  </strong></span>Generate the bubble plot Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-5">2.4</a> based on the code:“plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl])”. Submit your complete code and the generated plot. Give a brief interpretation about your plot.
+<span id="exr:unnamed-chunk-56" class="exercise"><strong>Exercise 2.2  </strong></span>Generate the bubble plot Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-5">2.4</a> based on the code:“plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(3)[as.factor(mtcars$cyl)])”. Submit your complete code and the generated plot. Give a brief interpretation about your plot.
 </div>
 
 </div>
@@ -336,7 +336,7 @@ Figure 2.4: Scatter plot showing the weight and MPG, colored by the number of cy
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scatterplot3d) </code></pre></div>
 <pre><code>## Warning: package &#39;scatterplot3d&#39; was built under R version 3.5.2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scatterplot3d</span>(wt, disp, mpg, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">8</span>)[cyl], <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scatterplot3d</span>(wt, disp, mpg, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)], <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:9-6"></span>
 <img src="book_files/figure-html/9-6-1.png" alt="3D scatter plots are rarely useful." width="672" />
 <p class="caption">
@@ -652,7 +652,7 @@ mt &lt;-<span class="st"> </span><span class="kw">apply</span>(mt, <span class="
             <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)],    
             <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>) <span class="co"># bottom and right margins</span>
           )                                                                             
-<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="kw">levels</span>(<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)),
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="kw">levels</span>(<span class="kw">as.factor</span>(cyl)),
        <span class="dt">fill=</span><span class="kw">rainbow</span>(<span class="dv">3</span>))    <span class="co"># add legend </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:11-5"></span>
 <img src="book_files/figure-html/11-5-1.png" alt="Final version of heatmap for mtcars data." width="672" />
@@ -747,7 +747,7 @@ y <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(
 <h3><span class="header-section-number">2.3.2</span> Scatter plot matrix</h3>
 <p>We can generate a matrix of scatter plots simply by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[Species])  <span class="co"># Figure 2.18</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(iris<span class="op">$</span>Species)])  <span class="co"># Figure 2.18</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-94"></span>
 <img src="book_files/figure-html/unnamed-chunk-94-1.png" alt="Scatter plot matrix." width="672" />
 <p class="caption">
@@ -776,11 +776,11 @@ x &lt;-<span class="st"> </span><span class="kw">apply</span>(x, <span class="dv
             <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, 
             <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>, 
             <span class="dt">labRow =</span> <span class="ot">FALSE</span>,   <span class="co"># no row names</span>
-            <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species], 
+            <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(iris<span class="op">$</span>Species)], 
             <span class="dt">srtCol =</span> <span class="dv">45</span>,    <span class="co"># column labels at 45 degree</span>
             <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">10</span>))  <span class="co"># bottom and right margins</span>
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(iris<span class="op">$</span>Species),       
-       <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</code></pre></div>
+       <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:12-3"></span>
 <img src="book_files/figure-html/12-3-1.png" alt="Heatmap for iris flower dataset." width="672" />
 <p class="caption">

@@ -68,14 +68,14 @@ legend("topright", c("Automatic", "Manual"), pch = 0:1)
 This plot shows that heavier cars often use manual transmissions. Always slow down and interpret your plots in plain language. We can be happy about this plot, but we continue to fuss in more information on this graph.  Using the same line of thinking, we can change the color of the data points according to other information, i.e. the number of cylinders. 
 
 ```{r fig.show='hide'}
-plot(wt, mpg, pch = am, col = rainbow(8)[cyl])
+plot(wt, mpg, pch = am, col = rainbow(3)[as.factor(mtcars$cyl)]) #Generate 3 colors for the 3 types of cyl.
 ```
 
-The rainbow(8) generates a vector of 8 colors. The values in the cyl column are used to choose the color from these 8 colors. Green, blue, and red, indicates 4, 6, and 8 cylinders, respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called **bubble plots** or **balloon plots.** 
+The rainbow(3) generates a vector of 3 colors. The 3 levels of the cylinders will be assigned to three colors respectively. The red, green and blue represent the cylinder 4, 6, and 8 respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called **bubble plots** or **balloon plots.** 
 
 ```{r fig.show='hide'}
-plot(wt, mpg, pch = am, col = rainbow(8)[cyl], cex = hp / 50)
-legend(5, 30, c("4", "6", "8"), title = "Cylinders", pch = 15, col = rainbow(8)[c(4, 6, 8)])
+plot(wt, mpg, pch = am, col = rainbow(3)[as.factor(mtcars$cyl)], cex = hp / 50)
+legend(4.5, 34, levels(as.factor(mtcars$cyl)), title = "Cylinders", pch = 15, col = rainbow(3))
 ```
 
 Note that we added this legend at the (5, 30) position on the plot. To see all the options: 
@@ -88,15 +88,15 @@ This website lists all the parameters for R graphics: [http://www.statmethods.ne
 (ref:9-4) Enhanced scatter plot of mtcars data. Also called bubble plot or balloon plot.
 
 ```{r 9-4, echo=FALSE, fig.cap='(ref:9-4)', fig.align='center'}
-plot(wt, mpg, pch = am, col = rainbow(8)[cyl], cex = hp/50,
+plot(wt, mpg, pch = am, col = rainbow(3)[as.factor(mtcars$cyl)], cex = hp/50,
      xlab = "Weight (1000 lbs)", ylab = "Miles per gallon", 
      main = "Weight and MPG", xlim = c(1, 6))
 abline(lm(mpg ~ wt))    # add regression line
 legend("topright", c("Automatic", "Manual"), pch = 0:1)  # marker 
-legend(5.48, 28, c("4", "6", "8"), 
+legend(5.48, 28, levels(as.factor(mtcars$cyl)), 
        title = "Cylinders", 
        pch = 15,
-       col = rainbow(8)[c(4, 6, 8)])  # legend for color
+       col = rainbow(3))  # legend for color
 ```
 
 Note that this seemingly complicated chunk of code is built upon many smaller steps, and it involves trial-and-error. 
@@ -109,7 +109,7 @@ Hint: Go through the above example first. Then start small and add on step by st
 Figure \@ref(fig:9-4) is perhaps a bit too busy. Let’s develop an elegant version.
 
 ```{r fig.show='hide'}
-plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl]) 
+plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(3)[as.factor(mtcars$cyl)]) 
 ```
 
 Notes: x; y; solid circle; horsepowersize of bubble; color cylinder 4, 6, or 8
@@ -119,19 +119,19 @@ Then we use a lower-level graphics function points to draw circles around each d
 (ref:9-5) Scatter plot showing the weight and MPG, colored by the number of cylinders. A line at mpg = 20 separates the 4-cylinder cars from 8 cylinder cars.
 
 ```{r 9-5, echo=FALSE, fig.cap='(ref:9-5)', fig.align='center'}
-plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl]) 
+plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(3)[plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(3)[as.factor(mtcars$cyl)])]) 
 abline(h = 20, col = "red", lwd = 2, lty = 2)
 points(wt, mpg, cex = hp / 50)
 lines(lowess(wt, mpg), col = "blue")  # lowess line
-legend("topright", c("4", "6", "8"), title = "Cylinders", 
-       pch = 15, col = rainbow(8)[c(4, 6, 8)])
+legend("topright", levels(as.factor(mtcars$cyl)), title = "Cylinders", 
+       pch = 15, col = rainbow(3))
 ```
 
 This line adds a LOWESS smooth line determined by locally-weighted polynomial regression.
 
 
 ```{exercise}
-Generate the bubble plot Figure \@ref(fig:9-5) based on the code:"plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(8)[cyl])". Submit your complete code and the generated plot. Give a brief interpretation about your plot.
+Generate the bubble plot Figure \@ref(fig:9-5) based on the code:"plot(wt, mpg, pch = 16, cex = hp / 50, col = rainbow(3)[as.factor(mtcars$cyl)])". Submit your complete code and the generated plot. Give a brief interpretation about your plot.
 ```
 
 #### 3D scatter plot
@@ -141,7 +141,7 @@ Even though I’ve never been a fan of 3D plots, it is possible in R using addit
 
 ```{r 9-6, fig.cap='(ref:9-6)', fig.align='center'}
 library(scatterplot3d) 
-scatterplot3d(wt, disp, mpg, color = rainbow(8)[cyl], type = "h", pch = 20)
+scatterplot3d(wt, disp, mpg, color = rainbow(3)[as.factor(mtcars$cyl)], type = "h", pch = 20)
 ```
 
 3D plots are hard to interpret. So try to avoid them. However, it is fun when you can interact with them. Using example code at this website, you can create interactive 3D plots: [http://www.statmethods.net/graphs/scatterplot.html](http://www.statmethods.net/graphs/scatterplot.html)
@@ -324,7 +324,7 @@ plot(mtcars)  # scatter plot matrix; same as pairs(mtcars)
 (ref:10-1) Scatter plot matrix of the mtcars dataset.
 
 ```{r 10-1, echo=FALSE, fig.cap='(ref:10-1)', fig.align='center'}
-pairs(mtcars[, 1:7],col = rainbow(8)[mtcars$cyl])  # Add color 
+pairs(mtcars[, 1:7],col = rainbow(3)[as.factor(mtcars$cyl)])  # Add color 
 ```
 
 We can spend all day studying this large plot, as it contains information on all pairs of variables. For example, mpg is negatively correlated with disp, hp, and wt, and positively correlated with drat. There are many variations of scatter plot matrix, for instance, the spm function in the car package. Also try this cool plot using ellipses: [http://www.r-graph-gallery.com/97-correlation-ellipses/](http://www.r-graph-gallery.com/97-correlation-ellipses/)
@@ -497,7 +497,7 @@ heatmap.2(mt,
 	        RowSideColors = rainbow(3)[as.factor(mtcars$cyl)],    
 	        margins = c(5, 10) # bottom and right margins
           )                                                                             
-legend("topright",levels(as.factor(mtcars$cyl)),
+legend("topright",levels(as.factor(cyl)),
        fill=rainbow(3))    # add legend 
 ```
 
@@ -592,7 +592,7 @@ pairs(iris[, 1:4])
 ```
 
 ```{r fig.cap='Scatter plot matrix.', fig.align='center'}
-pairs(iris[, 1:4], col = rainbow(3)[Species])  # Figure 2.18
+pairs(iris[, 1:4], col = rainbow(3)[as.factor(iris$Species)])  # Figure 2.18
 ```
 
 ```{exercise}
