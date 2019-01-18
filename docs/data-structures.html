@@ -306,11 +306,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.71727892 -0.75458932 -0.02968613  0.70795567  1.35000000
+## [1] -2.5016999 -0.8731993 -0.1866633  0.4711449  1.3500000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##          0%         25%         50%         75%        100% 
-## -2.71727892 -0.75458932 -0.02968613  0.70795567  1.35000000 
+##         0%        25%        50%        75%       100% 
+## -2.5016999 -0.8731993 -0.1866633  0.4711449  1.3500000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -445,7 +445,7 @@ y</code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>We can randomly chose some elements from the vector.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sample</span>(x, <span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 11  2</code></pre>
+<pre><code>## [1] 5 5</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
 x</code></pre></div>
@@ -593,18 +593,18 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 ##  Welch Two Sample t-test
 ## 
 ## data:  rnorm(100) and rnorm(100)
-## t = -0.4394, df = 197.33, p-value = 0.6609
+## t = -0.62923, df = 197.08, p-value = 0.5299
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3339632  0.2122578
+##  -0.3631168  0.1874481
 ## sample estimates:
 ##   mean of x   mean of y 
-## -0.03163374  0.02921894</code></pre>
+## -0.07396504  0.01386933</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
-<pre><code>## [1] 0.6608517</code></pre>
+<pre><code>## [1] 0.5299273</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
 <pre><code>##   mean of x   mean of y 
-## -0.03163374  0.02921894</code></pre>
+## -0.07396504  0.01386933</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? t.test</code></pre></div>
 <p>Value</p>
@@ -621,10 +621,10 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 <span class="kw">hist</span>(pvalues)  <span class="co"># define</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-258-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
-<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0008133 0.2478585 0.4869624 0.4968841 0.7470706 0.9989726</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## 0.004399 0.295680 0.529144 0.523886 0.761917 0.999465</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 28</code></pre>
+<pre><code>## [1] 19</code></pre>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-259" class="exercise"><strong>Exercise 6.10  </strong></span>Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point.
@@ -969,12 +969,12 @@ y</code></pre></div>
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(x, y)
 <span class="kw">head</span>(x2)</code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id           y
-## 1          5.1         3.5          1.4         0.2  setosa  1  1.77206665
-## 2          4.9         3.0          1.4         0.2  setosa  2  0.80973025
-## 3          4.7         3.2          1.3         0.2  setosa  3  0.14525073
-## 4          4.6         3.1          1.5         0.2  setosa  4 -1.47047948
-## 5          5.0         3.6          1.4         0.2  setosa  5 -0.67842522
-## 6          5.4         3.9          1.7         0.4  setosa  6 -0.02672698</code></pre>
+## 1          5.1         3.5          1.4         0.2  setosa  1 -0.32956838
+## 2          4.9         3.0          1.4         0.2  setosa  2 -0.15495598
+## 3          4.7         3.2          1.3         0.2  setosa  3 -1.44585581
+## 4          4.6         3.1          1.5         0.2  setosa  4 -0.01857418
+## 5          5.0         3.6          1.4         0.2  setosa  5  0.33078886
+## 6          5.4         3.9          1.7         0.4  setosa  6  0.99431297</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1047,31 +1047,31 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <p>We use data.frame() function to define a new data frame with 100 rows and two columns, <em>ids</em> and <em>rand</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
-<pre><code>##   id        rand
-## 1  1 -2.26853010
-## 2  2  1.30853074
-## 3  3 -0.66991418
-## 4  4 -0.06837266
-## 5  5 -0.78706646
-## 6  6  0.26594401</code></pre>
+<pre><code>##   id       rand
+## 1  1  0.9082390
+## 2  2  0.3434065
+## 3  3  0.4543823
+## 4  4 -0.9225396
+## 5  5 -2.0831289
+## 6  6  0.3817499</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
-<pre><code>##      id         rand
-## 95   95 -0.001182203
-## 96   96  0.261477504
-## 97   97 -0.303208365
-## 98   98 -0.787625866
-## 99   99  1.234340643
-## 100 100 -0.439816626</code></pre>
+<pre><code>##      id        rand
+## 95   95 -1.06816446
+## 96   96  0.06129366
+## 97   97 -1.14230888
+## 98   98  0.07342482
+## 99   99  0.78303577
+## 100 100  1.10797717</code></pre>
 <p>Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
-<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species        rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -2.26853010
-## 2  2          4.9         3.0          1.4         0.2  setosa  1.30853074
-## 3  3          4.7         3.2          1.3         0.2  setosa -0.66991418
-## 4  4          4.6         3.1          1.5         0.2  setosa -0.06837266
-## 5  5          5.0         3.6          1.4         0.2  setosa -0.78706646
-## 6  6          5.4         3.9          1.7         0.4  setosa  0.26594401</code></pre>
+<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
+## 1  1          5.1         3.5          1.4         0.2  setosa  0.9082390
+## 2  2          4.9         3.0          1.4         0.2  setosa  0.3434065
+## 3  3          4.7         3.2          1.3         0.2  setosa  0.4543823
+## 4  4          4.6         3.1          1.5         0.2  setosa -0.9225396
+## 5  5          5.0         3.6          1.4         0.2  setosa -2.0831289
+## 6  6          5.4         3.9          1.7         0.4  setosa  0.3817499</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1081,12 +1081,12 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
 ##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-2.73324  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.78721  
-##  Median :0.800   virginica : 0   Median :-0.06156  
-##  Mean   :0.786                   Mean   :-0.10685  
-##  3rd Qu.:1.300                   3rd Qu.: 0.49493  
-##  Max.   :1.800                   Max.   : 2.11266</code></pre>
+##  Min.   :0.100   setosa    :50   Min.   :-2.09304  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.66533  
+##  Median :0.800   virginica : 0   Median : 0.18113  
+##  Mean   :0.786                   Mean   :-0.01358  
+##  3rd Qu.:1.300                   3rd Qu.: 0.63133  
+##  Max.   :1.800                   Max.   : 2.16805</code></pre>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-319" class="exercise"><strong>Exercise 6.13  </strong></span>A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
