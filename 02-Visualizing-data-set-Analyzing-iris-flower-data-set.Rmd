@@ -68,14 +68,16 @@ legend("topright", c("Automatic", "Manual"), pch = 0:1)
 This plot shows that heavier cars often use manual transmissions. Always slow down and interpret your plots in plain language. We can be happy about this plot, but we continue to fuss in more information on this graph.  Using the same line of thinking, we can change the color of the data points according to other information, i.e. the number of cylinders. 
 
 ```{r fig.show='hide'}
-plot(wt, mpg, pch = am, col = rainbow(3)[as.factor(mtcars$cyl)]) #Generate 3 colors for the 3 types of cyl.
+plot(wt, mpg, pch = am, col = rainbow(3)[as.factor(mtcars$cyl)])
+#Generate 3 colors for the 3 types of cyl.
 ```
 
 The rainbow(3) generates a vector of 3 colors. The 3 levels of the cylinders will be assigned to three colors respectively. The red, green and blue represent the cylinder 4, 6, and 8 respectively. Now we alter the size of the data points to represent additional information such as horsepower, hp. Since hp is often a big number, we divide it by 50, a ratio determined by trial-and-error. These sometimes are called **bubble plots** or **balloon plots.** 
 
 ```{r fig.show='hide'}
 plot(wt, mpg, pch = am, col = rainbow(3)[as.factor(mtcars$cyl)], cex = hp / 50)
-legend(4.5, 34, levels(as.factor(mtcars$cyl)), title = "Cylinders", pch = 15, col = rainbow(3))
+legend(4.5, 34, levels(as.factor(mtcars$cyl)), title = "Cylinders", pch = 15,
+       col = rainbow(3))
 ```
 
 Note that we added this legend at the (5, 30) position on the plot. To see all the options: 
