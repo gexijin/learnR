@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Learning R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Learning R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Learning R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge">
+
+
+<meta name="date" content="2019-01-22">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="analyzing-the-relationship-for-all-columns-of-data-set.html">
+<link rel="next" href="conclusion.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Index</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R program-Analyzing iris flower dataset</a><ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.1</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.2</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#students-t-test"><i class="fa fa-check"></i><b>1.3</b> Student’s t-test</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#test-for-normal-distribution"><i class="fa fa-check"></i><b>1.4</b> Test for normal distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.5</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-the-relationship-between-two-columns-of-numbers"><i class="fa fa-check"></i><b>1.6</b> Analyzing the relationship between two columns of numbers</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#visualizing-and-testing-the-differences-in-groups"><i class="fa fa-check"></i><b>1.7</b> Visualizing and testing the differences in groups</a></li>
+<li class="chapter" data-level="1.8" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.8</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><i class="fa fa-check"></i><b>2</b> Visualizing data set-Analyzing cars and iris flower data sets</a><ul>
+<li class="chapter" data-level="2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-mtcars-dataset"><i class="fa fa-check"></i><b>2.2</b> Visualizing mtcars dataset</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.2</b> Detecting correlations among variables</a></li>
+<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.3</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.4</b> Representing data using faces. Serious scientific research only!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-iris-data-set"><i class="fa fa-check"></i><b>2.3</b> Visualizing iris data set</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.3.1</b> A Matrix only contains numbers</a></li>
+<li class="chapter" data-level="2.3.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>2.3.2</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.3.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#heatmap"><i class="fa fa-check"></i><b>2.3.3</b> Heatmap</a></li>
+<li class="chapter" data-level="2.3.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#star-plot"><i class="fa fa-check"></i><b>2.3.4</b> Star plot</a></li>
+<li class="chapter" data-level="2.3.5" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#segment-diagrams"><i class="fa fa-check"></i><b>2.3.5</b> Segment diagrams</a></li>
+<li class="chapter" data-level="2.3.6" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.3.6</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.3.7" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#box-plot"><i class="fa fa-check"></i><b>2.3.7</b> Box plot</a></li>
+<li class="chapter" data-level="2.3.8" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.3.8</b> Bar plot with error bar</a></li>
+<li class="chapter" data-level="2.3.9" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#combining-plots"><i class="fa fa-check"></i><b>2.3.9</b> Combining plots</a></li>
+<li class="chapter" data-level="2.3.10" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#plot-using-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.3.10</b> Plot using principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.3.11" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#attempt-at-ggplot2"><i class="fa fa-check"></i><b>2.3.11</b> Attempt at ggplot2</a></li>
+<li class="chapter" data-level="2.3.12" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.3.12</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.1</b> Matrix operations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.2</b> Lists</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Operations on data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>4</b> Data importing</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
+<li class="chapter" data-level="4.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>4.2</b> Reading data from file using Import dataset in Rstudio</a></li>
+<li class="chapter" data-level="4.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.3</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>4.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="4.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>4.6</b> Recommended workflow for EVERY project</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set I</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html"><i class="fa fa-check"></i><b>6</b> Analyzing heart attack data set II</a><ul>
+<li class="chapter" data-level="6.1" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>7</b> Vectors</a></li>
+<li class="chapter" data-level="8" data-path="matrics-and-arrays.html"><a href="matrics-and-arrays.html"><i class="fa fa-check"></i><b>8</b> Matrics and arrays</a></li>
+<li class="chapter" data-level="9" data-path="lists-1.html"><a href="lists-1.html"><i class="fa fa-check"></i><b>9</b> Lists</a></li>
+<li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a></li>
+<li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
+<li class="chapter" data-level="12" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>12</b> Advanced topics</a><ul>
+<li class="chapter" data-level="12.1" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>12.1</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps-and-interactive-plots"><i class="fa fa-check"></i><b>12.2</b> Shiny Apps and interactive plots</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html"><i class="fa fa-check"></i><b>13</b> Data exploring of state dataset</a><ul>
+<li class="chapter" data-level="13.1" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html#read-in-data-and-manage-data"><i class="fa fa-check"></i><b>13.1</b> Read in data and manage data</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html#state.abb"><i class="fa fa-check"></i><b>13.1.1</b> state.abb:</a></li>
+<li class="chapter" data-level="13.1.2" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html#state.x77"><i class="fa fa-check"></i><b>13.1.2</b> state.x77:</a></li>
+<li class="chapter" data-level="13.1.3" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html#state.region"><i class="fa fa-check"></i><b>13.1.3</b> state.region:</a></li>
+<li class="chapter" data-level="13.1.4" data-path="data-exploring-of-state-dataset.html"><a href="data-exploring-of-state-dataset.html#data-merge-and-data-type-convertion"><i class="fa fa-check"></i><b>13.1.4</b> Data merge and data type convertion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html"><i class="fa fa-check"></i><b>14</b> Analyzing each set of data column seperately</a><ul>
+<li class="chapter" data-level="14.1" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-population"><i class="fa fa-check"></i><b>14.1</b> Distribution for Population</a></li>
+<li class="chapter" data-level="14.2" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-income"><i class="fa fa-check"></i><b>14.2</b> Distribution for Income</a></li>
+<li class="chapter" data-level="14.3" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-illiteracy"><i class="fa fa-check"></i><b>14.3</b> Distribution for Illiteracy</a></li>
+<li class="chapter" data-level="14.4" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-life.exp"><i class="fa fa-check"></i><b>14.4</b> Distribution for Life.Exp</a></li>
+<li class="chapter" data-level="14.5" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-murder"><i class="fa fa-check"></i><b>14.5</b> Distribution for Murder</a></li>
+<li class="chapter" data-level="14.6" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-hs.grad"><i class="fa fa-check"></i><b>14.6</b> Distribution for HS.Grad</a></li>
+<li class="chapter" data-level="14.7" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-frost"><i class="fa fa-check"></i><b>14.7</b> Distribution for Frost</a></li>
+<li class="chapter" data-level="14.8" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-area"><i class="fa fa-check"></i><b>14.8</b> Distribution for Area</a></li>
+<li class="chapter" data-level="14.9" data-path="analyzing-each-set-of-data-column-seperately.html"><a href="analyzing-each-set-of-data-column-seperately.html#distribution-for-region"><i class="fa fa-check"></i><b>14.9</b> Distribution for Region</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="analyzing-the-relationship-between-two-columns-of-data-set.html"><a href="analyzing-the-relationship-between-two-columns-of-data-set.html"><i class="fa fa-check"></i><b>15</b> Analyzing the relationship between two columns of data set</a></li>
+<li class="chapter" data-level="16" data-path="analyzing-the-relationship-between-more-than-two-columns-of-data-set.html"><a href="analyzing-the-relationship-between-more-than-two-columns-of-data-set.html"><i class="fa fa-check"></i><b>16</b> Analyzing the relationship between more than two columns of data set</a></li>
+<li class="chapter" data-level="17" data-path="analyzing-the-relationship-for-all-columns-of-data-set.html"><a href="analyzing-the-relationship-for-all-columns-of-data-set.html"><i class="fa fa-check"></i><b>17</b> Analyzing the relationship for all columns of data set</a></li>
+<li class="chapter" data-level="18" data-path="linear-model-anylysis.html"><a href="linear-model-anylysis.html"><i class="fa fa-check"></i><b>18</b> Linear Model Anylysis</a></li>
+<li class="chapter" data-level="19" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>19</b> Conclusion</a></li>
+<li class="chapter" data-level="20" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>20</b> Data exploring of game sale dataset</a></li>
+<li class="chapter" data-level="21" data-path="data-exploring-of-employee-salary-dataset.html"><a href="data-exploring-of-employee-salary-dataset.html"><i class="fa fa-check"></i><b>21</b> Data exploring of employee salary dataset</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear-model-anylysis" class="section level1">
+<h1><span class="header-section-number">Chapter 18</span> Linear Model Anylysis</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(leaps)</code></pre></div>
+<pre><code>## Loading required package: leaps</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(Population <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Population ~ ., data = st)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -33.590  -10.464   -0.898    9.394   24.704  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 31.25909   13.67566   2.286   0.0274 *
+## Income       0.25188    0.17693   1.424   0.1619  
+## Illiteracy  -0.35679    0.53704  -0.664   0.5101  
+## Life.Exp    -0.05938    0.20482  -0.290   0.7733  
+## Murder      -0.11650    0.19357  -0.602   0.5505  
+## HS.Grad     -0.26423    0.21955  -1.203   0.2355  
+## Frost       -0.17490    0.19371  -0.903   0.3717  
+## Area         0.17760    0.16153   1.099   0.2778  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 213.4415)
+## 
+##     Null deviance: 10412.5  on 49  degrees of freedom
+## Residual deviance:  8964.5  on 42  degrees of freedom
+## AIC: 419.34
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggfortify)
+d.factanal &lt;-<span class="st"> </span><span class="kw">factanal</span>(st, <span class="dt">factors =</span> <span class="dv">2</span>, <span class="dt">scores =</span> <span class="st">&#39;regression&#39;</span>)
+<span class="kw">autoplot</span>(d.factanal, <span class="dt">data =</span> st, <span class="dt">colour =</span> <span class="st">&#39;Population&#39;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">label.size =</span> <span class="dv">4</span>,
+         <span class="dt">loadings =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.label =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.label.size  =</span> <span class="dv">5</span>)</code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>Both Murder and Income have significant effection on Population. The factanal figure is very similar as PCA figure except we add the Population lable on it. California has really high population and isolated from the other states. New York has high population too. But from the factanal figure we find that Nevada was isolated from the other states. It’s different from the PCA figure we got in PCA analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(Income <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Income ~ ., data = st)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -20.1862   -7.1232   -0.2516    6.2072   26.0363  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 25.175015  11.725659   2.147   0.0376 *
+## Population   0.182762   0.128376   1.424   0.1619  
+## Illiteracy  -0.458973   0.454363  -1.010   0.3182  
+## Life.Exp    -0.006649   0.174643  -0.038   0.9698  
+## Murder      -0.232442   0.161660  -1.438   0.1579  
+## HS.Grad      0.462905   0.176289   2.626   0.0120 *
+## Frost       -0.211414   0.163370  -1.294   0.2027  
+## Area        -0.076436   0.139062  -0.550   0.5855  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 154.8687)
+## 
+##     Null deviance: 10412.5  on 49  degrees of freedom
+## Residual deviance:  6504.5  on 42  degrees of freedom
+## AIC: 403.31
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d.factanal &lt;-<span class="st"> </span><span class="kw">factanal</span>(st, <span class="dt">factors =</span> <span class="dv">2</span>, <span class="dt">scores =</span> <span class="st">&#39;regression&#39;</span>)
+<span class="kw">autoplot</span>(d.factanal, <span class="dt">data =</span> st, <span class="dt">colour =</span> <span class="st">&#39;Income&#39;</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">label.size =</span> <span class="dv">4</span>,
+         <span class="dt">loadings =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.label =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.label.size  =</span> <span class="dv">5</span>)</code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Income has significant relationship with Population and High School Gradulation. We add the Income lable for this factanal figure . Maybe one of the reason for Alaska’s speciality is its high income.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(Illiteracy <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Illiteracy ~ ., data = st)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -6.9257  -2.5776  -0.3218   1.9303  13.5463  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 18.15925    3.05426   5.946 4.76e-07 ***
+## Population  -0.02915    0.04387  -0.664   0.5101    
+## Income      -0.05168    0.05116  -1.010   0.3182    
+## Life.Exp    -0.10616    0.05627  -1.887   0.0661 .  
+## Murder      -0.04109    0.05520  -0.744   0.4608    
+## HS.Grad     -0.14394    0.05984  -2.406   0.0206 *  
+## Frost       -0.01831    0.05583  -0.328   0.7446    
+## Area        -0.06104    0.04587  -1.331   0.1905    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 17.43749)
+## 
+##     Null deviance: 1491.62  on 49  degrees of freedom
+## Residual deviance:  732.37  on 42  degrees of freedom
+## AIC: 294.11
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>Illiteracy is mainly correlated with Frost , HS. Grad and Area of the state.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(Life.Exp <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Life.Exp ~ ., data = st)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -24.401   -5.733   -0.454    5.672   20.714  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 23.830951  10.275410   2.319   0.0253 *
+## Population  -0.033630   0.116011  -0.290   0.7733  
+## Income      -0.005191   0.136328  -0.038   0.9698  
+## Illiteracy  -0.736018   0.390089  -1.887   0.0661 .
+## Murder      -0.103225   0.145434  -0.710   0.4818  
+## HS.Grad      0.278856   0.162452   1.717   0.0934 .
+## Frost       -0.134100   0.145729  -0.920   0.3627  
+## Area         0.211439   0.118911   1.778   0.0826 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 120.8915)
+## 
+##     Null deviance: 8918.6  on 49  degrees of freedom
+## Residual deviance: 5077.4  on 42  degrees of freedom
+## AIC: 390.92
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>Life Expectation is signifcantly related with Murder, and HS.Grad too. We can use follow formula to predict the Life Expectation: <span class="math inline">\(Life.Exp = 70.94 - 0.3011 * Murder + 0.0489 * HS.Grad\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(Murder <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Murder ~ ., data = st)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -19.989   -6.959   -0.474    6.463   33.555  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 39.24072    9.78903   4.009 0.000245 ***
+## Population  -0.07340    0.12195  -0.602 0.550514    
+## Income      -0.20183    0.14037  -1.438 0.157889    
+## Illiteracy  -0.31688    0.42570  -0.744 0.460804    
+## Life.Exp    -0.11482    0.16177  -0.710 0.481766    
+## HS.Grad      0.22509    0.17381   1.295 0.202368    
+## Frost       -0.44382    0.13932  -3.186 0.002723 ** 
+## Area        -0.02066    0.13001  -0.159 0.874482    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 134.4742)
+## 
+##     Null deviance: 7764.5  on 49  degrees of freedom
+## Residual deviance: 5647.9  on 42  degrees of freedom
+## AIC: 396.24
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>Murder is signifcantly related to Life.Exp and Population of the state. I we know the population and Life.Exp of the certain state in those years, we can predict Murder in that state at that time. <span class="math inline">\(Murder = 122.2 - 1.655 * Life.Exp + 0.000188 * Population\)</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(HS.Grad <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = HS.Grad ~ ., data = st)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -15.6772   -6.3948   -0.7912    6.4416   23.1144  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) 15.870646   9.716734   1.633   0.1099  
+## Population  -0.126166   0.104833  -1.203   0.2355  
+## Income       0.304633   0.116014   2.626   0.0120 *
+## Illiteracy  -0.841319   0.349725  -2.406   0.0206 *
+## Life.Exp     0.235089   0.136955   1.717   0.0934 .
+## Murder       0.170598   0.131728   1.295   0.2024  
+## Frost        0.005356   0.135144   0.040   0.9686  
+## Area        -0.011616   0.113202  -0.103   0.9188  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 101.9174)
+## 
+##     Null deviance: 9198.0  on 49  degrees of freedom
+## Residual deviance: 4280.5  on 42  degrees of freedom
+## AIC: 382.38
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(leaps)
+model &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(HS.Grad <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st, <span class="dt">method =</span> <span class="st">&quot;exhaustive&quot;</span>)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(HS.Grad ~ ., data = st, method = &quot;exhaustive&quot;)
+## 7 Variables  (and intercept)
+##            Forced in Forced out
+## Population     FALSE      FALSE
+## Income         FALSE      FALSE
+## Illiteracy     FALSE      FALSE
+## Life.Exp       FALSE      FALSE
+## Murder         FALSE      FALSE
+## Frost          FALSE      FALSE
+## Area           FALSE      FALSE
+## 1 subsets of each size up to 7
+## Selection Algorithm: exhaustive
+##          Population Income Illiteracy Life.Exp Murder Frost Area
+## 1  ( 1 ) &quot; &quot;        &quot; &quot;    &quot;*&quot;        &quot; &quot;      &quot; &quot;    &quot; &quot;   &quot; &quot; 
+## 2  ( 1 ) &quot; &quot;        &quot;*&quot;    &quot;*&quot;        &quot; &quot;      &quot; &quot;    &quot; &quot;   &quot; &quot; 
+## 3  ( 1 ) &quot; &quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot; &quot;    &quot; &quot;   &quot; &quot; 
+## 4  ( 1 ) &quot; &quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot; &quot;   &quot; &quot; 
+## 5  ( 1 ) &quot;*&quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot; &quot;   &quot; &quot; 
+## 6  ( 1 ) &quot;*&quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot; &quot;   &quot;*&quot; 
+## 7  ( 1 ) &quot;*&quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot;*&quot;   &quot;*&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(HS.Grad <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> st, <span class="dt">method =</span> <span class="st">&quot;forward&quot;</span>)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## Subset selection object
+## Call: regsubsets.formula(HS.Grad ~ ., data = st, method = &quot;forward&quot;)
+## 7 Variables  (and intercept)
+##            Forced in Forced out
+## Population     FALSE      FALSE
+## Income         FALSE      FALSE
+## Illiteracy     FALSE      FALSE
+## Life.Exp       FALSE      FALSE
+## Murder         FALSE      FALSE
+## Frost          FALSE      FALSE
+## Area           FALSE      FALSE
+## 1 subsets of each size up to 7
+## Selection Algorithm: forward
+##          Population Income Illiteracy Life.Exp Murder Frost Area
+## 1  ( 1 ) &quot; &quot;        &quot; &quot;    &quot;*&quot;        &quot; &quot;      &quot; &quot;    &quot; &quot;   &quot; &quot; 
+## 2  ( 1 ) &quot; &quot;        &quot;*&quot;    &quot;*&quot;        &quot; &quot;      &quot; &quot;    &quot; &quot;   &quot; &quot; 
+## 3  ( 1 ) &quot; &quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot; &quot;    &quot; &quot;   &quot; &quot; 
+## 4  ( 1 ) &quot; &quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot; &quot;   &quot; &quot; 
+## 5  ( 1 ) &quot;*&quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot; &quot;   &quot; &quot; 
+## 6  ( 1 ) &quot;*&quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot; &quot;   &quot;*&quot; 
+## 7  ( 1 ) &quot;*&quot;        &quot;*&quot;    &quot;*&quot;        &quot;*&quot;      &quot;*&quot;    &quot;*&quot;   &quot;*&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(HS.Grad <span class="op">~</span><span class="st"> </span>Illiteracy <span class="op">+</span><span class="st"> </span>Area <span class="op">+</span><span class="st"> </span>Life.Exp <span class="op">+</span><span class="st"> </span>Income,  <span class="dt">data =</span> st)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = HS.Grad ~ Illiteracy + Area + Life.Exp + Income, 
+##     data = st)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -20.624   -6.517   -2.793    7.318   22.786  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) 18.77743    6.63039   2.832  0.00689 **
+## Illiteracy  -0.93005    0.34563  -2.691  0.00997 **
+## Area        -0.04374    0.11237  -0.389  0.69894   
+## Life.Exp     0.24900    0.13637   1.826  0.07449 . 
+## Income       0.26114    0.11182   2.335  0.02405 * 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 103.8066)
+## 
+##     Null deviance: 9198.0  on 49  degrees of freedom
+## Residual deviance: 4671.3  on 45  degrees of freedom
+## AIC: 380.75
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>we can predict HS.Grad mainly using four factors: Illiteracy, Area, Life.Exp and Income, though both globle search method “exhaustive” and “foreward” included every factors of the data set into it. We get the final formula as: <span class="math inline">\(HS.Grad = -5.383 * Illiteracy + 0.00002983 * Area + 1.806 * Life.Exp + 0.002968 * Income\)</span></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analyzing-the-relationship-for-all-columns-of-data-set.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

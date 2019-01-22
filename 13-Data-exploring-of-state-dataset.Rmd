@@ -1,1 +1,69 @@
 # Data exploring of state dataset
+
+## Read in data and manage data
+ 
+There are 7 little data sets in the state data group. We pick three of them, including state.abb, state.x77, and state.region to form our data file "sta". The detail information about the variables *in the three data sets are listed here.
+
+**state.abb**:
+character vector of 2-letter abbreviations for the state names.
+
+**state.x77**:
+matrix with 50 rows and 8 columns giving the following statistics in the respective columns.
+
+Population:
+population estimate as of July 1, 1975
+
+Income:
+per capita income (1974)
+
+Illiteracy:
+illiteracy (1970, percent of population)
+
+Life Exp:
+life expectancy in years (1969-71)
+
+Murder:
+murder and non-negligent manslaughter rate per 100,000 population (1976)
+
+HS Grad:
+percent high-school graduates (1970)
+
+Frost:
+mean number of days with minimum temperature below freezing (1931-1960) in capital or large city
+
+Area:
+land area in square miles
+
+**state.region**:
+factor giving the region (Northeast, South, North Central, West) that each state belongs to.
+
+We merge these three and got final dataframe "sta" with 10 columns and 50 rows.
+```{r}
+tem <- cbind(state.abb, state.x77, state.region)
+class(tem)
+sta <- data.frame(tem)  #change tem from matrix to dataframe
+head(sta)
+dim(sta)
+colnames(sta)[1] <- "State"
+colnames(sta)[10] <- "Region"
+str(sta)
+```
+
+```{r}
+sta$Population <- as.numeric(sta$Population)
+sta$Income <- as.numeric(sta$Income)
+sta$Illiteracy <- as.numeric(sta$Illiteracy)
+sta$Life.Exp <- as.numeric(sta$Life.Exp)
+sta$Murder <- as.numeric(sta$Murder)
+sta$HS.Grad <- as.numeric(sta$HS.Grad)
+sta$Frost <- as.numeric(sta$Frost)
+sta$Area <- as.numeric(sta$Area)
+```
+
+## Analyzing each set of data column seperately
+
+
+
+
+
+
