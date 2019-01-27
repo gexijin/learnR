@@ -138,11 +138,78 @@ plot(x, myf(x))  # see plot on the right.
 Obviously functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too. 
 
 ```{exercise}
-Write an R function to implement this arithmetic function:  f(x)= √(|x|)+5x-6. Note |x| means the absolute value of x. Use this function to find f(4.534), and also try to produce a plot like the one above. 
+Write an R function to implement this arithmetic function:  f(x)= |x|+5x-6. Note |x| means the absolute value of x. Use this function to find f(4.534), and also produce a plot like the example. 
 ```
 
 ```{exercise}
-Go over the **R cheat sheet**, find some function that was not covered in class and show some demo. 
+Read the **R cheat sheet** or google r functions, find 5 functions that are not covered in class and show some demo. 
+```
+
+Let's define a function to count even numbers in a vector. 
+
+```{r}
+#counts the number of even intergers in vec
+evencount <- function(vec) {
+  k <- 0 # assign o to i      #assign 0 to a count varialbe k
+  for (i in vec) {            #set i to vec[1],vec[2],...
+    if (i %% 2 == 0) k <- k+1 # test if i is an even or odd number. %% is the modulo operator
+  }
+  return(k)                   #print the computed value of k
+}
+```
+
+```{r}
+x=c(2,5,7,8,14,12,8,3) #a vector
+evencount(x)           #Call the function evencount(). 
+```
+
+A vaiable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
+
+k
+
+Error: object 'vec' not found
+
+vec
+
+Error: object 'vec' not found
+
+A variable is called global variable if it is defined outside of functions.A global variable is also available within functions. Here is an example:
+
+```{r}
+myfun.globle <- function (x){
+  return(x - 2*y)
+  y <- 1
+}
+myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
+```
+Here y is a global variable.
+```{r}
+y
+```
+The function *myfun.globle2()* defined below returns the same values as above. But both x and y within the the paratheses *(x, y=1)* following *function* are local variables.
+```{r}
+myfun.globle2 <- function (x,y=1){ #y is set as 1 within the function by default.
+  return(x - 2*y)
+ }
+myfun.globle2(8)    #8-2*y = 8-2*(1)=6
+```
+
+```{exercise}
+Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=xnorm(5000) respectively. Define another function to calcute the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+```
+
+```{r echo=FALSE, results= 'hide', message=FALSE}
+fun1 <- function(x){
+  k <- 0
+  for (n in x) { 
+    if (n < 0) k <- k+1
+  } 
+  return(k/length(x))
+}
+x=rnorm(50)
+y=rnorm(5000)
+fun1(x)
+fun1(y)
 ```
 
 ###	Looking for Help and Example Code
@@ -169,7 +236,7 @@ example(boxplot)  # bring example of boxplot
 
 I found a lot of help information about R through Google. Google tolerate typos, grammar errors, and different notations. Also, most (99 %) of your questions have been asked and answered on various forums. Many R gurus answered a ton of questions on web sites like** [stackoverflow.com](stackoverflow.com)**, with example codes!  I also use Google as a reference. 
 
-It is important to add comments to your code. Everything after the “#” will be ignored by R when running.  We often recycle and repurpose our codes. 
+It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and repurpose our codes. 
 ```{r}
 max(1, 3, 5)  # return the maximum value of a vector
 ```
@@ -179,10 +246,11 @@ max(1, 3, 5)  # return the maximum value of a vector
 A vector is an object that holds a sequence of values of the same type. A vector's values can be numbers, strings, logical values, or any other type, as long as they're all the same type. They can come from a column of a data frame. if we have a vector x:
 ```{r}
 x <- c(5, 2, 22, 11, 5)
+x
 ```
-Here **c** is for combine, do not use it as variable name. It is as special as you!
+Here **c** stands for *concatenate*, do not use it as variable name. It is as special as you!
 
-Vectors cannot hold values with different modes (types). Try mixing modes and see what happens:
+Vectors can not hold values with different modes (types). Try mixing modes and see what happens:
 ```{r}
 c(1, TRUE, "three")
 ```
@@ -196,12 +264,17 @@ If you need a vector with a sequence of numbers you can create it with **start:e
 
 A more versatile way to make sequences is to call the **seq** function. Let's do the same thing with **seq**:
 ```{r}
-seq(5, 9)
+seq(from = 5, to = 9)
 ```
 
 seq also allows you to use increments other than 1. Try it with steps of 0.5:
 ```{r}
-seq(5, 9, .5)
+seq(from = 5, to = 9, by = .5)
+```
+
+Create a sequence from 5 to 9 with length 15: 
+```{r}
+seq(from = 5, to = 9, length = 15)
 ```
 
 ```{exercise}
@@ -209,7 +282,7 @@ Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code f
 ```
 
 #### Commands about vector
-Next we will try those commands about vector. First let's find out what is the 4th element of our vector x, or the elements from 2 to 4.
+Next we will try those commands about vector. First let's find out what is the 4th element of our vector x <- c(5, 2, 22, 11, 5), or the elements from 2 to 4.
 ```{r}
 x[4]
 x[2:4]
@@ -220,7 +293,7 @@ If you define the vector as y,
 y <- x[2:4]
 ```
 
-No result is returned but you "captured" the result in a new vector, which holds 3 numbers. You can type y and hit return to see the results. Or do some computing with it. 
+No result is returned but you "captured" the result in a new vector, which holds 3 numbers. You can type y and hit enter to see the results. Or do some computing with it. 
 ```{r}
 y <- x[2:4]; y
 ```
@@ -274,40 +347,79 @@ y <- x[-2]
 y
 ```
 
-On the contrary, we can also add a new element to the end. These two commands get the same result.
+Add an element 100 to the vector x between the second and the third element:
+
 ```{r}
+x <- c(5, 2, 22, 11, 5)     
+x <- c(x[1:2], 100, x[3:5] )  #add an element 100 to x between elements 8 and 9
+x                          #The value 100 is added to the previous vector x 
+```
+
+Length of the new created x is:
+```{r}
+length(x)
+```
+
+
+To add a new element to the end, we can use the two commands below, they generate same result.
+```{r}
+x <- c(5, 2, 22, 11, 5) 
 c(x, 7)
 append(x, 7)
 ```
 
+Creat an empty vector y:
+```{r}
+y <- c()
+y
+```
+```{r}
+length(y)
+```
+
 Sometimes we are interested in unique elements:
 ```{r}
+x <- c(5, 2, 22, 11, 5) 
 unique(x)
 ```
 
 And the frequencies of the unique elements:
 ```{r}
+x <- c(5, 2, 22, 11, 5)
 table(x)
 ```
 
 If we are interested in the index of the maximum or minimum:
 ```{r}
+x <- c(5, 2, 22, 11, 5)
 which.max(x)
 which.min(x)
 ```
 
 Or we need to look for the location of a special value:
 ```{r}
+x <- c(5, 2, 22, 11, 5)
 which(x == 11)
 ```
-
-We can randomly chose some elements from the vector.
+Or more complicated, we want to find the locations where $x^2>100$:
 ```{r}
-sample(x, 2)
+x <- c(5, 2, 22, 11, 5)
+x^2
+```
+```{r}
+which (x^2 > 100)
+```
+
+
+We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is "No". Because the 3 elements are randomly selected.
+```{r}
+x <- c(5, 2, 22, 11, 5)
+sample(x, 3)
 ```
 
 Elements in the vector can have names. Type "x" in the command window to see the difference.
 ```{r}
+x <- c(5, 2, 22, 11, 5)
 names(x) <- c("x", "y", "z", "Amy", "John")
 x
 ```
@@ -317,8 +429,69 @@ Now we can refer to the elements by their names.
 x["Amy"]
 ```
 
+The *any()* and *all()* functions produce logical values. They return if any of all of their arguments are TRUE.
+
+```{r}
+x <- c(5, 2, 22, 11, 5)
+any(x < 10)
+```
+
+```{r}
+x <- c(5, 2, 22, 11, 5)
+any(x < 0)
+```
+
+```{r}
+x <- c(5, 2, 22, 11, 5)
+all(x < 10)
+```
+
+```{r}
+x <- c(5, 2, 22, 11, 5)
+any(x > 0)
+```
+
+```{r}
+x>10
+```
+
+If we want to get a subset from a vector, there are multiple methods can be used.Here are some examples:
+
+```{r}
+x <- c(NA, 2, -4, NA, 9, -1, 5)
+x
+```
+```{r}
+y <- x[x < 0]
+y
+```
+There are annoying NAs in the subset y. We can remove the NAs by applying *na.rm()* function to y. Or we can use the *subset()* function to get a "clean" data without NAs.
+```{r}
+subset(x, x < 0)
+```
+
+The *ifelse()* function allows us do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true of false. Here are two examples.
+```{r}
+x <- c(2, -3, 4, -1, -5, 6)
+y <- ifelse(x > 0, 'Positive', 'Negative')
+y
+```
+In this example, the element in y is either 'positive' or 'negative'. It depends on x greater than 0 or less than 0.
+
+```{r}
+x <- c(3, 4, -6, 1, -2)
+y <- ifelse (x < 0, abs(x), 2*x+1) 
+y
+```
+In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise multiply the element by 2 then add 1.
+
+```{exercise}
+Using sample selction function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selcted integer is an even number, then y returns 'even', otherwise y returns 'odd'.
+```
+
 If we have two vectors and try to compare them with each other:
 ```{r}
+x <- c(5, 2, 22, 11, 5)
 y <- c(5, 11, 8)
 z <- match(y, x)
 z
@@ -360,6 +533,79 @@ sum(z, na.rm = TRUE)
 Now compute the average of values in z. Ignore the missing values.
 ```
 
+Let's using examples to show the differences between NULL and NA.
+```{r}
+# build up a vector of numbers greater than 10 in vector vec.x
+vec.x <- c(40, 3, 11, 0, 9)
+z1 <- NULL
+for (i in vec.x) {
+  if (i > 10) z1 <- c(z1, i)
+}
+z1
+
+```
+
+```{r}
+length(z1)
+```
+
+
+```{r}
+# build up a vector of numbers greater than 10 in vector vec.x
+vec.x <- c(40, 3, 11, 0, 9)
+z2 <- NA
+for (i in vec.x) {
+  if (i > 10) z2 <- c(z2, i)
+}
+z2
+```
+
+```{r}
+length(z2)
+```
+
+Comparing the length of z1 and z2, we know the NULL is counted as nonexistent, but the NA is counted as a missing value.
+
+Let's do some opertations related to vectors. Firsly, we start from the operation between a vector and a scalar. 
+```{r}
+# Operation between x and a scalar
+x <- c(1, 4, 8, 9, 10)
+y <- 1
+x+y
+
+```
+As you can see, 1 is added to each element in x.  The operation is equivalent to: 
+```{r}
+x <- c(1, 4, 8, 9, 10)
+y <- c(1, 1, 1, 1, 1)
+x+y
+```
+The operation between vectors with same length is element-wise. For example:
+```{r}
+# Operation between two vectors with same length
+x <- c(1, 4, 8, 9, 10)
+y <- c(1, 2, 0, 3, 15)
+x+y
+```
+```{r}
+x*y
+```
+
+If vectors have different length, then R will automatically *recycles* the shorter one, untill it has the same length as the longer one. For example:
+```{r}
+x <- c(1, 4, 8, 9, 10)
+y <- c(1, 2)
+x+y
+```
+The y was *recyled*, in fact the real operation is showed below:
+```{r}
+x <- c(1, 4, 8, 9, 10)
+y <- c(1, 2, 1, 2, 1)
+x+y
+```
+
+
+
 ####	Scatter Plots of two vectors  
 The **plot** function takes two vectors, one for X values and one for Y values, and draws a graph of them. Let's draw a graph showing the relationship of numbers and their sines.
 
@@ -367,6 +613,7 @@ The **plot** function takes two vectors, one for X values and one for Y values, 
 x <- seq(1, 20, 0.1)
 y <- sqrt(x)
 ```
+
 
 Then simply call plot with your two vectors:
 ```{r }
