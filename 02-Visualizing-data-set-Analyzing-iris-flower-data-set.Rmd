@@ -755,7 +755,7 @@ pca  # Have a look at the results.
 ```
 
 Note that the first principal component is positively correlated with Sepal length, petal length, and petal width. Recall that these three variables are highly correlated. Sepal width is the variable that is almost the same across three species with small standard deviation. PC2 is mostly determined by sepal width, less so by sepal length.
-```{r results='hide', fig.keep='none'}
+```{r }
 plot(pca)  # plot the amount of variance each principal components captures.
 str(pca)   # this shows the structure of the object, listing all parts. 
 ```
@@ -766,7 +766,7 @@ head(pca$x)  # the new coordinate values for each of the 150 samples
 
 These numbers can be used to plot the distribution of the 150 data points. 
 ```{r fig.keep='none'}
-plot(pca$x[, 1:2], pch = 1, col = iris$Species,
+plot(pca$x[, 1:2], pch = 1, col = rainbow(3)[iris$Species],
 		 xlab = "1st principal component", 
 		 ylab = "2nd Principal Component")
      legend("topright", levels(iris$Species), fill = rainbow(3))
@@ -776,8 +776,8 @@ The result (left side of Figure \@ref(fig:13-5)) is a projection of the 4-dimens
 
 (ref:13-5) PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
 
-```{r 13-5, echo=FALSE, fig.show='hold', out.width='50%', fig.cap='(ref:13-5)', fig.align='center'}
-plot(pca$x[, 1:2], pch = 1, col = iris$Species,
+```{r 13-5, echo=FALSE, message=FALSE, fig.show='hold', out.width='50%', fig.cap='(ref:13-5)', fig.align='center'}
+plot(pca$x[, 1:2], pch = 1, col = rainbow(3)[iris$Species],
 		 xlab = "1st principal component", 
 		 ylab = "2nd Principal Component")
 legend("topright", levels(iris$Species), fill = rainbow(3))
@@ -821,6 +821,16 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting g
 ```
 
 The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
+
+The function *autoplot()* in package **ggfortify** can generate the similar plot as Figure \@ref(fig:13-5). The differences are caused by algorithms used in different packages.
+```{r warning=FALSE}
+library(ggfortify)
+autoplot(prcomp(pca$x[, 1:2]), data = iris, colour = 'Species', shape = 'Species')
+```
+
+More details can be found in this webpage:
+
+[https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html](https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html).
 
 ```{exercise}
 Create PCA plot of the state.x77 data set (convert matrix to data frame). Use the state.region information to color code the states. Interpret your results. Hint: do not forget normalization using the scale option. 
