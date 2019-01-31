@@ -25,11 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<<<<<<< HEAD
 <meta name="date" content="2019-01-31">
-=======
-<meta name="date" content="2019-01-28">
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -411,19 +407,11 @@ evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-<<<<<<< HEAD
-## [1] -3.1863242 -0.7319469  0.1490667  1.0090740  1.3500000
+## [1] -2.429265825 -0.708759943 -0.002811017  0.778737607  1.350000000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##         0%        25%        50%        75%       100% 
-## -3.1863242 -0.7319469  0.1490667  1.0090740  1.3500000 
-=======
-## [1] -2.9455801 -0.7228064  0.1078889  0.6998016  1.3500000
-## 
-## min&gt; pmin(quantile(x), cH) # has names
-##         0%        25%        50%        75%       100% 
-## -2.9455801 -0.7228064  0.1078889  0.6998016  1.3500000 
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+##           0%          25%          50%          75%         100% 
+## -2.429265825 -0.708759943 -0.002811017  0.778737607  1.350000000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -591,11 +579,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre></div>
-<<<<<<< HEAD
-<pre><code>## [1]  2  5 22</code></pre>
-=======
-<pre><code>## [1] 11 22  5</code></pre>
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+<pre><code>## [1] 11  5 22</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -940,33 +924,18 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 ##  Welch Two Sample t-test
 ## 
 ## data:  rnorm(100) and rnorm(100)
-<<<<<<< HEAD
-## t = -0.812, df = 197.64, p-value = 0.4178
+## t = 0.13394, df = 197.99, p-value = 0.8936
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3905354  0.1627258
+##  -0.2497400  0.2861383
 ## sample estimates:
 ##   mean of x   mean of y 
-## -0.13632585 -0.02242106</code></pre>
+## -0.00491592 -0.02311506</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
-<pre><code>## [1] 0.417767</code></pre>
+<pre><code>## [1] 0.8935823</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
 <pre><code>##   mean of x   mean of y 
-## -0.13632585 -0.02242106</code></pre>
-=======
-## t = -1.2063, df = 196.9, p-value = 0.2291
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -0.4214408  0.1015359
-## sample estimates:
-##   mean of x   mean of y 
-## -0.08199738  0.07795508</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
-<pre><code>## [1] 0.2291397</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
-<pre><code>##   mean of x   mean of y 
-## -0.08199738  0.07795508</code></pre>
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+## -0.00491592 -0.02311506</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? t.test</code></pre></div>
 <p>Value</p>
@@ -983,17 +952,10 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 <span class="kw">hist</span>(pvalues)  <span class="co"># define</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-241-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
-<<<<<<< HEAD
-<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.001141 0.245824 0.516984 0.508172 0.768466 0.996667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 21</code></pre>
-=======
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0008262 0.2389882 0.4908667 0.4925679 0.7349929 0.9967776</code></pre>
+## 0.0001954 0.2340694 0.4657447 0.4826007 0.7433038 0.9998633</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 15</code></pre>
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+<pre><code>## [1] 34</code></pre>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-242" class="exercise"><strong>Exercise 3.15  </strong></span>Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point.
@@ -1236,21 +1198,12 @@ segs  <span class="co"># a vector of strings</span></code></pre></div>
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(x, y)
 <span class="kw">head</span>(x2)</code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id          y
-<<<<<<< HEAD
-## 1          5.1         3.5          1.4         0.2  setosa  1 -0.5931391
-## 2          4.9         3.0          1.4         0.2  setosa  2 -0.6129410
-## 3          4.7         3.2          1.3         0.2  setosa  3  1.0677381
-## 4          4.6         3.1          1.5         0.2  setosa  4 -0.6646461
-## 5          5.0         3.6          1.4         0.2  setosa  5 -0.3400414
-## 6          5.4         3.9          1.7         0.4  setosa  6 -0.5471668</code></pre>
-=======
-## 1          5.1         3.5          1.4         0.2  setosa  1 -0.6953512
-## 2          4.9         3.0          1.4         0.2  setosa  2  2.3566236
-## 3          4.7         3.2          1.3         0.2  setosa  3 -1.2605085
-## 4          4.6         3.1          1.5         0.2  setosa  4  0.3005148
-## 5          5.0         3.6          1.4         0.2  setosa  5 -1.7099341
-## 6          5.4         3.9          1.7         0.4  setosa  6 -2.8493737</code></pre>
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+## 1          5.1         3.5          1.4         0.2  setosa  1  1.3107485
+## 2          4.9         3.0          1.4         0.2  setosa  2  1.0800301
+## 3          4.7         3.2          1.3         0.2  setosa  3  0.9839631
+## 4          4.6         3.1          1.5         0.2  setosa  4 -1.0810760
+## 5          5.0         3.6          1.4         0.2  setosa  5 -0.2293538
+## 6          5.4         3.9          1.7         0.4  setosa  6 -1.0517801</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1323,66 +1276,31 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <p>We use data.frame() function to define a new data frame with 100 rows and two columns, <em>ids</em> and <em>rand</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
-<<<<<<< HEAD
 <pre><code>##   id       rand
-## 1  1 -0.2523284
-## 2  2  1.0676939
-## 3  3  0.2319460
-## 4  4 -1.0928998
-## 5  5 -0.3966778
-## 6  6 -0.4184772</code></pre>
+## 1  1 -0.5442972
+## 2  2 -0.1071918
+## 3  3 -0.3103954
+## 4  4 -1.0405582
+## 5  5  1.3199536
+## 6  6 -1.5767343</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
 <pre><code>##      id       rand
-## 95   95 -0.1389368
-## 96   96  0.6953654
-## 97   97  1.6429494
-## 98   98  1.1450920
-## 99   99 -0.5938179
-## 100 100  3.0305420</code></pre>
+## 95   95  1.7581967
+## 96   96 -0.7489665
+## 97   97 -0.2240222
+## 98   98 -1.1099483
+## 99   99 -0.1121066
+## 100 100 -0.7846598</code></pre>
 <p>Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -0.2523284
-## 2  2          4.9         3.0          1.4         0.2  setosa  1.0676939
-## 3  3          4.7         3.2          1.3         0.2  setosa  0.2319460
-## 4  4          4.6         3.1          1.5         0.2  setosa -1.0928998
-## 5  5          5.0         3.6          1.4         0.2  setosa -0.3966778
-## 6  6          5.4         3.9          1.7         0.4  setosa -0.4184772</code></pre>
-=======
-<pre><code>##   id         rand
-## 1  1  0.431237846
-## 2  2  0.001621487
-## 3  3 -1.160204089
-## 4  4 -0.605423324
-## 5  5  1.233794641
-## 6  6 -0.732464304</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
-<pre><code>##      id       rand
-## 95   95 -2.8286101
-## 96   96 -0.9247618
-## 97   97 -1.0418569
-## 98   98  1.2513378
-## 99   99  0.0341188
-## 100 100 -1.1050678</code></pre>
-<p>Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
-<span class="kw">head</span>(z)</code></pre></div>
-<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1  1          5.1         3.5          1.4         0.2  setosa
-## 2  2          4.9         3.0          1.4         0.2  setosa
-## 3  3          4.7         3.2          1.3         0.2  setosa
-## 4  4          4.6         3.1          1.5         0.2  setosa
-## 5  5          5.0         3.6          1.4         0.2  setosa
-## 6  6          5.4         3.9          1.7         0.4  setosa
-##           rand
-## 1  0.431237846
-## 2  0.001621487
-## 3 -1.160204089
-## 4 -0.605423324
-## 5  1.233794641
-## 6 -0.732464304</code></pre>
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+## 1  1          5.1         3.5          1.4         0.2  setosa -0.5442972
+## 2  2          4.9         3.0          1.4         0.2  setosa -0.1071918
+## 3  3          4.7         3.2          1.3         0.2  setosa -0.3103954
+## 4  4          4.6         3.1          1.5         0.2  setosa -1.0405582
+## 5  5          5.0         3.6          1.4         0.2  setosa  1.3199536
+## 6  6          5.4         3.9          1.7         0.4  setosa -1.5767343</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1391,23 +1309,13 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ##  Mean   : 50.50   Mean   :5.471   Mean   :3.099   Mean   :2.861  
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
-<<<<<<< HEAD
-##   Petal.Width          Species        rand           
-##  Min.   :0.100   setosa    :50   Min.   :-2.2499091  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.5888752  
-##  Median :0.800   virginica : 0   Median : 0.0000358  
-##  Mean   :0.786                   Mean   : 0.0524344  
-##  3rd Qu.:1.300                   3rd Qu.: 0.7106188  
-##  Max.   :1.800                   Max.   : 3.0305420</code></pre>
-=======
 ##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-2.82861  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.55335  
-##  Median :0.800   virginica : 0   Median : 0.03939  
-##  Mean   :0.786                   Mean   : 0.01834  
-##  3rd Qu.:1.300                   3rd Qu.: 0.64018  
-##  Max.   :1.800                   Max.   : 2.17183</code></pre>
->>>>>>> 89608702223ea07924a82213fbf7a70758e85ad3
+##  Min.   :0.100   setosa    :50   Min.   :-2.60150  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.74187  
+##  Median :0.800   virginica : 0   Median : 0.02503  
+##  Mean   :0.786                   Mean   : 0.02602  
+##  3rd Qu.:1.300                   3rd Qu.: 0.83591  
+##  Max.   :1.800                   Max.   : 2.26286</code></pre>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-291" class="exercise"><strong>Exercise 3.17  </strong></span>A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
