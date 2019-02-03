@@ -954,12 +954,14 @@ Another interesting application of matrix is the manipulation of images.You may 
 Most time, we need to blur images or add mosaic to a picture for various purposes. Let's use one example to demonstrate how to add mosaic to a grayscale image.
 
 **Example: Add mosaic to Einstein image**
-Fistly, let's read an grayscale image of Einstein into R and view the image. 
+
+Firstly, let's read an grayscale image of Einstein into R and view the image. 
 ```{r}
 library(pixmap)
 EINSTEIN <- read.pnm("EINSTEIN.pgm", cellres=1)
 plot(EINSTEIN)
 ```
+
 Then let us look at structure of this image:
 
 ```{r}
@@ -987,9 +989,7 @@ mosaic.plot <- function(image,yrange,xrange){
 }
 ```
 
-The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. 
-
-We don't want to change the origial image,therefore we copy the original image to image2 by using *image2 <-image*. The *whitenoise* creates a matrix filled with random numbers following uniform distribution. The dimensions of *whitenoise* is determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
+The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. Since we don't want to change the origial image,therefore we copy the original image to image2 by assigning *image* to *image2*. The *whitenoise* creates a matrix filled with random numbers following uniform distribution. The dimensions of *whitenoise* is determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
 
 ```{r}
 EINSTEIN.mosaic <- mosaic.plot(EINSTEIN, 175:249, 118:295)
@@ -1001,7 +1001,7 @@ Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 
 The function *locator()* allows us to find the relevant rows and columns. Type **locator()** in the *Console* window, then R will wait for you to click a point within an image, then click *esc* on your keyboard to exit the function. Then the function will return the coordinates of that point in the *Console* window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in *pixmap* objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from *locator()* function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function. 
 
 ```{exercise}
-Using the *mosaic.plot()* function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region.
+Using the *mosaic.plot()* function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
 
 ```
 
