@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-02-02">
+<meta name="date" content="2019-02-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -407,11 +407,11 @@ evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.7628255 -0.4234363  0.1634008  0.8053130  1.3500000
+## [1] -2.4417120 -0.8346154 -0.1757271  0.3404592  1.3500000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
 ##         0%        25%        50%        75%       100% 
-## -2.7628255 -0.4234363  0.1634008  0.8053130  1.3500000 
+## -2.4417120 -0.8346154 -0.1757271  0.3404592  1.3500000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -579,7 +579,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 11 22  2</code></pre>
+<pre><code>## [1] 22  5 11</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -807,78 +807,171 @@ Figure 3.1: Simple Bar plot
 </div>
 <div id="matrix-operations" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Matrix operations</h3>
-<p>A <strong>matrix</strong> has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. Define a matrix using the Iris dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</code></pre></div>
-<p>First let’s show the first few rows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(x)</code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1          5.1         3.5          1.4         0.2
-## 2          4.9         3.0          1.4         0.2
-## 3          4.7         3.2          1.3         0.2
-## 4          4.6         3.1          1.5         0.2
-## 5          5.0         3.6          1.4         0.2
-## 6          5.4         3.9          1.7         0.4</code></pre>
-<p>You can transform the matrix if you want, for the convenience of view and analysis.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t</span>(x)</code></pre></div>
-<pre><code>##                1   2   3   4   5   6   7   8   9  10
-## Sepal.Length 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9
-## Sepal.Width  3.5 3.0 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1
-## Petal.Length 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5
-## Petal.Width  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1</code></pre>
-<p>We can produce a new matrix by each element is doubled and added 5</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">+</span><span class="dv">5</span>
+<p><strong>Matrix</strong> is a two dimensional data structure in R programming. Technically, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values.</p>
+<p>We can creat a matrix by using <em>rbind</em> or <em>cbind</em> function. <em>rbind</em> combine all row Here are two examples:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">15</span>)) <span class="co"># combine vectors by row</span>
+m</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    3    4    5
+## [2,]   10   13   15</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">15</span>), <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)) <span class="co"># combine vectors by column</span>
+n</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    3   10    3
+## [2,]    4   13    2
+## [3,]    5   15    1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s &lt;-<span class="st"> </span><span class="kw">rbind</span>(m,n)      <span class="co">#combine two matrices m and n by row</span>
+s</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    3    4    5
+## [2,]   10   13   15
+## [3,]    3   10    3
+## [4,]    4   13    2
+## [5,]    5   15    1</code></pre>
+<p>To use <em>rbind()</em> combining matrices by row, the matrices must have same number of columns. Similar to <em>cbind()</em>, the matrices must have same number of rows.</p>
+<p>We can also create a matrix by using the <em>matrix()</em> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+x</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<p>The argument <em>seq()</em> create a sequence from 1 to 12, <em>nrom()</em> define the number of rows in the matrix, <em>ncol()</em> define the number of columns in the matrix. We don’t have to give both <em>nrom()</em> and <em>ncol()</em> since if one is provided, the other is inferred from length of the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>)
 y</code></pre></div>
-<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1          15.2        12.0          7.8         5.4
-## 2          14.8        11.0          7.8         5.4
-## 3          14.4        11.4          7.6         5.4
-## 4          14.2        11.2          8.0         5.4
-## 5          15.0        12.2          7.8         5.4
-## 6          15.8        12.8          8.4         5.8
-## 7          14.2        11.8          7.8         5.6
-## 8          15.0        11.8          8.0         5.4
-## 9          13.8        10.8          7.8         5.4
-## 10         14.8        11.2          8.0         5.2</code></pre>
-<p>Also we can do other calculation by adding or multiplying matrices.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">+</span><span class="st"> </span>y</code></pre></div>
-<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1          20.3        15.5          9.2         5.6
-## 2          19.7        14.0          9.2         5.6
-## 3          19.1        14.6          8.9         5.6
-## 4          18.8        14.3          9.5         5.6
-## 5          20.0        15.8          9.2         5.6
-## 6          21.2        16.7         10.1         6.2
-## 7          18.8        15.2          9.2         5.9
-## 8          20.0        15.2          9.5         5.6
-## 9          18.2        13.7          9.2         5.6
-## 10         19.7        14.3          9.5         5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">*</span><span class="st"> </span>y</code></pre></div>
-<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1         77.52       42.00        10.92        1.08
-## 2         72.52       33.00        10.92        1.08
-## 3         67.68       36.48         9.88        1.08
-## 4         65.32       34.72        12.00        1.08
-## 5         75.00       43.92        10.92        1.08
-## 6         85.32       49.92        14.28        2.32
-## 7         65.32       40.12        10.92        1.68
-## 8         75.00       40.12        12.00        1.08
-## 9         60.72       31.32        10.92        1.08
-## 10        72.52       34.72        12.00        0.52</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<p>As we can see that, the matrix is filled in column-wise by default. If you want to fill a matrix by row-wise, add the <em>byrow = TRUE</em> to the argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>), <span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)    <span class="co"># fill matrix row-wise</span>
+z</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9
+## [4,]   10   11   12</code></pre>
+<p>The following code will create an empty matrix y:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">w &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+w</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   NA   NA   NA
+## [2,]   NA   NA   NA
+## [3,]   NA   NA   NA
+## [4,]   NA   NA   NA</code></pre>
+<p>We can assign values to the matrix. For example, let’s assign the value 3 to the position at first row and first column and value 100 to position of the second row and third column:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">w[<span class="dv">1</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">3</span>
+w[<span class="dv">2</span>,<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="dv">100</span>
+w</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    3   NA   NA
+## [2,]   NA   NA  100
+## [3,]   NA   NA   NA
+## [4,]   NA   NA   NA</code></pre>
+<p>We can also create a matrix from a vector by setting its dimension using function <em>dim()</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">21</span>, <span class="dv">15</span>, <span class="dv">76</span>)
+x</code></pre></div>
+<pre><code>## [1]  1  5  6  9  8 10 21 15 76</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>)
+x</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    9   21
+## [2,]    5    8   15
+## [3,]    6   10   76</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<p>We can convert a non-matrix data set to a matrix using <em>as.matrix()</em> function. Take the data <em>iris</em> as an example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset.iris &lt;-<span class="st"> </span>iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+<span class="kw">class</span>(subset.iris)</code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>The data structure of <em>subset.iris</em> is a data frame. The function <em>as.matrix</em> wii transfer a data frame to a matix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(subset.iris)
+<span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<p>Various matrix operation can be applied in R. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
+x</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">^</span><span class="dv">2</span>                         <span class="co">#Squared each element in x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    9   25
+## [2,]    4   16   36</code></pre>
+<p>You can transform the matrix if you want, for the convenience of view and analysis.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">t</span>(x)                <span class="co"># transpose of x</span>
+y</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">%*%</span><span class="st"> </span>y                  <span class="co"># Matrix Multiplication</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   35   44
+## [2,]   44   56</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#x - y                   # Matrix subtraction</span></code></pre></div>
+<p>Error in x - y : non-conformable arrays</p>
+<p>The error reminders us that the matrices for subtraction must have same dimensions.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">6</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)    
+y</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    1    1
+## [2,]    1    1    1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="op">-</span><span class="st"> </span>y</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    0    2    4
+## [2,]    1    3    5</code></pre>
+<p>We can produce a new matrix by each element is doubled and added 5</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">*</span>x<span class="op">+</span><span class="dv">5</span>
+z</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    7   11   15
+## [2,]    9   13   17</code></pre>
 <p>We can also get a logical matrix using logical code like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">&gt;</span><span class="dv">3</span></code></pre></div>
-<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width
-## 1          TRUE        TRUE        FALSE       FALSE
-## 2          TRUE       FALSE        FALSE       FALSE
-## 3          TRUE        TRUE        FALSE       FALSE
-## 4          TRUE        TRUE        FALSE       FALSE
-## 5          TRUE        TRUE        FALSE       FALSE
-## 6          TRUE        TRUE        FALSE       FALSE
-## 7          TRUE        TRUE        FALSE       FALSE
-## 8          TRUE        TRUE        FALSE       FALSE
-## 9          TRUE       FALSE        FALSE       FALSE
-## 10         TRUE        TRUE        FALSE       FALSE</code></pre>
-<p>Now if we want to know the mean and sum of these rows and columns, try rowMeans(), colMeans(), rowSums(), colSums().</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rowMeans</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">34</span>, <span class="dv">51</span>, <span class="dv">27</span>, <span class="dv">26</span>, <span class="dv">10</span>), <span class="dt">ncol =</span> <span class="dv">2</span>)
+x <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span></code></pre></div>
+<pre><code>##       [,1]  [,2]
+## [1,] FALSE  TRUE
+## [2,]  TRUE  TRUE
+## [3,]  TRUE FALSE</code></pre>
+<p>We can extract all <em>TRUE</em> results from x by using <em>x[x&gt;20]</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x<span class="op">&gt;</span><span class="dv">20</span>]</code></pre></div>
+<pre><code>## [1] 34 51 27 26</code></pre>
+<p>Similar we can define a vector with logical values, then apply it to x to get all TRUE values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log.vau &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+x[log.vau]</code></pre></div>
+<pre><code>## [1] 34 51 27 26</code></pre>
+<p>Remember matrix is a vector, and filled by column-wise. Therefore the vector with logical values applies to x by column-wise order.</p>
+<p>Since matrix is a vector with two dimension, all operations for vectors also apply to matrix. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>,]                         <span class="co"># Get the first row of x</span></code></pre></div>
+<pre><code>## [1] 12 27</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])   <span class="co">#Take out the first 4 columns of iris and convert it to matrix.  </span>
+c &lt;-<span class="st"> </span>a[<span class="dv">5</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]             <span class="co"># Extract a subset</span>
+c</code></pre></div>
+<pre><code>##      Sepal.Width Petal.Length Petal.Width
+## [1,]         3.6          1.4         0.2
+## [2,]         3.9          1.7         0.4
+## [3,]         3.4          1.4         0.3
+## [4,]         3.4          1.5         0.2
+## [5,]         2.9          1.4         0.2
+## [6,]         3.1          1.5         0.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
+c[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,] &lt;-<span class="st"> </span>x                 <span class="co"># Replace the first two rows of c with x</span>
+c</code></pre></div>
+<pre><code>##      Sepal.Width Petal.Length Petal.Width
+## [1,]         1.0          3.0         5.0
+## [2,]         2.0          4.0         6.0
+## [3,]         3.4          1.4         0.3
+## [4,]         3.4          1.5         0.2
+## [5,]         2.9          1.4         0.2
+## [6,]         3.1          1.5         0.1</code></pre>
+<p>Now if we want to know the mean and sum of these rows and columns, try <em>rowMeans()</em>, <em>colMeans()</em>, <em>rowSums()</em>, <em>colSums()</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+<span class="kw">rowMeans</span>(x)</code></pre></div>
 <pre><code>##     1     2     3     4     5     6     7     8     9    10 
 ## 2.550 2.375 2.350 2.350 2.550 2.850 2.425 2.525 2.225 2.400</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMeans</span>(x)</code></pre></div>
@@ -890,20 +983,124 @@ y</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colSums</span>(x)</code></pre></div>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 ##         48.6         33.1         14.5          2.2</code></pre>
-<p>Here we are computing the standard deviation by columns, using 2 for columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(x, <span class="dv">2</span>, sd)</code></pre></div>
+<p>Here we are computing the standard deviation by columns, using <em>apply()</em> function.The second argument “1” or “2” in <em>apply()</em> reprents the function applies to rows or columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(x, <span class="dv">2</span>, sd) <span class="co"># Calculate the standard deviation of each column in x </span></code></pre></div>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 ##   0.29135698   0.30713732   0.10801234   0.07888106</code></pre>
 <p>Or median by rows, using 1 for rows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(x, <span class="dv">1</span>, median)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(x, <span class="dv">1</span>, median)  <span class="co"># Calculate the median of each row in x </span></code></pre></div>
 <pre><code>##    1    2    3    4    5    6    7    8    9   10 
 ## 2.45 2.20 2.25 2.30 2.50 2.80 2.40 2.45 2.15 2.30</code></pre>
 <p>Heatmap is my favorite type of graph for visualizing a large matrix data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(x, <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>, <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">5</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-234-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-259-1.png" width="672" /></p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-235" class="exercise"><strong>Exercise 3.14  </strong></span>Take the first 4 columns of iris data set and format as a matrix. Compute the median for each column using the apply function.
+<span id="exr:unnamed-chunk-260" class="exercise"><strong>Exercise 3.14  </strong></span>Let <em>subset.iris &lt;- as.matrix(iris[1:10, 1:4])</em>, Using apply function to calculate the mean of <em>subset.iris</em> by column.
+</div>
+
+<p><strong>Example:</strong> Define a function to find the positions of minimal value in each column of <em>subset.iris &lt;- as.matrix(iris[1:10, 1:4])</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">find.min.posi &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  y &lt;-<span class="st"> </span><span class="cf">function</span>(xcol){
+    <span class="kw">return</span>(<span class="kw">which.min</span>(xcol))
+  }
+  <span class="kw">return</span>(<span class="kw">apply</span>(x,<span class="dv">2</span>,y))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset.iris &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+subset.iris</code></pre></div>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1           5.1         3.5          1.4         0.2
+## 2           4.9         3.0          1.4         0.2
+## 3           4.7         3.2          1.3         0.2
+## 4           4.6         3.1          1.5         0.2
+## 5           5.0         3.6          1.4         0.2
+## 6           5.4         3.9          1.7         0.4
+## 7           4.6         3.4          1.4         0.3
+## 8           5.0         3.4          1.5         0.2
+## 9           4.4         2.9          1.4         0.2
+## 10          4.9         3.1          1.5         0.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find.min.posi</span>(subset.iris)</code></pre></div>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##            9            9            3           10</code></pre>
+<p>As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Lenth and Petal.Width respectively.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-264" class="exercise"><strong>Exercise 3.15  </strong></span>Let <em>subset.iris.2 &lt;- as.matrix(iris[, 1:4])</em>, fill blanks in the <em>find.max</em> function defined below to find the maximal value in each column of <em>subset.iris.2</em>.
+</div>
+
+<p>find.max &lt;- function(x){<br />
+y &lt;- function(xcol){<br />
+return(_________)<br />
+}<br />
+return(_______(x,____,y))<br />
+}</p>
+<p>________(subset.iris.2)</p>
+<p>To make a matrix more easily readable, we can use functions <em>colnames()</em> and <em>rownames</em> to assign names to the columns and rows of the matrix. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>))
+y</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(y) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;First.Col&#39;</span>, <span class="st">&#39;Second.Col&#39;</span>, <span class="st">&#39;Third.Col&#39;</span>)
+<span class="kw">row.names</span>(y) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;odd.number&#39;</span>, <span class="st">&#39;even.number&#39;</span>)
+y</code></pre></div>
+<pre><code>##             First.Col Second.Col Third.Col
+## odd.number          1          3         5
+## even.number         2          4         6</code></pre>
+<p>Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents “picure elements”. They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a grayscale imge, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%.</p>
+<p>Most time, we need to blur images or add mosaic to a picture for various purposes. Let’s use one example to demonstrate how to add mosaic to a grayscale image.</p>
+<p><strong>Example: Add mosaic to Einstein image</strong> Fistly, let’s read an grayscale image of Einstein into R and view the image.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pixmap)</code></pre></div>
+<pre><code>## Warning: package &#39;pixmap&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">EINSTEIN &lt;-<span class="st"> </span><span class="kw">read.pnm</span>(<span class="st">&quot;EINSTEIN.pgm&quot;</span>, <span class="dt">cellres=</span><span class="dv">1</span>)
+<span class="kw">plot</span>(EINSTEIN)</code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-267-1.png" width="672" /> Then let us look at structure of this image:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(EINSTEIN)</code></pre></div>
+<pre><code>## Formal class &#39;pixmapGrey&#39; [package &quot;pixmap&quot;] with 6 slots
+##   ..@ grey    : num [1:512, 1:512] 0.596 0.541 0.522 0.529 0.561 ...
+##   ..@ channels: chr &quot;grey&quot;
+##   ..@ size    : int [1:2] 512 512
+##   ..@ cellres : num [1:2] 1 1
+##   ..@ bbox    : num [1:4] 0 0 512 512
+##   ..@ bbcent  : logi FALSE</code></pre>
+<p>Here we get a new class which is S4 type. We don’t go into depth for this time. One fact we need to pay attendtion is that we must use “@” instead of “$” sign to designate the components.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(EINSTEIN<span class="op">@</span><span class="st"> </span>grey)</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<p>The class of <em>EINSTEIN@ grey</em> is matrix. The output <em>..@ grey : num [1:512, 1:512]</em> shows that the dimension of matrix is 512*512. The values “0.596 0.541 0.522 0.529 0.561 …” reprent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">EINSTEIN<span class="op">@</span><span class="st"> </span>grey[<span class="dv">3</span>,<span class="dv">4</span>]</code></pre></div>
+<pre><code>## [1] 0.2941176</code></pre>
+<p>If we change the value 0.2941176 to 0 by <em>EINSTEIN@ grey[3,4] &lt;- 0</em>, then that pixel will become pure black. If we assign a random number between 0 to 1 to the value, then the color in the pixel will be randomly assigned based on the random number. Using this idea, we define a masoic function which will be used to blur the image.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mosaic.plot &lt;-<span class="st"> </span><span class="cf">function</span>(image,yrange,xrange){
+  length.y &lt;-<span class="st"> </span><span class="kw">length</span>(yrange)
+  length.x &lt;-<span class="st"> </span><span class="kw">length</span>(xrange)
+  image2 &lt;-<span class="st"> </span>image
+  whitenoise &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow=</span>length.y, <span class="dt">ncol=</span>length.x, <span class="kw">runif</span>(length.y<span class="op">*</span>length.x))
+  image2<span class="op">@</span>grey[yrange,xrange] &lt;-<span class="st"> </span>whitenoise
+  <span class="kw">return</span>(image2)
+}</code></pre></div>
+<p>The argument <em>image</em> is the original image, <em>yrange</em> is the range of rows that you want to blur, <em>xrange</em> is the range of columns that you want to blur. The <em>xrange</em> and <em>yrange</em> construct the mosaic region.</p>
+<p>We don’t want to change the origial image,therefore we copy the original image to image2 by using <em>image2 &lt;-image</em>. The <em>whitenoise</em> creates a matrix filled with random numbers following uniform distribution. The dimensions of <em>whitenoise</em> is determined by the mosaic region. Replace the values in the original image that you want to blur <em><a href="mailto:image2@grey">image2@grey</a>[yrange,xrange]</em> by the <em>whitenoise</em> matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">EINSTEIN.mosaic &lt;-<span class="st"> </span><span class="kw">mosaic.plot</span>(EINSTEIN, <span class="dv">175</span><span class="op">:</span><span class="dv">249</span>, <span class="dv">118</span><span class="op">:</span><span class="dv">295</span>)
+<span class="kw">plot</span>(EINSTEIN.mosaic)</code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-272-1.png" width="672" /></p>
+<p>Here, we take <em>yrange=175:249</em> and <em>xrange=118:295</em> to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein’ eyes region. The sub-matix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.</p>
+<p>The function <em>locator()</em> allows us to find the relevant rows and columns. Type <strong>locator()</strong> in the <em>Console</em> window, then R will wait for you to click a point within an image, then click <em>esc</em> on your keyboard to exit the function. Then the function will return the coordinates of that point in the <em>Console</em> window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in <em>pixmap</em> objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from <em>locator()</em> function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function.</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-273" class="exercise"><strong>Exercise 3.16  </strong></span>Using the <em>mosaic.plot()</em> function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region.</p>
+</div>
+
+<img src="book_files/figure-html/unnamed-chunk-274-1.png" width="672" /> 
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-275" class="exercise"><strong>Exercise 3.17  </strong></span>Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic.</p>
+<p>mosaic.plot.2 &lt;- function(picture,yrange,xrange,degree){<br />
+length.y &lt;- _______(yrange)<br />
+length.x &lt;- length(______)<br />
+pic2 &lt;- picture<br />
+pic2@____[_______,_______] &lt;- degree<br />
+return(pic2)<br />
+}</p>
+Setting the degree=0, 0.5 and 1 respectively, plot the images of Mona Lisa that eyes region are covered by pure colors.
 </div>
 
 </div>
@@ -924,18 +1121,18 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 ##  Welch Two Sample t-test
 ## 
 ## data:  rnorm(100) and rnorm(100)
-## t = 1.4592, df = 197.94, p-value = 0.1461
+## t = -0.3865, df = 197.67, p-value = 0.6995
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.06861503  0.45910112
+##  -0.3372030  0.2266859
 ## sample estimates:
 ##   mean of x   mean of y 
-##  0.14754868 -0.04769437</code></pre>
+## 0.006091907 0.061350486</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
-<pre><code>## [1] 0.1460934</code></pre>
+<pre><code>## [1] 0.6995409</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
 <pre><code>##   mean of x   mean of y 
-##  0.14754868 -0.04769437</code></pre>
+## 0.006091907 0.061350486</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? t.test</code></pre></div>
 <p>Value</p>
@@ -950,15 +1147,15 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
      pvalues[i] =<span class="st"> </span>result<span class="op">$</span>p.value  <span class="co"># P values are stored in the i-th element in the vector</span>
 }  
 <span class="kw">hist</span>(pvalues)  <span class="co"># define</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-241-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-281-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.003775 0.244670 0.508047 0.504383 0.754935 0.995395</code></pre>
+## 0.001445 0.256789 0.543173 0.520343 0.781715 0.999575</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 22</code></pre>
+<pre><code>## [1] 24</code></pre>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-242" class="exercise"><strong>Exercise 3.15  </strong></span>Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point.
+<span id="exr:unnamed-chunk-282" class="exercise"><strong>Exercise 3.18  </strong></span>Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point.
 </div>
 
 </div>
@@ -1041,7 +1238,7 @@ segs  <span class="co"># a vector of strings</span></code></pre></div>
 <pre><code>## [1] &quot;TAACCATTGTAAGAAC&quot;</code></pre>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-267" class="exercise"><strong>Exercise 3.16  </strong></span>In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris “ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.
+<span id="exr:unnamed-chunk-307" class="exercise"><strong>Exercise 3.19  </strong></span>In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris “ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.
 </div>
 
 </div>
@@ -1197,13 +1394,13 @@ segs  <span class="co"># a vector of strings</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">150</span>)
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(x, y)
 <span class="kw">head</span>(x2)</code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id           y
-## 1          5.1         3.5          1.4         0.2  setosa  1  0.62884175
-## 2          4.9         3.0          1.4         0.2  setosa  2 -1.27331965
-## 3          4.7         3.2          1.3         0.2  setosa  3  0.03187791
-## 4          4.6         3.1          1.5         0.2  setosa  4  0.60682568
-## 5          5.0         3.6          1.4         0.2  setosa  5 -0.42235213
-## 6          5.4         3.9          1.7         0.4  setosa  6 -0.81475224</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id          y
+## 1          5.1         3.5          1.4         0.2  setosa  1 -0.3856152
+## 2          4.9         3.0          1.4         0.2  setosa  2  0.6721129
+## 3          4.7         3.2          1.3         0.2  setosa  3  1.7271457
+## 4          4.6         3.1          1.5         0.2  setosa  4 -0.7931525
+## 5          5.0         3.6          1.4         0.2  setosa  5  0.2577236
+## 6          5.4         3.9          1.7         0.4  setosa  6 -1.1493306</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1236,7 +1433,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ## 6           5.4         3.9          1.7         0.4  setosa  6</code></pre>
 <p>We can view sepal length by species using boxplot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, x)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-285-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
 <p>Or compute summary statistics by category, here average by species:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(. <span class="op">~</span><span class="st"> </span>Species, x, mean)</code></pre></div>
 <pre><code>##      Species Sepal.Length Sepal.Width Petal.Length Petal.Width    id
@@ -1277,30 +1474,30 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
 <pre><code>##   id        rand
-## 1  1  0.10621957
-## 2  2  0.88712935
-## 3  3 -1.32341289
-## 4  4 -0.63631620
-## 5  5 -0.18237499
-## 6  6  0.04498906</code></pre>
+## 1  1 -0.87318393
+## 2  2  1.00883339
+## 3  3  1.55997771
+## 4  4 -0.66426583
+## 5  5  0.07175363
+## 6  6 -0.61786746</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
 <pre><code>##      id       rand
-## 95   95  1.3710638
-## 96   96  1.5424368
-## 97   97  1.6865368
-## 98   98 -0.2604054
-## 99   99 -0.3560669
-## 100 100 -0.4048670</code></pre>
+## 95   95 -1.3424734
+## 96   96  0.1574024
+## 97   97  0.7135146
+## 98   98  0.5044059
+## 99   99  0.4275556
+## 100 100 -0.4878755</code></pre>
 <p>Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species        rand
-## 1  1          5.1         3.5          1.4         0.2  setosa  0.10621957
-## 2  2          4.9         3.0          1.4         0.2  setosa  0.88712935
-## 3  3          4.7         3.2          1.3         0.2  setosa -1.32341289
-## 4  4          4.6         3.1          1.5         0.2  setosa -0.63631620
-## 5  5          5.0         3.6          1.4         0.2  setosa -0.18237499
-## 6  6          5.4         3.9          1.7         0.4  setosa  0.04498906</code></pre>
+## 1  1          5.1         3.5          1.4         0.2  setosa -0.87318393
+## 2  2          4.9         3.0          1.4         0.2  setosa  1.00883339
+## 3  3          4.7         3.2          1.3         0.2  setosa  1.55997771
+## 4  4          4.6         3.1          1.5         0.2  setosa -0.66426583
+## 5  5          5.0         3.6          1.4         0.2  setosa  0.07175363
+## 6  6          5.4         3.9          1.7         0.4  setosa -0.61786746</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1309,16 +1506,16 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ##  Mean   : 50.50   Mean   :5.471   Mean   :3.099   Mean   :2.861  
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
-##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-2.27850  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.86848  
-##  Median :0.800   virginica : 0   Median :-0.08960  
-##  Mean   :0.786                   Mean   :-0.07441  
-##  3rd Qu.:1.300                   3rd Qu.: 0.56923  
-##  Max.   :1.800                   Max.   : 2.46487</code></pre>
+##   Petal.Width          Species        rand          
+##  Min.   :0.100   setosa    :50   Min.   :-2.188898  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.611472  
+##  Median :0.800   virginica : 0   Median :-0.008997  
+##  Mean   :0.786                   Mean   :-0.002150  
+##  3rd Qu.:1.300                   3rd Qu.: 0.597609  
+##  Max.   :1.800                   Max.   : 3.123034</code></pre>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-291" class="exercise"><strong>Exercise 3.17  </strong></span>A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
+<p><span id="exr:unnamed-chunk-331" class="exercise"><strong>Exercise 3.20  </strong></span>A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
 <ol style="list-style-type: decimal">
 <li><p>Create a folder, download the data files into it, and create an Rstudio project in the folder.</p></li>
 <li><p>Read in these two files. Note that for the species file, DO NOT treat Strings as factors. Unselect this in the import wizard. Keep a copy of the import command into your R script.</p></li>
