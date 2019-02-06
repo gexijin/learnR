@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-02-03">
+<meta name="date" content="2019-02-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -407,11 +407,11 @@ evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.370303321 -0.689452576  0.001931417  0.616526714  1.350000000
+## [1] -2.3338414 -0.6082311  0.1525402  0.8713616  1.3500000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##           0%          25%          50%          75%         100% 
-## -2.370303321 -0.689452576  0.001931417  0.616526714  1.350000000 
+##         0%        25%        50%        75%       100% 
+## -2.3338414 -0.6082311  0.1525402  0.8713616  1.3500000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -579,7 +579,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 11  5  5</code></pre>
+<pre><code>## [1] 11  2  5</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -733,7 +733,7 @@ y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</code></pre></di
 <p>Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>)</code></pre></div>
 <pre><code>## [1] 7 3 9</code></pre>
-<p>The <strong>c()</strong> function (<strong>c</strong> is short for Combine) creates a new vector by combining a set of values. If we want to continue to use the vector, we hold it in an object and give it a name:</p>
+<p>The <strong>c()</strong> function creates a new vector by combining a set of values. If we want to continue to use the vector, we hold it in an object and give it a name:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>)
 fishes</code></pre></div>
 <pre><code>## [1] 7 3 9</code></pre>
@@ -761,7 +761,7 @@ fishes</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fishes2 &lt;-<span class="st"> </span>fishes <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
 fishes2</code></pre></div>
 <pre><code>## [1] 6 3 8</code></pre>
-<p>Most arithmetic operations work just as well on vectors as they do on single values. <strong>R subtracts 1 from each individual element</strong>. If you add a scalar (a single value) to a vector, the scalar will be added to each value in the vector, returning a new vector with the results.</p>
+<p>Most arithmetic operations work just as well on vectors as they do on single values. R subtracts 1 from each individual element. If you add a scalar (a single value) to a vector, the scalar will be added to each value in the vector, returning a new vector with the results.</p>
 <p>While they are sleeping in their camping site, a fox stole 3 fishes from Jerry’s bucket, and 4 fishes from Mickey’s bucket. How many left?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stolen &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">4</span>)  <span class="co"># a new vector</span>
 fishes2 <span class="op">-</span><span class="st"> </span>stolen</code></pre></div>
@@ -1122,18 +1122,18 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 ##  Welch Two Sample t-test
 ## 
 ## data:  rnorm(100) and rnorm(100)
-## t = 0.95769, df = 193.51, p-value = 0.3394
+## t = -0.30909, df = 197.95, p-value = 0.7576
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.1393992  0.4025548
+##  -0.3132204  0.2283381
 ## sample estimates:
-##   mean of x   mean of y 
-##  0.04542377 -0.08615402</code></pre>
+##  mean of x  mean of y 
+## 0.06214693 0.10458810</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>p.value  <span class="co"># This retrieves just the P value</span></code></pre></div>
-<pre><code>## [1] 0.3394164</code></pre>
+<pre><code>## [1] 0.757579</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result<span class="op">$</span>estimate  <span class="co"># this returns a vector containing two values</span></code></pre></div>
-<pre><code>##   mean of x   mean of y 
-##  0.04542377 -0.08615402</code></pre>
+<pre><code>##  mean of x  mean of y 
+## 0.06214693 0.10458810</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? t.test</code></pre></div>
 <p>Value</p>
@@ -1151,7 +1151,7 @@ result  <span class="co"># A list holds all  results of t-test</span></code></pr
 <p><img src="book_files/figure-html/unnamed-chunk-281-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0003123 0.2879826 0.5367269 0.5204395 0.7610255 0.9985791</code></pre>
+## 0.0005779 0.2566147 0.4941583 0.4899489 0.7224955 0.9994665</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Count how many P values are less than 0.05. </span></code></pre></div>
 <pre><code>## [1] 23</code></pre>
 
@@ -1395,13 +1395,13 @@ segs  <span class="co"># a vector of strings</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">150</span>)
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(x, y)
 <span class="kw">head</span>(x2)</code></pre></div>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id          y
-## 1          5.1         3.5          1.4         0.2  setosa  1 -0.1577392
-## 2          4.9         3.0          1.4         0.2  setosa  2 -0.1252392
-## 3          4.7         3.2          1.3         0.2  setosa  3  0.1080913
-## 4          4.6         3.1          1.5         0.2  setosa  4  0.4137842
-## 5          5.0         3.6          1.4         0.2  setosa  5 -0.8003625
-## 6          5.4         3.9          1.7         0.4  setosa  6  0.7106393</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species id           y
+## 1          5.1         3.5          1.4         0.2  setosa  1 -0.99893895
+## 2          4.9         3.0          1.4         0.2  setosa  2 -1.16330438
+## 3          4.7         3.2          1.3         0.2  setosa  3 -0.05684444
+## 4          4.6         3.1          1.5         0.2  setosa  4  0.50199385
+## 5          5.0         3.6          1.4         0.2  setosa  5  0.26429758
+## 6          5.4         3.9          1.7         0.4  setosa  6  0.55231702</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1475,30 +1475,30 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
 <pre><code>##   id       rand
-## 1  1  0.2310179
-## 2  2  2.0103081
-## 3  3 -0.5641572
-## 4  4  0.7683874
-## 5  5  0.4493467
-## 6  6  0.4011309</code></pre>
+## 1  1  1.9069970
+## 2  2 -1.3473148
+## 3  3  0.2091497
+## 4  4  0.8684836
+## 5  5 -0.9048570
+## 6  6  0.8100607</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
-<pre><code>##      id       rand
-## 95   95  0.2107741
-## 96   96  0.7156794
-## 97   97 -0.2135766
-## 98   98 -0.8454797
-## 99   99  1.4474321
-## 100 100 -1.4322559</code></pre>
+<pre><code>##      id        rand
+## 95   95 -0.06900811
+## 96   96 -0.45645444
+## 97   97 -0.74008123
+## 98   98  1.64934497
+## 99   99  1.30228919
+## 100 100 -0.13133185</code></pre>
 <p>Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa  0.2310179
-## 2  2          4.9         3.0          1.4         0.2  setosa  2.0103081
-## 3  3          4.7         3.2          1.3         0.2  setosa -0.5641572
-## 4  4          4.6         3.1          1.5         0.2  setosa  0.7683874
-## 5  5          5.0         3.6          1.4         0.2  setosa  0.4493467
-## 6  6          5.4         3.9          1.7         0.4  setosa  0.4011309</code></pre>
+## 1  1          5.1         3.5          1.4         0.2  setosa  1.9069970
+## 2  2          4.9         3.0          1.4         0.2  setosa -1.3473148
+## 3  3          4.7         3.2          1.3         0.2  setosa  0.2091497
+## 4  4          4.6         3.1          1.5         0.2  setosa  0.8684836
+## 5  5          5.0         3.6          1.4         0.2  setosa -0.9048570
+## 6  6          5.4         3.9          1.7         0.4  setosa  0.8100607</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1508,12 +1508,12 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
 ##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-2.35358  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.88893  
-##  Median :0.800   virginica : 0   Median :-0.01435  
-##  Mean   :0.786                   Mean   :-0.08495  
-##  3rd Qu.:1.300                   3rd Qu.: 0.40691  
-##  Max.   :1.800                   Max.   : 3.18812</code></pre>
+##  Min.   :0.100   setosa    :50   Min.   :-2.08862  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.82311  
+##  Median :0.800   virginica : 0   Median : 0.11678  
+##  Mean   :0.786                   Mean   : 0.04966  
+##  3rd Qu.:1.300                   3rd Qu.: 0.81412  
+##  Max.   :1.800                   Max.   : 3.04309</code></pre>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-331" class="exercise"><strong>Exercise 3.20  </strong></span>A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity. These two files are available here and both are tab-deliminated text files.</p>
