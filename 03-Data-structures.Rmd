@@ -141,10 +141,6 @@ Obviously functions can handle many different calculations beyond arithmetic fun
 Write an R function to implement this arithmetic function:  f(x)= |x|+5x-6. Note |x| means the absolute value of x. Use this function to find f(4.534), and also produce a plot like the example. 
 ```
 
-```{exercise}
-Read the **R cheat sheet** or google r functions, find 5 functions that are not covered in class and show some demo. 
-```
-
 Let's define a function to count even numbers in a vector. 
 
 ```{r}
@@ -152,7 +148,7 @@ Let's define a function to count even numbers in a vector.
 evencount <- function(vec) {
   k <- 0 # assign o to i      #assign 0 to a count varialbe k
   for (i in vec) {            #set i to vec[1],vec[2],...
-    if (i %% 2 == 0) k <- k+1 # test if i is an even or odd number. %% is the modulo operator
+    if (i %% 2 == 0) k <- k + 1 # test if i is an even or odd number. %% is the modulo operator
   }
   return(k)                   #print the computed value of k
 }
@@ -195,7 +191,7 @@ myfun.globle2(8)    #8-2*y = 8-2*(1)=6
 ```
 
 ```{exercise}
-Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=xnorm(5000) respectively. Define another function to calcute the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calcute the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
 ```
 
 ```{r echo=FALSE, results= 'hide', message=FALSE}
@@ -729,55 +725,172 @@ Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam
 ```
 
 ### Matrix operations
-A **matrix** has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. Define a matrix using the Iris dataset.
+**Matrix** is a two dimensional data structure in R programming. Technically, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. 
+
+We can creat a matrix by using *rbind* or *cbind* function. *rbind* combine all row
+Here are two examples:
+```{r}
+m <- rbind(c(3, 4, 5), c(10, 13, 15)) # combine vectors by row
+m
+```
+```{r}
+n <- cbind(c(3, 4, 5), c(10, 13, 15), c(3, 2, 1)) # combine vectors by column
+n
+```
+```{r}
+s <- rbind(m,n)      #combine two matrices m and n by row
+s
+```
+To use *rbind()* combining matrices by row, the matrices must have same number of columns. Similar to *cbind()*, the matrices must have same number of rows.
+
+We can also create a matrix by using the *matrix()* function:
+```{r}
+x <- matrix(seq(1:12), nrow = 4, ncol = 3)
+x
+```
+The argument *seq()* create a sequence from 1 to 12, *nrom()* define the number of rows in the matrix, *ncol()* define the number of columns in the matrix. We don't have to give both *nrom()* and *ncol()* since if one is provided, the other is inferred from length of the data.
+```{r}
+y <- matrix(seq(1:12), nrow = 4)
+y
+```
+As we can see that, the matrix is filled in column-wise by default. If you want to fill a matrix by row-wise, add the *byrow = TRUE* to the argument:
 
 ```{r}
-x <- as.matrix(iris[1:10, 1:4])
+z <- matrix(seq(1:12), nrow = 4, byrow = TRUE)    # fill matrix row-wise
+z
 ```
-
-First let's show the first few rows.
+The following code will create an empty matrix y:
 ```{r}
-head(x)
+w <- matrix(nrow = 4, ncol = 3)
+w
+```
+We can assign values to the matrix. For example, let's assign the value 3 to the position at first row and first column and value 100 to position of the second row and third column:
+```{r}
+w[1,1] <- 3
+w[2,3] <- 100
+w
+```
+We can also create a matrix from a vector by setting its dimension  using function *dim()*.
+
+```{r}
+x <- c(1, 5, 6, 9, 8, 10, 21, 15, 76)
+x
+```
+```{r}
+class(x)
+```
+```{r}
+dim(x) <- c(3, 3)
+x
+```
+```{r}
+class(x)
 ```
 
+We can convert a non-matrix data set to a matrix using *as.matrix()* function. Take the data *iris* as an example. 
+```{r}
+subset.iris <- iris[1:10, 1:4]
+class(subset.iris)
+```
+
+The data structure of *subset.iris* is a data frame. The function *as.matrix* wii transfer a data frame to a matix.
+```{r}
+x <- as.matrix(subset.iris)
+class(x)
+```
+
+Various matrix operation can be applied in R. For example:
+```{r}
+x <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+x
+```
+```{r}
+x^2                         #Squared each element in x
+```
 You can transform the matrix if you want, for the convenience of view and analysis.
+
 ```{r}
-t(x)
+y <- t(x)                # transpose of x
+y
+```
+```{r}
+x %*% y                  # Matrix Multiplication
+```
+
+```{r}
+#x - y                   # Matrix subtraction
+```
+ Error in x - y : non-conformable arrays
+
+The error reminders us that the matrices for subtraction must have same dimensions.
+```{r}
+y <- matrix(rep(1, 6), nrow = 2)    
+y
+```
+```{r}
+x - y
 ```
 
 We can produce a new matrix by each element is doubled and added 5
 ```{r}
-y <- 2 * x + 5
-y
-```
-
-Also we can do other calculation by adding or multiplying matrices.
-```{r}
-x + y
-x * y
+z <- 2 * x + 5
+z
 ```
 
 We can also get a logical matrix using logical code like:
 ```{r}
-x > 3
+x <- matrix(c(12, 34, 51, 27, 26, 10), ncol = 2)
+x > 20
+```
+We can extract all *TRUE* results from x by using *x[x>20]*.
+```{r}
+x[x > 20]
+```
+Similar we can define a vector with logical values, then apply it to x to get all TRUE values.
+```{r}
+log.vau <- c(FALSE, TRUE, TRUE, TRUE, TRUE, FALSE)
+x[log.vau]
+```
+Remember matrix is a vector, and filled by column-wise. Therefore the vector with logical values applies to x by column-wise order.
+
+Since matrix is a vector with two dimension, all operations for vectors also apply to matrix. For example:
+```{r}
+x[1, ]                         # Get the first row of x
+```
+```{r}
+a <- as.matrix(iris[, 1:4])   #Take out the first 4 columns of iris and convert it to matrix.  
+c <- a[5:10, 2:4]             # Extract a subset
+c
 ```
 
-Now if we want to know the mean and sum of these rows and columns, try rowMeans(), colMeans(), rowSums(), colSums().
 ```{r}
+x <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+c[1:2, ] <- x                 # Replace the first two rows of c with x
+c
+```
+
+Now if we want to know the mean and sum of these rows and columns, try *rowMeans()*, *colMeans()*, *rowSums()*, *colSums()*.
+```{r}
+x <- as.matrix(iris[1:10, 1:4])
 rowMeans(x)
+```
+```{r}
 colMeans(x)
+```
+```{r}
 rowSums(x)
+```
+```{r}
 colSums(x)
 ```
 
-Here we are computing the standard deviation by columns, using 2 for columns.
+Here we are computing the standard deviation by columns, using *apply()* function.The second argument "1" or "2" in *apply()* reprents the function applies to rows or columns.
 ```{r}
-apply(x, 2, sd)
+apply(x, 2, sd) # Calculate the standard deviation of each column in x 
 ```
-
 Or median by rows, using 1 for rows. 
 ```{r}
-apply(x, 1, median)
+apply(x, 1, median)  # Calculate the median of each row in x 
 ```
 
 Heatmap is my favorite type of graph for visualizing a large matrix data.
@@ -786,8 +899,139 @@ heatmap(x, scale = "column", margins = c(10,5))
 ```
 
 ```{exercise}
-Take the first 4 columns of iris data set and format as a matrix. Compute the median for each column using the apply function.
+Let *subset.iris <- as.matrix(iris[1:10, 1:4])*, Using apply function to calculate the mean of *subset.iris* by column.
 ```
+
+**Example:**
+Define a function to find the positions of minimal value in each column of *subset.iris <- as.matrix(iris[1:10, 1:4])*.
+```{r}
+find.min.posi <- function(x){
+  y <- function(xcol){
+    return(which.min(xcol))
+  }
+  return(apply(x, 2, y))
+}
+```
+
+```{r}
+subset.iris <- as.matrix(iris[1:10, 1:4])
+subset.iris
+```
+```{r}
+find.min.posi(subset.iris)
+```
+As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Lenth and Petal.Width respectively.
+
+
+```{exercise}
+Let *subset.iris.2 <- as.matrix(iris[, 1:4])*, fill blanks in the *find.max* function defined below to find the maximal value in each column of *subset.iris.2*.
+```
+
+find.max <- function(x){       
+  y <- function(xcol){       
+    return(_________)       
+  }         
+  return(_______(x, ____, y))        
+}         
+              
+________(subset.iris.2)               
+
+To make a matrix more easily readable, we can use functions *colnames()* and *rownames* to assign names to the columns and rows of the matrix. For example:
+```{r}
+y <- rbind(c(1, 3, 5), c(2, 4, 6))
+y
+
+```
+```{r}
+colnames(y) <- c('First.Col', 'Second.Col', 'Third.Col')
+row.names(y) <- c('odd.number', 'even.number')
+y
+```
+
+
+Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents "picure elements". They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a grayscale imge, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%. 
+
+Most time, we need to blur images or add mosaic to a picture for various purposes. Let's use one example to demonstrate how to add mosaic to a grayscale image.
+
+**Example: Add mosaic to Einstein image**
+
+Firstly, let's read an grayscale image of Einstein into R and view the image. 
+```{r}
+library(pixmap)
+EINSTEIN <- read.pnm("EINSTEIN.pgm", cellres = 1)
+plot(EINSTEIN)
+```
+
+Then let us look at structure of this image:
+
+```{r}
+str(EINSTEIN)
+```
+Here we get a new class which is S4 type. We don't go into depth for this time. One fact we need to pay attendtion is that we must use "@" instead of "$" sign to designate the components. 
+
+```{r}
+class(EINSTEIN@ grey)
+```
+The class of *EINSTEIN@ grey* is matrix. The output *..@ grey : num [1:512, 1:512]* shows that the dimension of matrix is 512*512. The values "0.596 0.541 0.522 0.529 0.561 ..." reprent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below: 
+```{r}
+EINSTEIN@ grey[3,4]
+```
+If we change the value 0.2941176 to 0 by *EINSTEIN@ grey[3,4] <- 0*, then that pixel will become pure black. If we assign a random number between 0 to 1 to the value, then the color in the pixel will be randomly assigned based on the random number. Using this idea, we define a masoic function which will be used to blur the image.
+
+```{r}
+mosaic.plot <- function(image, yrange, xrange){
+  length.y <- length(yrange)
+  length.x <- length(xrange)
+  image2 <- image
+  whitenoise <- matrix(nrow = length.y, ncol = length.x, runif(length.y * length.x))
+  image2@grey[yrange, xrange] <- whitenoise
+  return(image2)
+}
+```
+
+The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. Since we don't want to change the origial image,therefore we copy the original image to image2 by assigning *image* to *image2*. The *whitenoise* creates a matrix filled with random numbers following uniform distribution. The dimensions of *whitenoise* is determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
+
+```{r}
+EINSTEIN.mosaic <- mosaic.plot(EINSTEIN, 175:249, 118:295)
+plot(EINSTEIN.mosaic)
+```
+
+Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein' eyes region. The sub-matix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.
+
+The function *locator()* allows us to find the relevant rows and columns. Type **locator()** in the *Console* window, then R will wait for you to click a point within an image, then click *esc* on your keyboard to exit the function. Then the function will return the coordinates of that point in the *Console* window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in *pixmap* objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from *locator()* function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function. 
+
+```{exercise}
+Using the *mosaic.plot()* function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
+
+```
+
+```{r echo = FALSE}
+# Mona lisa 
+library(pixmap)
+mona.lisa <- read.pnm("mona_lisa.pgm", cellres = 1)
+#str(mona.lisa)
+#plot(mona.lisa)
+#locator()
+mona.lisa.mosaic <- mosaic.plot(mona.lisa, 60:85, 81:150)
+plot(mona.lisa.mosaic)
+```
+```{exercise}
+Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic. 
+
+mosaic.plot.2 <- function(picture, yrange, xrange, degree){          
+  length.y <- _______(yrange)          
+  length.x <- length(______)          
+  pic2 <- picture          
+  pic2@____[_______,_______] <- degree          
+  return(pic2)          
+}          
+
+Setting the degree=0, 0.5 and 1 respectively, plot the images of Mona Lisa that eyes region are covered by pure colors. 
+```
+
+
+
+
 
 ### Lists
 Vectors contain a set of values. But one vector can only contain one type of values, numbers, characters, or logical values.  A list can store a series of objects of different types. 
