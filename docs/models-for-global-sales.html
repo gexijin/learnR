@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Learning R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Learning R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Learning R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge">
+
+
+<meta name="date" content="2019-02-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="r-librarycluster-autoplotfannypcadata-3-frame-true.html">
+<link rel="next" href="conclusion-1.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Index</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R program-Analyzing iris flower dataset</a><ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.1</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.2</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#students-t-test"><i class="fa fa-check"></i><b>1.3</b> Student’s t-test</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#test-for-normal-distribution"><i class="fa fa-check"></i><b>1.4</b> Test for normal distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.5</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-the-relationship-between-two-columns-of-numbers"><i class="fa fa-check"></i><b>1.6</b> Analyzing the relationship between two columns of numbers</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#visualizing-and-testing-the-differences-in-groups"><i class="fa fa-check"></i><b>1.7</b> Visualizing and testing the differences in groups</a></li>
+<li class="chapter" data-level="1.8" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.8</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><i class="fa fa-check"></i><b>2</b> Visualizing data set-Analyzing cars and iris flower data sets</a><ul>
+<li class="chapter" data-level="2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-mtcars-dataset"><i class="fa fa-check"></i><b>2.2</b> Visualizing mtcars dataset</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.2</b> Detecting correlations among variables</a></li>
+<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.3</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.4</b> Representing data using faces. Serious scientific research only!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-iris-data-set"><i class="fa fa-check"></i><b>2.3</b> Visualizing iris data set</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.3.1</b> A Matrix only contains numbers</a></li>
+<li class="chapter" data-level="2.3.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>2.3.2</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.3.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#heatmap"><i class="fa fa-check"></i><b>2.3.3</b> Heatmap</a></li>
+<li class="chapter" data-level="2.3.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#star-plot"><i class="fa fa-check"></i><b>2.3.4</b> Star plot</a></li>
+<li class="chapter" data-level="2.3.5" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#segment-diagrams"><i class="fa fa-check"></i><b>2.3.5</b> Segment diagrams</a></li>
+<li class="chapter" data-level="2.3.6" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.3.6</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.3.7" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#box-plot"><i class="fa fa-check"></i><b>2.3.7</b> Box plot</a></li>
+<li class="chapter" data-level="2.3.8" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.3.8</b> Bar plot with error bar</a></li>
+<li class="chapter" data-level="2.3.9" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#combining-plots"><i class="fa fa-check"></i><b>2.3.9</b> Combining plots</a></li>
+<li class="chapter" data-level="2.3.10" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#plot-using-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.3.10</b> Plot using principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.3.11" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#attempt-at-ggplot2"><i class="fa fa-check"></i><b>2.3.11</b> Attempt at ggplot2</a></li>
+<li class="chapter" data-level="2.3.12" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.3.12</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.1</b> Matrix operations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.2</b> Lists</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Operations on data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>4</b> Data importing</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
+<li class="chapter" data-level="4.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>4.2</b> Reading data from file using Import dataset in Rstudio</a></li>
+<li class="chapter" data-level="4.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.3</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>4.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="4.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>4.6</b> Recommended workflow for EVERY project</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set I</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html"><i class="fa fa-check"></i><b>6</b> Analyzing heart attack data set II</a><ul>
+<li class="chapter" data-level="6.1" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>7</b> Vectors</a></li>
+<li class="chapter" data-level="8" data-path="matrics-and-arrays.html"><a href="matrics-and-arrays.html"><i class="fa fa-check"></i><b>8</b> Matrics and arrays</a></li>
+<li class="chapter" data-level="9" data-path="lists-1.html"><a href="lists-1.html"><i class="fa fa-check"></i><b>9</b> Lists</a></li>
+<li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a></li>
+<li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
+<li class="chapter" data-level="12" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>12</b> Advanced topics</a><ul>
+<li class="chapter" data-level="12.1" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>12.1</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps-and-interactive-plots"><i class="fa fa-check"></i><b>12.2</b> Shiny Apps and interactive plots</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>13</b> Exploring of state data set</a><ul>
+<li class="chapter" data-level="13.1" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>13.1</b> Reading in and manipulating data</a></li>
+<li class="chapter" data-level="13.2" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#basic-information-about-data"><i class="fa fa-check"></i><b>13.2</b> Basic information about data</a></li>
+<li class="chapter" data-level="13.3" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>13.3</b> Analyzing the relationship among variables</a></li>
+<li class="chapter" data-level="13.4" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#peeking-the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>13.4</b> Peeking the whole picture of the data set</a></li>
+<li class="chapter" data-level="13.5" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#linear-model-anylysis"><i class="fa fa-check"></i><b>13.5</b> Linear Model Anylysis</a></li>
+<li class="chapter" data-level="13.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>13.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>14</b> Data exploring of game sale dataset</a><ul>
+<li class="chapter" data-level="14.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>14.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="14.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#simple-analysis-for-original-data"><i class="fa fa-check"></i><b>14.2</b> Simple analysis for original data</a></li>
+<li class="chapter" data-level="14.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#correlation-among-numeric-variables-and-categorical-variables"><i class="fa fa-check"></i><b>14.3</b> Correlation among numeric variables and categorical variables</a></li>
+<li class="chapter" data-level="14.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>14.4</b> Analysis of Score and Count</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-year.release"><i class="fa fa-check"></i><b>14.4.1</b> Score &amp; Year.Release</a></li>
+<li class="chapter" data-level="14.4.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-top-sale-game"><i class="fa fa-check"></i><b>14.4.2</b> Score &amp; Top sale game</a></li>
+<li class="chapter" data-level="14.4.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-platform"><i class="fa fa-check"></i><b>14.4.3</b> 4) Score &amp; Platform</a></li>
+<li class="chapter" data-level="14.4.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-score"><i class="fa fa-check"></i><b>14.4.4</b> 5) Score &amp; Score</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-rating"><i class="fa fa-check"></i><b>14.5</b> 6) Score &amp; Rating</a><ul>
+<li class="chapter" data-level="14.5.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-genre"><i class="fa fa-check"></i><b>14.5.1</b> 7) Score &amp; Genre</a></li>
+<li class="chapter" data-level="14.5.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-global-sales"><i class="fa fa-check"></i><b>14.5.2</b> 8) Score &amp; Global sales</a></li>
+<li class="chapter" data-level="14.5.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-top-sale-developer"><i class="fa fa-check"></i><b>14.5.3</b> 9) Score &amp; Top Sale Developer</a></li>
+<li class="chapter" data-level="14.5.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-publisher"><i class="fa fa-check"></i><b>14.5.4</b> 10) Score &amp; Publisher</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>14.6</b> Analysis of Sales</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>14.6.1</b> 1) By Year.Release</a></li>
+<li class="chapter" data-level="14.6.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>14.6.2</b> 2) By Region</a></li>
+<li class="chapter" data-level="14.6.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>14.6.3</b> 3) By Genre</a></li>
+<li class="chapter" data-level="14.6.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>14.6.4</b> 4) By Rating</a></li>
+<li class="chapter" data-level="14.6.5" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-rating-genre"><i class="fa fa-check"></i><b>14.6.5</b> 5) By Rating &amp; Genre</a></li>
+<li class="chapter" data-level="14.6.6" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>14.6.6</b> 6) By Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#analysis-for-numeric-matrix-heatmap-and-pca"><i class="fa fa-check"></i><b>14.7</b> Analysis for numeric matrix: Heatmap and PCA</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="r-librarycluster-autoplotfannypcadata-3-frame-true.html"><a href="r-librarycluster-autoplotfannypcadata-3-frame-true.html"><i class="fa fa-check"></i><b>15</b> <code>{r} library(cluster) autoplot(fanny(pcaData, 3), frame = TRUE) #</code></a></li>
+<li class="chapter" data-level="16" data-path="models-for-global-sales.html"><a href="models-for-global-sales.html"><i class="fa fa-check"></i><b>16</b> 7 Models for Global Sales</a></li>
+<li class="chapter" data-level="17" data-path="conclusion-1.html"><a href="conclusion-1.html"><i class="fa fa-check"></i><b>17</b> 8 Conclusion</a></li>
+<li class="chapter" data-level="18" data-path="data-exploring-of-employee-salary-dataset.html"><a href="data-exploring-of-employee-salary-dataset.html"><i class="fa fa-check"></i><b>18</b> Data exploring of employee salary dataset</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="models-for-global-sales" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> 7 Models for Global Sales</h1>
+<p>Because there are two many of levels in Publisher and Developer, and there are apparent correlation between them, we use only top ten levels of Publisher and classified the other publishers as “Others”; Because of the good correlation between Critic.Score and User.Score, we use only critic score; Same reason, we will not put “other.sale.log” in our model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#re-categorize publisher into 13 groups</span>
+Publisher. &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">names</span>(<span class="kw">sort</span>(<span class="kw">table</span>(game<span class="op">$</span>Publisher), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)), <span class="dv">12</span>)
+game &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
+<span class="kw">mutate</span>(<span class="dt">Publisher.type =</span> <span class="kw">ifelse</span>(Publisher <span class="op">%in%</span><span class="st"> </span>Publisher., <span class="kw">as.character</span>(Publisher),<span class="st">&quot;Others&quot;</span>)) 
+game.log &lt;-<span class="st"> </span>game[, <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">16</span>, <span class="dv">21</span><span class="op">:</span><span class="dv">23</span>, <span class="dv">24</span><span class="op">:</span><span class="dv">28</span>)]
+game.log<span class="op">$</span>Publisher.type &lt;-<span class="st"> </span><span class="kw">as.factor</span>(game.log<span class="op">$</span>Publisher.type)
+<span class="kw">summary</span>(game.log)</code></pre></div>
+<pre><code>##   Year.Release           Genre       Critic.Score     User.Score   
+##  2008   : 592   Action      :1630   Min.   :1.300   Min.   :0.500  
+##  2007   : 590   Sports      : 943   1st Qu.:6.200   1st Qu.:6.500  
+##  2005   : 562   Shooter     : 864   Median :7.200   Median :7.500  
+##  2009   : 550   Role-Playing: 712   Mean   :7.027   Mean   :7.186  
+##  2006   : 528   Racing      : 581   3rd Qu.:8.000   3rd Qu.:8.200  
+##  2003   : 498   Platform    : 403   Max.   :9.800   Max.   :9.600  
+##  (Other):3505   (Other)     :1692                                  
+##   Rating     Global.Sales.Log Critic.Count.Log User.Count.Log 
+##  AO  :   1   Min.   : 9.21    Min.   :1.099    Min.   :1.386  
+##  E   :2082   1st Qu.:11.61    1st Qu.:2.639    1st Qu.:2.398  
+##  E10+: 930   Median :12.58    Median :3.219    Median :3.296  
+##  K-A :   1   Mean   :12.58    Mean   :3.125    Mean   :3.588  
+##  M   :1433   3rd Qu.:13.53    3rd Qu.:3.664    3rd Qu.:4.489  
+##  RP  :   1   Max.   :18.23    Max.   :4.727    Max.   :9.275  
+##  T   :2377                                                    
+##  Rating.type            Platform.type           Genre.     Rating.    
+##  Length:6825        nintendo   :1535   Action      :1630   T   :2377  
+##  Class :character   others     : 251   Sports      : 943   E   :2082  
+##  Mode  :character   pc         : 651   Shooter     : 864   M   :1433  
+##                     playstation:2806   Role-Playing: 712   E10+: 930  
+##                     xbox       :1582   Racing      : 581   AO  :   1  
+##                                        Platform    : 403   K-A :   1  
+##                                        (Other)     :1692   RP  :   1  
+##                      Publisher.type
+##  Others                     :2566  
+##  Electronic Arts            : 944  
+##  Ubisoft                    : 496  
+##  Activision                 : 492  
+##  Sony Computer Entertainment: 316  
+##  THQ                        : 307  
+##  (Other)                    :1704</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">glm</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> game.log)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Global.Sales.Log ~ ., data = game.log)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.9546  -0.5619   0.0202   0.5780   4.2582  
+## 
+## Coefficients: (21 not defined because of singularities)
+##                                             Estimate Std. Error t value
+## (Intercept)                                10.663626   1.299125   8.208
+## Year.Release1988                           -3.370061   1.297373  -2.598
+## Year.Release1992                           -1.764433   1.296619  -1.361
+## Year.Release1994                            3.001558   1.298122   2.312
+## Year.Release1996                            1.736227   0.991601   1.751
+## Year.Release1997                            1.291103   0.952692   1.355
+## Year.Release1998                            0.862419   0.936678   0.921
+## Year.Release1999                            0.746893   0.933474   0.800
+## Year.Release2000                            0.822917   0.922460   0.892
+## Year.Release2001                            0.795710   0.919721   0.865
+## Year.Release2002                            0.589663   0.919012   0.642
+## Year.Release2003                            0.359763   0.918877   0.392
+## Year.Release2004                            0.543142   0.918963   0.591
+## Year.Release2005                            0.197113   0.918738   0.215
+## Year.Release2006                            0.126281   0.918731   0.137
+## Year.Release2007                            0.357175   0.918630   0.389
+## Year.Release2008                            0.519440   0.918679   0.565
+## Year.Release2009                            0.418390   0.918663   0.455
+## Year.Release2010                            0.568807   0.918894   0.619
+## Year.Release2011                            0.355368   0.918948   0.387
+## Year.Release2012                           -0.048199   0.919532  -0.052
+## Year.Release2013                           -0.166436   0.920000  -0.181
+## Year.Release2014                           -0.375063   0.920104  -0.408
+## Year.Release2015                           -0.485091   0.920300  -0.527
+## Year.Release2016                           -0.841727   0.920190  -0.915
+## GenreAdventure                             -0.328721   0.063121  -5.208
+## GenreFighting                               0.064205   0.055194   1.163
+## GenreMisc                                   0.343682   0.054309   6.328
+## GenrePlatform                              -0.184917   0.054685  -3.381
+## GenrePuzzle                                -0.390170   0.091564  -4.261
+## GenreRacing                                -0.109884   0.048353  -2.273
+## GenreRole-Playing                          -0.354402   0.042965  -8.249
+## GenreShooter                               -0.156028   0.040308  -3.871
+## GenreSimulation                             0.398392   0.060707   6.563
+## GenreSports                                -0.006325   0.047048  -0.134
+## GenreStrategy                              -0.502930   0.063754  -7.889
+## Critic.Score                                0.142716   0.012277  11.625
+## User.Score                                 -0.055903   0.010483  -5.333
+## RatingE                                    -0.451377   0.918428  -0.491
+## RatingE10+                                 -0.511091   0.918339  -0.557
+## RatingK-A                                  -1.242177   1.350491  -0.920
+## RatingM                                    -0.927148   0.917799  -1.010
+## RatingRP                                    0.120732   1.298501   0.093
+## RatingT                                    -0.789933   0.917950  -0.861
+## Critic.Count.Log                            0.098257   0.022273   4.411
+## User.Count.Log                              0.585448   0.013012  44.993
+## Rating.typeE10+                                   NA         NA      NA
+## Rating.typeM                                      NA         NA      NA
+## Rating.typeOthers                                 NA         NA      NA
+## Rating.typeT                                      NA         NA      NA
+## Platform.typeothers                        -0.171085   0.066025  -2.591
+## Platform.typepc                            -2.420588   0.052575 -46.041
+## Platform.typeplaystation                    0.124988   0.033827   3.695
+## Platform.typexbox                          -0.148605   0.037535  -3.959
+## Genre.Sports                                      NA         NA      NA
+## Genre.Shooter                                     NA         NA      NA
+## Genre.Role-Playing                                NA         NA      NA
+## Genre.Racing                                      NA         NA      NA
+## Genre.Platform                                    NA         NA      NA
+## Genre.Misc                                        NA         NA      NA
+## Genre.Fighting                                    NA         NA      NA
+## Genre.Simulation                                  NA         NA      NA
+## Genre.Strategy                                    NA         NA      NA
+## Genre.Adventure                                   NA         NA      NA
+## Genre.Puzzle                                      NA         NA      NA
+## Rating.E                                          NA         NA      NA
+## Rating.M                                          NA         NA      NA
+## Rating.E10+                                       NA         NA      NA
+## Rating.AO                                         NA         NA      NA
+## Rating.K-A                                        NA         NA      NA
+## Rating.RP                                         NA         NA      NA
+## Publisher.typeAtari                        -0.492524   0.082286  -5.986
+## Publisher.typeCapcom                       -0.761111   0.078891  -9.648
+## Publisher.typeElectronic Arts              -0.112655   0.053156  -2.119
+## Publisher.typeKonami Digital Entertainment -0.683982   0.072922  -9.380
+## Publisher.typeNamco Bandai Games           -0.539285   0.074905  -7.200
+## Publisher.typeNintendo                      0.107601   0.075274   1.429
+## Publisher.typeOthers                       -0.599886   0.046478 -12.907
+## Publisher.typeSega                         -0.509254   0.069441  -7.334
+## Publisher.typeSony Computer Entertainment  -0.590278   0.069451  -8.499
+## Publisher.typeTake-Two Interactive         -0.267233   0.070691  -3.780
+## Publisher.typeTHQ                          -0.097505   0.068678  -1.420
+## Publisher.typeUbisoft                      -0.355457   0.059008  -6.024
+##                                            Pr(&gt;|t|)    
+## (Intercept)                                2.66e-16 ***
+## Year.Release1988                           0.009408 ** 
+## Year.Release1992                           0.173624    
+## Year.Release1994                           0.020795 *  
+## Year.Release1996                           0.080003 .  
+## Year.Release1997                           0.175394    
+## Year.Release1998                           0.357229    
+## Year.Release1999                           0.423668    
+## Year.Release2000                           0.372377    
+## Year.Release2001                           0.386979    
+## Year.Release2002                           0.521137    
+## Year.Release2003                           0.695422    
+## Year.Release2004                           0.554515    
+## Year.Release2005                           0.830126    
+## Year.Release2006                           0.890678    
+## Year.Release2007                           0.697427    
+## Year.Release2008                           0.571807    
+## Year.Release2009                           0.648812    
+## Year.Release2010                           0.535929    
+## Year.Release2011                           0.698982    
+## Year.Release2012                           0.958198    
+## Year.Release2013                           0.856445    
+## Year.Release2014                           0.683557    
+## Year.Release2015                           0.598141    
+## Year.Release2016                           0.360365    
+## GenreAdventure                             1.97e-07 ***
+## GenreFighting                              0.244763    
+## GenreMisc                                  2.64e-10 ***
+## GenrePlatform                              0.000725 ***
+## GenrePuzzle                                2.06e-05 ***
+## GenreRacing                                0.023085 *  
+## GenreRole-Playing                           &lt; 2e-16 ***
+## GenreShooter                               0.000109 ***
+## GenreSimulation                            5.68e-11 ***
+## GenreSports                                0.893055    
+## GenreStrategy                              3.54e-15 ***
+## Critic.Score                                &lt; 2e-16 ***
+## User.Score                                 9.99e-08 ***
+## RatingE                                    0.623112    
+## RatingE10+                                 0.577861    
+## RatingK-A                                  0.357712    
+## RatingM                                    0.312442    
+## RatingRP                                   0.925924    
+## RatingT                                    0.389522    
+## Critic.Count.Log                           1.04e-05 ***
+## User.Count.Log                              &lt; 2e-16 ***
+## Rating.typeE10+                                  NA    
+## Rating.typeM                                     NA    
+## Rating.typeOthers                                NA    
+## Rating.typeT                                     NA    
+## Platform.typeothers                        0.009584 ** 
+## Platform.typepc                             &lt; 2e-16 ***
+## Platform.typeplaystation                   0.000222 ***
+## Platform.typexbox                          7.60e-05 ***
+## Genre.Sports                                     NA    
+## Genre.Shooter                                    NA    
+## Genre.Role-Playing                               NA    
+## Genre.Racing                                     NA    
+## Genre.Platform                                   NA    
+## Genre.Misc                                       NA    
+## Genre.Fighting                                   NA    
+## Genre.Simulation                                 NA    
+## Genre.Strategy                                   NA    
+## Genre.Adventure                                  NA    
+## Genre.Puzzle                                     NA    
+## Rating.E                                         NA    
+## Rating.M                                         NA    
+## Rating.E10+                                      NA    
+## Rating.AO                                        NA    
+## Rating.K-A                                       NA    
+## Rating.RP                                        NA    
+## Publisher.typeAtari                        2.27e-09 ***
+## Publisher.typeCapcom                        &lt; 2e-16 ***
+## Publisher.typeElectronic Arts              0.034098 *  
+## Publisher.typeKonami Digital Entertainment  &lt; 2e-16 ***
+## Publisher.typeNamco Bandai Games           6.69e-13 ***
+## Publisher.typeNintendo                     0.152917    
+## Publisher.typeOthers                        &lt; 2e-16 ***
+## Publisher.typeSega                         2.50e-13 ***
+## Publisher.typeSony Computer Entertainment   &lt; 2e-16 ***
+## Publisher.typeTake-Two Interactive         0.000158 ***
+## Publisher.typeTHQ                          0.155731    
+## Publisher.typeUbisoft                      1.79e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.8366257)
+## 
+##     Null deviance: 13360.4  on 6824  degrees of freedom
+## Residual deviance:  5658.1  on 6763  degrees of freedom
+## AIC: 18215
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> game.log)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>##                    Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Year.Release       24    521    21.7   25.95  &lt; 2e-16 ***
+## Genre              11    527    47.9   57.24  &lt; 2e-16 ***
+## Critic.Score        1   1771  1771.3 2117.16  &lt; 2e-16 ***
+## User.Score          1     26    26.0   31.11 2.53e-08 ***
+## Rating              6     56     9.4   11.26 1.52e-12 ***
+## Critic.Count.Log    1   1137  1137.0 1359.04  &lt; 2e-16 ***
+## User.Count.Log      1    699   698.9  835.37  &lt; 2e-16 ***
+## Platform.type       4   2593   648.2  774.79  &lt; 2e-16 ***
+## Publisher.type     12    372    31.0   37.05  &lt; 2e-16 ***
+## Residuals        6763   5658     0.8                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Global sales is mostly effected by factors of platform, genre, critic score, critic and user count log in glm analysis. But ANOVA shows every factors are included in the contribution.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(leaps)</code></pre></div>
+<pre><code>## Loading required package: leaps</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">regsubsets</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> game.log, <span class="dt">method =</span> <span class="st">&quot;forward&quot;</span>)</code></pre></div>
+<pre><code>## Warning in leaps.setup(x, y, wt = wt, nbest = nbest, nvmax = nvmax,
+## force.in = force.in, : 21 linear dependencies found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)</code></pre></div>
+<p>Critic score and User.Count.Log are the main effects for global sales. Platform PC, Wii and PS2 together are the big contributions. Rating E and Genre Misc, Year. Release 2016 and publisher “Others” too, contribute to affect the global sales log. Maybe the big amounts of games for these factors are the good explanation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>Critic.Score <span class="op">+</span><span class="st"> </span>User.Count.Log <span class="op">+</span><span class="st"> </span>Platform.type <span class="op">+</span><span class="st"> </span>Genre, <span class="dt">data =</span> game.log)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Global.Sales.Log ~ Critic.Score + User.Count.Log + 
+##     Platform.type + Genre, data = game.log)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.7389 -0.6269  0.0414  0.6714  4.2830 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               9.81832    0.06879 142.730  &lt; 2e-16 ***
+## Critic.Score              0.17518    0.01042  16.818  &lt; 2e-16 ***
+## User.Count.Log            0.51575    0.01042  49.475  &lt; 2e-16 ***
+## Platform.typeothers      -0.04937    0.07011  -0.704 0.481319    
+## Platform.typepc          -2.60332    0.05402 -48.192  &lt; 2e-16 ***
+## Platform.typeplaystation -0.09302    0.03326  -2.797 0.005177 ** 
+## Platform.typexbox        -0.33951    0.03786  -8.967  &lt; 2e-16 ***
+## GenreAdventure           -0.41236    0.06962  -5.923 3.31e-09 ***
+## GenreFighting             0.04236    0.05834   0.726 0.467832    
+## GenreMisc                 0.56221    0.05842   9.623  &lt; 2e-16 ***
+## GenrePlatform             0.06668    0.05730   1.164 0.244623    
+## GenrePuzzle              -0.13865    0.09872  -1.405 0.160193    
+## GenreRacing               0.18343    0.04966   3.693 0.000223 ***
+## GenreRole-Playing        -0.36315    0.04617  -7.865 4.27e-15 ***
+## GenreShooter             -0.10091    0.04327  -2.332 0.019706 *  
+## GenreSimulation           0.53113    0.06548   8.112 5.87e-16 ***
+## GenreSports               0.38984    0.04341   8.980  &lt; 2e-16 ***
+## GenreStrategy            -0.33393    0.06934  -4.816 1.50e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.018 on 6807 degrees of freedom
+## Multiple R-squared:  0.4723, Adjusted R-squared:  0.471 
+## F-statistic: 358.4 on 17 and 6807 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Critic score and User.Count.Log positively affect the global sales log. Platforms and Genres either lift or pull down the global sales according to their types. This model will explain the global sales log with R-Square of 0.53.</p>
+<p>Because of the curve smooth line at global sale ~ critic score in our previous analysis, We try a polynomial fit (degree 4) of critic score only.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>
+<span class="st">           </span>Critic.Score <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">4</span>),  <span class="dt">data =</span> game.log)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Global.Sales.Log ~ Critic.Score + I(Critic.Score^2) + 
+##     I(Critic.Score^3) + I(Critic.Score^4), data = game.log)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0029 -0.7972  0.0916  0.8801  5.6201 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       12.030638   1.468428   8.193 3.02e-16 ***
+## Critic.Score      -0.840810   1.095444  -0.768   0.4428    
+## I(Critic.Score^2)  0.385671   0.292104   1.320   0.1868    
+## I(Critic.Score^3) -0.060971   0.033147  -1.839   0.0659 .  
+## I(Critic.Score^4)  0.003434   0.001358   2.528   0.0115 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.281 on 6820 degrees of freedom
+## Multiple R-squared:  0.1623, Adjusted R-squared:  0.1618 
+## F-statistic: 330.4 on 4 and 6820 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The first two levels are not statistically significant, we try the third and fourth levels only.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">4</span>),  <span class="dt">data =</span> game.log)
+<span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Global.Sales.Log ~ I(Critic.Score^3) + I(Critic.Score^4), 
+##     data = game.log)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.8634 -0.7892  0.0950  0.8837  5.5807 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        1.193e+01  7.115e-02 167.722  &lt; 2e-16 ***
+## I(Critic.Score^3) -2.989e-03  7.972e-04  -3.749 0.000179 ***
+## I(Critic.Score^4)  6.076e-04  8.224e-05   7.387 1.67e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.283 on 6822 degrees of freedom
+## Multiple R-squared:  0.1597, Adjusted R-squared:  0.1595 
+## F-statistic: 648.3 on 2 and 6822 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plotmo)</code></pre></div>
+<pre><code>## Warning: package &#39;plotmo&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Loading required package: plotrix</code></pre>
+<pre><code>## 
+## Attaching package: &#39;plotrix&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:gplots&#39;:
+## 
+##     plotCI</code></pre>
+<pre><code>## The following object is masked from &#39;package:scales&#39;:
+## 
+##     rescale</code></pre>
+<pre><code>## Loading required package: TeachingDemos</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotlm &lt;-<span class="st"> </span><span class="cf">function</span>(object){  <span class="co"># similar to plot.lm</span>
+  <span class="kw">plotres</span>(object, <span class="dt">which =</span> <span class="dv">3</span>, <span class="dt">versus =</span> <span class="dv">4</span>, <span class="dt">standardize =</span> <span class="ot">TRUE</span>)  <span class="co"># leverage plot</span>
+  <span class="kw">plotres</span>(object, <span class="dt">which =</span> <span class="dv">3</span>, <span class="dt">center =</span> <span class="ot">FALSE</span>,  <span class="co"># residuals vs fitted</span>
+          <span class="dt">caption =</span> <span class="kw">paste</span>(<span class="kw">deparse</span>(object<span class="op">$</span>call), <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)) <span class="co"># caption</span>
+  <span class="kw">plotres</span>(object, <span class="dt">which =</span> <span class="dv">6</span>, <span class="dt">standardize =</span> <span class="ot">TRUE</span>, <span class="dt">main =</span> <span class="st">&quot;Scale-Location&quot;</span>)
+  <span class="kw">plotres</span>(object, <span class="dt">which =</span> <span class="dv">2</span>)  <span class="co"># cumulative distribution</span>
+  <span class="kw">plotres</span>(object, <span class="dt">which =</span> <span class="dv">4</span>, <span class="dt">standardize =</span> <span class="ot">TRUE</span>) <span class="co"># QQ plot</span>
+}
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">0</span>))
+<span class="kw">plotlm</span>(model)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-52"></span>
+<img src="book_files/figure-html/unnamed-chunk-52-1.png" alt="Model residuals plots by plotres" width="768" />
+<p class="caption">
+Figure 16.1: Model residuals plots by plotres
+</p>
+</div>
+<p>There are 6 points are potential influential against the regression line in Residual vs Leverage plot. But they are not out of the Cook’s distance line(out of the range), so the regression results shall not be altered if we exclude those cases. Except three points far away from the horizontal line in Residual vs Fitted plot, means the model fit the linear regression well. The scale-location plot shows the residuals are spread equally along the ranges of predictors except these three cases. These three cases determine the right bound of the Cumulative Distribution plot(top right). Residual QQ plot too, shows that residuals except these three points follow normal QQ line. In total, the coefficients are statistically significant, the model of two levels of critic score itself will explain the data with R square 0.16.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">testFunc &lt;-<span class="st"> </span><span class="cf">function</span>(x) {model<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>model<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>x<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>x<span class="op">*</span>model<span class="op">$</span>coefficients[<span class="dv">3</span>]}
+<span class="kw">ggplot</span>(<span class="dt">data =</span> game.log, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Score, <span class="dt">y =</span> Global.Sales.Log)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> testFunc, <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Meta Critic Score&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&#39;Global Sales Log&#39;</span>)</code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Here is the scatter plot of Global.Sales.Log ~ Critic Score and the model line which predict the global sales log.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-librarycluster-autoplotfannypcadata-3-frame-true.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

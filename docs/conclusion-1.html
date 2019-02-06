@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Learning R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Learning R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Learning R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge">
+
+
+<meta name="date" content="2019-02-01">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="models-for-global-sales.html">
+<link rel="next" href="data-exploring-of-employee-salary-dataset.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Index</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R program-Analyzing iris flower dataset</a><ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.1</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.2</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#students-t-test"><i class="fa fa-check"></i><b>1.3</b> Student’s t-test</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#test-for-normal-distribution"><i class="fa fa-check"></i><b>1.4</b> Test for normal distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.5</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-the-relationship-between-two-columns-of-numbers"><i class="fa fa-check"></i><b>1.6</b> Analyzing the relationship between two columns of numbers</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#visualizing-and-testing-the-differences-in-groups"><i class="fa fa-check"></i><b>1.7</b> Visualizing and testing the differences in groups</a></li>
+<li class="chapter" data-level="1.8" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.8</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><i class="fa fa-check"></i><b>2</b> Visualizing data set-Analyzing cars and iris flower data sets</a><ul>
+<li class="chapter" data-level="2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-mtcars-dataset"><i class="fa fa-check"></i><b>2.2</b> Visualizing mtcars dataset</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.2</b> Detecting correlations among variables</a></li>
+<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.3</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.4</b> Representing data using faces. Serious scientific research only!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-iris-data-set"><i class="fa fa-check"></i><b>2.3</b> Visualizing iris data set</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.3.1</b> A Matrix only contains numbers</a></li>
+<li class="chapter" data-level="2.3.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>2.3.2</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.3.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#heatmap"><i class="fa fa-check"></i><b>2.3.3</b> Heatmap</a></li>
+<li class="chapter" data-level="2.3.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#star-plot"><i class="fa fa-check"></i><b>2.3.4</b> Star plot</a></li>
+<li class="chapter" data-level="2.3.5" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#segment-diagrams"><i class="fa fa-check"></i><b>2.3.5</b> Segment diagrams</a></li>
+<li class="chapter" data-level="2.3.6" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.3.6</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.3.7" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#box-plot"><i class="fa fa-check"></i><b>2.3.7</b> Box plot</a></li>
+<li class="chapter" data-level="2.3.8" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.3.8</b> Bar plot with error bar</a></li>
+<li class="chapter" data-level="2.3.9" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#combining-plots"><i class="fa fa-check"></i><b>2.3.9</b> Combining plots</a></li>
+<li class="chapter" data-level="2.3.10" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#plot-using-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.3.10</b> Plot using principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.3.11" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#attempt-at-ggplot2"><i class="fa fa-check"></i><b>2.3.11</b> Attempt at ggplot2</a></li>
+<li class="chapter" data-level="2.3.12" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.3.12</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.1</b> Matrix operations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.2</b> Lists</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Operations on data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>4</b> Data importing</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
+<li class="chapter" data-level="4.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>4.2</b> Reading data from file using Import dataset in Rstudio</a></li>
+<li class="chapter" data-level="4.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.3</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>4.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="4.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>4.6</b> Recommended workflow for EVERY project</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set I</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html"><i class="fa fa-check"></i><b>6</b> Analyzing heart attack data set II</a><ul>
+<li class="chapter" data-level="6.1" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>7</b> Vectors</a></li>
+<li class="chapter" data-level="8" data-path="matrics-and-arrays.html"><a href="matrics-and-arrays.html"><i class="fa fa-check"></i><b>8</b> Matrics and arrays</a></li>
+<li class="chapter" data-level="9" data-path="lists-1.html"><a href="lists-1.html"><i class="fa fa-check"></i><b>9</b> Lists</a></li>
+<li class="chapter" data-level="10" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>10</b> Data frames</a></li>
+<li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
+<li class="chapter" data-level="12" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>12</b> Advanced topics</a><ul>
+<li class="chapter" data-level="12.1" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>12.1</b> Tidyverse</a></li>
+<li class="chapter" data-level="12.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps-and-interactive-plots"><i class="fa fa-check"></i><b>12.2</b> Shiny Apps and interactive plots</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>13</b> Exploring of state data set</a><ul>
+<li class="chapter" data-level="13.1" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>13.1</b> Reading in and manipulating data</a></li>
+<li class="chapter" data-level="13.2" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#basic-information-about-data"><i class="fa fa-check"></i><b>13.2</b> Basic information about data</a></li>
+<li class="chapter" data-level="13.3" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>13.3</b> Analyzing the relationship among variables</a></li>
+<li class="chapter" data-level="13.4" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#peeking-the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>13.4</b> Peeking the whole picture of the data set</a></li>
+<li class="chapter" data-level="13.5" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#linear-model-anylysis"><i class="fa fa-check"></i><b>13.5</b> Linear Model Anylysis</a></li>
+<li class="chapter" data-level="13.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>13.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>14</b> Data exploring of game sale dataset</a><ul>
+<li class="chapter" data-level="14.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>14.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="14.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#simple-analysis-for-original-data"><i class="fa fa-check"></i><b>14.2</b> Simple analysis for original data</a></li>
+<li class="chapter" data-level="14.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#correlation-among-numeric-variables-and-categorical-variables"><i class="fa fa-check"></i><b>14.3</b> Correlation among numeric variables and categorical variables</a></li>
+<li class="chapter" data-level="14.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>14.4</b> Analysis of Score and Count</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-year.release"><i class="fa fa-check"></i><b>14.4.1</b> Score &amp; Year.Release</a></li>
+<li class="chapter" data-level="14.4.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-top-sale-game"><i class="fa fa-check"></i><b>14.4.2</b> Score &amp; Top sale game</a></li>
+<li class="chapter" data-level="14.4.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-platform"><i class="fa fa-check"></i><b>14.4.3</b> 4) Score &amp; Platform</a></li>
+<li class="chapter" data-level="14.4.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-score"><i class="fa fa-check"></i><b>14.4.4</b> 5) Score &amp; Score</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-rating"><i class="fa fa-check"></i><b>14.5</b> 6) Score &amp; Rating</a><ul>
+<li class="chapter" data-level="14.5.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-genre"><i class="fa fa-check"></i><b>14.5.1</b> 7) Score &amp; Genre</a></li>
+<li class="chapter" data-level="14.5.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-global-sales"><i class="fa fa-check"></i><b>14.5.2</b> 8) Score &amp; Global sales</a></li>
+<li class="chapter" data-level="14.5.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-top-sale-developer"><i class="fa fa-check"></i><b>14.5.3</b> 9) Score &amp; Top Sale Developer</a></li>
+<li class="chapter" data-level="14.5.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#score-publisher"><i class="fa fa-check"></i><b>14.5.4</b> 10) Score &amp; Publisher</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>14.6</b> Analysis of Sales</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>14.6.1</b> 1) By Year.Release</a></li>
+<li class="chapter" data-level="14.6.2" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>14.6.2</b> 2) By Region</a></li>
+<li class="chapter" data-level="14.6.3" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>14.6.3</b> 3) By Genre</a></li>
+<li class="chapter" data-level="14.6.4" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>14.6.4</b> 4) By Rating</a></li>
+<li class="chapter" data-level="14.6.5" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-rating-genre"><i class="fa fa-check"></i><b>14.6.5</b> 5) By Rating &amp; Genre</a></li>
+<li class="chapter" data-level="14.6.6" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>14.6.6</b> 6) By Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="14.7" data-path="data-exploring-of-game-sale-dataset.html"><a href="data-exploring-of-game-sale-dataset.html#analysis-for-numeric-matrix-heatmap-and-pca"><i class="fa fa-check"></i><b>14.7</b> Analysis for numeric matrix: Heatmap and PCA</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="r-librarycluster-autoplotfannypcadata-3-frame-true.html"><a href="r-librarycluster-autoplotfannypcadata-3-frame-true.html"><i class="fa fa-check"></i><b>15</b> <code>{r} library(cluster) autoplot(fanny(pcaData, 3), frame = TRUE) #</code></a></li>
+<li class="chapter" data-level="16" data-path="models-for-global-sales.html"><a href="models-for-global-sales.html"><i class="fa fa-check"></i><b>16</b> 7 Models for Global Sales</a></li>
+<li class="chapter" data-level="17" data-path="conclusion-1.html"><a href="conclusion-1.html"><i class="fa fa-check"></i><b>17</b> 8 Conclusion</a></li>
+<li class="chapter" data-level="18" data-path="data-exploring-of-employee-salary-dataset.html"><a href="data-exploring-of-employee-salary-dataset.html"><i class="fa fa-check"></i><b>18</b> Data exploring of employee salary dataset</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conclusion-1" class="section level1">
+<h1><span class="header-section-number">Chapter 17</span> 8 Conclusion</h1>
+<p><strong>a</strong> There is no strong statistics evidence that these sales, scores and counts are normal distributed, neither for the log value of these variables.</p>
+<p><strong>b</strong> Good positive correlation between Global.Sales and other regional sales; Good positive correlation between these regional sales too. Positive correlation between Critic.Score and User.Score.</p>
+<p><strong>c According to the frequency:</strong> -Word “world” has highest frequency in game name, then “star”, “wars”, and “NBA”;</p>
+<p>-The popular platforms are: PS2, X360, PS3, PC, XB, Wii, DS and so on;</p>
+<p>-There were not so many games released before 1996. From 1996 to 1999, games were still released at the little amount. After 2000, there is a big lift on the amount of game released. The peak years are in 2007 and 2008. After that, the counts keep to reduce.</p>
+<p>-Action, Sports and Shooter are the first three biggest genre;</p>
+<p>-According to the order, the most popular ratings are T, E, M and E10+;</p>
+<p>-Electronic Arts, Ubisoft and Activision lead the big publisher;</p>
+<p>-The top three Developers are EA Canada, EA Sports and Capcorm;</p>
+<p>-Action game was combined with almost equal three portions: RP, M, and E; Most sports games are E rating; Most of the shooter games are rated as M. Most fighting and half Role-Playing games are rated as RP.</p>
+<p><strong>d According tO the global sales:</strong> -There is at least one of platform is statistically significantly different from the others in the means of the global sales. Same conclusion can be applied to other factors like year.release, genre, publisher, developer and rating.</p>
+<p>-There is very little sales before 1996. For several years between 1996 and 2000 the sales increased slowly. After that there is a big climbing. The top sales happened in 2008. After that total sales of the video games sloped down year after year.</p>
+<p>-Top popular 3 games included: Wii Sports, Grand Theft Auto V and Mario Kart Wii;</p>
+<p>-Nintendo is the only one which has total sales over 400 millions, much more than the other developers. The other top developers included EA Sports, EA Canada, Rockstar North, Capcorm and so on;</p>
+<p>-Genre Action keeps on the top sale for all those years, then Adventure and Fighting. Strategy is on the lowest sale list;</p>
+<p>_For the best global sales game in each years, Action game occupies most of the years. From 2001 to 2015, Action is not the Genre of the best sale game for only three years: 2006 and 2009 are Sports, 2011 is Shooter.</p>
+<p>-Rating E and E10+ run the first two in global sales. M game is popular in North America, which contributed a lot to global sales, E games have good sale in Europe, while Japanese like T And E games. It’s balance in ratings for “other” region.</p>
+<p>-Top global sale platforms were PS2, X360, PS3 and Wii. Though their user score are not the highest. If we separate these top platforms into five types: pc, nintendo, xbox, playstation and others, others portion shrinked to be ignored around 2010, while the global sale portions of other four platform types keep relatively evenly and stably.</p>
+<p>_North America keeps on selling more games than the other three regions. The second one is Europe. Japan and other regions kept the low amount sales for all those years.</p>
+<p>-North America, Europe and other sales follow the global sales’ pattern on Genre and rating, while Japan market is very different from them. Role-Playing is very popular in Japan. Rating M contribute big portion in both Action and Shooter global sales, Rating E sports game are popular globally. In Japan, teenagers play a lot of Role-Playing games, they also play part of action games. Almost half of Japan action games are rated as M and lots of other genre games are rated as E.</p>
+<p><strong>e According score and count analysis:</strong> -There is at least one of platforms is statistically significantly different from the others in the means of critic score and user score. Same conclusion is for year.release, genre, publisher, developer and rating.</p>
+<p>-There is good correlation between Critic.Score and User.Score; In total, Critic.Score is a little bit higher than User.Score; The means of them are statistically different.</p>
+<p>-Critic.Score has a little correlation to Critic.Count, while User.Score is independent on User.Count.</p>
+<p>-There is no apparent linear correlation between global sales and critic score or user score.</p>
+<p>-There is no big difference for critic.Score and User.Score in different Rating except Rating M got more higher Critic.Score than others, E10+ got more lower Critic.Score, and both User.Score and Critic.Score in E10+ are a little bit lower;</p>
+<p>-For Genre, Sports got higher Critic.Score density, while Role-Playing games got highest average user score.</p>
+<p>-For both Critic.Score and user.Score, the higher the score, the better the global sales;</p>
+<p>-Top 3 Genre of Action, Sports and Shooter show high critic scores.</p>
+<p><strong>f According to PCA and heatmap:</strong> -PCA plot and Kmeans plot explain PC1 and PC2 together around 60% of variance.</p>
+<p>-Together with heat map, these plots illustrate that PC, Xbox, PlayStation and Nintendo play different important role in components of the variance of PC1 and PC2.</p>
+<p>-Four middle level clusters construct into two big clusters, with each big cluster combined by two middle level clusters for all these observations.</p>
+<p>-For these numeric columns, all sales logs except JP.Sales.Log combined as one cluster, JP.Sales.Log together with to count logs build another cluster, and two scores combined the third cluster.</p>
+<p><strong>g Models:</strong> -Global sales is mostly effected by factors of platform, genre, critic score, critic and user count log in glm analysis. But ANOVA shows every factors are included in the contribution.</p>
+<p>-Critic score and User.Count.Log are the main positive effects. Platforms and Genres either lift or pull down the global sales according to their name. A polynomial fit (degree 3 &amp; 4) of critic score only will explain global sales with R square 0.16.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="models-for-global-sales.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-exploring-of-employee-salary-dataset.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

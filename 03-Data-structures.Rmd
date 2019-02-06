@@ -56,7 +56,7 @@ x / 2
 log(x)
 x^2
 sqrt(x)
-x>1
+x > 1
 ```
 
 You can re-assign any value to a variable at any time. Try assigning **"Go Jacks!"** to **x**.
@@ -159,7 +159,7 @@ evencount <- function(vec) {
 ```
 
 ```{r}
-x=c(2,5,7,8,14,12,8,3) #a vector
+x=c(2, 5, 7, 8, 14, 12, 8, 3) #a vector
 evencount(x)           #Call the function evencount(). 
 ```
 
@@ -177,7 +177,7 @@ A variable is called global variable if it is defined outside of functions.A glo
 
 ```{r}
 myfun.globle <- function (x){
-  return(x - 2*y)
+  return(x - 2 * y)
   y <- 1
 }
 myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
@@ -188,8 +188,8 @@ y
 ```
 The function *myfun.globle2()* defined below returns the same values as above. But both x and y within the the paratheses *(x, y=1)* following *function* are local variables.
 ```{r}
-myfun.globle2 <- function (x,y=1){ #y is set as 1 within the function by default.
-  return(x - 2*y)
+myfun.globle2 <- function (x, y = 1){ #y is set as 1 within the function by default.
+  return(x - 2 * y)
  }
 myfun.globle2(8)    #8-2*y = 8-2*(1)=6
 ```
@@ -202,12 +202,12 @@ Define a function counting the values that are less than 0 for two vectors x=rno
 fun1 <- function(x){
   k <- 0
   for (n in x) { 
-    if (n < 0) k <- k+1
+    if (n < 0) k <- k + 1
   } 
   return(k/length(x))
 }
-x=rnorm(50)
-y=rnorm(5000)
+x = rnorm(50)
+y = rnorm(5000)
 fun1(x)
 fun1(y)
 ```
@@ -420,7 +420,7 @@ sample(x, 3)
 Elements in the vector can have names. Type "x" in the command window to see the difference.
 ```{r}
 x <- c(5, 2, 22, 11, 5)
-names(x) <- c("x", "y", "z", "Amy", "John")
+names(x) <- c("David", "Breck", "Zach", "Amy", "John")
 x
 ```
 
@@ -480,7 +480,7 @@ In this example, the element in y is either 'positive' or 'negative'. It depends
 
 ```{r}
 x <- c(3, 4, -6, 1, -2)
-y <- ifelse (x < 0, abs(x), 2*x+1) 
+y <- ifelse (x < 0, abs(x), 2 * x + 1) 
 y
 ```
 In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise multiply the element by 2 then add 1.
@@ -747,7 +747,7 @@ t(x)
 
 We can produce a new matrix by each element is doubled and added 5
 ```{r}
-y <- 2*x+5
+y <- 2 * x + 5
 y
 ```
 
@@ -759,7 +759,7 @@ x * y
 
 We can also get a logical matrix using logical code like:
 ```{r}
-x>3
+x > 3
 ```
 
 Now if we want to know the mean and sum of these rows and columns, try rowMeans(), colMeans(), rowSums(), colSums().
@@ -792,7 +792,7 @@ Take the first 4 columns of iris data set and format as a matrix. Compute the me
 ### Lists
 Vectors contain a set of values. But one vector can only contain one type of values, numbers, characters, or logical values.  A list can store a series of objects of different types. 
 ```{r}
-y <- list(height = 5,name = "John Doe", BP = c(100, 77))  # a list with 3 components
+y <- list(height = 5, name = "John Doe", BP = c(100, 77))  # a list with 3 components
 ```
 
 If we want one of the items in its original form, we can extract it with double square brackets:
@@ -1114,44 +1114,9 @@ head(z)
 summary(z)
 ```
 
+Here need more exercise for this chapter
 ```{exercise}
-A researcher studied the pathogenicity of fungi species on certain plants. Their results are in two files in the Datasets folder on D2L as a zipped file pathogenicity.zip. Once unzipped, it contains two files. The first (pathogenicity.txt) contains pathogenicity (the “Infection” column) in terms percentages plant tissue infected. Each isolate was used to infect 9 plants. The entire experiment is repeated according to expt column (1 or 2). The second file (species.txt) contains information about the genotypes identified by sequencing of the fungi DNA. Isolate ID links these two files. The goal is to compare the pathogens in terms of pathogenicity.  These two files are available here and both are tab-deliminated text files.
 
-1)	Create a folder, download the data files into it, and create an Rstudio project in the folder.
-
-2)	Read in these two files. Note that for the species file, DO NOT treat Strings as factors. Unselect this in the import wizard. Keep a copy of the import command into your R script.
-
-3)	Change the species name from “no matching sequences/no significant similarity” to “no match”
-
-4)	Plot histogram of infection across all experiments.
-
-5)	Merge these two files according to Isolate ID. 
-
-6)	Show the number of rows and columns of the merged data.
-
-7)	Show the first few rows of data.
-
-8)	Show the column names
-
-9)	Show summary descriptive statistics for all columns
-
-10)	Show the data types of all columns in the merged data
-
-11)	Create a pie chart by Species (hint: tabulate frequencies first)
-
-12)	Generate a boxplot to compare infection percentage across species
-
-13)	Sort the combined data by infection and show the most infectious species with highest percentages.
-
-14)	Compute average infection for each of the species (use aggregate)
-
-15)	Run linear regression for infection as a function of species, expt, and plant. We want to know if the technical replicate factors have significant impact on the data. Interpret your results.
-
-Provide interpretation of the plots or quantitative analyses.
-
-Hint 1. Make sure the data is correctly imported in the desired type. Numeric, character or factor. 
-
-Hint 2: Structure your R code by partition into parts with comments.
 ```
 
 
