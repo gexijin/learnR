@@ -3,13 +3,16 @@ The heart attack data set (http://statland.org/R/RC/tables4R.htm), included in t
 
 The data set is formatted as a table (Table \@ref(tab:4-01)) with rows representing cases and columns representing characteristics, which is a typical format for many datasets. If you download and open the file in NotePad++ or Excel, you can see that the columns are separated by tabs, and there are **missing values** noted by “NA”. Four columns (DIAGNOSIS, SEX, DRG, DIED) contain **nominal** values, representing labels of **categories**. See an excellent explanation of data types [here](http://www.mymarketresearchmethods.com/types-of-data-nominal-ordinal-interval-ratio/). DIAGNOSIS column contains codes defined in the International Classification of Diseases (IDC), 9th Edition. This is the code that your doctor sends to your insurance company for billing. The numbers, such as 41041, actually code for which part of the heart was affected. Although these are numbers, it does not make any sense to add or subtract or compute the mean. If I have a room of 30 students each with student ids, such as 732324, it does not make any sense to compute the average of these numbers. Such **categorical data needs to be recognized as factors in R**. Similarly, DRG column has three possible numbers, 121 for survivors with cardiovascular complications, 122 for survivors without complications, and 123 for patients who died.  Moreover, DIED also codes for prognosis, it is 1 if the patient passed away, and 0 if survived. 
 
-```{r 4-01, echo=FALSE}
+```{r }
 heartatk4R <- read.table("http://statland.org/R/RC/heartatk4R.txt", 
                          header = TRUE, 
                          sep = "\t", 
                          colClasses = c("character", "factor", "factor", "factor", 
                                         "factor", "numeric", "numeric", "numeric"))
 
+```
+
+```{r 4-01, echo=FALSE}
 knitr::kable(
   head(heartatk4R[, 1:8], 15), 
   booktabs = TRUE,
@@ -37,7 +40,7 @@ If you are single and meet someone in a bar, you typically start with small talk
 As a first step, we are going to examine each column separately. This can be very basic things such as mean, median, ranges, distributions, and normality. This is important because sometimes the data is so skewed or far from normal distribution that we need to use **non-parametric tests**, or **transformate the raw data** using log transformation, or more generally box-cox transformation, before conducting other analyses. 
 
 ```{exercise}
-Perform the following analysis on your own. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google. 
+Perform the following analysis for the heartatk4R dataset. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google. 
 
 a.	Graphical EDA: Plot distribution of **charges** using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running **temp = CHARGES [ ! is.na (CHARGES)  ]**  and then run your plot on **temp**. 
 
@@ -293,10 +296,6 @@ Now for each gender, we further divide the patients by their survival status. In
 
 ```{r new4, fig.width=6, fig.height=4, fig.cap='(ref:new4)', fig.align='center'}
 ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + geom_density(alpha = .3) + facet_grid(SEX ~ .) 
-```
-
-```{exercise}
-Generate the pie chart for each of the categorical variables in heart attack dataset. Generate histogram for each of the numerical variables. Interpret each plot.
 ```
 
 ```{exercise}
