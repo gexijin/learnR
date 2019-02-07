@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-02-06">
+<meta name="date" content="2019-02-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -245,6 +245,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 5</span> Analyzing heart attack data set I</h1>
 <p>The heart attack data set (<a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>), included in the ActivStats<sup>1</sup> CD, contains all 12,844 cases of hospital discharges of the patients admitted for heart attack but did not have surgery in New York State in 1993. This information is essential for the interpretation of our results, as this is a purely <strong>observational study</strong>. It is not a random sample or <strong>controlled experiment</strong>.</p>
 <p>The data set is formatted as a table (Table <a href="analyzing-heart-attack-data-set-i.html#tab:4-01">5.1</a>) with rows representing cases and columns representing characteristics, which is a typical format for many datasets. If you download and open the file in NotePad++ or Excel, you can see that the columns are separated by tabs, and there are <strong>missing values</strong> noted by “NA”. Four columns (DIAGNOSIS, SEX, DRG, DIED) contain <strong>nominal</strong> values, representing labels of <strong>categories</strong>. See an excellent explanation of data types <a href="http://www.mymarketresearchmethods.com/types-of-data-nominal-ordinal-interval-ratio/">here</a>. DIAGNOSIS column contains codes defined in the International Classification of Diseases (IDC), 9th Edition. This is the code that your doctor sends to your insurance company for billing. The numbers, such as 41041, actually code for which part of the heart was affected. Although these are numbers, it does not make any sense to add or subtract or compute the mean. If I have a room of 30 students each with student ids, such as 732324, it does not make any sense to compute the average of these numbers. Such <strong>categorical data needs to be recognized as factors in R</strong>. Similarly, DRG column has three possible numbers, 121 for survivors with cardiovascular complications, 122 for survivors without complications, and 123 for patients who died. Moreover, DIED also codes for prognosis, it is 1 if the patient passed away, and 0 if survived.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, 
+                         <span class="dt">header =</span> <span class="ot">TRUE</span>, 
+                         <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
+                         <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, 
+                                        <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</code></pre></div>
 <table>
 <caption><span id="tab:4-01">Table 5.1: </span>First 15 rows of the heart attack dataset</caption>
 <thead>
@@ -434,7 +439,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As a first step, we are going to examine each column separately. This can be very basic things such as mean, median, ranges, distributions, and normality. This is important because sometimes the data is so skewed or far from normal distribution that we need to use <strong>non-parametric tests</strong>, or <strong>transformate the raw data</strong> using log transformation, or more generally box-cox transformation, before conducting other analyses.</p>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-348" class="exercise"><strong>Exercise 5.1  </strong></span>Perform the following analysis on your own. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google.</p>
+<p><span id="exr:unnamed-chunk-350" class="exercise"><strong>Exercise 5.1  </strong></span>Perform the following analysis for the heartatk4R dataset. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Graphical EDA: Plot distribution of <strong>charges</strong> using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running <strong>temp = CHARGES [ ! is.na (CHARGES) ]</strong> and then run your plot on <strong>temp</strong>.</p></li>
 <li>Quantitative EDA: test of normality, and confidence interval. Note that if the Shapiro-Wilk normality test cannot handle the 12,000 data points, you can either try to find other tests in the nortest library or sample randomly by running <strong>temp = sample( CHARGES, 4000)</strong>
@@ -471,7 +476,7 @@ Figure 5.2: Pie chart of patients by SEX.
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-351" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the counts and percentages of each levels of DRG. Use bar plot and pie charts similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="analyzing-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.
+<span id="exr:unnamed-chunk-353" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the counts and percentages of each levels of DRG. Use bar plot and pie charts similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="analyzing-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.
 </div>
 
 </div>
@@ -557,15 +562,15 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 <p>We already know that we could use scatter plots to visualize correlation between two numeric columns. But when there are many data points, in this case we have over 12,000, it could be hard to comprehend. This is especially the case, when the data is integers and there are a lot of data points overlap on top of each other. Yes, graphics can be misleading.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(AGE, LOS)  <span class="co"># standard scatter plot    </span>
 <span class="kw">smoothScatter</span>(AGE, LOS)  <span class="co"># a smoothed color density representation of a scatterplot  </span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-356"></span>
-<img src="book_files/figure-html/unnamed-chunk-356-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-356-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-358"></span>
+<img src="book_files/figure-html/unnamed-chunk-358-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-358-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
 <p class="caption">
 Figure 5.4: Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points.
 </p>
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-357" class="exercise"><strong>Exercise 5.3  </strong></span>Investigate the correlation between length of stay and charges. Try both parametric and non-parametric methods to quantify correlation and use graphs. Remember to include plain English interpretation of your results even your grandpa can understand.
+<span id="exr:unnamed-chunk-359" class="exercise"><strong>Exercise 5.3  </strong></span>Investigate the correlation between length of stay and charges. Try both parametric and non-parametric methods to quantify correlation and use graphs. Remember to include plain English interpretation of your results even your grandpa can understand.
 </div>
 
 </div>
@@ -659,19 +664,14 @@ Figure 5.7: Mosaic plot of three factors.
 <p>Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset. </span>
 <span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-363-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-365-1.png" width="672" /></p>
 <p>This is a mosaic plot of the whole Titanic dataset</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-364-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-366-1.png" width="672" /></p>
 <p>Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-365" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use <strong>table</strong> to generate the counts and then visualize.
-</div>
-
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-366" class="exercise"><strong>Exercise 5.5  </strong></span>Use these approaches to investigate whether men and women differ in their diagnosis.
+<span id="exr:unnamed-chunk-367" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use <strong>table</strong> to generate the counts and then visualize.
 </div>
 
 </div>
@@ -733,27 +733,22 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-367" class="exercise"><strong>Exercise 5.6  </strong></span>Generate the pie chart for each of the categorical variables in heart attack dataset. Generate histogram for each of the numerical variables. Interpret each plot.
+<span id="exr:unnamed-chunk-368" class="exercise"><strong>Exercise 5.5  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-368" class="exercise"><strong>Exercise 5.7  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
+<span id="exr:unnamed-chunk-369" class="exercise"><strong>Exercise 5.6  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:new4">5.11</a>).
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-369" class="exercise"><strong>Exercise 5.8  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:new4">5.11</a>).
+<p><span id="exr:unnamed-chunk-370" class="exercise"><strong>Exercise 5.7  </strong></span>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
 </div>
 
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-370" class="exercise"><strong>Exercise 5.9  </strong></span>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
-</div>
-
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-371" class="exercise"><strong>Exercise 5.10  </strong></span>Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
+<span id="exr:unnamed-chunk-371" class="exercise"><strong>Exercise 5.8  </strong></span>Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
 </div>
 
 </div>
@@ -771,12 +766,12 @@ Figure 5.12: Multiple boxplots by ggplot2 package.
 <p>Recall that 121 indicate survivors with complication, 122 survivors with no complication, and 123, died. As you could see this clearly indicate our previous observation people who died in hospital are older than survivors and that patients who developed complications seems to be older than those that did not. Did people with complications stayed longer in the hospital?</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-372" class="exercise"><strong>Exercise 5.11  </strong></span>Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
+<span id="exr:unnamed-chunk-372" class="exercise"><strong>Exercise 5.9  </strong></span>Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-373" class="exercise"><strong>Exercise 5.12  </strong></span>Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:14-5">5.13</a>. Offer interpretation.
+<span id="exr:unnamed-chunk-373" class="exercise"><strong>Exercise 5.10  </strong></span>Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:14-5">5.13</a>. Offer interpretation.
 </div>
 
 
