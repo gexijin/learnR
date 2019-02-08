@@ -132,8 +132,8 @@ Create density plots like Figure \@ref(fig:15-5) to compare the distribution of 
 (ref:15-5) Distribution of LOS by DRG groups grouped by SEX.
 
 ```{r 15-5, echo=FALSE, warning=FALSE, fig.width=6, fig.height=4, fig.cap='(ref:15-5)', fig.align='center'}
-ggplot(df, aes(x = LOS,fill = DRG)) + geom_density(alpha = 0.3) + 
-       facet_grid(SEX ~ .) + xlim(0, 20)  # Figure 5.5
+ggplot(df, aes(x = LOS, fill = DRG)) + geom_density(alpha = 0.3) + 
+       facet_grid(SEX ~ .) + xlim(0, 20)  
 ```
 
 ## Box plots and Violin plots
@@ -237,7 +237,7 @@ stats3 <- df %>%
             n    = n(),  
             se   = sd(AGE) / sqrt(n())) 
 ggplot(stats3, aes(x = DIAGNOSIS, y = mean, fill = DRG)) +  # mapping
-       geom_bar(stat = "identity", position = "dodge") +         # bars  mean AGE
+       geom_bar(stat = "identity", position = "dodge") +         # bars 
        labs(x = "Diagnosis codes", y = "Age(yrs)") +             # axes labels
        geom_errorbar(aes(ymin = mean - se, ymax = mean + se),     # error bars
                      position = position_dodge(.9), width = 0.2)
@@ -263,7 +263,7 @@ summary(fit)
 
 As we could see from above, one levels for factors (such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. This is really small number compared to overall charges and also the p value is just marginally significant for this large sample. This is in contrast to the **t.test(CHARGES ~ SEX)**, when we got the opposite conclusion. This is because we did not control for other factors. 
 
-The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the **t value** is an indicator of significance.  LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males.   Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 410914, 1051 and 41071 incurred less charges compared with those with 41001.  
+The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the **t value** is an indicator of significance.  LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males.   Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 41091, 41051 and 41071 incurred less charges compared with those with 41001.  
 
 To investigate mortality, which is a binary outcome, we use **logistic regression**.  
 ```{r}

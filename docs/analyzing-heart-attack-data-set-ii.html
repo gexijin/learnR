@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-02-07">
+<meta name="date" content="2019-02-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -188,7 +188,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>11</b> Strings</a></li>
 <li class="chapter" data-level="12" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>12</b> Advanced topics</a><ul>
 <li class="chapter" data-level="12.1" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>12.1</b> Tidyverse</a></li>
-<li class="chapter" data-level="12.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps-and-interactive-plots"><i class="fa fa-check"></i><b>12.2</b> Shiny Apps and interactive plots</a></li>
+<li class="chapter" data-level="12.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>12.2</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>12.2.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="12.2.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>12.2.2</b> Create a Shiny web app is a piece of cake</a></li>
+<li class="chapter" data-level="12.2.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>12.2.3</b> Let’s play!</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>12.3</b> Interactive plots made easy with Plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>13</b> Exploring of state data set</a><ul>
 <li class="chapter" data-level="13.1" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>13.1</b> Reading in and manipulating data</a></li>
@@ -525,7 +530,7 @@ Figure 6.9: Mean ages for patients with different diagnosis and treatment outcom
 ## Multiple R-squared:  0.569,  Adjusted R-squared:  0.5685 
 ## F-statistic:  1232 on 13 and 12131 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>As we could see from above, one levels for factors (such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. This is really small number compared to overall charges and also the p value is just marginally significant for this large sample. This is in contrast to the <strong>t.test(CHARGES ~ SEX)</strong>, when we got the opposite conclusion. This is because we did not control for other factors.</p>
-<p>The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the <strong>t value</strong> is an indicator of significance. LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males. Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 410914, 1051 and 41071 incurred less charges compared with those with 41001.</p>
+<p>The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the <strong>t value</strong> is an indicator of significance. LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males. Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 41091, 41051 and 41071 incurred less charges compared with those with 41001.</p>
 <p>To investigate mortality, which is a binary outcome, we use <strong>logistic regression</strong>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">glm</span>(DIED <span class="op">~</span><span class="st"> </span>SEX <span class="op">+</span><span class="st"> </span>LOS <span class="op">+</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>DIAGNOSIS, <span class="dt">family =</span> <span class="kw">binomial</span>( ), <span class="dt">data =</span> df)
 <span class="kw">summary</span>(fit)</code></pre></div>

@@ -49,33 +49,37 @@ iris %>%
 Here we created a new data frame with the mean sepal length and sepal width for each of the 3 species. Obviously, we can change **mean**( ) to many other functions. This makes it very easy to summarize large data sets. 
 
 ```{exercise}
-Read in the heart attack data, calculate the average cost per day for patients with different DIAGNOSIS codes. Restrict to females aged between 20 and 70 who stayed at least one day. Sort the results in descending order. Use the dplyr package. Use one command with multiple steps. Note: since we have missing values in CHARGES, remember to use the **na.rm =TRUE** option in the mean( ) function. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the **head** or **summary** function at the end to examine if the desired data is produced. 
+Read in the heart attack data, calculate the average cost per day for patients with different DIAGNOSIS codes. Restrict to females aged older than 20 and younger than 70 who stayed at least one day. Sort the results in descending order. Use the dplyr package. Use one command with multiple steps. Note: since we have missing values in CHARGES, remember to use the **na.rm =TRUE** option in the mean( ) function. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the **head** or **summary** function at the end to examine if the desired data is produced. 
 ```
 
-## Shiny Apps and interactive plots 
+## Shiny Apps   
 Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP http://ge-lab.org/idep/ ) to enable biologists to analyze genomic data on their own.  My blog (http://gex.netlify.com ) is also created in Rstudio. 
 
-1.	Install the Shiny package by typing this in the console.
+###	Install the Shiny package by typing this in the console.
  
 ```{r}
 #install.packages("shiny")
 ```
 
-2.	Create a Shiny web app is a piece of cake
+###	Create a Shiny web app is a piece of cake
 
-Start a new Shiny app use the shortcut shown in Figure 13. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name like test1 and note where the app will be stored. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called app.R. Click on **Run App** on the top right of the script window; you have a histogram that can be customized by a sliding bar. There are two **functions**: *ui()* defines the user interface, and *server()* specifies the logic. 
+```{r echo=FALSE, out.width='45%'}
+knitr::include_graphics("images/img1201_shiny.png")
+```
 
-3.	Let’s play!
+Start a new Shiny app use the shortcut shown above. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name like test1 and note where the app will be stored. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called app.R. Click on **Run App** on the top right of the script window; you have a histogram that can be customized by a sliding bar. There are two **functions**: *ui()* defines the user interface, and *server()* specifies the logic. 
+
+###	Let’s play!
 
 a.	Change the color by changing the col = **'darkgray'** in line 44 to your favorite color, such as **'green', 'red'**, etc. To make it colorful, set it to col = **rainbow(10)** so we can use ten colors on a rolling basis.
 
-b.	Switch the data. Change line 40 to visualize the iris dataset: x <- iris[,'Sepal.Length']
+b.	Switch the data. Change line 40 to visualize the iris dataset: x <- iris[, 'Sepal.Length']
 
-c.	The default number of bins of 30, specified at line 25, is probably too big. Change it to: value = 12
+c.	The default number of bins of 30, specified at line 25, is probably too big. Change it to: value = 12.
 
-d.	We obviously can change 'Sepal.Length' to other columns. Would it be cool if the user can choose? We need to add a control widget by inserting this line of code **after line 20**: selectInput("cid", "Column", choices = colnames( iris ) ),
+d.	We obviously can change 'Sepal.Length' to other columns. Would it be cool if the user can choose? We need to add a control widget by inserting this line of code **after line 20**: selectInput("cid", "Column", choices = colnames(iris)),
 
-Do not forget the comma at the very end! Now run this app. We can now select the columns, but the app does not do anything with it. We need to use the selected column in the server logic to customize the plot. We will **change the line 41** to this: x <- iris[ , input$cid ] 
+Do not forget the comma at the very end! Now run this app. We can now select the columns, but the app does not do anything with it. We need to use the selected column in the server logic to customize the plot. We will **change the line 41** to this: x <- iris[, input$cid ] 
 
 ```{exercise}
 Find and solve the error in this app when choosing the last column by limiting to first 4 columns. 
@@ -100,7 +104,7 @@ Solve the error message in this app by plotting a pie chart when the Species col
 ```
 
 ```{exercise}
-Publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. And show it off to your friend by sending them an URL.
+Publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. And show it off by sending an URL.
 ```
 
 
@@ -109,13 +113,13 @@ Solutions to these challenges can be found at GitHub [https://github.com/gexijin
 To learn more, follow these excellent tutorials: [https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/) 
 
 
-4.	Interactive plots made easy with Plotly
+## Interactive plots made easy with Plotly
 
 ```{r message=FALSE}
 #install.packages("plotly")
 library(plotly)
 g <- ggplot(iris, aes(Petal.Width, Petal.Length , color = Species)) + geom_point() 
-ggplotly( g )
+ggplotly(g)
 ```
 
 We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in. 
