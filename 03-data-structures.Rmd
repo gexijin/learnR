@@ -1106,9 +1106,8 @@ This implies that y[[4]] is same as the *mean()* function. For example:
 y[[4]](c(1, 2, 3, 4, 5))          #Get the mean of 1, 2, 3, 4, 5
 ```
 
-```{exercise}
-Access the second component in list1 by three ways as we introduced above. What is the type of list1["Fishing"] and list1[["Fishing"]] respectively?
-
+```{exercise}           
+Access the second component in list1 by three ways as we introduced above. What is the type of list1["Hobby"] and list1[["Hobby"]] respectively?      
 ```{r}
   list1 <- list(Name = "Tom", Hobby = "Fishing", Num.fish = c(16, 27, 5))
 ```
@@ -1120,8 +1119,8 @@ y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
 y[[2]] <- "Mike"    #Change the 2nd component from "John Doe" to "Mike"
 y[[4]] <- NULL      #Delete the 4th component by setting it to NULL
 y
-
 ```
+
 The output shows that the name has been changed to Mike and the mean function is deleted. So far, the length of y is 3:
 ```{r}
 length(y)
@@ -1133,7 +1132,6 @@ We can add the forth components to y using the following code:
 y$class <- c("math", "art") #Add a class component
 y
 ```
-
 
 If we have a vector of tags and a vector of corresponding values, we can associate the names and values into a list by creating an empty list and then fill it via assignment statements:
 ```{r}
@@ -1154,26 +1152,28 @@ sale.tag[["Winter"]] <- 112
 sale.tag
 ```
 
-```{exercise}
-Based on the data set of sale.tag, choose all correct answers from the following options A - F.
-  A: sale.tag[[1]]
-  B: sale.tag[[Spring]]
-  C: sale.tag[["Spring"]]
-  D: sale.tag["Spring"]
-  E: sale.tag[1]
-  F: sale.tag[Spring]
+```{exercise}         
+Based on the data set of sale.tag, choose all correct answers from the following options A - F.                   
+  A: sale.tag[[1]]                  
+  B: sale.tag[[Spring]]                      
+  C: sale.tag[["Spring"]]                      
+  D: sale.tag["Spring"]                   
+  E: sale.tag[1]                    
+  F: sale.tag[Spring]                
   
-1, Which options return a vector.  Answer:___________ 
-2, Which options return a list.    Answer:___________
-3, Which options returns an error. Answer:___________
+1, Which options return a vector.  Answer:___________                 
+2, Which options return a list.    Answer:___________                
+3, Which options returns an error. Answer:___________                
 ```
 
+
+                          
 Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
-> mean(sale.tag)
-[1] NA
-Warning message:
-In mean.default(sale.tag) :
-  argument is not numeric or logical: returning NA
+> mean(sale.tag)                
+[1] NA                
+Warning message:                
+In mean.default(sale.tag) :                
+  argument is not numeric or logical: returning NA                
 
 To calculate the mean, we need to use function *unlist()* to flatten the list into a vector.
 ```{r}
@@ -1217,10 +1217,12 @@ list.null
 ```
  But for large size of data set, we turn to the *sapply()* function to remove NULL elements.
 
-**Example**: Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:
+**Example**: 
+Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:
 
 ```{r}
-customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", "Mary", "Alex", "Tom", "Grace")
+customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
+                 "Mary", "Alex", "Tom", "Grace")
 ```
 
 Firsly, we define a function which returns all locations of same elements in a list. 
@@ -1267,7 +1269,8 @@ The process will stop till i = length (y) = 10. The *loc.names()* funciton will 
 
 Let's find all days of cumsters who visited to our store.
 ```{r}
-customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", "Mary", "Alex", "Tom", "Grace")
+customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
+                 "Mary", "Alex", "Tom", "Grace")
 v1 <- loc.names(customer)
 v1
 ```
@@ -1288,26 +1291,9 @@ You can sort the v2 by the number of days that they presented by function *sort(
 sort(v2, decreasing = T)
 ```
 
-```{Exercise}
-Define a function which can find all locations of 
-gender 
-
-```
-
-```{r}
-loc.num <- function(f){
-y <- unlist(f)                     
-x <- list()                        
-for (i in 1:length(y)){        
-  c.name <- as.character(y[i])                   # Assign the ith element to c.name. 
-  x[[c.name]] <- c(x[[c.name]],i)  # assign values to x[[c.name]]. c.name is the name of x.
-}
-return(x)
-}
-```
-
-```{Exercise}
-Fill blanks in the function *my.fun()* so that for a given list, the function returns all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
+```{exercise}           
+Fill blanks in the function *my.fun()* so that for a given list, the function returns
+all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
   F F M M M M I I F I F M I F M I I M I I F         
 Where F, M and I represent Female, Male and Infant respectively.
 
@@ -1324,7 +1310,7 @@ lst <- list(x, z)
 ___________(lst)
 }
 
-gender <- list( "F", ________________________________, "F")
+gender <- list( "F", ________________________________, "F")             
 __________(gender)
 ```
 
