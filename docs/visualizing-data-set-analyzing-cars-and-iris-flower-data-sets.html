@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-02-08">
+<meta name="date" content="2019-02-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -255,7 +255,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-02"></span>
-<img src="images/img0902_function.png" alt="List of graphics functions in base R."  />
+<img src="images/img0902_function.png" alt="List of graphics functions in base R." width="640" />
 <p class="caption">
 Figure 2.1: List of graphics functions in base R.
 </p>
@@ -317,7 +317,7 @@ Figure 2.1: List of graphics functions in base R.
 <p><strong>“pch”</strong> is a parameter that specifies the types of data points on the plot. See Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:9-3">2.2</a> for a whole list of possible values. The “am” column in mtcars dataset indicates whether the car is automatic transmission (am = 1) or not (am = 0).</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-3"></span>
-<img src="images/img0903_symbol.png" alt="Data point types in base R."  />
+<img src="images/img0903_symbol.png" alt="Data point types in base R." width="640" />
 <p class="caption">
 Figure 2.2: Data point types in base R.
 </p>
@@ -371,8 +371,9 @@ Figure 2.4: Scatter plot showing the weight and MPG, colored by the number of cy
 <h4><span class="header-section-number">2.2.1.2</span> 3D scatter plot</h4>
 <p>Even though I’ve never been a fan of 3D plots, it is possible in R using additional packages such as scatterplot3d. Install this package and then try the following.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scatterplot3d) 
-<span class="kw">scatterplot3d</span>(wt, disp, mpg, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)], <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scatterplot3d) </code></pre></div>
+<pre><code>## Warning: package &#39;scatterplot3d&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scatterplot3d</span>(wt, disp, mpg, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[<span class="kw">as.factor</span>(mtcars<span class="op">$</span>cyl)], <span class="dt">type =</span> <span class="st">&quot;h&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:9-6"></span>
 <img src="book_files/figure-html/9-6-1.png" alt="3D scatter plots are rarely useful." width="672" />
 <p class="caption">
@@ -543,9 +544,11 @@ Figure 2.9: Scatter plot matrix of the mtcars dataset.
 </div>
 <p>We can spend all day studying this large plot, as it contains information on all pairs of variables. For example, mpg is negatively correlated with disp, hp, and wt, and positively correlated with drat. There are many variations of scatter plot matrix, for instance, the spm function in the car package. Also try this cool plot using ellipses: <a href="http://www.r-graph-gallery.com/97-correlation-ellipses/" class="uri">http://www.r-graph-gallery.com/97-correlation-ellipses/</a></p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ellipse)  <span class="co"># install.packages(&quot;ellipsis&quot;) </span>
-<span class="kw">library</span>(RColorBrewer)  <span class="co"># install.packages(&quot;RcolorBrewer&quot;) </span>
-data &lt;-<span class="st"> </span><span class="kw">cor</span>(mtcars)  <span class="co"># correlation matrix</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ellipse)  <span class="co"># install.packages(&quot;ellipsis&quot;) </span></code></pre></div>
+<pre><code>## Warning: package &#39;ellipse&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RColorBrewer)  <span class="co"># install.packages(&quot;RcolorBrewer&quot;) </span></code></pre></div>
+<pre><code>## Warning: package &#39;RColorBrewer&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">cor</span>(mtcars)  <span class="co"># correlation matrix</span>
 my_colors &lt;-<span class="st"> </span><span class="kw">brewer.pal</span>(<span class="dv">5</span>, <span class="st">&quot;Spectral&quot;</span>)  <span class="co"># Color Pannel </span>
 my_colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(my_colors)(<span class="dv">100</span>)
 ord &lt;-<span class="st"> </span><span class="kw">order</span>(data[<span class="dv">1</span>, ])  <span class="co"># Order the correlation matrix</span>
@@ -642,8 +645,9 @@ Figure 2.13: Heatmap of mtcars dataset. Yellow- positive number / above average.
 <p>This produced Figure <a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#fig:11-2">2.13</a>.</p>
 <p>Another function with much better coloring is heatmap.2 in the gplot package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;gplots&quot;) </span>
-<span class="kw">library</span>(gplots)
-<span class="kw">heatmap.2</span>(mt) <span class="co"># plain version </span></code></pre></div>
+<span class="kw">library</span>(gplots)</code></pre></div>
+<pre><code>## Warning: package &#39;gplots&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap.2</span>(mt) <span class="co"># plain version </span></code></pre></div>
 <p>This basic heatmap is not very cool. So, we do some fine tuning. This function have a million parameters to tune:</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? heatmap.<span class="dv">2</span> 
@@ -661,7 +665,7 @@ Figure 2.14: Fine-tuned heatmap using heatmap.2 in gplots package.
 <p>Note that the <strong>last argument</strong> gives a large right margin, so that the long names can show up un-truncated. By default, the heatmap function scales the rows in the data matrix so that it has zero mean. In our case, we already did our scaling, so we use <strong>scale=“none”</strong> as a parameter. Also, the dendrogram on the left and top are generated using the <strong>hclust</strong> function. The distance function is Euclidean distance. All of these can be changed.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:11-4"></span>
-<img src="images/img1001_linkage.png" alt="Single, complete and average linkage methods for hierarchical clustering."  />
+<img src="images/img1001_linkage.png" alt="Single, complete and average linkage methods for hierarchical clustering." width="640" />
 <p class="caption">
 Figure 2.15: Single, complete and average linkage methods for hierarchical clustering.
 </p>
@@ -728,8 +732,9 @@ Figure 2.16: Final version of heatmap for mtcars data.
 <p>Humans are sensitive to facial images. We can use this to visualize data.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;TeachingDemos&quot;)</span>
-<span class="kw">library</span>(TeachingDemos)
-<span class="kw">faces</span>(mtcars) </code></pre></div>
+<span class="kw">library</span>(TeachingDemos)</code></pre></div>
+<pre><code>## Warning: package &#39;TeachingDemos&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">faces</span>(mtcars) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:10-7"></span>
 <img src="book_files/figure-html/10-7-1.png" alt="Using faces to represent data." width="672" />
 <p class="caption">
@@ -838,7 +843,7 @@ Figure 2.19: Heatmap for iris flower dataset.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stars</span>(x, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">20</span>,<span class="fl">0.5</span>), <span class="dt">draw.segments =</span> T )    </code></pre></div>
 
 <div class="figure" style="text-align: center"><span id="fig:12-4"></span>
-<img src="images/img1204n_starsegment.png" alt="Star plots and segments diagrams."  />
+<img src="images/img1204n_starsegment.png" alt="Star plots and segments diagrams." width="640" />
 <p class="caption">
 Figure 2.20: Star plots and segments diagrams.
 </p>
