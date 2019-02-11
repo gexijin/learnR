@@ -47,6 +47,13 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -113,10 +120,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><i class="fa fa-check"></i><b>2</b> Visualizing data set-Analyzing cars and iris flower data sets</a><ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
 <li class="chapter" data-level="2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-mtcars-dataset"><i class="fa fa-check"></i><b>2.2</b> Visualizing mtcars dataset</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Visualizing correlation between categorical variables</a></li>
-<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.2</b> Detecting correlations among variables</a></li>
-<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.3</b> Hierarchical clustering</a></li>
-<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.4</b> Representing data using faces. Serious scientific research only!</a></li>
+<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#scatter-plot"><i class="fa fa-check"></i><b>2.2.1</b> scatter plot</a></li>
+<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#barplot-with-error-bars"><i class="fa fa-check"></i><b>2.2.2</b> Barplot with error bars</a></li>
+<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.3</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.4</b> Detecting correlations among variables</a></li>
+<li class="chapter" data-level="2.2.5" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.5</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.2.6" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.6</b> Representing data using faces. Serious scientific research only!</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-iris-data-set"><i class="fa fa-check"></i><b>2.3</b> Visualizing iris data set</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.3.1</b> A Matrix only contains numbers</a></li>
@@ -134,12 +143,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for Help and Example Code</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.1</b> Matrix operations</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.2</b> Lists</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Operations on data frames</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.2</b> Matrix operations</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.3</b> Lists</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#operations-on-data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Operations on data frames</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.5</b> Strings and string vectors</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
 </ul></li>
@@ -167,7 +183,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
 <li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.1</b> Tidyverse</a></li>
-<li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.2</b> Shiny Apps</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.2</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.2.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="7.2.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.2.2</b> Create a Shiny web app is a piece of cake</a></li>
+<li class="chapter" data-level="7.2.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.2.3</b> Let’s play!</a></li>
+</ul></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>8</b> Exploring of state data set</a><ul>
@@ -179,28 +199,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>9</b> Exploring of game sale dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualizing-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualizing of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of Score and Count</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#distribution-of-two-scores"><i class="fa fa-check"></i><b>9.3.1</b> Distribution of two scores</a></li>
-<li class="chapter" data-level="9.3.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-top-sale-game"><i class="fa fa-check"></i><b>9.3.2</b> Score &amp; Top sale game</a></li>
-<li class="chapter" data-level="9.3.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-rating"><i class="fa fa-check"></i><b>9.3.3</b> Score &amp; Rating</a></li>
-<li class="chapter" data-level="9.3.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-genre"><i class="fa fa-check"></i><b>9.3.4</b> 7) Score &amp; Genre</a></li>
-<li class="chapter" data-level="9.3.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-global-sales"><i class="fa fa-check"></i><b>9.3.5</b> 8) Score &amp; Global sales</a></li>
-<li class="chapter" data-level="9.3.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-top-sale-developer"><i class="fa fa-check"></i><b>9.3.6</b> 9) Score &amp; Top Sale Developer</a></li>
-<li class="chapter" data-level="9.3.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-publisher"><i class="fa fa-check"></i><b>9.3.7</b> 10) Score &amp; Publisher</a></li>
+<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualizing-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualizing of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of Score and Count</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#distribution-of-two-scores"><i class="fa fa-check"></i><b>9.4.1</b> Distribution of two scores</a></li>
+<li class="chapter" data-level="9.4.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-top-sale-game"><i class="fa fa-check"></i><b>9.4.2</b> Score &amp; Top sale game</a></li>
+<li class="chapter" data-level="9.4.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-rating"><i class="fa fa-check"></i><b>9.4.3</b> Score &amp; Rating</a></li>
+<li class="chapter" data-level="9.4.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-genre"><i class="fa fa-check"></i><b>9.4.4</b> 7) Score &amp; Genre</a></li>
+<li class="chapter" data-level="9.4.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-global-sales"><i class="fa fa-check"></i><b>9.4.5</b> 8) Score &amp; Global sales</a></li>
+<li class="chapter" data-level="9.4.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-top-sale-developer"><i class="fa fa-check"></i><b>9.4.6</b> 9) Score &amp; Top Sale Developer</a></li>
+<li class="chapter" data-level="9.4.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#score-publisher"><i class="fa fa-check"></i><b>9.4.7</b> 10) Score &amp; Publisher</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of Sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> 1) By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> 2) By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.3</b> 3) By Genre</a></li>
-<li class="chapter" data-level="9.4.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.4</b> 4) By Rating</a></li>
-<li class="chapter" data-level="9.4.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre"><i class="fa fa-check"></i><b>9.4.5</b> 5) By Rating &amp; Genre</a></li>
-<li class="chapter" data-level="9.4.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.6</b> 6) By Platform</a></li>
+<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of Sales</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> 1) By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> 2) By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.3</b> 3) By Genre</a></li>
+<li class="chapter" data-level="9.5.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.4</b> 4) By Rating</a></li>
+<li class="chapter" data-level="9.5.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre"><i class="fa fa-check"></i><b>9.5.5</b> 5) By Rating &amp; Genre</a></li>
+<li class="chapter" data-level="9.5.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.6</b> 6) By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-for-numeric-matrix-heatmap-and-pca"><i class="fa fa-check"></i><b>9.5</b> Analysis for numeric matrix: Heatmap and PCA</a></li>
-<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for Global Sales</a></li>
-<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-for-numeric-matrix-heatmap-and-pca"><i class="fa fa-check"></i><b>9.6</b> Analysis for numeric matrix: Heatmap and PCA</a></li>
+<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for Global Sales</a></li>
+<li class="chapter" data-level="9.8" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html"><i class="fa fa-check"></i><b>10</b> Exploring of employee salary data set</a></li>
 </ul>
@@ -262,7 +283,7 @@ x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="
 <p>Before you click <strong>Import</strong>, I highly recommend that you select all the codes and copy it to your clipboard. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:3-1"></span>
-<img src="images/img0301n_importdata.png" alt="Importing data into R." width="640" />
+<img src="images/img0301n_importdata.png" alt="Importing data into R."  />
 <p class="caption">
 Figure 4.1: Importing data into R.
 </p>
@@ -365,7 +386,7 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 <p>After locating the file, you can click on the automatically detected data type under each of the column names as shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>. By selecting “Factor” from the drop down and enter all possible levels separated by commas, you can successfully format this column as a factor.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-2"></span>
-<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio." width="640" />
+<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio."  />
 <p class="caption">
 Figure 4.2: Changing data types while importing data into Rstudio.
 </p>
@@ -383,7 +404,7 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(x<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre></div>
 <p>You can now do things like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>ag)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-368-1.png" width="672" /></p>
 <p>Each box represents an age group. Older patients tends to stay longer in the hospital after being admitted for heart attack.</p>
 <p>You can extract a subset of cases:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
@@ -416,7 +437,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span cla
 <p>Try not to attach the data when you are manipulation data like this.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-11" class="exercise"><strong>Exercise 4.1  </strong></span>Generate a histogram of cost per day for middle-aged men aged between 40 and 60. Hint: subset your data step by step.
+<span id="exr:unnamed-chunk-370" class="exercise"><strong>Exercise 4.1  </strong></span>Generate a histogram of cost per day for middle-aged men aged between 40 and 60. Hint: subset your data step by step.
 </div>
 
 </div>
@@ -456,7 +477,7 @@ x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.
 <p>We are reading data directly from the internet with the URL. And we are specifying the data type for each column.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="data-importing.html#tab:9-01">4.1</a> in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Create a script file with comments and starting scripts, including the rm(ls()) and getwd() command. Copy the CSV file to the new folder. Import to Rstudio. Convert data types. Copy the generated R code similar to those shown in Figure <a href="data-importing.html#fig:9-2">4.2</a> into the script file. Submit your R code and the results from the <strong>str(patients)</strong> function to show the data structure and <strong>head(patients)</strong> to show the data.
+<span id="exr:unnamed-chunk-374" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="data-importing.html#tab:9-01">4.1</a> in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Create a script file with comments and starting scripts, including the rm(ls()) and getwd() command. Copy the CSV file to the new folder. Import to Rstudio. Convert data types. Copy the generated R code similar to those shown in Figure <a href="data-importing.html#fig:9-2">4.2</a> into the script file. Submit your R code and the results from the <strong>str(patients)</strong> function to show the data structure and <strong>head(patients)</strong> to show the data.
 </div>
 
 <table>
