@@ -1314,10 +1314,14 @@ __________(gender)                                                  #
 
 Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a P value, a vector of residuals or coefficients, and even a matrix of data.  A list is the natural way to represent this sort of thing as one big object that could be parsed. 
 ```{r}
-result <- t.test(rnorm(100), rnorm(100))  # rnorm(100): 100 random number
-result  # A list holds all  results of t-test
-result$p.value  # This retrieves just the P value
-result$estimate  # this returns a vector containing two values
+r1 <- rnorm(100)  # Create 100 random numbers following Normal Distribution
+r2 <- rnorm(100)
+t.result <- t.test(r1, r2) # Run the t test. Test if the mean of r1 and r2 are same.
+is.list(t.result) # Check if the t.result is a list
+t.result  # A list holds all components of t-test
+names(t.result) # Returns all tags of the t test result
+t.result$p.value  # Retrieves  p-value for the test
+t.result$estimate  # Returns mean of r1 and r2
 ```
 
 The help page of t.test contains information about what types of values are returned and their names.
@@ -1325,27 +1329,16 @@ The help page of t.test contains information about what types of values are retu
 ? t.test
 ```
 
-Value
-
-A list with class "htest" containing the following components:
-
-**statistic**: …
-
-**p.value**:   the p-value for the test.
-
-**estimate**:  the estimated mean or difference in means depending on whether it was a one-sample test or a two-sample test.
-
-
-With this in mind, let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the P value. By repeating this process 500 times, we want to see the distribution of P values and count how many times we get significant result with P < 0.05. 
+Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p < 0.05. 
 ```{r }
 pvalues <- rep(1, 500)  # define a vector containing 500 numbers, all equal to 1.
 for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
      result = t.test(rnorm(100), rnorm(100))    
      pvalues[i] = result$p.value  # P values are stored in the i-th element in the vector
 }  
-hist(pvalues)  # define
+hist(pvalues)  # Histogram of p-values
 summary(pvalues)   
-sum(pvalues < 0.05)  # Count how many P values are less than 0.05. 
+sum(pvalues < 0.05)  # Count how many p values are less than 0.05. 
 ```
 
 
