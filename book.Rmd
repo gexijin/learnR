@@ -17,31 +17,21 @@ Chapter 1  Step into R program
 
 Chapter 2  Visualizing data set
 
-Chapter 3  Data importing 
+Chapter 3  Data structures
 
-Chapter 4  Heart attack data set I 
+Chapter 4  Data importing 
 
-Chapter 5  Heart attack data set II
+Chapter 5  Heart attack data set I
 
-Chapter 6  Data structures
+Chapter 6  Heart attack data set II
 
-Chapter 7  Vectors
+Chapter 7  Advanced topics
 
-Chapter 8  Matrics and arrays
+Chapter 8  State data set
 
-Chapter 9  Lists
+Chapter 9  Game sale data set
 
-Chapter 10  Data frames 
-
-Chapter 11  Strings
-
-Chapter 12  Advanced topics
-
-Chapter 13  State data set
-
-Chapter 14  Game sale data set
-
-Chapter 15  Employee salary data set
+Chapter 10  Employee salary data set
 
 
 
@@ -51,7 +41,7 @@ Chapter 15  Employee salary data set
 
 **Getting started**
 
-1. Install R from [www.R-project.org](www.R-project.org). Choose the cloud server or any U.S. mirror site. 
+1. Install R from [www.R-project.org](www.R-project.org). Choose the cloud server or any U.S. mirror site.
 2. Install RStudio Desktop from [www.RStudio.com](www.RStudio.com). Rstudio uses the R software you just installed in the background, but provides a more user-friendly interface. We will use Rstudio. R commands can be typed directly into the “Console” window. Or you can enter them in the “R Script” window and click the “Run” button. 
 
 ```{r echo=FALSE, out.width='80%'}
@@ -143,9 +133,9 @@ x <- Petal.Length   # I am just lazy and don’t want to type “Petal.Length”
 summary(x)
 ```
 
-- The minimum petal length is 1.0, and the maximum is 6.9. 
+- The minimum petal length is 1.0, and the maximum is 6.9.  
 - **Average** petal length is 3.758. 
-- The mid-point or median is 5.35, as about half of the numbers is smaller than 5.35.  Why the median is different from the mean? What happens if there is a typo and one number is entered 340cm instead of 3.40cm?
+- The mid-point or median is 5.35, as about half of the numbers is smaller than 5.35.  Why the median is different from the mean? What happens if there is a typo and one number is entered 340cm instead of 3.40cm?  
 - The 3rd quartile, or 75^th^ percentile is 5.1, as 75% of the flowers has petals shorter than 5.1. The 95^th^ percentile for the weight of 2-year-old boy is 37 pounds. If a 2-year-old boy weighs 37 pounds, he is heavier than 95% of his peers.  If a student’s GPA ranks 5^th^ in a class of 25, he/she is at 80^th^ percentile.
 - The 1st quartile, or 25^th^ percentile is 1.6.  Only 25% of the flowers has petals shorter than 1.6.
 These summary statistics are graphically represented as a boxplot in the Figure \@ref(fig:1-3)A. Boxplots are more useful when multiple sets of numbers are compared. 
@@ -167,7 +157,7 @@ In Rstudio, you can copy a plot to clipboard using the **Export** button on top 
 ```{exercise}
 What can we tell from this boxplot (Figire \@ref(fig:1-3)B)? Summarize your observations in PLAIN English. Note the differences in median and the spread (tall boxes). What is the most variable characteristics?
 ```
-
+  
 To quantify the variance, we can compute the **standard deviation** σ:
 \begin{align}
 σ=\sqrt{\frac{1}{N}[(x_{1}-u)^2+(x_{2}-u)^2+...+(x_{N}-u)^2]}    
@@ -2641,148 +2631,16 @@ The help page of t.test contains information about what types of values are retu
 ```
 
 Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p < 0.05. 
+
 ```{r }
 pvalues <- rep(1, 500)  # define a vector containing 500 numbers, all equal to 1.
 for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
      result = t.test(rnorm(100), rnorm(100))    
-     pvalues[i] = result$p.value  # P values are stored in the i-th element in the vector
+     pvalues[i] = result$p.value  # p values are stored in the i-th element in the vector
 }  
 hist(pvalues)  # Histogram of p-values
 summary(pvalues)   
 sum(pvalues < 0.05)  # Number of p-value's which are less than 0.05. 
-```
-
-
-### Strings and string vectors
-We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
-
-Define a **string** x: "R is cool"
-```{r}
-x <- "R is cool"
-```
-
-If we want to know the number of character of the string:
-```{r}
-nchar(x)
-```
-
-We can concatenate strings. By default a space is added.
-```{r}
-paste(x, "!!")
-```
-
-If we want to extract sub-string from position of 6 and 9:
-```{r}
-substr(x, 6, 9)
-```
-
-Split string into a list which is separated by space:
-```{r}
-strsplit(x, " ")
-```
-
-Find pattern "R" and replace with "Tim":
-```{r}
-gsub("R", "Tim", x)
-```
-
-Or remove space followed by anything:
-```{r}
-gsub(" .*", "", x)
-```
-
-We can search for pattern like "is" in the string.
-```{r}
-grepl("is", x)
-```
-
-We can also convert the whole string into low case or upper case by "tolower" or "toupper" function.
-```{r}
-tolower(x)
-toupper(x)
-```
-
-A **string vector** can hold many strings. This can be a column of names or IDs in a table.
-First let's define a character vector **x <- c("ab",  "cde",  "d",  "ab")**. 
-```{r}
-x <- c("ab", "cde", "d", "ab") 
-```
-
-We can use all commands about vector for our string vector, such as 2nd element in vector:
-```{r}
-x[2]
-```
-
-Number of strings in the vector:
-```{r}
-length(x)
-```
-
-Unique elements:
-```{r}
-unique(x)
-```
-
-Now we are interested in the duplicated element in the string vector. Is there any duplicated element in the vector?
-```{r}
-duplicated(x)
-```
-The last element is duplicated. F denotes FALSE, and T for TRUE.
-If we want to know the number of characters in each of the element:
-```{r}
-nchar(x)
-```
-
-We can also unite two vectors x and y if we define another vector y first:
-```{r}
-y <- c("ab", "e")
-union(x, y)
-```
-
-Is there intercept among these two sets of strings?
-```{r}
-intersect(x, y)
-```
-
-We can add something like "Q" to each element:
-```{r}
-paste(x, "Q")
-```
-
-To get rid of the space between these element and "Q", try paste0:
-```{r}
-paste0(x, "Q")
-```
-
-If we want to collapse multiple strings into one, which is joined by space:
-```{r}
-paste(x, collapse = " ")
-```
-
-Using these functions, we can achieve many things. For example if we have a piece of DNA sequence: 
-```{r}
-DNA <- "taaCCATTGtaaGAACATGGTTGTCcaaaCAAGATGCTAGT"
-```
-
-Note that I am using the assignment operator “<-”, instead of “=”, which also works most of the times but it could be ambiguous. First we need to convert everything to upper case. 
-```{r}
-DNA <- toupper(DNA)
-```
-
-Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to certain pattern. 
-```{r}
-segs <- strsplit(DNA, "ATG")
-```
-
-The result is contained in an object segs, which is a list.  We needed the unlist( ) function to convert list to a string vector. 
-```{r}
-segs <- unlist(segs)   
-segs  # a vector of strings
-segs[1]  # first segment
-```
-
-```{exercise}
-In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
 ```
 
 ### Operations on data frames
@@ -2922,11 +2780,138 @@ head(z)
 summary(z)
 ```
 
-Here need more exercise for this chapter
-```{exercise}
 
+### Strings and string vectors
+We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
+
+Define a **string** x: "R is cool"
+```{r}
+x <- "R is cool"
 ```
 
+If we want to know the number of character of the string:
+```{r}
+nchar(x)
+```
+
+We can concatenate strings. By default a space is added.
+```{r}
+paste(x, "!!")
+```
+
+If we want to extract sub-string from position of 6 and 9:
+```{r}
+substr(x, 6, 9)
+```
+
+Split string into a list which is separated by space:
+```{r}
+strsplit(x, " ")
+```
+
+Find pattern "R" and replace with "Tim":
+```{r}
+gsub("R", "Tim", x)
+```
+
+Or remove space followed by anything:
+```{r}
+gsub(" .*", "", x)
+```
+
+We can search for pattern like "is" in the string.
+```{r}
+grepl("is", x)
+```
+
+We can also convert the whole string into low case or upper case by "tolower" or "toupper" function.
+```{r}
+tolower(x)
+toupper(x)
+```
+
+A **string vector** can hold many strings. This can be a column of names or IDs in a table.
+First let's define a character vector **x <- c("ab",  "cde",  "d",  "ab")**. 
+```{r}
+x <- c("ab", "cde", "d", "ab") 
+```
+
+We can use all commands about vector for our string vector, such as 2nd element in vector:
+```{r}
+x[2]
+```
+
+Number of strings in the vector:
+```{r}
+length(x)
+```
+
+Unique elements:
+```{r}
+unique(x)
+```
+
+Now we are interested in the duplicated element in the string vector. Is there any duplicated element in the vector?
+```{r}
+duplicated(x)
+```
+The last element is duplicated. F denotes FALSE, and T for TRUE.
+If we want to know the number of characters in each of the element:
+```{r}
+nchar(x)
+```
+
+We can also unite two vectors x and y if we define another vector y first:
+```{r}
+y <- c("ab", "e")
+union(x, y)
+```
+
+Is there intercept among these two sets of strings?
+```{r}
+intersect(x, y)
+```
+
+We can add something like "Q" to each element:
+```{r}
+paste(x, "Q")
+```
+
+To get rid of the space between these element and "Q", try paste0:
+```{r}
+paste0(x, "Q")
+```
+
+If we want to collapse multiple strings into one, which is joined by space:
+```{r}
+paste(x, collapse = " ")
+```
+
+Using these functions, we can achieve many things. For example if we have a piece of DNA sequence: 
+```{r}
+DNA <- "taaCCATTGtaaGAACATGGTTGTCcaaaCAAGATGCTAGT"
+```
+
+Note that I am using the assignment operator “<-”, instead of “=”, which also works most of the times but it could be ambiguous. First we need to convert everything to upper case. 
+```{r}
+DNA <- toupper(DNA)
+```
+
+Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to certain pattern. 
+```{r}
+segs <- strsplit(DNA, "ATG")
+```
+
+The result is contained in an object segs, which is a list.  We needed the unlist( ) function to convert list to a string vector. 
+```{r}
+segs <- unlist(segs)   
+segs  # a vector of strings
+segs[1]  # first segment
+```
+
+```{exercise}
+In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
+```
 
 ## For more in-depth exercises
 Go to: [http://tryr.codeschool.com/](http://tryr.codeschool.com/)  
@@ -3839,26 +3824,6 @@ We still need pair-wised examinations, because we cannot put two highly correlat
 
 <!--chapter:end:06-Analyzing-heart-attach-data-set-2.Rmd-->
 
-# Vectors
-
-<!--chapter:end:07-Vectors.Rmd-->
-
-# Matrics and arrays
-
-<!--chapter:end:08-Matrics-and-arrays.Rmd-->
-
-# Lists
-
-<!--chapter:end:09-Lists.Rmd-->
-
-# Data frames
-
-<!--chapter:end:10-Data-frames.Rmd-->
-
-# Strings
-
-<!--chapter:end:11-Strings.Rmd-->
-
 # Advanced topics
 
 ## Tidyverse
@@ -3987,7 +3952,7 @@ We first generated the plot using ggplot2 and stored it in an object g, which is
 
 The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc. Here are some helpful websites and information:
 
-<!--chapter:end:12-Advanced-topics.Rmd-->
+<!--chapter:end:07-Advanced-topics.Rmd-->
 
 # Exploring of state data set
 
@@ -4285,7 +4250,7 @@ Do principal components analysis and linear model analysis for Illiteracy and in
 
 
 
-<!--chapter:end:13-Exploring-state-data-set.Rmd-->
+<!--chapter:end:08-Exploring-state-data-set.Rmd-->
 
 # Exploring of game sale dataset
 
@@ -5304,11 +5269,11 @@ Here is the scatter plot of Global.Sales.Log ~ Critic Score and the model line w
 
 ##  Conclusion
 
-<!--chapter:end:14-Exploring-game-sale-data-set.Rmd-->
+<!--chapter:end:09-Exploring-game-sale-data-set.Rmd-->
 
 # Exploring of employee salary data set
 
-<!--chapter:end:15-Exploring-employee-salary-data-set.Rmd-->
+<!--chapter:end:10-Exploring-employee-salary-data-set.Rmd-->
 
 ---
 title: "Homework 4"
