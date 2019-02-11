@@ -363,8 +363,9 @@ percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span clas
 <p><img src="book_files/figure-html/unnamed-chunk-448-1.png" width="672" /></p>
 <p>From the plot we can see even in early days, California and New York are the top two states in population. South Dakota have little population even in 1970s.</p>
 <p>Other questions we may have are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model to explain the murder rate?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maps)
-sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># create new character vector with lowercase states names</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maps)</code></pre></div>
+<pre><code>## Warning: package &#39;maps&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># create new character vector with lowercase states names</span>
 states &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;state&quot;</span>)  <span class="co"># extract state data</span>
 map &lt;-<span class="st"> </span><span class="kw">merge</span>(states, sta, <span class="dt">by =</span> <span class="st">&quot;region&quot;</span>, <span class="dt">all.x =</span> T)  <span class="co"># merge states and state.x77 data</span>
 map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span class="op">$</span>order), ]
@@ -378,8 +379,9 @@ map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span cla
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-449-1.png" width="672" /></p>
 <p>We can see from the map that the bottom and right of the map are close to red while the top middle and left are yellow. There is an area on top-right are yellow too. The map tells us that murder rate are higher in south and east states but less in north central, northwest and northeast states.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggridges)
-<span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Region, <span class="dt">fill =</span> Region)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggridges)</code></pre></div>
+<pre><code>## Warning: package &#39;ggridges&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Region, <span class="dt">fill =</span> Region)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ridgeline plot of Murder&quot;</span>) <span class="op">+</span>
@@ -389,7 +391,11 @@ map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span cla
 <p>The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has big murder rate than other regions.</p>
 
 <div class="exercise">
+<<<<<<< HEAD
 <span id="exr:unnamed-chunk-451" class="exercise"><strong>Exercise 8.1  </strong></span>Use 2 plots such as bar, lollipop, map and ridgeline to explore the distribution of Illiteracy and give brief interpretation.
+=======
+<span id="exr:unnamed-chunk-451" class="exercise"><strong>Exercise 13.1  </strong></span>Use 2 plots such as bar, lollipop, map and ridgeline to explore the distribution of Illiteracy and give brief interpretation.
+>>>>>>> b87f67f153d9d67add9eea25913ae161a364297d
 </div>
 
 </div>
@@ -397,8 +403,9 @@ map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span cla
 <h2><span class="header-section-number">8.3</span> Analyzing the relationship among variables</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">st &lt;-<span class="st"> </span>sta[, <span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co">#take numeric variables as goal matrix</span>
 <span class="kw">library</span>(ellipse) 
-<span class="kw">library</span>(corrplot)
-corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)) <span class="co"># correlation matrix</span>
+<span class="kw">library</span>(corrplot)</code></pre></div>
+<pre><code>## Warning: package &#39;corrplot&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)) <span class="co"># correlation matrix</span>
 col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#7F0000&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;#FF7F00&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;#7FFF7F&quot;</span>,
                            <span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;#007FFF&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;#00007F&quot;</span>))
 <span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, 
@@ -410,7 +417,11 @@ col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span
 <p>Positive correlation between Murder and Illiteracy with r value of 0.70, which means the lower education level the state have, the higher murder rate chance it will happen in that state; Negative correlations between Murder and Life.Exp, Frost, with r value of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life expectation the state will have; And the colder of the weather, the lower chance the murder will occur: too cold to murder?!</p>
 
 <div class="exercise">
+<<<<<<< HEAD
 <span id="exr:unnamed-chunk-453" class="exercise"><strong>Exercise 8.2  </strong></span>According to the corrplot above, explain the correlation between Illiteracy and other variables.
+=======
+<span id="exr:unnamed-chunk-453" class="exercise"><strong>Exercise 13.2  </strong></span>According to the corrplot above, explain the correlation between Illiteracy and other variables.
+>>>>>>> b87f67f153d9d67add9eea25913ae161a364297d
 </div>
 
 <p>Now let’s see the cluster situation of these variables.</p>
@@ -472,7 +483,11 @@ sta.income &lt;-<span class="st"> </span>sta <span class="op">%&gt;%</span><span
 <p>Most southern states has lower HS.Grad high, low Life.Exp but higher murder frequency, while states in other three regions have relative higher HS.Grad and income but lower murder rate.</p>
 
 <div class="exercise">
+<<<<<<< HEAD
 <span id="exr:unnamed-chunk-460" class="exercise"><strong>Exercise 8.3  </strong></span>Use scatter plot to analyze the correlation between Illiteracy and other variables in the same or different cluster. Interpret your plots.
+=======
+<span id="exr:unnamed-chunk-460" class="exercise"><strong>Exercise 13.3  </strong></span>Use scatter plot to analyze the correlation between Illiteracy and other variables in the same or different cluster. Interpret your plots.
+>>>>>>> b87f67f153d9d67add9eea25913ae161a364297d
 </div>
 
 </div>
@@ -591,7 +606,11 @@ model &lt;-<span class="st"> </span><span class="kw">lm</span>(Murder <span clas
 <p>Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another relative smaller factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow: <span class="math inline">\(Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast\)</span></p>
 
 <div class="exercise">
+<<<<<<< HEAD
 <span id="exr:unnamed-chunk-466" class="exercise"><strong>Exercise 8.4  </strong></span>Do principal components analysis and linear model analysis for Illiteracy and interpret your result.
+=======
+<span id="exr:unnamed-chunk-466" class="exercise"><strong>Exercise 13.4  </strong></span>Do principal components analysis and linear model analysis for Illiteracy and interpret your result.
+>>>>>>> b87f67f153d9d67add9eea25913ae161a364297d
 </div>
 
 </div>
