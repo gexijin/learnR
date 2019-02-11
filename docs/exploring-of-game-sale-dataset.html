@@ -397,7 +397,7 @@ User.Count &lt;-<span class="st"> </span>game<span class="op">$</span>User.Count
   sub &lt;-<span class="st"> </span><span class="kw">sample</span>(game[a[i]][, <span class="dv">1</span>], <span class="dv">5000</span>)
   <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])
  }</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-439-1.png" width="768" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-470-1.png" width="768" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NA.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>NA.Sales)   
 EU.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>EU.Sales)  
 JP.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>JP.Sales)   
@@ -489,16 +489,16 @@ s.t &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw"
 s.t<span class="op">$</span>data.name &lt;-<span class="st"> </span>a
 s.t</code></pre></div>
 <pre><code>##     statistic p.value        data.name
-## s.t     0.962       0     Critic.Score
-## X       0.912       0       User.Score
-## X.1     0.646       0     NA.Sales.Log
-## X.2     0.713       0     EU.Sales.Log
-## X.3     0.620       0     JP.Sales.Log
-## X.4     0.709       0  Other.Sales.Log
+## s.t     0.965       0     Critic.Score
+## X       0.915       0       User.Score
+## X.1     0.644       0     NA.Sales.Log
+## X.2     0.712       0     EU.Sales.Log
+## X.3     0.623       0     JP.Sales.Log
+## X.4     0.708       0  Other.Sales.Log
 ## X.5     0.997       0 Global.Sales.Log
 ## X.6     0.979       0 Critic.Count.Log
-## X.7     0.941       0   User.Count.Log</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-442-1.png" width="768" /></p>
+## X.7     0.945       0   User.Count.Log</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-473-1.png" width="768" /></p>
 <p>Though the Shapiro test still deny the normality of these log values. We assume they are normal distributed data after log-transformation.</p>
 <p>There are lots of interest points in this data set such as the distribution of global and regional sales and their relationship, the correlation of critic score and user score and their counts, whether these scores are the main effect for sales, or the other factors like genre, rating, platform, even publisher affect the sales more, and so on.</p>
 </div>
@@ -518,12 +518,12 @@ unigram &lt;-<span class="st"> </span><span class="kw">ngram</span>(titles, <spa
 freq &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(<span class="kw">get.phrasetable</span>(unigram))
 <span class="kw">wordcloud</span>(freq<span class="op">$</span>ngrams, freq<span class="op">$</span>freq, <span class="dt">random.order =</span> <span class="ot">FALSE</span>, <span class="dt">rot.per =</span> <span class="fl">0.35</span>,
           <span class="dt">color=</span><span class="kw">brewer.pal</span>(<span class="dv">8</span>, <span class="st">&quot;Dark2&quot;</span>), <span class="dt">max.words =</span> <span class="dv">500</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-443-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-474-1.png" width="672" /></p>
 <p>The most common word in game name is world and ii, then star, wars and NBA. Soccer, NFL, dragon, Lego and warriors are the third popular team.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(game<span class="op">$</span>Platform), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
 percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(game<span class="op">$</span>Platform)
 <span class="kw">barplot</span>(percentages[<span class="dv">1</span><span class="op">:</span><span class="dv">18</span>], <span class="dt">las =</span> <span class="dv">3</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>, <span class="dt">axis.lty =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-444-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-475-1.png" width="672" /></p>
 <p>These are the top 18 platforms according to the frequency. PSs occupies big portion.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#regroup platform as Platform.type </span>
 pc &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC&quot;</span>)
@@ -537,7 +537,7 @@ game &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
                                <span class="kw">ifelse</span>(Platform <span class="op">%in%</span><span class="st"> </span>playstation, <span class="st">&quot;playstation&quot;</span>, <span class="st">&quot;others&quot;</span>))))) </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Platform.type)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-446-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-477-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">table</span>(game<span class="op">$</span>Genre))
 dat<span class="op">$</span>fraction =<span class="st"> </span>dat<span class="op">$</span>Freq <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(dat<span class="op">$</span>Freq)
 dat =<span class="st"> </span>dat[<span class="kw">order</span>(dat<span class="op">$</span>fraction), ]
@@ -551,7 +551,7 @@ dat<span class="op">$</span>ymin =<span class="st"> </span><span class="kw">c</s
 <span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>)) <span class="op">+</span>
 <span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ring plot for Genre type&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Genre&quot;</span>) <span class="op">+</span>
 <span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-447-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-478-1.png" width="672" /></p>
 <p>Action, Sports and Shooter are the first three biggest genre. Action occupies almost 25% genre. Three of them together contribute half of genre count.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#regroup Genre as Genre.type</span>
 genre &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Platform&quot;</span>, <span class="st">&quot;Racing&quot;</span>, <span class="st">&quot;Simulation&quot;</span>, <span class="st">&quot;Sports&quot;</span>, <span class="st">&quot;Misc&quot;</span>)
@@ -574,7 +574,7 @@ pct &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw"
 lbls &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">names</span>(counts), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, pct, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)  <span class="co"># labels with count number</span>
 <span class="kw">pie</span>(counts, <span class="dt">labels =</span> lbls, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="kw">length</span>(lbls)),
 <span class="dt">main=</span><span class="st">&quot;Pie Chart of Ratings with sample sizes&quot;</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-450-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-481-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">15</span></code></pre></div>
 <pre><code>## [1] 15</code></pre>
 <p>According to the order, the most popular ratings are T, E, M and E10+. There are altogether 6722 in 6825 games belong to these four ratings. Other ratings only occupy very little in the all games.</p>
@@ -591,10 +591,10 @@ col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span
 <span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, 
                <span class="dt">number.cex =</span> .<span class="dv">8</span>, <span class="dt">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="dt">upper.col =</span> <span class="kw">col</span>(<span class="dv">10</span>), 
                <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-451-1.png" width="768" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-482-1.png" width="768" /></p>
 <p>There are high r values of 0.75, 0.65, 0.52 and 0.42 between the log value of Global.Sales and regional sales, we will consider to use Global.Sales.Log as our target sales to analyze the relationship with other variables later. On the other hand, there are good positive correlation between regional sales too. User Score is positive correlated to Critic Score with r of 0.58. There is little correlation between User Count log value and User Score.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)))))  <span class="co"># hierarchical clustering</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-452-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-483-1.png" width="672" /></p>
 <p>All sales’ log value except JP.Sales.Log build one cluster, scores build second cluster, and log value of counts and JP.Sales build another one. In sales cluster, Other.Sales.Log is the closest to Global.Sales.Log, then NA.Sales.Log, and EU.Sales.Log is the next.</p>
 </div>
 <div id="analysis-of-score-and-count" class="section level2">
@@ -606,7 +606,7 @@ col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">data =</span> game, <span class="kw">aes</span>(<span class="dt">x=</span>Critic.Score), <span class="dt">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">data =</span> game, <span class="kw">aes</span>(<span class="dt">x=</span>User.Score), <span class="dt">color =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightgreen&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Critic.Score-blue, User.Score-green&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Density plot for critic and user score&quot;</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-453-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-484-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Year.Release, <span class="dt">y =</span> Critic.Score, <span class="dt">colour =</span> <span class="st">&quot;CriticScore&quot;</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">alpha =</span> <span class="fl">1.0</span>) <span class="op">+</span><span class="st">  </span><span class="co"># scatter point of critic score</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> User.Score, <span class="dt">colour =</span> <span class="st">&quot;UserScore&quot;</span>)) <span class="op">+</span><span class="st">  </span><span class="co"># scatter point of user score</span>
@@ -625,7 +625,7 @@ col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span
           <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()) <span class="op">+</span>
 <span class="st">   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Score distribution of Each Year&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Year Release&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Scores&quot;</span>) <span class="op">+</span>
 <span class="st">   </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-454-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-485-1.png" width="672" /></p>
 <p>There is not so many evaluation about the game available before 1996. In the early years, averages of Critic.Score are higher than averages of User.Score. From 1998 Users gave higher score then critics on average, the situation kept until 2009. From 2010 till 2016, the trend of early years came back, average critic scores are higher than average user score again.</p>
 <p>Between 1996 and 1999, both critics and users intended to give higher scores than the other years.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggpmisc)  <span class="co">#package for function stat_poly_eq</span>
@@ -639,7 +639,7 @@ formula &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st
                <span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">paste</span>(..eq.label.., ..rr.label.., <span class="dt">sep =</span> <span class="st">&quot;*plain(</span><span class="ch">\&quot;</span><span class="st">,</span><span class="ch">\&quot;</span><span class="st">)~&quot;</span>)),
                <span class="dt">label.x.npc =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">label.y.npc =</span> <span class="fl">0.92</span>,   <span class="co"># position of the equation label</span>
                <span class="dt">parse =</span> <span class="ot">TRUE</span>)   </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-455-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-486-1.png" width="672" /></p>
 <p>There is good correlation between Critic.Score and User.Score. Some of the GBA games got highest User.Score, while highest Critic.Score came from X360 and PS series.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(game<span class="op">$</span>Critic.Score, game<span class="op">$</span>User.Score)</code></pre></div>
 <pre><code>## 
@@ -675,7 +675,7 @@ p1 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span><span class=
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">size =</span> <span class="dv">8</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Top Global Sales Game with Score&quot;</span> ) <span class="op">+</span><span class="st">  </span><span class="co"># add title in the center of the plot</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-457-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-488-1.png" width="672" /></p>
 <p>Among these 20 top sale games, top two games, Wii Sports and Grand Theft Auto V have much better sales than the other games. Both of them were scored above 7.5. Grand Theft Auto V even got the highest Critic score among all these top games. Though there are several other games like Grand Theft Auto IV, The Elder Scrolls V: Skyrim have really high scores too. This plot also indicates that for these top games, their global sales have no clear linear correlation with the average User.Score and Critic.Score. For most games, average critic score is higher than average user score. Call of Duty: Modern Warfare 3 and Call of Duty: Ghosts got really lower average user score comparing with other top sales game.</p>
 </div>
 <div id="score-rating" class="section level3">
@@ -699,7 +699,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span clas
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) 
 <span class="kw">library</span>(gridExtra)
 <span class="kw">grid.arrange</span>(p1, p2, <span class="dt">nrow =</span> <span class="dv">1</span>,<span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-459-1.png" width="1152" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-490-1.png" width="1152" /></p>
 <p>In total, Rating M got more higher Critic.Score than others, E10+ got more lower Critic.Score; For User.Score, as same as Critic.Score, E10+ is low. While the others are similar and higher.</p>
 </div>
 <div id="score-genre" class="section level3">
@@ -721,7 +721,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span clas
         <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>), 
         <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),  
         <span class="dt">panel.grid.minor=</span><span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-460-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-491-1.png" width="672" /></p>
 <p>Some Racing and Adventure game got the lowest Critic.Score. On the other side, some action game got excellent evaluation from critics and have great Global.Sales. Sports, Shooter and Platform came next.</p>
 </div>
 <div id="score-global-sales" class="section level3">
@@ -733,7 +733,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span clas
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Rating)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>()
 <span class="kw">grid.arrange</span>(p1, p2, <span class="dt">nrow =</span> <span class="dv">1</span>,<span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-461-1.png" width="1152" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-492-1.png" width="1152" /></p>
 <p>Independent from Genre and Rating, the higher of Score, the better of Global.Sales.Log. Especially for Critic.Score bigger than 9, Global.Sales straight rising. Global.Sales rise slowly with User.Score.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game.bottom &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">filter</span>(game, Critic.Score <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.5</span>), <span class="kw">c</span>(Global.Sales.Log, Critic.Score))
 game.low &lt;-<span class="st"> </span><span class="kw">select</span>(<span class="kw">filter</span>(game, Critic.Score <span class="op">&gt;=</span><span class="st"> </span><span class="fl">2.5</span> <span class="op">&amp;</span><span class="st"> </span>Critic.Score <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>), 
@@ -754,7 +754,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game.middle, <sp
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;
 ## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-462-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-493-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r1 &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">with</span>(game.high, <span class="kw">cor</span>(Critic.Score, Global.Sales.Log)), <span class="dt">digits =</span> <span class="dv">2</span>)
 p4 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game.high, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Score, <span class="dt">y =</span> Global.Sales.Log)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>() <span class="op">+</span>
@@ -776,7 +776,7 @@ p5 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game.top, <span 
 <span class="kw">grid.arrange</span>(p4, p5, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-463-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-494-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ggarrange(p4, p5, ncol = 2)</span></code></pre></div>
 <p>If we seperate the citic score into 5 groups: bottom(&lt;2.5), low(between2.5 &amp; 5), middle(between 5 &amp; 7.5), high(between 7.5 &amp; 9) and top(&gt;=9), there is no linear relationship between Global.Sales.Log and Critic.Score in the first three groups. For “high” group, correlation r is 0.22 and the linear equation of critic score can only explain about 0.05 global sales log; While for “top” group, correlation r is higher as 0.35 and the linear equation of critic score can only explain more global sales log up to 0.13.</p>
 </div>
@@ -803,7 +803,7 @@ lv &lt;-<span class="st"> </span><span class="kw">unique</span>(comp[<span class
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Top sale Developers and their Scores&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Top Developers&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Total.Sales, <span class="dt">group =</span> <span class="dv">1</span>), <span class="dt">col =</span> <span class="st">&quot;navyblue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-464-1.png" width="960" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-495-1.png" width="960" /></p>
 <p>According to our analysis, Nintendo is the only one which has total sales over 400 millions, much more than the other developers. The other top developers included EA Sports, EA Canada, Rockstar North, Capcorm and so on. This is a little bitter different order from the top developers according to number of games. But EA Sports, EA Canada and Capcorm are included in the top five in both list. Naughty Dogs has the highest user score, while Rockstar North got highest critic score. Infinity Ward got pretty good critic score, but user gave it a lowest score. Best sale developer Nintendo have pretty good scores, but not the highest in both scores.</p>
 </div>
 <div id="score-publisher" class="section level3">
@@ -821,7 +821,7 @@ lv &lt;-<span class="st"> </span><span class="kw">unique</span>(comp[<span class
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Avg.Critic.Score), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">size =</span> <span class="dv">8</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Top Publishers with Average Critic Score greater than 8&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Top Publisher&quot;</span> )</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-465-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-496-1.png" width="672" /></p>
 <p>These are the top publisher who got highest average critic score. Valve, Valve Software and Blue Byte are the top three publisher who got the highest average critic score. For Activision Blizzard and Slightly Mad Studios, though they got relatively higher average critic score, but their average user score are not ideal. While for Kadokawa Shoten, Nihon Falcom Corporation and Sony Computer Entertainment Europe, they got even much higher average user score than average critic score.</p>
 </div>
 </div>
@@ -873,7 +873,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(q, <span class="
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">x =</span> <span class="dv">25</span>, <span class="dt">y =</span> <span class="dv">410000000</span>, <span class="dt">label =</span> <span class="kw">paste</span>(<span class="st">&quot;r =&quot;</span>, r, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co"># add correlation rate r</span>
 <span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-466-1.png" width="768" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-497-1.png" width="768" /></p>
 <p>We can notice from the histogram of total sales that there is very little sales before 1996. There is only one game was released for these years. For several years between 1996 and 2000 the sales increased slowly. The count of games too, from 7 to 30. After that there is a big climbing in total sales. Over 100 games were released each year after that. The top sales happened in 2008, and the most count games was released that year(592). After that total sales of the video games sloped down. And the count of games reduced too. There is a good correlation between total sales and the count of game sold with r=0.96. If we use the equation top left in the figure, we can explain 0.92 of the total sales.</p>
 </div>
 <div id="by-region" class="section level3">
@@ -906,7 +906,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(q, <span class="
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Regional Global Sales Log Distribution Each Year&quot;</span>, 
          <span class="dt">x =</span> <span class="st">&quot;Year Release&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total Sales Log Value&quot;</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-467-1.png" width="768" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-498-1.png" width="768" /></p>
 <p>The pattern of log value for these regional sales in those years are similar for Global, North America, Europe, and Others. Japan is much different from them. Same conclusion as cluster analysis.</p>
 </div>
 <div id="by-genre" class="section level3">
@@ -925,7 +925,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(q, <span class="
                           <span class="dt">breaks =</span> Year.Release)<span class="op">+</span>
 <span class="st">         </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Year Wise Log Global Sales by Genre&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">         </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-468-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-499-1.png" width="672" /></p>
 <p>In total the golden years are from 2007 to 2009 for most of these Genres. Action keeps on the top sale for all those years. Strategy is on the bottom sale list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales )
  <span class="co"># reorder according to the length per Genre, to make the plots look beautiful and keep axis y stable </span>
@@ -988,7 +988,7 @@ P4 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
 <pre><code>## Loading required package: magrittr</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
 <span class="kw">ggarrange</span>(P0, P1, P2, P3, P4, <span class="dt">ncol =</span> <span class="dv">5</span>, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">widths =</span> <span class="kw">c</span>(<span class="fl">1.3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-469-1.png" width="1152" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-500-1.png" width="1152" /></p>
 <p>Generally North America, Europe Sales and other sales follow the global Sales pattern. They all have Action, Sports and Shooter as top 3 genres, Puzzle, Adventure and Strategy as bottom 3 genres. Japan market is different from them. The Role-Playing gets the largest portion in Japan sales, while Shooter plays much less portion comparing with the other regions. Platform and Puzzle are popular in Japan than in other regions. As other regions, action and sports are still the most popular Genre in Japan.</p>
 </div>
 <div id="by-rating" class="section level3">
@@ -1006,15 +1006,15 @@ P4 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Year Wise Global Sales by Rating&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_flip</span>()</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-470-1.png" width="672" /></p>
-<p>Rating E and E10+ run the first two in global sales. Compare with E, E10+, M and T, the other rating sales were so little and even not show in our area figure. 2008 is a good year for all ratings. <img src="book_files/figure-html/unnamed-chunk-471-1.png" width="1152" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-501-1.png" width="672" /></p>
+<p>Rating E and E10+ run the first two in global sales. Compare with E, E10+, M and T, the other rating sales were so little and even not show in our area figure. 2008 is a good year for all ratings. <img src="book_files/figure-html/unnamed-chunk-502-1.png" width="1152" /></p>
 <p>The patterns for Rating are almost the same for different region sales and global sales. E is the biggest rating, then M and T, E10+ is the smallest in these four ratings. In Europe there is a little of bit of AO portion, while in Japan, some K-A games are released too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 x &lt;-<span class="st"> </span>game[,<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>]
 <span class="kw">matplot</span>(<span class="kw">t</span>(x), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>)[game<span class="op">$</span>Rating])
 <span class="kw">legend</span>(<span class="st">&quot;center&quot;</span>, <span class="kw">levels</span>(game<span class="op">$</span>Rating), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">pt.cex =</span> <span class="dv">1</span>)
 <span class="kw">text</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">3.9</span>, <span class="fl">4.8</span>), <span class="dv">80000000</span>, <span class="kw">colnames</span>(x))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-472-1.png" width="1152" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-503-1.png" width="1152" /></p>
 <p>There is one E game which was mainly sold in North America and Europe which was really popular and produced a sale tale of over 80 millions’ global sale, while North America contributed half of the global sales. We can check the game data and know it’s Wii Sports released in 2006. We also noticed that M game is popular in North America(blue), which contributed a lot to global sales, E games(green) have good sale in Europe, while Japanese like T(red) And E(green) games. It’s balance in rating for “other” region.</p>
 </div>
 <div id="by-rating-genre" class="section level3">
@@ -1027,13 +1027,13 @@ x &lt;-<span class="st"> </span>game[,<span class="dv">6</span><span class="op">
 <span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Genre, <span class="dt">y =</span> Total.Sales, <span class="dt">fill =</span> Rating)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;Identity&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-473-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-504-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggmosaic)
 <span class="kw">ggplot</span>(game) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_mosaic</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">product</span>(Rating), <span class="dt">fill =</span> Platform.type), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Rating&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Platform Type&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Mosaic Plot&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-474-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-505-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(Rating, Global.Sales, Genre, User.Score) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(Rating, Genre) <span class="op">%&gt;%</span>
@@ -1067,7 +1067,7 @@ p2 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Genre&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;JP Sales&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Rating&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>)
 <span class="kw">grid.arrange</span>(p1, p2, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">top =</span> <span class="st">&quot;Distribution of genre and rating for top sales&quot;</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-475-1.png" width="960" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-506-1.png" width="960" /></p>
 <p>For the top 20 sales of genre*rating combination, same as we discussed previously, Action, Shooter and Sports have biggest Global.Sales while Role-Playing and Action are sold better in Japan. Rating M contribute big portion in both Action and Shooter global sales, Rating E sports game are popular globally. In Japan, teenage play a lot of Role-Playing games, they also play part of action and fighting games. Almost half of Japan action games are rated as M and lots of other genre games are rated as E. In both sales plots, Role-Playing games got highest average user score.</p>
 </div>
 <div id="by-platform" class="section level3">
@@ -1090,7 +1090,7 @@ p &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="kw">percent_format</span>()) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-476-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-507-1.png" width="672" /></p>
 <p>Nintendo and xbox came after 1990. Before that pc and playstation occupied the game market, pc are the main platform at that time. After 1995, the portion of pc and playstation shrinked, while nintendo and xbox grew fast and took over more portion than playstation and pc in the market. Together with Nintendo and xbox, there were other game platform sprouting out in early 1990s, but they last for 20 years and dissapeared. From around 2010, the portions of these 4 platforms keep relatively evenly and stablly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(Platform.type, Critic.Score) <span class="op">%&gt;%</span>
@@ -1104,21 +1104,21 @@ p &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
         <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>),
         <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
         <span class="dt">panel.grid.minor=</span><span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-477-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-508-1.png" width="672" /></p>
 <p>*show year every 10 , sales 45 degree</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(ggiraph)</span>
 <span class="kw">ggplot</span>(game, <span class="kw">aes</span>(Global.Sales, Year.Release)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Platform.type)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(<span class="op">~</span><span class="st"> </span>Rating) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Global Sales Vs. Year of Release by Rating&quot;</span>) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-478-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-509-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(Global.Sales, Year.Release)) <span class="op">+</span><span class="st"> </span>
 <span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Platform.type)) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(<span class="op">~</span><span class="st"> </span>Platform.type) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Global Sales Vs. Year of Release by Platform.type&quot;</span>) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-478-2.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-509-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">game<span class="op">$</span>Platform.type &lt;-<span class="st"> </span><span class="kw">as.factor</span>(game<span class="op">$</span>Platform.type)
 <span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Platform.type, <span class="dt">y =</span> Global.Sales.Log, <span class="dt">fill =</span> Genre)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-479-1.png" width="1152" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-510-1.png" width="1152" /></p>
 <p>In total, PC have lower Global sales log comparing with other platform type, while palystation have more higher sale mediums for different genre. For Xbox, Shooter is the top sale genre, puzzle is not a popular; Misc genre contribute a lot for Nintendo, strategy is at the bottom of Nintendo sale log list. For nintendo and playstation, different genre keep balance in global sales log. Nintendo have several real high global sales for some games.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute 1-way ANOVA test forlog value of global sales by Platform Type</span>
 model &lt;-<span class="st"> </span><span class="kw">aov</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>Platform.type, <span class="dt">data =</span> game)
@@ -1149,7 +1149,7 @@ tukey</code></pre></div>
 ## xbox-playstation     -0.16236593 -0.27652224 -0.048209629 0.0009961</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">1</span>))
 <span class="kw">plot</span>(tukey, <span class="dt">las =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-480-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-511-1.png" width="672" /></p>
 <p>ANOVA test shows that there is at lease one of the platform type is significant different from the others. The plot of Turkey tests shows that there is significant difference between all other pairs of platform types but between xbox and nintendo, others and nintendo.</p>
 </div>
 </div>
@@ -1179,8 +1179,8 @@ a &lt;-<span class="st"> </span><span class="kw">heatmap.2</span>(s,
         <span class="dt">lhei =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">10</span>))
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(<span class="kw">as.factor</span>(game<span class="op">$</span>Platform.type)), 
        <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)    <span class="co"># add legend </span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-481"></span>
-<img src="book_files/figure-html/unnamed-chunk-481-1.png" alt="Heat map for whole game sales data set" width="576" />
+<div class="figure"><span id="fig:unnamed-chunk-512"></span>
+<img src="book_files/figure-html/unnamed-chunk-512-1.png" alt="Heat map for whole game sales data set" width="576" />
 <p class="caption">
 Figure 14.1: Heat map for whole game sales data set
 </p>
@@ -1189,7 +1189,7 @@ Figure 14.1: Heat map for whole game sales data set
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#rownames(st) = make.names(Name, unique=TRUE)</span>
 pca =<span class="st"> </span><span class="kw">prcomp</span>(st, <span class="dt">scale =</span> T)  <span class="co">#scale = T to normalize the data</span>
 <span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-482-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-513-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#str(pca)  # this shows the structure of the object, listing all parts.</span>
 <span class="kw">summary</span>(pca)  <span class="co">#shows the importance of the components</span></code></pre></div>
 <pre><code>## Importance of components:
@@ -1230,7 +1230,7 @@ pcaData &lt;-<span class="st"> </span><span class="kw">cbind</span>(pcaData, gam
 <span class="st">  </span><span class="kw">ylab</span>(<span class="kw">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, percentVar[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>)) <span class="op">+</span><span class="st">  </span><span class="co"># y label</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Principal component analysis (PCA)&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># title</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> <span class="dv">1</span>)  <span class="co"># width and height ratio</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-483-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-514-1.png" width="672" /></p>
 <p>PC, xbox, playstation and nintendo occupy in their own positions in the PCA figure, which illustrate that they play different important role in components of the variance of PC1 and PC2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)
 <span class="co"># Compute and plot wss for k = 2 to k = 15 to find the best k for clusters</span>
@@ -1244,8 +1244,8 @@ wss &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv
      <span class="dt">type =</span> <span class="st">&quot;b&quot;</span>, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>, 
      <span class="dt">xlab =</span> <span class="st">&quot;Number of clusters K&quot;</span>,
      <span class="dt">ylab =</span> <span class="st">&quot;Total within-clusters sum of squares&quot;</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-484"></span>
-<img src="book_files/figure-html/unnamed-chunk-484-1.png" alt="Kmeans figure using ggfortify" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-515"></span>
+<img src="book_files/figure-html/unnamed-chunk-515-1.png" alt="Kmeans figure using ggfortify" width="672" />
 <p class="caption">
 Figure 14.2: Kmeans figure using ggfortify
 </p>
@@ -1263,8 +1263,8 @@ Figure 14.2: Kmeans figure using ggfortify
 <span class="kw">library</span>(ggfortify)
 <span class="kw">set.seed</span>(<span class="dv">1</span>)
 <span class="kw">autoplot</span>(<span class="kw">kmeans</span>(st, <span class="dv">3</span>), <span class="dt">data =</span> st, <span class="dt">label =</span> <span class="ot">FALSE</span>, <span class="dt">label.size =</span> <span class="fl">0.1</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-484"></span>
-<img src="book_files/figure-html/unnamed-chunk-484-2.png" alt="Kmeans figure using ggfortify" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-515"></span>
+<img src="book_files/figure-html/unnamed-chunk-515-2.png" alt="Kmeans figure using ggfortify" width="672" />
 <p class="caption">
 Figure 14.2: Kmeans figure using ggfortify
 </p>
@@ -1525,7 +1525,7 @@ game.log<span class="op">$</span>Publisher.type &lt;-<span class="st"> </span><s
 <span class="kw">ggplot</span>(<span class="dt">data =</span> game.log, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Score, <span class="dt">y =</span> Global.Sales.Log)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> testFunc, <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Meta Critic Score&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&#39;Global Sales Log&#39;</span>)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-489-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-520-1.png" width="672" /></p>
 <p>Here is the scatter plot of Global.Sales.Log ~ Critic Score and the model line which predict the global sales log.</p>
 </div>
 <div id="conclusion-1" class="section level2">

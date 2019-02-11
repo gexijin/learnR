@@ -173,8 +173,8 @@ A variable is called global variable if it is defined outside of functions.A glo
 
 ```{r}
 myfun.globle <- function (x){
-  return(x - 2 * y)
   y <- 1
+  return(x - 2 * y)
 }
 myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
 ```
@@ -1034,19 +1034,284 @@ Setting the degree=0, 0.5 and 1 respectively, plot the images of Mona Lisa that 
 
 
 ### Lists
-Vectors contain a set of values. But one vector can only contain one type of values, numbers, characters, or logical values.  A list can store a series of objects of different types. 
+All elements in vectors must be same type. The list can combine objectes of different types. Let's start from creating a list:
 ```{r}
-y <- list(height = 5, name = "John Doe", BP = c(100, 77))  # a list with 3 components
+y <- list(5, "John Doe", c(100, 7), mean) # a list with 4 components
+y
+```
+There are 4 components in the list y. We can associate each components with a *tag*. We add tags "height", "name", "BP" and "fun" to the y. 
+
+```{r}
+y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)  
+y
+```
+Here is another example for creating a list:
+```{r}
+x1 <- matrix(c(4, 2, 5, 6, 10, 9), ncol = 3) # create a matrix
+x2 <- 8 : 1
+x3 <- c(2.4, 5.1, 9.0, 4.4)
+x4 <- c('u', 'v', 'w')
+z <- list(x1, x2, x3, x4)
+z
 ```
 
-If we want one of the items in its original form, we can extract it with double square brackets:
+We can build a list by creating an empty list and assigning values to it.
+```{r}
+v <- list()         #Create an empty list
+v[[1]] <- matrix(c(4, 2, 5, 6, 10, 9), ncol = 3)  # Assign a matrix to v[[1]]
+v[[2]] <- 8 : 1    #Assign a vector to v[[2]]
+v[[3]] <- x3       #Assign x3 to v[[3]] where x3 is defined as above
+v[[4]] <- x4       #Assign x4 to v[[4]] where x4 is defined as above
+v
+```
+We used different methods creating list z and v. The list v and z are identical because that we assigned same components for v as that of in z.
+
+There are several different ways to access the elements in a list. For example, to access the third component in y:
+```{r}
+y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
+```
+```{r}
+y[[3]]        #Specifing the number in a double square braket
+```
+
+```{r}
+y$BP          #Using $ sign
+```
+```{r}
+y[["BP"]]     #Using the tag
+```
+Note: we used **double square braket** '[[]]' to access the element in a list, which is different from using single square braket '[]' in a vector. If we use sigle square braket in a list, we will get a sublist. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions *class()* and *is.list* can be used to check the types.
+
+```{r}
+y[3]
+class(y[3])
+is.list(y[3])
+```
+
 ```{r}
 y[[3]]
+class(y[[3]])               #Get the class of y[[3]] 
+is.list(y[[3]])           #Check if y[[3]] is a list or not
 ```
 
-Alternatively, we can refer to the objects by using the dollar sign and the name of the object:
+The forth component of y is *fun = mean*. There are no quotation marks around *mean*. The *class(y[[4]])* returns a function. 
+
 ```{r}
-y$BP
+class(y[[4]])
+```
+
+This implies that y[[4]] is same as the *mean()* function. For example:
+
+```{r}
+y[[4]](c(1, 2, 3, 4, 5))          #Get the mean of 1, 2, 3, 4, 5
+```
+
+```{exercise}           
+Access the second component in list1 by three ways as we introduced above. What is the type of list1["Hobby"] and list1[["Hobby"]] respectively?      
+```{r}
+  list1 <- list(Name = "Tom", Hobby = "Fishing", Num.fish = c(16, 27, 5))
+```
+
+
+Here are some examples for list operation:
+```{r}
+y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
+y[[2]] <- "Mike"    #Change the 2nd component from "John Doe" to "Mike"
+y[[4]] <- NULL      #Delete the 4th component by setting it to NULL
+y
+```
+
+The output shows that the name has been changed to Mike and the mean function is deleted. So far, the length of y is 3:
+```{r}
+length(y)
+```
+
+We can add the forth components to y using the following code: 
+
+```{r}
+y$class <- c("math", "art") #Add a class component
+y
+```
+
+If we have a vector of tags and a vector of corresponding values, we can associate the names and values into a list by creating an empty list and then fill it via assignment statements:
+```{r}
+sales <- c(100, 105, 98, 112)
+seasons <- c("Spring", "Summer", "Fall", "Winter")
+sale.tag <- list()               #Create an empty list
+sale.tag[seasons] <- sales
+sale.tag
+```
+Equivalently, we can associate the names and values by creating an empty list and then assign each component corresponding value or vector. For example.
+
+```{r}
+sale.tag <- list()               #Create an empty list
+sale.tag[["Spring"]] <- 100
+sale.tag[["Summer"]] <- 105
+sale.tag[["Fall"]] <- 98
+sale.tag[["Winter"]] <- 112
+sale.tag
+```
+
+```{exercise}         
+Based on the data set of sale.tag, choose all correct answers from the following options A - F.                   
+  A: sale.tag[[1]]                  
+  B: sale.tag[[Spring]]                      
+  C: sale.tag[["Spring"]]                      
+  D: sale.tag["Spring"]                   
+  E: sale.tag[1]                    
+  F: sale.tag[Spring]                
+  
+1, Which options return a vector.  Answer:___________                 
+2, Which options return a list.    Answer:___________                
+3, Which options returns an error. Answer:___________                
+```
+
+
+                          
+Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
+> mean(sale.tag)                
+[1] NA                
+Warning message:                
+In mean.default(sale.tag) :                
+  argument is not numeric or logical: returning NA                
+
+To calculate the mean, we need to use function *unlist()* to flatten the list into a vector.
+```{r}
+mean(unlist(sale.tag))
+```
+
+Similar to *apply()* funciton works on vectors, *lapply()* (for list apply) works on each component of lists. Here is an example:
+```{r}
+x <- list(c(10, 20, 30), c(4, 5, 6, 7, 8))
+mean.x <- lapply(x, mean)
+mean.x
+```
+The *mean.x* returns a list consisting of 20 and 6 which are means of components of x respectively. 
+
+When the list returned by *lapply()* could be simplified to a vector or matrix, we can use function *sapply()* (for *simplified [l]apply*). Let's redo the previous example by *sapply()* function.
+```{r}
+mean.x.2 <- sapply(x, mean)
+mean.x.2
+```
+
+We can double check the outputs by *class()* or *is.vector()* function:
+```{r}
+class(mean.x)               
+class(mean.x.2)             
+is.vector(mean.x.2)
+```
+
+Here is another example for *sapply()* function. Suppose we have NULL elements in a list.null. To remove the NULL element, apply *is.null* function to every element of the list.null. If the logical value is TRUE, i.e. the element is a NULL, then delete the element by setting NULL to it.
+```{r}
+list.null <- list('art', NULL, c(2, 4, 6, 8))
+list.null
+list.null[sapply(list.null, is.null)] <- NULL
+list.null
+```
+
+For a small size data set, if we can locate the position of NULL element, we can easily remove the NULL element by setting NULL to that element. For example, we already know the second element of list.null is NULL, to remove this NULL element, we set a NULL to the second element:
+```{r}
+list.null <- list('art', NULL, c(2, 4, 6, 8))
+list.null[[2]] <- NULL
+list.null
+```
+ But for large size of data set, we turn to the *sapply()* function to remove NULL elements.
+
+**Example**: 
+Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:
+
+```{r}
+customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
+                 "Mary", "Alex", "Tom", "Grace")
+```
+
+Firsly, we define a function which returns all locations of same elements in a list. 
+
+```{r}
+loc.names <- function(f){
+y <- unlist(f)                     # Flatten a list x into a vector y
+x <- list()                        # Create an empty list
+for (i in 1:length(y)){        
+  c.name <- y[i]                   # Assign the ith element to c.name. 
+  x[[c.name]] <- c(x[[c.name]],i)  # assign values to x[[c.name]]. c.name is the name of x.
+}
+return(x)
+}
+```
+
+the *f* will be replaced by your own list. In this example, *f* will be replaced by the list of customer when we apply the funtion.        
+x <- list () # create an empty list.      
+In the *for* loop, i starts from 1 to the length of y. In our example, the length of y is the length of list of customers: 10.  
+*c.name <- y[i]* # Assign the ith element in y to a new variable *c.name*. For example, if i=1, y[1] is the "Alex", then *c.name = "Alex"*. 
+
+*x[[c.name]] <- c(x[[c.name]], i)* 
+For i=1, we have *c.name <- "Alex"*, then *x[[c.name]] = x[["Alex"]] = NULL* since x starting from an empty list. Therefore c(x[["Alex"]], i) = c(NULL, i) = i = 1. The value 1 will be assigned to x[["Alex"]] by the code: *x[["Alex"]] <- c(x[["Alex"]], i) = 1*. Now x is not an empty list, it is a list with 1 component:
+
+```{r}
+x <- list()
+x[["Alex"]] <- 1
+x
+```
+For i=2, y[2] <- "Brandon", then similar to the case of i=1, we have *x[["Brandon"]] <- 1*:
+```{r}
+x[["Brandon"]] <- 1
+x
+```
+
+For i=3, *y[3] <- "Alex"*. We have met "Alex" once, which returned *x[["Alex"]] <- 1*. Now we meet "Alex" again which means we are going to update *x[["Alex"]]* by *x[["Alex"]] <- c(x[["Alex"]], i) = c(1, i) = c(1, 3)*. The updated x is:
+
+```{r}
+x[["Alex"]] <- c(1, 3)
+x
+```
+
+The process will stop till i = length (y) = 10. The *loc.names()* funciton will return all locations of all names which are already stored in x. 
+
+Let's find all days of cumsters who visited to our store.
+```{r}
+customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
+                 "Mary", "Alex", "Tom", "Grace")
+v1 <- loc.names(customer)
+v1
+```
+
+The output tells us that Alex visited our store at the first, third and eighth days, Brandon came at the second day, etc.
+
+
+Then we use *sapply()* function to calculate the repeat times of each element.
+
+```{r}
+v2 <- sapply(v1,length)     # Calculate the length of each component in v1
+v2
+```
+
+You can sort the v2 by the number of days that they presented by function *sort()*:
+
+```{r}
+sort(v2, decreasing = T)
+```
+
+```{exercise}           
+Fill blanks in the function *my.fun()* so that for a given list, the function returns
+all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
+  F F M M M M I I F I F M I F M I I M I I F         
+Where F, M and I represent Female, Male and Infant respectively.
+
+my.fun <- function(f){
+y <- unlist(f)                     
+x <- ___________                        
+for (i in 1:____){        
+  g1 <- y[i]                
+  x[[______]] <- c(x[[____]],i) 
+}
+freq <- _________(x, length)
+z <- sort(________, decreasing = ____)
+lst <- list(x, z) 
+___________(lst)
+}
+
+gender <- list( "F", ________________________________, "F")             
+__________(gender)
 ```
 
 Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a P value, a vector of residuals or coefficients, and even a matrix of data.  A list is the natural way to represent this sort of thing as one big object that could be parsed. 
@@ -1085,9 +1350,6 @@ summary(pvalues)
 sum(pvalues < 0.05)  # Count how many P values are less than 0.05. 
 ```
 
-```{exercise}
-Write R code to generate two vectors, each containing 100 random numbers from the standard normal distribution. Then compute Pearson’s correlation coefficient (PPC). Repeat 1000 times and plot the distribution of PPCs. Discuss your results briefly. Hint: You can use the above example code as a starting point. 
-```
 
 ### Strings and string vectors
 We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
@@ -1218,7 +1480,7 @@ segs[1]  # first segment
 ```
 
 ```{exercise}
-In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris “ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
+In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
 ```
 
 ### Operations on data frames
