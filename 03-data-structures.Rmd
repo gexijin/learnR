@@ -1329,7 +1329,23 @@ The help page of t.test contains information about what types of values are retu
 ? t.test
 ```
 
+<<<<<<< HEAD
 Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p < 0.05. 
+=======
+Value
+
+A list with class "htest" containing the following components:
+
+**statistic**: …
+
+**p.value**:   the p-value for the test.
+
+**estimate**:  the estimated mean or difference in means depending on whether it was a one-sample test or a two-sample test.
+
+
+With this in mind, let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the P value. By repeating this process 500 times, we want to see the distribution of P values and count how many times we get significant result with P < 0.05. 
+
+>>>>>>> e5dab7af5b51b4de94b24872bc306dd5ae98955d
 ```{r }
 pvalues <- rep(1, 500)  # define a vector containing 500 numbers, all equal to 1.
 for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
@@ -1339,139 +1355,6 @@ for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
 hist(pvalues)  # Histogram of p-values
 summary(pvalues)   
 sum(pvalues < 0.05)  # Number of p-value's which are less than 0.05. 
-```
-
-
-### Strings and string vectors
-We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
-
-Define a **string** x: "R is cool"
-```{r}
-x <- "R is cool"
-```
-
-If we want to know the number of character of the string:
-```{r}
-nchar(x)
-```
-
-We can concatenate strings. By default a space is added.
-```{r}
-paste(x, "!!")
-```
-
-If we want to extract sub-string from position of 6 and 9:
-```{r}
-substr(x, 6, 9)
-```
-
-Split string into a list which is separated by space:
-```{r}
-strsplit(x, " ")
-```
-
-Find pattern "R" and replace with "Tim":
-```{r}
-gsub("R", "Tim", x)
-```
-
-Or remove space followed by anything:
-```{r}
-gsub(" .*", "", x)
-```
-
-We can search for pattern like "is" in the string.
-```{r}
-grepl("is", x)
-```
-
-We can also convert the whole string into low case or upper case by "tolower" or "toupper" function.
-```{r}
-tolower(x)
-toupper(x)
-```
-
-A **string vector** can hold many strings. This can be a column of names or IDs in a table.
-First let's define a character vector **x <- c("ab",  "cde",  "d",  "ab")**. 
-```{r}
-x <- c("ab", "cde", "d", "ab") 
-```
-
-We can use all commands about vector for our string vector, such as 2nd element in vector:
-```{r}
-x[2]
-```
-
-Number of strings in the vector:
-```{r}
-length(x)
-```
-
-Unique elements:
-```{r}
-unique(x)
-```
-
-Now we are interested in the duplicated element in the string vector. Is there any duplicated element in the vector?
-```{r}
-duplicated(x)
-```
-The last element is duplicated. F denotes FALSE, and T for TRUE.
-If we want to know the number of characters in each of the element:
-```{r}
-nchar(x)
-```
-
-We can also unite two vectors x and y if we define another vector y first:
-```{r}
-y <- c("ab", "e")
-union(x, y)
-```
-
-Is there intercept among these two sets of strings?
-```{r}
-intersect(x, y)
-```
-
-We can add something like "Q" to each element:
-```{r}
-paste(x, "Q")
-```
-
-To get rid of the space between these element and "Q", try paste0:
-```{r}
-paste0(x, "Q")
-```
-
-If we want to collapse multiple strings into one, which is joined by space:
-```{r}
-paste(x, collapse = " ")
-```
-
-Using these functions, we can achieve many things. For example if we have a piece of DNA sequence: 
-```{r}
-DNA <- "taaCCATTGtaaGAACATGGTTGTCcaaaCAAGATGCTAGT"
-```
-
-Note that I am using the assignment operator “<-”, instead of “=”, which also works most of the times but it could be ambiguous. First we need to convert everything to upper case. 
-```{r}
-DNA <- toupper(DNA)
-```
-
-Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to certain pattern. 
-```{r}
-segs <- strsplit(DNA, "ATG")
-```
-
-The result is contained in an object segs, which is a list.  We needed the unlist( ) function to convert list to a string vector. 
-```{r}
-segs <- unlist(segs)   
-segs  # a vector of strings
-segs[1]  # first segment
-```
-
-```{exercise}
-In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
 ```
 
 ### Operations on data frames
@@ -1611,11 +1494,138 @@ head(z)
 summary(z)
 ```
 
-Here need more exercise for this chapter
-```{exercise}
 
+### Strings and string vectors
+We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
+
+Define a **string** x: "R is cool"
+```{r}
+x <- "R is cool"
 ```
 
+If we want to know the number of character of the string:
+```{r}
+nchar(x)
+```
+
+We can concatenate strings. By default a space is added.
+```{r}
+paste(x, "!!")
+```
+
+If we want to extract sub-string from position of 6 and 9:
+```{r}
+substr(x, 6, 9)
+```
+
+Split string into a list which is separated by space:
+```{r}
+strsplit(x, " ")
+```
+
+Find pattern "R" and replace with "Tim":
+```{r}
+gsub("R", "Tim", x)
+```
+
+Or remove space followed by anything:
+```{r}
+gsub(" .*", "", x)
+```
+
+We can search for pattern like "is" in the string.
+```{r}
+grepl("is", x)
+```
+
+We can also convert the whole string into low case or upper case by "tolower" or "toupper" function.
+```{r}
+tolower(x)
+toupper(x)
+```
+
+A **string vector** can hold many strings. This can be a column of names or IDs in a table.
+First let's define a character vector **x <- c("ab",  "cde",  "d",  "ab")**. 
+```{r}
+x <- c("ab", "cde", "d", "ab") 
+```
+
+We can use all commands about vector for our string vector, such as 2nd element in vector:
+```{r}
+x[2]
+```
+
+Number of strings in the vector:
+```{r}
+length(x)
+```
+
+Unique elements:
+```{r}
+unique(x)
+```
+
+Now we are interested in the duplicated element in the string vector. Is there any duplicated element in the vector?
+```{r}
+duplicated(x)
+```
+The last element is duplicated. F denotes FALSE, and T for TRUE.
+If we want to know the number of characters in each of the element:
+```{r}
+nchar(x)
+```
+
+We can also unite two vectors x and y if we define another vector y first:
+```{r}
+y <- c("ab", "e")
+union(x, y)
+```
+
+Is there intercept among these two sets of strings?
+```{r}
+intersect(x, y)
+```
+
+We can add something like "Q" to each element:
+```{r}
+paste(x, "Q")
+```
+
+To get rid of the space between these element and "Q", try paste0:
+```{r}
+paste0(x, "Q")
+```
+
+If we want to collapse multiple strings into one, which is joined by space:
+```{r}
+paste(x, collapse = " ")
+```
+
+Using these functions, we can achieve many things. For example if we have a piece of DNA sequence: 
+```{r}
+DNA <- "taaCCATTGtaaGAACATGGTTGTCcaaaCAAGATGCTAGT"
+```
+
+Note that I am using the assignment operator “<-”, instead of “=”, which also works most of the times but it could be ambiguous. First we need to convert everything to upper case. 
+```{r}
+DNA <- toupper(DNA)
+```
+
+Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to certain pattern. 
+```{r}
+segs <- strsplit(DNA, "ATG")
+```
+
+The result is contained in an object segs, which is a list.  We needed the unlist( ) function to convert list to a string vector. 
+```{r}
+segs <- unlist(segs)   
+segs  # a vector of strings
+segs[1]  # first segment
+```
+
+```{exercise}
+In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
+```
 
 ## For more in-depth exercises
 Go to: [http://tryr.codeschool.com/](http://tryr.codeschool.com/)  
