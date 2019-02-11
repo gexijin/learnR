@@ -1,0 +1,80 @@
+---
+title: "HW6 Solution"
+author: "Rong Fan"
+date: "February 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{exercise}
+Exercise 3.18 Access the second component in list1 by three ways as we introduced above. What is the types of list1["Hobby"] and list1[["Hobby"]] respectively?
+```{r}
+  list1 <- list(Name = "Tom", Hobby = "Fishing", Num.fish = c(16, 27, 5))
+```
+  
+Solution:
+```{r}
+list1[[2]]
+list1$Hobby
+list1[["Hobby"]]
+```
+```{r}
+class(list1["Hobby"])
+class(list1[["Hobby"]])
+```
+
+```{exercise}
+Exercise 3.19        
+Based on the data set of sale.tag, choose all correct answers from the following options A - F.
+  A: sale.tag[[1]]
+  B: sale.tag[[Spring]]
+  C: sale.tag[["Spring"]]
+  D: sale.tag["Spring"]
+  E: sale.tag[1]
+  F: sale.tag[Spring]
+  
+1, Which options return a vector.  Answer:___________ 
+2, Which options return a list.    Answer:___________
+3, Which options returns an error. Answer:___________
+````
+
+Solution:             
+1, Answer: A, C             
+2, Answer: D, E          
+3, Answer: B, F    
+
+
+```{Exercise}
+Exercise 3. 20
+
+Fill blanks in the function below so that for a given list, the function returns all locations of each element and sort the frequency of the elements in an increasing order. Then apply your function to the set of gender:
+  F F M M M M I I F I F M I F M I I M I I F
+Where F, M and I represent Female, Male and Infant respectively.
+
+```
+
+Solultion:
+
+```{r}
+my.fun <- function(f){
+y <- unlist(f)                     
+x <- list()                        
+for (i in 1:length(y)){        
+  c.name <- y[i]                
+  x[[c.name]] <- c(x[[c.name]],i) 
+}
+freq <- sapply(x, length)
+b1 <- sort(freq, decreasing = F)
+lst <- list(x, b1)
+return(lst)
+}
+```
+
+```{r}
+gender <- list( "F","F", "M", "M", "M", "M", "I", "I", "F", "I", "F", "M", "I", "F", "M", "I", "I", "M", "I", "I", "F")
+my.fun(gender)
+```
+
