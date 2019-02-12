@@ -87,7 +87,7 @@ ggplot(sta, aes(x = State, y = Population)) +
 
 From the plot we can see even in early days, California and New York are the top two states in population. South Dakota have little population even in 1970s.
 
-Other questions we may have are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model to explain the murder rate?
+Other questions we may ask are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model of other factors to explain their contribution to murder rate?
 ```{r}
 library(maps)
 sta$region <- tolower(state.name)  # create new character vector with lowercase states names
@@ -118,11 +118,18 @@ ggplot(sta, aes(x = Murder, y = Region, fill = Region)) +
 The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has big murder rate than other regions. 
 
 ```{exercise}
-Use 2 plots such as bar, lollipop, map and ridgeline to explore the distribution of Illiteracy and give brief interpretation.
+Use lollipop plots to explore the distribution of Illiteracy in state.x77 data set and give brief interpretation. Hint: You can combine state.abb to state.x77 or use the row names of state.x77 data set directly. 
+```
+
+```{exercise}
+Use ridgeline plot to explore the regional distribution of Illiteracy for state.x77 and state.region data sets and interpret your figure.
 ```
 
 ## Analyzing the relationship among variables
-```{r message=FALSE, fig.width=6, fig.height=6}
+
+(ref:state-1) Corrplot illustrate the relationship among numeric variables
+
+```{r state-1, message=FALSE, fig.width=6, fig.height=6, fig.cap='(ref:state-1)', fig.align='center'}
 st <- sta[, 2:9] #take numeric variables as goal matrix
 library(ellipse) 
 library(corrplot)
@@ -141,11 +148,14 @@ The pearson and spearman correlation matrix on the bottom-left gives us the r va
 Positive correlation between Murder and Illiteracy with r value of 0.70, which means the lower education level the state have, the higher murder rate chance it will happen in that state; Negative correlations between Murder and Life.Exp, Frost, with r value of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life expectation the state will have; And the colder of the weather, the lower chance the murder will occur: too cold to murder?!
 
 ```{exercise}
-According to the corrplot above, explain the correlation between Illiteracy and other variables.
+According to the corrplot, Figure \@ref(fig:state-1), explain the correlation between Illiteracy and other variables.
 ```
 
 Now let's see the cluster situation of these variables.
-```{r}
+
+(ref:state-2) Cluster dendrogram for state numeric variables
+
+```{r state-2, fig.cap='(ref:state-2)', fig.align='center'}
 plot(hclust(as.dist(1 - cor(as.matrix(st)))))  # hierarchical clustering
 ```
 
@@ -213,7 +223,7 @@ It looks like the income type does not affect the murder rate a lot because all 
 Most southern states has lower HS.Grad high, low Life.Exp but higher murder frequency, while states in other three regions have relative higher HS.Grad and income but lower murder rate.
 
 ```{exercise}
-Use scatter plot to analyze the correlation between Illiteracy and other variables in the same or different cluster. Interpret your plots.
+Use scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure \@ref(fig:state-2). Interpret your plot.
 ```
 
 ## Peeking the whole picture of the data set 
@@ -282,7 +292,7 @@ Murder is most related to Life.Exp and Population of the state, also affected by
 $Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast$ 
 
 ```{exercise}
-Do principal components analysis and linear model analysis for Illiteracy and interpret your result.
+Do linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure \@ref(fig:state-1) and pay attention to the high correlation between murder rate and life expectancy.
 ```
 
 
