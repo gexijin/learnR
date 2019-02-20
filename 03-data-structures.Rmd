@@ -1337,7 +1337,54 @@ summary(pvalues)
 sum(pvalues < 0.05)  # Number of p-value's which are less than 0.05. 
 ```
 
-### Operations on data frames
+### Data Frames
+Similar to a matrix, a data frame is a two-dimensional array-like structure. But it differs from the matrix in that the mode of each column could be different. In fact, a data frame is a special case of a two-dimensional list. The data set *iris* that we analyzied before is a data frame. 
+```{r}
+class(iris)
+head(iris)
+```
+
+There are some properties of a data frame.Firstly, the mode for each column in a data frame can be of numeric, factor or character. Such as the class of Sepal.Length is numeric, and the class of Species is factor.
+```{r}
+class(iris$Sepal.Length)
+class(iris$Species)
+```
+Secondly, the column names must be non-empty. Usually, the columns represent various variables in a statistical problem. There are 5 column names or variables in the *iris* data set, they are Sepal.Length, Sepal.Width,  Petal.Length, Petal.Width, and Species respectively.
+```{r}
+colnames(iris)
+```
+Thirdly, each column should contain same number of data items. In other words, each variable contains same observations. Fourthly, the row names are unique. If they are not pre-named, the indices "1", "2", "3", $\cdots$, "n" will be assigned to each row, where "n" is the length of a row or the number of observations. For example, there are 150 observations for each variable in the *iris* data, the rows names are shown below:
+```{r}
+rownames(iris)
+```
+
+We can creat a data frame by using function *data.frame()* to combine vectors. For example:
+```{r}
+x <- c("A", "B", "C", "D")
+y <- c(41, 32, 13, 89)
+z <- c("TRUE", "FALSE", "FALSE", "TRUE")
+df1 <- data.frame(x,y,z)
+df1
+```
+
+As you can see in the output, the *<fctr>* underneath the x means that the class of x has been changed from a character to a factor. So does the z. We can check the change by the *class()* function:
+```{r}
+class(x)
+class(df1$x)
+```
+To keep the class of x unchanged after becoming a component of a data frame, we need an argument *stringsAsFactors = FALSE* in the *data.frame()* function. 
+```{r}
+class(df1$x)
+df2 <- data.frame(x,y,z,stringsAsFactors = FALSE)
+df2
+class(df2$x)
+```
+```
+```{exercise}
+What is the class of the build in data set *mtcars*? Show the function that you used to check the class.
+
+```
+
 Once data is read in as **data frame**, these are commands you can use to analyze it. 
 
 Read in data frame x:
@@ -1367,28 +1414,22 @@ nrow(x)
 ncol(x)
 ```
 
-If we are interested in the column names or row names, which should be a vector of strings:
-```{r}
-colnames(x)
-rownames(x)
-```
-
 str() is a very useful function, which shows data types for all columns.
 ```{r}
 str(x)
 ```
 
-Like string and vector, we can select one element in the data frame, like element in 2nd row and 3rd column.
+Like matrix, we can select one element in a data frame. Let's select the element in the second row and third column:
 ```{r}
 x[2, 3]
 ```
 
-Also we can subset a smaller data frame from x, such as columns 2 to 4 and rows 1 to 10:
+Also we can subtract a subset data frame from x. For example, let's select the columns 2 to 4 and rows 1 to 10:
 ```{r}
 x[1:10, 2:4]
 ```
 
-We can only retrieve all of the first column:
+We can view the first column:
 ```{r}
 x[, 1]
 ```
@@ -1397,33 +1438,50 @@ Using the data frame name x followed column name has the same effect.
 ```{r}
 x$Sepal.Length
 ```
+The argument *drop=FALSE* will keep a one-column vector to a data frame. For example:
+```{r}
+class(x[, 1])
+class(x[,1, drop = FALSE])
+```
 
 If we need to know the average Sepal Length, we use mean() function. By the way, expressions can be nested.
 ```{r}
 mean(x$Sepal.Length)
 ```
 
-It's very common to select a subset of data by certain column. Note "==" is for comparison and "=" is for assign value. Also you can use logical symbols like ">" ,"<".
+It's very common to select a subset of data by certain column. The "==", ">", and "<" are logical operations and the "=" is an equality sign for assigning value. Let's select a subset which contains only the species of setosa:
 ```{r}
 y <- subset(x, Species == "setosa")
 head(y)
+```
+
+Similar we can obtain a subset that the lengh of sepal are greater than 7. 
+```{r}
 subset(x, Sepal.Length > 7)
 ```
 
-We also can add new column named "id" to the data frame, which goes from 1 to 150. Function head() is used to examine.
+If there are more than one conditions are applied to the data, we use *&* to connect the conditions. For example, we want to select a subset which contains only the species of virginica, and the length of sepal is greater than 7, meanwhile remove the length of petal from the data:
 ```{r}
-x$id <- 1:150
-head(x)
+x.3conds <- x[x$Sepal.Length>7 & x$Species == "virginica", -3]       # -3 means removing the 3rd column from x.
 ```
 
-cbind() is for adding another exist column, like a column of random numbers y.
+```{exercise}
+Select a subset which satisfies that the *cyl* is 6 and *mpg* greater than 21.2, meanwhile the subset doesn't include the variable *carb*.
+```
+
+We can add new column named "id" to the data frame, which goes from 1 to 150. Function *head()* is used to view the first 6 rows of the new data set.
+```{r}
+x.id <- cbind(id = c(1:150), x)
+head(x.id)
+```
+Adding another column of random numbers y to x.id.
 ```{r}
 y <- rnorm(150)
-x2 <- cbind(x, y)
+x2 <- cbind(y, x.id)
 head(x2)
 ```
 
-Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine.
+Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.
 ```{r}
 newRow <- c(1, 1, 1, 1, "setosa", 151)
 x3 <- rbind(x, newRow)
@@ -1443,21 +1501,75 @@ We can view sepal length by species using boxplot.
 boxplot(Sepal.Length ~ Species, x)
 ```
 
-Or compute summary statistics by category, here average by species:
+We can obtain summary statistics by category. Let's calculate the mean of the variables by species:
 ```{r}
 aggregate(. ~ Species, x, mean)
 ```
 
-It is easier to conduct statistical analysis after organizing data as data frame. Analysis of variance, or ANOVA tests whether sepal length is the same cross species in data frame x.
+```{exercise}
+Use *aggregate()* function to calculate the median of the variables: *mpg*, *disp*, *hp*, and *wt* across the number of cylinders *cyl* in the *mtcars* data set.
+```
+
+
+It is easier to conduct statistical analysis after organizing data as data frame. Analysis of variance, or ANOVA tests whether sepal length has significant difference cross species in data frame iris.
 ```{r}
-m <- aov(Sepal.Length ~ Species, x)
+m <- aov(Sepal.Length ~ Species, iris)
 summary(m)
+```
+The p-value is close to 0, therefore we reject the null hypothesis and conclude that the length of sepal among three species are not same.
+
+We can use the *sapply()* function to do the ANOVA test for all of the 4 numeric variables acorss the species. 
+
+```{r}
+aov.fun <- function(temx){
+  m1 <- aov(temx ~ iris$Species)
+  summary(m1)
+}
+
+```
+```{r}
+nvar <- iris[-5]  # Remove the variable Species which lies at the 5th column in the data set.
+da <- sapply(nvar, aov.fun)   # Apply the aov.fun() function to each of the variable in the data set nvar. 
+da
 ```
 
 Regression analysis use linear model(lm) to analyze the relationship of these columns. Here we use sepal length as a function of sepal width and petal length plus error.
 ```{r}
 m <- lm(Sepal.Length ~ Sepal.Width + Petal.Length, x)
 summary(m)
+```
+
+```{exercise}
+Test if the variables *mpg*, *disp*, *hp*, *wt* and *qsec* have significant difference across the three cyl in the R build data set *mtcars*. Fill the blanks and interpret your conclusion based on the p-values.            
+              
+aov.fun.car <- function(temx){                         
+  m2 <- ________(________ ~ _________$______)                                   
+  summary(________)                  
+}                  
+                  
+
+sub.car <- mtcars[, ___________]                                 
+aov.car <- ___________(_________, __________)                              
+____________                  
+
+```
+
+We can merge two data frames by the function *merge()*. Here are some examples:
+```{r}
+dfmg1 <- data.frame(V1 = c("A", "B", "C", "D"), V2 = c(90, 80, 70, 60), stringsAsFactors = FALSE)
+dfmg1
+dfmg2 <- data.frame(V1 = c("A", "C"), W2 = c(95, 85), stringsAsFactors = FALSE)
+dfmg2
+merge(dfmg1, dfmg2)
+
+```
+
+Here the two data frames dfmg1 and dfmg2 have the same variable V1. After merging the two data frames, the rows with common elements "A" and "C" in both V1's are selected. If two columns contains similar information, but they have different names in different data frames, then we can use *by.x* and *by.y* arguments to merge them. Let *by.x=* and *by.y=* specify the variable names in the first and second data frame respectively. See the example below.
+
+```{r}
+dfmg3 <- data.frame(W1 = c("A", "F", "C"), W2 = c(95, 85, 65), stringsAsFactors = FALSE)
+dfmg3
+merge(dfmg1, dfmg3, by.x="V1", by.y="W1")
 ```
 
 We use data.frame() function to define a new data frame with 100 rows and two columns, *ids* and *rand*.
@@ -1467,13 +1579,15 @@ head(y)
 tail(y)
 ```
 
-Now we merge two data frames x and y by a common column called ids. Note the new data frame has only 100 rows. We can also merge data frame by row names too.
+Now we merge two data frames x and y by a common column named **id**. Note the new data frame z has only 100 rows. We can also merge data frame by row names too.
 ```{r}
+x <- iris
+x$id = c(1:150)
 z <- merge(x, y, by = "id")
 head(z)
+tail(z)
 summary(z)
 ```
-
 
 ### Strings and string vectors
 We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.
@@ -1609,5 +1723,4 @@ In the iris flower dataset iris, define a new column called FullName which conta
 
 ## For more in-depth exercises
 Go to: [http://tryr.codeschool.com/](http://tryr.codeschool.com/)  
-   
-1 This material is based on http://tryr.codeschool.com/
+
