@@ -52,6 +52,25 @@ Here we created a new data frame with the mean sepal length and sepal width for 
 Read in the heart attack data, calculate the average cost per day for patients with different DIAGNOSIS codes. Restrict to females aged older than 20 and younger than 70 who stayed at least one day. Sort the results in descending order. Use the dplyr package. Use one command with multiple steps. Note: since we have missing values in CHARGES, remember to use the **na.rm =TRUE** option in the mean( ) function. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the **head** or **summary** function at the end to examine if the desired data is produced. 
 ```
 
+## Interactive plots made easy with Plotly
+
+```{r message=FALSE}
+#install.packages("plotly")
+library(plotly)
+g <- ggplot(iris, aes(Petal.Width, Petal.Length , color = Species)) + geom_point() 
+ggplotly(g)
+```
+
+We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in. 
+
+The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc. Here are some helpful websites and information.
+
+## Introduction to Markdown
+
+
+
+
+
 ## Shiny Apps   
 Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP http://ge-lab.org/idep/ ) to enable biologists to analyze genomic data on their own.  My blog (http://gex.netlify.com ) is also created in Rstudio. 
 
@@ -111,17 +130,3 @@ Publish your app online by clicking on the Publish button at the top right of th
 Solutions to these challenges can be found at GitHub [https://github.com/gexijin/teach/blob/master/app.R](https://github.com/gexijin/teach/blob/master/app.R)
 
 To learn more, follow these excellent tutorials: [https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/) 
-
-
-## Interactive plots made easy with Plotly
-
-```{r message=FALSE}
-#install.packages("plotly")
-library(plotly)
-g <- ggplot(iris, aes(Petal.Width, Petal.Length , color = Species)) + geom_point() 
-ggplotly(g)
-```
-
-We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in. 
-
-The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc. Here are some helpful websites and information:
