@@ -33,6 +33,7 @@ Regardless of their extensions in file names, all **plain text files** can be op
 Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
 
 Probably the most intuitive way to read data into Rstudio is to use the **Import dataset** function available at **File->Import Dataset** from the Rstudio menu. You can also click  **Import dataset** button on the top-right of the Rstudio interface. The preferred format is CSV.  But it is not required. You can open a text file with Excel, and save it as a CSV file.
+
 1.	Download data and read background information 
 
 Download the heartatk4R.txt file from this page http://statland.org/R/RC/tables4R.htm. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the "$\t$" above.  
@@ -130,8 +131,13 @@ summary(x3)
 Try not to attach the data when you are manipulation data like this. 
 
 ```{exercise}
-Generate a histogram of cost per day for middle-aged men aged between 40 and 60. Hint: subset your data step by step.
-```
+Answer the following questions. 
+a). Get a subset which contains the middle-aged men whose ages are greater than 40 and less than or equal to 60.
+
+b). Calculate cost per day for middle-aged men. 
+
+c). Generate a histogram of the cost per day.
+
 
 ## Reading file using read.table, read.csv, etc.
 As you get more experience with R programming, there are many other options to import data.
@@ -145,11 +151,9 @@ heartatk4R <- read.table("datasets/heartatk4R.txt", header = TRUE, sep = "\t")
 
 4.	Then we can repeat the above commands to check and adjust data types for the columns, using str(), as.factor(), and as.numeric() functions.
 
-In summary, we have the following code to read in the data. 
+In summary, we have the following code to read in the data. Reading the heart attack dataset. I am not using the Import Dataset in Rstudio. We have to make sure the file is in the current working directory. To set working directory from Rstudio main menu, go to Session -> Set Working Directory.
+
 ```{r results='hide'}
-# Reading the heart attack dataset. I am not using the Import Dataset in Rstudio.
-# We have to make sure the file is in the current working directory
-# To set working directory from Rstudio main menu, go to Session -> Set Working Directory
 rm(list = ls())  # Erase all objects in memory
 getwd()  # show working directory
 x <- read.table("datasets/heartatk4R.txt", sep="\t", header = TRUE)
@@ -174,33 +178,12 @@ x <- read.table("http://statland.org/R/RC/heartatk4R.txt",
 
 We are reading data directly from the internet with the URL. And we are specifying the data type for each column. 
 
-```{exercise}
-Type in Table \@ref(tab:9-01) in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Create a script file with comments and starting scripts, including the rm(ls()) and getwd() command. Copy the CSV file to the new folder.  Import to Rstudio. Convert data types. Copy the generated R code similar to those shown in Figure \@ref(fig:9-2) into the script file. Submit your R code and the results from the **str(patients)** function to show the data structure and **head(patients)** to show the data. 
-```
-
-```{r echo=FALSE, results='hide'}
-LastName <- c("Smith", "Bird", "Wilson")
-Age <- c("19", "55", "23")
-Sex <- c("M", "F", "M")
-BloodPressure <- c("100", "86", "200")
-Weight <- c("130.2", "300", "212.7")
-HeartAttack <- c("1", "0", "0")
-dat <- data.frame(LastName,	Age, Sex, BloodPressure, Weight, HeartAttack)
-```
-
-```{r 9-01, echo=FALSE}
-knitr::kable(
-  data.frame(dat),
-  booktabs = TRUE,
-  caption = 'An example of a multivariate dataset.'
-)
-```
 
 ## General procedure to read data into R:
 1.	If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. 
 2.	Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  
 3.	Open with a text editor (TexPad, NotePad++) to have a look. 
-4.	Rows and columns?   Row and column names? **row.names = 1    header = T**
+4.	Rows and columns?   Row and column names? **row.names = 1, header = T**
 5.	Deliminaters between columns?(space, comma, tab…)     **sep = “$\t$”**
 6.	Missing values?  NA, na, NULL, blank, NaN, 0  **missingstring = **
 7.	Open as text file in Excel, choose appropriate deliminater while importing, or use the **Text to Column** under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”->“4-OCT”.  Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.
@@ -231,4 +214,24 @@ It is best to create a separate folder that contains all related files. You can 
 knitr::include_graphics("images/img0901_rstudio.png")
 ```
 
+```{exercise}
+Type in Table \@ref(tab:9-01) in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Copy the CSV file to the new folder. Import the csv file to Rstudio. Create a script file which includes the rm(ls()) and getwd() command, the generated R code when importing the csv file, (similar to those shown in Figure \@ref(fig:9-2)), and the code that convert data types (Age, BloodPressure and	Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as *patients*. Submit the R script your created, data structure of the data set patient,  and use **head(patients)** to show the data. 
+```
 
+```{r echo=FALSE, results='hide'}
+LastName <- c("Smith", "Bird", "Wilson")
+Age <- c("19", "55", "23")
+Sex <- c("M", "F", "M")
+BloodPressure <- c("100", "86", "200")
+Weight <- c("130.2", "300", "212.7")
+HeartAttack <- c("1", "0", "0")
+dat <- data.frame(LastName,	Age, Sex, BloodPressure, Weight, HeartAttack)
+```
+
+```{r 9-01, echo=FALSE}
+knitr::kable(
+  data.frame(dat),
+  booktabs = TRUE,
+  caption = 'An example of a multivariate dataset.'
+)
+```
