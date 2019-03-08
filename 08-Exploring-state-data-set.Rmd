@@ -56,10 +56,8 @@ for (i in 1:length(a)){
   } else {s.t <- rbind(s.t, shapiro.test(sub))
  }
 }
-s.t <- s.t[, 1:2]
-mode(s.t) = "numeric"  # show shapiro.test result as numeric
-s.t <- round(data.frame(s.t), 3)  # round to decimal 3
-s.t$data.name <- a
+s.t <- s.t[, 1:2]  # take first two column of shapiro.test result
+s.t <- cbind(a, s.t) # add variable name for the result
 s.t
 ```
 
