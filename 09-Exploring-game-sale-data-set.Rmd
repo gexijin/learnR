@@ -94,23 +94,21 @@ str(game)
 
 Now we plot histogram and QQ plot for the transformed data set.
 ```{r message=FALSE, fig.width=8, fig.height=10}
-a <- colnames(game)[c(11, 13, 17:23)]  # pick up the numeric columns according to the names 
+name <- colnames(game)[c(11, 13, 17:23)]  # pick up the numeric columns according to the names 
 par(mfrow = c(5, 4))  # layout in 5 rows and 4 columns
-for (i in 1:length(a)){
-  sub <- sample(game[a[i]][, 1], 5000)
+for (i in 1:length(name)){
+  sub <- sample(game[name[i]][, 1], 5000)
   submean <- mean(sub)
-  hist(sub, main = paste("Hist. of", a[i], sep = " "), xlab = a[i])
+  hist(sub, main = paste("Hist. of", name[i], sep = " "), xlab = name[i])
   abline(v = submean, col = "blue", lwd = 1)
-  qqnorm(sub, main = paste("Q-Q Plot of", a[i], sep = " "))
+  qqnorm(sub, main = paste("Q-Q Plot of", name[i], sep = " "))
   qqline(sub) 
   if (i == 1) {s.t <- shapiro.test(sub)
   } else {s.t <- rbind(s.t, shapiro.test(sub))
  }
 }
-s.t <- s.t[, 1:2]
-mode(s.t) = "numeric"  # show shapiro.test result as numeric
-s.t <- round(data.frame(s.t), 3)  # round to decimal 3
-s.t$data.name <- a
+s.t <- s.t[, 1:2]  # take first two column of shapiro.test result
+s.t <- cbind(name, s.t) # add variable name for the result
 s.t
 ```
 
@@ -119,27 +117,6 @@ From the histograms and qq plots we can see that two scores and and their count 
 There are lots of interest points in this data set such as the distribution of global and regional sales and their relationship, the correlation of critic score and user score and their counts, whether these scores are the main effect for sales, or the effect of other factors like genre, rating, platform, even publisher to sales, and so on. First let's do visualization.
 
 ## Visualization of categorical variables
-
-(ref:game-wordcloud) Wordcloud of game names
-
-```{r game-wordcloud, warning=FALSE, message=FALSE, fig.cap='(ref:game-wordcloud)', fig.align='center'}
-library(wordcloud)
-library(ngram)
-library(tm)
-library(RColorBrewer)
-titles <- concatenate(game$Name)
-titles <- tolower(titles)
-titles <- removeNumbers(titles)
-titles <- removePunctuation(titles)
-titles <- stripWhitespace(titles)
-titles <- removeWords(titles, c(stopwords("en"), "game"))
-unigram <- ngram(titles, n = 1)
-freq <- tbl_df(get.phrasetable(unigram))
-wordcloud(freq$ngrams, freq$freq, random.order = FALSE, rot.per = 0.35,
-          color=brewer.pal(8, "Dark2"), max.words = 500)
-```
-
-The most common word in game name is world and ii, then star, wars and NBA. Soccer, NFL, dragon, Lego and warriors are the third popular team.  
 
 To simplify platform analysis, We regroup platform as Platform.type.
 ```{r}
@@ -249,7 +226,7 @@ plot(hclust(as.dist(1 - cor(as.matrix(st)))))  # hierarchical clustering
 
 All sales’ log value except JP.Sales.Log build one cluster, scores build second cluster, and log value of counts and JP.Sales build another one. In sales cluster, Other.Sales.Log is the closest to Global.Sales.Log, then NA.Sales.Log, and EU.Sales.Log is the next.
 
-## Analysis of Score and Count
+## Analysis of score and count
 
 (ref:game-score) Scatter and density plot for critic score and user score
 
@@ -306,7 +283,7 @@ Use ggplot2 package to get a scatter plot with smooth line between Global_Sales 
 Use density plot of Global_Sales, NA_Sales, EU_Sales, JP_Sales and Other_Sales to illustrate the relationship among these sales. Interpret your plot.
 ```
 
-## Analysis of Sales
+## Analysis of sales
 ###  By Year.Release
 
 (ref:game-SalesYear) Total sales by year
@@ -548,7 +525,7 @@ autoplot(kmeans(st, 3), data = st, label = FALSE, label.size = 0.1)
 
 Together with PCA Figure \@ref(fig:game-pca), we will find that the first cluster is contributed mainly by PC. The second cluster is contributed mainly by Xbox and Playstation. Xbox, Nintendo, and Playstation together build the third cluster. 
 
-## Models for Global Sales
+## Models for global sales
 Because there are too many of levels in Publisher and Developer, and there is apparent correlation between them, we use only top 12 levels of Publisher and classified the other publishers as "Others"; Because of the good correlation between Critic.Score and User.Score, we use only critic score; Also we use only log value of user score count because of it's closer correlation to global sales log. We will not put other sales log variables in our model because their apparent correlation with global sales log.
 
 ```{r}
