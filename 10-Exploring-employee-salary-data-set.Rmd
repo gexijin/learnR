@@ -316,7 +316,7 @@ summary(model)
 With p value of much less than 0.05, we reject the null hypothesis that there is no significant difference among these means of gross for different age groups.
 
 ```{r message=FALSE}
-require(agricolae)
+library(agricolae)
 # LSD.test need provide degrees of freedom and mean square for errors. We can got it from aov.
 res <- LSD.test(salary$Gross.Log, salary$Age., 
                 DFerror = model$df.residual, MSerror=anova(model)[["Mean Sq"]][2])  
