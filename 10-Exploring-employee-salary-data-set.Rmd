@@ -3,7 +3,7 @@
 This original data set is taken from the Payroll Data from online "https://data.ct.gov/Government/State-Employee-Payroll-Data-Calendar-Year-2015-thr/virr-yb6n/data", Which include Calendar Year 2015 through the most recent pay period for Connecticut state employees. We take the subset only for 2017 fiscal year, which include the information of more than 1.77 million observations and 38 variables. There are 102101 employees listed there. For convenience of analysis, we randomly took 8500 employees from the original data. For our sampled data set ("state_empoyee_salary_data_2017.csv"), we are interested in the relationship between income with other variables like age, sex, ethnic, union and so on. We will focus on the full time employees who got 26 pay checks in 2017 fiscal year. First we will clean our sampled data set.
 
 ## Read in and clean data
-###```{r}
+```{r eval=FALSE}
 raw0 <- read.csv("datasets/State_Employee_Payroll_Data_Calendar_Year_2015_through_Present.csv")
 str(raw0)
 employID <- unique(raw0$EmplId.Empl.Rcd)
@@ -11,7 +11,7 @@ sample <- sample(employID, 8500)
 raw <- raw0[raw0$EmplId.Empl.Rcd %in% sample, ] %>% droplevels()
 str(raw)
 write.csv(raw, file = "datasets/state_employee_salary_data_2017.csv", row.names = FALSE)
-###```
+```
 
 From the sampled data set, We will pick full time employees as our goal and focus on the interested variables.
 ```{r message=FALSE}

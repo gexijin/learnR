@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Learning R through examples</title>
+  <title>Chapter 4 Data importing | Learning R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Learning R through examples" />
+  <meta property="og:title" content="Chapter 4 Data importing | Learning R through examples" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="gexijin/learnR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Learning R through examples" />
+  <meta name="twitter:title" content="Chapter 4 Data importing | Learning R through examples" />
   
   <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-03-08">
+<meta name="date" content="2019-03-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,6 +36,7 @@
 <link rel="next" href="analyzing-heart-attack-data-set-i.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -218,9 +219,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.8" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html"><i class="fa fa-check"></i><b>10</b> Exploring of employee salary data set</a><ul>
-<li class="chapter" data-level="10.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#r-raw0---read.csvdatasetsstate_employee_payroll_data_calendar_year_2015_through_present.csv-strraw0-employid---uniqueraw0emplid.empl.rcd-sample---sampleemployid-8500-raw---raw0raw0emplid.empl.rcd-in-sample-droplevels-strraw-write.csvraw-file-datasetsstate_employee_salary_data_2017.csv-row.names-false"><i class="fa fa-check"></i><b>10.1.1</b> <code>{r} raw0 &lt;- read.csv(&quot;datasets/State_Employee_Payroll_Data_Calendar_Year_2015_through_Present.csv&quot;) str(raw0) employID &lt;- unique(raw0$EmplId.Empl.Rcd) sample &lt;- sample(employID, 8500) raw &lt;- raw0[raw0$EmplId.Empl.Rcd %in% sample, ] %&gt;% droplevels() str(raw) write.csv(raw, file = &quot;datasets/state_employee_salary_data_2017.csv&quot;, row.names = FALSE) ###</code></a></li>
-</ul></li>
+<li class="chapter" data-level="10.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
 <li class="chapter" data-level="10.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
 <li class="chapter" data-level="10.2.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
 <li class="chapter" data-level="10.2.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
@@ -294,8 +293,9 @@ A                            <span class="co"># show the matrix</span></code></p
 <p>Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the “<span class="math inline">\(\t\)</span>” above.<br />
 2. In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“x”</strong> on the lower left of the import interface. See Figure <a href="data-importing.html#fig:3-1">4.1</a>.</p>
 <p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre></div>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
                 <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
 <span class="kw">View</span>(x)  <span class="co"># shows the data, will change if you modify it. </span></code></pre></div>
 <p>Before you click <strong>Import</strong>, I highly recommend that you select all the codes and copy it to your clipboard. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
@@ -311,36 +311,26 @@ Figure 4.1: Importing data into R.
 </ol>
 <p>Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using as.numeric, as.factor, or as.character functions.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)  <span class="co"># structure of data object, data types for each column</span></code></pre></div>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    12844 obs. of  8 variables:
-##  $ Patient  : int  1 2 3 4 5 6 7 8 9 10 ...
-##  $ DIAGNOSIS: int  41041 41041 41091 41081 41091 41091 41091 41091 41041 41041 ...
+<pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 12844 obs. of  8 variables:
+##  $ Patient  : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ DIAGNOSIS: num  41041 41041 41091 41081 41091 ...
 ##  $ SEX      : chr  &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
-##  $ DRG      : int  122 122 122 122 122 121 121 121 121 123 ...
-##  $ DIED     : int  0 0 0 0 0 0 0 0 0 1 ...
+##  $ DRG      : num  122 122 122 122 122 121 121 121 121 123 ...
+##  $ DIED     : num  0 0 0 0 0 0 0 0 0 1 ...
 ##  $ CHARGES  : num  4752 3941 3657 1481 1681 ...
 ##  $ LOS      : chr  &quot;0010&quot; &quot;0006&quot; &quot;0005&quot; &quot;0002&quot; ...
 ##  $ AGE      : chr  &quot;079&quot; &quot;034&quot; &quot;076&quot; &quot;080&quot; ...
-##  - attr(*, &quot;spec&quot;)=List of 2
-##   ..$ cols   :List of 8
-##   .. ..$ Patient  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ DIAGNOSIS: list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ SEX      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ DRG      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ DIED     : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ CHARGES  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ LOS      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ AGE      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
-##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Patient = col_double(),
+##   ..   DIAGNOSIS = col_double(),
+##   ..   SEX = col_character(),
+##   ..   DRG = col_double(),
+##   ..   DIED = col_double(),
+##   ..   CHARGES = col_double(),
+##   ..   LOS = col_character(),
+##   ..   AGE = col_character()
+##   .. )</code></pre>
 <p>Note that the first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.<br />
 We need to reformat these columns as <strong>factors</strong>. We are going to use <strong>x$SEX</strong> to refer to the SEX column of the data frame x:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span>
@@ -351,8 +341,8 @@ x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>LOS &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>LOS)  <span class="co"># convert to numeric</span>
 x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>AGE)
 <span class="kw">str</span>(x)  <span class="co"># double check structure of data</span></code></pre></div>
-<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    12844 obs. of  8 variables:
-##  $ Patient  : int  1 2 3 4 5 6 7 8 9 10 ...
+<pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 12844 obs. of  8 variables:
+##  $ Patient  : num  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41001&quot;,&quot;41011&quot;,..: 5 5 9 8 9 9 9 9 5 5 ...
 ##  $ SEX      : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 1 2 2 1 1 2 1 ...
 ##  $ DRG      : Factor w/ 3 levels &quot;121&quot;,&quot;122&quot;,&quot;123&quot;: 2 2 2 2 2 1 1 1 1 3 ...
@@ -360,27 +350,17 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 ##  $ CHARGES  : num  4752 3941 3657 1481 1681 ...
 ##  $ LOS      : num  10 6 5 2 1 9 15 15 2 1 ...
 ##  $ AGE      : num  79 34 76 80 55 84 84 70 76 65 ...
-##  - attr(*, &quot;spec&quot;)=List of 2
-##   ..$ cols   :List of 8
-##   .. ..$ Patient  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ DIAGNOSIS: list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ SEX      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ DRG      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ DIED     : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
-##   .. ..$ CHARGES  : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
-##   .. ..$ LOS      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   .. ..$ AGE      : list()
-##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
-##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   Patient = col_double(),
+##   ..   DIAGNOSIS = col_double(),
+##   ..   SEX = col_character(),
+##   ..   DRG = col_double(),
+##   ..   DIED = col_double(),
+##   ..   CHARGES = col_double(),
+##   ..   LOS = col_character(),
+##   ..   AGE = col_character()
+##   .. )</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(x)  <span class="co"># a summary often gives us a lot of useful information </span></code></pre></div>
 <pre><code>##     Patient        DIAGNOSIS    SEX       DRG       DIED     
 ##  Min.   :    1   41091  :5213   F:5065   121:5387   0:11434  
@@ -600,7 +580,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -610,6 +590,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -627,7 +611,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
