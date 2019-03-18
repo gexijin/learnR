@@ -8,7 +8,7 @@ Let's start learning R Markdown from its cheat sheet. Click the RStudio IDE unde
 knitr::include_graphics("rmarkdownCheatSheet.pdf")
 ```
 
-To create a R Markdown file by the following process. Firstly, you can open a new .Rmd file at File $\rightarrow$ New File $\rightarrow$. In the open window, feel free to change the **Title**. For example, you can change the **Untitled** to **MyFirstRmd**. Then choose the default output format from the three options: HTML, PDF or WORD. The click "OK". 
+To create a R Markdown file by the following process. Firstly, you can open a new .Rmd file at File $\rightarrow$ New File $\rightarrow$. In the open window, feel free to change the **Title**. For example, you can change the **Untitled** to **MyFirstRmd**. Then choose the default output format from the three options: HTML, PDF or WORD. Then click "OK". 
 
 ```{r label, echo=F, out.width = "80%", fig.cap = "Create a new RMarkdown file"}
 knitr::include_graphics("images/Ch7_Adv_top_1.PNG")
@@ -16,20 +16,20 @@ knitr::include_graphics("images/Ch7_Adv_top_1.PNG")
 
 A new .Rmd file is created. 
 
-The first part of the file is the YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes "---". See the example below. It specifies the key arguments for the document, such as **title**, **author**, **date**, and output format. The output format is html in the example. You may see the **output: pdf_document**, which means that the default format you have chosen is **PDF** when you created the file. 
+The first part of the file is the YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes "\-". See the example below. It specifies the key arguments for the document, such as **title**, **author**, **date**, and output format. The output format is html in the example. You may see the **output: pdf_document**, which means that the default format you have chosen is **PDF** when you created the file. 
 
 ```{r echo=FALSE, out.width='60%'}
 knitr::include_graphics("images//Ch7_Adv_top_2.PNG")
 ```
-
-The second part of a .Rmd file is surrounded by ```. They are called chunks of R. An chunk is shown below.   
+ 
+The second part of a .Rmd file is surrounded by three back ticks "`". They are called chunks of R. An eample of a chunk is shown below. The "cars" after r in the \{ \} is the name of the chunk.  
 ```{r echo=FALSE, out.width='100%'}
 knitr::include_graphics("images//Ch7_Adv_top_3.PNG")
 ```
 
-The chunk is a collection of r code. You can run each chunk by clicking the right arrow on the top right of the chunk or by pressing the shortcut Ctrl+Shift+Enter. Then R executes the code and displays the outputs inline with the code. See the example below.
+A chunk is a collection of r code. You can run each chunk by clicking the right arrow on the top-right of the chunk or by pressing the shortcut Ctrl+Shift+Enter. Then R executes the code and displays the outputs inline with the code. See the example below. 
 
-```{r}
+```{r nm_cars}
 summary(cars)
 ```
 
@@ -94,8 +94,11 @@ Do all the following Homework by using R Markdown. You should submit your .Rmd f
 ## Tidyverse
 
 Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. We even already start to use this package in chapter 5. Now Let’s explain the dplyr package in a little detail for manipulating iris data set. 
-```{r message=FALSE}
-#install.packages("dplyr") 
+```{r message=FALSE, eval = FALSE}
+install.packages("dplyr") 
+```
+
+``` {r}
 library(dplyr)
 ```
 
@@ -171,8 +174,11 @@ df
 
 ## Interactive plots made easy with Plotly
 
+```{r message = FALSE, warning = FALSE, eval = FALSE}
+install.packages("plotly")
+```
+
 ```{r message = FALSE, warning = FALSE}
-#install.packages("plotly")
 library(plotly)
 g <- ggplot(iris, aes(Petal.Width, Petal.Length , color = Species)) + geom_point() 
 ggplotly(g)
@@ -188,8 +194,8 @@ Recent developments in R made it easy to create interactive charts and even comp
 
 ###	Install the Shiny package by typing this in the console.
  
-```{r}
-#install.packages("shiny")
+```{r eval = FALSE}
+install.packages("shiny")
 ```
 
 ###	Create a Shiny web app is a piece of cake
