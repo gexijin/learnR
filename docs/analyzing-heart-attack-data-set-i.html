@@ -709,9 +709,8 @@ Figure 5.8: Histogram of AGE by SEX using ggplot2 package
 <p>Now the two histograms are arranged, and it is very easy to see that women’s age are more skewed to the right, meaning women are considerably older than men. I am surprised at first by this huge difference, as the average age of women if bigger by 11. Further research shows that for women the symptoms of heart attacks are milder and often go unnoticed.</p>
 <p>We can further divide the population according to survival status by adding another factor:</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, 
            <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),
                  ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),

@@ -293,15 +293,14 @@ A                            <span class="co"># show the matrix</span></code></p
 <p>Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the “<span class="math inline">\(\t\)</span>” above.<br />
 2. In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“x”</strong> on the lower left of the import interface. See Figure <a href="data-importing.html#fig:3-1">4.1</a>.</p>
 <p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre></div>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.5.2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
                 <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
 <span class="kw">View</span>(x)  <span class="co"># shows the data, will change if you modify it. </span></code></pre></div>
 <p>Before you click <strong>Import</strong>, I highly recommend that you select all the codes and copy it to your clipboard. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:3-1"></span>
-<img src="images/img0301n_importdata.png" alt="Importing data into R."  />
+<img src="images/img0301n_importdata.png" alt="Importing data into R." width="640" />
 <p class="caption">
 Figure 4.1: Importing data into R.
 </p>
@@ -384,7 +383,7 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 <p>After locating the file, you can click on the automatically detected data type under each of the column names as shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>. By selecting “Factor” from the drop down and enter all possible levels separated by commas, you can successfully format this column as a factor.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-2"></span>
-<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio."  />
+<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio." width="640" />
 <p class="caption">
 Figure 4.2: Changing data types while importing data into Rstudio.
 </p>

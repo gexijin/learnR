@@ -93,7 +93,8 @@ Do all the following Homework by using R Markdown. You should submit your .Rmd f
 
 ## Tidyverse
 
-Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. We even already start to use this package in chapter 5. Now Let’s explain the dplyr package in a little detail for manipulating iris data set. 
+Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. Now Let’s explain the dplyr package in a little detail for manipulating iris data set. 
+
 ```{r message=FALSE, eval = FALSE}
 install.packages("dplyr") 
 ```
@@ -133,6 +134,7 @@ iris %>%
 **filter**( ), **mutate**( ) and **arrange**( ) are 3 **“verbs”** that operate on the data frame sequentially. **head**( ) is the function that only shows the top rows. Notice the pipe operator %>% at the end of each line.  This code is much easier to read by humans, as it defines a sequence of operations.
   
 Two other useful verbs are **group_by**( ) and **summarise**( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths and width, and then combine. So it is **“split-apply-combine”**.  
+
 ```{r}
 iris %>% 
   group_by(Species)  %>%  # split by Species 
@@ -200,23 +202,85 @@ install.packages("shiny")
 
 ###	Create a Shiny web app is a piece of cake
 
-```{r echo=FALSE, out.width='45%'}
+```{r echo=FALSE, out.width='60%'}
 knitr::include_graphics("images/img1201_shiny.png")
 ```
 
-Start a new Shiny app use the shortcut shown above. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name like test1 and note where the app will be stored. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called app.R. Click on **Run App** on the top right of the script window; you have a histogram that can be customized by a sliding bar. There are two **functions**: *ui()* defines the user interface, and *server()* specifies the logic. 
+Start a new Shiny app use the shortcut shown above. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name, such as *test1*. Save the app to your local PC. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called test1.app.R. Click on **Run App** on the top-right of the script window, a histogram will pop up. We can custermize the number of bins of the histogram by moving the sliding bar.
+
+```{r echo=FALSE, out.width='60%'}
+knitr::include_graphics("images//Ch7_Adv_top_10.PNG")
+```
+
+We can further custermize the outputs by editing the code. In the app.R file, there are two **functions**: *ui()* and *server()* . The *ui()* defines the user interface, and *server()* specifies the logic. 
 
 ###	Let’s play!
 
-a.	Change the color by changing the col = **'darkgray'** in line 44 to your favorite color, such as **'green', 'red'**, etc. To make it colorful, set it to col = **rainbow(10)** so we can use ten colors on a rolling basis.
+a.	Change the color by changing the col = **'darkgray'** in line 44 to your favorite color, such as **'green', 'red'**, etc. To make it colorful, set it to col = **rainbow(10)** so we can use ten colors on a rolling basis. See the highlignted code.
 
-b.	Switch the data. Change line 40 to visualize the iris dataset: x <- iris[, 'Sepal.Length']
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_11.PNG")
+knitr::include_graphics("images//Ch7_Adv_top_12.PNG")
+```
 
-c.	The default number of bins of 30, specified at line 25, is probably too big. Change it to: value = 12.
+After saving the correction, run the app again.
 
-d.	We obviously can change 'Sepal.Length' to other columns. Would it be cool if the user can choose? We need to add a control widget by inserting this line of code **after line 20**: selectInput("cid", "Column", choices = colnames(iris)),
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_13.PNG")
+```
 
-Do not forget the comma at the very end! Now run this app. We can now select the columns, but the app does not do anything with it. We need to use the selected column in the server logic to customize the plot. We will **change the line 41** from *x <- iris[, 'Sepal.Length']* to *x <- iris[, input$cid ]*. 
+b.	Switch the data. To replace the original dataset faithful to a new dataset iris, we need to change the dataset specified in line 40. See the hignlighted code in the following graphs. Save the changes and run the app again. 
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_14.PNG")
+knitr::include_graphics("images//Ch7_Adv_top_15.PNG")
+```
+
+Here is the output of histogram of the Sepal length in iris dataset.
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_16.PNG")
+```
+
+c.	The default number of bins of 30, specified at line 25, is probably too big. We can change the defaul value to 12 by setting value = 12.
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_17.PNG")
+knitr::include_graphics("images//Ch7_Adv_top_18.PNG")
+```
+
+Save the changes and run the app again, we have the histogram with 12 bins by default.
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_19.PNG")
+```
+
+d.	We can change 'Sepal.Length' to other columns by assigning x to other variables. Would it be cool if the user can choose the variable from the output? To make it, we need to add a control widget by inserting this line of code after line 20: "selectInput("cid", "Column", choices = colnames(iris)),". Do not forget the comma at the very end! 
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_20.PNG")
+knitr::include_graphics("images//Ch7_Adv_top_21.PNG")
+```
+
+Save and run the app. A control widget **Column** presents above the **Number of bins**. We are able to select any of the variable in iris dataset. 
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_22.PNG")
+```
+
+
+As you may have noticed that, the columns can be selected from the control widget **Column**, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the **server** function, on line 44, the histogram function is given as **hist(x,...)** where **x <- iris[, 'Sepal.Length']** sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of columns, we replace **x <- iris[, 'Sepal.Length']** by **x <- iris[, input\$cid ]** on the line 40. Note that the **input\$cid** is consistant with the inserted code **selectInput( "cid",$\cdots$)** on line 20: "**sidebarPanel(selectInput("cid", "Column", choices = colnames(iris)),**".
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_23.PNG")
+knitr::include_graphics("images//Ch7_Adv_top_24.PNG")
+```
+
+Save and run the code. Select a variable from the **Column**, say *Petal.Width*, then the histogram of Petal width shows up correctly.
+
+```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_25.PNG")
+```
+
 
 ```{exercise}
 What happens when you choose the last Column "Species" in the app? 
