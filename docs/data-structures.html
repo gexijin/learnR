@@ -183,7 +183,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5" data-path="analyzing-heart-attack-data-set-ii.html"><a href="analyzing-heart-attack-data-set-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
-<li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
+<li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown-new-new"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown new new</a></li>
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
 <li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
@@ -423,11 +423,11 @@ evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.6943764 -0.7131601  0.1599829  0.6738167  1.3500000
+## [1] -2.8714986 -0.3995319  0.1340424  0.7975868  1.3500000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
 ##         0%        25%        50%        75%       100% 
-## -2.6943764 -0.7131601  0.1599829  0.6738167  1.3500000 
+## -2.8714986 -0.3995319  0.1340424  0.7975868  1.3500000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -1137,7 +1137,7 @@ y</code></pre></div>
 ## [[4]]
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x000000001b0696a8&gt;
+## &lt;bytecode: 0x0000000019464938&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height”, “name”, “BP” and “fun” to the y.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)  
@@ -1154,7 +1154,7 @@ y</code></pre></div>
 ## $fun
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x000000001b0696a8&gt;
+## &lt;bytecode: 0x0000000019464938&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Here is another example for creating a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span>
@@ -1469,21 +1469,21 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 ##  Welch Two Sample t-test
 ## 
 ## data:  r1 and r2
-## t = 0.032473, df = 196.46, p-value = 0.9741
+## t = -0.3695, df = 197.54, p-value = 0.7122
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.2736802  0.2828440
+##  -0.3343102  0.2288007
 ## sample estimates:
-##  mean of x  mean of y 
-## -0.1144310 -0.1190129</code></pre>
+##    mean of x    mean of y 
+## -0.007228889  0.045525849</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></code></pre></div>
 <pre><code>## [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
 ## [6] &quot;null.value&quot;  &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></code></pre></div>
-<pre><code>## [1] 0.9741278</code></pre>
+<pre><code>## [1] 0.7121508</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></code></pre></div>
-<pre><code>##  mean of x  mean of y 
-## -0.1144310 -0.1190129</code></pre>
+<pre><code>##    mean of x    mean of y 
+## -0.007228889  0.045525849</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
 <p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p &lt; 0.05.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
@@ -1495,9 +1495,9 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 <p><img src="book_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.002836 0.230345 0.471071 0.476208 0.721145 0.998562</code></pre>
+## 0.002366 0.275234 0.512290 0.507974 0.756838 0.994203</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 27</code></pre>
+<pre><code>## [1] 19</code></pre>
 </div>
 <div id="data-frames" class="section level3">
 <h3><span class="header-section-number">3.2.4</span> Data Frames</h3>
@@ -1715,12 +1715,12 @@ df2</code></pre></div>
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(y, x.id)
 <span class="kw">head</span>(x2)</code></pre></div>
 <pre><code>##            y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1 -1.9238464  1          5.1         3.5          1.4         0.2  setosa
-## 2 -0.9114296  2          4.9         3.0          1.4         0.2  setosa
-## 3 -1.1778215  3          4.7         3.2          1.3         0.2  setosa
-## 4  2.0506775  4          4.6         3.1          1.5         0.2  setosa
-## 5  1.0138906  5          5.0         3.6          1.4         0.2  setosa
-## 6 -0.9544806  6          5.4         3.9          1.7         0.4  setosa</code></pre>
+## 1 -1.3159526  1          5.1         3.5          1.4         0.2  setosa
+## 2  0.1482491  2          4.9         3.0          1.4         0.2  setosa
+## 3 -1.1824137  3          4.7         3.2          1.3         0.2  setosa
+## 4  0.1792597  4          4.6         3.1          1.5         0.2  setosa
+## 5  1.0363414  5          5.0         3.6          1.4         0.2  setosa
+## 6 -1.4613856  6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1875,32 +1875,32 @@ dfmg3</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
 <pre><code>##   id       rand
-## 1  1 -0.5396842
-## 2  2 -1.2507883
-## 3  3 -0.6105581
-## 4  4 -0.4001393
-## 5  5  0.8096879
-## 6  6  1.5566040</code></pre>
+## 1  1  0.7442281
+## 2  2  1.7150407
+## 3  3  0.4831755
+## 4  4 -0.1522787
+## 5  5 -0.8748814
+## 6  6  0.6071857</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
-<pre><code>##      id        rand
-## 95   95 -1.86922339
-## 96   96  0.15976557
-## 97   97 -0.09355097
-## 98   98  0.93727422
-## 99   99  1.10759236
-## 100 100 -1.64395493</code></pre>
+<pre><code>##      id       rand
+## 95   95 -0.5655001
+## 96   96 -2.0187914
+## 97   97 -1.1811796
+## 98   98 -0.5366845
+## 99   99 -1.3154060
+## 100 100 -1.2498122</code></pre>
 <p>Now we merge two data frames x and y by a common column named <strong>id</strong>. Note the new data frame z has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris
 x<span class="op">$</span>id =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)
 z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -0.5396842
-## 2  2          4.9         3.0          1.4         0.2  setosa -1.2507883
-## 3  3          4.7         3.2          1.3         0.2  setosa -0.6105581
-## 4  4          4.6         3.1          1.5         0.2  setosa -0.4001393
-## 5  5          5.0         3.6          1.4         0.2  setosa  0.8096879
-## 6  6          5.4         3.9          1.7         0.4  setosa  1.5566040</code></pre>
+## 1  1          5.1         3.5          1.4         0.2  setosa  0.7442281
+## 2  2          4.9         3.0          1.4         0.2  setosa  1.7150407
+## 3  3          4.7         3.2          1.3         0.2  setosa  0.4831755
+## 4  4          4.6         3.1          1.5         0.2  setosa -0.1522787
+## 5  5          5.0         3.6          1.4         0.2  setosa -0.8748814
+## 6  6          5.4         3.9          1.7         0.4  setosa  0.6071857</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(z)</code></pre></div>
 <pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 95   95          5.6         2.7          4.2         1.3 versicolor
@@ -1909,13 +1909,13 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ## 98   98          6.2         2.9          4.3         1.3 versicolor
 ## 99   99          5.1         2.5          3.0         1.1 versicolor
 ## 100 100          5.7         2.8          4.1         1.3 versicolor
-##            rand
-## 95  -1.86922339
-## 96   0.15976557
-## 97  -0.09355097
-## 98   0.93727422
-## 99   1.10759236
-## 100 -1.64395493</code></pre>
+##           rand
+## 95  -0.5655001
+## 96  -2.0187914
+## 97  -1.1811796
+## 98  -0.5366845
+## 99  -1.3154060
+## 100 -1.2498122</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1924,13 +1924,13 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ##  Mean   : 50.50   Mean   :5.471   Mean   :3.099   Mean   :2.861  
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
-##   Petal.Width          Species        rand        
-##  Min.   :0.100   setosa    :50   Min.   :-1.9456  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.5771  
-##  Median :0.800   virginica : 0   Median : 0.1873  
-##  Mean   :0.786                   Mean   : 0.1021  
-##  3rd Qu.:1.300                   3rd Qu.: 0.7240  
-##  Max.   :1.800                   Max.   : 2.3827</code></pre>
+##   Petal.Width          Species        rand         
+##  Min.   :0.100   setosa    :50   Min.   :-2.54431  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.84840  
+##  Median :0.800   virginica : 0   Median :-0.02966  
+##  Mean   :0.786                   Mean   :-0.12427  
+##  3rd Qu.:1.300                   3rd Qu.: 0.62079  
+##  Max.   :1.800                   Max.   : 1.77529</code></pre>
 </div>
 <div id="strings-and-string-vectors" class="section level3">
 <h3><span class="header-section-number">3.2.5</span> Strings and string vectors</h3>

@@ -4,32 +4,42 @@
 
 Let's start learning R Markdown from its cheat sheet. Click the RStudio IDE under *Help $\rightarrow$ Cheatsheets $\rightarrow$ R Markdown Cheat Sheet.* As the cheet sheet explained, the R Markdown (.Rmd) file can combine your code and the output in one file, and produce various formats, such as html, pdf, MS Word, or RTF documents.  
 
-```{r include=F, out.width = "85%", fig.cap = "RMarkdown Cheet Sheet"}
-knitr::include_graphics("rmarkdownCheatSheet.pdf")
+(ref:label0) R Markdown Cheat Sheet
+
+```{r label0, echo=F, out.width="80%", fig.cap='(ref:label0)', fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_0.PNG")
 ```
 
 To create a R Markdown file by the following process. Firstly, you can open a new .Rmd file at File $\rightarrow$ New File $\rightarrow$. In the open window, feel free to change the **Title**. For example, you can change the **Untitled** to **MyFirstRmd**. Then choose the default output format from the three options: HTML, PDF or WORD. Then click "OK". 
 
-```{r label, echo=F, out.width = "80%", fig.cap = "Create a new RMarkdown file"}
+(ref:label1)  Create a new RMarkdown file
+
+```{r label1, echo=F, out.width = "80%", fig.cap = "(ref:label1)" , fig.align='center'}
 knitr::include_graphics("images/Ch7_Adv_top_1.PNG")
 ```
 
-A new .Rmd file is created. 
+A new .Rmd file named MyFirstRmd.Rmd is created. 
 
-The first part of the file is the YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes "\-". See the example below. It specifies the key arguments for the document, such as **title**, **author**, **date**, and output format. The output format is html in the example. You may see the **output: pdf_document**, which means that the default format you have chosen is **PDF** when you created the file. 
+The first part of the file is the YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes "\-". See the Figure \@ref(fig:label2). It specifies the key arguments for the document, such as **title**, **author**, **date**, and output format. The output format is html in the example. You may see the **output: pdf_document**, which means that the default format you have chosen is **PDF** when you created the file. 
 
-```{r echo=FALSE, out.width='60%'}
-knitr::include_graphics("images//Ch7_Adv_top_2.PNG")
+(ref:label2)  YAML Header
+
+```{r label2, echo=F, out.width = "80%", fig.cap = "(ref:label2)" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_2.PNG")
 ```
+
  
-The second part of a .Rmd file is surrounded by three back ticks "`". They are called chunks of R. An eample of a chunk is shown below. The "cars" after r in the \{ \} is the name of the chunk.  
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics("images//Ch7_Adv_top_3.PNG")
+The second part of a .Rmd file is surrounded by three back ticks "`". They are called chunks of R. Figure \@ref(fig:label3) is an example of a chunk. The "nm_cars" after r in the \{ \} is the name of the chunk.  
+
+(ref:label3)  Chunk of R
+
+```{r label3, echo=F, out.width = "45%", fig.cap = "(ref:label3)" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_3.PNG")
 ```
 
-A chunk is a collection of r code. You can run each chunk by clicking the right arrow on the top-right of the chunk or by pressing the shortcut Ctrl+Shift+Enter. Then R executes the code and displays the outputs inline with the code. See the example below. 
+A chunk is a collection of r code. You can run each chunk by clicking the right arrow on the top-right of the chunk or by pressing the shortcut Ctrl+Shift+Enter. Then R executes the code and displays the outputs inline with the code. The output of chunk in Figure \@ref(fig:label3) is shown below. 
 
-```{r nm_cars}
+```{r nm_cars, echo=F}
 summary(cars)
 ```
 
@@ -76,7 +86,7 @@ The third part of a .Rmd file is the text mixed with symbols like # or *.
 knitr::include_graphics("images//Ch7_Adv_top_4.PNG")
 ```
 
-You can type your text like how you do in MS Word file. The pound symbol **#** implies a heading. The number of pounders indicate the heading level, it runs from 1 to 6. One **#** presents the first level header, two **#**s implies the second level header, and etc. Here is an output of various level headers.
+You can type your text like how you do in MS Word files. The pound symbol **#** implies a heading. The number of pounders indicate the heading level, it runs from 1 to 6. One **#** presents the first level header, two **#**s implies the second level header, and etc. Here is an output of various level headers.
 
 
 ```{r echo=FALSE, out.width='60%'}
@@ -208,7 +218,7 @@ knitr::include_graphics("images/img1201_shiny.png")
 
 Start a new Shiny app use the shortcut shown above. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name, such as *test1*. Save the app to your local PC. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called test1.app.R. Click on **Run App** on the top-right of the script window, a histogram will pop up. We can custermize the number of bins of the histogram by moving the sliding bar.
 
-```{r echo=FALSE, out.width='60%'}
+```{r echo=FALSE, out.width='60%', fig.align='center'}
 knitr::include_graphics("images//Ch7_Adv_top_10.PNG")
 ```
 
@@ -229,28 +239,34 @@ After saving the correction, run the app again.
 knitr::include_graphics("images//Ch7_Adv_top_13.PNG")
 ```
 
-b.	Switch the data. To replace the original dataset faithful to a new dataset iris, we need to change the dataset specified in line 40. See the hignlighted code in the following graphs. Save the changes and run the app again. 
+b.	Switch the data. To replace the original dataset Old Faithful Geyser to a new dataset iris, we need to change the columns and dataset specified on line 40. Meanwhile we need to change the content after **titlePanel** on line 16 to get a new title. See the hignlighted code in the following graphs.
 
 ```{r echo=FALSE, out.width='80%'}
+knitr::include_graphics("images//Ch7_Adv_top_14_1.PNG")
+knitr::include_graphics("images//Ch7_Adv_top_14_2.PNG")
 knitr::include_graphics("images//Ch7_Adv_top_14.PNG")
 knitr::include_graphics("images//Ch7_Adv_top_15.PNG")
 ```
 
-Here is the output of histogram of the Sepal length in iris dataset.
+Save the changes and run the app again. Figure \@ref(fig:label16) is the output of histogram of the Sepal length in iris dataset.
 
-```{r echo=FALSE, out.width='80%'}
-knitr::include_graphics("images//Ch7_Adv_top_16.PNG")
+(ref:label16)  Output of the Sepal length in the iris.
+
+```{r label16, echo=F, out.width = "80%", fig.cap = "(ref:label16)" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_16.PNG")
 ```
+
 
 c.	The default number of bins of 30, specified at line 25, is probably too big. We can change the defaul value to 12 by setting value = 12.
 
-```{r echo=FALSE, out.width='80%'}
+```{r echo=FALSE, out.width='80%', fig.align='center'}
 knitr::include_graphics("images//Ch7_Adv_top_17.PNG")
 knitr::include_graphics("images//Ch7_Adv_top_18.PNG")
 ```
 
 Save the changes and run the app again, we have the histogram with 12 bins by default.
-```{r echo=FALSE, out.width='80%'}
+
+```{r echo=FALSE, out.width='80%', fig.align='center'}
 knitr::include_graphics("images//Ch7_Adv_top_19.PNG")
 ```
 
@@ -277,43 +293,71 @@ knitr::include_graphics("images//Ch7_Adv_top_24.PNG")
 
 Save and run the code. Select a variable from the **Column**, say *Petal.Width*, then the histogram of Petal width shows up correctly.
 
-```{r echo=FALSE, out.width='80%'}
+```{r echo=FALSE, out.width='80%', fig.align='center'}
 knitr::include_graphics("images//Ch7_Adv_top_25.PNG")
 ```
 
-
 ```{exercise}
 What happens when you choose the last Column "Species" in the app? 
-Solve the error by deleting the last column from the data iris which reflects in the line 20 *selectInput(“cid”, “Column”, choices = colnames(iris))*. 
+Solve the error by deleting the variable Species from the data iris. Hint: Modify the code on line 20: *selectInput(“cid”, “Column”, choices = colnames(iris))*. 
 ```
 
 ```{exercise}
-Change the title from “Histogram of x” to the name of the selected variable like “Sepal.Length”. Fill in the blanks.
+Change the title from “Histogram of x” to "Histogram of ___" where ___ is the name of the selected variable like “Sepal.Length”. Complete the question by filling in the blanks.
 ```
 
-To change the title we can first define main title and add it in the hist() function as: 
+To change the title, let's define a main title as *titl <- *, then assign it to the option "main =___ " in the hist() function. Your output should look like the Figure \@ref(fig:label27)
+
 ```{r eval=FALSE}
-titl <- paste("Histogram of", input$cid, sep = " ")
+titl <- paste("Histogram of", **input$cid**, sep = " ")
 hist(x, breaks = bins, col = 'green', border = 'white', main = _______)
 ```
 
-e.	We can build a more complex app by adding a normal distribution line by **expanding line 45: hist(x, breaks = bins, col = 'green', border = 'white')** into these:
+(ref:label27) Output of **Exercise 7.4**. 
 
-     h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
+```{r label27, echo=F, out.width = "80%", fig.cap = "(ref:label27)" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_27.PNG")
+```
 
+
+
+
+e.	We can build a more complex app by adding an approximation normal distribution line by replace the function **hist(x, breaks = bins, col = 'green', border = 'white')** by the code below:
+
+```{r eval=F}
+      h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
       yfit <- dnorm(bins, mean = mean(x), sd = sd(x)) 
-      
       yfit <- yfit *  diff( h$mids[1:2]) * length(x) 
-      
       lines(bins, yfit, col = "blue")
+```
+
+The output should be similar to Figure \@ref(fig:label28).
+
+(ref:label28) Output of adding an approximation normal distribution curve.
+
+```{r label28, echo=F, out.width = "80%", fig.cap = "(ref:label28)" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_28.PNG")
+```
+
 
 ```{exercise}
-Fill in the blanks to solve the error message in this app by plotting a pie chart when the Species column is selected.
+Fill in the blanks to solve the error message in this app by plotting a pie chart when the variable **Species** is selected in the **Column**.
 ```
+
 Steps:
-1, Change the selectInput() line as its original with all columns selected. 
+1, Change the **selectInput()** line as its original with all columns selected. 
+
 2, Separate the variables into two groups, numeric variables (columns 1 throught 4) for histogram and categorical variables (5th column) for pie plot. 
-3, Use if() and }else{ for each group.
+
+3, Use if() and }else{ for each group. 
+
+Your output of the pie chart should be similar to Figure \@ref(fig:label29).
+
+(ref:label29) Pie chart output of **Exercise 7.5**.
+
+```{r label29, echo=F, out.width = "80%", fig.cap = "(ref:label29)" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_29.PNG")
+```
 
 ```{r, eval=FALSE, message=FALSE, warning = FALSE}
 library(shiny)
@@ -365,13 +409,70 @@ server <- function(input, output) {
    })
 }
 
-
-# Run the application 
-shinyApp(ui = ui, server = server)
 ```
 
 
-You can publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. And show it off by sending an URL. More details can be found in these excellent tutorials: [https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/) 
+
+```{r echo=F}
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+   
+   # Application title
+   titlePanel("Interactive page for iris data"),
+   
+   # Sidebar with a slider input for number of bins 
+   sidebarLayout(
+      sidebarPanel(
+        selectInput("cid", "Select the column", choices = colnames(iris)),
+         sliderInput("bins",
+                     "Number of bins:",
+                     min = 1,
+                     max = 50,
+                     value = 12)
+      ),
+      
+      # Show a plot of the generated distribution
+      mainPanel(
+         plotOutput("Plot")
+      ) 
+   )
+ )
+
+# Define server logic required to draw a histogram and pie plot
+
+server <- function(input, output) {
+   
+   output$Plot <- renderPlot({
+     
+      x    <- iris[, input$cid]
+      
+      # draw the histogram with the specified number of bins for variable columns
+      if (input$cid %in% colnames(iris)[1:4]){
+      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+      titl <- paste("Histogram of", input$cid, sep = " ")
+      hist(x, breaks = bins, col = 'green', border = 'white', main = titl)
+      
+      # draw the pie plot for catogorical column Species
+      } else {
+        count <- table(x)
+        labl <- paste(names(count), "\n", count, sep = "")
+        titl <- paste("Pie plot of", input$cid, sep = " ")
+        pie(count, labels = labl, main = titl)
+      }
+   })
+}
+
+
+# Run the application 
+#shinyApp(ui = ui, server = server)
+```
+
+
+
+You can publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. Show it off by sending an URL to your friends or your adviser. More instructions can be found in these excellent tutorials: 
+[https://docs.rstudio.com/shinyapps.io/getting-started.html](https://docs.rstudio.com/shinyapps.io/getting-started.html), and [https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/). 
 
 Solutions to these challenges can be found at GitHub [https://github.com/gexijin/teach/blob/master/app.R](https://github.com/gexijin/teach/blob/master/app.R)
 
