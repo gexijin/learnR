@@ -78,16 +78,28 @@ table(SEX)  # tabulate the frequencies of M and F
 pie(table(SEX))  # pie chart
 ```
 
+
 ```{exercise}
-Compute the counts and percentages of each levels of DRG. Use bar plot and pie charts similar to Figure \@ref(fig:4-1) and Figure \@ref(fig:14-2) to visualize. Briefly discuss your results.
+Compute the counts and percentages of each levels of DRG by filling the blanks below. Use bar plot and pie charts similar to Figure \@ref(fig:4-1) and Figure \@ref(fig:14-2) to visualize. Briefly discuss your results.
 ```
 
+```{r eval=F}
+drg <- __________               #Import values of DRG 
+counts <- sort(________(drg), decreasing = TRUE)  # tabulate & sort 
+percentages <- 100 * __________  # Compute the percentage and convert to %
+barplot(percentages, ylab = "Percentage", col = "blue") # barplot
+_________(counts)  # pie chart
+```
+
+
 ## Possible correlation between two numeric columns? 
-This is done using various measures of correlation coefficients such as Pearson’s correlation coefficients (PPC), which is given by $$r=∑_{i=1}^{n}(\frac{x_i-\overline{x}}{s_x}) (\frac{y_i-\overline{y}}{s_y})$$ 
+This is done using various measures of correlation coefficients such as Pearson’s correlation coefficients (PPC), which is given by
 
-where x ~i~ and y ~i~  are the i^th^ values, $\overline{x}$ and $\overline{y}$ are sample means, and s ~x~ and s ~y~ are sample standard deviations. 
+$$r=∑_{i=1}^{n}(\frac{x_i-\bar{x}}{s_x}) (\frac{y_i-\bar{y}}{s_y})$$ 
 
-Note that Pearson’s correlation ranges from -1 to 1, with -1 indicating perfect negative correlation. **Negative correlation is just as important and informative as positive ones**. 
+where $x_i$ and $y_i$ are the $i^{th}$ values, $\bar{x}$ and $\bar{y}$ are sample means, and $s_x$s and $s_y$ are sample standard deviations. 
+
+Note that Pearson’s correlation ranges from -1 to 1, with -1 and 1 indicating perfect negative and possitive correlation respectively. **Negative correlation is just as important and informative as positive ones**. 
 
 (ref:4-2) Interpretation of Pearson's correlation coefficient. The numbers are Pearson’s correlation coefficient r. 
 
@@ -114,7 +126,7 @@ knitr::kable(
 )
 ```
 
-There is a small, but statistically significant correlation between age and length of stay in the hospital after a heart attack. **The plain English interpretation (read: a no-bullshit version that could be understood by your grandmother) is this**: Older people tend to stay slightly longer in the hospital after a heart attack. 
+There is a small, but statistically significant correlation between age and length of stay in the hospital after a heart attack. **The plain English interpretation (the explanation that could be understood by your grandmother) is this**: Older people tend to stay slightly longer in the hospital after a heart attack. 
 ```{r}
 cor.test(AGE, LOS)
 ```
@@ -128,16 +140,16 @@ Like many commonly-used parametric statistical methods which rely on means and s
 
 **Non-parametric** approaches typically rank original data and do calculations on the ranks instead of raw data. They are often more robust. The only drawback might be loss of sensitivity. There are corresponding non-parametric versions for most of the parametric tests.
 
-**Spearman’s rank correlation coefficient ρ** is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores X~i~, Y~i~ are converted to ranks x~i~, y~i~, and the differences   d~i~ = x~i~ − y~i~ between the ranks of each observation on the two variables are calculated.
+**Spearman’s rank correlation coefficient $\rho$** is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores $X_i$, $Y_i$are converted to ranks $R_{x_i}$, $R_{y_i}$, and the differences   $d_i$ = $R_{x_i}$-$R_{y_i}$ between the ranks of each observation on the two variables are calculated.
 
-If there are no tied ranks, then ρ is given by:$$ρ=1-\frac{6∑d_{i}^{2}}{n(n_{}^{2}-1)}$$
+If there are no tied ranks, then $\rho$ is given by:$$ρ=1-\frac{6∑d_{i}^{2}}{n(n_{}^{2}-1)}$$
 
-In R, we can calculate Spearman’s ρ and test its significance but customize the cor.test() function:
+In R, we can calculate Spearman’s $\rho$ and test its significance but customize the cor.test() function:
 ```{r}
 cor.test(AGE, LOS, method = "spearman")
 ```
 
-Interpretation of Spearman’s ρ is similar to Pearson’s r. The statistical significance can also be determined similarly as demonstrated above. Alternative non-parametric statistic for correlation is Kendall tau rank correlation coefficient. 
+Interpretation of Spearman’s $\rho$ is similar to Pearson’s r. The statistical significance can also be determined similarly as demonstrated above. Alternative non-parametric statistic for correlation is Kendall tau rank correlation coefficient. 
 
 We already know that we could use scatter plots to visualize correlation between two numeric columns. But when there are many data points, in this case we have over 12,000, it could be hard to comprehend. This is especially the case, when the data is integers and there are a lot of data points overlap on top of each other. Yes, graphics can be misleading. 
 
@@ -149,13 +161,23 @@ text(37, 37, labels = "smoothScatter(AGE, LOS)", col = "red")
 ```
  
 ```{exercise}
-Investigate the correlation between length of stay and charges. Try both parametric and non-parametric methods to quantify correlation and use graphs. Remember to include plain English interpretation of your results even your grandpa can understand. 
+Investigate the correlation between length of stay and charges by filling in the blanks below. Remember to include plain English interpretation of your results even your grandpa can understand. 
 ```
+
+```{r eval=F}
+LOS <- ______________       # import the values of LOS in the heart attack data
+CHARGES <- _____________    #import the values of Charges
+cor.test(LOS, CHARGES, method = ___________)  # Pearson correlation
+cor.test(LOS, CHARGES, method = __________)   # spearman correlation
+plot(LOS, CHARGES)  # standard scatter plot 
+__________(LOS, CHARGES)  # a smoothed color density representation of a scatterplot
+```
+
 
 ## Associations between categorical variables? 
 There are four columns in the heart attack data set that contain categorical values (DIAGNOSIS, DRG, SEX, and DIED). These columns could be associated with each other. For example, there is a correlation between SEX and DIED. Are men and women equally likely to survive a heart attack? 
 ```{r results='hide', message=FALSE}
-counts <- table(SEX, DIED)  # tabulates SEX and DIED and generate counts in a 2d array.
+counts <- table(SEX, DIED)  # tabulates SEX and DIED and generate counts in a two dimension array.
 counts
 ```
 ```{r echo=FALSE, results='hide'}
@@ -178,12 +200,12 @@ We got a contingency table as shown in Table \@ref(tab:5-01).  To convert into p
 counts / rowSums(counts) 
 ```
 
-We can see that 15.1% of females died in the hospital, much higher than the 8.26% for male patients.  This gender difference is quite a surprise to me. But could this happen just by chance? To answer this question, we need a statistical test. Chi-square test for the correlation of two categorical variables. The null hypothesis is that men and women are equally likely to die from a heart attack. 
+We can see that 15.1% of females died in the hospital, much higher than the 8.26% for male patients.  This gender difference is quite a surprise to me. But could this happen just by chance? To answer this question, we need a statistical test. Chi-square test can be used for testing the correlation of two categorical variables. The null hypothesis is that men and women are equally likely to die from a heart attack. 
 ```{r}
 chisq.test(counts)
 ```
 
-You have seen this p-value before? Probably! It is the smallest non-zero number R shows for lots of tests. However, p is definitely small! Hence we reject the hypothesis that the mortality rate is the same for men and women. Looking at the data, it is higher for women. The chi-square test for a 2x2 contingency table gives accurate p-values provided that the number of expected observation is greater than 5. If this is not true, then you should use the Fisher Exact test. The chi-square test is an approximation to the Fisher Exact test. The Fisher Exact test is computationally intensive; Karl Pearson developed the chi-square approximation before we had computers to do the work. With fast computers available today, you can use the Fisher Exact test for quite large data sets, and be more confident in the p-values.
+Have you seen this p-value before? Probably! It is the smallest non-zero number R shows for lots of tests. However, p is definitely small! Hence we reject the hypothesis that the mortality rate is the same for men and women. Looking at the data, it is higher for women. The chi-square test for a 2x2 contingency table gives accurate p-values provided that the number of expected observation is greater than 5. If this is not true, then you should use the Fisher Exact test. The chi-square test is an approximation to the Fisher Exact test. The Fisher Exact test is computationally intensive; Karl Pearson developed the chi-square approximation before we had computers to do the work. With fast computers available today, you can use the Fisher Exact test for quite large data sets, and be more confident in the p-values.
 
 You can use the chi-square test for contingency tables that have more than two rows or two columns. For contingency tables that have more than two rows or two columns, the p-value computed by the chi square approximation is reasonably accurate provided that the expected number of observations in every cell is greater than 1, and that no more than 20 percent of the cells have an expected number of observations less than 5.  Again, the Fisher Exact test can handle quite large data sets with today’s computers, and avoid the problems with chi-square test.
 ```{r }
@@ -191,18 +213,25 @@ fisher.test(counts)  # Fisher’s Exact test
 ```
 In this case, the result of fisher's test is the same as chi-square test.
 
-If you want to make your point to a boss who is either stupid or too busy, you need a chart. Below we show two barplots, one stacked and one side by side.  
+If you want to make your point to a boss who is either stupid or too busy, you need a chart. Below we show two types of barplots: stacked and side by side.  
 
 (ref:5-1) Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side.
 
 ```{r 5-1, echo=c(1, 2, 4), fig.show='hold', out.width='50%', fig.cap='(ref:5-1)', fig.align='center'}
 counts <- table(DIED, SEX)  # SEX define columns now, as I want the bars to represent M or F. 
-barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED",
-        args.legend = list(x = "topleft"))  # Figure 4.5A
+barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = F)  # Figure A
 text(0.42, 7500, labels = "A")
-barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = T)  # Figure 4.5B
+barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = T)  # Figure B
 text(1, 7000, labels = "B")
 ```
+
+You can add an argument, such as "*args.legend = list(x = "topleft")*", in the function barplot() to change the position of legends. For example, we can move the legend to the top-left of Figure \@ref(fig:5-1) A:
+
+```{r}
+barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = F,
+        args.legend = list(x = "topleft"))
+```
+
 
 Another way of showing the proportions is mosaic plot.
 
