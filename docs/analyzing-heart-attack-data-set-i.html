@@ -637,9 +637,9 @@ counts</code></pre></div>
 <p>In this case, the result of fisher’s test is the same as chi-square test.</p>
 <p>If you want to make your point to a boss who is either stupid or too busy, you need a chart. Below we show two types of barplots: stacked and side by side.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(DIED, SEX)  <span class="co"># SEX define columns now, as I want the bars to represent M or F. </span>
-<span class="kw">barplot</span>(counts, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="dt">beside =</span> F)  <span class="co"># Figure A</span>
-<span class="kw">barplot</span>(counts, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="dt">beside =</span> T)  <span class="co"># Figure B</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(DIED, SEX)  <span class="co"># SEX define columns now, as I want the bars to represent M or F.  </span>
+<span class="co"># Figure A</span>
+<span class="kw">text</span>(<span class="fl">0.42</span>, <span class="dv">7500</span>, <span class="dt">labels =</span> <span class="st">&quot;A&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-1"></span>
 <img src="book_files/figure-html/5-1-1.png" alt="Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side." width="50%" /><img src="book_files/figure-html/5-1-2.png" alt="Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side." width="50%" />
 <p class="caption">
@@ -677,12 +677,18 @@ Figure 5.7: Mosaic plot of three factors.
 <p>This is a mosaic plot of the whole Titanic dataset</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p>Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
+<p>Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-23" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use <strong>table</strong> to generate the counts and then visualize.
+<p><span id="exr:unnamed-chunk-23" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses?</p>
 </div>
 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DIAGNOSIS &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>DIAGNOSIS
+SEX &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>SEX
+counts &lt;-<span class="st"> </span><span class="kw">_____________</span>(DIAGNOSIS, SEX)  <span class="co"># Take SEX as columns </span>
+<span class="kw">barplot</span>(_____________________________________________________)
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="fl">0.75</span>)
+<span class="kw">mosaicplot</span>(_____________________________________________)</code></pre></div>
 </div>
 <div id="associations-between-a-categorical-and-a-numeric-variables" class="section level2">
 <h2><span class="header-section-number">5.4</span> Associations between a categorical and a numeric variables?</h2>
@@ -742,22 +748,22 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercise 5.5  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
+<span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercise 5.5  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercise 5.6  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:new4">5.11</a>).
+<span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercise 5.6  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:new4">5.11</a>).
 </div>
 
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercise 5.7  </strong></span>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
+<p><span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercise 5.7  </strong></span>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercise 5.8  </strong></span>Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
+<span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercise 5.8  </strong></span>Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
 </div>
 
 </div>
@@ -775,12 +781,12 @@ Figure 5.12: Multiple boxplots of AGE by DRG and SEX using ggplot2 package
 <p>Recall that 121 indicate survivors with complication, 122 survivors with no complication, and 123, died. As you could see this clearly indicate our previous observation people who died in hospital are older than survivors and that patients who developed complications seems to be older than those that did not. Did people with complications stayed longer in the hospital?</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercise 5.9  </strong></span>Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
+<span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 5.9  </strong></span>Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 5.10  </strong></span>Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:14-5">5.13</a>. Offer interpretation.
+<span id="exr:unnamed-chunk-30" class="exercise"><strong>Exercise 5.10  </strong></span>Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure <a href="analyzing-heart-attack-data-set-i.html#fig:14-5">5.13</a>. Offer interpretation.
 </div>
 
 
@@ -798,7 +804,7 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 <span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  
 <span class="co"># scatterplot colored by DIED</span>
 <span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-30-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-31-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:5-7"></span>

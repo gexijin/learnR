@@ -218,10 +218,13 @@ If you want to make your point to a boss who is either stupid or too busy, you n
 (ref:5-1) Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side.
 
 ```{r 5-1, echo=c(1, 2, 4), fig.show='hold', out.width='50%', fig.cap='(ref:5-1)', fig.align='center'}
-counts <- table(DIED, SEX)  # SEX define columns now, as I want the bars to represent M or F. 
-barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = F)  # Figure A
+counts <- table(DIED, SEX)  # SEX define columns now, as I want the bars to represent M or F.  
+# Figure A
+barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = F) 
 text(0.42, 7500, labels = "A")
-barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = T)  # Figure B
+
+# Figure B
+barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = T) 
 text(1, 7000, labels = "B")
 ```
 
@@ -264,10 +267,18 @@ This is a mosaic plot of the whole Titanic dataset
 mosaicplot(Titanic, color = rainbow(2)) 
 ```
 
-Did men and women survived by equal proportion? Did girls and women survived by equal proportion?
+Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?
 
 ```{exercise}
-The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Are men and women equal in their frequencies of diagnoses? Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Hint: Use **table** to generate the counts and then visualize.
+The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses? 
+
+```{r eval=F}
+DIAGNOSIS <- heartatk4R$DIAGNOSIS
+SEX <- heartatk4R$SEX
+counts <- _____________(DIAGNOSIS, SEX)  # Take SEX as columns 
+barplot(_____________________________________________________)
+legend("topleft", legend = rownames(counts), fill = rainbow(9), ncol = 3, cex = 0.75)
+mosaicplot(_____________________________________________)
 ```
 
 ## Associations between a categorical and a numeric variables? 
