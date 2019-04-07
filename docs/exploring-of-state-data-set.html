@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-04-03">
+<meta name="date" content="2019-04-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -175,7 +175,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>8</b> Exploring of state data set</a><ul>
 <li class="chapter" data-level="8.1" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
-<li class="chapter" data-level="8.2" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#basic-information-about-data"><i class="fa fa-check"></i><b>8.2</b> Basic information about data</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#exploring-state-data"><i class="fa fa-check"></i><b>8.2</b> Exploring state data</a></li>
 <li class="chapter" data-level="8.3" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
 <li class="chapter" data-level="8.4" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#peeking-the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>8.4</b> Peeking the whole picture of the data set</a></li>
 <li class="chapter" data-level="8.5" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#linear-model-anylysis"><i class="fa fa-check"></i><b>8.5</b> Linear model anylysis</a></li>
@@ -240,22 +240,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="reading-in-and-manipulating-data" class="section level2">
 <h2><span class="header-section-number">8.1</span> Reading in and manipulating data</h2>
 <p>The state data sets include state information in early years around 1970s. We pick state.abb, state.x77, and state.region to form our data file. The detail information is listed here.</p>
-<p><strong>state.abb</strong>: vector with 2-letter abbreviations for the state names.</p>
-<p><strong>state.x77</strong>: matrix with 50 rows and 8 columns giving the following statistics in the respective columns.</p>
-<p>Population: population estimate as of July 1, 1975</p>
-<p>Income: per capita income (1974)</p>
-<p>Illiteracy: illiteracy (1970, percent of population)</p>
-<p>Life Exp: life expectancy in years (1969-71)</p>
-<p>Murder: murder and non-negligent manslaughter rate per 100,000 population (1976)</p>
-<p>HS Grad: percent high-school graduates (1970)</p>
-<p>Frost: mean number of days with minimum temperature below freezing (1931-1960) in capital or large city</p>
-<p>Area: land area in square miles</p>
-<p><strong>state.region</strong>: factor giving the region (Northeast, South, North Central, West) that each state belongs to.</p>
-<p>First we merge these three data sets to get data frame “sta” with 10 columns and 50 rows, and take a look of the data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77)  <span class="co"># transform matrix into data frame</span>
-sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region)
-<span class="kw">colnames</span>(sta)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;State&quot;</span>
-<span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span>
+<p><strong>state.abb</strong>: A vector with 2-letter abbreviations for the state names.</p>
+<p><strong>state.x77</strong>: A matrix with 50 rows and 8 columns giving the following statistics in the respective columns.</p>
+<ul>
+<li><p>Population: population estimate as of July 1, 1975</p></li>
+<li><p>Income: per capita income (1974)</p></li>
+<li><p>Illiteracy: illiteracy (1970, percent of population)</p></li>
+<li><p>Life Exp: life expectancy in years (1969-71)</p></li>
+<li><p>Murder: murder and non-negligent manslaughter rate per 100,000 population (1976)</p></li>
+<li><p>HS Grad: percent high-school graduates (1970)</p></li>
+<li><p>Frost: mean number of days with minimum temperature below freezing (1931-1960) in capital or large city</p></li>
+<li><p>Area: land area in square miles</p></li>
+</ul>
+<p><strong>state.region</strong>: A factor containing the region (Northeast, South, North Central, West) that each state belongs to.</p>
+<p>For convenience of analyzing the state data, let’s merge the three data sets into a single data set “sta”. It is a data frame with 10 columns and 50 rows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77)               <span class="co"># transform matrix into data frame</span>
+sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region) <span class="co">#combine the three data sets</span>
+<span class="kw">colnames</span>(sta)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;State&quot;</span>                <span class="co">#Rename first column</span>
+<span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span>              <span class="co">#Rename the 10th column</span>
 <span class="kw">head</span>(sta)</code></pre></div>
 <pre><code>##            State Population Income Illiteracy Life.Exp Murder HS.Grad
 ## Alabama       AL       3615   3624        2.1    69.05   15.1    41.3
@@ -309,24 +311,29 @@ sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, 
 ##  Max.   :566432                     
 ## </code></pre>
 </div>
-<div id="basic-information-about-data" class="section level2">
-<h2><span class="header-section-number">8.2</span> Basic information about data</h2>
-<p>Now let’s see whether the numeric variables are normally distributed or not.</p>
+<div id="exploring-state-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Exploring state data</h2>
+<p>Firstly, let’s see whether the numeric variables are normally distributed or not.There are multiple ways to check the normality of numeric data: - histogram: Does the histogram approaches to a normal density curve? If yes, then the variable more likely follows a normal distribution. - Q-Q plot: Does the sample quantiles almost fall into a straight line ? If yes, then the variable more likely followa a normal distribution. - Shapiro-Wilk test: This is a widely used normality test. The null hypothesis is that a variable follows a normal distribution. Small p-value indicates a non-normality of the variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>]  <span class="co"># pick up the numeric columns according to the names </span>
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))  <span class="co"># layout in 4 rows and 4 columns</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){
-  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>]
+a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span>
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outouts in 4 rows and 4 columns</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ <span class="co"># Use a for loop to test normality of all variables listed in the vector a</span>
+  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract correspoinding values in sta given a[i].</span>
+                      <span class="co"># Take i=1 as an example: a[1]=&#39;Population&#39;. sta[a[1]] is a data frame </span>
+                      <span class="co">#containing state names and corresponding population information. </span>
+                      <span class="co"># Functions, such as hist(), qqnorm() can not be applied to a data frame.</span>
+                      <span class="co"># The sub = sta[a[1]][,1] extracts the poplutlation information from the data </span>
+                      <span class="co"># frame as a numeric vector. Functions can be applied to a vector directly.  </span>
   <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])
-  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
-  <span class="kw">qqline</span>(sub) 
-  <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub)
-  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub))
+  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#Q-Q plot</span>
+  <span class="kw">qqline</span>(sub)           <span class="co"># Add a qq plot line. </span>
+  <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span>
+  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous results in row. </span>
  }
 }</code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co"># take first two column of shapiro.test result</span>
-s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t) <span class="co"># add variable name for the result</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two column of shapiro.test result</span>
+s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t)    <span class="co"># add variable name for the result</span>
 s.t</code></pre></div>
 <pre><code>##     a            statistic p.value     
 ## s.t &quot;Population&quot; 0.769992  1.906393e-07

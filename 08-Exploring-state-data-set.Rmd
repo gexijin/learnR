@@ -5,59 +5,69 @@
 The state data sets include state information in early years around 1970s. We pick state.abb, state.x77, and state.region to form our data file. The detail information is listed here.
 
 **state.abb**:
-vector with 2-letter abbreviations for the state names.
+ A vector with 2-letter abbreviations for the state names.
 
 **state.x77**:
-matrix with 50 rows and 8 columns giving the following statistics in the respective columns.
+A matrix with 50 rows and 8 columns giving the following statistics in the respective columns.
 
-Population: population estimate as of July 1, 1975
+- Population: population estimate as of July 1, 1975
 
-Income: per capita income (1974)
+- Income: per capita income (1974)
 
-Illiteracy: illiteracy (1970, percent of population)
+- Illiteracy: illiteracy (1970, percent of population)
 
-Life Exp: life expectancy in years (1969-71)
+- Life Exp: life expectancy in years (1969-71)
 
-Murder: murder and non-negligent manslaughter rate per 100,000 population (1976)
+- Murder: murder and non-negligent manslaughter rate per 100,000 population (1976)
 
-HS Grad: percent high-school graduates (1970)
+- HS Grad: percent high-school graduates (1970)
 
-Frost: mean number of days with minimum temperature below freezing (1931-1960) in capital or large city
+- Frost: mean number of days with minimum temperature below freezing (1931-1960) in capital or large city
 
-Area: land area in square miles
+- Area: land area in square miles
 
 **state.region**:
-factor giving the region (Northeast, South, North Central, West) that each state belongs to.
+A factor containing the region (Northeast, South, North Central, West) that each state belongs to.
 
-First we merge these three data sets to get data frame "sta" with 10 columns and 50 rows, and take a look of the data. 
+For convenience of analyzing the state data, let's merge the three data sets into a single data set "sta".  It is a data frame with 10 columns and 50 rows. 
 
 ```{r}
-tem <- data.frame(state.x77)  # transform matrix into data frame
-sta <- cbind(state.abb, tem, state.region)
-colnames(sta)[1] <- "State"
-colnames(sta)[10] <- "Region"
+tem <- data.frame(state.x77)               # transform matrix into data frame
+sta <- cbind(state.abb, tem, state.region) #combine the three data sets
+colnames(sta)[1] <- "State"                #Rename first column
+colnames(sta)[10] <- "Region"              #Rename the 10th column
 head(sta)
 str(sta)
 summary(sta)
 ```
 
-## Basic information about data
-Now let's see whether the numeric variables are normally distributed or not. 
+## Exploring state data
+
+Firstly, let's see whether the numeric variables are normally distributed or not.There are multiple ways to check the normality of numeric data: 
+- histogram: Does the histogram approaches to a normal density curve? If yes, then the variable more likely follows a normal distribution.
+- Q\-Q plot: Does the sample quantiles almost fall into a straight line ? If yes, then the variable more likely followa a normal distribution.
+- Shapiro-Wilk test: This is a widely used normality test. The null hypothesis is that a variable follows a normal distribution. Small p-value indicates a non-normality of the variable.
+
 ```{r message=FALSE, fig.width=8, fig.height=8}
 library(dplyr)
-a <- colnames(sta)[2:9]  # pick up the numeric columns according to the names 
-par(mfrow = c(4, 4))  # layout in 4 rows and 4 columns
-for (i in 1:length(a)){
-  sub = sta[a[i]][,1]
+a <- colnames(sta)[2:9] # pick up all numeric columns/variables according to the names 
+par(mfrow = c(4, 4))    # layout outouts in 4 rows and 4 columns
+for (i in 1:length(a)){ # Use a for loop to test normality of all variables listed in the vector a
+  sub = sta[a[i]][,1] # Extract correspoinding values in sta given a[i].
+                      # Take i=1 as an example: a[1]='Population'. sta[a[1]] is a data frame 
+                      #containing state names and corresponding population information. 
+                      # Functions, such as hist(), qqnorm() can not be applied to a data frame.
+                      # The sub = sta[a[1]][,1] extracts the poplutlation information from the data 
+                      # frame as a numeric vector. Functions can be applied to a vector directly.  
   hist(sub, main = paste("Hist. of", a[i], sep = " "), xlab = a[i])
-  qqnorm(sub, main = paste("Q-Q Plot of", a[i], sep = " "))
-  qqline(sub) 
-  if (i == 1) {s.t <- shapiro.test(sub)
-  } else {s.t <- rbind(s.t, shapiro.test(sub))
+  qqnorm(sub, main = paste("Q-Q Plot of", a[i], sep = " ")) #Q-Q plot
+  qqline(sub)           # Add a qq plot line. 
+  if (i == 1) {s.t <- shapiro.test(sub) # Normality test for population
+  } else {s.t <- rbind(s.t, shapiro.test(sub)) # Bind a new test result to previous results in row. 
  }
 }
-s.t <- s.t[, 1:2]  # take first two column of shapiro.test result
-s.t <- cbind(a, s.t) # add variable name for the result
+s.t <- s.t[, 1:2]       # take the first two column of shapiro.test result
+s.t <- cbind(a, s.t)    # add variable name for the result
 s.t
 ```
 
