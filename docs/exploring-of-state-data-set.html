@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge">
 
 
-<meta name="date" content="2019-04-08">
+<meta name="date" content="2019-04-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -48,6 +48,13 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -114,10 +121,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><i class="fa fa-check"></i><b>2</b> Visualizing data set-Analyzing cars and iris flower data sets</a><ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
 <li class="chapter" data-level="2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-mtcars-dataset"><i class="fa fa-check"></i><b>2.2</b> Visualizing mtcars dataset</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Visualizing correlation between categorical variables</a></li>
-<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.2</b> Detecting correlations among variables</a></li>
-<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.3</b> Hierarchical clustering</a></li>
-<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.4</b> Representing data using faces. Serious scientific research only!</a></li>
+<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#scatter-plot"><i class="fa fa-check"></i><b>2.2.1</b> scatter plot</a></li>
+<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#barplot-with-error-bars"><i class="fa fa-check"></i><b>2.2.2</b> Barplot with error bars</a></li>
+<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.3</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.4</b> Detecting correlations among variables</a></li>
+<li class="chapter" data-level="2.2.5" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.5</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.2.6" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.6</b> Representing data using faces. Serious scientific research only!</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-iris-data-set"><i class="fa fa-check"></i><b>2.3</b> Visualizing iris data set</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.3.1</b> A Matrix only contains numbers</a></li>
@@ -135,11 +144,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for Help and Example Code</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.1</b> Matrix operations</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.2</b> Lists</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.2</b> Matrix operations</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.3</b> Lists</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.5</b> Strings and string vectors</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
 </ul></li>
@@ -170,7 +187,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
 <li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.1</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
+<li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>8</b> Exploring of state data set</a><ul>
@@ -182,21 +202,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>9</b> Exploring of game sale dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.4.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.4.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
-<li class="chapter" data-level="9.4.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.4.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.5.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.5.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
+<li class="chapter" data-level="9.5.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.5.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.8" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html"><i class="fa fa-check"></i><b>10</b> Exploring of employee salary data set</a><ul>
 <li class="chapter" data-level="10.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
@@ -336,7 +357,7 @@ a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span clas
   } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous results in row. </span>
  }
 }</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-2-1.png" width="768" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-494-1.png" width="768" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two column of shapiro.test result</span>
 s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t)    <span class="co"># add variable name for the result</span>
 s.t</code></pre></div>
@@ -417,7 +438,7 @@ Figure 8.4: Ridgeline plot for murder rate in each region
 <p>The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has big murder rate than other regions.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-3" class="exercise"><strong>Exercise 8.1  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-map">8.3</a>, use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb to state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:
+<span id="exr:unnamed-chunk-495" class="exercise"><strong>Exercise 8.1  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-map">8.3</a>, use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb to state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:
 </div>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77) 
@@ -427,7 +448,7 @@ sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, 
 <hr />
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-5" class="exercise"><strong>Exercise 8.2  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-murder">8.4</a>, use ridgeline plot to explore the regional distribution of Illiteracy for state.x77 and state.region data sets and interpret your figure.
+<span id="exr:unnamed-chunk-497" class="exercise"><strong>Exercise 8.2  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-murder">8.4</a>, use ridgeline plot to explore the regional distribution of Illiteracy for state.x77 and state.region data sets and interpret your figure.
 </div>
 
 <hr />
@@ -455,7 +476,7 @@ Figure 8.5: Corrplot for numeric variables
 <p>Positive correlation between Murder and Illiteracy with r value of 0.70, which means the lower education level the state have, the higher murder rate chance it will happen in that state; Negative correlations between Murder and Life.Exp, Frost, with r value of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life expectation the state will have; And the colder of the weather, the lower chance the murder will occur: too cold to murder?!</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-6" class="exercise"><strong>Exercise 8.3  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-corrplot">8.5</a>, plot a scatter matrix among 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of the scatter matrix plot.
+<span id="exr:unnamed-chunk-498" class="exercise"><strong>Exercise 8.3  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-corrplot">8.5</a>, plot a scatter matrix among 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of the scatter matrix plot.
 </div>
 
 <hr />
@@ -471,7 +492,7 @@ Figure 8.6: Cluster dendrogram for state numeric variables
 <p>The cluster Dendrogram tells us that there are two clusters for these variables. Murder is mostly close to Illiteracy, and then to Population and Area. Similar situation, HS.Grad is mostly close to Income, and then to Life.Exp and Frost. Though illiteracy and HS.Grad are in different cluster, we know for the same state, illiteracy is highly correlated with high school graduation rate , the lower the illiteracy, the higher the high school graduation rate. r value of -0.66 between Illiteracy and HS.Grad in the corrplot tells the same story.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-7" class="exercise"><strong>Exercise 8.4  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-dendrogram">8.6</a>, plot a cluster dendrogram of the 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of your output.
+<span id="exr:unnamed-chunk-499" class="exercise"><strong>Exercise 8.4  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-dendrogram">8.6</a>, plot a cluster dendrogram of the 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of your output.
 </div>
 
 <hr />
@@ -487,7 +508,7 @@ Figure 8.7: Illiteracy distribution by region
 <p>We can see that north central region has narrow density distribution with most Illiteracy less than 1 percent of population. While south region has an open distribution with illiteracy covered from 0.5 to 3, and most south states have illiteracy between 1.5 and 2.2. Though region west has a spread out distribution too, but it’s left skewed, which means there are still lots of west states with illiteracy less than 1% of population. Most northeast region states have illiteracy less then 1.5% of population.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 8.5  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-illiteracy">8.7</a>, use density plot to see the distribution of <em>mpg</em> by <em>cyl</em> in the data set <em>mtcars</em>.
+<span id="exr:unnamed-chunk-500" class="exercise"><strong>Exercise 8.5  </strong></span>Similar to Figure <a href="exploring-of-state-data-set.html#fig:state-illiteracy">8.7</a>, use density plot to see the distribution of <em>mpg</em> by <em>cyl</em> in the data set <em>mtcars</em>.
 </div>
 
 <hr />
@@ -559,7 +580,7 @@ Figure 8.11: Relationship between murder rate and life expectancy, high school g
 <p>Most southern states has lower HS.Grad high, low Life.Exp but higher murder frequency, while states in other three regions have relative higher HS.Grad and income but lower murder rate.</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 8.6  </strong></span>Use scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure <a href="exploring-of-state-data-set.html#fig:state-dendrogram">8.6</a>. Interpret your plot.
+<span id="exr:unnamed-chunk-501" class="exercise"><strong>Exercise 8.6  </strong></span>Use scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure <a href="exploring-of-state-data-set.html#fig:state-dendrogram">8.6</a>. Interpret your plot.
 </div>
 
 <hr />
@@ -626,7 +647,7 @@ pca</code></pre></div>
 ## Frost       0.21268413 -0.472013140  0.02834442
 ## Area        0.14836054  0.286260213  0.01320320</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-502-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pca)  <span class="co">#shows the importance of the components</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3     PC4     PC5     PC6
@@ -692,7 +713,7 @@ model &lt;-<span class="st"> </span><span class="kw">lm</span>(Murder <span clas
 <p>Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another relative smaller factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow: <span class="math inline">\(Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast\)</span></p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-12" class="exercise"><strong>Exercise 8.7  </strong></span>Do linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure <a href="exploring-of-state-data-set.html#fig:state-corrplot">8.5</a> and pay attention to the high correlation between murder rate and life expectancy.
+<span id="exr:unnamed-chunk-504" class="exercise"><strong>Exercise 8.7  </strong></span>Do linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure <a href="exploring-of-state-data-set.html#fig:state-corrplot">8.5</a> and pay attention to the high correlation between murder rate and life expectancy.
 </div>
 
 <hr />
