@@ -1,21 +1,44 @@
-# Step into R program-Analyzing iris flower dataset  
+# Step into R programming--the iris flower dataset  
 
 **Getting started**
 
 1. Install R from [www.R-project.org](www.R-project.org). Choose the cloud server or any U.S. mirror site.
-2. Install RStudio Desktop from [www.RStudio.com](www.RStudio.com). Rstudio uses the R software you just installed in the background, but provides a more user-friendly interface. We will use Rstudio. R commands can be typed directly into the “Console” window. Or you can enter them in the “R Script” window and click the “Run” button. 
+2. Install RStudio Desktop from [www.RStudio.com](www.RStudio.com). Rstudio uses the R software you just installed in the background, but provides a more user-friendly interface. R commands can be typed directly into the “Console” window. Or you can enter them in the “R Script” window and click the “Run” button. 
+3. Alternatively, you can use Rstudio through a web browser via [Rstudio Cloud.](https://rstudio.cloud/) Some universities also host their own Rstudio server on more powerful workstations.  
 
 ```{r echo=FALSE, out.width='80%'}
 knitr::include_graphics("images/img0100_Rstudio.png")
 ```
 
-Just try all of these commands and guess what’s going on. If it takes a few months to type these 188 characters,  try [www.RapidTyping.com](www.RapidTyping.com).  
-```{r echo=FALSE, out.width='80%'}
-knitr::include_graphics("images/img0100_magic.png")
+As a quick sample session, try all of these commands below in the Console window and guess what’s going on. If you understand all of these, you do not need this book. Consider more advanced books like [R for Data Science](https://r4ds.had.co.nz/). If it takes a few months to type these 243 characters,  try [www.RapidTyping.com](www.RapidTyping.com).  
+```{r eval = FALSE}
+head(iris)
+str(iris)
+summary(iris)
+x <- iris[, 1:4]
+head(x)
+boxplot(x)
+plot(x[, 3:4])
+abline( lm(x[, 4] ~ x[, 3]) )
+pairs(x)
+stars(x)
+
+PL <- x$Petal.Length
+PL
+barplot(PL)
+hist(PL)
+Species <- iris$Species
+Species
+pie( table(Species) )
+boxplot(PL ~ Species )
+summary( aov(PL ~ Species) )
 ```
 
+![Demo session](https://github.com/gexijin/precisionFDA2018/raw/master/demo.gif)
+
+
 ## Data frames have rows and columns: the Iris flower dataset 
-In 1936, Edgar Anderson collected data to quantify the geographic variation of *Iris* flowers. The data set consists of 50 samples from each of three sub-species ( *Iris setosa*, *Iris virginica* and *Iris versicolor*). Four features were measured from each sample: the lengths and the widths of sepals and petals, in centimeters (cm). This data is included in R software. Go to the Wikipedia page for this data set (yes, it is famous!).  Have a quick look at the data there, think about what distinguishes the three species? If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to? **Think** (!) for a few minutes while eyeballing the data at Wikipedia.
+In 1936, Edgar Anderson collected data to quantify the geographic variation of *Iris* flowers. The data set consists of 50 samples from each of three sub-species ( *Iris setosa*, *Iris virginica* and *Iris versicolor*). Four features were measured from each sample: the lengths and the widths of sepals and petals, in centimeters (cm). This data is included in R software. Go to the Wikipedia page for this data set (yes, it is famous!). Have a quick look at the data there, think about what distinguishes the three species? If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to? **Think** (!) for a few minutes while eyeballing the data at Wikipedia. Getting familar with this dataset is vital to follow this book. 
 
 
 ```{r echo=FALSE, out.width='50%', fig.cap='Iris flower. Photo from Wikipedia.', fig.align='center' }
@@ -37,12 +60,12 @@ head(iris)  # show the first few rows; useful for bigger datasets.
 So the first 4 columns contain numeric values. The last one is species information as **character** values. This is an important distinction, as we cannot add or subtract character values. This object is a **data frame**, with both numeric and character columns. A **matrix** only contains one type of values, often just numbers.
 
 To have a look at the data in a spreadsheet, we can use the fix( ) function.
-```{r}
-#fix(iris)  # examine data frame in a spreadsheet. 
+```{r eval = FALSE}
+fix(iris)  # examine data frame in a spreadsheet. 
 ```
 
 Click on column names to double-check data types (numeric vs. character). Sometimes we need to overwrite data types guessed by R. For example, sometimes we use 1 for male and 0 for female. These are essentially categories; Values like 1.6 make no sense. In this case we need to enforce this column as characters. **Note this window needs to be closed before proceeding to the next**. 
-```{r echo=TRUE, results='hide'}
+```{r eval=FALSE, echo=TRUE, results='hide'}
 View(iris)  # this Rstudio function also shows data. Note R is case sensitive. 
 ```
 
