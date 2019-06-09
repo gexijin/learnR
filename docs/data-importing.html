@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 4 Data importing | Learning R through examples</title>
-  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Data importing | Learn R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Data importing | Learning R through examples" />
+  <meta property="og:title" content="Chapter 4 Data importing | Learn R through examples" />
   <meta property="og:type" content="book" />
   
   
@@ -17,19 +16,19 @@
   <meta name="github-repo" content="gexijin/learnR" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Data importing | Learning R through examples" />
+  <meta name="twitter:title" content="Chapter 4 Data importing | Learn R through examples" />
   
   <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
   
 
-<meta name="author" content="Xijin Ge">
+<meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2019-04-10">
+<meta name="date" content="2019-06-09" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="data-structures.html">
@@ -49,50 +48,76 @@
 
 
 <script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -107,26 +132,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Index</a></li>
-<li class="chapter" data-level="1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R program-Analyzing iris flower dataset</a><ul>
-<li class="chapter" data-level="1.1" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.1</b> Data frames have rows and columns: the Iris flower dataset</a></li>
-<li class="chapter" data-level="1.2" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.2</b> Analyzing one set of numbers</a></li>
-<li class="chapter" data-level="1.3" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#students-t-test"><i class="fa fa-check"></i><b>1.3</b> Student’s t-test</a></li>
-<li class="chapter" data-level="1.4" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#test-for-normal-distribution"><i class="fa fa-check"></i><b>1.4</b> Test for normal distribution</a></li>
-<li class="chapter" data-level="1.5" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.5</b> Analyzing a column of categorical values</a></li>
-<li class="chapter" data-level="1.6" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#analyzing-the-relationship-between-two-columns-of-numbers"><i class="fa fa-check"></i><b>1.6</b> Analyzing the relationship between two columns of numbers</a></li>
-<li class="chapter" data-level="1.7" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#visualizing-and-testing-the-differences-in-groups"><i class="fa fa-check"></i><b>1.7</b> Visualizing and testing the differences in groups</a></li>
-<li class="chapter" data-level="1.8" data-path="step-into-r-program-analyzing-iris-flower-dataset.html"><a href="step-into-r-program-analyzing-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.8</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><i class="fa fa-check"></i><b>2</b> Visualizing data set-Analyzing cars and iris flower data sets</a><ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
 <li class="chapter" data-level="2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-mtcars-dataset"><i class="fa fa-check"></i><b>2.2</b> Visualizing mtcars dataset</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#scatter-plot"><i class="fa fa-check"></i><b>2.2.1</b> scatter plot</a></li>
-<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#barplot-with-error-bars"><i class="fa fa-check"></i><b>2.2.2</b> Barplot with error bars</a></li>
-<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.3</b> Visualizing correlation between categorical variables</a></li>
-<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.4</b> Detecting correlations among variables</a></li>
-<li class="chapter" data-level="2.2.5" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.5</b> Hierarchical clustering</a></li>
-<li class="chapter" data-level="2.2.6" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.6</b> Representing data using faces. Serious scientific research only!</a></li>
+<li class="chapter" data-level="2.2.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-correlation-between-categorical-variables"><i class="fa fa-check"></i><b>2.2.1</b> Visualizing correlation between categorical variables</a></li>
+<li class="chapter" data-level="2.2.2" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#detecting-correlations-among-variables"><i class="fa fa-check"></i><b>2.2.2</b> Detecting correlations among variables</a></li>
+<li class="chapter" data-level="2.2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#hierarchical-clustering"><i class="fa fa-check"></i><b>2.2.3</b> Hierarchical clustering</a></li>
+<li class="chapter" data-level="2.2.4" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#representing-data-using-faces.-serious-scientific-research-only"><i class="fa fa-check"></i><b>2.2.4</b> Representing data using faces. Serious scientific research only!</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#visualizing-iris-data-set"><i class="fa fa-check"></i><b>2.3</b> Visualizing iris data set</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html"><a href="visualizing-data-set-analyzing-cars-and-iris-flower-data-sets.html#a-matrix-only-contains-numbers"><i class="fa fa-check"></i><b>2.3.1</b> A Matrix only contains numbers</a></li>
@@ -202,22 +224,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>9</b> Exploring of game sale dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
-<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.5.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
-<li class="chapter" data-level="9.5.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.5.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.5.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
-<li class="chapter" data-level="9.5.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.5.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
+<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.4.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
+<li class="chapter" data-level="9.4.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.4.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.4.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
+<li class="chapter" data-level="9.4.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.4.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.8" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
+<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html"><i class="fa fa-check"></i><b>10</b> Exploring of employee salary data set</a><ul>
 <li class="chapter" data-level="10.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
@@ -248,7 +269,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learning R through examples</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R through examples</a>
           </h1>
         </div>
 
@@ -262,23 +283,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img src="images/img0900_note.png" width="50%" style="display: block; margin: auto;" /></p>
 <div id="enter-data-manually" class="section level2">
 <h2><span class="header-section-number">4.1</span> Enter data manually</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)
-<span class="kw">sum</span>(x)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)
+<span class="kw">sum</span>(x)</code></pre>
 <pre><code>## [1] 13.8</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(
+<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(
        <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># the data elements </span>
        <span class="dt">nrow =</span> <span class="dv">2</span>,             <span class="co"># number of rows </span>
        <span class="dt">ncol =</span> <span class="dv">3</span>)             <span class="co"># number of columns                     </span>
-A                            <span class="co"># show the matrix</span></code></pre></div>
+A                            <span class="co"># show the matrix</span></code></pre>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    3    5
 ## [2,]    4    1    7</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">scan</span>()  <span class="co"># Enter values from keyboard, separated by Return key. End by empty line. </span>
-<span class="fl">2.1</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">scan</span>()  <span class="co"># Enter values from keyboard, separated by Return key. End by empty line. </span>
+<span class="fl">2.1</span></code></pre>
 <pre><code>## [1] 2.1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">3.1</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">3.1</span></code></pre>
 <pre><code>## [1] 3.1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">4.1</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">4.1</span></code></pre>
 <pre><code>## [1] 4.1</code></pre>
 <p>Note that you can paste a column of numbers from Excel.</p>
 </div>
@@ -294,15 +315,14 @@ A                            <span class="co"># show the matrix</span></code></p
 <p>Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the “<span class="math inline">\(\t\)</span>” above.<br />
 2. In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“x”</strong> on the lower left of the import interface. See Figure <a href="data-importing.html#fig:3-1">4.1</a>.</p>
 <p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)</code></pre></div>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.5.2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
                 <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
-<span class="kw">View</span>(x)  <span class="co"># shows the data, will change if you modify it. </span></code></pre></div>
+<span class="kw">View</span>(x)  <span class="co"># shows the data, will change if you modify it. </span></code></pre>
 <p>Before you click <strong>Import</strong>, I highly recommend that you select all the codes and copy it to your clipboard. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:3-1"></span>
-<img src="images/img0301n_importdata.png" alt="Importing data into R." width="640" />
+<img src="images/img0301n_importdata.png" alt="Importing data into R."  />
 <p class="caption">
 Figure 4.1: Importing data into R.
 </p>
@@ -311,7 +331,7 @@ Figure 4.1: Importing data into R.
 <li><strong>Check data type</strong>.</li>
 </ol>
 <p>Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using as.numeric, as.factor, or as.character functions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)  <span class="co"># structure of data object, data types for each column</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)  <span class="co"># structure of data object, data types for each column</span></code></pre>
 <pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 12844 obs. of  8 variables:
 ##  $ Patient  : num  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: num  41041 41041 41091 41081 41091 ...
@@ -334,14 +354,14 @@ Figure 4.1: Importing data into R.
 ##   .. )</code></pre>
 <p>Note that the first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.<br />
 We need to reformat these columns as <strong>factors</strong>. We are going to use <strong>x$SEX</strong> to refer to the SEX column of the data frame x:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span>
+<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span>
 x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>SEX)
 x<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DRG)
-x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIED)</code></pre></div>
+x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIED)</code></pre>
 <p>Now the last three columns are actually numeric measurements. But the LOS and AGE were actually read as characters, due the fact that 10 is recorded as 0010.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>LOS &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>LOS)  <span class="co"># convert to numeric</span>
+<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>LOS &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>LOS)  <span class="co"># convert to numeric</span>
 x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>AGE)
-<span class="kw">str</span>(x)  <span class="co"># double check structure of data</span></code></pre></div>
+<span class="kw">str</span>(x)  <span class="co"># double check structure of data</span></code></pre>
 <pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 12844 obs. of  8 variables:
 ##  $ Patient  : num  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41001&quot;,&quot;41011&quot;,..: 5 5 9 8 9 9 9 9 5 5 ...
@@ -362,7 +382,7 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 ##   ..   LOS = col_character(),
 ##   ..   AGE = col_character()
 ##   .. )</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(x)  <span class="co"># a summary often gives us a lot of useful information </span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(x)  <span class="co"># a summary often gives us a lot of useful information </span></code></pre>
 <pre><code>##     Patient        DIAGNOSIS    SEX       DRG       DIED     
 ##  Min.   :    1   41091  :5213   F:5065   121:5387   0:11434  
 ##  1st Qu.: 3212   41041  :2665   M:7779   122:6047   1: 1410  
@@ -380,12 +400,13 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 ##  Max.   :47910   Max.   :38.000   Max.   :103.00  
 ##  NA&#39;s   :699</code></pre>
 <p>The summary( ) function is very useful to get basic information about data frames.</p>
-<p>Note that for numeric columns we are shown mean, median, etc, while for factors the frequencies are shown. This reassured us that the data types are correctly recognized. It also shows missing values for CHARGES. Some people got free treatment for heart attack? Maybe not. Missing does not mean zero. Maybe the data was not entered for some patients.</p>
+<p>Note that for numeric columns we are shown mean, median, etc, while for factors the frequencies are shown. This reassured us that the data types are correctly recognized. It also shows missing values for CHARGES.
+Some people got free treatment for heart attack? Maybe not. Missing does not mean zero. Maybe the data was not entered for some patients.</p>
 <p>Except enforcing data type conversion by as.factor, as.numeric and so on, We can also reformat the columns before clicking <strong>Import</strong>:</p>
 <p>After locating the file, you can click on the automatically detected data type under each of the column names as shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>. By selecting “Factor” from the drop down and enter all possible levels separated by commas, you can successfully format this column as a factor.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-2"></span>
-<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio." width="640" />
+<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio."  />
 <p class="caption">
 Figure 4.2: Changing data types while importing data into Rstudio.
 </p>
@@ -395,20 +416,21 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 <div id="data-manipulation-in-a-data-frame" class="section level2">
 <h2><span class="header-section-number">4.3</span> Data manipulation in a data frame</h2>
 <p>We can sort the data by age. Again, type these commands in the script window, instead of directly into the Console window. And save the scripts once a while.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>x[<span class="kw">order</span>(x<span class="op">$</span>AGE), ]  <span class="co"># sort by ascending order by AGE</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>x[<span class="kw">order</span>(x<span class="op">$</span>AGE), ]  <span class="co"># sort by ascending order by AGE</span></code></pre>
 <p><strong>Global Environment</strong> window contains the names and sizes of all the variables or objects in the computer memory. R programming is all about creating and modifying these objects in the memory with clear, step-by-step instructions. We also can sort the data by clicking on the column names in spreadsheet from Global Environment.</p>
 <p>Just like in Excel, you can add a new column with computed results:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>pdc &lt;-<span class="st"> </span>x<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span>x<span class="op">$</span>LOS</code></pre></div>
-<p>Here we created a new column pdc to represent per day cost. We can also create a column to represent age groups using the floor function just returns the integer part.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(x<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>pdc &lt;-<span class="st"> </span>x<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span>x<span class="op">$</span>LOS</code></pre>
+<p>Here we created a new column pdc to represent per day cost.
+We can also create a column to represent age groups using the floor function just returns the integer part.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(x<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre>
 <p>You can now do things like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>ag)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-385-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>ag)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-383-1.png" width="672" /></p>
 <p>Each box represents an age group. Older patients tends to stay longer in the hospital after being admitted for heart attack.</p>
 <p>You can extract a subset of cases:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
+<pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
 x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)  <span class="co"># only people older than 80</span>
-<span class="kw">summary</span>(x3)   </code></pre></div>
+<span class="kw">summary</span>(x3)   </code></pre>
 <pre><code>##     Patient        DIAGNOSIS   SEX       DRG       DIED    
 ##  Min.   :    6   41091  :928   F:1263   121:1056   0:1518  
 ##  1st Qu.: 3527   41071  :347   M: 785   122: 462   1: 530  
@@ -436,7 +458,8 @@ x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span cla
 <p>Try not to attach the data when you are manipulation data like this.</p>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-387" class="exercise"><strong>Exercise 4.1  </strong></span>Answer the following questions. a). Get a subset which contains the middle-aged men whose ages are greater than 40 and less than or equal to 60.</p>
+<p><span id="exr:unnamed-chunk-385" class="exercise"><strong>Exercise 4.1  </strong></span>Answer the following questions.
+a). Get a subset which contains the middle-aged men whose ages are greater than 40 and less than or equal to 60.</p>
 <p>b). Calculate cost per day for middle-aged men.</p>
 <p>c). Generate a histogram of the cost per day.</p>
 </div>
@@ -447,15 +470,14 @@ x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span cla
 <li>Create a new project folder by File-&gt;New Project-&gt;New Directory-&gt;Empty Project and then create a new folder.</li>
 <li>Download and save the heartatk4R.txt file to that new folder. That folder becomes your <strong>default working directory</strong>.</li>
 <li>Now you can read the data by yourself.
-</div>
-</li>
+</div></li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Then we can repeat the above commands to check and adjust data types for the columns, using str(), as.factor(), and as.numeric() functions.</li>
 </ol>
 <p>In summary, we have the following code to read in the data. Reading the heart attack dataset. I am not using the Import Dataset in Rstudio. We have to make sure the file is in the current working directory. To set working directory from Rstudio main menu, go to Session -&gt; Set Working Directory.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())  <span class="co"># Erase all objects in memory</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())  <span class="co"># Erase all objects in memory</span>
 <span class="kw">getwd</span>()  <span class="co"># show working directory</span>
 x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 <span class="kw">head</span>(x)  <span class="co"># show the first few rows</span>
@@ -465,13 +487,13 @@ x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as
 x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)
 x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>SEX)
 <span class="kw">str</span>(x)  <span class="co"># show the data types of columns</span>
-<span class="kw">summary</span>(x)  <span class="co"># show summary of dataset</span></code></pre></div>
+<span class="kw">summary</span>(x)  <span class="co"># show summary of dataset</span></code></pre>
 <p>Alternatively, you can skip all of the above and do this.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, 
                 <span class="dt">header =</span> <span class="ot">TRUE</span>, 
                 <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
                 <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, 
-                               <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</code></pre></div>
+                               <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</code></pre>
 <p>We are reading data directly from the internet with the URL. And we are specifying the data type for each column.</p>
 </div>
 <div id="general-procedure-to-read-data-into-r" class="section level2">
@@ -486,10 +508,12 @@ x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.
 <li>Missing values? NA, na, NULL, blank, NaN, 0 <strong>missingstring = </strong></li>
 <li>Open as text file in Excel, choose appropriate deliminater while importing, or use the <strong>Text to Column</strong> under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”-&gt;“4-OCT”. Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.</li>
 <li>Change working directory to where the file was saved. Main menu: <strong>File-&gt;Change dir…</strong></li>
-<li>read.table ( ), or read.csv( ). For example, <strong>x &lt;- read.table(“somefile.txt”, sep = “<span class="math inline">\(\t\)</span>”, header = TRUE, missingstring = “NA”)</strong></li>
-<li>Double check the data with <strong>str( x )</strong>, make sure each column is recognized correctly as <strong>“character”</strong>, <strong>“factor”</strong> and <strong>“numeric”</strong>. Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character. For example, <strong>x $ ids &lt;- as.character(x $ ids)</strong>, here x is the data frame and ids is the column name. Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as <strong>factors</strong>. This could be done with something like <strong>x $ treatment &lt;- as.factor(x $ treatment)</strong>.</li>
+<li>read.table ( ), or read.csv( ). For example,
+<strong>x &lt;- read.table(“somefile.txt”, sep = “<span class="math inline">\(\t\)</span>”, header = TRUE, missingstring = “NA”)</strong></li>
+<li>Double check the data with <strong>str( x )</strong>, make sure each column is recognized correctly as <strong>“character”</strong>, <strong>“factor”</strong> and <strong>“numeric”</strong>.
+Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character. For example, <strong>x $ ids &lt;- as.character(x $ ids)</strong>, here x is the data frame and ids is the column name. Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as <strong>factors</strong>. This could be done with something like <strong>x $ treatment &lt;- as.factor(x $ treatment)</strong>.</li>
 </ol>
-<p>Refresher using cheat sheets that summarize many R functions is available here: <a href="https://www.rstudio.com/resources/cheatsheets/" class="uri">https://www.rstudio.com/resources/cheatsheets/</a>. It is important to know the different types of R objects: <strong>scalars, vectors, data frames, matrix, and lists</strong>.</p>
+<p>Refresher using cheat sheets that summarize many R functions is available here: <a href="https://www.rstudio.com/resources/cheatsheets/">https://www.rstudio.com/resources/cheatsheets/</a>. It is important to know the different types of R objects: <strong>scalars, vectors, data frames, matrix, and lists</strong>.</p>
 </div>
 <div id="recommended-workflow-for-every-project" class="section level2">
 <h2><span class="header-section-number">4.6</span> Recommended workflow for EVERY project</h2>
@@ -510,7 +534,7 @@ Figure 4.3: Beginning a project in Rstudio, a recommended workflow: commenting, 
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-391" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="data-importing.html#tab:9-01">4.1</a> in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Copy the CSV file to the new folder. Import the csv file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the csv file, (similar to those shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
+<span id="exr:unnamed-chunk-389" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="data-importing.html#tab:9-01">4.1</a> in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Copy the CSV file to the new folder. Import the csv file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the csv file, (similar to those shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
 </div>
 
 <table>
@@ -611,7 +635,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

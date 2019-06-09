@@ -14,7 +14,51 @@ In addition to the graphics functions in base R, there are many other packages w
 knitr::include_graphics("images/img0902_function.png")
 ```  
 
-Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data.  Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
+Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data.  Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some Google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
+
+## Ploting made easy with the ggplot2 package
+
+Now  we  demonstrate  how  to  use  the ggplot2 package  for  visualizing  data using multiple panels. This package is not included in the base version of R. They need to be downloaded and installed. One of main advantages of R is that it is open, and users can contribute their code as packages. If you are  using **Rstudio**,  you  can  choose **Tools->Install packages** from the main menu, and then enter the name of the package.
+If  you  are  using  R  software,  you  can  install  additional  packages,  by clicking **Packages** in the main menu, and select a mirror site. These mirror sites  all  work  the  same,  but  some  may  be  faster. Lately I  just  use cloud mirror. After choosing a mirror and clicking “OK”, you can scroll down the long list to find your package.  Alternatively, you can type this command to install packages. 
+```{r eval =FALSE}
+install.packages ("ggplot2")  # choose the cloud mirror site when asked
+```
+Packages only need to be installed once. But every time you need to use a package, you need to **load** it from your hard drive. 
+```{r}
+library(ggplot2)  # load the ggplot2 package
+```
+
+
+Figure \@ref(fig:2-6)A shows the sepal width distribution for each of the 3 species.  The 3 histograms are aligned in panels: layout of 1 column and 3 rows. 
+
+Figure \@ref(fig:2-6)A shows an interesting feature in how sepal width is distributed. While for I. setosa it is skewed to the right. For the other two species it is skewed to the left. 
+
+We can also have density plots side-by-side (Figure \@ref(fig:2-6)B):
+
+```{r fig.keep='none'}
+ggplot(iris, aes(x = Sepal.Width, group = Species, 
+                 y = c(..count..[..group.. == 1]/sum(..count..[..group.. == 1]),
+                       ..count..[..group.. == 2]/sum(..count..[..group.. == 2]),
+                       ..count..[..group.. == 3]/sum(..count..[..group.. == 3])) * 100)) + 
+  geom_histogram(binwidth = .2, colour = "black", fill = "lightblue") + 
+  facet_grid(Species ~ .) +
+  labs(y = "Percent of Total")
+ggplot(iris, aes(x = Petal.Length, fill = Species)) + geom_density(alpha = .3)
+
+```
+
+
+(ref:2-6) Visualizing data using the ggplot2 package. 
+
+```{r 2-6, echo=FALSE, fig.cap='(ref:2-6)', fig.align='center'}
+knitr::include_graphics("images/img0206n_HistDensity.png")
+```
+
+```{exercise}
+Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies. 
+```
+
+
 
 ## Visualizing mtcars dataset 
 
