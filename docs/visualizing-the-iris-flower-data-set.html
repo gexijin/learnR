@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Visualizing the iris flower data set | Learn R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Visualizing the iris flower data set | Learn R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Visualizing the iris flower data set | Learn R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
+
+
+<meta name="date" content="2019-06-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="step-into-r-programmingthe-iris-flower-dataset.html">
+<link rel="next" href="data-structures.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
+<li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-makes-plotting-intuitive"><i class="fa fa-check"></i><b>2.2</b> The ggplot2 package makes plotting intuitive</a></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>2.3</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.4</b> Star and segment diagrams</a></li>
+<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.5</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.6</b> Bar plot with error bar</a></li>
+<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#box-plot-and-death-to-the-dynamite-plots"><i class="fa fa-check"></i><b>2.7</b> Box plot and death to the dynamite plots</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#combining-plots"><i class="fa fa-check"></i><b>2.8</b> Combining plots</a></li>
+<li class="chapter" data-level="2.9" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.9</b> Hierarchical clustering and heat map</a></li>
+<li class="chapter" data-level="2.10" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#projecting-high-dimentional-data-with-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.10</b> Projecting high-dimentional data with principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for Help and Example Code</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.2</b> Matrix operations</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.3</b> Lists</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.5</b> Strings and string vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>4</b> Data importing</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
+<li class="chapter" data-level="4.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>4.2</b> Reading data from file using Import dataset in Rstudio</a></li>
+<li class="chapter" data-level="4.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.3</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>4.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="4.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>4.6</b> Recommended workflow for EVERY project</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set I</a><ul>
+<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html"><i class="fa fa-check"></i><b>6</b> Visualizing heart attack data set</a><ul>
+<li class="chapter" data-level="6.1" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
+<li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
+<li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>8</b> Exploring of state data set</a><ul>
+<li class="chapter" data-level="8.1" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#peeking-the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>8.4</b> Peeking the whole picture of the data set</a></li>
+<li class="chapter" data-level="8.5" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#linear-model-anylysis"><i class="fa fa-check"></i><b>8.5</b> Linear model anylysis</a></li>
+<li class="chapter" data-level="8.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>9</b> Exploring of game sale dataset</a><ul>
+<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.4.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
+<li class="chapter" data-level="9.4.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.4.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.4.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
+<li class="chapter" data-level="9.4.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.4.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html"><i class="fa fa-check"></i><b>10</b> Exploring of employee salary data set</a><ul>
+<li class="chapter" data-level="10.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
+<li class="chapter" data-level="10.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
+<li class="chapter" data-level="10.2.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
+<li class="chapter" data-level="10.2.3" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
+<li class="chapter" data-level="10.2.4" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
+<li class="chapter" data-level="10.3.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
+<li class="chapter" data-level="10.3.3" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
+<li class="chapter" data-level="10.4.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#lm-and-anova-analysis"><i class="fa fa-check"></i><b>10.5</b> LM and ANOVA analysis</a></li>
+<li class="chapter" data-level="10.6" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#conclusion-2"><i class="fa fa-check"></i><b>10.6</b> Conclusion</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="visualizing-the-iris-flower-data-set" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Visualizing the iris flower data set</h1>
+<p>Learning objectives:</p>
+<ul>
+<li>Install and load R packages</li>
+<li>Basic concepts of the R graphics</li>
+<li>The ggplot2 package</li>
+<li>Visualization of the iris flower dataset</li>
+</ul>
+<div id="basic-concepts-of-r-graphics" class="section level2">
+<h2><span class="header-section-number">2.1</span> Basic concepts of R graphics</h2>
+<p>In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics. The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a so-called Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics using layers.</p>
+<p>Note the textbook <em>R Graphics Cookbook</em> includes all kinds of R plots and example code. Some are online: <a href="http://www.cookbook-r.com/Graphs/">http://www.cookbook-r.com/Graphs/</a>. There are also websites lists all sorts of R graphics and example codes that you can use. <a href="http://www.r-graph-gallery.com/">http://www.r-graph-gallery.com/</a> contains more than 200 such examples. Another one is here: <a href="http://bxhorn.com/r-graphics-gallery/">http://bxhorn.com/r-graphics-gallery/</a> If you know what types of graphs you want, tt is very easy to start with a template code and swap out the dataset.</p>
+<p>We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:9-02"></span>
+<img src="images/img0902_function.png" alt="List of graphics functions in base R."  />
+<p class="caption">
+Figure 2.1: List of graphics functions in base R.
+</p>
+</div>
+<p>Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data. Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some Google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document.</p>
+</div>
+<div id="the-ggplot2-package-makes-plotting-intuitive" class="section level2">
+<h2><span class="header-section-number">2.2</span> The ggplot2 package makes plotting intuitive</h2>
+<p>Now we demonstrate how to use the ggplot2 package for visualizing data using multiple panels. This package is not included in the base version of R. They need to be downloaded and installed. One of main advantages of R is that it is open, and users can contribute their code as packages. If you are using <strong>Rstudio</strong>, you can choose <strong>Tools-&gt;Install packages</strong> from the main menu, and then enter the name of the package.
+If you are using R software, you can install additional packages, by clicking <strong>Packages</strong> in the main menu, and select a mirror site. These mirror sites all work the same, but some may be faster. Lately I just use cloud mirror. After choosing a mirror and clicking “OK”, you can scroll down the long list to find your package. Alternatively, you can type this command to install packages.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span> (<span class="st">&quot;ggplot2&quot;</span>)  <span class="co"># choose the cloud mirror site when asked</span></code></pre>
+<p>Packages only need to be installed once. But every time you need to use <strong>functions or data</strong> in a package, we have to <strong>load</strong> it from your hard drive.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)  <span class="co"># load the ggplot2 package</span></code></pre>
+<p>Figure <a href="visualizing-the-iris-flower-data-set.html#fig:2-6">2.2</a> shows the sepal width distribution for each of the 3 species. The 3 histograms are aligned in panels: layout of 1 column and 3 rows.</p>
+<p>Figure <a href="visualizing-the-iris-flower-data-set.html#fig:2-6">2.2</a> shows an interesting feature in how sepal width is distributed. While for I. setosa it is skewed to the right. For the other two species it is skewed to the left.</p>
+<p>We can also have density plots side-by-side (Figure <a href="visualizing-the-iris-flower-data-set.html#fig:2-6">2.2</a>):</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:2-6"></span>
+<img src="book_files/figure-html/2-6-1.png" alt="Visualizing data using the ggplot2 package." width="672" />
+<p class="caption">
+Figure 2.2: Visualizing data using the ggplot2 package.
+</p>
+</div>
+<p>Notice that this command span two lines. The first line defines the plotting space. The ending “+” signififies that another layer ( data points) of plotting is added. The ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density</span>( <span class="dt">alpha =</span> <span class="fl">0.3</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:2-7"></span>
+<img src="book_files/figure-html/2-7-1.png" alt="(ref:2-7)" width="672" />
+<p class="caption">
+Figure 2.3: (ref:2-7)
+</p>
+</div>
+<blockquote>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-45" class="exercise"><strong>Exercise 2.1  </strong></span>Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies.
+</div>
+</blockquote>
+</div>
+<div id="scatter-plot-matrix" class="section level2">
+<h2><span class="header-section-number">2.3</span> Scatter plot matrix</h2>
+<p>While data frames can have a mix of numbers and characters in different columns, a <strong>matrix is often only contain numbers</strong>. Let’s extract first 4 columns from the data frame iris and convert to a matrix:</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])  <span class="co"># convert to matrix</span>
+<span class="kw">colMeans</span>(x)  <span class="co"># column means for matrix</span></code></pre>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##     5.843333     3.057333     3.758000     1.199333</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colSums</span>(x)</code></pre>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        876.5        458.6        563.7        179.9</code></pre>
+<p>The same thing can be done with rows via <strong>rowMeans(x)</strong> and <strong>rowSums(x)</strong>.</p>
+<p>We can generate a matrix of scatter plots simply by:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(x) </code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(x, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species])  <span class="co"># Figure 2.18</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-48"></span>
+<img src="book_files/figure-html/unnamed-chunk-48-1.png" alt="Scatter plot matrix." width="672" />
+<p class="caption">
+Figure 2.4: Scatter plot matrix.
+</p>
+</div>
+<blockquote>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-49" class="exercise"><strong>Exercise 2.2  </strong></span>Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots.
+</div>
+</blockquote>
+</div>
+<div id="star-and-segment-diagrams" class="section level2">
+<h2><span class="header-section-number">2.4</span> Star and segment diagrams</h2>
+<p><strong>Star plot uses stars to visualize multidimensional data.</strong> Radar chart is a useful way to display multivariate observations with an arbitrary number of variables. Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+<span class="kw">stars</span>(x)         <span class="co"># do I see any diamonds?</span>
+<span class="kw">stars</span>(x, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">0</span>))    <span class="co"># What does this tell you?</span></code></pre>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-51" class="exercise"><strong>Exercise 2.3  </strong></span>Based on the star plot, what is your overall impression regarding the differences among these 3 species of flowers?
+</div>
+
+<p>The stars() function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stars</span>(x, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">20</span>,<span class="fl">0.5</span>), <span class="dt">draw.segments =</span> T )    </code></pre>
+
+<div class="figure" style="text-align: center"><span id="fig:12-4"></span>
+<img src="images/img1204n_starsegment.png" alt="Star plots and segments diagrams."  />
+<p class="caption">
+Figure 2.5: Star plots and segments diagrams.
+</p>
+</div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-53" class="exercise"><strong>Exercise 2.4  </strong></span>Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 &lt;- as.data.frame(state.x77),then attach df.state.x77.
+</div>
+
+</div>
+<div id="parallel-coordinate-plot" class="section level2">
+<h2><span class="header-section-number">2.5</span> Parallel coordinate plot</h2>
+<p>Parallel coordinate plot is a straightforward way of visualizing multivariate data using lines.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+<span class="kw">matplot</span>(<span class="kw">t</span>(x), <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>,                <span class="co">#“l” is lower case L for “line”.</span>
+        <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species])  <span class="co"># Species information is color coded</span>
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(iris<span class="op">$</span>Species), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))  <span class="co"># add legend to figure.</span>
+<span class="kw">text</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">3.8</span>), <span class="dv">0</span>, <span class="kw">colnames</span>(x))  <span class="co"># manually add names</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:12-5"></span>
+<img src="book_files/figure-html/12-5-1.png" alt="Parallel coordinate plots directly visualize high-dimensional data by drawing lines." width="80%" />
+<p class="caption">
+Figure 2.6: Parallel coordinate plots directly visualize high-dimensional data by drawing lines.
+</p>
+</div>
+<p>The result is shown in Figure <a href="visualizing-the-iris-flower-data-set.html#fig:12-5">2.6</a>. Note that each line represents a flower. The four measurements are used to define the line. We can clearly see that I. setosa have smaller petals.</p>
+<p>In addition to this, the “lattice” package has something nicer called “parallelplot”. That function can handle columns with different scales.</p>
+</div>
+<div id="bar-plot-with-error-bar" class="section level2">
+<h2><span class="header-section-number">2.6</span> Bar plot with error bar</h2>
+
+<pre class="sourceCode r"><code class="sourceCode r">Means &lt;-<span class="st"> </span><span class="kw">tapply</span>(iris<span class="op">$</span>Petal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), mean)  <span class="co"># means by group </span>
+SDs &lt;-<span class="st"> </span><span class="kw">tapply</span>(iris<span class="op">$</span>Petal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), sd)   <span class="co"># standard deviation by group</span>
+Nsamples &lt;-<span class="st"> </span><span class="kw">tapply</span>(iris<span class="op">$</span>Petal.Length, <span class="kw">list</span>(iris<span class="op">$</span>Species), length) <span class="co"># number of samples per group</span>
+SEs &lt;-<span class="st"> </span>SDs<span class="op">/</span><span class="kw">sqrt</span>(Nsamples) <span class="co"># standard error</span>
+xloc &lt;-<span class="st"> </span><span class="kw">barplot</span>(Means,  <span class="co"># bar plot, returning the location of the bars</span>
+                <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,
+                <span class="dt">ylab =</span> <span class="st">&quot;Measurements(cm)&quot;</span>,
+                <span class="dt">main =</span> <span class="st">&quot;Petal Length&quot;</span>,
+                <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">7</span>), <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)
+<span class="kw">arrows</span>(xloc, Means <span class="op">-</span><span class="st"> </span>SDs,  <span class="co"># add error bars as arrows</span>
+       xloc, Means <span class="op">+</span><span class="st"> </span>SDs,
+       <span class="dt">code =</span> <span class="dv">3</span>, <span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">length =</span> <span class="fl">0.1</span>)
+<span class="kw">text</span>(xloc, <span class="fl">0.5</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, Nsamples))   <span class="co"># add sample size to each group</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:12-8"></span>
+<img src="book_files/figure-html/12-8-1.png" alt="Bar plot of average petal lengths for 3 species" width="80%" />
+<p class="caption">
+Figure 2.7: Bar plot of average petal lengths for 3 species
+</p>
+</div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-54" class="exercise"><strong>Exercise 2.5  </strong></span>Write R code to generate Figure <a href="visualizing-the-iris-flower-data-set.html#fig:12-8">2.7</a>, which show the means of petal length for each of the species with error bars corresponding to standard deviations.
+Bar plot of average petal lengths for 3 species Bar plot of average petal lengths for 3 species.
+</div>
+
+</div>
+<div id="box-plot-and-death-to-the-dynamite-plots" class="section level2">
+<h2><span class="header-section-number">2.7</span> Box plot and death to the dynamite plots</h2>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x)  <span class="co"># plain version. Column names may not shown properly</span></code></pre>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># set figure margins (bottom, left, top, right)</span>
+<span class="kw">boxplot</span>(x, <span class="dt">las =</span> <span class="dv">2</span>)   <span class="co"># Figure 2.22</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:12-6"></span>
+<img src="book_files/figure-html/12-6-1.png" alt="Box plot of all 4 columns" width="80%" />
+<p class="caption">
+Figure 2.8: Box plot of all 4 columns
+</p>
+</div>
+<p>Notice that las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely.</p>
+<p>Instead of ploting 4 columns, we want to generate a boxplot of one column (Petal.Length), subgrouped by another column (Species). This is called the <strong>formula notation</strong> in R: Sepal length as a function of Species.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(iris<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Species)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The similar plot can be generated by ggplot.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>The benefit of using ggplot2 is evident as we can easily refine it.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="fl">0.2</span>))</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-58"></span>
+<img src="book_files/figure-html/unnamed-chunk-58-1.png" alt="Box plot with raw data points. This is getting increasingly popular." width="80%" />
+<p class="caption">
+Figure 2.9: Box plot with raw data points. This is getting increasingly popular.
+</p>
+</div>
+<p>On top of the boxplot, we add another layer representing the raw data points for each of the species. Since lining up data points on a straight line is hard to see, we jittered the relative x-poisition within each subspecies randomly. We also color-coded three species simply by adding “color = Species”. Many of hte low-level graphics details are handled for us by ggplot2 as the legend is generated automatically.</p>
+<p>The bar plot with error bar in Bar plot of average petal lengths for 3 species we generated above is called dynamite plots for its similarity.<strong>“The dynamite plots must die!”</strong>, argued renowed statistician Rafael Irizarry in his <a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">blog</a>. Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overal disstribution is hidden. Many scientists have chosen to use this boxplot with jittered points.</p>
+</div>
+<div id="combining-plots" class="section level2">
+<h2><span class="header-section-number">2.8</span> Combining plots</h2>
+<p>It is possible to combine multiple plots at the same graphics window.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r">op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">no.readonly =</span> <span class="ot">TRUE</span>)  <span class="co"># get old parameters</span>
+<span class="kw">par</span>(<span class="dt">mfrow=</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># nrows = 2; ncols= 2</span>
+<span class="kw">attach</span>(iris)
+<span class="kw">hist</span>(Sepal.Length)
+<span class="kw">hist</span>(Sepal.Width)
+<span class="kw">hist</span>(Petal.Length)
+<span class="kw">hist</span>(Petal.Width)
+<span class="kw">par</span>(op)  <span class="co"># restore old parameters; otherwise affect all subsequent plots</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:13-1"></span>
+<img src="book_files/figure-html/13-1-1.png" alt="Combine multiple histograms." width="50%" height="50%" />
+<p class="caption">
+Figure 2.10: Combine multiple histograms.
+</p>
+</div>
+<p>The result is shown in Figure <a href="visualizing-the-iris-flower-data-set.html#fig:13-1">2.10</a>. This plot gives a good overview of the distribution of multiple variables. We can see that the overall distributions of petal length and petal width are quite unusual.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-59" class="exercise"><strong>Exercise 2.6  </strong></span>Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations.
+</div>
+
+</div>
+<div id="hierarchical-clustering-and-heat-map" class="section level2">
+<h2><span class="header-section-number">2.9</span> Hierarchical clustering and heat map</h2>
+<p>Hierarchical clustering summarizes observations into trees representing the overall similarities.</p>
+<pre class="sourceCode r"><code class="sourceCode r">disMatarix &lt;-<span class="st"> </span><span class="kw">dist</span>(x)
+<span class="kw">plot</span>( <span class="kw">hclust</span>(disMatarix) )</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>We first calculate a distance matrix using the <strong>dist</strong> function with the default Euclidian distance method. The distance matrix is then used by the <strong>hclust</strong> function to generate a hierarchical clustering tree with the defult complete linkage method, which is then plotted in a nested command.</p>
+<p>The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidian distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.</p>
+<p>First, each of the flower samples is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all 150 flowers. At each iteration, the distances between clusters are recalculated according to one of the methods—<em>Single linkage, complete linkage, average linkage, and so on</em>. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the all possible object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances. However, the default seems to be complete linkage. Thus we need to change that in our final version.</p>
+<p><strong>Heat maps</strong> with hierarchical clustering are my favorite way of visualizing data matrices. The rows and columns are reorganized based on hierarchical clustering, and the values in the matrix are coded by colors. Heat maps can directly visualize millions of numbers in one plot. The hierarchical trees also show the similarity among rows and columns.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># convert to matrix</span>
+<span class="kw">heatmap</span>(x, 
+        <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>, 
+        <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species]
+        )</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>Scaling is handled by the <strong>scale</strong> function, which subtracts the mean from each column and then divides by the standard division. Afterwards, all the columns have the same mean of approximately 0 and standard deviation of 1. This is also called standardization. The default color scheme code bigger numbers in yellow and smaller numbers in red. The color bar on the left codes for different species. But we still missing a legend and many other things can be polished. Instead of going down the rabbit hole of adjusting dozens of parameters to heatmap function (and its improved version heatmap.2 in the ggplots package), We will refine this plot using another R package called pheatmap.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>)</code></pre>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pheatmap)
+x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># convert to matrix</span>
+<span class="kw">row.names</span>(x) &lt;-<span class="st"> </span><span class="kw">row.names</span>(iris) <span class="co"># assign row names in the matrix</span>
+<span class="kw">pheatmap</span>(x, 
+         <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>,
+         <span class="dt">clustering_method =</span> <span class="st">&quot;average&quot;</span>, <span class="co"># average linkage</span>
+         <span class="dt">annotation_row =</span> iris[, <span class="dv">5</span>, <span class="dt">drop=</span><span class="ot">FALSE</span>], <span class="co"># the 5th column as color bar</span>
+         <span class="dt">show_rownames =</span> <span class="ot">FALSE</span>
+         )</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:12-3"></span>
+<img src="book_files/figure-html/12-3-1.png" alt="Heatmap for iris flower dataset." width="672" />
+<p class="caption">
+Figure 2.11: Heatmap for iris flower dataset.
+</p>
+</div>
+<p>First we convert the first 4 columns of the iris data frame into a matrix. Then the row names are assigned to be the same, namely, “1” to “150”. This is required because row names are used to match with the column annotation information, specified by the annotation_row parameter. Even though we only need the 5th column, i.e. Species, this has to be a data frame. To prevent R from automatically converting a one-column data frame into a vector, we used to <em>drop = FALSE</em> option. Multiple columns can be contained in the column annotation data frame to display multiple color bars. The rows could be annotated the same way.</p>
+<p>More information about the pheatmap function can be obtained by reading the help document. But most of times, I rely on the online tutorials. Beyond the official documents prepared by the author, there are many documents created by R users across the world. The R user community is uniquely open and supportive. I was researching heatmap.2, a more refined version of heatmap part of the gplots package and landed on Dave Tang’s <a href="https://davetang.org/muse/2010/12/06/making-a-heatmap-with-r/">blog</a>, which mentioned that there is more user-friendly package called pheatmap described in his other <a href="https://davetang.org/muse/2018/05/15/making-a-heatmap-in-r-with-the-pheatmap-package/">blog</a>. To figure out the code chuck above, I tried several times and also used Kamil Slowikowski’s <a href="https://slowkow.com/notes/pheatmap-tutorial/">blog</a>.</p>
+<p>We can gain many insights from Figure <a href="visualizing-the-iris-flower-data-set.html#fig:12-3">2.11</a>. The 150 flowers in the rows are organized into different clusters. <em>I. Setosa</em> samples obviously formed a unique cluster, characterized by smaller (blue) petal length, petal width, and sepal length. The other two subspecies are not clearly separated but we can notice that some <em>I. Virginica</em> samples form a small subcluster showing bigger petals. The columns are also organized into dendrograms, which clearly suggest that petal length and petal width are highly correlated.</p>
+</div>
+<div id="projecting-high-dimentional-data-with-principal-component-analysis-pca" class="section level2">
+<h2><span class="header-section-number">2.10</span> Projecting high-dimentional data with principal component analysis (PCA)</h2>
+<p>PCA is a linear projection method. As illustrated in Figure <a href="visualizing-the-iris-flower-data-set.html#fig:13-4">2.12</a>, it tries to define a new set of orthogonal coordinates to represent the dataset such that the new coordinates can be ranked by the amount of variation or information it captures in the dataset. After running PCA, you get many pieces of information:</p>
+<p>• How the new coordinates are defined,</p>
+<p>• The percentage of variances captured by each of the new coordinates,</p>
+<p>• A representation of all the data points onto the new coordinates.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:13-4"></span>
+<img src="images/img1304_PCA.png" alt="Concept of PCA. Here the first component x’ gives a relatively accurate representation of the data." width="75%" />
+<p class="caption">
+Figure 2.12: Concept of PCA. Here the first component x’ gives a relatively accurate representation of the data.
+</p>
+</div>
+<p>Here’s an example of running PCA in R. Note that “scale=T” in the following command means that the data is normalized before conduction PCA so that each variable has unite variance.</p>
+<pre class="sourceCode r"><code class="sourceCode r">pca =<span class="st"> </span><span class="kw">prcomp</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">scale =</span> <span class="ot">TRUE</span>)   
+pca  <span class="co"># Have a look at the results.</span></code></pre>
+<pre><code>## Standard deviations (1, .., p=4):
+## [1] 1.7083611 0.9560494 0.3830886 0.1439265
+## 
+## Rotation (n x k) = (4 x 4):
+##                     PC1         PC2        PC3        PC4
+## Sepal.Length  0.5210659 -0.37741762  0.7195664  0.2612863
+## Sepal.Width  -0.2693474 -0.92329566 -0.2443818 -0.1235096
+## Petal.Length  0.5804131 -0.02449161 -0.1421264 -0.8014492
+## Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</code></pre>
+<p>Note that the first principal component is positively correlated with Sepal length, petal length, and petal width. Recall that these three variables are highly correlated. Sepal width is the variable that is almost the same across three species with small standard deviation. PC2 is mostly determined by sepal width, less so by sepal length.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(pca)   <span class="co"># this shows the structure of the object, listing all parts. </span></code></pre>
+<pre><code>## List of 5
+##  $ sdev    : num [1:4] 1.708 0.956 0.383 0.144
+##  $ rotation: num [1:4, 1:4] 0.521 -0.269 0.58 0.565 -0.377 ...
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : chr [1:4] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; &quot;Petal.Length&quot; &quot;Petal.Width&quot;
+##   .. ..$ : chr [1:4] &quot;PC1&quot; &quot;PC2&quot; &quot;PC3&quot; &quot;PC4&quot;
+##  $ center  : Named num [1:4] 5.84 3.06 3.76 1.2
+##   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; &quot;Petal.Length&quot; &quot;Petal.Width&quot;
+##  $ scale   : Named num [1:4] 0.828 0.436 1.765 0.762
+##   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot; &quot;Petal.Length&quot; &quot;Petal.Width&quot;
+##  $ x       : num [1:150, 1:4] -2.26 -2.07 -2.36 -2.29 -2.38 ...
+##   ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..$ : NULL
+##   .. ..$ : chr [1:4] &quot;PC1&quot; &quot;PC2&quot; &quot;PC3&quot; &quot;PC4&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;prcomp&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(pca<span class="op">$</span>x)  <span class="co"># the new coordinate values for each of the 150 samples</span></code></pre>
+<pre><code>##            PC1        PC2         PC3          PC4
+## [1,] -2.257141 -0.4784238  0.12727962  0.024087508
+## [2,] -2.074013  0.6718827  0.23382552  0.102662845
+## [3,] -2.356335  0.3407664 -0.04405390  0.028282305
+## [4,] -2.291707  0.5953999 -0.09098530 -0.065735340
+## [5,] -2.381863 -0.6446757 -0.01568565 -0.035802870
+## [6,] -2.068701 -1.4842053 -0.02687825  0.006586116</code></pre>
+<p>These numbers can be used to plot the distribution of the 150 data points.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">pch =</span> <span class="dv">1</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species],
+         <span class="dt">xlab =</span> <span class="st">&quot;1st principal component&quot;</span>, 
+         <span class="dt">ylab =</span> <span class="st">&quot;2nd Principal Component&quot;</span>)
+     <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(iris<span class="op">$</span>Species), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))</code></pre>
+<p>The result (left side of Figure <a href="visualizing-the-iris-flower-data-set.html#fig:13-5">2.13</a>) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. From this I observed that the first principal component alone can be used to distinguish the three species. We could use simple rules like this: If PC1 &lt; -1, then Iris setosa. If PC1 &gt; 1.5 then Iris virginica. If -1 &lt; PC1 &lt; 1, then Iris versicolor.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:13-5"></span>
+<img src="book_files/figure-html/13-5-1.png" alt="PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right)." width="50%" /><img src="book_files/figure-html/13-5-2.png" alt="PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right)." width="50%" />
+<p class="caption">
+Figure 2.13: PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
+</p>
+</div>
+<p>Now let’s try ggplot2. First, construct a data frame demanded by ggplot2.</p>
+<pre class="sourceCode r"><code class="sourceCode r">pcaData &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])
+pcaData &lt;-<span class="st"> </span><span class="kw">cbind</span>(pcaData, iris<span class="op">$</span>Species) 
+<span class="kw">colnames</span>(pcaData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>, <span class="st">&quot;Species&quot;</span>)
+
+<span class="co">#install.packages(&quot;ggplot2&quot;)</span>
+<span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(pcaData, <span class="kw">aes</span>(PC1, PC2, <span class="dt">color =</span> Species, <span class="dt">shape =</span> Species)) <span class="op">+</span><span class="st">   </span><span class="co"># define plot area</span>
+<span class="st">         </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>)                                          <span class="co"># adding data points</span></code></pre>
+<p>Now we have a basic plot. As you could see this plot is very different from those from R base graphics. We are adding elements one by one using the “+” sign at the end of the first line.</p>
+<p>We will add details to this plot.</p>
+<pre class="sourceCode r"><code class="sourceCode r">percentVar &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="kw">summary</span>(pca)<span class="op">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dv">0</span>)     <span class="co"># compute % variances</span>
+<span class="kw">ggplot</span>(pcaData, <span class="kw">aes</span>(PC1, PC2, <span class="dt">color =</span> Species, <span class="dt">shape =</span> Species)) <span class="op">+</span><span class="st">  </span><span class="co"># starting ggplot2</span>
+<span class="st">         </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st">                                       </span><span class="co"># add data points</span>
+<span class="st">         </span><span class="kw">xlab</span>(<span class="kw">paste0</span>(<span class="st">&quot;PC1: &quot;</span>, percentVar[<span class="dv">1</span>], <span class="st">&quot;% variance&quot;</span>)) <span class="op">+</span><span class="st">         </span><span class="co"># x label</span>
+<span class="st">         </span><span class="kw">ylab</span>(<span class="kw">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, percentVar[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>)) <span class="op">+</span><span class="st">         </span><span class="co"># y  label</span>
+<span class="st">         </span><span class="kw">ggtitle</span>(<span class="st">&quot;Principal component analysis (PCA)&quot;</span>) <span class="op">+</span><span class="st">              </span><span class="co"># title            </span>
+<span class="st">         </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> <span class="dv">1</span>)                                      <span class="co"># width and height ratio             </span></code></pre>
+<p>The result is shown in right side of Figure <a href="visualizing-the-iris-flower-data-set.html#fig:13-5">2.13</a>. You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it.</p>
+<p>The function <em>autoplot()</em> in package <strong>ggfortify</strong> can generate the similar plot as Figure <a href="visualizing-the-iris-flower-data-set.html#fig:13-5">2.13</a>. The differences are caused by algorithms used in different packages.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggfortify)
+<span class="kw">autoplot</span>(<span class="kw">prcomp</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), <span class="dt">data =</span> iris, <span class="dt">colour =</span> <span class="st">&#39;Species&#39;</span>, <span class="dt">shape =</span> <span class="st">&#39;Species&#39;</span>)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>More details can be found in this webpage:</p>
+<p><a href="https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html">https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html</a>.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-70" class="exercise"><strong>Exercise 2.7  </strong></span>Create PCA plot of the state.x77 data set (convert matrix to data frame). Use the state.region information to color code the states. Interpret your results. Hint: do not forget normalization using the scale option.
+</div>
+
+</div>
+<div id="classification-predicting-the-odds-of-binary-outcomes" class="section level2">
+<h2><span class="header-section-number">2.11</span> Classification: Predicting the odds of binary outcomes</h2>
+<p>It is easy to distinguish <em>I. setosa</em> from the other two species, just based on petal length alone. Here we focus on building a predictive model that can predict between <em>I. versicolor</em> and <em>I. virginica</em>. For this we use the logistic regression to model the odd ratio of being <em>I. virginica</em> as a function of all of the 4 measurements:</p>
+<p><span class="math display">\[ln(odds)=ln(\frac{p}{1-p})
+                     =a×Sepal.Length + b×Sepal.Width + c×Petal.Length + d×Petal.Width+c+e.\]</span></p>
+<pre class="sourceCode r"><code class="sourceCode r">iris2 &lt;-<span class="st"> </span>iris[<span class="dv">51</span><span class="op">:</span><span class="dv">150</span>, ]  <span class="co"># removes the first 50 samples, which represent I. setosa</span>
+iris2 &lt;-<span class="st"> </span><span class="kw">droplevels</span>(iris2)  <span class="co"># removes setosa, an empty levels of species.</span>
+model &lt;-<span class="st"> </span><span class="kw">glm</span>(Species <span class="op">~</span><span class="st"> </span>. , <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link =</span> <span class="st">&#39;logit&#39;</span>), 
+             <span class="dt">data =</span> iris2)  <span class="co"># Species ~ . species as a function of everything else in the dataset</span>
+<span class="kw">summary</span>(model)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Species ~ ., family = binomial(link = &quot;logit&quot;), 
+##     data = iris2)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.01105  -0.00541  -0.00001   0.00677   1.78065  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)  
+## (Intercept)   -42.638     25.707  -1.659   0.0972 .
+## Sepal.Length   -2.465      2.394  -1.030   0.3032  
+## Sepal.Width    -6.681      4.480  -1.491   0.1359  
+## Petal.Length    9.429      4.737   1.991   0.0465 *
+## Petal.Width    18.286      9.743   1.877   0.0605 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 138.629  on 99  degrees of freedom
+## Residual deviance:  11.899  on 95  degrees of freedom
+## AIC: 21.899
+## 
+## Number of Fisher Scoring iterations: 10</code></pre>
+<p>Sepal length and width are not useful in distinguishing versicolor from <em>virginica</em>. The most significant (P=0.0465) factor is Petal.Length. One unit increase in petal length will increase the log-odd of being <em>virginica</em> by 9.429. Marginally significant effect is found for Petal.Width.</p>
+<p>If you do not fully understand the mathematics behind linear regression or logistic regression, do not worry about it too much. Me either. In this class, I just want to show you how to do these analysis in R and interpret the results.
+I do not understand how computers work. Yet I <strong>use</strong> it every day.</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-72" class="exercise"><strong>Exercise 2.8  </strong></span>So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:</p>
+<p>• What distinguishes these three species?</p>
+<p>• If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to?</p>
+Review all the analysis we did, examine the raw data, and answer the above questions. Write a paragraph and provide evidence of your thinking. Do more analysis if needed.
+</div>
+
+<p>References:
+1 Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="step-into-r-programmingthe-iris-flower-dataset.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-structures.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
