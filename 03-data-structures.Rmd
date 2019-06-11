@@ -1,7 +1,6 @@
 # Data structures
 
-R data types and basic expressions^1^ :
-Common **data structures** in R include **scalars, vectors, matrices, factors, data frames**, and **lists**. These data structures can contain one or more individual data elements of several types, namely **numeric** (2.5), **character** (“Go Jacks”), or **logical** (TRUE or FALSE). 
+R script is mostly consisted of function calls and data. There are many different types of data objects. Common **data structures** in R include **scalars, vectors, factors, matrices, factors, data frames**, and **lists**. These data structures can contain one or more individual data elements of several types, namely **numeric** (2.5), **character** (“Go Jacks”), or **logical** (TRUE or FALSE). 
 
 ## Basic concepts
 ###	Expressions
@@ -17,30 +16,30 @@ Type the string **"Go Jacks"**. (Don't forget the quotes!)
 "Go Jacks"
 ```
 
+>
 ```{exercise}
 Now try multiplying 45.6 by 78.9.
 ```
 
+---
+
+
 ###	Logical Values
 
-Some expressions return a "logical value": **TRUE** or **FALSE**. (Many programming languages refer to these as "boolean" values.) Let's try typing an expression that gives us a logical value:
+Some expressions return a "logical value" that take value of either **TRUE** or **FALSE**. Many programming languages refer to these as "boolean" values. Let's try typing an expression that gives us a logical value:
 ```{r}
 3 < 4
 ```
 
-And another logical value (note that you need a double-equals sign to check whether two values are equal - a single-equals sign won't work):
+And another logical value.:
 ```{r}
 2 + 2 == 5
 ```
-
-**T** and **F** are shorthand for **TRUE** and **FALSE**. Try this:
-```{r}
-T == TRUE
-```
+Note that you need a double-equals sign to check whether two values are equal - a single-equals sign won't work.
 
 
 ###	Variables
-As in other programming languages, you can store a value into a variable to access it later. Type **x = 42** to store a value in **x**.  x is a **scalar, with only one data element**. 
+As in other programming languages, you can store a value into a variable to access it later. Type **x = 42** to store a value in **x**.  x is a **scalar that contain only one data element**. 
 ```{r}
 x = 42
 ```
@@ -49,6 +48,9 @@ You can also use the following. This is a conventional, safer way to assign valu
 ```{r}
 x <- 42
 ```
+
+This is the recommended way of assignment, according to the [Google R style Guide.](https://google.github.io/styleguide/Rguide.xml) But if ```x = 42``` works fine in the vast majority of the times. 
+
 
 x can now be used in expressions in place of the original result. Try dividing **x** by **2** (**/** is the division operator), and other calculations.
 ```{r}
@@ -76,8 +78,9 @@ x <- TRUE
 
 You can store multiple values in a variable or object. That is called a **vector**, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a **matrix**, or **data frame**. 
 
+
 ###	Functions
-You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Most of your R commands are functional calls. Let's try using the sum function, to add up a few numbers. Enter:
+Functions are fundamental building blocks of R. Most of the times when we run R commands, we are calling and executing functions. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let's try using the sum function, to add up a few numbers. Enter:
 ```{r}
 sum(1, 3, 5)
 ```
@@ -87,20 +90,30 @@ Some arguments have names. For example, to repeat a value 3 times, you would cal
 rep("Yo ho!", times = 3)
 ```
 
-
+>
 ```{exercise}
-Suppose a vector is definded as x <- c(12, 56, 31, -5, 7). Calculate the mean of all elements in x, assign the mean to *y*. Squared each element in x and assign the result in a new vector *z*.
+Suppose a vector is definded as x <- c(12, 56, 31, -5, 7).              
+a. Calculate the mean of all elements in x and assign it to *y*.     
+b. Squared each element in x and assign the results to a new vector *z*.       
 ```
 
+---
+
+>
 ```{exercise}
-Try to find and run the two functions that sets and returns the current working directory. 
+Find two functions which sets and returns the current working directory, respectively.
 ```
 
+---
+
+>
 ```{exercise}
-Try to find and run the function that lists all the files in the current working folder. 
+Find the function that lists all the files in the current working folder. 
 ```
 
-Many times, we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Functions are fundamental building blocks of R. Most of the times when we run R commands, we are calling and executing functions.  We can easily define our very own functions.
+---
+
+Often we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Tested and documented R functions are often available as R packages. We can also easily define our own functions.
 
 For example, we have the following arithmetic function: 
 
@@ -112,51 +125,63 @@ x <- 5
 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1
 ```
 
-This will work, but every time we have to re-write this code. 
-So let’s try to define our own function:
+This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:
 ```{r}
-myf <- function(x) {
-       y = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1
-       return(y)
+myf <- function(x) {                           #Name of my function is myf
+       y = 1.57345 * x^3 + x^2 - 2 * x + 1 #Expression of the function
+       return(y)                               #Return vaules of the function
 }
 ```
 
-Note that “{”  and “}” signify the beginning and end of a block of code.  **“function”** tells R that a function is going to be defined. At the end, the **“return”** statement returns the desired value. 
+Note that “{”  and “}” signify the beginning and end of a block of code.  **“function”** tells R that a function is going to be defined. At the end, the **“return”** statement returns the desired values. 
 
-You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call by:
+You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:
 ```{r}
-myf(5)  # or myf(x = 5)
+myf(5)     # Obtain the y value given x=5.
+```
+or 
+```{r}
+myf(x = 5) #
 ```
 
-As you can see you get the same results when x=5. But now you can use this in many ways. 
+The funtion applies to a vector as well. For example:
 ```{r}
-x <- - 10 : 10  # x now is a vector  with 21 numbers -10, -9, … 10
-myf(x) 
-plot(x, myf(x))  # see plot on the right.
+x <- - 10 : 10  # x is a vector with integer values from -10 to 10.
+myf(x)          # Apply the function myf() to x.
+plot(x, myf(x)) # Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.
 ```
 
-Obviously functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too. 
+Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too. 
 
+>
 ```{exercise}
-Write an R function to implement this arithmetic function:  f(x)= |x|+5x-6. Note |x| means the absolute value of x. Use this function to find f(4.534), and also produce a plot like the example. 
+Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.             
+a. Write an R function to implement this arithmetic function.               
+b. Use this function to find f(-4.534).                 
+c. Obtain the graph of the function.                 
 ```
+
+---
 
 Let's define a function to count even numbers in a vector. 
 
 ```{r}
 #counts the number of even intergers in vec
 evencount <- function(vec) {
-  k <- 0 # assign o to i      #assign 0 to a count varialbe k
-  for (i in vec) {            #set i to vec[1],vec[2],...
-    if (i %% 2 == 0) k <- k + 1 # test if i is an even or odd number. %% is the modulo operator
+  k <- 0                      # assign 0 to a count varialbe k
+  for (i in vec) {            # Find all elements (represented by i) in vec. 
+                              # Values of i are actually vec[1],vec[2],...
+    if (i %% 2 == 0) 
+      k <- k + 1              # test if i is an even or odd number. 
+                              # %% is the modulo operator.
   }
-  return(k)                   #print the computed value of k
+  return(k)                   #Return the count of even numbers in vec.
 }
 ```
 
 ```{r}
-x=c(2, 5, 7, 8, 14, 12, 8, 3) #a vector
-evencount(x)           #Call the function evencount(). 
+x=c(2, 5, 7, 8, 14, 12, 8, 3) # Define a new vector. 
+evencount(x) # Call the function evencount(). Replace vec with defined vector x.
 ```
 
 A vaiable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
@@ -169,7 +194,7 @@ vec
 
 Error: object 'vec' not found
 
-A variable is called global variable if it is defined outside of functions.A global variable is also available within functions. Here is an example:
+A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:
 
 ```{r}
 myfun.globle <- function (x){
@@ -180,7 +205,6 @@ myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
 ```
 Here y is a global variable.
 
-
 The function *myfun.globle2()* defined below returns the same values as above. But both x and y within the the paratheses *(x, y=1)* following *function* are local variables.
 ```{r}
 myfun.globle2 <- function (x, y = 1){ #y is set as 1 within the function by default.
@@ -189,9 +213,19 @@ myfun.globle2 <- function (x, y = 1){ #y is set as 1 within the function by defa
 myfun.globle2(8)    #8-2*y = 8-2*(1)=6
 ```
 
+>
 ```{exercise}
-Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calcute the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+Define a function which returns the count of all odd numbers in the vector x <- 1:99. 
 ```
+
+---
+
+>
+```{exercise}
+Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+```
+
+---
 
 ```{r echo=FALSE, results= 'hide', message=FALSE}
 fun1 <- function(x){
@@ -207,14 +241,32 @@ fun1(x)
 fun1(y)
 ```
 
-###	Looking for Help and Example Code
-```{r message=FALSE, results='hide'}
+###	Looking for help and example Code
+```{r, eval=F}
 ? sum 
 ```
 
-A web page will pope up. This is the official help information for this function. At the bottom of the page is some example code. The quickest way to learn an R function is to run the example codes and see the input and output. You can easily copy, paste, and twist the example code to do your analysis. 
+A document will pop up in the Help Window. See the Figure \@ref(fig:ch3-1). 
 
-**example()** brings up examples of usage for the given function. Try displaying examples for the min function:
+(ref:ch3-1) Sum help
+
+```{r ch3-1, echo=FALSE, out.width='60%', fig.cap='(ref:ch3-1)', fig.align='center'}
+knitr::include_graphics("images//Ch3_1.png")
+```
+
+
+At the bottom of the page is some example code. See the Figure \@ref(fig:ch3-2).
+
+(ref:ch3-2) Examples of sum code
+
+```{r ch3-2, echo=FALSE, out.width='60%', fig.cap='(ref:ch3-2)', fig.align='center'}
+knitr::include_graphics("images//Ch3_2.png")
+```
+
+The quickest way to learn an R function is to run the example codes and see the input and output. You can easily copy, paste, and twist the example code to do your analysis.
+
+
+**example()** brings up examples of usage for the given function. Try the examples for the min function:
 ```{r fig.keep='none'}
 example(min)
 ```
@@ -272,11 +324,14 @@ Create a sequence from 5 to 9 with length 15:
 seq(from = 5, to = 9, length = 15)
 ```
 
+>
 ```{exercise}
 Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
 ```
 
-#### Commands about vector
+---
+
+#### Vectors operations
 Next we will try those commands about vector. First let's find out what is the 4th element of our vector x <- c(5, 2, 22, 11, 5), or the elements from 2 to 4.
 ```{r}
 x[4]
@@ -480,9 +535,12 @@ y
 ```
 In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise multiply the element by 2 then add 1.
 
+>
 ```{exercise}
 Using sample selction function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selcted integer is an even number, then y returns 'even', otherwise y returns 'odd'.
 ```
+
+---
 
 If we have two vectors and try to compare them with each other:
 ```{r}
@@ -507,15 +565,9 @@ sum(z)
 The sum is considered "not available" by default because one of the vector's values was **NA**. This is the responsible thing to do; R won't just blithely add up the numbers without warning you about the incomplete data. We can explicitly tell **sum** (and many other functions) to remove **NA** values before they do their calculations, however.
 
 Bring up documentation for the **sum** function:
-```{r}
+```{r, eval=F}
 ? sum
 ```
-
-sum    package:base                    
-
-R Documentation
-...
-
 
 As you see in the documentation, **sum** can take an optional named argument, **na.rm**. It's set to **FALSE** by default, but if you set it to **TRUE**, all **NA** arguments will be removed from the vector before the calculation is performed.
 
@@ -524,9 +576,12 @@ Try calling **sum** again, with **na.rm** parameter set to **TRUE**:
 sum(z, na.rm = TRUE)
 ```
 
+>
 ```{exercise}
 Now compute the average of values in z. Ignore the missing values.
 ```
+
+---
 
 Let's using examples to show the differences between NULL and NA.
 ```{r}
@@ -599,29 +654,7 @@ y <- c(1, 2, 1, 2, 1)
 x+y
 ```
 
-
-
-####	Scatter Plots of two vectors  
-The **plot** function takes two vectors, one for X values and one for Y values, and draws a graph of them. Let's draw a graph showing the relationship of numbers and their sines.
-
-```{r}
-x <- seq(1, 20, 0.1)
-y <- sqrt(x)
-```
-
-
-Then simply call plot with your two vectors:
-```{r }
-plot(x, y)
-```
-
-Great job! Notice on the graph that values from the first argument (x) are used for the horizontal axis, and values from the second (y) for the vertical.
-
-```{exercise}
-Create a vector with 21 integers from -10 to 10, and store it in the x variable.  Then create a scatterplot of x^2 against x. 
-```
-
-#### Fish example of vector
+#### An example of vector
 Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:
 ```{r}
 c(7, 3, 9)
@@ -648,9 +681,12 @@ We can access the individual elements by indices:
 fishes[3]
 ```
 
+>
 ```{exercise}
 Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the **fishes** vector and return a TRUE or FALSE value.
 ```
+
+---
 
 Jerry protested that the ¼ inch long fish he caught and released per fishing rules was not counted properly. We can change the values in the 2nd element directly by:
 ```{r}
@@ -703,9 +739,12 @@ Assigning names for a vector also enables us to use labels to access each elemen
 fishes["Jerry"]
 ```
 
+>
 ```{exercise}
 Now see if you can set the value for **Tom** to something other than 5 using the name rather than the index.
 ```
+
+---
 
 Tom proposes that their goal for next fishing trip is to double their catches.
 ```{r}
@@ -719,9 +758,36 @@ sum(fishes ^ 2)
 
 Note that two operations are nested. You can obviously do it in two steps.
 
+>
 ```{exercise}
 Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1.  And create a bar plot to represent this information. 
 ```
+
+---
+
+####	Scatter Plots of two vectors  
+The **plot** function takes two vectors, one for X values and one for Y values, and draws a graph of them. Let's draw a graph showing the relationship of numbers and their sines.
+
+```{r}
+x <- seq(1, 20, 0.1)
+y <- sqrt(x)
+```
+
+
+Then simply call plot with your two vectors:
+```{r }
+plot(x, y)
+```
+
+Great job! Notice on the graph that values from the first argument (x) are used for the horizontal axis, and values from the second (y) for the vertical.
+
+>
+```{exercise}
+Create a vector with 21 integers from -10 to 10, and store it in the x variable.  Then create a scatterplot of x^2 against x. 
+```
+
+---
+
 
 ### Matrix operations
 **Matrix** is a two dimensional data structure in R programming. Technically, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. 
@@ -897,9 +963,12 @@ Heatmap is my favorite type of graph for visualizing a large matrix data.
 heatmap(x, scale = "column", margins = c(10,5))
 ```
 
+>
 ```{exercise}
 Let *subset.iris <- as.matrix(iris[1:10, 1:4])*, Using apply function to calculate the mean of *subset.iris* by column.
 ```
+
+---
 
 **Example:**
 Define a function to find the positions of minimal value in each column of *subset.iris <- as.matrix(iris[1:10, 1:4])*.
@@ -921,7 +990,7 @@ find.min.posi(subset.iris)
 ```
 As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Lenth and Petal.Width respectively.
 
-
+>
 ```{exercise}
 Let *subset.iris.2 <- as.matrix(iris[, 1:4])*, fill blanks in the *find.max* function defined below to find the maximal value in each column of *subset.iris.2*.
 ```
@@ -947,6 +1016,7 @@ row.names(y) <- c('odd.number', 'even.number')
 y
 ```
 
+---
 
 Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents "picure elements". They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a grayscale imge, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%. 
 
@@ -999,9 +1069,9 @@ Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 
 
 The function *locator()* allows us to find the relevant rows and columns. Type **locator()** in the *Console* window, then R will wait for you to click a point within an image, then click *esc* on your keyboard to exit the function. Then the function will return the coordinates of that point in the *Console* window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in *pixmap* objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from *locator()* function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function. 
 
+>
 ```{exercise}
 Using the *mosaic.plot()* function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
-
 ```
 
 ```{r echo = FALSE}
@@ -1014,9 +1084,12 @@ mona.lisa <- read.pnm("mona_lisa.pgm", cellres = 1)
 mona.lisa.mosaic <- mosaic.plot(mona.lisa, 60:85, 81:150)
 plot(mona.lisa.mosaic)
 ```
-```{exercise}
-Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic. 
 
+---
+
+>
+```{exercise}
+Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic.         
 mosaic.plot.2 <- function(picture, yrange, xrange, degree){          
   length.y <- _______(yrange)          
   length.x <- length(______)          
@@ -1024,11 +1097,10 @@ mosaic.plot.2 <- function(picture, yrange, xrange, degree){
   pic2@____[_______,_______] <- degree          
   return(pic2)          
 }          
-
 Setting the degree=0, 0.5 and 1 respectively, plot the images of Mona Lisa that eyes region are covered by pure colors. 
 ```
 
-
+---
 
 ### Lists
 All elements in vectors must be same type. The list can combine objectes of different types. Let's start from creating a list:
@@ -1103,12 +1175,14 @@ This implies that y[[4]] is same as the *mean()* function. For example:
 y[[4]](c(1, 2, 3, 4, 5))          #Get the mean of 1, 2, 3, 4, 5
 ```
 
+>
 ```{exercise}           
 Access the second component in list1 by three ways as we introduced above. What is the type of list1["Hobby"] and list1[["Hobby"]] respectively?      
 ```{r}
   list1 <- list(Name = "Tom", Hobby = "Fishing", Num.fish = c(16, 27, 5))
 ```
 
+---
 
 Here are some examples for list operation:
 ```{r}
@@ -1149,22 +1223,21 @@ sale.tag[["Winter"]] <- 112
 sale.tag
 ```
 
+>
 ```{exercise}         
-Based on the data set of sale.tag, choose all correct answers from the following options A - F.                   
-  A: sale.tag[[1]]                  
+Based on the data set of sale.tag, choose all correct answers from the following options A - F.         A: sale.tag[[1]]                  
   B: sale.tag[[Spring]]                      
   C: sale.tag[["Spring"]]                      
   D: sale.tag["Spring"]                   
   E: sale.tag[1]                    
-  F: sale.tag[Spring]                
-  
+  F: sale.tag[Spring] 
 1, Which options return a vector.  Answer:___________                 
 2, Which options return a list.    Answer:___________                
 3, Which options returns an error. Answer:___________                
 ```
 
+---
 
-                          
 Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
 > mean(sale.tag)                
 [1] NA                
@@ -1288,12 +1361,13 @@ You can sort the v2 by the number of days that they presented by function *sort(
 sort(v2, decreasing = T)
 ```
 
+>
 ```{exercise}           
 Fill blanks in the function *my.fun()* so that for a given list, the function returns
 all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
   F F M M M M I I F I F M I F M I I M I I F         
 Where F, M and I represent Female, Male and Infant respectively.
-
+>
 my.fun <- function(f){
 y <- unlist(f)                         
 x <- ___________                                     
@@ -1309,6 +1383,8 @@ ___________(lst)
 gender <- list( "F", ________________________________, "F")                    
 __________(gender)                                                  #                 
 ```
+
+---
 
 Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a p value, a vector of residuals or coefficients, and even a matrix of data.  A list is the natural way to represent this sort of thing as one big object that could be parsed. 
 ```{r}
@@ -1379,11 +1455,13 @@ df2 <- data.frame(x,y,z,stringsAsFactors = FALSE)
 df2
 class(df2$x)
 ```
-```
+
+>
 ```{exercise}
 What is the class of the R built-in data set *mtcars*? Show the function that you used to check the class.
-
 ```
+
+---
 
 Once data is read in as **data frame**, these are commands you can use to analyze it. 
 
@@ -1465,9 +1543,12 @@ If there are more than one conditions are applied to the data, we use *&* to con
 x.3conds <- x[x$Sepal.Length>7 & x$Species == "virginica", -3]       # -3 means removing the 3rd column from x.
 ```
 
+>
 ```{exercise}
 Select a subset which satisfies that the *cyl* is 6 and *mpg* greater than 21.2, meanwhile the subset doesn't include the variable *carb*.
 ```
+
+---
 
 We can add new column named "id" to the data frame, which goes from 1 to 150. Function *head()* is used to view the first 6 rows of the new data set.
 ```{r}
@@ -1506,10 +1587,12 @@ We can obtain summary statistics by category. Let's calculate the mean of the va
 aggregate(. ~ Species, x, mean)
 ```
 
+>
 ```{exercise}
 Use *aggregate()* function to calculate the median of the variables: *mpg*, *disp*, *hp*, and *wt* across the number of cylinders *cyl* in the *mtcars* data set.
 ```
 
+---
 
 It is easier to conduct statistical analysis after organizing data as data frame. Analysis of variance, or ANOVA tests whether sepal length has significant difference cross species in data frame iris.
 ```{r}
@@ -1539,20 +1622,20 @@ m <- lm(Sepal.Length ~ Sepal.Width + Petal.Length, x)
 summary(m)
 ```
 
+>
 ```{exercise}
 Test if the variables *mpg*, *disp*, *hp*, *wt* and *qsec* have significant difference across the three cyl in the R build data set *mtcars*. Fill the blanks and interpret your conclusion based on the p-values.            
-              
+>              
 aov.fun.car <- function(temx){                         
   m2 <- ________(________ ~ _________$______)                                   
   summary(________)                  
 }                  
-                  
-
 sub.car <- mtcars[, ___________]                                 
 aov.car <- ___________(_________, __________)                              
 ____________                  
-
 ```
+
+---
 
 We can merge two data frames by the function *merge()*. Here are some examples:
 ```{r}
@@ -1717,10 +1800,12 @@ segs  # a vector of strings
 segs[1]  # first segment
 ```
 
+>
 ```{exercise}
 In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”. 
 ```
 
-## For more in-depth exercises
-Go to: [http://tryr.codeschool.com/](http://tryr.codeschool.com/)  
+---
+
+Some of the materials above has been inspired by  [http://tryr.codeschool.com/](http://tryr.codeschool.com/), which contains more in-depth introduction.
 
