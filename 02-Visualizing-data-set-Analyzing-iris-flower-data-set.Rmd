@@ -3,18 +3,18 @@
 Learning objectives:
 
 - Install and load R packages (ggplot2 and pheatmap)
-- Basic concepts of the R graphics
+- Basic concepts of R graphics
 - Ploting with ggplot2
 - Different ways to visualize the iris flower dataset
 
 
 ## Basic concepts of R graphics
 
-In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2, both implemented in additional packages. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics.  The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a so-called Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics by adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
+In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2, both implemented in additional packages. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics.  The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics by adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
 
   We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table below. High-level graphics functions initiates new plots, to which new elements could be added using the low level functions. 
   
-  High-level graphics functions that can initiate a new plot
+
   
   Function   |  Memo
   -----------|---------------------------------------------
@@ -27,9 +27,10 @@ barplot	     | Barplot
 mosaicplot	 | Using mosaics to represent the frequencies of tabulated counts.
 heatmap	     | Using colors to visualize a matrix of numeric values.
 
-
+Table: High-level graphics functions that can initiate a new plot. 
   
-Low-level graphics functions that add things to an existing plot
+In contrast, low-level graphics functions does not wipe out the existing plot, they adds elements to it. 
+
 
   Function   |  Memo
   -----------|---------------------------------------------
@@ -41,13 +42,16 @@ Low-level graphics functions that add things to an existing plot
   legend	   | Add a legend to a plot
   arrows	   | Add arrows to a plot
 
+Table: Low-level graphics functions that add things to an existing plot.
+
 
 Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with **default settings** to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are suitable for the data.  
 
 Sometimes we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some Google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
 
-  One of the open secret of R programming is that you can start from a plain figure and keep trying to **refine it step by step** while googling. Let's take a example using the base R graphics.
-This produces a basic scatter plot.   
+One of the open secret of R programming is that you can start from a plain figure and keep trying to **refine it step by step** while googling. Let's take a example using the base R graphics.
+This produces a basic scatter plot with the petal length on the x-axis and petal width on the y-axis. Since iris is a data frame, we will use the ```iris$Petal.Length``` to refer to the Petal.Length column. This avoids using the *attach* function. 
+
 ```{r, fig.align='center', out.width='80%' }
 plot(iris$Petal.Length, iris$Petal.Width)
 ```
@@ -90,7 +94,7 @@ plot(iris$Petal.Length, iris$Petal.Width,
      col = rainbow(3)[types])
 ```
 
-This figure starts to looks nice. But we are not done. Let's  change the x- and y-labels, and also add a main title.
+This figure starts to looks nice, as the three species are easily separated by color and shape. But we are not done. Let's  change the x- and y-labels, and also add a main title.
 
 ```{r, fig.align='center', out.width='80%'}
 plot(iris$Petal.Length, iris$Petal.Width, 
@@ -98,7 +102,7 @@ plot(iris$Petal.Length, iris$Petal.Width,
      col = rainbow(3)[types],
      xlab = "Petal length (cm)",
      ylab = "Petal width (cm)",
-     main = "Variation in Petals")
+     main = "Correlation of Petal length and width")
 ```
 
 
@@ -110,8 +114,10 @@ plot(iris$Petal.Length, iris$Petal.Width,
      xlab = "Petal length (cm)",
      ylab = "Petal width (cm)",
      main = "Correlation of Petal length and width")
-abline( lm(iris$Petal.Width ~ iris$Petal.Length) )
+abline( lm(iris$Petal.Width ~ iris$Petal.Length) ) # the order is reversed as we need y ~ x.
 ```
+The ```lm(iris$Petal.Width ~ iris$Petal.Length)``` generates a linear model (lm) of petal width as a function petal length. y ~ x is **formula notation** that used in many different situations. This linear model is used to plot the trend line.
+
 
 We calculate the Pearson's correlation coefficient and mark it to the plot. The **text** function is used to place strings created with the *paste* function at the location of coordinate of (x=5, y=0.5). 
 ```{r, fig.align='center', out.width='80%'}
@@ -129,8 +135,12 @@ text(5, 0.5, paste("R=", roundedPCC) ) # add text to plot
 ```
 
 
-To finish up this plot, we need a legend. 
-```{r, fig.align='center', out.width='80%'}
+To finish up this plot, we add a legend. 
+
+(ref:23-5) A refined scatter plot using base R graphics.
+
+
+```{r, fig.cap='(ref:12-3)', fig.align='center', out.width='80%'}
 plot(iris$Petal.Length, iris$Petal.Width, 
      pch = types,  # marker type
      col = rainbow(3)[types],  # color
@@ -143,7 +153,7 @@ legend("topleft",
        levels(iris$Species), 
        pch = 1:3, col = rainbow(3))
 ```
-This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step. 
+This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step with some trial-and-error. 
 
   Another open secrets of coding is that we frequently steal each other's ideas and code.
   Note the  textbook *R Graphics Cookbook* includes all kinds of R plots and example code. Some are online: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/). There are also websites lists all sorts of R graphics and example codes that you can use. [http://www.r-graph-gallery.com/](http://www.r-graph-gallery.com/) contains more than 200 such examples. Another one is here: [http://bxhorn.com/r-graphics-gallery/](http://bxhorn.com/r-graphics-gallery/)  If you know what types of graphs you want, it is very easy to start with a template code and swap out the dataset.
@@ -173,6 +183,8 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
 
 Notice that this command span two lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. The ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
 
+
+It is also much easier to generate a plot like Figure \@ref(fig:23-5).
 ```{r , fig.align='center', out.width='80%' }
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width) ) +    # define space
   geom_point( aes(color = Species, shape = Species) ) +    # add points
@@ -233,6 +245,7 @@ stars(x)         # do I see any diamonds?
 stars(x, key.loc = c(17,0))    # What does this tell you?
 ```
 
+>
 ```{exercise}
 Based on the star plot, what is your overall impression regarding the differences among these 3 species of flowers? 
 ```
@@ -249,6 +262,7 @@ stars(x, key.loc = c(20,0.5), draw.segments = T )
 knitr::include_graphics("images/img1204n_starsegment.png")
 ```
 
+>
 ```{exercise}
 Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 <- as.data.frame(state.x77),then attach df.state.x77.
 ```
@@ -290,6 +304,7 @@ arrows(xloc, Means - SDs,  # add error bars as arrows
 text(xloc, 0.5, paste("n=", Nsamples))   # add sample size to each group
 ```
 
+>
 ```{exercise}
 Write R code to generate Figure \@ref(fig:12-8), which show the means of petal length for each of the species with error bars corresponding to standard deviations. 
 (ref:12-8) Bar plot of average petal lengths for 3 species.
@@ -357,6 +372,7 @@ par(op)  # restore old parameters; otherwise affect all subsequent plots
 
 The result is shown in Figure \@ref(fig:13-1). This plot gives a good overview of the distribution of multiple variables. We can see that the overall distributions of petal length and petal width are quite unusual. 
 
+>
 ```{exercise}
 Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations. 
 ```
@@ -504,16 +520,7 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting g
 
 The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
 
-The function *autoplot()* in package **ggfortify** can generate the similar plot as Figure \@ref(fig:13-5). The differences are caused by algorithms used in different packages.
-```{r warning=FALSE}
-library(ggfortify)
-autoplot(prcomp(pca$x[, 1:2]), data = iris, colour = 'Species', shape = 'Species')
-```
-
-More details can be found in this webpage:
-
-[https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html](https://cran.r-project.org/web/packages/ggfortify/vignettes/plot_pca.html).
-
+>
 ```{exercise}
 Create PCA plot of the state.x77 data set (convert matrix to data frame). Use the state.region information to color code the states. Interpret your results. Hint: do not forget normalization using the scale option. 
 ```
@@ -536,6 +543,7 @@ Sepal length and width are not useful in distinguishing versicolor from *virgini
 If you do not fully understand the mathematics behind linear regression or logistic regression, do not worry about it too much.  Me either. In this class, I just want to show you how to do these analysis in R and interpret the results. 
 I do not understand how computers work. Yet I **use** it every day. 
 
+>
 ```{exercise}
 So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:
 
