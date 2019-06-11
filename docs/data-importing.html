@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2019-06-10" />
+<meta name="date" content="2019-06-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,12 +173,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="data-structures.html"><a href="data-structures.html#for-more-in-depth-exercises"><i class="fa fa-check"></i><b>3.3</b> For more in-depth exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-importing.html"><a href="data-importing.html"><i class="fa fa-check"></i><b>4</b> Data importing</a><ul>
-<li class="chapter" data-level="4.1" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
-<li class="chapter" data-level="4.2" data-path="data-importing.html"><a href="data-importing.html#reading-data-from-file-using-import-dataset-in-rstudio"><i class="fa fa-check"></i><b>4.2</b> Reading data from file using Import dataset in Rstudio</a></li>
-<li class="chapter" data-level="4.3" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.3</b> Data manipulation in a data frame</a></li>
-<li class="chapter" data-level="4.4" data-path="data-importing.html"><a href="data-importing.html#reading-file-using-read.table-read.csv-etc."><i class="fa fa-check"></i><b>4.4</b> Reading file using read.table, read.csv, etc.</a></li>
+<li class="chapter" data-level="4.1" data-path="data-importing.html"><a href="data-importing.html#poject-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Poject-oriented workflow</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-importing.html"><a href="data-importing.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="data-importing.html"><a href="data-importing.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="data-importing.html"><a href="data-importing.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="data-importing.html"><a href="data-importing.html#import-dataset"><i class="fa fa-check"></i><b>4.1.4</b> Import dataset</a></li>
+<li class="chapter" data-level="4.1.5" data-path="data-importing.html"><a href="data-importing.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-importing.html"><a href="data-importing.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.2</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.3" data-path="data-importing.html"><a href="data-importing.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.3</b> Data transformation using the dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="data-importing.html"><a href="data-importing.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.4</b> Reading files directly using read.table</a></li>
 <li class="chapter" data-level="4.5" data-path="data-importing.html"><a href="data-importing.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
-<li class="chapter" data-level="4.6" data-path="data-importing.html"><a href="data-importing.html#recommended-workflow-for-every-project"><i class="fa fa-check"></i><b>4.6</b> Recommended workflow for EVERY project</a></li>
+<li class="chapter" data-level="4.6" data-path="data-importing.html"><a href="data-importing.html#enter-data-manually"><i class="fa fa-check"></i><b>4.6</b> Enter data manually</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set I</a><ul>
 <li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
@@ -269,110 +275,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-importing" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Data importing</h1>
-<p>There are many different ways to get data into R. You can enter data manually (see below), or semi-manually (see below). You can read data into R from a local file or a file on the internet. You can also use R to retrieve data from databases, local or remote. The most import thing is to read data set into R correctly. A dataset not read in correctly will never be analyzed or visualized correctly.</p>
-<p><img src="images/img0900_note.png" width="50%" style="display: block; margin: auto;" /></p>
-<div id="enter-data-manually" class="section level2">
-<h2><span class="header-section-number">4.1</span> Enter data manually</h2>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)
-<span class="kw">sum</span>(x)</code></pre>
-<pre><code>## [1] 13.8</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(
-       <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># the data elements </span>
-       <span class="dt">nrow =</span> <span class="dv">2</span>,             <span class="co"># number of rows </span>
-       <span class="dt">ncol =</span> <span class="dv">3</span>)             <span class="co"># number of columns                     </span>
-A                            <span class="co"># show the matrix</span></code></pre>
-<pre><code>##      [,1] [,2] [,3]
-## [1,]    2    3    5
-## [2,]    4    1    7</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">scan</span>()  <span class="co"># Enter values from keyboard, separated by Return key. End by empty line. </span>
-<span class="fl">2.1</span></code></pre>
-<pre><code>## [1] 2.1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">3.1</span></code></pre>
-<pre><code>## [1] 3.1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">4.1</span></code></pre>
-<pre><code>## [1] 4.1</code></pre>
-<p>Note that you can paste a column of numbers from Excel.</p>
+<p>Learning objectives:</p>
+<ul>
+<li>Create projects in Rstudio</li>
+<li>Proper steps to import data</li>
+<li>Data transformation using dplyr</li>
+</ul>
+<div id="poject-oriented-workflow" class="section level2">
+<h2><span class="header-section-number">4.1</span> Poject-oriented workflow</h2>
+<p>It is best to create a separate folder that contains all related files. You can do the same for research projects. In Rstudio, this is called a <strong>Project</strong>. For example you can create a project for each of the chapters in this book. Projects are self-contained and can be moved to another computer or folder and the code will run.</p>
+<blockquote>
+<p>If the first line of your R script is
+setwd(“C:\Users\jenny\path\that\only\I\have”)
+I will come into your office and SET YOUR COMPUTER ON FIRE
+—@JennyBryan on Twitter</p>
+</blockquote>
+<div class="figure">
+<img src="https://github.com/gexijin/learnR/raw/master/images/dataImport.gif" alt="Animated GIF for screen shot." />
+<p class="caption">Animated GIF for screen shot.</p>
 </div>
-<div id="reading-data-from-file-using-import-dataset-in-rstudio" class="section level2">
-<h2><span class="header-section-number">4.2</span> Reading data from file using Import dataset in Rstudio</h2>
-<p>Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and sooo amateur)! Do not even think about using Microsoft Word! I strongly recommend that you install a powerful text editor such as NotePad++ (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a>), or TextPad (<a href="https://www.textpad.com/" class="uri">https://www.textpad.com/</a>). If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (<a href="https://sourceforge.net/projects/npptor/" class="uri">https://sourceforge.net/projects/npptor/</a>) to send R commands from NotePad++ directly to R, and I love it!</p>
-<p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
-<p>Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
-<p>Probably the most intuitive way to read data into Rstudio is to use the <strong>Import dataset</strong> function available at <strong>File-&gt;Import Dataset</strong> from the Rstudio menu. You can also click <strong>Import dataset</strong> button on the top-right of the Rstudio interface. The preferred format is CSV. But it is not required. You can open a text file with Excel, and save it as a CSV file.</p>
-<ol style="list-style-type: decimal">
-<li>Download data and read background information</li>
-</ol>
-<p>Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-deliminated text file, meaning the different columns are separated by tab, hence the “<span class="math inline">\(\t\)</span>” above.<br />
-2. In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“x”</strong> on the lower left of the import interface. See Figure <a href="data-importing.html#fig:3-1">4.1</a>.</p>
-<p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
-x &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>,<span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
-                <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
-<span class="kw">View</span>(x)  <span class="co"># shows the data, will change if you modify it. </span></code></pre>
-<p>Before you click <strong>Import</strong>, I highly recommend that you select all the codes and copy it to your clipboard. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
+<div id="create-a-project-in-a-new-folder" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Create a project in a new folder</h3>
+<p>Start by setting up a project in a new folder by going to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose where the directory will be created on your hard drive. I created a directory called “Chapter4” under “D:\RBook”. Rstudio creates a Project file named like “Chapter4.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from <strong>File-&gt;Open</strong>. In Windows you can also just double-click on the project file. You get everything ready to go on a particular assignment or research project.</p>
+<p>This folder is your <strong>working folder</strong>, a default folder for reading files, writing outputs etc.</p>
+<p>More advanced users should consider create a project using version control, so that all versions of your code is backup and easily shared by <a href="https://github.com/">GitHub</a>. See <a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a> by Jenny Bryan.</p>
+</div>
+<div id="create-a-script-file-and-comment" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Create a script file and comment (!)</h3>
+<p>Once you have a new project created, the first step is to start a new script file by clicking the <strong>File +</strong> button or go to <strong>File-&gt;New file</strong> and choose <strong>R script file</strong>. By default, the script file is called Untitled1.R. Rstudio will ask you to change it the first time you hit “Save” button.</p>
+<p>Start your R script by adding comments on background information. Comments starting with “#” are ignored by R when running, but they are helpful for humans, including the future self, to understand the code. We re-cycle and re-use our codes over and over, so it is vital to add information about what a chunk of code does. Figure <a href="data-importing.html#fig:9-1">4.1</a> shows a recommended workflow for beginning your script. Click “Save” button and name your file something like “Data Import.R”.</p>
+<p><strong>Write your scripts while saving your project files</strong>. If you click on the <strong>Run</strong> button, Rstudio runs the current line of code where your cursor is located. You can also select multiple lines and run them at once. You can jump back and forth but remember you are operating on the data objects sequentially. So sometimes you want to get a fresh start by running the reset line, namely:<strong>rm(list=ls())</strong>. This command lists and then deletes all data objects from R’s brain. As you develop your coding skills, following these guidelines can make you more efficient. Remember to save everything once a while by hitting the <strong>Save</strong> button on the main icon bar! Even though Rstudio saves your scripts every 5 seconds, it can crash.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:3-1"></span>
-<img src="images/img0301n_importdata.png" alt="Importing data into R."  />
+<div class="figure" style="text-align: center"><span id="fig:9-1"></span>
+<img src="images/img0901_rstudio.png" alt="Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder." width="80%" />
 <p class="caption">
-Figure 4.1: Importing data into R.
+Figure 4.1: Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder.
 </p>
 </div>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>Check data type</strong>.</li>
-</ol>
+</div>
+<div id="copy-data-files-to-the-new-directory" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Copy data files to the new directory</h3>
+<p>This is done outside of Rstudio on Windows or Mac interface. Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-deliminated text file, meaning the different columns are separated by tab. We also need to get some context about the data and how it is collected. At the minimim level, we need to know the meaning of each columns.</p>
+<p><strong>File unzipping, conversion, and context.</strong>
+If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. Is it a text file (CSV, txt, …) or Binary file (XLS, XLSX, …)? Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimitated text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character.</p>
+<p><strong>Checking the file with text editor and Excel.</strong> Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and sooo amateur)! Do not even think about using Microsoft Word! I strongly recommend that you install a powerful text editor such as NotePad++ (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a>), or TextPad (<a href="https://www.textpad.com/" class="uri">https://www.textpad.com/</a>). If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (<a href="https://sourceforge.net/projects/npptor/" class="uri">https://sourceforge.net/projects/npptor/</a>) to send R commands from NotePad++ directly to R, and I love it!</p>
+<p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
+<p>Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
+</div>
+<div id="import-dataset" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> Import dataset</h3>
+<p>In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“df”</strong> on the lower left of the import interface.</p>
+<p>We need to check each of the columns and see the data types are correctly read in.
+The first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.
+So in this dialog interface, DIAGNOSIS, DRG, and DIED should be changed from <strong>“double” to “character”</strong>.
+As shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>, you can click on the automatically guessed datas type under each of the column names as shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>. By selecting “character” from the drop down, you can successfully format this column as a character.</p>
+<p>On the other hand, LOS (length of stay in days) and AGE should be numbers. But because 10 is presented as “0010”, these columns are automatically recognized as characters. We have to force R to read these columns as intergers by clicking on the column title and select <strong>integer</strong>.
+We have to change LOS and AGE from <strong>“character” to “integer”</strong>.</p>
+<p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+df &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;heartatk4R.txt&quot;</span>, 
+    <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">AGE =</span> <span class="kw">col_integer</span>(), 
+        <span class="dt">DIAGNOSIS =</span> <span class="kw">col_character</span>(), <span class="dt">DIED =</span> <span class="kw">col_character</span>(), 
+        <span class="dt">DRG =</span> <span class="kw">col_character</span>(), <span class="dt">LOS =</span> <span class="kw">col_integer</span>()), 
+    <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
+<span class="kw">View</span>(df)</code></pre>
+<p>Before you click on the <strong>Import</strong> button, I highly recommend that you select all the codes and copy it to the script file. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:9-2"></span>
+<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio."  />
+<p class="caption">
+Figure 4.2: Changing data types while importing data into Rstudio.
+</p>
+</div>
+</div>
+<div id="check-and-convert-data-types" class="section level3">
+<h3><span class="header-section-number">4.1.5</span> Check and convert data types</h3>
 <p>Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using as.numeric, as.factor, or as.character functions.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)  <span class="co"># structure of data object, data types for each column</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)  <span class="co"># structure of data object, data types for each column</span></code></pre>
 <pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 12844 obs. of  8 variables:
 ##  $ Patient  : num  1 2 3 4 5 6 7 8 9 10 ...
-##  $ DIAGNOSIS: num  41041 41041 41091 41081 41091 ...
+##  $ DIAGNOSIS: chr  &quot;41041&quot; &quot;41041&quot; &quot;41091&quot; &quot;41081&quot; ...
 ##  $ SEX      : chr  &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
-##  $ DRG      : num  122 122 122 122 122 121 121 121 121 123 ...
-##  $ DIED     : num  0 0 0 0 0 0 0 0 0 1 ...
+##  $ DRG      : chr  &quot;122&quot; &quot;122&quot; &quot;122&quot; &quot;122&quot; ...
+##  $ DIED     : chr  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; ...
 ##  $ CHARGES  : num  4752 3941 3657 1481 1681 ...
-##  $ LOS      : chr  &quot;0010&quot; &quot;0006&quot; &quot;0005&quot; &quot;0002&quot; ...
-##  $ AGE      : chr  &quot;079&quot; &quot;034&quot; &quot;076&quot; &quot;080&quot; ...
+##  $ LOS      : int  10 6 5 2 1 9 15 15 2 1 ...
+##  $ AGE      : int  79 34 76 80 55 84 84 70 76 65 ...
 ##  - attr(*, &quot;spec&quot;)=
 ##   .. cols(
 ##   ..   Patient = col_double(),
-##   ..   DIAGNOSIS = col_double(),
+##   ..   DIAGNOSIS = col_character(),
 ##   ..   SEX = col_character(),
-##   ..   DRG = col_double(),
-##   ..   DIED = col_double(),
+##   ..   DRG = col_character(),
+##   ..   DIED = col_character(),
 ##   ..   CHARGES = col_double(),
-##   ..   LOS = col_character(),
-##   ..   AGE = col_character()
+##   ..   LOS = col_integer(),
+##   ..   AGE = col_integer()
 ##   .. )</code></pre>
-<p>Note that the first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.<br />
-We need to reformat these columns as <strong>factors</strong>. We are going to use <strong>x$SEX</strong> to refer to the SEX column of the data frame x:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span>
-x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>SEX)
-x<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DRG)
-x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIED)</code></pre>
-<p>Now the last three columns are actually numeric measurements. But the LOS and AGE were actually read as characters, due the fact that 10 is recorded as 0010.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>LOS &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>LOS)  <span class="co"># convert to numeric</span>
-x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(x<span class="op">$</span>AGE)
-<span class="kw">str</span>(x)  <span class="co"># double check structure of data</span></code></pre>
+<p>We can reformat categorical values <strong>factors</strong>. We are going to use <code>df$SEX</code> to refer to the SEX column of the data frame df:</p>
+<pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span>
+df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>SEX)
+df<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DRG)
+df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIED)</code></pre>
+<p>Factors are very similar to character vectors. But factors have defined levels and their values are stored as integers.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nlevels</span>(df<span class="op">$</span>DIAGNOSIS)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(df<span class="op">$</span>DIAGNOSIS)</code></pre>
+<pre><code>## [1] &quot;41001&quot; &quot;41011&quot; &quot;41021&quot; &quot;41031&quot; &quot;41041&quot; &quot;41051&quot; &quot;41071&quot; &quot;41081&quot; &quot;41091&quot;</code></pre>
+<p>Note tht “41001” is the <strong>reference level</strong> for this factor and it is coded as 1. The reference level for factors are important when we interpret results from regression, as effects are represented relative to the reference level. The reference level are defined based on the order they appear in the dataset. Sometimes we need to change the reference level.</p>
+<pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">relevel</span>( df<span class="op">$</span>DIAGNOSIS, <span class="st">&quot;41091&quot;</span>)
+<span class="kw">levels</span>(df<span class="op">$</span>DIAGNOSIS)</code></pre>
+<pre><code>## [1] &quot;41091&quot; &quot;41001&quot; &quot;41011&quot; &quot;41021&quot; &quot;41031&quot; &quot;41041&quot; &quot;41051&quot; &quot;41071&quot; &quot;41081&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)  <span class="co"># double check structure of data</span></code></pre>
 <pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 12844 obs. of  8 variables:
 ##  $ Patient  : num  1 2 3 4 5 6 7 8 9 10 ...
-##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41001&quot;,&quot;41011&quot;,..: 5 5 9 8 9 9 9 9 5 5 ...
+##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41091&quot;,&quot;41001&quot;,..: 6 6 1 9 1 1 1 1 6 6 ...
 ##  $ SEX      : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 1 2 2 1 1 2 1 ...
 ##  $ DRG      : Factor w/ 3 levels &quot;121&quot;,&quot;122&quot;,&quot;123&quot;: 2 2 2 2 2 1 1 1 1 3 ...
 ##  $ DIED     : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 2 ...
 ##  $ CHARGES  : num  4752 3941 3657 1481 1681 ...
-##  $ LOS      : num  10 6 5 2 1 9 15 15 2 1 ...
-##  $ AGE      : num  79 34 76 80 55 84 84 70 76 65 ...
+##  $ LOS      : int  10 6 5 2 1 9 15 15 2 1 ...
+##  $ AGE      : int  79 34 76 80 55 84 84 70 76 65 ...
 ##  - attr(*, &quot;spec&quot;)=
 ##   .. cols(
 ##   ..   Patient = col_double(),
-##   ..   DIAGNOSIS = col_double(),
+##   ..   DIAGNOSIS = col_character(),
 ##   ..   SEX = col_character(),
-##   ..   DRG = col_double(),
-##   ..   DIED = col_double(),
+##   ..   DRG = col_character(),
+##   ..   DIED = col_character(),
 ##   ..   CHARGES = col_double(),
-##   ..   LOS = col_character(),
-##   ..   AGE = col_character()
+##   ..   LOS = col_integer(),
+##   ..   AGE = col_integer()
 ##   .. )</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(x)  <span class="co"># a summary often gives us a lot of useful information </span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)  <span class="co"># a summary often gives us a lot of useful information </span></code></pre>
 <pre><code>##     Patient        DIAGNOSIS    SEX       DRG       DIED     
 ##  Min.   :    1   41091  :5213   F:5065   121:5387   0:11434  
 ##  1st Qu.: 3212   41041  :2665   M:7779   122:6047   1: 1410  
@@ -393,93 +428,143 @@ x<span class="op">$</span>AGE &lt;-<span class="st"> </span><span class="kw">as.
 <p>Note that for numeric columns we are shown mean, median, etc, while for factors the frequencies are shown. This reassured us that the data types are correctly recognized. It also shows missing values for CHARGES.
 Some people got free treatment for heart attack? Maybe not. Missing does not mean zero. Maybe the data was not entered for some patients.</p>
 <p>Except enforcing data type conversion by as.factor, as.numeric and so on, We can also reformat the columns before clicking <strong>Import</strong>:</p>
-<p>After locating the file, you can click on the automatically detected data type under each of the column names as shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>. By selecting “Factor” from the drop down and enter all possible levels separated by commas, you can successfully format this column as a factor.</p>
-
-<div class="figure" style="text-align: center"><span id="fig:9-2"></span>
-<img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio."  />
-<p class="caption">
-Figure 4.2: Changing data types while importing data into Rstudio.
-</p>
 </div>
-<p>But if the column has too many levels, it is trouble to type in manually. We can read the column in as character first and then do as.facter conversion.</p>
 </div>
 <div id="data-manipulation-in-a-data-frame" class="section level2">
-<h2><span class="header-section-number">4.3</span> Data manipulation in a data frame</h2>
+<h2><span class="header-section-number">4.2</span> Data manipulation in a data frame</h2>
 <p>We can sort the data by age. Again, type these commands in the script window, instead of directly into the Console window. And save the scripts once a while.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>x[<span class="kw">order</span>(x<span class="op">$</span>AGE), ]  <span class="co"># sort by ascending order by AGE</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df[<span class="kw">order</span>(df<span class="op">$</span>AGE), ]  <span class="co"># sort by ascending order by AGE</span></code></pre>
 <p><strong>Global Environment</strong> window contains the names and sizes of all the variables or objects in the computer memory. R programming is all about creating and modifying these objects in the memory with clear, step-by-step instructions. We also can sort the data by clicking on the column names in spreadsheet from Global Environment.</p>
 <p>Just like in Excel, you can add a new column with computed results:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>pdc &lt;-<span class="st"> </span>x<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span>x<span class="op">$</span>LOS</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df2<span class="op">$</span>pdc &lt;-<span class="st"> </span>df2<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span>df2<span class="op">$</span>LOS</code></pre>
 <p>Here we created a new column pdc to represent per day cost.
 We can also create a column to represent age groups using the floor function just returns the integer part.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(x<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df2<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(df2<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre>
 <p>You can now do things like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>x<span class="op">$</span>ag)</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-356-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(df2<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>df2<span class="op">$</span>ag)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-357-1.png" width="672" /></p>
 <p>Each box represents an age group. Older patients tends to stay longer in the hospital after being admitted for heart attack.</p>
 <p>You can extract a subset of cases:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x2 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
-x3 &lt;-<span class="st"> </span><span class="kw">subset</span>(x, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)  <span class="co"># only people older than 80</span>
-<span class="kw">summary</span>(x3)   </code></pre>
-<pre><code>##     Patient        DIAGNOSIS   SEX       DRG       DIED    
-##  Min.   :    6   41091  :928   F:1263   121:1056   0:1518  
-##  1st Qu.: 3527   41071  :347   M: 785   122: 462   1: 530  
-##  Median : 6834   41011  :280            123: 530           
-##  Mean   : 6633   41041  :275                               
-##  3rd Qu.: 9734   41001  : 78                               
-##  Max.   :12844   41081  : 58                               
-##                  (Other): 82                               
-##     CHARGES           LOS              AGE              pdc         
-##  Min.   :   92   Min.   : 1.000   Min.   : 81.00   Min.   :   18.4  
-##  1st Qu.: 5155   1st Qu.: 5.000   1st Qu.: 82.00   1st Qu.:  833.9  
-##  Median : 8326   Median : 8.000   Median : 85.00   Median : 1133.7  
-##  Mean   :10135   Mean   : 9.131   Mean   : 85.64   Mean   : 1363.7  
-##  3rd Qu.:13369   3rd Qu.:12.000   3rd Qu.: 88.00   3rd Qu.: 1530.0  
-##  Max.   :46915   Max.   :38.000   Max.   :103.00   Max.   :11246.1  
-##  NA&#39;s   :115                                       NA&#39;s   :115      
-##        ag        
-##  Min.   : 80.00  
-##  1st Qu.: 80.00  
-##  Median : 80.00  
-##  Mean   : 81.81  
-##  3rd Qu.: 80.00  
-##  Max.   :100.00  
-## </code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df3 &lt;-<span class="st"> </span><span class="kw">subset</span>(df2, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
+df4 &lt;-<span class="st"> </span><span class="kw">subset</span>(df3, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)  <span class="co"># only people older than 80</span>
+<span class="kw">summary</span>(df4)   </code></pre>
+<pre><code>##     Patient        DIAGNOSIS   SEX       DRG      DIED       CHARGES     
+##  Min.   :    7   41091  :564   F:1263   121:679   0:929   Min.   :   92  
+##  1st Qu.: 3416   41071  :224   M:   0   122:250   1:334   1st Qu.: 5179  
+##  Median : 6816   41041  :181            123:334           Median : 8580  
+##  Mean   : 6624   41011  :166                              Mean   :10143  
+##  3rd Qu.: 9814   41001  : 41                              3rd Qu.:13347  
+##  Max.   :12841   41081  : 38                              Max.   :46915  
+##                  (Other): 49                              NA&#39;s   :74     
+##       LOS              AGE              pdc                ag        
+##  Min.   : 1.000   Min.   : 81.00   Min.   :   18.4   Min.   : 80.00  
+##  1st Qu.: 5.000   1st Qu.: 83.00   1st Qu.:  796.7   1st Qu.: 80.00  
+##  Median : 8.000   Median : 85.00   Median : 1113.7   Median : 80.00  
+##  Mean   : 9.457   Mean   : 85.92   Mean   : 1331.4   Mean   : 81.96  
+##  3rd Qu.:13.000   3rd Qu.: 89.00   3rd Qu.: 1523.8   3rd Qu.: 80.00  
+##  Max.   :38.000   Max.   :102.00   Max.   :11246.1   Max.   :100.00  
+##                                    NA&#39;s   :74</code></pre>
 <p>Try not to attach the data when you are manipulation data like this.</p>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-358" class="exercise"><strong>Exercise 4.1  </strong></span>Answer the following questions.
+<p><span id="exr:unnamed-chunk-359" class="exercise"><strong>Exercise 4.1  </strong></span>Answer the following questions.
 a). Get a subset which contains the middle-aged men whose ages are greater than 40 and less than or equal to 60.</p>
 <p>b). Calculate cost per day for middle-aged men.</p>
-<p>c). Generate a histogram of the cost per day.</p>
+c). Generate a histogram of the cost per day.
 </div>
-<div id="reading-file-using-read.table-read.csv-etc." class="section level2">
-<h2><span class="header-section-number">4.4</span> Reading file using read.table, read.csv, etc.</h2>
+
+</div>
+<div id="data-transformation-using-the-dplyr" class="section level2">
+<h2><span class="header-section-number">4.3</span> Data transformation using the dplyr</h2>
+<p>Following the same style of ggplot, the dplyr package, a part of the <a href="https://www.tidyverse.org/">Tidyverse</a>, makes data transformation more intuitive.</p>
+<p>First we need to install the dplyr package.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre>
+<p>With dplyr, data transformation becomes fun.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+df2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># pipe operator; data is send to the next step</span>
+<span class="st">  </span><span class="kw">arrange</span>(AGE) <span class="co"># sort in ascending order; desc(AGE) for descending order</span>
+<span class="kw">head</span>(df2)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   Patient DIAGNOSIS SEX   DRG   DIED  CHARGES   LOS   AGE
+##     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+## 1    5411 41041     M     122   0       6214      4    20
+## 2   10853 41091     F     122   0       6726.     4    21
+## 3    4126 41041     M     122   0      10781      8    23
+## 4   10738 41011     M     121   0         NA      8    23
+## 5    4247 41091     F     122   0      10672      6    24
+## 6    5199 41041     M     121   0       7596      8    24</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">pdc =</span> CHARGES <span class="op">/</span><span class="st"> </span>LOS) <span class="co"># new column by dividing two columns</span>
+<span class="kw">head</span>(df2)</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##   Patient DIAGNOSIS SEX   DRG   DIED  CHARGES   LOS   AGE   pdc
+##     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+## 1    5411 41041     M     122   0       6214      4    20 1554.
+## 2   10853 41091     F     122   0       6726.     4    21 1682.
+## 3    4126 41041     M     122   0      10781      8    23 1348.
+## 4   10738 41011     M     121   0         NA      8    23   NA 
+## 5    4247 41091     F     122   0      10672      6    24 1779.
+## 6    5199 41041     M     121   0       7596      8    24  950.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">ag =</span> <span class="kw">floor</span>(AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) <span class="co"># new column, age group</span>
+<span class="kw">head</span>(df2)</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   Patient DIAGNOSIS SEX   DRG   DIED  CHARGES   LOS   AGE   pdc    ag
+##     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1    5411 41041     M     122   0       6214      4    20 1554.    20
+## 2   10853 41091     F     122   0       6726.     4    21 1682.    20
+## 3    4126 41041     M     122   0      10781      8    23 1348.    20
+## 4   10738 41011     M     121   0         NA      8    23   NA     20
+## 5    4247 41091     F     122   0      10672      6    24 1779.    20
+## 6    5199 41041     M     121   0       7596      8    24  950.    20</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">df3 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="co"># filtering</span>
+<span class="kw">head</span>(df3)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   Patient DIAGNOSIS SEX   DRG   DIED  CHARGES   LOS   AGE
+##     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+## 1       7 41091     F     121   0      10959.    15    84
+## 2      13 41091     F     122   0         NA      9    83
+## 3      27 41011     F     123   1       3215.     4    83
+## 4      36 41041     F     121   0       2584.     9    81
+## 5      51 41011     F     121   0       7589     11    81
+## 6      67 41011     F     123   1      16429.     8    81</code></pre>
+<p>The real power and efficiency of dplyr comes when you connect the pipes to do data transformation in multiple steps.</p>
+<pre class="sourceCode r"><code class="sourceCode r">df2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(AGE) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">pdc =</span> CHARGES <span class="op">/</span><span class="st"> </span>LOS) <span class="op">%&gt;%</span><span class="st">   </span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">ag =</span> <span class="kw">floor</span>(AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)
+<span class="kw">head</span>(df2)</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   Patient DIAGNOSIS SEX   DRG   DIED  CHARGES   LOS   AGE   pdc    ag
+##     &lt;dbl&gt; &lt;fct&gt;     &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1      36 41041     F     121   0       2584.     9    81  287.    80
+## 2      51 41011     F     121   0       7589     11    81  690.    80
+## 3      67 41011     F     123   1      16429.     8    81 2054.    80
+## 4     225 41041     F     123   1       4674.     7    81  668.    80
+## 5     265 41091     F     122   0       9401.     9    81 1045.    80
+## 6     284 41041     F     121   0       7240.     7    81 1034.    80</code></pre>
+<p><strong>arrange, mutate, filter</strong> are called <strong>action verbs</strong>. For more action verbs, see <a href="https://www.rstudio.com/resources/cheatsheets/#dplyr">dplyr cheat Sheet</a>.</p>
+</div>
+<div id="reading-files-directly-using-read.table" class="section level2">
+<h2><span class="header-section-number">4.4</span> Reading files directly using read.table</h2>
 <p>As you get more experience with R programming, there are many other options to import data.</p>
-<ol style="list-style-type: decimal">
-<li>Create a new project folder by File-&gt;New Project-&gt;New Directory-&gt;Empty Project and then create a new folder.</li>
-<li>Download and save the heartatk4R.txt file to that new folder. That folder becomes your <strong>default working directory</strong>.</li>
-<li>Now you can read the data by yourself.
-</div></li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Then we can repeat the above commands to check and adjust data types for the columns, using str(), as.factor(), and as.numeric() functions.</li>
-</ol>
 <p>In summary, we have the following code to read in the data. Reading the heart attack dataset. I am not using the Import Dataset in Rstudio. We have to make sure the file is in the current working directory. To set working directory from Rstudio main menu, go to Session -&gt; Set Working Directory.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())  <span class="co"># Erase all objects in memory</span>
 <span class="kw">getwd</span>()  <span class="co"># show working directory</span>
-x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-<span class="kw">head</span>(x)  <span class="co"># show the first few rows</span>
+df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(df)  <span class="co"># show the first few rows</span>
 <span class="co"># change several columns to factors</span>
-x<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DRG)
-x<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIED)
-x<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>DIAGNOSIS)
-x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x<span class="op">$</span>SEX)
-<span class="kw">str</span>(x)  <span class="co"># show the data types of columns</span>
-<span class="kw">summary</span>(x)  <span class="co"># show summary of dataset</span></code></pre>
+df<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DRG)
+df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIED)
+df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIAGNOSIS)
+df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>SEX)
+<span class="kw">str</span>(df)  <span class="co"># show the data types of columns</span>
+<span class="kw">summary</span>(df)  <span class="co"># show summary of dataset</span></code></pre>
 <p>Alternatively, you can skip all of the above and do this.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, 
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, 
                 <span class="dt">header =</span> <span class="ot">TRUE</span>, 
                 <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
                 <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, 
@@ -497,36 +582,42 @@ x<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.
 <li>Deliminaters between columns?(space, comma, tab…) <strong>sep = “<span class="math inline">\(\t\)</span>”</strong></li>
 <li>Missing values? NA, na, NULL, blank, NaN, 0 <strong>missingstring = </strong></li>
 <li>Open as text file in Excel, choose appropriate deliminater while importing, or use the <strong>Text to Column</strong> under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”-&gt;“4-OCT”. Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.</li>
-<li>Change working directory to where the file was saved. Main menu: <strong>File-&gt;Change dir…</strong></li>
 <li>read.table ( ), or read.csv( ). For example,
-<strong>x &lt;- read.table(“somefile.txt”, sep = “<span class="math inline">\(\t\)</span>”, header = TRUE, missingstring = “NA”)</strong></li>
-<li>Double check the data with <strong>str( x )</strong>, make sure each column is recognized correctly as <strong>“character”</strong>, <strong>“factor”</strong> and <strong>“numeric”</strong>.
-Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character. For example, <strong>x $ ids &lt;- as.character(x $ ids)</strong>, here x is the data frame and ids is the column name. Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as <strong>factors</strong>. This could be done with something like <strong>x $ treatment &lt;- as.factor(x $ treatment)</strong>.</li>
+<code>x &lt;- read.table(“somefile.txt”, sep = “$\t$”, header = TRUE, missingstring = “NA”)</code></li>
+<li>Double check the data with <strong>str(df)</strong>, make sure each column is recognized correctly as <strong>“character”</strong>, <strong>“factor”</strong> and <strong>“numeric”</strong>.
+Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character. For example, <code>x$ids &lt;- as.character(x$ids)</code>, here x is the data frame and ids is the column name. Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as <strong>factors</strong>. This could be done with something like <code>x$treatment &lt;- as.factor(x$treatment)</code>.</li>
 </ol>
 <p>Refresher using cheat sheets that summarize many R functions is available here: <a href="https://www.rstudio.com/resources/cheatsheets/">https://www.rstudio.com/resources/cheatsheets/</a>. It is important to know the different types of R objects: <strong>scalars, vectors, data frames, matrix, and lists</strong>.</p>
 </div>
-<div id="recommended-workflow-for-every-project" class="section level2">
-<h2><span class="header-section-number">4.6</span> Recommended workflow for EVERY project</h2>
-<p>It is best to create a separate folder that contains all related files. You can do the same for research projects. In Rstudio, this is called a <strong>Project</strong>.<br />
-1. <strong>Create a project in a new folder</strong>. I recommend you to start by setting up a project in a new folder by going to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose where the directory will be created on your hard drive. I created a directory called “learnR” under “C:\Ge working \ RBook” . Rstudio creates a Project file named like “learnR.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from <strong>File-&gt;Open</strong>. You get everything ready to go on a particular assignment or research project.</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p><strong>Copy required data files to the new directory</strong>. From Windows or Mac operation systems, you can now copy all required data files to the directory just created.</p></li>
-<li><p><strong>Creating a script file</strong>. Once you have a new project created, the first step is to start a new script file by clicking the <strong>File +</strong> button or go to <strong>File-&gt;New file</strong> and choose <strong>R script file</strong>. By default, the script file is called Untitled1.R. Rstudio will ask you to change it the first time you hit “Save” button .</p></li>
-<li><p><strong>Start your R script by adding comments on background information</strong>. Comments starting with “#” are ignored by R when running, but they are helpful for humans, including yourself, to understand the code. We re-cycle and re-use our codes over and over, so it is vital to add information about what a chunk of code does. Figure <a href="data-importing.html#fig:9-1">4.3</a> shows a recommended workflow for beginning your script.</p></li>
-<li><p><strong>Write your scripts while saving your project files</strong>. If you click on the <strong>Run</strong> button, Rstudio runs the current line of code where your cursor is located. You can also select multiple lines and run them at once. You can jump back and forth but remember you are operating on the data objects sequentially. So sometimes you want to get a fresh start by running the reset line, namely:<strong>rm(list=ls())</strong>. This command lists and then deletes all data objects from R’s brain. As you develop your coding skills, following these guidelines can make you more efficient. Remember to save everything once a while by hitting the <strong>Save</strong> button on the main icon bar! Even though Rstudio saves your scripts every 5 seconds, it can crash.</p></li>
-</ol>
-
-<div class="figure" style="text-align: center"><span id="fig:9-1"></span>
-<img src="images/img0901_rstudio.png" alt="Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder." width="80%" />
-<p class="caption">
-Figure 4.3: Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder.
-</p>
-</div>
+<div id="enter-data-manually" class="section level2">
+<h2><span class="header-section-number">4.6</span> Enter data manually</h2>
+<p>There are many different ways to get data into R. You can enter data manually (see below), or semi-manually (see below). You can read data into R from a local file or a file on the internet. You can also use R to retrieve data from databases, local or remote. The most import thing is to read data set into R correctly. A dataset not read in correctly will never be analyzed or visualized correctly.</p>
+<p><img src="images/img0900_note.png" width="50%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)
+<span class="kw">sum</span>(x)</code></pre>
+<pre><code>## [1] 13.8</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(
+       <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># the data elements </span>
+       <span class="dt">nrow =</span> <span class="dv">2</span>,             <span class="co"># number of rows </span>
+       <span class="dt">ncol =</span> <span class="dv">3</span>)             <span class="co"># number of columns                     </span>
+A                            <span class="co"># show the matrix</span></code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    3    5
+## [2,]    4    1    7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">scan</span>()  <span class="co"># Enter values from keyboard, separated by Return key. End by empty line. </span>
+<span class="fl">2.1</span></code></pre>
+<pre><code>## [1] 2.1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">3.1</span></code></pre>
+<pre><code>## [1] 3.1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">4.1</span></code></pre>
+<pre><code>## [1] 4.1</code></pre>
+<p>You can even use the scan() function to paste a column of numbers from Excel.</p>
+<blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-362" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="data-importing.html#tab:9-01">4.1</a> in Excel and save as a CSV file. Create a new Rstudio project as outlined above. Copy the CSV file to the new folder. Import the csv file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the csv file, (similar to those shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
+<span id="exr:unnamed-chunk-366" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="data-importing.html#tab:9-01">4.1</a> in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure <a href="data-importing.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
 </div>
-
+</blockquote>
 <table>
 <caption><span id="tab:9-01">Table 4.1: </span>An example of a multivariate dataset.</caption>
 <thead>
