@@ -2,28 +2,154 @@
 
 Learning objectives:
 
-- Install and load R packages
+- Install and load R packages (ggplot2 and pheatmap)
 - Basic concepts of the R graphics
-- The ggplot2 package
-- Visualization of the iris flower dataset
+- Ploting with ggplot2
+- Different ways to visualize the iris flower dataset
 
 
 ## Basic concepts of R graphics
 
-In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics.  The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a so-called Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics using layers.  
-   
-  Note the  textbook *R Graphics Cookbook* includes all kinds of R plots and example code. Some are online: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/). There are also websites lists all sorts of R graphics and example codes that you can use. [http://www.r-graph-gallery.com/](http://www.r-graph-gallery.com/) contains more than 200 such examples. Another one is here: [http://bxhorn.com/r-graphics-gallery/](http://bxhorn.com/r-graphics-gallery/)  If you know what types of graphs you want, tt is very easy to start with a template code and swap out the dataset. 
+In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2, both implemented in additional packages. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics.  The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a so-called Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics by adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
+
+  We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table below. High-level graphics functions initiates new plots, to which new elements could be added using the low level functions. 
   
-  We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table. 
+  High-level graphics functions that can initiate a new plot
   
-(ref:9-02) List of graphics functions in base R.
+  Function   |  Memo
+  -----------|---------------------------------------------
+  plot       | Generic plotting function
+  boxplot	   | boxplot. Can be applied to multiple columns of a matrix, or use equations boxplot( y ~ x)
+  hist	     | histogram
+  qqnorm	   | Quantile-quantile (Q-Q) plot to check for normality
+curve	       | Graph an arithmetic function
+barplot	     | Barplot
+mosaicplot	 | Using mosaics to represent the frequencies of tabulated counts.
+heatmap	     | Using colors to visualize a matrix of numeric values.
 
-```{r 9-02, echo=FALSE, fig.cap='(ref:9-02)', fig.align='center'}
-knitr::include_graphics("images/img0902_function.png")
-```  
 
-Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with default settings to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are possible for the data.  Other times, we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some Google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
+  
+Low-level graphics functions that add things to an existing plot
 
+  Function   |  Memo
+  -----------|---------------------------------------------
+  points	   | Add points to a plot
+  lines	     | Add lines to a plot
+  abline	   | Add a straight line
+  segments	 | Add line segments
+  text	     | Add text to a plot
+  legend	   | Add a legend to a plot
+  arrows	   | Add arrows to a plot
+
+
+Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with **default settings** to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are suitable for the data.  
+
+Sometimes we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some Google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
+
+  One of the open secret of R programming is that you can start from a plain figure and keep trying to **refine it step by step** while googling. Let's take a example using the base R graphics.
+This produces a basic scatter plot.   
+```{r, fig.align='center', out.width='80%' }
+plot(iris$Petal.Length, iris$Petal.Width)
+```
+  
+Let's change the marker type. 
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = 2) # change to triangel
+```
+Note that this command spans two lines. Very long code in the same line makes it hard to read. When you are typing in the Console window, R knows that you are not done and will be waiting for second parenthesis. 
+
+The pch parameter can take values from 0 to 25, each corresponding to different types of marker. See a list [here.](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r)
+
+We can also change the color of the data points easily with the *col* parameter.
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = 2,
+     col = "green") # change to green
+```
+
+Next, we want to use different markers according to species. First, lets get the information. 
+```{r, fig.align='center', out.width='80%'}
+types <- as.numeric(iris$Species)
+types
+```
+This is possible because Species is a **factor** with 3 predefined levels and the individual elements take 1, 2 or 3. Now we can change the symbols based on species with this:
+
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = types,
+     col = "green") 
+```
+What happens here is that the 150 integers stored in the types vector is used to alter symbols. The first 50 data points (setosa)  are represented by open circles. The next 50 (versicolor) are represented by triangles, while the last 50 in crosses. 
+
+Follow the same thinning, we also change the color according to species. We generate 3 colors with rainbow() function and then alternate using the species. 
+
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = types,
+     col = rainbow(3)[types])
+```
+
+This figure starts to looks nice. But we are not done. Let's  change the x- and y-labels, and also add a main title.
+
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = types,
+     col = rainbow(3)[types],
+     xlab = "Petal length (cm)",
+     ylab = "Petal width (cm)",
+     main = "Variation in Petals")
+```
+
+
+A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add this trend line.  
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = types,
+     col = rainbow(3)[types],
+     xlab = "Petal length (cm)",
+     ylab = "Petal width (cm)",
+     main = "Correlation of Petal length and width")
+abline( lm(iris$Petal.Width ~ iris$Petal.Length) )
+```
+
+We calculate the Pearson's correlation coefficient and mark it to the plot. The **text** function is used to place strings created with the *paste* function at the location of coordinate of (x=5, y=0.5). 
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = types,
+     col = rainbow(3)[types],
+     xlab = "Petal length (cm)",
+     ylab = "Petal width (cm)",
+     main = "Correlation of Petal length and width")
+abline( lm(iris$Petal.Width ~ iris$Petal.Length) )
+PCC = cor(iris$Petal.Length, iris$Petal.Width)  # Pearson's correlation coefficient
+PCC
+roundedPCC = round(PCC, 2) # round to the 2nd place after decimal point.
+text(5, 0.5, paste("R=", roundedPCC) ) # add text to plot
+```
+
+
+To finish up this plot, we need a legend. 
+```{r, fig.align='center', out.width='80%'}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     pch = types,  # marker type
+     col = rainbow(3)[types],  # color
+     xlab = "Petal length (cm)",
+     ylab = "Petal width (cm)",
+     main = "Correlation of Petal length and width")
+abline( lm(iris$Petal.Width ~ iris$Petal.Length) ) # regression line
+text(5, 0.5, paste("R=", roundedPCC ))  # add text annotation
+legend("topleft", 
+       levels(iris$Species), 
+       pch = 1:3, col = rainbow(3))
+```
+This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step. 
+
+  Another open secrets of coding is that we frequently steal each other's ideas and code.
+  Note the  textbook *R Graphics Cookbook* includes all kinds of R plots and example code. Some are online: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/). There are also websites lists all sorts of R graphics and example codes that you can use. [http://www.r-graph-gallery.com/](http://www.r-graph-gallery.com/) contains more than 200 such examples. Another one is here: [http://bxhorn.com/r-graphics-gallery/](http://bxhorn.com/r-graphics-gallery/)  If you know what types of graphs you want, it is very easy to start with a template code and swap out the dataset.
+
+
+  
 ## The ggplot2 package makes plotting intuitive
 
 Now  we  demonstrate  how  to  use  the ggplot2 package  for  visualizing  data using multiple panels. This package is not included in the base version of R. They need to be downloaded and installed. One of main advantages of R is that it is open, and users can contribute their code as packages. If you are  using **Rstudio**,  you  can  choose **Tools->Install packages** from the main menu, and then enter the name of the package.
@@ -37,25 +163,32 @@ library(ggplot2)  # load the ggplot2 package
 ```
 
 
-Figure \@ref(fig:2-6) shows the sepal width distribution for each of the 3 species.  The 3 histograms are aligned in panels: layout of 1 column and 3 rows. 
 
-Figure \@ref(fig:2-6) shows an interesting feature in how sepal width is distributed. While for I. setosa it is skewed to the right. For the other two species it is skewed to the left. 
+(ref:2-6) Basic scatter plot using the ggplot2 package.
 
-We can also have density plots side-by-side (Figure \@ref(fig:2-6)):
-
-(ref:2-6) Visualizing data using the ggplot2 package.
-
-```{r 2-6, fig.cap='(ref:2-6)', fig.align='center' }
+```{r 2-6, fig.cap='(ref:2-6)', fig.align='center', out.width='80%' }
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) + 
   geom_point()
 ```
 
-Notice that this command span two lines. The first line defines the plotting space. The ending "+" signififies that another layer ( data points) of plotting is added. The ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
+Notice that this command span two lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. The ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
+
+```{r , fig.align='center', out.width='80%' }
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width) ) +    # define space
+  geom_point( aes(color = Species, shape = Species) ) +    # add points
+  geom_smooth(method =lm) +                                # add trend line  
+  annotate("text", x = 5, y = 0.5, label = "R=0.96") +     # annotate with text
+  xlab("Petal length (cm)") +                              # x-axis labels
+  ylab("Petal width (cm)") +                               # y-axis labels
+  ggtitle( "Correlation between petal length and width")   # title
+```
+
 
 ```{r 2-7, fig.cap='(ref:2-7)', fig.align='center' }
 ggplot(iris, aes(x = Petal.Length, fill = Species)) + 
   geom_density( alpha = 0.3)
 ```
+
 
 
 >
@@ -64,11 +197,9 @@ Use boxplot, multiple panel histograms and density plots to investigate whether 
 ```
 
 
+## Scatter plots matrix
 
-
-## Scatter plot matrix
-
-While data frames can have a mix of numbers and characters in different columns, a **matrix is often only contain numbers**.  Let’s extract first 4 columns from the data frame iris and convert to a matrix:
+While data frames can have a mixture of numbers and characters in different columns, a **matrix is often only contain numbers**.  Let’s extract first 4 columns from the data frame iris and convert to a matrix:
 ```{r}
 x <- as.matrix(iris[, 1:4])  # convert to matrix
 colMeans(x)  # column means for matrix
@@ -92,7 +223,6 @@ pairs(x, col = rainbow(3)[iris$Species])  # Figure 2.18
 ```{exercise}
 Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots. 
 ```
-
 
 
 ## Star and segment diagrams
@@ -167,20 +297,20 @@ Write R code to generate Figure \@ref(fig:12-8), which show the means of petal l
 
 ## Box plot and death to the dynamite plots
 ```{r fig.keep='none'}
-boxplot(x)  # plain version. Column names may not shown properly
+boxplot(x)  # plain version. 
 ```
 
 (ref:12-6) Box plot of all 4 columns
 
 ```{r 12-6, message=FALSE, out.width='80%', fig.cap='(ref:12-6)', fig.align='center'}
 par(mar = c(8, 2, 2, 2))  # set figure margins (bottom, left, top, right)
-boxplot(x, las = 2)   # Figure 2.22
+boxplot(x, las = 2) 
 ```
 
 Notice that las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely. 
 
 
-Instead of ploting 4 columns, we want to generate a boxplot of one column (Petal.Length), subgrouped by another column (Species). This is called the **formula notation** in R: Sepal length as a function of Species. 
+Instead of plotting 4 columns, we want to generate a boxplot of one column (Petal.Length), sub-grouped by another column (Species). This is called the **formula notation** in R: Sepal length as a function of Species. 
 
 ```{r out.width='80%',fig.align='center'}
 boxplot(iris$Sepal.Length ~ iris$Species)
@@ -204,9 +334,9 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, color = Species)) +
   geom_boxplot() +
   geom_jitter(position=position_jitter(0.2))
 ```
-On top of the boxplot, we add another layer representing the raw data points for each of the species. Since lining up data points on a straight line is hard to see, we jittered the relative x-poisition within each subspecies randomly. We also color-coded three species simply by adding "color = Species". Many of hte low-level graphics details are handled for us by ggplot2 as the legend is generated automatically.
+On top of the boxplot, we add another layer representing the raw data points for each of the species. Since lining up data points on a straight line is hard to see, we jittered the relative x-position within each subspecies randomly. We also color-coded three species simply by adding "color = Species". Many of the low-level graphics details are handled for us by ggplot2 as the legend is generated automatically.
 
-The bar plot with error bar in \ref@(ref:12-8) we generated above is called dynamite plots for its similarity.**"The dynamite plots must die!"**, argued renowed statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/).  Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overal disstribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
+The bar plot with error bar in \ref@(ref:12-8) we generated above is called dynamite plots for its similarity.**"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/).  Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
 
 
 ## Combining plots
@@ -240,9 +370,9 @@ disMatarix <- dist(x)
 plot( hclust(disMatarix) )
 ```
 
-We first calculate a distance matrix using the **dist** function with the default Euclidian distance method. The distance matrix is then used by the **hclust** function to generate a hierarchical clustering tree  with the defult complete linkage method, which is then plotted in a nested command. 
+We first calculate a distance matrix using the **dist** function with the default Euclidean distance method. The distance matrix is then used by the **hclust** function to generate a hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
 
-The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidian distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.
+The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.
 
 First, each of the flower samples is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all 150 flowers. At each iteration, the distances between clusters are recalculated according to one of the methods—*Single linkage, complete linkage, average linkage, and so on*. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the all possible object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances.  However, the default seems to be complete linkage. Thus we need to change that in our final version.
 
@@ -284,7 +414,7 @@ More information about the pheatmap function can be obtained by reading the help
 We can gain many insights from Figure \@ref(fig:12-3). The 150 flowers in the rows are organized into different clusters. *I. Setosa* samples obviously formed a unique cluster, characterized by smaller (blue) petal length, petal width, and sepal length. The other two subspecies are  not clearly separated but we can notice that some *I. Virginica* samples form a small subcluster showing bigger petals. The columns are also organized into dendrograms, which clearly suggest that petal length and petal width are highly correlated. 
 
 
-## Projecting high-dimentional data with principal component analysis (PCA)
+## Projecting high-dimensional data with principal component analysis (PCA)
 PCA is a linear projection method. As illustrated in Figure \@ref(fig:13-4), it tries to define a new set of orthogonal coordinates to represent the dataset such that the new coordinates can be ranked by the amount of variation or information it captures in the dataset. After running PCA, you get many pieces of information: 
 
 •	How the new coordinates are defined, 
