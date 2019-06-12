@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="visualizing-the-iris-flower-data-set.html">
-<link rel="next" href="data-importation-and-project-management.html">
+<link rel="next" href="importing-data-and-managing-files.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -47,6 +47,13 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -133,7 +140,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
 <li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
 <li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
-<li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-analysis-of-variance-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (Analysis of Variance: ANOVA)</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (ANOVA)</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
@@ -154,93 +161,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
 <li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
 <li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
-<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for Help and Example Code</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrix-operations"><i class="fa fa-check"></i><b>3.2.2</b> Matrix operations</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.3</b> Lists</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.4</b> Data Frames</a></li>
-<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.5</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html"><i class="fa fa-check"></i><b>4</b> Data importation and project management</a><ul>
-<li class="chapter" data-level="4.1" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#poject-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Poject-oriented workflow</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#import-dataset"><i class="fa fa-check"></i><b>4.1.1</b> Import dataset</a></li>
-<li class="chapter" data-level="4.1.2" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.2</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-file"><i class="fa fa-check"></i><b>4.1.4</b> Import data file</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.2</b> Data manipulation in a data frame</a></li>
-<li class="chapter" data-level="4.3" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.3</b> Data transformation using the dplyr</a></li>
-<li class="chapter" data-level="4.4" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.4</b> Reading files directly using read.table</a></li>
-<li class="chapter" data-level="4.5" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
-<li class="chapter" data-level="4.6" data-path="data-importation-and-project-management.html"><a href="data-importation-and-project-management.html#enter-data-manually"><i class="fa fa-check"></i><b>4.6</b> Enter data manually</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.2</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.3</b> Data transformation using the dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.4</b> Reading files directly using read.table</a></li>
+<li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.6</b> Enter data manually</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> Analyzing heart attack data set I</a><ul>
-<li class="chapter" data-level="5.1" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
-<li class="chapter" data-level="5.2" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
-<li class="chapter" data-level="5.3" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
-<li class="chapter" data-level="5.4" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
-<li class="chapter" data-level="5.5" data-path="analyzing-heart-attack-data-set-i.html"><a href="analyzing-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a><ul>
+<li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html"><i class="fa fa-check"></i><b>6</b> Visualizing heart attack data set</a><ul>
-<li class="chapter" data-level="6.1" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
-<li class="chapter" data-level="6.2" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
-<li class="chapter" data-level="6.3" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
-<li class="chapter" data-level="6.4" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
-<li class="chapter" data-level="6.5" data-path="visualizing-heart-attack-data-set.html"><a href="visualizing-heart-attack-data-set.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a><ul>
+<li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
 <li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
 <li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.1</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
+<li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
 </ul></li>
+<li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html"><i class="fa fa-check"></i><b>8</b> Exploring of state data set</a><ul>
-<li class="chapter" data-level="8.1" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
-<li class="chapter" data-level="8.2" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#peeking-the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>8.4</b> Peeking the whole picture of the data set</a></li>
-<li class="chapter" data-level="8.5" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#linear-model-anylysis"><i class="fa fa-check"></i><b>8.5</b> Linear model anylysis</a></li>
-<li class="chapter" data-level="8.6" data-path="exploring-of-state-data-set.html"><a href="exploring-of-state-data-set.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
+<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a><ul>
+<li class="chapter" data-level="8.1" data-path="the-state-dataset.html"><a href="the-state-dataset.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
+<li class="chapter" data-level="8.2" data-path="the-state-dataset.html"><a href="the-state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
+<li class="chapter" data-level="8.3" data-path="the-state-dataset.html"><a href="the-state-dataset.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
+<li class="chapter" data-level="8.4" data-path="the-state-dataset.html"><a href="the-state-dataset.html#the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>8.4</b> The whole picture of the data set</a></li>
+<li class="chapter" data-level="8.5" data-path="the-state-dataset.html"><a href="the-state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
+<li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html"><i class="fa fa-check"></i><b>9</b> Exploring of game sale dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.4.4" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.4.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
-<li class="chapter" data-level="9.4.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.4.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
+<li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.4.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.4.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
+<li class="chapter" data-level="9.4.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.4.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.6" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.7" data-path="exploring-of-game-sale-dataset.html"><a href="exploring-of-game-sale-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html"><i class="fa fa-check"></i><b>10</b> Exploring of employee salary data set</a><ul>
-<li class="chapter" data-level="10.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
-<li class="chapter" data-level="10.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
-<li class="chapter" data-level="10.2.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
-<li class="chapter" data-level="10.2.3" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
-<li class="chapter" data-level="10.2.4" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
+<li class="chapter" data-level="10" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html"><i class="fa fa-check"></i><b>10</b> The big and messy employee salary data</a><ul>
+<li class="chapter" data-level="10.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
+<li class="chapter" data-level="10.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
+<li class="chapter" data-level="10.2.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
+<li class="chapter" data-level="10.2.3" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
+<li class="chapter" data-level="10.2.4" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
-<li class="chapter" data-level="10.3.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
-<li class="chapter" data-level="10.3.3" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
+<li class="chapter" data-level="10.3" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
+<li class="chapter" data-level="10.3.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
+<li class="chapter" data-level="10.3.3" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
-<li class="chapter" data-level="10.4.2" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
+<li class="chapter" data-level="10.4" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
 </ul></li>
-<li class="chapter" data-level="10.5" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#lm-and-anova-analysis"><i class="fa fa-check"></i><b>10.5</b> LM and ANOVA analysis</a></li>
-<li class="chapter" data-level="10.6" data-path="exploring-of-employee-salary-data-set.html"><a href="exploring-of-employee-salary-data-set.html#conclusion-2"><i class="fa fa-check"></i><b>10.6</b> Conclusion</a></li>
+<li class="chapter" data-level="10.5" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#lm-and-anova-analysis"><i class="fa fa-check"></i><b>10.5</b> LM and ANOVA analysis</a></li>
+<li class="chapter" data-level="10.6" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#conclusion-2"><i class="fa fa-check"></i><b>10.6</b> Conclusion</a></li>
 </ul></li>
 </ul>
 
@@ -261,6 +275,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-structures" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Data structures</h1>
+<p>Learning objectives:</p>
+<ul>
+<li>Basic concepts of R programming: functions and data objects</li>
+<li>Looking for help documents within R and using Google</li>
+<li>Common data objects: scalars, vectors, lists, data frames, and matrices</li>
+</ul>
 <p>R script is mostly consisted of function calls and data. There are many different types of data objects. Common <strong>data structures</strong> in R include <strong>scalars, vectors, factors, matrices, factors, data frames</strong>, and <strong>lists</strong>. These data structures can contain one or more individual data elements of several types, namely <strong>numeric</strong> (2.5), <strong>character</strong> (“Go Jacks”), or <strong>logical</strong> (TRUE or FALSE).</p>
 <div id="basic-concepts" class="section level2">
 <h2><span class="header-section-number">3.1</span> Basic concepts</h2>
@@ -276,14 +296,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-3" class="exercise"><strong>Exercise 3.1  </strong></span>Now try multiplying 45.6 by 78.9.
+<span id="exr:unnamed-chunk-85" class="exercise"><strong>Exercise 3.1  </strong></span>Now try multiplying 45.6 by 78.9.
 </div>
 </blockquote>
 <hr />
 </div>
 <div id="logical-values" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Logical Values</h3>
-<p>Some expressions return a “logical value” that take value of either <strong>TRUE</strong> or <strong>FALSE</strong>. Many programming languages refer to these as “boolean” values. Let’s try typing an expression that gives us a logical value:</p>
+<p>Some expressions return a “logical value” that take value of either <strong>TRUE</strong> or <strong>FALSE</strong>. Many programming languages refer to these as “Boolean” values. Let’s try typing an expression that gives us a logical value:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span></code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>And another logical value.:</p>
@@ -316,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;Go Jacks!&quot;</code></pre>
 <p>Now try assigning the <strong>TRUE</strong> logical value to <strong>x</strong>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="ot">TRUE</span></code></pre>
-<p>You can store multiple values in a variable or object. That is called a <strong>vector</strong>, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a <strong>matrix</strong>, or <strong>data frame</strong>.</p>
+<p>You can store multiple values in a variable or object. That is called a <strong>vector</strong>, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a <strong>matrix</strong>, or <strong>data frame</strong>. These are explained in the next section.</p>
 </div>
 <div id="functions" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Functions</h3>
@@ -329,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 3.2  </strong></span>Suppose a vector is definded as x &lt;- c(12, 56, 31, -5, 7).<br />
+<span id="exr:unnamed-chunk-96" class="exercise"><strong>Exercise 3.2  </strong></span>Suppose a vector is defined as x &lt;- c(12, 56, 31, -5, 7).<br />
 a. Calculate the mean of all elements in x and assign it to <em>y</em>.<br />
 b. Squared each element in x and assign the results to a new vector <em>z</em>.
 </div>
@@ -338,107 +358,21 @@ b. Squared each element in x and assign the results to a new vector <em>z</em>.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 3.3  </strong></span>Find two functions which sets and returns the current working directory, respectively.
+<span id="exr:unnamed-chunk-97" class="exercise"><strong>Exercise 3.3  </strong></span>Find two functions which sets and returns the current working directory, respectively.
 </div>
 </blockquote>
 <hr />
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 3.4  </strong></span>Find the function that lists all the files in the current working folder.
+<span id="exr:unnamed-chunk-98" class="exercise"><strong>Exercise 3.4  </strong></span>Find the function that lists all the files in the current working folder.
 </div>
 </blockquote>
 <hr />
-<p>Often we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Tested and documented R functions are often available as R packages. We can also easily define our own functions.</p>
-<p>For example, we have the following arithmetic function:</p>
-<p><span class="math display">\[f(x)=1.5 x^3+ x^2-2x+1\]</span></p>
-<p>Obviously, we can use the following code to do the computing:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">5</span>
-<span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre>
-<pre><code>## [1] 212.6813</code></pre>
-<p>This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myf &lt;-<span class="st"> </span><span class="cf">function</span>(x) {                           <span class="co">#Name of my function is myf</span>
-       y =<span class="st"> </span><span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co">#Expression of the function</span>
-       <span class="kw">return</span>(y)                               <span class="co">#Return vaules of the function</span>
-}</code></pre>
-<p>Note that “{” and “}” signify the beginning and end of a block of code. <strong>“function”</strong> tells R that a function is going to be defined. At the end, the <strong>“return”</strong> statement returns the desired values.</p>
-<p>You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value given x=5.</span></code></pre>
-<pre><code>## [1] 212.6813</code></pre>
-<p>or</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myf</span>(<span class="dt">x =</span> <span class="dv">5</span>) <span class="co">#</span></code></pre>
-<pre><code>## [1] 212.6813</code></pre>
-<p>The funtion applies to a vector as well. For example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">10</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>  <span class="co"># x is a vector with integer values from -10 to 10.</span>
-<span class="kw">myf</span>(x)          <span class="co"># Apply the function myf() to x.</span></code></pre>
-<pre><code>##  [1] -1452.45000 -1047.04505  -724.60640  -475.69335  -290.86520
-##  [6]  -160.68125   -75.70080   -26.48315    -3.58760     2.42655
-## [11]     1.00000     1.57345    13.58760    46.48315   109.70080
-## [16]   212.68125   364.86520   575.69335   854.60640  1211.04505
-## [21]  1654.45000</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x, <span class="kw">myf</span>(x)) <span class="co"># Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.</span></code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<p>Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too.</p>
-<blockquote>
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-22" class="exercise"><strong>Exercise 3.5  </strong></span>Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.<br />
-a. Write an R function to implement this arithmetic function.<br />
-b. Use this function to find f(-4.534).<br />
-c. Obtain the graph of the function.
-</div>
-</blockquote>
-<hr />
-<p>Let’s define a function to count even numbers in a vector.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#counts the number of even intergers in vec</span>
-evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
-  k &lt;-<span class="st"> </span><span class="dv">0</span>                      <span class="co"># assign 0 to a count varialbe k</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Find all elements (represented by i) in vec. </span>
-                              <span class="co"># Values of i are actually vec[1],vec[2],...</span>
-    <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) k &lt;-<span class="st"> </span>k <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co"># test if i is an even or odd number. </span>
-                              <span class="co"># %% is the modulo operator.</span>
-  }
-  <span class="kw">return</span>(k)                   <span class="co">#Return the count of even numbers in vec.</span>
-}</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x=<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector. </span>
-<span class="kw">evencount</span>(x) <span class="co"># Call the function evencount(). Replace vec with defined vector x.</span></code></pre>
-<pre><code>## [1] 5</code></pre>
-<p>A vaiable is called local variable if it is only visible within a function. Such as <em>k</em> and <em>vec</em> are local variables to the function <strong>evencount()</strong>. They disappear after the function returns.</p>
-<p>k</p>
-<p>Error: object ‘vec’ not found</p>
-<p>vec</p>
-<p>Error: object ‘vec’ not found</p>
-<p>A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">myfun.globle &lt;-<span class="st"> </span><span class="cf">function</span> (x){
-  y &lt;-<span class="st"> </span><span class="dv">1</span>
-  <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y)
-}
-<span class="kw">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># set x=8, and do the calculation: 8-2*y = 8-2*(1)=6</span></code></pre>
-<pre><code>## [1] 6</code></pre>
-<p>Here y is a global variable.</p>
-<p>The function <em>myfun.globle2()</em> defined below returns the same values as above. But both x and y within the the paratheses <em>(x, y=1)</em> following <em>function</em> are local variables.</p>
-<pre class="sourceCode r"><code class="sourceCode r">myfun.globle2 &lt;-<span class="st"> </span><span class="cf">function</span> (x, <span class="dt">y =</span> <span class="dv">1</span>){ <span class="co">#y is set as 1 within the function by default.</span>
-  <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y)
- }
-<span class="kw">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co">#8-2*y = 8-2*(1)=6</span></code></pre>
-<pre><code>## [1] 6</code></pre>
-<blockquote>
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercise 3.6  </strong></span>Define a function which returns the count of all odd numbers in the vector x &lt;- 1:99.
-</div>
-</blockquote>
-<hr />
-<blockquote>
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercise 3.7  </strong></span>Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
-</div>
-</blockquote>
-<hr />
+<p>Often we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Tested and documented R functions are often available as R packages. You can also define your own functions, which will be explained later.</p>
 </div>
 <div id="looking-for-help-and-example-code" class="section level3">
-<h3><span class="header-section-number">3.1.5</span> Looking for Help and Example Code</h3>
+<h3><span class="header-section-number">3.1.5</span> Looking for help and example Code</h3>
 <pre class="sourceCode r"><code class="sourceCode r">? sum </code></pre>
 <p>A document will pop up in the Help Window. See the Figure <a href="data-structures.html#fig:ch3-1">3.1</a>.</p>
 
@@ -471,11 +405,11 @@ Figure 3.2: Examples of sum code
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.32472002 -0.70165540 -0.01621811  0.55999802  1.35000000
+## [1] -2.54454475 -0.79351692  0.06356574  0.68788900  1.35000000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
 ##          0%         25%         50%         75%        100% 
-## -2.32472002 -0.70165540 -0.01621811  0.55999802  1.35000000 
+## -2.54454475 -0.79351692  0.06356574  0.68788900  1.35000000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -498,9 +432,9 @@ Figure 3.2: Examples of sum code
 <p>Example commands and plots will show up automatically by typing Return in RStudio.
 In R, you need to click on the plots.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">example</span>(boxplot)  <span class="co"># bring example of boxplot</span></code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
 <p>I found a lot of help information about R through Google. Google tolerate typos, grammar errors, and different notations. Also, most (99 %) of your questions have been asked and answered on various forums. Many R gurus answered a ton of questions on web sites like** <a href="stackoverflow.com">stackoverflow.com</a>**, with example codes! I also use Google as a reference.</p>
-<p>It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and repurpose our codes.</p>
+<p>It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and re-purpose our codes.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)  <span class="co"># return the maximum value of a vector</span></code></pre>
 <pre><code>## [1] 5</code></pre>
 </div>
@@ -535,12 +469,12 @@ x</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-41" class="exercise"><strong>Exercise 3.8  </strong></span>Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
+<span id="exr:unnamed-chunk-110" class="exercise"><strong>Exercise 3.5  </strong></span>Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
 </div>
 </blockquote>
 <hr />
-<div id="commands-about-vector" class="section level4">
-<h4><span class="header-section-number">3.2.1.1</span> Commands about vector</h4>
+<div id="vectors-operations" class="section level4">
+<h4><span class="header-section-number">3.2.1.1</span> Vectors operations</h4>
 <p>Next we will try those commands about vector. First let’s find out what is the 4th element of our vector x &lt;- c(5, 2, 22, 11, 5), or the elements from 2 to 4.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">4</span>]</code></pre>
 <pre><code>## [1] 11</code></pre>
@@ -611,7 +545,7 @@ x                          <span class="co">#The value 100 is added to the previ
 <pre><code>## [1]  5  2 22 11  5  7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">append</span>(x, <span class="dv">7</span>)</code></pre>
 <pre><code>## [1]  5  2 22 11  5  7</code></pre>
-<p>Creat an empty vector y:</p>
+<p>Create an empty vector y:</p>
 <pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">c</span>()
 y</code></pre>
 <pre><code>## NULL</code></pre>
@@ -646,7 +580,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre>
-<pre><code>## [1] 22  2  5</code></pre>
+<pre><code>## [1] 11 22  2</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;David&quot;</span>, <span class="st">&quot;Breck&quot;</span>, <span class="st">&quot;Zach&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -696,7 +630,7 @@ y</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-76" class="exercise"><strong>Exercise 3.9  </strong></span>Using sample selction function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selcted integer is an even number, then y returns ‘even’, otherwise y returns ‘odd’.
+<span id="exr:unnamed-chunk-145" class="exercise"><strong>Exercise 3.6  </strong></span>Using sample selection function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selected integer is an even number, then y returns ‘even’, otherwise y returns ‘odd’.
 </div>
 </blockquote>
 <hr />
@@ -725,7 +659,7 @@ For our z vector, try to get the sum of its values, and see what the result is:<
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-82" class="exercise"><strong>Exercise 3.10  </strong></span>Now compute the average of values in z. Ignore the missing values.
+<span id="exr:unnamed-chunk-151" class="exercise"><strong>Exercise 3.7  </strong></span>Now compute the average of values in z. Ignore the missing values.
 </div>
 </blockquote>
 <hr />
@@ -751,7 +685,7 @@ z2</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(z2)</code></pre>
 <pre><code>## [1] 3</code></pre>
 <p>Comparing the length of z1 and z2, we know the NULL is counted as nonexistent, but the NA is counted as a missing value.</p>
-<p>Let’s do some opertations related to vectors. Firsly, we start from the operation between a vector and a scalar.</p>
+<p>Let’s do some operations related to vectors. Firstly, we start from the operation between a vector and a scalar.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Operation between x and a scalar</span>
 x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)
 y &lt;-<span class="st"> </span><span class="dv">1</span>
@@ -770,21 +704,21 @@ x<span class="op">+</span>y</code></pre>
 <pre><code>## [1]  2  6  8 12 25</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">x<span class="op">*</span>y</code></pre>
 <pre><code>## [1]   1   8   0  27 150</code></pre>
-<p>If vectors have different length, then R will automatically <em>recycles</em> the shorter one, untill it has the same length as the longer one. For example:</p>
+<p>If vectors have different length, then R will automatically <em>recycles</em> the shorter one, until it has the same length as the longer one. For example:</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
 x<span class="op">+</span>y</code></pre>
 <pre><code>## Warning in x + y: longer object length is not a multiple of shorter object
 ## length</code></pre>
 <pre><code>## [1]  2  6  9 11 11</code></pre>
-<p>The y was <em>recyled</em>, in fact the real operation is showed below:</p>
+<p>The y was <em>recycled</em>, in fact the real operation is showed below:</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)
 x<span class="op">+</span>y</code></pre>
 <pre><code>## [1]  2  6  9 11 11</code></pre>
 </div>
-<div id="fish-example-of-vector" class="section level4">
-<h4><span class="header-section-number">3.2.1.2</span> Fish example of vector</h4>
+<div id="an-example-of-vector" class="section level4">
+<h4><span class="header-section-number">3.2.1.2</span> An example of vector</h4>
 <p>Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">9</span>)</code></pre>
 <pre><code>## [1] 7 3 9</code></pre>
@@ -803,7 +737,7 @@ fishes</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-98" class="exercise"><strong>Exercise 3.11  </strong></span>Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the <strong>fishes</strong> vector and return a TRUE or FALSE value.
+<span id="exr:unnamed-chunk-167" class="exercise"><strong>Exercise 3.8  </strong></span>Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the <strong>fishes</strong> vector and return a TRUE or FALSE value.
 </div>
 </blockquote>
 <hr />
@@ -824,7 +758,7 @@ fishes2</code></pre>
 fishes2 <span class="op">-</span><span class="st"> </span>stolen</code></pre>
 <pre><code>## [1] 6 0 4</code></pre>
 <p>If you add or subtract two vectors of the same length, R will take the corresponding values from each vector and add or subtract them. The 0 is necessary to keep the vector length the same.</p>
-<p>Proud of himself, Mickey wanted to make a 5ft x 5ft poster to show he is the best fisherman. Knowing that <strong>a picture worthes a thousand words</strong>, he learned R and started plotting. He absolutely needs his names on the plots. The data elements in a vector can have names or labels.</p>
+<p>Proud of himself, Mickey wanted to make a 5ft x 5ft poster to show he is the best fisherman. Knowing that <strong>a picture is worth a thousand words</strong>, he learned R and started plotting. He absolutely needs his names on the plots. The data elements in a vector can have names or labels.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(fishes) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Jerry&quot;</span>, <span class="st">&quot;Mickey&quot;</span>)</code></pre>
 <p>The right side is a vector, holding 3 character values. These values are assigned as the names of the 3 elements in the fishes vector. names is a built-in function. Our vector looks like:</p>
 <pre class="sourceCode r"><code class="sourceCode r">fishes</code></pre>
@@ -845,7 +779,7 @@ Figure 3.3: Simple Bar plot
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-106" class="exercise"><strong>Exercise 3.12  </strong></span>Now see if you can set the value for <strong>Tom</strong> to something other than 5 using the name rather than the index.
+<span id="exr:unnamed-chunk-175" class="exercise"><strong>Exercise 3.9  </strong></span>Now see if you can set the value for <strong>Tom</strong> to something other than 5 using the name rather than the index.
 </div>
 </blockquote>
 <hr />
@@ -860,7 +794,7 @@ Figure 3.3: Simple Bar plot
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-109" class="exercise"><strong>Exercise 3.13  </strong></span>Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1. And create a bar plot to represent this information.
+<span id="exr:unnamed-chunk-178" class="exercise"><strong>Exercise 3.10  </strong></span>Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1. And create a bar plot to represent this information.
 </div>
 </blockquote>
 <hr />
@@ -872,21 +806,21 @@ Figure 3.3: Simple Bar plot
 y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</code></pre>
 <p>Then simply call plot with your two vectors:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x, y)</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>Great job! Notice on the graph that values from the first argument (x) are used for the horizontal axis, and values from the second (y) for the vertical.</p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-112" class="exercise"><strong>Exercise 3.14  </strong></span>Create a vector with 21 integers from -10 to 10, and store it in the x variable. Then create a scatterplot of x^2 against x.
+<span id="exr:unnamed-chunk-181" class="exercise"><strong>Exercise 3.11  </strong></span>Create a vector with 21 integers from -10 to 10, and store it in the x variable. Then create a scatter plot of x^2 against x.
 </div>
 </blockquote>
 <hr />
 </div>
 </div>
-<div id="matrix-operations" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Matrix operations</h3>
+<div id="matrices" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Matrices</h3>
 <p><strong>Matrix</strong> is a two dimensional data structure in R programming. Technically, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values.</p>
-<p>We can creat a matrix by using <em>rbind</em> or <em>cbind</em> function. <em>rbind</em> combine all row
+<p>We can create a matrix by using <em>rbind</em> or <em>cbind</em> function. <em>rbind</em> combine all row
 Here are two examples:</p>
 <pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">15</span>)) <span class="co"># combine vectors by row</span>
 m</code></pre>
@@ -967,7 +901,7 @@ x</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">subset.iris &lt;-<span class="st"> </span>iris[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
 <span class="kw">class</span>(subset.iris)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<p>The data structure of <em>subset.iris</em> is a data frame. The function <em>as.matrix</em> wii transfer a data frame to a matix.</p>
+<p>The data structure of <em>subset.iris</em> is a data frame. The function <em>as.matrix</em> will transfer a data frame to a matrix.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(subset.iris)
 <span class="kw">class</span>(x)</code></pre>
 <pre><code>## [1] &quot;matrix&quot;</code></pre>
@@ -1062,7 +996,7 @@ c</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colSums</span>(x)</code></pre>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 ##         48.6         33.1         14.5          2.2</code></pre>
-<p>Here we are computing the standard deviation by columns, using <em>apply()</em> function.The second argument “1” or “2” in <em>apply()</em> reprents the function applies to rows or columns.</p>
+<p>Here we are computing the standard deviation by columns, using <em>apply()</em> function.The second argument “1” or “2” in <em>apply()</em> represents the function applies to rows or columns.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(x, <span class="dv">2</span>, sd) <span class="co"># Calculate the standard deviation of each column in x </span></code></pre>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 ##   0.29135698   0.30713732   0.10801234   0.07888106</code></pre>
@@ -1070,13 +1004,13 @@ c</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(x, <span class="dv">1</span>, median)  <span class="co"># Calculate the median of each row in x </span></code></pre>
 <pre><code>##    1    2    3    4    5    6    7    8    9   10 
 ## 2.45 2.20 2.25 2.30 2.50 2.80 2.40 2.45 2.15 2.30</code></pre>
-<p>Heatmap is my favorite type of graph for visualizing a large matrix data.</p>
+<p>Heat map is my favorite type of graph for visualizing a large matrix data.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(x, <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>, <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">5</span>))</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-216-1.png" width="672" /></p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-148" class="exercise"><strong>Exercise 3.15  </strong></span>Let <em>subset.iris &lt;- as.matrix(iris[1:10, 1:4])</em>, Using apply function to calculate the mean of <em>subset.iris</em> by column.
+<span id="exr:unnamed-chunk-217" class="exercise"><strong>Exercise 3.12  </strong></span>Let <em>subset.iris &lt;- as.matrix(iris[1:10, 1:4])</em>, Using apply function to calculate the mean of <em>subset.iris</em> by column.
 </div>
 </blockquote>
 <hr />
@@ -1104,11 +1038,11 @@ subset.iris</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">find.min.posi</span>(subset.iris)</code></pre>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
 ##            9            9            3           10</code></pre>
-<p>As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Lenth and Petal.Width respectively.</p>
+<p>As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Length and Petal.Width respectively.</p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-152" class="exercise"><strong>Exercise 3.16  </strong></span>Let <em>subset.iris.2 &lt;- as.matrix(iris[, 1:4])</em>, fill blanks in the <em>find.max</em> function defined below to find the maximal value in each column of <em>subset.iris.2</em>.
+<span id="exr:unnamed-chunk-221" class="exercise"><strong>Exercise 3.13  </strong></span>Let <em>subset.iris.2 &lt;- as.matrix(iris[, 1:4])</em>, fill blanks in the <em>find.max</em> function defined below to find the maximal value in each column of <em>subset.iris.2</em>.
 </div>
 </blockquote>
 <p>find.max &lt;- function(x){<br />
@@ -1131,14 +1065,14 @@ y</code></pre>
 ## odd.number          1          3         5
 ## even.number         2          4         6</code></pre>
 <hr />
-<p>Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents “picure elements”. They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a grayscale imge, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%.</p>
-<p>Most time, we need to blur images or add mosaic to a picture for various purposes. Let’s use one example to demonstrate how to add mosaic to a grayscale image.</p>
+<p>Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents “picture elements”. They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a gray-scale image, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%.</p>
+<p>Most time, we need to blur images or add mosaic to a picture for various purposes. Let’s use one example to demonstrate how to add mosaic to a gray-scale image.</p>
 <p><strong>Example: Add mosaic to Einstein image</strong></p>
-<p>Firstly, let’s read an grayscale image of Einstein into R and view the image.</p>
+<p>Firstly, let’s read an gray-scale image of Einstein into R and view the image.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pixmap)
 EINSTEIN &lt;-<span class="st"> </span><span class="kw">read.pnm</span>(<span class="st">&quot;EINSTEIN.pgm&quot;</span>, <span class="dt">cellres =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(EINSTEIN)</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-224-1.png" width="672" /></p>
 <p>Then let us look at structure of this image:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(EINSTEIN)</code></pre>
 <pre><code>## Formal class &#39;pixmapGrey&#39; [package &quot;pixmap&quot;] with 6 slots
@@ -1148,13 +1082,13 @@ EINSTEIN &lt;-<span class="st"> </span><span class="kw">read.pnm</span>(<span cl
 ##   ..@ cellres : num [1:2] 1 1
 ##   ..@ bbox    : num [1:4] 0 0 512 512
 ##   ..@ bbcent  : logi FALSE</code></pre>
-<p>Here we get a new class which is S4 type. We don’t go into depth for this time. One fact we need to pay attendtion is that we must use “@” instead of “$” sign to designate the components.</p>
+<p>Here we get a new class which is S4 type. We don’t go into depth for this time. One fact we need to pay attention is that we must use “@” instead of “$” sign to designate the components.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(EINSTEIN<span class="op">@</span><span class="st"> </span>grey)</code></pre>
 <pre><code>## [1] &quot;matrix&quot;</code></pre>
-<p>The class of <em>EINSTEIN@ grey</em> is matrix. The output <em>..@ grey : num [1:512, 1:512]</em> shows that the dimension of matrix is 512*512. The values “0.596 0.541 0.522 0.529 0.561 …” reprent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below:</p>
+<p>The class of <em>EINSTEIN@ grey</em> is matrix. The output <em>..@ grey : num [1:512, 1:512]</em> shows that the dimension of matrix is 512*512. The values “0.596 0.541 0.522 0.529 0.561 …” represent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below:</p>
 <pre class="sourceCode r"><code class="sourceCode r">EINSTEIN<span class="op">@</span><span class="st"> </span>grey[<span class="dv">3</span>,<span class="dv">4</span>]</code></pre>
 <pre><code>## [1] 0.2941176</code></pre>
-<p>If we change the value 0.2941176 to 0 by <em>EINSTEIN@ grey[3,4] &lt;- 0</em>, then that pixel will become pure black. If we assign a random number between 0 to 1 to the value, then the color in the pixel will be randomly assigned based on the random number. Using this idea, we define a masoic function which will be used to blur the image.</p>
+<p>If we change the value 0.2941176 to 0 by <em>EINSTEIN@ grey[3,4] &lt;- 0</em>, then that pixel will become pure black. If we assign a random number between 0 to 1 to the value, then the color in the pixel will be randomly assigned based on the random number. Using this idea, we define a mosaic function which will be used to blur the image.</p>
 <pre class="sourceCode r"><code class="sourceCode r">mosaic.plot &lt;-<span class="st"> </span><span class="cf">function</span>(image, yrange, xrange){
   length.y &lt;-<span class="st"> </span><span class="kw">length</span>(yrange)
   length.x &lt;-<span class="st"> </span><span class="kw">length</span>(xrange)
@@ -1163,24 +1097,24 @@ EINSTEIN &lt;-<span class="st"> </span><span class="kw">read.pnm</span>(<span cl
   image2<span class="op">@</span>grey[yrange, xrange] &lt;-<span class="st"> </span>whitenoise
   <span class="kw">return</span>(image2)
 }</code></pre>
-<p>The argument <em>image</em> is the original image, <em>yrange</em> is the range of rows that you want to blur, <em>xrange</em> is the range of columns that you want to blur. The <em>xrange</em> and <em>yrange</em> construct the mosaic region. Since we don’t want to change the origial image,therefore we copy the original image to image2 by assigning <em>image</em> to <em>image2</em>. The <em>whitenoise</em> creates a matrix filled with random numbers following uniform distribution. The dimensions of <em>whitenoise</em> is determined by the mosaic region. Replace the values in the original image that you want to blur <em><a href="mailto:image2@grey" class="email">image2@grey</a>[yrange,xrange]</em> by the <em>whitenoise</em> matrix.</p>
+<p>The argument <em>image</em> is the original image, <em>yrange</em> is the range of rows that you want to blur, <em>xrange</em> is the range of columns that you want to blur. The <em>xrange</em> and <em>yrange</em> construct the mosaic region. Since we don’t want to change the original image,therefore we copy the original image to image2 by assigning <em>image</em> to <em>image2</em>. The <em>whitenoise</em> creates a matrix filled with random numbers following uniform distribution. The dimensions of <em>whitenoise</em> is determined by the mosaic region. Replace the values in the original image that you want to blur <em><a href="mailto:image2@grey" class="email">image2@grey</a>[yrange,xrange]</em> by the <em>whitenoise</em> matrix.</p>
 <pre class="sourceCode r"><code class="sourceCode r">EINSTEIN.mosaic &lt;-<span class="st"> </span><span class="kw">mosaic.plot</span>(EINSTEIN, <span class="dv">175</span><span class="op">:</span><span class="dv">249</span>, <span class="dv">118</span><span class="op">:</span><span class="dv">295</span>)
 <span class="kw">plot</span>(EINSTEIN.mosaic)</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
-<p>Here, we take <em>yrange=175:249</em> and <em>xrange=118:295</em> to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein’ eyes region. The sub-matix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.</p>
+<p><img src="book_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
+<p>Here, we take <em>yrange=175:249</em> and <em>xrange=118:295</em> to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein’ eyes region. The sub-matrix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.</p>
 <p>The function <em>locator()</em> allows us to find the relevant rows and columns. Type <strong>locator()</strong> in the <em>Console</em> window, then R will wait for you to click a point within an image, then click <em>esc</em> on your keyboard to exit the function. Then the function will return the coordinates of that point in the <em>Console</em> window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in <em>pixmap</em> objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from <em>locator()</em> function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function.</p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-161" class="exercise"><strong>Exercise 3.17  </strong></span>Using the <em>mosaic.plot()</em> function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
+<span id="exr:unnamed-chunk-230" class="exercise"><strong>Exercise 3.14  </strong></span>Using the <em>mosaic.plot()</em> function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
 </div>
 </blockquote>
-<p><img src="book_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-231-1.png" width="672" /></p>
 <hr />
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-163" class="exercise"><strong>Exercise 3.18  </strong></span>Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic.<br />
+<span id="exr:unnamed-chunk-232" class="exercise"><strong>Exercise 3.15  </strong></span>Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic.<br />
 mosaic.plot.2 &lt;- function(picture, yrange, xrange, degree){<br />
 length.y &lt;- _______(yrange)<br />
 length.x &lt;- length(______)<br />
@@ -1193,399 +1127,9 @@ Setting the degree=0, 0.5 and 1 respectively, plot the images of Mona Lisa that 
 </blockquote>
 <hr />
 </div>
-<div id="lists" class="section level3">
-<h3><span class="header-section-number">3.2.3</span> Lists</h3>
-<p>All elements in vectors must be same type. The list can combine objectes of different types. Let’s start from creating a list:</p>
-<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">5</span>, <span class="st">&quot;John Doe&quot;</span>, <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">7</span>), mean) <span class="co"># a list with 4 components</span>
-y</code></pre>
-<pre><code>## [[1]]
-## [1] 5
-## 
-## [[2]]
-## [1] &quot;John Doe&quot;
-## 
-## [[3]]
-## [1] 100   7
-## 
-## [[4]]
-## function (x, ...) 
-## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x00000000067e7d40&gt;
-## &lt;environment: namespace:base&gt;</code></pre>
-<p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height”, “name”, “BP” and “fun” to the y.</p>
-<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)  
-y</code></pre>
-<pre><code>## $height
-## [1] 5
-## 
-## $name
-## [1] &quot;John Doe&quot;
-## 
-## $BP
-## [1] 100  77
-## 
-## $fun
-## function (x, ...) 
-## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x00000000067e7d40&gt;
-## &lt;environment: namespace:base&gt;</code></pre>
-<p>Here is another example for creating a list:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span>
-x2 &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">:</span><span class="st"> </span><span class="dv">1</span>
-x3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.4</span>, <span class="fl">5.1</span>, <span class="fl">9.0</span>, <span class="fl">4.4</span>)
-x4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;u&#39;</span>, <span class="st">&#39;v&#39;</span>, <span class="st">&#39;w&#39;</span>)
-z &lt;-<span class="st"> </span><span class="kw">list</span>(x1, x2, x3, x4)
-z</code></pre>
-<pre><code>## [[1]]
-##      [,1] [,2] [,3]
-## [1,]    4    5   10
-## [2,]    2    6    9
-## 
-## [[2]]
-## [1] 8 7 6 5 4 3 2 1
-## 
-## [[3]]
-## [1] 2.4 5.1 9.0 4.4
-## 
-## [[4]]
-## [1] &quot;u&quot; &quot;v&quot; &quot;w&quot;</code></pre>
-<p>We can build a list by creating an empty list and assigning values to it.</p>
-<pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">list</span>()         <span class="co">#Create an empty list</span>
-v[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>)  <span class="co"># Assign a matrix to v[[1]]</span>
-v[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">:</span><span class="st"> </span><span class="dv">1</span>    <span class="co">#Assign a vector to v[[2]]</span>
-v[[<span class="dv">3</span>]] &lt;-<span class="st"> </span>x3       <span class="co">#Assign x3 to v[[3]] where x3 is defined as above</span>
-v[[<span class="dv">4</span>]] &lt;-<span class="st"> </span>x4       <span class="co">#Assign x4 to v[[4]] where x4 is defined as above</span>
-v</code></pre>
-<pre><code>## [[1]]
-##      [,1] [,2] [,3]
-## [1,]    4    5   10
-## [2,]    2    6    9
-## 
-## [[2]]
-## [1] 8 7 6 5 4 3 2 1
-## 
-## [[3]]
-## [1] 2.4 5.1 9.0 4.4
-## 
-## [[4]]
-## [1] &quot;u&quot; &quot;v&quot; &quot;w&quot;</code></pre>
-<p>We used different methods creating list z and v. The list v and z are identical because that we assigned same components for v as that of in z.</p>
-<p>There are several different ways to access the elements in a list. For example, to access the third component in y:</p>
-<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">3</span>]]        <span class="co">#Specifing the number in a double square braket</span></code></pre>
-<pre><code>## [1] 100  77</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">y<span class="op">$</span>BP          <span class="co">#Using $ sign</span></code></pre>
-<pre><code>## [1] 100  77</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="st">&quot;BP&quot;</span>]]     <span class="co">#Using the tag</span></code></pre>
-<pre><code>## [1] 100  77</code></pre>
-<p>Note: we used <strong>double square braket</strong> ‘[[]]’ to access the element in a list, which is different from using single square braket ‘[]’ in a vector. If we use sigle square braket in a list, we will get a sublist. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions <em>class()</em> and <em>is.list</em> can be used to check the types.</p>
-<pre class="sourceCode r"><code class="sourceCode r">y[<span class="dv">3</span>]</code></pre>
-<pre><code>## $BP
-## [1] 100  77</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y[<span class="dv">3</span>])</code></pre>
-<pre><code>## [1] &quot;list&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(y[<span class="dv">3</span>])</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">3</span>]]</code></pre>
-<pre><code>## [1] 100  77</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y[[<span class="dv">3</span>]])               <span class="co">#Get the class of y[[3]] </span></code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(y[[<span class="dv">3</span>]])           <span class="co">#Check if y[[3]] is a list or not</span></code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<p>The forth component of y is <em>fun = mean</em>. There are no quotation marks around <em>mean</em>. The <em>class(y[[4]])</em> returns a function.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y[[<span class="dv">4</span>]])</code></pre>
-<pre><code>## [1] &quot;function&quot;</code></pre>
-<p>This implies that y[[4]] is same as the <em>mean()</em> function. For example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">4</span>]](<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))          <span class="co">#Get the mean of 1, 2, 3, 4, 5</span></code></pre>
-<pre><code>## [1] 3</code></pre>
-<blockquote>
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-176" class="exercise"><strong>Exercise 3.19  </strong></span>Access the second component in list1 by three ways as we introduced above. What is the type of list1[“Hobby”] and list1[[“Hobby”]] respectively?
-</div>
-</blockquote>
-<pre class="sourceCode r"><code class="sourceCode r">  list1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Name =</span> <span class="st">&quot;Tom&quot;</span>, <span class="dt">Hobby =</span> <span class="st">&quot;Fishing&quot;</span>, <span class="dt">Num.fish =</span> <span class="kw">c</span>(<span class="dv">16</span>, <span class="dv">27</span>, <span class="dv">5</span>))</code></pre>
-<hr />
-<p>Here are some examples for list operation:</p>
-<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)
-y[[<span class="dv">2</span>]] &lt;-<span class="st"> &quot;Mike&quot;</span>    <span class="co">#Change the 2nd component from &quot;John Doe&quot; to &quot;Mike&quot;</span>
-y[[<span class="dv">4</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span>      <span class="co">#Delete the 4th component by setting it to NULL</span>
-y</code></pre>
-<pre><code>## $height
-## [1] 5
-## 
-## $name
-## [1] &quot;Mike&quot;
-## 
-## $BP
-## [1] 100  77</code></pre>
-<p>The output shows that the name has been changed to Mike and the mean function is deleted. So far, the length of y is 3:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(y)</code></pre>
-<pre><code>## [1] 3</code></pre>
-<p>We can add the forth components to y using the following code:</p>
-<pre class="sourceCode r"><code class="sourceCode r">y<span class="op">$</span>class &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;math&quot;</span>, <span class="st">&quot;art&quot;</span>) <span class="co">#Add a class component</span>
-y</code></pre>
-<pre><code>## $height
-## [1] 5
-## 
-## $name
-## [1] &quot;Mike&quot;
-## 
-## $BP
-## [1] 100  77
-## 
-## $class
-## [1] &quot;math&quot; &quot;art&quot;</code></pre>
-<p>If we have a vector of tags and a vector of corresponding values, we can associate the names and values into a list by creating an empty list and then fill it via assignment statements:</p>
-<pre class="sourceCode r"><code class="sourceCode r">sales &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">98</span>, <span class="dv">112</span>)
-seasons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Spring&quot;</span>, <span class="st">&quot;Summer&quot;</span>, <span class="st">&quot;Fall&quot;</span>, <span class="st">&quot;Winter&quot;</span>)
-sale.tag &lt;-<span class="st"> </span><span class="kw">list</span>()               <span class="co">#Create an empty list</span>
-sale.tag[seasons] &lt;-<span class="st"> </span>sales
-sale.tag</code></pre>
-<pre><code>## $Spring
-## [1] 100
-## 
-## $Summer
-## [1] 105
-## 
-## $Fall
-## [1] 98
-## 
-## $Winter
-## [1] 112</code></pre>
-<p>Equivalently, we can associate the names and values by creating an empty list and then assign each component corresponding value or vector. For example.</p>
-<pre class="sourceCode r"><code class="sourceCode r">sale.tag &lt;-<span class="st"> </span><span class="kw">list</span>()               <span class="co">#Create an empty list</span>
-sale.tag[[<span class="st">&quot;Spring&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">100</span>
-sale.tag[[<span class="st">&quot;Summer&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">105</span>
-sale.tag[[<span class="st">&quot;Fall&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">98</span>
-sale.tag[[<span class="st">&quot;Winter&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">112</span>
-sale.tag</code></pre>
-<pre><code>## $Spring
-## [1] 100
-## 
-## $Summer
-## [1] 105
-## 
-## $Fall
-## [1] 98
-## 
-## $Winter
-## [1] 112</code></pre>
-<blockquote>
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-183" class="exercise"><strong>Exercise 3.20  </strong></span>Based on the data set of sale.tag, choose all correct answers from the following options A - F. A: sale.tag[[1]]<br />
-B: sale.tag[[Spring]]<br />
-C: sale.tag[[“Spring”]]<br />
-D: sale.tag[“Spring”]<br />
-E: sale.tag[1]<br />
-F: sale.tag[Spring]
-1, Which options return a vector. Answer:___________<br />
-2, Which options return a list. Answer:___________<br />
-3, Which options returns an error. Answer:___________
-</div>
-</blockquote>
-<hr />
-<p>Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
-&gt; mean(sale.tag)<br />
-[1] NA<br />
-Warning message:<br />
-In mean.default(sale.tag) :<br />
-argument is not numeric or logical: returning NA</p>
-<p>To calculate the mean, we need to use function <em>unlist()</em> to flatten the list into a vector.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">unlist</span>(sale.tag))</code></pre>
-<pre><code>## [1] 103.75</code></pre>
-<p>Similar to <em>apply()</em> funciton works on vectors, <em>lapply()</em> (for list apply) works on each component of lists. Here is an example:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>))
-mean.x &lt;-<span class="st"> </span><span class="kw">lapply</span>(x, mean)
-mean.x</code></pre>
-<pre><code>## [[1]]
-## [1] 20
-## 
-## [[2]]
-## [1] 6</code></pre>
-<p>The <em>mean.x</em> returns a list consisting of 20 and 6 which are means of components of x respectively.</p>
-<p>When the list returned by <em>lapply()</em> could be simplified to a vector or matrix, we can use function <em>sapply()</em> (for <em>simplified [l]apply</em>). Let’s redo the previous example by <em>sapply()</em> function.</p>
-<pre class="sourceCode r"><code class="sourceCode r">mean.x<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">sapply</span>(x, mean)
-mean.x<span class="fl">.2</span></code></pre>
-<pre><code>## [1] 20  6</code></pre>
-<p>We can double check the outputs by <em>class()</em> or <em>is.vector()</em> function:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(mean.x)               </code></pre>
-<pre><code>## [1] &quot;list&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(mean.x<span class="fl">.2</span>)             </code></pre>
-<pre><code>## [1] &quot;numeric&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.vector</span>(mean.x<span class="fl">.2</span>)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<p>Here is another example for <em>sapply()</em> function. Suppose we have NULL elements in a list.null. To remove the NULL element, apply <em>is.null</em> function to every element of the list.null. If the logical value is TRUE, i.e. the element is a NULL, then delete the element by setting NULL to it.</p>
-<pre class="sourceCode r"><code class="sourceCode r">list.null &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;art&#39;</span>, <span class="ot">NULL</span>, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>))
-list.null</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;art&quot;
-## 
-## [[2]]
-## NULL
-## 
-## [[3]]
-## [1] 2 4 6 8</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">list.null[<span class="kw">sapply</span>(list.null, is.null)] &lt;-<span class="st"> </span><span class="ot">NULL</span>
-list.null</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;art&quot;
-## 
-## [[2]]
-## [1] 2 4 6 8</code></pre>
-<p>For a small size data set, if we can locate the position of NULL element, we can easily remove the NULL element by setting NULL to that element. For example, we already know the second element of list.null is NULL, to remove this NULL element, we set a NULL to the second element:</p>
-<pre class="sourceCode r"><code class="sourceCode r">list.null &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;art&#39;</span>, <span class="ot">NULL</span>, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>))
-list.null[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span>
-list.null</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;art&quot;
-## 
-## [[2]]
-## [1] 2 4 6 8</code></pre>
-<p>But for large size of data set, we turn to the <em>sapply()</em> function to remove NULL elements.</p>
-<p><strong>Example</strong>:
-Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:</p>
-<pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Brandon&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Daniel&quot;</span>, <span class="st">&quot;Grace&quot;</span>, <span class="st">&quot;Mary&quot;</span>, 
-                 <span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Grace&quot;</span>)</code></pre>
-<p>Firsly, we define a function which returns all locations of same elements in a list.</p>
-<pre class="sourceCode r"><code class="sourceCode r">loc.names &lt;-<span class="st"> </span><span class="cf">function</span>(f){
-y &lt;-<span class="st"> </span><span class="kw">unlist</span>(f)                     <span class="co"># Flatten a list x into a vector y</span>
-x &lt;-<span class="st"> </span><span class="kw">list</span>()                        <span class="co"># Create an empty list</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(y)){        
-  c.name &lt;-<span class="st"> </span>y[i]                   <span class="co"># Assign the ith element to c.name. </span>
-  x[[c.name]] &lt;-<span class="st"> </span><span class="kw">c</span>(x[[c.name]],i)  <span class="co"># assign values to x[[c.name]]. c.name is the name of x.</span>
-}
-<span class="kw">return</span>(x)
-}</code></pre>
-<p>the <em>f</em> will be replaced by your own list. In this example, <em>f</em> will be replaced by the list of customer when we apply the funtion.<br />
-x &lt;- list () # create an empty list.<br />
-In the <em>for</em> loop, i starts from 1 to the length of y. In our example, the length of y is the length of list of customers: 10.<br />
-<em>c.name &lt;- y[i]</em> # Assign the ith element in y to a new variable <em>c.name</em>. For example, if i=1, y[1] is the “Alex”, then <em>c.name = “Alex”</em>.</p>
-<p><em>x[[c.name]] &lt;- c(x[[c.name]], i)</em>
-For i=1, we have <em>c.name &lt;- “Alex”</em>, then <em>x[[c.name]] = x[[“Alex”]] = NULL</em> since x starting from an empty list. Therefore c(x[[“Alex”]], i) = c(NULL, i) = i = 1. The value 1 will be assigned to x[[“Alex”]] by the code: <em>x[[“Alex”]] &lt;- c(x[[“Alex”]], i) = 1</em>. Now x is not an empty list, it is a list with 1 component:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>()
-x[[<span class="st">&quot;Alex&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">1</span>
-x</code></pre>
-<pre><code>## $Alex
-## [1] 1</code></pre>
-<p>For i=2, y[2] &lt;- “Brandon”, then similar to the case of i=1, we have <em>x[[“Brandon”]] &lt;- 1</em>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x[[<span class="st">&quot;Brandon&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">1</span>
-x</code></pre>
-<pre><code>## $Alex
-## [1] 1
-## 
-## $Brandon
-## [1] 1</code></pre>
-<p>For i=3, <em>y[3] &lt;- “Alex”</em>. We have met “Alex” once, which returned <em>x[[“Alex”]] &lt;- 1</em>. Now we meet “Alex” again which means we are going to update <em>x[[“Alex”]]</em> by <em>x[[“Alex”]] &lt;- c(x[[“Alex”]], i) = c(1, i) = c(1, 3)</em>. The updated x is:</p>
-<pre class="sourceCode r"><code class="sourceCode r">x[[<span class="st">&quot;Alex&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)
-x</code></pre>
-<pre><code>## $Alex
-## [1] 1 3
-## 
-## $Brandon
-## [1] 1</code></pre>
-<p>The process will stop till i = length (y) = 10. The <em>loc.names()</em> funciton will return all locations of all names which are already stored in x.</p>
-<p>Let’s find all days of cumsters who visited to our store.</p>
-<pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Brandon&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Daniel&quot;</span>, <span class="st">&quot;Grace&quot;</span>, <span class="st">&quot;Mary&quot;</span>, 
-                 <span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Grace&quot;</span>)
-v1 &lt;-<span class="st"> </span><span class="kw">loc.names</span>(customer)
-v1</code></pre>
-<pre><code>## $Alex
-## [1] 1 3 8
-## 
-## $Brandon
-## [1] 2
-## 
-## $Daniel
-## [1] 4
-## 
-## $Grace
-## [1]  5 10
-## 
-## $Mary
-## [1] 6 7
-## 
-## $Tom
-## [1] 9</code></pre>
-<p>The output tells us that Alex visited our store at the first, third and eighth days, Brandon came at the second day, etc.</p>
-<p>Then we use <em>sapply()</em> function to calculate the repeat times of each element.</p>
-<pre class="sourceCode r"><code class="sourceCode r">v2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(v1,length)     <span class="co"># Calculate the length of each component in v1</span>
-v2</code></pre>
-<pre><code>##    Alex Brandon  Daniel   Grace    Mary     Tom 
-##       3       1       1       2       2       1</code></pre>
-<p>You can sort the v2 by the number of days that they presented by function <em>sort()</em>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(v2, <span class="dt">decreasing =</span> T)</code></pre>
-<pre><code>##    Alex   Grace    Mary Brandon  Daniel     Tom 
-##       3       2       2       1       1       1</code></pre>
-<blockquote>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-198" class="exercise"><strong>Exercise 3.21  </strong></span>Fill blanks in the function <em>my.fun()</em> so that for a given list, the function returns
-all locations of each element and sort the frequency of the elements in an increasing order. Then apply <em>my.fun()</em> to a set of gender:<br />
-F F M M M M I I F I F M I F M I I M I I F<br />
-Where F, M and I represent Female, Male and Infant respectively.</p>
-my.fun &lt;- function(f){
-y &lt;- unlist(f)<br />
-x &lt;- ___________<br />
-for (i in 1:____){<br />
-g1 &lt;- y[i]<br />
-x[[______]] &lt;- c(x[[____]],i)<br />
-}
-freq &lt;- _________(x, length)<br />
-z &lt;- sort(________, decreasing = ____)<br />
-lst &lt;- list(x, z)<br />
-___________(lst)<br />
-}<br />
-gender &lt;- list( “F”, ________________________________, “F”)<br />
-__________(gender) #
-</div>
-</blockquote>
-<hr />
-<p>Many R functions, such as <em>t.test()</em>, returns results as a <strong>list</strong>, which contain a series of components, such as a p value, a vector of residuals or coefficients, and even a matrix of data. A list is the natural way to represent this sort of thing as one big object that could be parsed.</p>
-<pre class="sourceCode r"><code class="sourceCode r">r1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)  <span class="co"># Create 100 random numbers following Normal Distribution</span>
-r2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
-t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <span class="co"># Run the t test. Test if the mean of r1 and r2 are same.</span>
-<span class="kw">is.list</span>(t.result) <span class="co"># Check if the t.result is a list</span></code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">t.result  <span class="co"># A list holds all components of t-test</span></code></pre>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  r1 and r2
-## t = 1.3466, df = 197.78, p-value = 0.1796
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -0.08262189  0.43844182
-## sample estimates:
-##   mean of x   mean of y 
-##  0.04831131 -0.12959865</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></code></pre>
-<pre><code>##  [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
-##  [6] &quot;null.value&quot;  &quot;stderr&quot;      &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></code></pre>
-<pre><code>## [1] 0.1796357</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></code></pre>
-<pre><code>##   mean of x   mean of y 
-##  0.04831131 -0.12959865</code></pre>
-<p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
-<p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p &lt; 0.05.</p>
-<pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) {  <span class="co"># Loop: The values of i takes values from 1,2,3, …, 500</span>
-     result =<span class="st"> </span><span class="kw">t.test</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="kw">rnorm</span>(<span class="dv">100</span>))    
-     pvalues[i] =<span class="st"> </span>result<span class="op">$</span>p.value  <span class="co"># p values are stored in the i-th element in the vector</span>
-}  
-<span class="kw">hist</span>(pvalues)  <span class="co"># Histogram of p-values</span></code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre>
-<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.001951 0.226673 0.488202 0.494032 0.759763 0.999349</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></code></pre>
-<pre><code>## [1] 25</code></pre>
-</div>
 <div id="data-frames" class="section level3">
-<h3><span class="header-section-number">3.2.4</span> Data Frames</h3>
-<p>Similar to a matrix, a data frame is a two-dimensional array-like structure. But it differs from the matrix in that the mode of each column could be different. In fact, a data frame is a special case of a two-dimensional list. The data set <em>iris</em> that we analyzied before is a data frame.</p>
+<h3><span class="header-section-number">3.2.3</span> Data Frames</h3>
+<p>Similar to a matrix, a data frame is a two-dimensional array-like structure. But it differs from the matrix in that the mode of each column could be different. In fact, a data frame is a special case of a two-dimensional list. The data set <em>iris</em> that we analyzed before is a data frame.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(iris)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(iris)</code></pre>
@@ -1621,7 +1165,7 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 ## [122] &quot;122&quot; &quot;123&quot; &quot;124&quot; &quot;125&quot; &quot;126&quot; &quot;127&quot; &quot;128&quot; &quot;129&quot; &quot;130&quot; &quot;131&quot; &quot;132&quot;
 ## [133] &quot;133&quot; &quot;134&quot; &quot;135&quot; &quot;136&quot; &quot;137&quot; &quot;138&quot; &quot;139&quot; &quot;140&quot; &quot;141&quot; &quot;142&quot; &quot;143&quot;
 ## [144] &quot;144&quot; &quot;145&quot; &quot;146&quot; &quot;147&quot; &quot;148&quot; &quot;149&quot; &quot;150&quot;</code></pre>
-<p>We can creat a data frame by using function <em>data.frame()</em> to combine vectors. For example:</p>
+<p>We can create a data frame by using function <em>data.frame()</em> to combine vectors. For example:</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>)
 y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">41</span>, <span class="dv">32</span>, <span class="dv">13</span>, <span class="dv">89</span>)
 z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>, <span class="st">&quot;TRUE&quot;</span>)
@@ -1652,7 +1196,7 @@ df2</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-208" class="exercise"><strong>Exercise 3.22  </strong></span>What is the class of the R built-in data set <em>mtcars</em>? Show the function that you used to check the class.
+<span id="exr:unnamed-chunk-240" class="exercise"><strong>Exercise 3.16  </strong></span>What is the class of the R built-in data set <em>mtcars</em>? Show the function that you used to check the class.
 </div>
 </blockquote>
 <hr />
@@ -1764,7 +1308,7 @@ df2</code></pre>
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<p>Similar we can obtain a subset that the lengh of sepal are greater than 7.</p>
+<p>Similar we can obtain a subset that the length of sepal are greater than 7.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(x, Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">7</span>)</code></pre>
 <pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 ## 103          7.1         3.0          5.9         2.1 virginica
@@ -1784,7 +1328,7 @@ df2</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-224" class="exercise"><strong>Exercise 3.23  </strong></span>Select a subset which satisfies that the <em>cyl</em> is 6 and <em>mpg</em> greater than 21.2, meanwhile the subset doesn’t include the variable <em>carb</em>.
+<span id="exr:unnamed-chunk-256" class="exercise"><strong>Exercise 3.17  </strong></span>Select a subset which satisfies that the <em>cyl</em> is 6 and <em>mpg</em> greater than 21.2, meanwhile the subset doesn’t include the variable <em>carb</em>.
 </div>
 </blockquote>
 <hr />
@@ -1803,12 +1347,12 @@ df2</code></pre>
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(y, x.id)
 <span class="kw">head</span>(x2)</code></pre>
 <pre><code>##            y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1  0.7711098  1          5.1         3.5          1.4         0.2  setosa
-## 2  1.7629016  2          4.9         3.0          1.4         0.2  setosa
-## 3  0.2418381  3          4.7         3.2          1.3         0.2  setosa
-## 4 -1.7149314  4          4.6         3.1          1.5         0.2  setosa
-## 5  1.6948552  5          5.0         3.6          1.4         0.2  setosa
-## 6 -0.3116077  6          5.4         3.9          1.7         0.4  setosa</code></pre>
+## 1 -0.9324550  1          5.1         3.5          1.4         0.2  setosa
+## 2  1.1104572  2          4.9         3.0          1.4         0.2  setosa
+## 3 -1.4911297  3          4.7         3.2          1.3         0.2  setosa
+## 4  0.2787379  4          4.6         3.1          1.5         0.2  setosa
+## 5 -0.7172038  5          5.0         3.6          1.4         0.2  setosa
+## 6  0.7267849  6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.</p>
 <pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1841,7 +1385,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ## 6           5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>We can view sepal length by species using boxplot.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, x)</code></pre>
-<p><img src="book_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-261-1.png" width="672" /></p>
 <p>We can obtain summary statistics by category. Let’s calculate the mean of the variables by species:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(. <span class="op">~</span><span class="st"> </span>Species, x, mean)</code></pre>
 <pre><code>##      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
@@ -1851,7 +1395,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-231" class="exercise"><strong>Exercise 3.24  </strong></span>Use <em>aggregate()</em> function to calculate the median of the variables: <em>mpg</em>, <em>disp</em>, <em>hp</em>, and <em>wt</em> across the number of cylinders <em>cyl</em> in the <em>mtcars</em> data set.
+<span id="exr:unnamed-chunk-263" class="exercise"><strong>Exercise 3.18  </strong></span>Use <em>aggregate()</em> function to calculate the median of the variables: <em>mpg</em>, <em>disp</em>, <em>hp</em>, and <em>wt</em> across the number of cylinders <em>cyl</em> in the <em>mtcars</em> data set.
 </div>
 </blockquote>
 <hr />
@@ -1864,7 +1408,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The p-value is close to 0, therefore we reject the null hypothesis and conclude that the length of sepal among three species are not same.</p>
-<p>We can use the <em>sapply()</em> function to do the ANOVA test for all of the 4 numeric variables acorss the species.</p>
+<p>We can use the <em>sapply()</em> function to do the ANOVA test for all of the 4 numeric variables across the species.</p>
 <pre class="sourceCode r"><code class="sourceCode r">aov.fun &lt;-<span class="st"> </span><span class="cf">function</span>(temx){
   m1 &lt;-<span class="st"> </span><span class="kw">aov</span>(temx <span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Species)
   <span class="kw">summary</span>(m1)
@@ -1924,7 +1468,7 @@ da</code></pre>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-236" class="exercise"><strong>Exercise 3.25  </strong></span>Test if the variables <em>mpg</em>, <em>disp</em>, <em>hp</em>, <em>wt</em> and <em>qsec</em> have significant difference across the three cyl in the R build data set <em>mtcars</em>. Fill the blanks and interpret your conclusion based on the p-values.</p>
+<p><span id="exr:unnamed-chunk-268" class="exercise"><strong>Exercise 3.19  </strong></span>Test if the variables <em>mpg</em>, <em>disp</em>, <em>hp</em>, <em>wt</em> and <em>qsec</em> have significant difference across the three cyl in the R build data set <em>mtcars</em>. Fill the blanks and interpret your conclusion based on the p-values.</p>
 aov.fun.car &lt;- function(temx){<br />
 m2 &lt;- ________(________ ~ _________$______)<br />
 summary(________)<br />
@@ -1966,33 +1510,33 @@ dfmg3</code></pre>
 <p>We use data.frame() function to define a new data frame with 100 rows and two columns, <em>ids</em> and <em>rand</em>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre>
-<pre><code>##   id       rand
-## 1  1 -0.5025386
-## 2  2  0.4331045
-## 3  3 -0.7394242
-## 4  4 -0.5181319
-## 5  5  1.2336488
-## 6  6  0.2123018</code></pre>
+<pre><code>##   id        rand
+## 1  1 -1.36666810
+## 2  2  0.38266841
+## 3  3 -0.41929943
+## 4  4  0.24701382
+## 5  5  0.11613526
+## 6  6 -0.05190243</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre>
-<pre><code>##      id        rand
-## 95   95 -0.74768000
-## 96   96  0.44528280
-## 97   97 -0.07052882
-## 98   98  0.12090317
-## 99   99  1.16997137
-## 100 100 -0.32728812</code></pre>
+<pre><code>##      id       rand
+## 95   95 -0.5795577
+## 96   96 -0.8921466
+## 97   97  0.5085633
+## 98   98 -1.7601963
+## 99   99  0.6558851
+## 100 100  0.8962153</code></pre>
 <p>Now we merge two data frames x and y by a common column named <strong>id</strong>. Note the new data frame z has only 100 rows. We can also merge data frame by row names too.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris
 x<span class="op">$</span>id =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)
 z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre>
-<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -0.5025386
-## 2  2          4.9         3.0          1.4         0.2  setosa  0.4331045
-## 3  3          4.7         3.2          1.3         0.2  setosa -0.7394242
-## 4  4          4.6         3.1          1.5         0.2  setosa -0.5181319
-## 5  5          5.0         3.6          1.4         0.2  setosa  1.2336488
-## 6  6          5.4         3.9          1.7         0.4  setosa  0.2123018</code></pre>
+<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species        rand
+## 1  1          5.1         3.5          1.4         0.2  setosa -1.36666810
+## 2  2          4.9         3.0          1.4         0.2  setosa  0.38266841
+## 3  3          4.7         3.2          1.3         0.2  setosa -0.41929943
+## 4  4          4.6         3.1          1.5         0.2  setosa  0.24701382
+## 5  5          5.0         3.6          1.4         0.2  setosa  0.11613526
+## 6  6          5.4         3.9          1.7         0.4  setosa -0.05190243</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(z)</code></pre>
 <pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 95   95          5.6         2.7          4.2         1.3 versicolor
@@ -2001,13 +1545,13 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ## 98   98          6.2         2.9          4.3         1.3 versicolor
 ## 99   99          5.1         2.5          3.0         1.1 versicolor
 ## 100 100          5.7         2.8          4.1         1.3 versicolor
-##            rand
-## 95  -0.74768000
-## 96   0.44528280
-## 97  -0.07052882
-## 98   0.12090317
-## 99   1.16997137
-## 100 -0.32728812</code></pre>
+##           rand
+## 95  -0.5795577
+## 96  -0.8921466
+## 97   0.5085633
+## 98  -1.7601963
+## 99   0.6558851
+## 100  0.8962153</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -2017,15 +1561,15 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
 ##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-2.56207  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.59645  
-##  Median :0.800   virginica : 0   Median :-0.01555  
-##  Mean   :0.786                   Mean   : 0.01021  
-##  3rd Qu.:1.300                   3rd Qu.: 0.71513  
-##  Max.   :1.800                   Max.   : 1.83495</code></pre>
+##  Min.   :0.100   setosa    :50   Min.   :-2.81044  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.54200  
+##  Median :0.800   virginica : 0   Median : 0.05565  
+##  Mean   :0.786                   Mean   : 0.05028  
+##  3rd Qu.:1.300                   3rd Qu.: 0.61382  
+##  Max.   :1.800                   Max.   : 3.00969</code></pre>
 </div>
 <div id="strings-and-string-vectors" class="section level3">
-<h3><span class="header-section-number">3.2.5</span> Strings and string vectors</h3>
+<h3><span class="header-section-number">3.2.4</span> Strings and string vectors</h3>
 <p>We encounter text data sometimes. Plus, we also have row and column names. We can easily manipulate these string objects.</p>
 <p>Define a <strong>string</strong> x: “R is cool”</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;R is cool&quot;</span></code></pre>
@@ -2106,11 +1650,401 @@ segs  <span class="co"># a vector of strings</span></code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-265" class="exercise"><strong>Exercise 3.26  </strong></span>In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.
+<span id="exr:unnamed-chunk-297" class="exercise"><strong>Exercise 3.20  </strong></span>In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.
 </div>
 </blockquote>
 <hr />
 <p>Some of the materials above has been inspired by <a href="http://tryr.codeschool.com/">http://tryr.codeschool.com/</a>, which contains more in-depth introduction.</p>
+</div>
+<div id="lists" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Lists</h3>
+<p>All elements in vectors must be same type. The list can combine objects of different types. Let’s start from creating a list:</p>
+<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">5</span>, <span class="st">&quot;John Doe&quot;</span>, <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">7</span>), mean) <span class="co"># a list with 4 components</span>
+y</code></pre>
+<pre><code>## [[1]]
+## [1] 5
+## 
+## [[2]]
+## [1] &quot;John Doe&quot;
+## 
+## [[3]]
+## [1] 100   7
+## 
+## [[4]]
+## function (x, ...) 
+## UseMethod(&quot;mean&quot;)
+## &lt;bytecode: 0x0000000008e01128&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height”, “name”, “BP” and “fun” to the y.</p>
+<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)  
+y</code></pre>
+<pre><code>## $height
+## [1] 5
+## 
+## $name
+## [1] &quot;John Doe&quot;
+## 
+## $BP
+## [1] 100  77
+## 
+## $fun
+## function (x, ...) 
+## UseMethod(&quot;mean&quot;)
+## &lt;bytecode: 0x0000000008e01128&gt;
+## &lt;environment: namespace:base&gt;</code></pre>
+<p>Here is another example for creating a list:</p>
+<pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span>
+x2 &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">:</span><span class="st"> </span><span class="dv">1</span>
+x3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.4</span>, <span class="fl">5.1</span>, <span class="fl">9.0</span>, <span class="fl">4.4</span>)
+x4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;u&#39;</span>, <span class="st">&#39;v&#39;</span>, <span class="st">&#39;w&#39;</span>)
+z &lt;-<span class="st"> </span><span class="kw">list</span>(x1, x2, x3, x4)
+z</code></pre>
+<pre><code>## [[1]]
+##      [,1] [,2] [,3]
+## [1,]    4    5   10
+## [2,]    2    6    9
+## 
+## [[2]]
+## [1] 8 7 6 5 4 3 2 1
+## 
+## [[3]]
+## [1] 2.4 5.1 9.0 4.4
+## 
+## [[4]]
+## [1] &quot;u&quot; &quot;v&quot; &quot;w&quot;</code></pre>
+<p>We can build a list by creating an empty list and assigning values to it.</p>
+<pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">list</span>()         <span class="co">#Create an empty list</span>
+v[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>)  <span class="co"># Assign a matrix to v[[1]]</span>
+v[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="dv">8</span> <span class="op">:</span><span class="st"> </span><span class="dv">1</span>    <span class="co">#Assign a vector to v[[2]]</span>
+v[[<span class="dv">3</span>]] &lt;-<span class="st"> </span>x3       <span class="co">#Assign x3 to v[[3]] where x3 is defined as above</span>
+v[[<span class="dv">4</span>]] &lt;-<span class="st"> </span>x4       <span class="co">#Assign x4 to v[[4]] where x4 is defined as above</span>
+v</code></pre>
+<pre><code>## [[1]]
+##      [,1] [,2] [,3]
+## [1,]    4    5   10
+## [2,]    2    6    9
+## 
+## [[2]]
+## [1] 8 7 6 5 4 3 2 1
+## 
+## [[3]]
+## [1] 2.4 5.1 9.0 4.4
+## 
+## [[4]]
+## [1] &quot;u&quot; &quot;v&quot; &quot;w&quot;</code></pre>
+<p>We used different methods creating list z and v. The list v and z are identical because that we assigned same components for v as that of in z.</p>
+<p>There are several different ways to access the elements in a list. For example, to access the third component in y:</p>
+<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">3</span>]]        <span class="co">#Specifing the number in a double square braket</span></code></pre>
+<pre><code>## [1] 100  77</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y<span class="op">$</span>BP          <span class="co">#Using $ sign</span></code></pre>
+<pre><code>## [1] 100  77</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="st">&quot;BP&quot;</span>]]     <span class="co">#Using the tag</span></code></pre>
+<pre><code>## [1] 100  77</code></pre>
+<p>Note: we used <strong>double square bracket</strong> ‘[[]]’ to access the element in a list, which is different from using single square brake ‘[]’ in a vector. If we use single square bracket in a list, we will get a sub-list. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions <em>class()</em> and <em>is.list</em> can be used to check the types.</p>
+<pre class="sourceCode r"><code class="sourceCode r">y[<span class="dv">3</span>]</code></pre>
+<pre><code>## $BP
+## [1] 100  77</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y[<span class="dv">3</span>])</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(y[<span class="dv">3</span>])</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">3</span>]]</code></pre>
+<pre><code>## [1] 100  77</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y[[<span class="dv">3</span>]])               <span class="co">#Get the class of y[[3]] </span></code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.list</span>(y[[<span class="dv">3</span>]])           <span class="co">#Check if y[[3]] is a list or not</span></code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>The forth component of y is <em>fun = mean</em>. There are no quotation marks around <em>mean</em>. The <em>class(y[[4]])</em> returns a function.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y[[<span class="dv">4</span>]])</code></pre>
+<pre><code>## [1] &quot;function&quot;</code></pre>
+<p>This implies that y[[4]] is same as the <em>mean()</em> function. For example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">4</span>]](<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))          <span class="co">#Get the mean of 1, 2, 3, 4, 5</span></code></pre>
+<pre><code>## [1] 3</code></pre>
+<blockquote>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-310" class="exercise"><strong>Exercise 3.21  </strong></span>Access the second component in list1 by three ways as we introduced above. What is the type of list1[“Hobby”] and list1[[“Hobby”]] respectively?
+</div>
+</blockquote>
+<pre class="sourceCode r"><code class="sourceCode r">  list1 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">Name =</span> <span class="st">&quot;Tom&quot;</span>, <span class="dt">Hobby =</span> <span class="st">&quot;Fishing&quot;</span>, <span class="dt">Num.fish =</span> <span class="kw">c</span>(<span class="dv">16</span>, <span class="dv">27</span>, <span class="dv">5</span>))</code></pre>
+<hr />
+<p>Here are some examples for list operation:</p>
+<pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)
+y[[<span class="dv">2</span>]] &lt;-<span class="st"> &quot;Mike&quot;</span>    <span class="co">#Change the 2nd component from &quot;John Doe&quot; to &quot;Mike&quot;</span>
+y[[<span class="dv">4</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span>      <span class="co">#Delete the 4th component by setting it to NULL</span>
+y</code></pre>
+<pre><code>## $height
+## [1] 5
+## 
+## $name
+## [1] &quot;Mike&quot;
+## 
+## $BP
+## [1] 100  77</code></pre>
+<p>The output shows that the name has been changed to Mike and the mean function is deleted. So far, the length of y is 3:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(y)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>We can add the forth components to y using the following code:</p>
+<pre class="sourceCode r"><code class="sourceCode r">y<span class="op">$</span>class &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;math&quot;</span>, <span class="st">&quot;art&quot;</span>) <span class="co">#Add a class component</span>
+y</code></pre>
+<pre><code>## $height
+## [1] 5
+## 
+## $name
+## [1] &quot;Mike&quot;
+## 
+## $BP
+## [1] 100  77
+## 
+## $class
+## [1] &quot;math&quot; &quot;art&quot;</code></pre>
+<p>If we have a vector of tags and a vector of corresponding values, we can associate the names and values into a list by creating an empty list and then fill it via assignment statements:</p>
+<pre class="sourceCode r"><code class="sourceCode r">sales &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">105</span>, <span class="dv">98</span>, <span class="dv">112</span>)
+seasons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Spring&quot;</span>, <span class="st">&quot;Summer&quot;</span>, <span class="st">&quot;Fall&quot;</span>, <span class="st">&quot;Winter&quot;</span>)
+sale.tag &lt;-<span class="st"> </span><span class="kw">list</span>()               <span class="co">#Create an empty list</span>
+sale.tag[seasons] &lt;-<span class="st"> </span>sales
+sale.tag</code></pre>
+<pre><code>## $Spring
+## [1] 100
+## 
+## $Summer
+## [1] 105
+## 
+## $Fall
+## [1] 98
+## 
+## $Winter
+## [1] 112</code></pre>
+<p>Equivalently, we can associate the names and values by creating an empty list and then assign each component corresponding value or vector. For example.</p>
+<pre class="sourceCode r"><code class="sourceCode r">sale.tag &lt;-<span class="st"> </span><span class="kw">list</span>()               <span class="co">#Create an empty list</span>
+sale.tag[[<span class="st">&quot;Spring&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">100</span>
+sale.tag[[<span class="st">&quot;Summer&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">105</span>
+sale.tag[[<span class="st">&quot;Fall&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">98</span>
+sale.tag[[<span class="st">&quot;Winter&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">112</span>
+sale.tag</code></pre>
+<pre><code>## $Spring
+## [1] 100
+## 
+## $Summer
+## [1] 105
+## 
+## $Fall
+## [1] 98
+## 
+## $Winter
+## [1] 112</code></pre>
+<blockquote>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-317" class="exercise"><strong>Exercise 3.22  </strong></span>Based on the data set of sale.tag, choose all correct answers from the following options A - F. A: sale.tag[[1]]<br />
+B: sale.tag[[Spring]]<br />
+C: sale.tag[[“Spring”]]<br />
+D: sale.tag[“Spring”]<br />
+E: sale.tag[1]<br />
+F: sale.tag[Spring]
+1, Which options return a vector. Answer:___________<br />
+2, Which options return a list. Answer:___________<br />
+3, Which options returns an error. Answer:___________
+</div>
+</blockquote>
+<hr />
+<p>Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
+&gt; mean(sale.tag)<br />
+[1] NA<br />
+Warning message:<br />
+In mean.default(sale.tag) :<br />
+argument is not numeric or logical: returning NA</p>
+<p>To calculate the mean, we need to use function <em>unlist()</em> to flatten the list into a vector.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">unlist</span>(sale.tag))</code></pre>
+<pre><code>## [1] 103.75</code></pre>
+<p>Similar to <em>apply()</em> function works on vectors, <em>lapply()</em> (for list apply) works on each component of lists. Here is an example:</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>))
+mean.x &lt;-<span class="st"> </span><span class="kw">lapply</span>(x, mean)
+mean.x</code></pre>
+<pre><code>## [[1]]
+## [1] 20
+## 
+## [[2]]
+## [1] 6</code></pre>
+<p>The <em>mean.x</em> returns a list consisting of 20 and 6 which are means of components of x respectively.</p>
+<p>When the list returned by <em>lapply()</em> could be simplified to a vector or matrix, we can use function <em>sapply()</em> (for <em>simplified [l]apply</em>). Let’s redo the previous example by <em>sapply()</em> function.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mean.x<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">sapply</span>(x, mean)
+mean.x<span class="fl">.2</span></code></pre>
+<pre><code>## [1] 20  6</code></pre>
+<p>We can double check the outputs by <em>class()</em> or <em>is.vector()</em> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(mean.x)               </code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(mean.x<span class="fl">.2</span>)             </code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.vector</span>(mean.x<span class="fl">.2</span>)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Here is another example for <em>sapply()</em> function. Suppose we have NULL elements in a list.null. To remove the NULL element, apply <em>is.null</em> function to every element of the list.null. If the logical value is TRUE, i.e. the element is a NULL, then delete the element by setting NULL to it.</p>
+<pre class="sourceCode r"><code class="sourceCode r">list.null &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;art&#39;</span>, <span class="ot">NULL</span>, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>))
+list.null</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;art&quot;
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## [1] 2 4 6 8</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">list.null[<span class="kw">sapply</span>(list.null, is.null)] &lt;-<span class="st"> </span><span class="ot">NULL</span>
+list.null</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;art&quot;
+## 
+## [[2]]
+## [1] 2 4 6 8</code></pre>
+<p>For a small size data set, if we can locate the position of NULL element, we can easily remove the NULL element by setting NULL to that element. For example, we already know the second element of list.null is NULL, to remove this NULL element, we set a NULL to the second element:</p>
+<pre class="sourceCode r"><code class="sourceCode r">list.null &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;art&#39;</span>, <span class="ot">NULL</span>, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>))
+list.null[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="ot">NULL</span>
+list.null</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;art&quot;
+## 
+## [[2]]
+## [1] 2 4 6 8</code></pre>
+<p>But for large size of data set, we turn to the <em>sapply()</em> function to remove NULL elements.</p>
+<p><strong>Example</strong>:
+Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:</p>
+<pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Brandon&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Daniel&quot;</span>, <span class="st">&quot;Grace&quot;</span>, <span class="st">&quot;Mary&quot;</span>, 
+                 <span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Grace&quot;</span>)</code></pre>
+<p>Firstly, we define a function which returns all locations of same elements in a list.</p>
+<pre class="sourceCode r"><code class="sourceCode r">loc.names &lt;-<span class="st"> </span><span class="cf">function</span>(f){
+y &lt;-<span class="st"> </span><span class="kw">unlist</span>(f)                     <span class="co"># Flatten a list x into a vector y</span>
+x &lt;-<span class="st"> </span><span class="kw">list</span>()                        <span class="co"># Create an empty list</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(y)){        
+  c.name &lt;-<span class="st"> </span>y[i]                   <span class="co"># Assign the ith element to c.name. </span>
+  x[[c.name]] &lt;-<span class="st"> </span><span class="kw">c</span>(x[[c.name]],i)  <span class="co"># assign values to x[[c.name]]. c.name is the name of x.</span>
+}
+<span class="kw">return</span>(x)
+}</code></pre>
+<p>the <em>f</em> will be replaced by your own list. In this example, <em>f</em> will be replaced by the list of customer when we apply the function.<br />
+x &lt;- list () # create an empty list.<br />
+In the <em>for</em> loop, i starts from 1 to the length of y. In our example, the length of y is the length of list of customers: 10.<br />
+<em>c.name &lt;- y[i]</em> # Assign the i-th element in y to a new variable <em>c.name</em>. For example, if i=1, y[1] is the “Alex”, then <em>c.name = “Alex”</em>.</p>
+<p><em>x[[c.name]] &lt;- c(x[[c.name]], i)</em>
+For i=1, we have <em>c.name &lt;- “Alex”</em>, then <em>x[[c.name]] = x[[“Alex”]] = NULL</em> since x starting from an empty list. Therefore c(x[[“Alex”]], i) = c(NULL, i) = i = 1. The value 1 will be assigned to x[[“Alex”]] by the code: <em>x[[“Alex”]] &lt;- c(x[[“Alex”]], i) = 1</em>. Now x is not an empty list, it is a list with 1 component:</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>()
+x[[<span class="st">&quot;Alex&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">1</span>
+x</code></pre>
+<pre><code>## $Alex
+## [1] 1</code></pre>
+<p>For i=2, y[2] &lt;- “Brandon”, then similar to the case of i=1, we have <em>x[[“Brandon”]] &lt;- 1</em>:</p>
+<pre class="sourceCode r"><code class="sourceCode r">x[[<span class="st">&quot;Brandon&quot;</span>]] &lt;-<span class="st"> </span><span class="dv">1</span>
+x</code></pre>
+<pre><code>## $Alex
+## [1] 1
+## 
+## $Brandon
+## [1] 1</code></pre>
+<p>For i=3, <em>y[3] &lt;- “Alex”</em>. We have met “Alex” once, which returned <em>x[[“Alex”]] &lt;- 1</em>. Now we meet “Alex” again which means we are going to update <em>x[[“Alex”]]</em> by <em>x[[“Alex”]] &lt;- c(x[[“Alex”]], i) = c(1, i) = c(1, 3)</em>. The updated x is:</p>
+<pre class="sourceCode r"><code class="sourceCode r">x[[<span class="st">&quot;Alex&quot;</span>]] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)
+x</code></pre>
+<pre><code>## $Alex
+## [1] 1 3
+## 
+## $Brandon
+## [1] 1</code></pre>
+<p>The process will stop till i = length (y) = 10. The <em>loc.names()</em> function will return all locations of all names which are already stored in x.</p>
+<p>Let’s find all days of customers who visited to our store.</p>
+<pre class="sourceCode r"><code class="sourceCode r">customer &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Brandon&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Daniel&quot;</span>, <span class="st">&quot;Grace&quot;</span>, <span class="st">&quot;Mary&quot;</span>, 
+                 <span class="st">&quot;Mary&quot;</span>, <span class="st">&quot;Alex&quot;</span>, <span class="st">&quot;Tom&quot;</span>, <span class="st">&quot;Grace&quot;</span>)
+v1 &lt;-<span class="st"> </span><span class="kw">loc.names</span>(customer)
+v1</code></pre>
+<pre><code>## $Alex
+## [1] 1 3 8
+## 
+## $Brandon
+## [1] 2
+## 
+## $Daniel
+## [1] 4
+## 
+## $Grace
+## [1]  5 10
+## 
+## $Mary
+## [1] 6 7
+## 
+## $Tom
+## [1] 9</code></pre>
+<p>The output tells us that Alex visited our store at the first, third and eighth days, Brandon came at the second day, etc.</p>
+<p>Then we use <em>sapply()</em> function to calculate the repeat times of each element.</p>
+<pre class="sourceCode r"><code class="sourceCode r">v2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(v1,length)     <span class="co"># Calculate the length of each component in v1</span>
+v2</code></pre>
+<pre><code>##    Alex Brandon  Daniel   Grace    Mary     Tom 
+##       3       1       1       2       2       1</code></pre>
+<p>You can sort the v2 by the number of days that they presented by function <em>sort()</em>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(v2, <span class="dt">decreasing =</span> T)</code></pre>
+<pre><code>##    Alex   Grace    Mary Brandon  Daniel     Tom 
+##       3       2       2       1       1       1</code></pre>
+<blockquote>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-332" class="exercise"><strong>Exercise 3.23  </strong></span>Fill blanks in the function <em>my.fun()</em> so that for a given list, the function returns
+all locations of each element and sort the frequency of the elements in an increasing order. Then apply <em>my.fun()</em> to a set of gender:<br />
+F F M M M M I I F I F M I F M I I M I I F<br />
+Where F, M and I represent Female, Male and Infant respectively.</p>
+my.fun &lt;- function(f){
+y &lt;- unlist(f)<br />
+x &lt;- ___________<br />
+for (i in 1:____){<br />
+g1 &lt;- y[i]<br />
+x[[______]] &lt;- c(x[[____]],i)<br />
+}
+freq &lt;- _________(x, length)<br />
+z &lt;- sort(________, decreasing = ____)<br />
+lst &lt;- list(x, z)<br />
+___________(lst)<br />
+}<br />
+gender &lt;- list( “F”, ________________________________, “F”)<br />
+__________(gender) #
+</div>
+</blockquote>
+<hr />
+<p>Many R functions, such as <em>t.test()</em>, returns results as a <strong>list</strong>, which contain a series of components, such as a p value, a vector of residuals or coefficients, and even a matrix of data. A list is the natural way to represent this sort of thing as one big object that could be parsed.</p>
+<pre class="sourceCode r"><code class="sourceCode r">r1 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)  <span class="co"># Create 100 random numbers following Normal Distribution</span>
+r2 &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
+t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <span class="co"># Run the t test. Test if the mean of r1 and r2 are same.</span>
+<span class="kw">is.list</span>(t.result) <span class="co"># Check if the t.result is a list</span></code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">t.result  <span class="co"># A list holds all components of t-test</span></code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  r1 and r2
+## t = -1.4881, df = 197.48, p-value = 0.1383
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.48206789  0.06741804
+## sample estimates:
+##   mean of x   mean of y 
+## -0.06718928  0.14013565</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></code></pre>
+<pre><code>##  [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
+##  [6] &quot;null.value&quot;  &quot;stderr&quot;      &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></code></pre>
+<pre><code>## [1] 0.13831</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></code></pre>
+<pre><code>##   mean of x   mean of y 
+## -0.06718928  0.14013565</code></pre>
+<p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
+<p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p &lt; 0.05.</p>
+<pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) {  <span class="co"># Loop: The values of i takes values from 1,2,3, …, 500</span>
+     result =<span class="st"> </span><span class="kw">t.test</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>), <span class="kw">rnorm</span>(<span class="dv">100</span>))    
+     pvalues[i] =<span class="st"> </span>result<span class="op">$</span>p.value  <span class="co"># p values are stored in the i-th element in the vector</span>
+}  
+<span class="kw">hist</span>(pvalues)  <span class="co"># Histogram of p-values</span></code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## 0.0009447 0.2329222 0.5056954 0.4984501 0.7353189 0.9911383</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></code></pre>
+<pre><code>## [1] 20</code></pre>
 
 </div>
 </div>
@@ -2121,7 +2055,7 @@ segs  <span class="co"># a vector of strings</span></code></pre>
         </div>
       </div>
 <a href="visualizing-the-iris-flower-data-set.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-importation-and-project-management.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="importing-data-and-managing-files.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

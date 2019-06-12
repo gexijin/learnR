@@ -1,5 +1,6 @@
 # Advanced topics
 
+
 ## Introduction to R Markdown
 
 Let's start learning R Markdown from its cheat sheet. Click the RStudio IDE under *Help $\rightarrow$ Cheatsheets $\rightarrow$ R Markdown Cheat Sheet.* As the cheet sheet explained, the R Markdown (.Rmd) file can combine your code and the output in one file, and produce various formats, such as html, pdf, MS Word, or RTF documents.  
@@ -541,4 +542,132 @@ Show it off by sending the URL of your data to your friends or your adviser. Mor
 
 Solutions to these exercises can be found at GitHub [https://github.com/gexijin/teach/blob/master/app.R](https://github.com/gexijin/teach/blob/master/app.R)
 
+
+## Define your own function
+
+We can also easily define our own functions. For example, we have the following arithmetic function: 
+
+$$f(x)=1.5 x^3+ x^2-2x+1$$
+
+Obviously, we can use the following code to do the computing:
+```{r}
+x <- 5
+1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1
+```
+
+This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:
+```{r}
+myf <- function(x) {                           #Name of my function is myf
+       y = 1.57345 * x^3 + x^2 - 2 * x + 1 #Expression of the function
+       return(y)                               #Return vaules of the function
+}
+```
+
+Note that “{”  and “}” signify the beginning and end of a block of code.  **“function”** tells R that a function is going to be defined. At the end, the **“return”** statement returns the desired values. 
+
+You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:
+```{r}
+myf(5)     # Obtain the y value given x=5.
+```
+or 
+```{r}
+myf(x = 5) #
+```
+
+The funtion applies to a vector as well. For example:
+```{r}
+x <- - 10 : 10  # x is a vector with integer values from -10 to 10.
+myf(x)          # Apply the function myf() to x.
+plot(x, myf(x)) # Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.
+```
+
+Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too. 
+
+>
+```{exercise}
+Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.             
+a. Write an R function to implement this arithmetic function.               
+b. Use this function to find f(-4.534).                 
+c. Obtain the graph of the function.                 
+```
+
+---
+
+Let's define a function to count even numbers in a vector. 
+
+```{r}
+#counts the number of even intergers in vec
+evencount <- function(vec) {
+  k <- 0                      # assign 0 to a count varialbe k
+  for (i in vec) {            # Find all elements (represented by i) in vec. 
+                              # Values of i are actually vec[1],vec[2],...
+    if (i %% 2 == 0) 
+      k <- k + 1              # test if i is an even or odd number. 
+                              # %% is the modulo operator.
+  }
+  return(k)                   #Return the count of even numbers in vec.
+}
+```
+
+```{r}
+x=c(2, 5, 7, 8, 14, 12, 8, 3) # Define a new vector. 
+evencount(x) # Call the function evencount(). Replace vec with defined vector x.
+```
+
+A vaiable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
+
+k
+
+Error: object 'vec' not found
+
+vec
+
+Error: object 'vec' not found
+
+A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:
+
+```{r}
+myfun.globle <- function (x){
+  y <- 1
+  return(x - 2 * y)
+}
+myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
+```
+Here y is a global variable.
+
+The function *myfun.globle2()* defined below returns the same values as above. But both x and y within the the paratheses *(x, y=1)* following *function* are local variables.
+```{r}
+myfun.globle2 <- function (x, y = 1){ #y is set as 1 within the function by default.
+  return(x - 2 * y)
+ }
+myfun.globle2(8)    #8-2*y = 8-2*(1)=6
+```
+
+>
+```{exercise}
+Define a function which returns the count of all odd numbers in the vector x <- 1:99. 
+```
+
+---
+
+>
+```{exercise}
+Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+```
+
+---
+
+```{r echo=FALSE, results= 'hide', message=FALSE}
+fun1 <- function(x){
+  k <- 0
+  for (n in x) { 
+    if (n < 0) k <- k + 1
+  } 
+  return(k/length(x))
+}
+x = rnorm(50)
+y = rnorm(5000)
+fun1(x)
+fun1(y)
+```
 

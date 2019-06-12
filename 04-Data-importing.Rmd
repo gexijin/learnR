@@ -1,18 +1,20 @@
-#  Data importation and project management
+#  Importing data and managing files
 
 Learning objectives:
 
 - Create projects in Rstudio
 - Proper steps to import data
-- Data transformation using dplyr
+- Intro to data transformation using dplyr
 
 
-## Poject-oriented workflow
+## Project-oriented workflow
 
 It is best to create a separate folder that contains all related files. You can do the same for research projects.  In Rstudio, this is called a **Project**. For example you can create a project for each of the chapters in this book. Projects are self-contained and can be moved to another computer or folder and the code will run.
 
 >
 If the first line of your R script is
+>
+>
 setwd("C:\\Users\\jenny\\path\\that\\only\\I\\have")
 I will come into your office and SET YOUR COMPUTER ON FIRE 
 ---\@JennyBryan on Twitter
@@ -42,18 +44,18 @@ knitr::include_graphics("images/img0901_rstudio.png")
 
 
 ###	Copy data files to the new directory
-This is done outside of Rstudio on Windows or Mac interface. Download the heartatk4R.txt file from this page http://statland.org/R/RC/tables4R.htm. It is a tab-deliminated text file, meaning the different columns are separated by tab. We also need to get some context about the data and how it is collected. At the minimim level, we need to know the meaning of each columns.
+This is done outside of Rstudio on Windows or Mac interface. Download the heartatk4R.txt file from this page http://statland.org/R/RC/tables4R.htm. It is a tab-delimited text file, meaning the different columns are separated by tab. We also need to get some context about the data and how it is collected. At the minimum level, we need to know the meaning of each columns.
 
  **File unzipping, conversion, and context.**
-If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character. 
+If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimited text files, which uses the tab or $\t$ as it is invisible character. 
 
-**Checking the file with text editor and Excel.** Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and sooo amateur)! Do not even think about using Microsoft Word!   I strongly recommend that you install a powerful text editor such as NotePad++ (https://notepad-plus-plus.org/), or TextPad (https://www.textpad.com/).  If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (https://sourceforge.net/projects/npptor/) to send R commands from NotePad++ directly to R, and I love it!
+**Checking the file with text editor and Excel.** Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and so amateur)! Do not even think about using Microsoft Word!   I strongly recommend that you install a powerful text editor such as NotePad++ (https://notepad-plus-plus.org/), or TextPad (https://www.textpad.com/).  If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (https://sourceforge.net/projects/npptor/) to send R commands from NotePad++ directly to R, and I love it!
 
 Regardless of their extensions in file names, all **plain text files** can be opened by these text editors. Plain text files only contain text without any formatting, links and images.  The file names can be “poems.txt”, “poems.tex”, “students.csv”,  or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”.  You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified. 
 
-Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
+Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimited text files, which uses the tab or $\t$ as it is invisible character.  Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files. 
 
-### 	Import dataset
+### 	Import data file
 In Rstudio, click **File->Import Dataset->From text(readr)…**, find the file on your hard drive. You should change the **Delimiter** to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to **“df”** on the lower left of the import interface. 
 
 
@@ -61,10 +63,10 @@ In Rstudio, click **File->Import Dataset->From text(readr)…**, find the file o
 We need to check each of the columns and see the data types are correctly read in. 
 The first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually **code for certain categories**. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX. 
 So in this dialog interface, DIAGNOSIS, DRG, and DIED should be changed from **"double" to "character"**. 
-As shown in Figure \@ref(fig:9-2), you can click on the automatically guessed datas type under each of the column names as shown in Figure \@ref(fig:9-2). By selecting “character” from the drop down, you can successfully format this column as a character.
+As shown in Figure \@ref(fig:9-2), you can click on the automatically guessed data type under each of the column names as shown in Figure \@ref(fig:9-2). By selecting “character” from the drop down, you can successfully format this column as a character.
 
 
-On the other hand, LOS (length of stay in days) and AGE should be numbers. But because 10 is presented as "0010", these columns are automatically recognized as characters. We have to force R to read these columns as intergers by clicking on the column title and select **integer**. 
+On the other hand, LOS (length of stay in days) and AGE should be numbers. But because 10 is presented as "0010", these columns are automatically recognized as characters. We have to force R to read these columns as integers by clicking on the column title and select **integer**. 
 We have to change LOS and AGE from **"character" to "integer"**. 
 
 The awesome nerds at Rstudio actually helped you generating these 3 lines of code:
@@ -120,7 +122,7 @@ Factors are very similar to character vectors. But factors have defined levels a
 nlevels(df$DIAGNOSIS)
 levels(df$DIAGNOSIS)
 ```
-Note tht "41001" is the **reference level** for this factor and it is coded as 1. The reference level for factors are important when we interpret results from regression, as  effects are represented relative to the reference level. The reference level are defined based on the order they appear in the dataset. Sometimes we need to change the reference level.
+Note  "41001" is the **reference level** for this factor and it is coded as 1. The reference level for factors are important when we interpret results from regression, as  effects are represented relative to the reference level. The reference level are defined based on the order they appear in the dataset. Sometimes we need to change the reference level.
 
 ```{r}
 df$DIAGNOSIS <- relevel( df$DIAGNOSIS, "41091")
@@ -264,12 +266,12 @@ We are reading data directly from the internet with the URL. And we are specifyi
 
 ## General procedure to read data into R:
 1.	If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. 
-2.	Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimitated text files, which uses the tab or $\t$ as it is invisible character.  
+2.	Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimited text files, which uses the tab or $\t$ as it is invisible character.  
 3.	Open with a text editor (TexPad, NotePad++) to have a look. 
 4.	Rows and columns?   Row and column names? **row.names = 1, header = T**
-5.	Deliminaters between columns?(space, comma, tab…)     **sep = “$\t$”**
+5.	Delimiters between columns?(space, comma, tab…)     **sep = “$\t$”**
 6.	Missing values?  NA, na, NULL, blank, NaN, 0  **missingstring = **
-7.	Open as text file in Excel, choose appropriate deliminater while importing, or use the **Text to Column** under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”->“4-OCT”.  Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.
+7.	Open as text file in Excel, choose appropriate delimiter while importing, or use the **Text to Column** under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”->“4-OCT”.  Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.
 9.	read.table ( ),  or read.csv( ). For example,
  ```x <- read.table(“somefile.txt”, sep = “$\t$”, header = TRUE, missingstring = “NA”)```
 10.	Double check the data with **str(df)**, make sure each column is recognized correctly as **“character”**, **“factor”** and **“numeric”**. 

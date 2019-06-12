@@ -1,5 +1,11 @@
 # Data structures
 
+Learning objectives:
+
+- Basic concepts of R programming: functions and data objects
+- Looking for help documents within R and using Google
+- Common data objects: scalars, vectors, lists, data frames, and matrices
+
 R script is mostly consisted of function calls and data. There are many different types of data objects. Common **data structures** in R include **scalars, vectors, factors, matrices, factors, data frames**, and **lists**. These data structures can contain one or more individual data elements of several types, namely **numeric** (2.5), **character** (“Go Jacks”), or **logical** (TRUE or FALSE). 
 
 ## Basic concepts
@@ -26,7 +32,7 @@ Now try multiplying 45.6 by 78.9.
 
 ###	Logical Values
 
-Some expressions return a "logical value" that take value of either **TRUE** or **FALSE**. Many programming languages refer to these as "boolean" values. Let's try typing an expression that gives us a logical value:
+Some expressions return a "logical value" that take value of either **TRUE** or **FALSE**. Many programming languages refer to these as "Boolean" values. Let's try typing an expression that gives us a logical value:
 ```{r}
 3 < 4
 ```
@@ -76,7 +82,7 @@ Now try assigning the **TRUE** logical value to **x**.
 x <- TRUE
 ```
 
-You can store multiple values in a variable or object. That is called a **vector**, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a **matrix**, or **data frame**. 
+You can store multiple values in a variable or object. That is called a **vector**, which is explained below. An object can also contain a table with rows and columns, like an Excel spreadsheet, as a **matrix**, or **data frame**. These are explained in the next section. 
 
 
 ###	Functions
@@ -92,7 +98,7 @@ rep("Yo ho!", times = 3)
 
 >
 ```{exercise}
-Suppose a vector is definded as x <- c(12, 56, 31, -5, 7).              
+Suppose a vector is defined as x <- c(12, 56, 31, -5, 7).              
 a. Calculate the mean of all elements in x and assign it to *y*.     
 b. Squared each element in x and assign the results to a new vector *z*.       
 ```
@@ -113,133 +119,9 @@ Find the function that lists all the files in the current working folder.
 
 ---
 
-Often we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Tested and documented R functions are often available as R packages. We can also easily define our own functions.
+Often we want to re-use a chunk of code. The most efficient way is to wrap these code as a function, clearly define what the input and the output. Tested and documented R functions are often available as R packages. You can also define your own functions, which will be explained later. 
 
-For example, we have the following arithmetic function: 
 
-$$f(x)=1.5 x^3+ x^2-2x+1$$
-
-Obviously, we can use the following code to do the computing:
-```{r}
-x <- 5
-1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1
-```
-
-This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:
-```{r}
-myf <- function(x) {                           #Name of my function is myf
-       y = 1.57345 * x^3 + x^2 - 2 * x + 1 #Expression of the function
-       return(y)                               #Return vaules of the function
-}
-```
-
-Note that “{”  and “}” signify the beginning and end of a block of code.  **“function”** tells R that a function is going to be defined. At the end, the **“return”** statement returns the desired values. 
-
-You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:
-```{r}
-myf(5)     # Obtain the y value given x=5.
-```
-or 
-```{r}
-myf(x = 5) #
-```
-
-The funtion applies to a vector as well. For example:
-```{r}
-x <- - 10 : 10  # x is a vector with integer values from -10 to 10.
-myf(x)          # Apply the function myf() to x.
-plot(x, myf(x)) # Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.
-```
-
-Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too. 
-
->
-```{exercise}
-Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.             
-a. Write an R function to implement this arithmetic function.               
-b. Use this function to find f(-4.534).                 
-c. Obtain the graph of the function.                 
-```
-
----
-
-Let's define a function to count even numbers in a vector. 
-
-```{r}
-#counts the number of even intergers in vec
-evencount <- function(vec) {
-  k <- 0                      # assign 0 to a count varialbe k
-  for (i in vec) {            # Find all elements (represented by i) in vec. 
-                              # Values of i are actually vec[1],vec[2],...
-    if (i %% 2 == 0) 
-      k <- k + 1              # test if i is an even or odd number. 
-                              # %% is the modulo operator.
-  }
-  return(k)                   #Return the count of even numbers in vec.
-}
-```
-
-```{r}
-x=c(2, 5, 7, 8, 14, 12, 8, 3) # Define a new vector. 
-evencount(x) # Call the function evencount(). Replace vec with defined vector x.
-```
-
-A vaiable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
-
-k
-
-Error: object 'vec' not found
-
-vec
-
-Error: object 'vec' not found
-
-A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:
-
-```{r}
-myfun.globle <- function (x){
-  y <- 1
-  return(x - 2 * y)
-}
-myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
-```
-Here y is a global variable.
-
-The function *myfun.globle2()* defined below returns the same values as above. But both x and y within the the paratheses *(x, y=1)* following *function* are local variables.
-```{r}
-myfun.globle2 <- function (x, y = 1){ #y is set as 1 within the function by default.
-  return(x - 2 * y)
- }
-myfun.globle2(8)    #8-2*y = 8-2*(1)=6
-```
-
->
-```{exercise}
-Define a function which returns the count of all odd numbers in the vector x <- 1:99. 
-```
-
----
-
->
-```{exercise}
-Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
-```
-
----
-
-```{r echo=FALSE, results= 'hide', message=FALSE}
-fun1 <- function(x){
-  k <- 0
-  for (n in x) { 
-    if (n < 0) k <- k + 1
-  } 
-  return(k/length(x))
-}
-x = rnorm(50)
-y = rnorm(5000)
-fun1(x)
-fun1(y)
-```
 
 ###	Looking for help and example Code
 ```{r, eval=F}
@@ -283,10 +165,11 @@ example(boxplot)  # bring example of boxplot
 
 I found a lot of help information about R through Google. Google tolerate typos, grammar errors, and different notations. Also, most (99 %) of your questions have been asked and answered on various forums. Many R gurus answered a ton of questions on web sites like** [stackoverflow.com](stackoverflow.com)**, with example codes!  I also use Google as a reference. 
 
-It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and repurpose our codes. 
+It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and re-purpose our codes. 
 ```{r}
 max(1, 3, 5)  # return the maximum value of a vector
 ```
+
 
 ## Data structures
 ###	Vectors
@@ -418,7 +301,7 @@ c(x, 7)
 append(x, 7)
 ```
 
-Creat an empty vector y:
+Create an empty vector y:
 ```{r}
 y <- c()
 y
@@ -537,7 +420,7 @@ In this example, if an element in x is less than 0, then take the absolute value
 
 >
 ```{exercise}
-Using sample selction function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selcted integer is an even number, then y returns 'even', otherwise y returns 'odd'.
+Using sample selection function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selected integer is an even number, then y returns 'even', otherwise y returns 'odd'.
 ```
 
 ---
@@ -616,7 +499,7 @@ length(z2)
 
 Comparing the length of z1 and z2, we know the NULL is counted as nonexistent, but the NA is counted as a missing value.
 
-Let's do some opertations related to vectors. Firsly, we start from the operation between a vector and a scalar. 
+Let's do some operations related to vectors. Firstly, we start from the operation between a vector and a scalar. 
 ```{r}
 # Operation between x and a scalar
 x <- c(1, 4, 8, 9, 10)
@@ -641,13 +524,13 @@ x+y
 x*y
 ```
 
-If vectors have different length, then R will automatically *recycles* the shorter one, untill it has the same length as the longer one. For example:
+If vectors have different length, then R will automatically *recycles* the shorter one, until it has the same length as the longer one. For example:
 ```{r}
 x <- c(1, 4, 8, 9, 10)
 y <- c(1, 2)
 x+y
 ```
-The y was *recyled*, in fact the real operation is showed below:
+The y was *recycled*, in fact the real operation is showed below:
 ```{r}
 x <- c(1, 4, 8, 9, 10)
 y <- c(1, 2, 1, 2, 1)
@@ -717,7 +600,7 @@ fishes2 - stolen
 
 If you add or subtract two vectors of the same length, R will take the corresponding values from each vector and add or subtract them. The 0 is necessary to keep the vector length the same.
 
-Proud of himself, Mickey wanted to make a 5ft x 5ft poster to show he is the best fisherman. Knowing that **a picture worthes a thousand words**, he learned R and started plotting. He absolutely needs his names on the plots. The data elements in a vector can have names or labels. 
+Proud of himself, Mickey wanted to make a 5ft x 5ft poster to show he is the best fisherman. Knowing that **a picture is worth a thousand words**, he learned R and started plotting. He absolutely needs his names on the plots. The data elements in a vector can have names or labels. 
 ```{r}
 names(fishes) <- c("Tom", "Jerry", "Mickey")
 ```
@@ -783,16 +666,16 @@ Great job! Notice on the graph that values from the first argument (x) are used 
 
 >
 ```{exercise}
-Create a vector with 21 integers from -10 to 10, and store it in the x variable.  Then create a scatterplot of x^2 against x. 
+Create a vector with 21 integers from -10 to 10, and store it in the x variable.  Then create a scatter plot of x^2 against x. 
 ```
 
 ---
 
 
-### Matrix operations
+### Matrices 
 **Matrix** is a two dimensional data structure in R programming. Technically, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. 
 
-We can creat a matrix by using *rbind* or *cbind* function. *rbind* combine all row
+We can create a matrix by using *rbind* or *cbind* function. *rbind* combine all row
 Here are two examples:
 ```{r}
 m <- rbind(c(3, 4, 5), c(10, 13, 15)) # combine vectors by row
@@ -858,7 +741,7 @@ subset.iris <- iris[1:10, 1:4]
 class(subset.iris)
 ```
 
-The data structure of *subset.iris* is a data frame. The function *as.matrix* wii transfer a data frame to a matix.
+The data structure of *subset.iris* is a data frame. The function *as.matrix* will transfer a data frame to a matrix.
 ```{r}
 x <- as.matrix(subset.iris)
 class(x)
@@ -949,7 +832,7 @@ rowSums(x)
 colSums(x)
 ```
 
-Here we are computing the standard deviation by columns, using *apply()* function.The second argument "1" or "2" in *apply()* reprents the function applies to rows or columns.
+Here we are computing the standard deviation by columns, using *apply()* function.The second argument "1" or "2" in *apply()* represents the function applies to rows or columns.
 ```{r}
 apply(x, 2, sd) # Calculate the standard deviation of each column in x 
 ```
@@ -958,7 +841,7 @@ Or median by rows, using 1 for rows.
 apply(x, 1, median)  # Calculate the median of each row in x 
 ```
 
-Heatmap is my favorite type of graph for visualizing a large matrix data.
+Heat map is my favorite type of graph for visualizing a large matrix data.
 ```{r}
 heatmap(x, scale = "column", margins = c(10,5))
 ```
@@ -988,7 +871,7 @@ subset.iris
 ```{r}
 find.min.posi(subset.iris)
 ```
-As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Lenth and Petal.Width respectively.
+As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Length and Petal.Width respectively.
 
 >
 ```{exercise}
@@ -1018,13 +901,13 @@ y
 
 ---
 
-Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents "picure elements". They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a grayscale imge, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%. 
+Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents "picture elements". They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a gray-scale image, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%. 
 
-Most time, we need to blur images or add mosaic to a picture for various purposes. Let's use one example to demonstrate how to add mosaic to a grayscale image.
+Most time, we need to blur images or add mosaic to a picture for various purposes. Let's use one example to demonstrate how to add mosaic to a gray-scale image.
 
 **Example: Add mosaic to Einstein image**
 
-Firstly, let's read an grayscale image of Einstein into R and view the image. 
+Firstly, let's read an gray-scale image of Einstein into R and view the image. 
 ```{r}
 library(pixmap)
 EINSTEIN <- read.pnm("EINSTEIN.pgm", cellres = 1)
@@ -1036,16 +919,16 @@ Then let us look at structure of this image:
 ```{r}
 str(EINSTEIN)
 ```
-Here we get a new class which is S4 type. We don't go into depth for this time. One fact we need to pay attendtion is that we must use "@" instead of "$" sign to designate the components. 
+Here we get a new class which is S4 type. We don't go into depth for this time. One fact we need to pay attention is that we must use "@" instead of "$" sign to designate the components. 
 
 ```{r}
 class(EINSTEIN@ grey)
 ```
-The class of *EINSTEIN@ grey* is matrix. The output *..@ grey : num [1:512, 1:512]* shows that the dimension of matrix is 512*512. The values "0.596 0.541 0.522 0.529 0.561 ..." reprent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below: 
+The class of *EINSTEIN@ grey* is matrix. The output *..@ grey : num [1:512, 1:512]* shows that the dimension of matrix is 512*512. The values "0.596 0.541 0.522 0.529 0.561 ..." represent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below: 
 ```{r}
 EINSTEIN@ grey[3,4]
 ```
-If we change the value 0.2941176 to 0 by *EINSTEIN@ grey[3,4] <- 0*, then that pixel will become pure black. If we assign a random number between 0 to 1 to the value, then the color in the pixel will be randomly assigned based on the random number. Using this idea, we define a masoic function which will be used to blur the image.
+If we change the value 0.2941176 to 0 by *EINSTEIN@ grey[3,4] <- 0*, then that pixel will become pure black. If we assign a random number between 0 to 1 to the value, then the color in the pixel will be randomly assigned based on the random number. Using this idea, we define a mosaic function which will be used to blur the image.
 
 ```{r}
 mosaic.plot <- function(image, yrange, xrange){
@@ -1058,14 +941,14 @@ mosaic.plot <- function(image, yrange, xrange){
 }
 ```
 
-The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. Since we don't want to change the origial image,therefore we copy the original image to image2 by assigning *image* to *image2*. The *whitenoise* creates a matrix filled with random numbers following uniform distribution. The dimensions of *whitenoise* is determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
+The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. Since we don't want to change the original image,therefore we copy the original image to image2 by assigning *image* to *image2*. The *whitenoise* creates a matrix filled with random numbers following uniform distribution. The dimensions of *whitenoise* is determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
 
 ```{r}
 EINSTEIN.mosaic <- mosaic.plot(EINSTEIN, 175:249, 118:295)
 plot(EINSTEIN.mosaic)
 ```
 
-Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein' eyes region. The sub-matix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.
+Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein' eyes region. The sub-matrix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.
 
 The function *locator()* allows us to find the relevant rows and columns. Type **locator()** in the *Console* window, then R will wait for you to click a point within an image, then click *esc* on your keyboard to exit the function. Then the function will return the coordinates of that point in the *Console* window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in *pixmap* objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from *locator()* function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function. 
 
@@ -1102,319 +985,8 @@ Setting the degree=0, 0.5 and 1 respectively, plot the images of Mona Lisa that 
 
 ---
 
-### Lists
-All elements in vectors must be same type. The list can combine objectes of different types. Let's start from creating a list:
-```{r}
-y <- list(5, "John Doe", c(100, 7), mean) # a list with 4 components
-y
-```
-There are 4 components in the list y. We can associate each components with a *tag*. We add tags "height", "name", "BP" and "fun" to the y. 
-
-```{r}
-y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)  
-y
-```
-Here is another example for creating a list:
-```{r}
-x1 <- matrix(c(4, 2, 5, 6, 10, 9), ncol = 3) # create a matrix
-x2 <- 8 : 1
-x3 <- c(2.4, 5.1, 9.0, 4.4)
-x4 <- c('u', 'v', 'w')
-z <- list(x1, x2, x3, x4)
-z
-```
-
-We can build a list by creating an empty list and assigning values to it.
-```{r}
-v <- list()         #Create an empty list
-v[[1]] <- matrix(c(4, 2, 5, 6, 10, 9), ncol = 3)  # Assign a matrix to v[[1]]
-v[[2]] <- 8 : 1    #Assign a vector to v[[2]]
-v[[3]] <- x3       #Assign x3 to v[[3]] where x3 is defined as above
-v[[4]] <- x4       #Assign x4 to v[[4]] where x4 is defined as above
-v
-```
-We used different methods creating list z and v. The list v and z are identical because that we assigned same components for v as that of in z.
-
-There are several different ways to access the elements in a list. For example, to access the third component in y:
-```{r}
-y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
-```
-```{r}
-y[[3]]        #Specifing the number in a double square braket
-```
-
-```{r}
-y$BP          #Using $ sign
-```
-```{r}
-y[["BP"]]     #Using the tag
-```
-Note: we used **double square braket** '[[]]' to access the element in a list, which is different from using single square braket '[]' in a vector. If we use sigle square braket in a list, we will get a sublist. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions *class()* and *is.list* can be used to check the types.
-
-```{r}
-y[3]
-class(y[3])
-is.list(y[3])
-```
-
-```{r}
-y[[3]]
-class(y[[3]])               #Get the class of y[[3]] 
-is.list(y[[3]])           #Check if y[[3]] is a list or not
-```
-
-The forth component of y is *fun = mean*. There are no quotation marks around *mean*. The *class(y[[4]])* returns a function. 
-
-```{r}
-class(y[[4]])
-```
-
-This implies that y[[4]] is same as the *mean()* function. For example:
-
-```{r}
-y[[4]](c(1, 2, 3, 4, 5))          #Get the mean of 1, 2, 3, 4, 5
-```
-
->
-```{exercise}           
-Access the second component in list1 by three ways as we introduced above. What is the type of list1["Hobby"] and list1[["Hobby"]] respectively?      
-```{r}
-  list1 <- list(Name = "Tom", Hobby = "Fishing", Num.fish = c(16, 27, 5))
-```
-
----
-
-Here are some examples for list operation:
-```{r}
-y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
-y[[2]] <- "Mike"    #Change the 2nd component from "John Doe" to "Mike"
-y[[4]] <- NULL      #Delete the 4th component by setting it to NULL
-y
-```
-
-The output shows that the name has been changed to Mike and the mean function is deleted. So far, the length of y is 3:
-```{r}
-length(y)
-```
-
-We can add the forth components to y using the following code: 
-
-```{r}
-y$class <- c("math", "art") #Add a class component
-y
-```
-
-If we have a vector of tags and a vector of corresponding values, we can associate the names and values into a list by creating an empty list and then fill it via assignment statements:
-```{r}
-sales <- c(100, 105, 98, 112)
-seasons <- c("Spring", "Summer", "Fall", "Winter")
-sale.tag <- list()               #Create an empty list
-sale.tag[seasons] <- sales
-sale.tag
-```
-Equivalently, we can associate the names and values by creating an empty list and then assign each component corresponding value or vector. For example.
-
-```{r}
-sale.tag <- list()               #Create an empty list
-sale.tag[["Spring"]] <- 100
-sale.tag[["Summer"]] <- 105
-sale.tag[["Fall"]] <- 98
-sale.tag[["Winter"]] <- 112
-sale.tag
-```
-
->
-```{exercise}         
-Based on the data set of sale.tag, choose all correct answers from the following options A - F.         A: sale.tag[[1]]                  
-  B: sale.tag[[Spring]]                      
-  C: sale.tag[["Spring"]]                      
-  D: sale.tag["Spring"]                   
-  E: sale.tag[1]                    
-  F: sale.tag[Spring] 
-1, Which options return a vector.  Answer:___________                 
-2, Which options return a list.    Answer:___________                
-3, Which options returns an error. Answer:___________                
-```
-
----
-
-Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
-> mean(sale.tag)                
-[1] NA                
-Warning message:                
-In mean.default(sale.tag) :                
-  argument is not numeric or logical: returning NA                
-
-To calculate the mean, we need to use function *unlist()* to flatten the list into a vector.
-```{r}
-mean(unlist(sale.tag))
-```
-
-Similar to *apply()* funciton works on vectors, *lapply()* (for list apply) works on each component of lists. Here is an example:
-```{r}
-x <- list(c(10, 20, 30), c(4, 5, 6, 7, 8))
-mean.x <- lapply(x, mean)
-mean.x
-```
-The *mean.x* returns a list consisting of 20 and 6 which are means of components of x respectively. 
-
-When the list returned by *lapply()* could be simplified to a vector or matrix, we can use function *sapply()* (for *simplified [l]apply*). Let's redo the previous example by *sapply()* function.
-```{r}
-mean.x.2 <- sapply(x, mean)
-mean.x.2
-```
-
-We can double check the outputs by *class()* or *is.vector()* function:
-```{r}
-class(mean.x)               
-class(mean.x.2)             
-is.vector(mean.x.2)
-```
-
-Here is another example for *sapply()* function. Suppose we have NULL elements in a list.null. To remove the NULL element, apply *is.null* function to every element of the list.null. If the logical value is TRUE, i.e. the element is a NULL, then delete the element by setting NULL to it.
-```{r}
-list.null <- list('art', NULL, c(2, 4, 6, 8))
-list.null
-list.null[sapply(list.null, is.null)] <- NULL
-list.null
-```
-
-For a small size data set, if we can locate the position of NULL element, we can easily remove the NULL element by setting NULL to that element. For example, we already know the second element of list.null is NULL, to remove this NULL element, we set a NULL to the second element:
-```{r}
-list.null <- list('art', NULL, c(2, 4, 6, 8))
-list.null[[2]] <- NULL
-list.null
-```
- But for large size of data set, we turn to the *sapply()* function to remove NULL elements.
-
-**Example**: 
-Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:
-
-```{r}
-customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
-                 "Mary", "Alex", "Tom", "Grace")
-```
-
-Firsly, we define a function which returns all locations of same elements in a list. 
-
-```{r}
-loc.names <- function(f){
-y <- unlist(f)                     # Flatten a list x into a vector y
-x <- list()                        # Create an empty list
-for (i in 1:length(y)){        
-  c.name <- y[i]                   # Assign the ith element to c.name. 
-  x[[c.name]] <- c(x[[c.name]],i)  # assign values to x[[c.name]]. c.name is the name of x.
-}
-return(x)
-}
-```
-
-the *f* will be replaced by your own list. In this example, *f* will be replaced by the list of customer when we apply the funtion.        
-x <- list () # create an empty list.      
-In the *for* loop, i starts from 1 to the length of y. In our example, the length of y is the length of list of customers: 10.  
-*c.name <- y[i]* # Assign the ith element in y to a new variable *c.name*. For example, if i=1, y[1] is the "Alex", then *c.name = "Alex"*. 
-
-*x[[c.name]] <- c(x[[c.name]], i)* 
-For i=1, we have *c.name <- "Alex"*, then *x[[c.name]] = x[["Alex"]] = NULL* since x starting from an empty list. Therefore c(x[["Alex"]], i) = c(NULL, i) = i = 1. The value 1 will be assigned to x[["Alex"]] by the code: *x[["Alex"]] <- c(x[["Alex"]], i) = 1*. Now x is not an empty list, it is a list with 1 component:
-
-```{r}
-x <- list()
-x[["Alex"]] <- 1
-x
-```
-For i=2, y[2] <- "Brandon", then similar to the case of i=1, we have *x[["Brandon"]] <- 1*:
-```{r}
-x[["Brandon"]] <- 1
-x
-```
-
-For i=3, *y[3] <- "Alex"*. We have met "Alex" once, which returned *x[["Alex"]] <- 1*. Now we meet "Alex" again which means we are going to update *x[["Alex"]]* by *x[["Alex"]] <- c(x[["Alex"]], i) = c(1, i) = c(1, 3)*. The updated x is:
-
-```{r}
-x[["Alex"]] <- c(1, 3)
-x
-```
-
-The process will stop till i = length (y) = 10. The *loc.names()* funciton will return all locations of all names which are already stored in x. 
-
-Let's find all days of cumsters who visited to our store.
-```{r}
-customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
-                 "Mary", "Alex", "Tom", "Grace")
-v1 <- loc.names(customer)
-v1
-```
-
-The output tells us that Alex visited our store at the first, third and eighth days, Brandon came at the second day, etc.
-
-
-Then we use *sapply()* function to calculate the repeat times of each element.
-
-```{r}
-v2 <- sapply(v1,length)     # Calculate the length of each component in v1
-v2
-```
-
-You can sort the v2 by the number of days that they presented by function *sort()*:
-
-```{r}
-sort(v2, decreasing = T)
-```
-
->
-```{exercise}           
-Fill blanks in the function *my.fun()* so that for a given list, the function returns
-all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
-  F F M M M M I I F I F M I F M I I M I I F         
-Where F, M and I represent Female, Male and Infant respectively.
->
-my.fun <- function(f){
-y <- unlist(f)                         
-x <- ___________                                     
-for (i in 1:____){                      
-  g1 <- y[i]                        
-  x[[______]] <- c(x[[____]],i)                 
-}
-freq <- _________(x, length)                       
-z <- sort(________, decreasing = ____)                      
-lst <- list(x, z)                      
-___________(lst)                      
-}                          
-gender <- list( "F", ________________________________, "F")                    
-__________(gender)                                                  #                 
-```
-
----
-
-Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a p value, a vector of residuals or coefficients, and even a matrix of data.  A list is the natural way to represent this sort of thing as one big object that could be parsed. 
-```{r}
-r1 <- rnorm(100)  # Create 100 random numbers following Normal Distribution
-r2 <- rnorm(100)
-t.result <- t.test(r1, r2) # Run the t test. Test if the mean of r1 and r2 are same.
-is.list(t.result) # Check if the t.result is a list
-t.result  # A list holds all components of t-test
-names(t.result) # Returns all tags of the t test result
-t.result$p.value  # Retrieves  p-value for the test
-t.result$estimate  # Returns mean of r1 and r2
-```
-
-The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.
-
-Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p < 0.05. 
-
-```{r }
-pvalues <- rep(1, 500)  # define a vector containing 500 numbers, all equal to 1.
-for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
-     result = t.test(rnorm(100), rnorm(100))    
-     pvalues[i] = result$p.value  # p values are stored in the i-th element in the vector
-}  
-hist(pvalues)  # Histogram of p-values
-summary(pvalues)   
-sum(pvalues < 0.05)  # Number of p-value's which are less than 0.05. 
-```
-
 ### Data Frames
-Similar to a matrix, a data frame is a two-dimensional array-like structure. But it differs from the matrix in that the mode of each column could be different. In fact, a data frame is a special case of a two-dimensional list. The data set *iris* that we analyzied before is a data frame. 
+Similar to a matrix, a data frame is a two-dimensional array-like structure. But it differs from the matrix in that the mode of each column could be different. In fact, a data frame is a special case of a two-dimensional list. The data set *iris* that we analyzed before is a data frame. 
 ```{r}
 class(iris)
 head(iris)
@@ -1434,7 +1006,7 @@ Thirdly, each column should contain same number of data items. In other words, e
 rownames(iris)
 ```
 
-We can creat a data frame by using function *data.frame()* to combine vectors. For example:
+We can create a data frame by using function *data.frame()* to combine vectors. For example:
 ```{r}
 x <- c("A", "B", "C", "D")
 y <- c(41, 32, 13, 89)
@@ -1533,7 +1105,7 @@ y <- subset(x, Species == "setosa")
 head(y)
 ```
 
-Similar we can obtain a subset that the lengh of sepal are greater than 7. 
+Similar we can obtain a subset that the length of sepal are greater than 7. 
 ```{r}
 subset(x, Sepal.Length > 7)
 ```
@@ -1601,7 +1173,7 @@ summary(m)
 ```
 The p-value is close to 0, therefore we reject the null hypothesis and conclude that the length of sepal among three species are not same.
 
-We can use the *sapply()* function to do the ANOVA test for all of the 4 numeric variables acorss the species. 
+We can use the *sapply()* function to do the ANOVA test for all of the 4 numeric variables across the species. 
 
 ```{r}
 aov.fun <- function(temx){
@@ -1809,3 +1381,314 @@ In the iris flower dataset iris, define a new column called FullName which conta
 
 Some of the materials above has been inspired by  [http://tryr.codeschool.com/](http://tryr.codeschool.com/), which contains more in-depth introduction.
 
+
+### Lists
+All elements in vectors must be same type. The list can combine objects of different types. Let's start from creating a list:
+```{r}
+y <- list(5, "John Doe", c(100, 7), mean) # a list with 4 components
+y
+```
+There are 4 components in the list y. We can associate each components with a *tag*. We add tags "height", "name", "BP" and "fun" to the y. 
+
+```{r}
+y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)  
+y
+```
+Here is another example for creating a list:
+```{r}
+x1 <- matrix(c(4, 2, 5, 6, 10, 9), ncol = 3) # create a matrix
+x2 <- 8 : 1
+x3 <- c(2.4, 5.1, 9.0, 4.4)
+x4 <- c('u', 'v', 'w')
+z <- list(x1, x2, x3, x4)
+z
+```
+
+We can build a list by creating an empty list and assigning values to it.
+```{r}
+v <- list()         #Create an empty list
+v[[1]] <- matrix(c(4, 2, 5, 6, 10, 9), ncol = 3)  # Assign a matrix to v[[1]]
+v[[2]] <- 8 : 1    #Assign a vector to v[[2]]
+v[[3]] <- x3       #Assign x3 to v[[3]] where x3 is defined as above
+v[[4]] <- x4       #Assign x4 to v[[4]] where x4 is defined as above
+v
+```
+We used different methods creating list z and v. The list v and z are identical because that we assigned same components for v as that of in z.
+
+There are several different ways to access the elements in a list. For example, to access the third component in y:
+```{r}
+y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
+```
+```{r}
+y[[3]]        #Specifing the number in a double square braket
+```
+
+```{r}
+y$BP          #Using $ sign
+```
+```{r}
+y[["BP"]]     #Using the tag
+```
+Note: we used **double square bracket** '[[]]' to access the element in a list, which is different from using single square brake '[]' in a vector. If we use single square bracket in a list, we will get a sub-list. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions *class()* and *is.list* can be used to check the types.
+
+```{r}
+y[3]
+class(y[3])
+is.list(y[3])
+```
+
+```{r}
+y[[3]]
+class(y[[3]])               #Get the class of y[[3]] 
+is.list(y[[3]])           #Check if y[[3]] is a list or not
+```
+
+The forth component of y is *fun = mean*. There are no quotation marks around *mean*. The *class(y[[4]])* returns a function. 
+
+```{r}
+class(y[[4]])
+```
+
+This implies that y[[4]] is same as the *mean()* function. For example:
+
+```{r}
+y[[4]](c(1, 2, 3, 4, 5))          #Get the mean of 1, 2, 3, 4, 5
+```
+
+>
+```{exercise}           
+Access the second component in list1 by three ways as we introduced above. What is the type of list1["Hobby"] and list1[["Hobby"]] respectively?      
+```{r}
+  list1 <- list(Name = "Tom", Hobby = "Fishing", Num.fish = c(16, 27, 5))
+```
+
+---
+
+Here are some examples for list operation:
+```{r}
+y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
+y[[2]] <- "Mike"    #Change the 2nd component from "John Doe" to "Mike"
+y[[4]] <- NULL      #Delete the 4th component by setting it to NULL
+y
+```
+
+The output shows that the name has been changed to Mike and the mean function is deleted. So far, the length of y is 3:
+```{r}
+length(y)
+```
+
+We can add the forth components to y using the following code: 
+
+```{r}
+y$class <- c("math", "art") #Add a class component
+y
+```
+
+If we have a vector of tags and a vector of corresponding values, we can associate the names and values into a list by creating an empty list and then fill it via assignment statements:
+```{r}
+sales <- c(100, 105, 98, 112)
+seasons <- c("Spring", "Summer", "Fall", "Winter")
+sale.tag <- list()               #Create an empty list
+sale.tag[seasons] <- sales
+sale.tag
+```
+Equivalently, we can associate the names and values by creating an empty list and then assign each component corresponding value or vector. For example.
+
+```{r}
+sale.tag <- list()               #Create an empty list
+sale.tag[["Spring"]] <- 100
+sale.tag[["Summer"]] <- 105
+sale.tag[["Fall"]] <- 98
+sale.tag[["Winter"]] <- 112
+sale.tag
+```
+
+>
+```{exercise}         
+Based on the data set of sale.tag, choose all correct answers from the following options A - F.         A: sale.tag[[1]]                  
+  B: sale.tag[[Spring]]                      
+  C: sale.tag[["Spring"]]                      
+  D: sale.tag["Spring"]                   
+  E: sale.tag[1]                    
+  F: sale.tag[Spring] 
+1, Which options return a vector.  Answer:___________                 
+2, Which options return a list.    Answer:___________                
+3, Which options returns an error. Answer:___________                
+```
+
+---
+
+Suppose we want to calculate the mean of sales in the dataset sale.tag. Because basic statistical functions work on vectors but not on lists. The mean() does not work:
+> mean(sale.tag)                
+[1] NA                
+Warning message:                
+In mean.default(sale.tag) :                
+  argument is not numeric or logical: returning NA                
+
+To calculate the mean, we need to use function *unlist()* to flatten the list into a vector.
+```{r}
+mean(unlist(sale.tag))
+```
+
+Similar to *apply()* function works on vectors, *lapply()* (for list apply) works on each component of lists. Here is an example:
+```{r}
+x <- list(c(10, 20, 30), c(4, 5, 6, 7, 8))
+mean.x <- lapply(x, mean)
+mean.x
+```
+The *mean.x* returns a list consisting of 20 and 6 which are means of components of x respectively. 
+
+When the list returned by *lapply()* could be simplified to a vector or matrix, we can use function *sapply()* (for *simplified [l]apply*). Let's redo the previous example by *sapply()* function.
+```{r}
+mean.x.2 <- sapply(x, mean)
+mean.x.2
+```
+
+We can double check the outputs by *class()* or *is.vector()* function:
+```{r}
+class(mean.x)               
+class(mean.x.2)             
+is.vector(mean.x.2)
+```
+
+Here is another example for *sapply()* function. Suppose we have NULL elements in a list.null. To remove the NULL element, apply *is.null* function to every element of the list.null. If the logical value is TRUE, i.e. the element is a NULL, then delete the element by setting NULL to it.
+```{r}
+list.null <- list('art', NULL, c(2, 4, 6, 8))
+list.null
+list.null[sapply(list.null, is.null)] <- NULL
+list.null
+```
+
+For a small size data set, if we can locate the position of NULL element, we can easily remove the NULL element by setting NULL to that element. For example, we already know the second element of list.null is NULL, to remove this NULL element, we set a NULL to the second element:
+```{r}
+list.null <- list('art', NULL, c(2, 4, 6, 8))
+list.null[[2]] <- NULL
+list.null
+```
+ But for large size of data set, we turn to the *sapply()* function to remove NULL elements.
+
+**Example**: 
+Suppose we have a list of customers who visited our store in the last 10 days. Some customers visited the store more than once. We want to find out on which days and the total number of days that each customer visited. The customer names are recorded by the order of the day they came:
+
+```{r}
+customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
+                 "Mary", "Alex", "Tom", "Grace")
+```
+
+Firstly, we define a function which returns all locations of same elements in a list. 
+
+```{r}
+loc.names <- function(f){
+y <- unlist(f)                     # Flatten a list x into a vector y
+x <- list()                        # Create an empty list
+for (i in 1:length(y)){        
+  c.name <- y[i]                   # Assign the ith element to c.name. 
+  x[[c.name]] <- c(x[[c.name]],i)  # assign values to x[[c.name]]. c.name is the name of x.
+}
+return(x)
+}
+```
+
+the *f* will be replaced by your own list. In this example, *f* will be replaced by the list of customer when we apply the function.        
+x <- list () # create an empty list.      
+In the *for* loop, i starts from 1 to the length of y. In our example, the length of y is the length of list of customers: 10.  
+*c.name <- y[i]* # Assign the i-th element in y to a new variable *c.name*. For example, if i=1, y[1] is the "Alex", then *c.name = "Alex"*. 
+
+*x[[c.name]] <- c(x[[c.name]], i)* 
+For i=1, we have *c.name <- "Alex"*, then *x[[c.name]] = x[["Alex"]] = NULL* since x starting from an empty list. Therefore c(x[["Alex"]], i) = c(NULL, i) = i = 1. The value 1 will be assigned to x[["Alex"]] by the code: *x[["Alex"]] <- c(x[["Alex"]], i) = 1*. Now x is not an empty list, it is a list with 1 component:
+
+```{r}
+x <- list()
+x[["Alex"]] <- 1
+x
+```
+For i=2, y[2] <- "Brandon", then similar to the case of i=1, we have *x[["Brandon"]] <- 1*:
+```{r}
+x[["Brandon"]] <- 1
+x
+```
+
+For i=3, *y[3] <- "Alex"*. We have met "Alex" once, which returned *x[["Alex"]] <- 1*. Now we meet "Alex" again which means we are going to update *x[["Alex"]]* by *x[["Alex"]] <- c(x[["Alex"]], i) = c(1, i) = c(1, 3)*. The updated x is:
+
+```{r}
+x[["Alex"]] <- c(1, 3)
+x
+```
+
+The process will stop till i = length (y) = 10. The *loc.names()* function will return all locations of all names which are already stored in x. 
+
+Let's find all days of customers who visited to our store.
+```{r}
+customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary", 
+                 "Mary", "Alex", "Tom", "Grace")
+v1 <- loc.names(customer)
+v1
+```
+
+The output tells us that Alex visited our store at the first, third and eighth days, Brandon came at the second day, etc.
+
+
+Then we use *sapply()* function to calculate the repeat times of each element.
+
+```{r}
+v2 <- sapply(v1,length)     # Calculate the length of each component in v1
+v2
+```
+
+You can sort the v2 by the number of days that they presented by function *sort()*:
+
+```{r}
+sort(v2, decreasing = T)
+```
+
+>
+```{exercise}           
+Fill blanks in the function *my.fun()* so that for a given list, the function returns
+all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
+  F F M M M M I I F I F M I F M I I M I I F         
+Where F, M and I represent Female, Male and Infant respectively.
+>
+my.fun <- function(f){
+y <- unlist(f)                         
+x <- ___________                                     
+for (i in 1:____){                      
+  g1 <- y[i]                        
+  x[[______]] <- c(x[[____]],i)                 
+}
+freq <- _________(x, length)                       
+z <- sort(________, decreasing = ____)                      
+lst <- list(x, z)                      
+___________(lst)                      
+}                          
+gender <- list( "F", ________________________________, "F")                    
+__________(gender)                                                  #                 
+```
+
+---
+
+Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a p value, a vector of residuals or coefficients, and even a matrix of data.  A list is the natural way to represent this sort of thing as one big object that could be parsed. 
+```{r}
+r1 <- rnorm(100)  # Create 100 random numbers following Normal Distribution
+r2 <- rnorm(100)
+t.result <- t.test(r1, r2) # Run the t test. Test if the mean of r1 and r2 are same.
+is.list(t.result) # Check if the t.result is a list
+t.result  # A list holds all components of t-test
+names(t.result) # Returns all tags of the t test result
+t.result$p.value  # Retrieves  p-value for the test
+t.result$estimate  # Returns mean of r1 and r2
+```
+
+The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.
+
+Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p < 0.05. 
+
+```{r }
+pvalues <- rep(1, 500)  # define a vector containing 500 numbers, all equal to 1.
+for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
+     result = t.test(rnorm(100), rnorm(100))    
+     pvalues[i] = result$p.value  # p values are stored in the i-th element in the vector
+}  
+hist(pvalues)  # Histogram of p-values
+summary(pvalues)   
+sum(pvalues < 0.05)  # Number of p-value's which are less than 0.05. 
+```

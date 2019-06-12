@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 The game sales dataset | Learn R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 The game sales dataset | Learn R through examples" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="github-repo" content="gexijin/learnR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 The game sales dataset | Learn R through examples" />
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  
+
+<meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
+
+
+<meta name="date" content="2019-06-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-state-dataset.html">
+<link rel="next" href="the-big-and-messy-employee-salary-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
+<li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-makes-plotting-intuitive"><i class="fa fa-check"></i><b>2.2</b> The ggplot2 package makes plotting intuitive</a></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.3</b> Scatter plots matrix</a></li>
+<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.4</b> Star and segment diagrams</a></li>
+<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.5</b> Parallel coordinate plot</a></li>
+<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.6</b> Bar plot with error bar</a></li>
+<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#box-plot-and-death-to-the-dynamite-plots"><i class="fa fa-check"></i><b>2.7</b> Box plot and death to the dynamite plots</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#combining-plots"><i class="fa fa-check"></i><b>2.8</b> Combining plots</a></li>
+<li class="chapter" data-level="2.9" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.9</b> Hierarchical clustering and heat map</a></li>
+<li class="chapter" data-level="2.10" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#projecting-high-dimensional-data-with-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.10</b> Projecting high-dimensional data with principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
+<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-file"><i class="fa fa-check"></i><b>4.1.4</b> Import data file</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.2</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.3</b> Data transformation using the dplyr</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.4</b> Reading files directly using read.table</a></li>
+<li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.5</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.6</b> Enter data manually</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a><ul>
+<li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a><ul>
+<li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
+<li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
+<li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a><ul>
+<li class="chapter" data-level="8.1" data-path="the-state-dataset.html"><a href="the-state-dataset.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
+<li class="chapter" data-level="8.2" data-path="the-state-dataset.html"><a href="the-state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
+<li class="chapter" data-level="8.3" data-path="the-state-dataset.html"><a href="the-state-dataset.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
+<li class="chapter" data-level="8.4" data-path="the-state-dataset.html"><a href="the-state-dataset.html#the-whole-picture-of-the-data-set"><i class="fa fa-check"></i><b>8.4</b> The whole picture of the data set</a></li>
+<li class="chapter" data-level="8.5" data-path="the-state-dataset.html"><a href="the-state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
+<li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
+<li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.4.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.4.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
+<li class="chapter" data-level="9.4.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.4.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html"><i class="fa fa-check"></i><b>10</b> The big and messy employee salary data</a><ul>
+<li class="chapter" data-level="10.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
+<li class="chapter" data-level="10.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
+<li class="chapter" data-level="10.2.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
+<li class="chapter" data-level="10.2.3" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
+<li class="chapter" data-level="10.2.4" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
+<li class="chapter" data-level="10.3.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
+<li class="chapter" data-level="10.3.3" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4.1" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#lm-and-anova-analysis"><i class="fa fa-check"></i><b>10.5</b> LM and ANOVA analysis</a></li>
+<li class="chapter" data-level="10.6" data-path="the-big-and-messy-employee-salary-data.html"><a href="the-big-and-messy-employee-salary-data.html#conclusion-2"><i class="fa fa-check"></i><b>10.6</b> Conclusion</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Learn R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="the-game-sales-dataset" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> The game sales dataset</h1>
+<p>This is a video game sales data including game sales of North America, European, Japan and other area, together they make the global sale. The data also give the information about the critic score, user score and the number of critics or users who gave these two scores. This data is downloaded from <a href="https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv">https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv</a>.</p>
+<p>The detail about the data is listed as follow:</p>
+<p>Name: Name of the game</p>
+<p>Platform: Console on which the game is running</p>
+<p>Year_of_Release: Year of the game released</p>
+<p>Genre: Game’s category</p>
+<p>Publisher: Publisher</p>
+<p>NA_Sales: Game sales in North America (in millions of units)</p>
+<p>EU_Sales: Game sales in the European Union (in millions of units)</p>
+<p>JP_Sales: Game sales in Japan (in millions of units)</p>
+<p>Other_Sales: Game sales in the rest of the world, i.e. Africa, Asia excluding Japan, Australia, Europe excluding the E.U. and South America (in millions of units)</p>
+<p>Global_Sales: Total sales in the world (in millions of units)</p>
+<p>Critic_Score: Aggregate score compiled by Meta critic staff</p>
+<p>Critic_Count: The number of critics used in coming up with the Critic_score</p>
+<p>User_Score: Score by Metacritic’s subscribers</p>
+<p>User_Count: Number of users who gave the user_score</p>
+<p>Developer: Party responsible for creating the game</p>
+<p>Rating: The ESRB ratings:
+E for “Everyone”; E10+ for “Everyone 10+”; T for “Teen”; M for “Mature”; AO for “Adults Only”; RP for “Rating Pending”; K-A for kids to adults.</p>
+<p>After downloading the data, We replace N/A with NA first in excel and save it as csv file and read in. We remove these observations with empty string of Rating and 6825 observations was left in our data set “game”. We notice that there are lots of zero sales value. To prepare these variables ready for being taken log value to make them normal or close to normal distribution, we transform the sales into its basic units and plus 1. We also divide critic score by 10 to march the scale unit of user score.</p>
+<p>##Reading in data and manage data</p>
+<pre class="sourceCode r"><code class="sourceCode r">tem &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/video-game-sales-at-22-Dec-2016.csv&quot;</span>)
+tem &lt;-<span class="st"> </span><span class="kw">na.omit</span>(tem)  <span class="co">#remove NA</span>
+
+<span class="kw">library</span>(dplyr)
+game &lt;-<span class="st"> </span>tem <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Rating <span class="op">!=</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">droplevels</span>()  <span class="co">#remove empty rating observations</span>
+
+<span class="co">#by multiplying 1000000 we get the actual sale, </span>
+<span class="co">#adding 1 makes all sales positive which make log possible for all sales later</span>
+game<span class="op">$</span>Year_of_Release &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">as.character</span>(game<span class="op">$</span>Year_of_Release))
+game<span class="op">$</span>NA_Sales &lt;-<span class="st"> </span>game<span class="op">$</span>NA_Sales <span class="op">*</span><span class="st"> </span><span class="dv">1000000</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+game<span class="op">$</span>EU_Sales &lt;-<span class="st"> </span>game<span class="op">$</span>EU_Sales <span class="op">*</span><span class="st"> </span><span class="dv">1000000</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+game<span class="op">$</span>JP_Sales &lt;-<span class="st"> </span>game<span class="op">$</span>JP_Sales <span class="op">*</span><span class="st"> </span><span class="dv">1000000</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+game<span class="op">$</span>Other_Sales &lt;-<span class="st"> </span>game<span class="op">$</span>Other_Sales <span class="op">*</span><span class="st"> </span><span class="dv">1000000</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+game<span class="op">$</span>Global_Sales &lt;-<span class="st"> </span>game<span class="op">$</span>Global_Sales <span class="op">*</span><span class="st"> </span><span class="dv">1000000</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+
+<span class="co"># By divide by 10 to make Critic Score the same decimal as User Score</span>
+game<span class="op">$</span>Critic_Score &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(game<span class="op">$</span>Critic_Score)) <span class="op">/</span><span class="st"> </span><span class="dv">10</span>  
+game<span class="op">$</span>User_Score &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(game<span class="op">$</span>User_Score))
+game<span class="op">$</span>Critic_Count &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(game<span class="op">$</span>Critic_Count)
+game<span class="op">$</span>User_Count &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(game<span class="op">$</span>User_Count)
+
+<span class="co"># format column names </span>
+<span class="kw">colnames</span>(game) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Platform&quot;</span>, <span class="st">&quot;Year.Release&quot;</span>, <span class="st">&quot;Genre&quot;</span>, <span class="st">&quot;Publisher&quot;</span>, <span class="st">&quot;NA.Sales&quot;</span>, <span class="st">&quot;EU.Sales&quot;</span>, <span class="st">&quot;JP.Sales&quot;</span>, <span class="st">&quot;Other.Sales&quot;</span>, <span class="st">&quot;Global.Sales&quot;</span>, <span class="st">&quot;Critic.Score&quot;</span>, <span class="st">&quot;Critic.Count&quot;</span>, <span class="st">&quot;User.Score&quot;</span>, <span class="st">&quot;User.Count&quot;</span>, <span class="st">&quot;Developer&quot;</span>, <span class="st">&quot;Rating&quot;</span>)
+
+<span class="kw">head</span>(game)</code></pre>
+<pre><code>##                        Name Platform Year.Release    Genre Publisher
+## 1                Wii Sports      Wii         2006   Sports  Nintendo
+## 2            Mario Kart Wii      Wii         2008   Racing  Nintendo
+## 3         Wii Sports Resort      Wii         2009   Sports  Nintendo
+## 4     New Super Mario Bros.       DS         2006 Platform  Nintendo
+## 5                  Wii Play      Wii         2006     Misc  Nintendo
+## 6 New Super Mario Bros. Wii      Wii         2009 Platform  Nintendo
+##   NA.Sales EU.Sales JP.Sales Other.Sales Global.Sales Critic.Score
+## 1 41360001 28960001  3770001     8450001     82530001          7.6
+## 2 15680001 12760001  3790001     3290001     35520001          8.2
+## 3 15610001 10930001  3280001     2950001     32770001          8.0
+## 4 11280001  9140001  6500001     2880001     29800001          8.9
+## 5 13960001  9180001  2930001     2840001     28920001          5.8
+## 6 14440001  6940001  4700001     2240001     28320001          8.7
+##   Critic.Count User.Score User.Count Developer Rating
+## 1           51        8.0        322  Nintendo      E
+## 2           73        8.3        709  Nintendo      E
+## 3           73        8.0        192  Nintendo      E
+## 4           65        8.5        431  Nintendo      E
+## 5           41        6.6        129  Nintendo      E
+## 6           80        8.4        594  Nintendo      E</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(game)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    6825 obs. of  16 variables:
+##  $ Name        : Factor w/ 4377 levels &quot; Tales of Xillia 2&quot;,..: 4203 2055 4205 2530 4201 2533 2054 4195 1820 4196 ...
+##  $ Platform    : Factor w/ 17 levels &quot;3DS&quot;,&quot;DC&quot;,&quot;DS&quot;,..: 13 13 13 3 13 13 3 13 15 13 ...
+##  $ Year.Release: Factor w/ 25 levels &quot;1985&quot;,&quot;1988&quot;,..: 15 17 18 15 15 18 14 16 19 18 ...
+##  $ Genre       : Factor w/ 12 levels &quot;Action&quot;,&quot;Adventure&quot;,..: 11 7 11 5 4 5 7 11 4 11 ...
+##  $ Publisher   : Factor w/ 262 levels &quot;10TACLE Studios&quot;,..: 164 164 164 164 164 164 164 164 147 164 ...
+##  $ NA.Sales    : num  41360001 15680001 15610001 11280001 13960001 ...
+##  $ EU.Sales    : num  28960001 12760001 10930001 9140001 9180001 ...
+##  $ JP.Sales    : num  3770001 3790001 3280001 6500001 2930001 ...
+##  $ Other.Sales : num  8450001 3290001 2950001 2880001 2840001 ...
+##  $ Global.Sales: num  82530001 35520001 32770001 29800001 28920001 ...
+##  $ Critic.Score: num  7.6 8.2 8 8.9 5.8 8.7 9.1 8 6.1 8 ...
+##  $ Critic.Count: num  51 73 73 65 41 80 64 63 45 33 ...
+##  $ User.Score  : num  8 8.3 8 8.5 6.6 8.4 8.6 7.7 6.3 7.4 ...
+##  $ User.Count  : num  322 709 192 431 129 594 464 146 106 52 ...
+##  $ Developer   : Factor w/ 1289 levels &quot;10tacle Studios, Fusionsphere Systems&quot;,..: 779 779 779 779 779 779 779 779 468 779 ...
+##  $ Rating      : Factor w/ 7 levels &quot;AO&quot;,&quot;E&quot;,&quot;E10+&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  - attr(*, &quot;na.action&quot;)= &#39;omit&#39; Named int  2 5 6 10 11 13 19 21 22 23 ...
+##   ..- attr(*, &quot;names&quot;)= chr  &quot;2&quot; &quot;5&quot; &quot;6&quot; &quot;10&quot; ...</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(game)</code></pre>
+<pre><code>##                                         Name         Platform   
+##  LEGO Star Wars II: The Original Trilogy  :   8   PS2    :1140  
+##  Madden NFL 07                            :   8   X360   : 858  
+##  Need for Speed: Most Wanted              :   8   PS3    : 769  
+##  Harry Potter and the Order of the Phoenix:   7   PC     : 651  
+##  Madden NFL 08                            :   7   XB     : 565  
+##  Need for Speed Carbon                    :   7   Wii    : 479  
+##  (Other)                                  :6780   (Other):2363  
+##   Year.Release           Genre                            Publisher   
+##  2008   : 592   Action      :1630   Electronic Arts            : 944  
+##  2007   : 590   Sports      : 943   Ubisoft                    : 496  
+##  2005   : 562   Shooter     : 864   Activision                 : 492  
+##  2009   : 550   Role-Playing: 712   Sony Computer Entertainment: 316  
+##  2006   : 528   Racing      : 581   THQ                        : 307  
+##  2003   : 498   Platform    : 403   Nintendo                   : 291  
+##  (Other):3505   (Other)     :1692   (Other)                    :3979  
+##     NA.Sales           EU.Sales           JP.Sales      
+##  Min.   :       1   Min.   :       1   Min.   :      1  
+##  1st Qu.:   60001   1st Qu.:   20001   1st Qu.:      1  
+##  Median :  150001   Median :   60001   Median :      1  
+##  Mean   :  394485   Mean   :  236090   Mean   :  64159  
+##  3rd Qu.:  390001   3rd Qu.:  210001   3rd Qu.:  10001  
+##  Max.   :41360001   Max.   :28960001   Max.   :6500001  
+##                                                         
+##   Other.Sales        Global.Sales       Critic.Score    Critic.Count   
+##  Min.   :       1   Min.   :   10001   Min.   :1.300   Min.   :  3.00  
+##  1st Qu.:   10001   1st Qu.:  110001   1st Qu.:6.200   1st Qu.: 14.00  
+##  Median :   20001   Median :  290001   Median :7.200   Median : 25.00  
+##  Mean   :   82678   Mean   :  777591   Mean   :7.027   Mean   : 28.93  
+##  3rd Qu.:   70001   3rd Qu.:  750001   3rd Qu.:8.000   3rd Qu.: 39.00  
+##  Max.   :10570001   Max.   :82530001   Max.   :9.800   Max.   :113.00  
+##                                                                        
+##    User.Score      User.Count                 Developer     Rating    
+##  Min.   :0.500   Min.   :    4.0   EA Canada       : 149   AO  :   1  
+##  1st Qu.:6.500   1st Qu.:   11.0   EA Sports       : 142   E   :2082  
+##  Median :7.500   Median :   27.0   Capcom          : 126   E10+: 930  
+##  Mean   :7.186   Mean   :  174.7   Ubisoft         : 103   K-A :   1  
+##  3rd Qu.:8.200   3rd Qu.:   89.0   Konami          :  95   M   :1433  
+##  Max.   :9.600   Max.   :10665.0   Ubisoft Montreal:  87   RP  :   1  
+##                                    (Other)         :6123   T   :2377</code></pre>
+<p>Summary of these variables tell us that some of games were published in the same name; PS2 is the most popular platform; Action is the most popular Genre; Electronic Arts has the most high frequency among the publishers; Rating T and E are the two most released ratings; For these sales, though the minimums, several quantiles and medians are small, but the maximums are high, which means there are real good sale games among them; Extreme big maximum User count hints so many users score some special games.</p>
+<p>Our pre-analysis shows that these variables are not normally distributed, especially those sales and score counts variables. We take logs to transform these variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r">NA.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>NA.Sales)   
+EU.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>EU.Sales)  
+JP.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>JP.Sales)   
+Other.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>Other.Sales)  
+Global.Sales.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>Global.Sales) 
+Critic.Count.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>Critic.Count)
+User.Count.Log &lt;-<span class="st"> </span><span class="kw">log</span>(game<span class="op">$</span>User.Count)</code></pre>
+<p>Then we combine the log variables with the original variables.</p>
+<pre class="sourceCode r"><code class="sourceCode r">game.log &lt;-<span class="st"> </span><span class="kw">cbind.data.frame</span>(NA.Sales.Log, EU.Sales.Log, JP.Sales.Log, Other.Sales.Log,
+Global.Sales.Log, Critic.Count.Log, User.Count.Log)
+game &lt;-<span class="st"> </span><span class="kw">cbind.data.frame</span>(game, game.log)  <span class="co"># the data we use for analysis</span>
+<span class="kw">head</span>(game)</code></pre>
+<pre><code>##                        Name Platform Year.Release    Genre Publisher
+## 1                Wii Sports      Wii         2006   Sports  Nintendo
+## 2            Mario Kart Wii      Wii         2008   Racing  Nintendo
+## 3         Wii Sports Resort      Wii         2009   Sports  Nintendo
+## 4     New Super Mario Bros.       DS         2006 Platform  Nintendo
+## 5                  Wii Play      Wii         2006     Misc  Nintendo
+## 6 New Super Mario Bros. Wii      Wii         2009 Platform  Nintendo
+##   NA.Sales EU.Sales JP.Sales Other.Sales Global.Sales Critic.Score
+## 1 41360001 28960001  3770001     8450001     82530001          7.6
+## 2 15680001 12760001  3790001     3290001     35520001          8.2
+## 3 15610001 10930001  3280001     2950001     32770001          8.0
+## 4 11280001  9140001  6500001     2880001     29800001          8.9
+## 5 13960001  9180001  2930001     2840001     28920001          5.8
+## 6 14440001  6940001  4700001     2240001     28320001          8.7
+##   Critic.Count User.Score User.Count Developer Rating NA.Sales.Log
+## 1           51        8.0        322  Nintendo      E     17.53782
+## 2           73        8.3        709  Nintendo      E     16.56790
+## 3           73        8.0        192  Nintendo      E     16.56342
+## 4           65        8.5        431  Nintendo      E     16.23854
+## 5           41        6.6        129  Nintendo      E     16.45171
+## 6           80        8.4        594  Nintendo      E     16.48551
+##   EU.Sales.Log JP.Sales.Log Other.Sales.Log Global.Sales.Log
+## 1     17.18143     15.14259        15.94968         18.22867
+## 2     16.36183     15.14788        15.00640         17.38561
+## 3     16.20702     15.00335        14.89732         17.30502
+## 4     16.02817     15.68731        14.87330         17.21002
+## 5     16.03254     14.89051        14.85931         17.18004
+## 6     15.75281     15.36307        14.62199         17.15908
+##   Critic.Count.Log User.Count.Log
+## 1         3.931826       5.774552
+## 2         4.290459       6.563856
+## 3         4.290459       5.257495
+## 4         4.174387       6.066108
+## 5         3.713572       4.859812
+## 6         4.382027       6.386879</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(game)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    6825 obs. of  23 variables:
+##  $ Name            : Factor w/ 4377 levels &quot; Tales of Xillia 2&quot;,..: 4203 2055 4205 2530 4201 2533 2054 4195 1820 4196 ...
+##  $ Platform        : Factor w/ 17 levels &quot;3DS&quot;,&quot;DC&quot;,&quot;DS&quot;,..: 13 13 13 3 13 13 3 13 15 13 ...
+##  $ Year.Release    : Factor w/ 25 levels &quot;1985&quot;,&quot;1988&quot;,..: 15 17 18 15 15 18 14 16 19 18 ...
+##  $ Genre           : Factor w/ 12 levels &quot;Action&quot;,&quot;Adventure&quot;,..: 11 7 11 5 4 5 7 11 4 11 ...
+##  $ Publisher       : Factor w/ 262 levels &quot;10TACLE Studios&quot;,..: 164 164 164 164 164 164 164 164 147 164 ...
+##  $ NA.Sales        : num  41360001 15680001 15610001 11280001 13960001 ...
+##  $ EU.Sales        : num  28960001 12760001 10930001 9140001 9180001 ...
+##  $ JP.Sales        : num  3770001 3790001 3280001 6500001 2930001 ...
+##  $ Other.Sales     : num  8450001 3290001 2950001 2880001 2840001 ...
+##  $ Global.Sales    : num  82530001 35520001 32770001 29800001 28920001 ...
+##  $ Critic.Score    : num  7.6 8.2 8 8.9 5.8 8.7 9.1 8 6.1 8 ...
+##  $ Critic.Count    : num  51 73 73 65 41 80 64 63 45 33 ...
+##  $ User.Score      : num  8 8.3 8 8.5 6.6 8.4 8.6 7.7 6.3 7.4 ...
+##  $ User.Count      : num  322 709 192 431 129 594 464 146 106 52 ...
+##  $ Developer       : Factor w/ 1289 levels &quot;10tacle Studios, Fusionsphere Systems&quot;,..: 779 779 779 779 779 779 779 779 468 779 ...
+##  $ Rating          : Factor w/ 7 levels &quot;AO&quot;,&quot;E&quot;,&quot;E10+&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ NA.Sales.Log    : num  17.5 16.6 16.6 16.2 16.5 ...
+##  $ EU.Sales.Log    : num  17.2 16.4 16.2 16 16 ...
+##  $ JP.Sales.Log    : num  15.1 15.1 15 15.7 14.9 ...
+##  $ Other.Sales.Log : num  15.9 15 14.9 14.9 14.9 ...
+##  $ Global.Sales.Log: num  18.2 17.4 17.3 17.2 17.2 ...
+##  $ Critic.Count.Log: num  3.93 4.29 4.29 4.17 3.71 ...
+##  $ User.Count.Log  : num  5.77 6.56 5.26 6.07 4.86 ...</code></pre>
+<p>Now we plot histogram and QQ plot for the transformed data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> </span><span class="kw">colnames</span>(game)[<span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span><span class="op">:</span><span class="dv">23</span>)]  <span class="co"># pick up the numeric columns according to the names </span>
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>))  <span class="co"># layout in 5 rows and 4 columns</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(name)){
+  sub &lt;-<span class="st"> </span><span class="kw">sample</span>(game[name[i]][, <span class="dv">1</span>], <span class="dv">5000</span>)
+  submean &lt;-<span class="st"> </span><span class="kw">mean</span>(sub)
+  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, name[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> name[i])
+  <span class="kw">abline</span>(<span class="dt">v =</span> submean, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">1</span>)
+  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, name[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+  <span class="kw">qqline</span>(sub) 
+  <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub)
+  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub))
+ }
+}
+s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]  <span class="co"># take first two column of shapiro.test result</span>
+s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(name, s.t) <span class="co"># add variable name for the result</span>
+s.t</code></pre>
+<pre><code>##     name               statistic p.value     
+## s.t &quot;Critic.Score&quot;     0.9629756 5.842348e-34
+##     &quot;User.Score&quot;       0.9095839 1.571784e-47
+##     &quot;NA.Sales.Log&quot;     0.646086  7.427246e-73
+##     &quot;EU.Sales.Log&quot;     0.7136691 1.470173e-68
+##     &quot;JP.Sales.Log&quot;     0.6192297 2.273742e-74
+##     &quot;Other.Sales.Log&quot;  0.7090281 7.015509e-69
+##     &quot;Global.Sales.Log&quot; 0.9966816 4.138676e-09
+##     &quot;Critic.Count.Log&quot; 0.978841  1.157109e-26
+##     &quot;User.Count.Log&quot;   0.9449601 1.079222e-39</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-484-1.png" width="768" /></p>
+<p>From the histograms and qq plots we can see that two scores and and their count log values, and global sales log are close to normal distribution. Though the Shapiro test still deny the normality of these log values. We assume they are normally distributed in our analysis.</p>
+<p>There are lots of interest points in this data set such as the distribution of global and regional sales and their relationship, the correlation of critic score and user score and their counts, whether these scores are the main effect for sales, or the effect of other factors like genre, rating, platform, even publisher to sales, and so on. First let’s do visualization.</p>
+<div id="visualization-of-categorical-variables" class="section level2">
+<h2><span class="header-section-number">9.1</span> Visualization of categorical variables</h2>
+<p>To simplify platform analysis, We regroup platform as Platform.type.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#regroup platform as Platform.type </span>
+pc &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC&quot;</span>)
+xbox &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;X360&quot;</span>, <span class="st">&quot;XB&quot;</span>, <span class="st">&quot;XOne&quot;</span>)
+nintendo &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Wii&quot;</span>, <span class="st">&quot;WiiU&quot;</span>, <span class="st">&quot;N64&quot;</span>, <span class="st">&quot;GC&quot;</span>, <span class="st">&quot;NES&quot;</span>, <span class="st">&quot;3DS&quot;</span>, <span class="st">&quot;DS&quot;</span>) 
+playstation &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PS&quot;</span>, <span class="st">&quot;PS2&quot;</span>, <span class="st">&quot;PS3&quot;</span>, <span class="st">&quot;PS4&quot;</span>, <span class="st">&quot;PSP&quot;</span>, <span class="st">&quot;PSV&quot;</span>)
+game &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Platform.type =</span> <span class="kw">ifelse</span>(Platform <span class="op">%in%</span><span class="st"> </span>pc, <span class="st">&quot;PC&quot;</span>,
+                           <span class="kw">ifelse</span>(Platform <span class="op">%in%</span><span class="st"> </span>xbox, <span class="st">&quot;Xbox&quot;</span>,
+                             <span class="kw">ifelse</span>(Platform <span class="op">%in%</span><span class="st"> </span>nintendo, <span class="st">&quot;Nintendo&quot;</span>, 
+                               <span class="kw">ifelse</span>(Platform <span class="op">%in%</span><span class="st"> </span>playstation, <span class="st">&quot;Playstation&quot;</span>, <span class="st">&quot;Others&quot;</span>))))) </code></pre>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Platform.type)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-PlatformType"></span>
+<img src="book_files/figure-html/game-PlatformType-1.png" alt="Bar plot of platform type" width="672" />
+<p class="caption">
+Figure 9.1: Bar plot of platform type
+</p>
+</div>
+<p>As the bar plot shown here, Playstation is the biggest group, then xbox and nintendo. While others are the smallest type.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">table</span>(game<span class="op">$</span>Genre))
+dat<span class="op">$</span>fraction =<span class="st"> </span>dat<span class="op">$</span>Freq <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(dat<span class="op">$</span>Freq)
+dat =<span class="st"> </span>dat[<span class="kw">order</span>(dat<span class="op">$</span>fraction), ]
+dat<span class="op">$</span>ymax =<span class="st"> </span><span class="kw">cumsum</span>(dat<span class="op">$</span>fraction)
+dat<span class="op">$</span>ymin =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">head</span>(dat<span class="op">$</span>ymax, <span class="dt">n =</span> <span class="dv">-1</span>))
+<span class="kw">names</span>(dat)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;Genre&quot;</span>
+<span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(dat, <span class="kw">aes</span>(<span class="dt">fill =</span> dat<span class="op">$</span>Genre, <span class="dt">ymax =</span> ymax, <span class="dt">ymin =</span> ymin, <span class="dt">xmax =</span> <span class="dv">4</span>, <span class="dt">xmin =</span> <span class="dv">3</span>)) <span class="op">+</span>
+<span class="kw">geom_rect</span>(<span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># background color</span>
+<span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># coordinate system to polar</span>
+<span class="kw">xlim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>)) <span class="op">+</span>
+<span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ring plot for Genre&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;Genre&quot;</span>) <span class="op">+</span>
+<span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-486-1.png" width="672" /></p>
+<p>Action, Sports and Shooter are the first three biggest genre. Action occupies almost 25% genre. Three of
+them together contribute half of genre count. Puzzle, Adventure and Stratage have relative less count.</p>
+<p>We regroup rating AO, RP and K-A as “Others” because there are only few observations of these ratings.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#regroup Rating as Rating.type </span>
+rating &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;E&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;E10+&quot;</span>)
+game &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Rating.type =</span> <span class="kw">ifelse</span>(Rating <span class="op">%in%</span><span class="st"> </span>rating, <span class="kw">as.character</span>(Rating), <span class="st">&quot;Others&quot;</span>)) </code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(game<span class="op">$</span>Rating.type), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+<span class="kw">names</span>(counts)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;T - Teen&quot;</span>  <span class="co"># rename the names of counts for detail information</span>
+<span class="kw">names</span>(counts)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;E - Everyone&quot;</span>
+<span class="kw">names</span>(counts)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;M - Mature&quot;</span>
+<span class="kw">names</span>(counts)[<span class="dv">4</span>] &lt;-<span class="st"> &quot;E10+ - Everyone 10+&quot;</span>
+pct &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">round</span>(counts<span class="op">/</span><span class="kw">sum</span>(counts) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>), <span class="st">&quot;%&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)
+lbls &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">names</span>(counts), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, pct, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)  <span class="co"># labels with count number</span>
+<span class="kw">pie</span>(counts, <span class="dt">labels =</span> lbls, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="kw">length</span>(lbls)),
+<span class="dt">main=</span><span class="st">&quot;Pie Chart of Ratings with sample sizes&quot;</span>)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-488-1.png" width="672" /></p>
+<p>According to the order, the most popular ratings are T, E, M and E10+. Other ratings only occupy very little in the all games.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggmosaic)
+<span class="kw">library</span>(plotly)
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_mosaic</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">product</span>(Rating.type), <span class="dt">fill =</span> Platform.type), <span class="dt">na.rm=</span><span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Rating.type&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Platform Type&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Mosaic Plot&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>())
+<span class="kw">ggplotly</span>(p)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-mosaic"></span>
+<div id="htmlwidget-ff812955e37886d14081" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ff812955e37886d14081">{"x":{"data":[{"x":[0,0,0.292852747252747,0.292852747252747,0],"y":[0,0.303064909538038,0.303064909538038,0,0],"text":"Nintendo<br>E<br>Frequency: 656","key":["Nintendo","E"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,118,109,0.8)","hoveron":"fills","name":"Nintendo","legendgroup":"Nintendo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.302852747252747,0.302852747252747,0.433665934065934,0.433665934065934,0.302852747252747],"y":[0,0.389915896939975,0.389915896939975,0,0],"text":"Nintendo<br>E10+<br>Frequency: 377","key":["Nintendo","E10+"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,118,109,0.8)","hoveron":"fills","name":"Nintendo","legendgroup":"Nintendo","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.443665934065934,0.443665934065934,0.645230769230769,0.645230769230769,0.443665934065934],"y":[0,0.0657797813329779,0.0657797813329779,0,0],"text":"Nintendo<br>M<br>Frequency: 98","key":["Nintendo","M"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,118,109,0.8)","hoveron":"fills","name":"Nintendo","legendgroup":"Nintendo","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.655230769230769,0.655230769230769,0.655652747252747,0.655652747252747,0.655230769230769],"y":[0,0,0,0,0],"text":"Nintendo<br>Others<br>Frequency: 0","key":["Nintendo","Others"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,118,109,0.8)","hoveron":"fills","name":"Nintendo","legendgroup":"Nintendo","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.665652747252747,0.665652747252747,1,1,0.665652747252747],"y":[0,0.163480035573324,0.163480035573324,0,0],"text":"Nintendo<br>T<br>Frequency: 404","key":["Nintendo","T"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(248,118,109,0.8)","hoveron":"fills","name":"Nintendo","legendgroup":"Nintendo","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0,0,0.292852747252747,0.292852747252747,0],"y":[0.312599535430494,0.392061676345955,0.392061676345955,0.312599535430494,0.312599535430494],"text":"Others<br>E<br>Frequency: 172","key":["Others","E"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(163,165,0,0.8)","hoveron":"fills","name":"Others","legendgroup":"Others","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.302852747252747,0.302852747252747,0.433665934065934,0.433665934065934,0.302852747252747],"y":[0.399450522832431,0.418067196956886,0.418067196956886,0.399450522832431,0.399450522832431],"text":"Others<br>E10+<br>Frequency: 18","key":["Others","E10+"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(163,165,0,0.8)","hoveron":"fills","name":"Others","legendgroup":"Others","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.443665934065934,0.443665934065934,0.645230769230769,0.645230769230769,0.443665934065934],"y":[0.0753144072254338,0.0800129630349322,0.0800129630349322,0.0753144072254338,0.0753144072254338],"text":"Others<br>M<br>Frequency: 7","key":["Others","M"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(163,165,0,0.8)","hoveron":"fills","name":"Others","legendgroup":"Others","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.655230769230769,0.655230769230769,0.655652747252747,0.655652747252747,0.655230769230769],"y":[0.00953462589245592,0.00953462589245592,0.00953462589245592,0.00953462589245592,0.00953462589245592],"text":"Others<br>Others<br>Frequency: 0","key":["Others","Others"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(163,165,0,0.8)","hoveron":"fills","name":"Others","legendgroup":"Others","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.665652747252747,0.665652747252747,1,1,0.665652747252747],"y":[0.17301466146578,0.194865953349343,0.194865953349343,0.17301466146578,0.17301466146578],"text":"Others<br>T<br>Frequency: 54","key":["Others","T"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(163,165,0,0.8)","hoveron":"fills","name":"Others","legendgroup":"Others","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0,0,0.292852747252747,0.292852747252747,0],"y":[0.401596302238411,0.447333232183939,0.447333232183939,0.401596302238411,0.401596302238411],"text":"PC<br>E<br>Frequency: 99","key":["PC","E"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,191,125,0.8)","hoveron":"fills","name":"PC","legendgroup":"PC","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.302852747252747,0.302852747252747,0.433665934065934,0.433665934065934,0.302852747252747],"y":[0.427601822849342,0.492760182284934,0.492760182284934,0.427601822849342,0.427601822849342],"text":"PC<br>E10+<br>Frequency: 63","key":["PC","E10+"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,191,125,0.8)","hoveron":"fills","name":"PC","legendgroup":"PC","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.443665934065934,0.443665934065934,0.645230769230769,0.645230769230769,0.443665934065934],"y":[0.0895475889273881,0.251983375484333,0.251983375484333,0.0895475889273881,0.0895475889273881],"text":"PC<br>M<br>Frequency: 242","key":["PC","M"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,191,125,0.8)","hoveron":"fills","name":"PC","legendgroup":"PC","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.655230769230769,0.655230769230769,0.655652747252747,0.655652747252747,0.655230769230769],"y":[0.0190692517849118,0.339689750594971,0.339689750594971,0.0190692517849118,0.0190692517849118],"text":"PC<br>Others<br>Frequency: 1","key":["PC","Others"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,191,125,0.8)","hoveron":"fills","name":"PC","legendgroup":"PC","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.665652747252747,0.665652747252747,1,1,0.665652747252747],"y":[0.204400579241799,0.303945353378031,0.303945353378031,0.204400579241799,0.204400579241799],"text":"PC<br>T<br>Frequency: 246","key":["PC","T"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,191,125,0.8)","hoveron":"fills","name":"PC","legendgroup":"PC","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0,0,0.292852747252747,0.292852747252747,0],"y":[0.456867858076394,0.810751578665018,0.810751578665018,0.456867858076394,0.456867858076394],"text":"Playstation<br>E<br>Frequency: 766","key":["Playstation","E"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,176,246,0.8)","hoveron":"fills","name":"Playstation","legendgroup":"Playstation","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.302852747252747,0.302852747252747,0.433665934065934,0.433665934065934,0.302852747252747],"y":[0.50229480817739,0.812572710251641,0.812572710251641,0.50229480817739,0.50229480817739],"text":"Playstation<br>E10+<br>Frequency: 300","key":["Playstation","E10+"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,176,246,0.8)","hoveron":"fills","name":"Playstation","legendgroup":"Playstation","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.443665934065934,0.443665934065934,0.645230769230769,0.645230769230769,0.443665934065934],"y":[0.261518001376789,0.673648468095651,0.673648468095651,0.261518001376789,0.261518001376789],"text":"Playstation<br>M<br>Frequency: 614","key":["Playstation","M"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,176,246,0.8)","hoveron":"fills","name":"Playstation","legendgroup":"Playstation","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.655230769230769,0.655230769230769,0.655652747252747,0.655652747252747,0.655230769230769],"y":[0.349224376487427,0.669844875297485,0.669844875297485,0.349224376487427,0.349224376487427],"text":"Playstation<br>Others<br>Frequency: 1","key":["Playstation","Others"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,176,246,0.8)","hoveron":"fills","name":"Playstation","legendgroup":"Playstation","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.665652747252747,0.665652747252747,1,1,0.665652747252747],"y":[0.313479979270487,0.768715226844718,0.768715226844718,0.313479979270487,0.313479979270487],"text":"Playstation<br>T<br>Frequency: 1125","key":["Playstation","T"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,176,246,0.8)","hoveron":"fills","name":"Playstation","legendgroup":"Playstation","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0,0,0.292852747252747,0.292852747252747,0],"y":[0.820286204557474,1,1,0.820286204557474,0.820286204557474],"text":"Xbox<br>E<br>Frequency: 389","key":["Xbox","E"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(231,107,243,0.8)","hoveron":"fills","name":"Xbox","legendgroup":"Xbox","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.302852747252747,0.302852747252747,0.433665934065934,0.433665934065934,0.302852747252747],"y":[0.822107336144096,1,1,0.822107336144096,0.822107336144096],"text":"Xbox<br>E10+<br>Frequency: 172","key":["Xbox","E10+"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(231,107,243,0.8)","hoveron":"fills","name":"Xbox","legendgroup":"Xbox","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.443665934065934,0.443665934065934,0.645230769230769,0.645230769230769,0.443665934065934],"y":[0.683183093988107,1,1,0.683183093988107,0.683183093988107],"text":"Xbox<br>M<br>Frequency: 472","key":["Xbox","M"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(231,107,243,0.8)","hoveron":"fills","name":"Xbox","legendgroup":"Xbox","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.655230769230769,0.655230769230769,0.655652747252747,0.655652747252747,0.655230769230769],"y":[0.679379501189941,1,1,0.679379501189941,0.679379501189941],"text":"Xbox<br>Others<br>Frequency: 1","key":["Xbox","Others"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(231,107,243,0.8)","hoveron":"fills","name":"Xbox","legendgroup":"Xbox","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null},{"x":[0.665652747252747,0.665652747252747,1,1,0.665652747252747],"y":[0.778249852737174,1,1,0.778249852737174,0.778249852737174],"text":"Xbox<br>T<br>Frequency: 548","key":["Xbox","T"],"type":"scatter","mode":"lines","line":{"width":0.377952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(231,107,243,0.8)","hoveron":"fills","name":"Xbox","legendgroup":"Xbox","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","_isSimpleKey":true,"_isNestedKey":false,"frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":25.5707762557078},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Mosaic Plot","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.05,1.05],"tickmode":"array","ticktext":["E","E10+","M","Others","T"],"tickvals":[0.146426373626374,0.368259340659341,0.544448351648352,0.655441758241758,0.832826373626374],"categoryorder":"array","categoryarray":["E","E10+","M","Others","T"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Rating.type","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.05,1.05],"tickmode":"array","ticktext":["Nintendo","Others","PC","Playstation","Xbox"],"tickvals":[0.151532454769019,0.352330605888225,0.424464767211175,0.633809718370706,0.910143102278737],"categoryorder":"array","categoryarray":["Nintendo","Others","PC","Playstation","Xbox"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":false,"tickfont":{"color":null,"family":null,"size":0},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Platform Type","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"Platform.type","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"14803cd77b63":{"x":{},"fill":{},"y":{},"x1__Rating.type":{},"type":"scatter"}},"cur_data":"14803cd77b63","visdat":{"14803cd77b63":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 9.2: Mosaic plot between platform type and rating type
+</p>
+</div>
+<p>For all platform and rating combination, Playstation games are released most in all other three different rating types except Everyone 10 age plus. Nintendo is the most popular game for Everyone 10+, it’s the second popular platform for rating Everyone. Xbox is the second popular platform for rating mature and teenage,and it’s the third favorite platform for rating everyone and everyone 10+. Most Other platform games are rated as Everyone.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-489" class="exercise"><strong>Exercise 9.1  </strong></span>Download the game sale data set and clean the data as similar as described in the beginning of this chapter, produce a masaic plot between genre and rating. Interpret your plot breifly.
+</div>
+
+</div>
+<div id="correlation-among-numeric-variables" class="section level2">
+<h2><span class="header-section-number">9.2</span> Correlation among numeric variables</h2>
+
+<pre class="sourceCode r"><code class="sourceCode r">st &lt;-<span class="st"> </span>game[, <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span><span class="op">:</span><span class="dv">23</span>)]  <span class="co"># take numeric variables as goal matrix</span>
+st &lt;-<span class="st"> </span><span class="kw">na.omit</span>(st)
+<span class="kw">library</span>(ellipse)  <span class="co"># install.packages(&quot;ellipses&quot;)</span>
+<span class="kw">library</span>(corrplot)
+corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st))  <span class="co"># correlation matrix</span>
+col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#7F0000&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;#FF7F00&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;#7FFF7F&quot;</span>,
+                           <span class="st">&quot;cyan&quot;</span>, <span class="st">&quot;#007FFF&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;#00007F&quot;</span>))
+<span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, 
+               <span class="dt">number.cex =</span> <span class="fl">.8</span>, <span class="dt">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="dt">upper.col =</span> <span class="kw">col</span>(<span class="dv">10</span>), 
+               <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-corrplot"></span>
+<img src="book_files/figure-html/game-corrplot-1.png" alt="Corrplot among numeric variables" width="768" />
+<p class="caption">
+Figure 9.3: Corrplot among numeric variables
+</p>
+</div>
+<p>There are high r values of 0.75, 0.65, 0.52 and 0.42 between the log value of Global.Sales and regional sales, we will consider to use Global.Sales.Log as our target sales to analyze the relationship of sales with other variables later. On the other hand, there are good positive correlation between regional sales too. User Score is positive correlated to Critic Score with r of 0.58. There is little correlation between User Count log value and User Score.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)))))  <span class="co"># hierarchical clustering</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-dendrogram"></span>
+<img src="book_files/figure-html/game-dendrogram-1.png" alt="Cluster dendrogram for numeric variables" width="672" />
+<p class="caption">
+Figure 9.4: Cluster dendrogram for numeric variables
+</p>
+</div>
+<p>All sales’ log value except JP.Sales.Log build one cluster, scores build second cluster, and log value of counts and JP.Sales build another one. In sales cluster, Other.Sales.Log is the closest to Global.Sales.Log, then NA.Sales.Log, and EU.Sales.Log is the next.</p>
+</div>
+<div id="analysis-of-score-and-count" class="section level2">
+<h2><span class="header-section-number">9.3</span> Analysis of score and count</h2>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggpmisc)  <span class="co">#package for function stat_poly_eq</span>
+formula &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st"> </span>x
+p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> User.Score, <span class="dt">y =</span> Critic.Score)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Platform), <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">formula =</span> formula) <span class="op">+</span><span class="st">  </span><span class="co">#add regression line</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula =</span> formula,   <span class="co">#add regression equation and R square value</span>
+               <span class="dt">eq.with.lhs =</span> <span class="st">&quot;italic(hat(y))~`=`~&quot;</span>,  <span class="co"># add ^ on y</span>
+               <span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">paste</span>(..eq.label.., ..rr.label.., <span class="dt">sep =</span> <span class="st">&quot;*plain(</span><span class="ch">\&quot;</span><span class="st">,</span><span class="ch">\&quot;</span><span class="st">)~&quot;</span>)),
+               <span class="dt">label.x.npc =</span> <span class="st">&quot;left&quot;</span>, <span class="dt">label.y.npc =</span> <span class="fl">0.9</span>,   <span class="co"># position of the equation label</span>
+               <span class="dt">parse =</span> <span class="ot">TRUE</span>)   
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">data =</span> game, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Score), <span class="dt">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">data =</span> game, <span class="kw">aes</span>(<span class="dt">x =</span> User.Score), <span class="dt">color =</span> <span class="st">&quot;darkgreen&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightgreen&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Critic.Score-blue, User.Score-green&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) 
+
+<span class="kw">library</span>(gridExtra)
+<span class="kw">grid.arrange</span>(p1, p2, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-score"></span>
+<img src="book_files/figure-html/game-score-1.png" alt="Scatter and density plot for critic score and user score" width="960" />
+<p class="caption">
+Figure 9.5: Scatter and density plot for critic score and user score
+</p>
+</div>
+<p>There is positive correlation between Critic.Score and User.Score. In total, Critic score is lower than user score.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">t.test</span>(game<span class="op">$</span>Critic.Score, game<span class="op">$</span>User.Score)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  game$Critic.Score and game$User.Score
+## t = -6.5463, df = 13629, p-value = 6.108e-11
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.2058518 -0.1109834
+## sample estimates:
+## mean of x mean of y 
+##  7.027209  7.185626</code></pre>
+<p>T-test with p value of much less than 0.05 let us accept the alternative hypothesis with 95% confidence that there is significant difference in the means of critic score and user score. The mean of critic score is 7.03, and mean of user score is 7.19.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Count.Log, <span class="dt">y =</span> Critic.Score)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_binhex</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Bin 2d plane into hexagons</span>
+<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>),
+  <span class="dt">name =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="co"># Adding a custom continuous color palette</span>
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> User.Count.Log, <span class="dt">y =</span> User.Score)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_binhex</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="dt">name =</span> <span class="st">&quot;Frequency&quot;</span>) <span class="co"># color legend</span>
+  <span class="kw">grid.arrange</span>(p1, p2, <span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-count"></span>
+<img src="book_files/figure-html/game-count-1.png" alt="Binhex plot for critic count and user count" width="672" />
+<p class="caption">
+Figure 9.6: Binhex plot for critic count and user count
+</p>
+</div>
+<p>Critic.Score has a pretty good correlation to Critic.Count.Log, with an r value of 0.41 in the correlation analysis above, though Critic.Count.Log doesn’t have impact over Critic.Score. While User.Score looks like independent on User.Count.Log.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-491" class="exercise"><strong>Exercise 9.2  </strong></span>Use ggplot2 package to get a scatter plot with smooth line between Global_Sales and NA_Sales. Use plain sentence to explain what you find in the plot.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-492" class="exercise"><strong>Exercise 9.3  </strong></span>Use density plot of Global_Sales, NA_Sales, EU_Sales, JP_Sales and Other_Sales to illustrate the relationship among these sales. Interpret your plot.
+</div>
+
+</div>
+<div id="analysis-of-sales" class="section level2">
+<h2><span class="header-section-number">9.4</span> Analysis of sales</h2>
+<div id="by-year.release" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> By Year.Release</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r">Year.Release &lt;-<span class="st"> </span>game<span class="op">$</span>Year.Release 
+counts &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">table</span>(Year.Release))
+p &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Year.Release, Global.Sales) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Year.Release) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total.Sales =</span> <span class="kw">sum</span>(Global.Sales))
+q &lt;-<span class="st"> </span><span class="kw">cbind.data.frame</span>(p, counts[<span class="dv">2</span>])
+<span class="kw">names</span>(q)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;count&quot;</span>
+q<span class="op">$</span>count &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(q<span class="op">$</span>count)
+
+<span class="kw">ggplot</span>(q, <span class="kw">aes</span>(<span class="dt">x =</span> Year.Release, <span class="dt">y =</span> Total.Sales, <span class="dt">label =</span> q<span class="op">$</span>count)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">y =</span> q<span class="op">$</span>count <span class="op">*</span><span class="st"> </span><span class="dv">500000</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">&quot;Yellow&quot;</span> ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">y =</span> (q<span class="op">$</span>count <span class="op">+</span><span class="st"> </span><span class="dv">50</span>) <span class="op">*</span><span class="st"> </span><span class="dv">500000</span>) <span class="op">+</span><span class="st">  </span><span class="co"># position of the text: count of games each year</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>),
+        <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;purple&quot;</span>),
+        <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="st">&quot;Year.Release&quot;</span>, <span class="dt">labels =</span> <span class="kw">as.character</span>(Year.Release), <span class="dt">breaks =</span> Year.Release)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-SalesYear"></span>
+<img src="book_files/figure-html/game-SalesYear-1.png" alt="Total sales by year" width="768" />
+<p class="caption">
+Figure 9.7: Total sales by year
+</p>
+</div>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Global Sales Each Year&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Year Release&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Global Sales&quot;</span>)</code></pre>
+<pre><code>## $x
+## [1] &quot;Year Release&quot;
+## 
+## $y
+## [1] &quot;Global Sales&quot;
+## 
+## $title
+## [1] &quot;Global Sales Each Year&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<p>We can see from the histogram of total sales that there is very little sales before 1996, only one game was released for each year. For several years between 1996 and 2000 the sales increased slowly. The count of games too. After that there is a big climbing in total sales and the number of released games. The top sales happened in 2008, and the most count games was released in that year too. After that both total sales and count of games sloped down.</p>
+</div>
+<div id="by-region" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> By Region</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
+game <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Year.Release, NA.Sales.Log, EU.Sales.Log, JP.Sales.Log, 
+         Other.Sales.Log, Global.Sales.Log) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.vars =</span> <span class="st">&quot;Year.Release&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Year.Release, variable) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total.sales =</span> <span class="kw">sum</span>(value)) <span class="op">%&gt;%</span>
+<span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year.Release, <span class="dt">y =</span> total.sales, <span class="dt">color =</span> variable, <span class="dt">group =</span> variable)) <span class="op">+</span>
+<span class="st">   </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Regional Global Sales Log Distribution Each Year&quot;</span>, 
+         <span class="dt">x =</span> <span class="st">&quot;Year Release&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Total Sales Log Value&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Region&quot;</span>) <span class="op">+</span>
+<span class="st">   </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),
+         <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>),
+         <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;pink&quot;</span>),
+         <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
+         <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>())</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-SalesRegion"></span>
+<img src="book_files/figure-html/game-SalesRegion-1.png" alt="Total sales by region" width="864" />
+<p class="caption">
+Figure 9.8: Total sales by region
+</p>
+</div>
+<p>The pattern of log value for these regional sales in those years are similar for Global, North America, Europe, and Others. Japan is much different from them. Same conclusion as cluster analysis.</p>
+</div>
+<div id="by-rating" class="section level3">
+<h3><span class="header-section-number">9.4.3</span> By Rating</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r">game<span class="op">$</span>Rating.type &lt;-<span class="st"> </span><span class="kw">as.factor</span>(game<span class="op">$</span>Rating.type)
+x &lt;-<span class="st"> </span>game[, <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">10</span>)]
+<span class="kw">matplot</span>(<span class="kw">t</span>(x), <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">5</span>)[game<span class="op">$</span>Rating.type])
+<span class="kw">legend</span>(<span class="st">&quot;center&quot;</span>, <span class="kw">levels</span>(game<span class="op">$</span>Rating.type), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">5</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>, <span class="dt">pt.cex =</span> <span class="dv">1</span>)
+<span class="kw">text</span>(<span class="kw">c</span>(<span class="fl">1.2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">3.9</span>, <span class="fl">4.8</span>), <span class="dv">80000000</span>, <span class="kw">colnames</span>(x))</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-SalesRating"></span>
+<img src="book_files/figure-html/game-SalesRating-1.png" alt="Sales by rating type" width="672" />
+<p class="caption">
+Figure 9.9: Sales by rating type
+</p>
+</div>
+<p>The figure shows one E game(for everyone) which was sold mainly in North America and Europe produced a sale tale of over 80 millions’ global sale, while North America contributed half of the global sales. We can check the game data and know it’s Wii Sports released in 2006. We also noticed that Mature game is popular in North America(green), which contributed a lot to global sales, Everyone games(red) have good sale in Europe, while Japanese like Teen(purple) and Everyone(red) games. It’s balance in rating for “other” region.</p>
+</div>
+<div id="by-genre" class="section level3">
+<h3><span class="header-section-number">9.4.4</span> By Genre</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r">game <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Year.Release, Global.Sales.Log, Genre) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Year.Release, Genre) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total.Sales.Log =</span> <span class="kw">sum</span>(Global.Sales.Log)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year.Release, <span class="dt">y =</span> Total.Sales.Log, <span class="dt">group =</span> Genre, <span class="dt">fill =</span> Genre)) <span class="op">+</span>
+<span class="st">         </span><span class="kw">geom_area</span>() <span class="op">+</span>
+<span class="st">         </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>, <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>),
+               <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>),
+               <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
+               <span class="dt">panel.grid.minor=</span><span class="kw">element_blank</span>()) <span class="op">+</span>
+<span class="st">         </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-SalesGenre"></span>
+<img src="book_files/figure-html/game-SalesGenre-1.png" alt="Year wise log global sales by Genre" width="672" />
+<p class="caption">
+Figure 9.10: Year wise log global sales by Genre
+</p>
+</div>
+<p>The figure shows the golden year for games are from 2007 to 2009, these games together occur above 7000 total.sales.log each of those years. Action and sports keeps on the top sale for almost all of those 20 years, occupying biggest portion of the total global sales log. Adventure, Puzzle and Strategy are on the bottom of the sale log list.</p>
+</div>
+<div id="by-score" class="section level3">
+<h3><span class="header-section-number">9.4.5</span> by Score</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Score, <span class="dt">y =</span> Global.Sales.Log)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Genre)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> User.Score, <span class="dt">y =</span> Global.Sales.Log)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Rating)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+<span class="kw">grid.arrange</span>(p1, p2, <span class="dt">nrow =</span> <span class="dv">1</span>,<span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-SalesScore"></span>
+<img src="book_files/figure-html/game-SalesScore-1.png" alt="Global sales by critic and user score" width="1152" />
+<p class="caption">
+Figure 9.11: Global sales by critic and user score
+</p>
+</div>
+<p>Independent from Genre and Rating, the higher of Score, the better of Global.Sales.Log. Especially for Critic.Score bigger than 9, Global.Sales straight rising. Global.Sales rise slowly with User.Score.</p>
+<pre class="sourceCode r"><code class="sourceCode r">game<span class="op">$</span>Name &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;Brain Age: Train Your Brain in Minutes a Day&quot;</span>,  <span class="co">#shorten the game name</span>
+                    <span class="st">&quot;Brain Age: Train Your Brain&quot;</span>, game<span class="op">$</span>Name)
+p1 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Name, User.Score, Critic.Score, Global.Sales) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Name) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total.Sales =</span> <span class="kw">sum</span>(Global.Sales), <span class="dt">Avg.User.Score =</span> <span class="kw">mean</span>(User.Score), 
+            <span class="dt">Avg.Critic.Score =</span> <span class="kw">mean</span>(Critic.Score)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Total.Sales)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">20</span>)
+<span class="kw">ggplot</span>(p1, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(Name, <span class="dt">levels =</span> Name))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Total.Sales<span class="op">/</span><span class="dv">10000000</span>), <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Avg.User.Score, <span class="dt">group =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;Avg.User.Score&quot;</span>), <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>( <span class="kw">aes</span>(<span class="dt">y =</span> Avg.User.Score), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">&quot;Yellow&quot;</span> ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Avg.Critic.Score,  <span class="dt">group =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;Avg.Critic.Score&quot;</span>), <span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> Avg.Critic.Score), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">size =</span> <span class="dv">8</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Top Global Sales Game with Score&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Name of the top games&quot;</span> ) <span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) </code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-493-1.png" width="672" /></p>
+<p>Among these 20 top sale games, the first two games, Wii Sports and Grand Theft Auto V have much better sales than the others. For most games, average critic score is higher than average user score, which agree with our density plot Figure<a href="the-game-sales-dataset.html#fig:game-score">9.5</a>. Two Call of Duty games got really lower average user score comparing with other top sales games.</p>
+</div>
+<div id="by-rating-genre-critic-score" class="section level3">
+<h3><span class="header-section-number">9.4.6</span> By Rating &amp; Genre &amp; Critic score</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Rating.type, Global.Sales, Genre, Critic.Score) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Rating.type, Genre) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total.Sales =</span> <span class="kw">sum</span>(Global.Sales)<span class="op">/</span><span class="dv">10</span><span class="op">^</span><span class="dv">8</span>, <span class="dt">Avg.Score =</span> <span class="kw">mean</span>(Critic.Score)) 
+p2 &lt;-<span class="st"> </span>p1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Genre) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Avg.Critic.Score =</span> <span class="kw">mean</span>(Avg.Score))
+<span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">data =</span> p1, 
+           <span class="kw">aes</span>(<span class="dt">x =</span> Genre, <span class="dt">y =</span> Total.Sales, <span class="dt">fill =</span> Rating.type), <span class="dt">stat =</span> <span class="st">&quot;Identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> p2, 
+            <span class="kw">aes</span>(<span class="dt">x =</span> Genre, <span class="dt">y =</span> Avg.Critic.Score, <span class="dt">group =</span> <span class="dv">1</span>, <span class="dt">color =</span> <span class="st">&quot;Avg.Critic.Score&quot;</span>), <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> p2, 
+             <span class="kw">aes</span>(<span class="dt">x =</span> Genre, <span class="dt">y =</span> Avg.Critic.Score, <span class="dt">shape =</span> <span class="st">&quot;Avg.Critic.Score&quot;</span>), <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">&quot;Blue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_manual</span>(<span class="st">&quot;Score&quot;</span>, <span class="dt">breaks =</span> <span class="st">&quot;Avg.Critic.Score&quot;</span>, <span class="dt">values =</span> <span class="st">&quot;yellow&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_shape_manual</span>(<span class="st">&quot;Score&quot;</span>, <span class="dt">values =</span> <span class="dv">19</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>), 
+        <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),
+        <span class="dt">legend.position=</span><span class="st">&quot;bottom&quot;</span>,
+        <span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>),
+        <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>()) </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-Sales"></span>
+<img src="book_files/figure-html/game-Sales-1.png" alt="Total sales for genre and rating with critic score" width="1152" />
+<p class="caption">
+Figure 9.12: Total sales for genre and rating with critic score
+</p>
+</div>
+<p>For genre &amp; rating &amp; Global.sale combination, Everyone sports game are so popular that it occupy the first in global sales in this group. Rating Mature contribute big portion in both Action and Shooter global sales. On average these three top sales genres show relatively higher critic score. Fighting, adventure and racing games got relatively lower average critic score. We can also see from the figure that adventure, puzzle and stratage do sell less comparing with other genres.</p>
+</div>
+<div id="by-platform" class="section level3">
+<h3><span class="header-section-number">9.4.7</span> By Platform</h3>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis)</code></pre>
+<pre><code>## Loading required package: viridisLite</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;scales&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:viridis&#39;:
+## 
+##     viridis_pal</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     col_factor</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Platform.type, Year.Release) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total =</span> <span class="kw">sum</span>(Global.Sales))
+  p<span class="op">$</span>Year.Release. &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(p<span class="op">$</span>Year.Release))
+<span class="kw">ggplot</span>(p, <span class="kw">aes</span>(<span class="dt">x =</span> Year.Release., <span class="dt">fill =</span> Platform.type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Market Share&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="kw">percent_format</span>()) </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-SalesPlatform"></span>
+<img src="book_files/figure-html/game-SalesPlatform-1.png" alt="Yearly market share by platform type" width="672" />
+<p class="caption">
+Figure 9.13: Yearly market share by platform type
+</p>
+</div>
+<p>Nintendo and Xbox came after 1990. Before that PC and Playstation occupied the game market, PC are the main platform at that time. After 1995, the portion of PC and Playstation shrinked, while Nintendo and Xbox grew fast and took over more portion than Playstation and PC in the market. Together with Nintendo and Xbox, there were other game platform sprouting out in early 1990s, but they last for 20 years and disappeared. From around 2010, the portions of these 4 platforms keep relatively evenly and stablly.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#compute 1-way ANOVA test for log value of global sales by Platform Type</span>
+model &lt;-<span class="st"> </span><span class="kw">aov</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>Platform.type, <span class="dt">data =</span> game)
+<span class="kw">summary</span>(model)</code></pre>
+<pre><code>##                 Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## Platform.type    4   1283   320.8   181.2 &lt;2e-16 ***
+## Residuals     6820  12077     1.8                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">tukey &lt;-<span class="st"> </span><span class="kw">TukeyHSD</span>(model)
+<span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">1</span>))
+<span class="kw">plot</span>(tukey, <span class="dt">las =</span> <span class="dv">1</span>)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-494-1.png" width="672" /></p>
+<p>ANOVA test shows that there is at lease one of the platform type is significant different from the others. In detail, the plot of Turkey tests tells us that there is significant difference between all other pairs of platform types but between Xbox and Nintendo, others and Nintendo.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r">game<span class="op">$</span>Platform.type &lt;-<span class="st"> </span><span class="kw">as.factor</span>(game<span class="op">$</span>Platform.type)
+<span class="kw">ggplot</span>(game, <span class="kw">aes</span>(<span class="dt">x =</span> Platform.type, <span class="dt">y =</span> Global.Sales.Log, <span class="dt">fill =</span> Rating.type)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-PlatformRating"></span>
+<img src="book_files/figure-html/game-PlatformRating-1.png" alt="Global sales log by platform and rating type" width="960" />
+<p class="caption">
+Figure 9.14: Global sales log by platform and rating type
+</p>
+</div>
+<p>In total, PC has lower Global sales log comparing with other platform type, while Playstation and Xbox have higher sale mediums for different rating types. Rating of Everyone sold pretty well in all platform type, while rating Mature sold better in PC, Playstation and Xbox.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(game, <span class="kw">aes</span>(Critic.Score, Global.Sales.Log, <span class="dt">color =</span> Platform.type)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>Genre) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-PlatformScore"></span>
+<img src="book_files/figure-html/game-PlatformScore-1.png" alt="Global sales log by critic score for different platform type and genre" width="960" />
+<p class="caption">
+Figure 9.15: Global sales log by critic score for different platform type and genre
+</p>
+</div>
+<p>Most genre plots in Figure <a href="the-game-sales-dataset.html#fig:game-PlatformScore">9.15</a> illustrate that there are positive correlation between Global.Sales.Log and Critic Score, the higher the critic score, the better the global sales log value. Most puzzle games were from Nintendo, while lots of stratage games are PC. For other genres, all platforms shared the portion relatively evenly. Lots of PC(green) shared lower market portion in different genres, while some of Nintendo(red) games in sports, racing, platform, and misc were sold really well. At the same time, Playstation action and racing games, and Xbox misc, action and shooter games show higher global sales log too.</p>
+</div>
+</div>
+<div id="effect-of-platform-type-to-priciple-components" class="section level2">
+<h2><span class="header-section-number">9.5</span> Effect of platform type to priciple components</h2>
+<pre class="sourceCode r"><code class="sourceCode r">st &lt;-<span class="st"> </span>game[, <span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span><span class="op">:</span><span class="dv">23</span>)]
+pca =<span class="st"> </span><span class="kw">prcomp</span>(st, <span class="dt">scale =</span> T)  <span class="co">#scale = T to normalize the data</span>
+percentVar &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="kw">summary</span>(pca)<span class="op">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dv">0</span>)  <span class="co"># compute % variances</span></code></pre>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#head(pca$x) # the new coordinate values for each observation</span>
+pcaData &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(pca<span class="op">$</span>x[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="co">#First and Second principal component value</span>
+pcaData &lt;-<span class="st"> </span><span class="kw">cbind</span>(pcaData, game<span class="op">$</span>Platform.type)  <span class="co">#add platform type as third col. for cluster purpose</span>
+<span class="kw">colnames</span>(pcaData) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;PC1&quot;</span>, <span class="st">&quot;PC2&quot;</span>, <span class="st">&quot;Platform&quot;</span>)
+<span class="kw">ggplot</span>(pcaData, <span class="kw">aes</span>(PC1, PC2, <span class="dt">color =</span> Platform, <span class="dt">shape =</span> Platform)) <span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">0.8</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="kw">paste0</span>(<span class="st">&quot;PC1: &quot;</span>, percentVar[<span class="dv">1</span>], <span class="st">&quot;% variance&quot;</span>)) <span class="op">+</span><span class="st">  </span><span class="co"># x label</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="kw">paste0</span>(<span class="st">&quot;PC2: &quot;</span>, percentVar[<span class="dv">2</span>], <span class="st">&quot;% variance&quot;</span>)) <span class="op">+</span><span class="st">  </span><span class="co"># y label</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">aspect.ratio =</span> <span class="dv">1</span>)  <span class="co"># width and height ratio</span></code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-pca"></span>
+<img src="book_files/figure-html/game-pca-1.png" alt="PCA plot colored with platform type" width="672" />
+<p class="caption">
+Figure 9.16: PCA plot colored with platform type
+</p>
+</div>
+<p>PC, Xbox, Playstation and Nintendo occupy in their own positions in the PCA figure, which illustrate that they play different important role in components of the variance of PC1 and PC2.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggfortify)
+<span class="kw">set.seed</span>(<span class="dv">1</span>)
+<span class="kw">autoplot</span>(<span class="kw">kmeans</span>(st, <span class="dv">3</span>), <span class="dt">data =</span> st, <span class="dt">label =</span> <span class="ot">FALSE</span>, <span class="dt">label.size =</span> <span class="fl">0.1</span>)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:game-Kmeans"></span>
+<img src="book_files/figure-html/game-Kmeans-1.png" alt="Kmeans PCA figure using ggfortify" width="672" />
+<p class="caption">
+Figure 9.17: Kmeans PCA figure using ggfortify
+</p>
+</div>
+<p>Together with PCA Figure <a href="the-game-sales-dataset.html#fig:game-pca">9.16</a>, we will find that the first cluster is contributed mainly by PC. The second cluster is contributed mainly by Xbox and Playstation. Xbox, Nintendo, and Playstation together build the third cluster.</p>
+</div>
+<div id="models-for-global-sales" class="section level2">
+<h2><span class="header-section-number">9.6</span> Models for global sales</h2>
+<p>Because there are too many of levels in Publisher and Developer, and there is apparent correlation between them, we use only top 12 levels of Publisher and classified the other publishers as “Others”; Because of the good correlation between Critic.Score and User.Score, we use only critic score; Also we use only log value of user score count because of it’s closer correlation to global sales log. We will not put other sales log variables in our model because their apparent correlation with global sales log.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#re-categorize publisher into 13 groups</span>
+Publisher. &lt;-<span class="st"> </span><span class="kw">head</span>(<span class="kw">names</span>(<span class="kw">sort</span>(<span class="kw">table</span>(game<span class="op">$</span>Publisher), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)), <span class="dv">12</span>)
+
+game &lt;-<span class="st"> </span>game <span class="op">%&gt;%</span>
+<span class="kw">mutate</span>(<span class="dt">Publisher.type =</span> <span class="kw">ifelse</span>(Publisher <span class="op">%in%</span><span class="st"> </span>Publisher., <span class="kw">as.character</span>(Publisher), <span class="st">&quot;Others&quot;</span>)) 
+game.lm &lt;-<span class="st"> </span>game[, <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">21</span>, <span class="dv">23</span><span class="op">:</span><span class="dv">26</span>)]
+<span class="co">#game.log$Genre.type &lt;- as.factor(game.log$Genre.type)</span>
+<span class="co">#game.lm$Publisher.type &lt;- as.factor(game.lm$Publisher.type)</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> game.lm)
+<span class="kw">summary</span>(model)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Global.Sales.Log ~ ., data = game.lm)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.9221 -0.5558  0.0254  0.5789  4.1009 
+## 
+## Coefficients:
+##                                             Estimate Std. Error t value
+## (Intercept)                                10.187752   0.922104  11.048
+## Year.Release1988                           -3.088268   1.300919  -2.374
+## Year.Release1992                           -1.796072   1.300851  -1.381
+## Year.Release1994                            2.930510   1.302000   2.251
+## Year.Release1996                            1.488582   0.987461   1.507
+## Year.Release1997                            1.188658   0.955613   1.244
+## Year.Release1998                            0.744742   0.939532   0.793
+## Year.Release1999                            0.653088   0.936406   0.697
+## Year.Release2000                            0.785921   0.925467   0.849
+## Year.Release2001                            0.772488   0.922728   0.837
+## Year.Release2002                            0.570865   0.922008   0.619
+## Year.Release2003                            0.340110   0.921843   0.369
+## Year.Release2004                            0.550812   0.921901   0.597
+## Year.Release2005                            0.210534   0.921694   0.228
+## Year.Release2006                            0.141533   0.921703   0.154
+## Year.Release2007                            0.373361   0.921629   0.405
+## Year.Release2008                            0.529829   0.921677   0.575
+## Year.Release2009                            0.446508   0.921648   0.484
+## Year.Release2010                            0.596658   0.921889   0.647
+## Year.Release2011                            0.389514   0.921944   0.422
+## Year.Release2012                           -0.031458   0.922540  -0.034
+## Year.Release2013                           -0.170252   0.922985  -0.184
+## Year.Release2014                           -0.383671   0.923096  -0.416
+## Year.Release2015                           -0.478979   0.923302  -0.519
+## Year.Release2016                           -0.826950   0.923192  -0.896
+## GenreAdventure                             -0.335989   0.063305  -5.307
+## GenreFighting                               0.072835   0.055338   1.316
+## GenreMisc                                   0.357196   0.054323   6.575
+## GenrePlatform                              -0.184139   0.054854  -3.357
+## GenrePuzzle                                -0.345253   0.091582  -3.770
+## GenreRacing                                -0.097943   0.048451  -2.021
+## GenreRole-Playing                          -0.357837   0.043093  -8.304
+## GenreShooter                               -0.142624   0.040372  -3.533
+## GenreSimulation                             0.405629   0.060887   6.662
+## GenreSports                                 0.011217   0.046986   0.239
+## GenreStrategy                              -0.483702   0.063838  -7.577
+## Critic.Score                                0.114744   0.009865  11.632
+## User.Count.Log                              0.615776   0.011589  53.134
+## Platform.typeOthers                        -0.188799   0.066011  -2.860
+## Platform.typePC                            -2.442802   0.051704 -47.246
+## Platform.typePlaystation                    0.135254   0.033868   3.994
+## Platform.typeXbox                          -0.106733   0.036927  -2.890
+## Rating.typeE10+                            -0.058393   0.040759  -1.433
+## Rating.typeM                               -0.467923   0.045704 -10.238
+## Rating.typeOthers                           0.144593   0.545092   0.265
+## Rating.typeT                               -0.331696   0.035692  -9.293
+## Publisher.typeAtari                        -0.506235   0.082442  -6.141
+## Publisher.typeCapcom                       -0.759855   0.078983  -9.620
+## Publisher.typeElectronic Arts              -0.114754   0.053315  -2.152
+## Publisher.typeKonami Digital Entertainment -0.705932   0.073042  -9.665
+## Publisher.typeNamco Bandai Games           -0.569621   0.074819  -7.613
+## Publisher.typeNintendo                      0.111592   0.074409   1.500
+## Publisher.typeOthers                       -0.618870   0.046433 -13.328
+## Publisher.typeSega                         -0.517708   0.069222  -7.479
+## Publisher.typeSony Computer Entertainment  -0.585506   0.069125  -8.470
+## Publisher.typeTake-Two Interactive         -0.276947   0.070848  -3.909
+## Publisher.typeTHQ                          -0.117032   0.068824  -1.700
+## Publisher.typeUbisoft                      -0.377192   0.059101  -6.382
+##                                            Pr(&gt;|t|)    
+## (Intercept)                                 &lt; 2e-16 ***
+## Year.Release1988                           0.017628 *  
+## Year.Release1992                           0.167420    
+## Year.Release1994                           0.024432 *  
+## Year.Release1996                           0.131733    
+## Year.Release1997                           0.213591    
+## Year.Release1998                           0.427996    
+## Year.Release1999                           0.485550    
+## Year.Release2000                           0.395791    
+## Year.Release2001                           0.402522    
+## Year.Release2002                           0.535836    
+## Year.Release2003                           0.712180    
+## Year.Release2004                           0.550211    
+## Year.Release2005                           0.819326    
+## Year.Release2006                           0.877964    
+## Year.Release2007                           0.685409    
+## Year.Release2008                           0.565410    
+## Year.Release2009                           0.628070    
+## Year.Release2010                           0.517516    
+## Year.Release2011                           0.672679    
+## Year.Release2012                           0.972799    
+## Year.Release2013                           0.853660    
+## Year.Release2014                           0.677690    
+## Year.Release2015                           0.603940    
+## Year.Release2016                           0.370418    
+## GenreAdventure                             1.15e-07 ***
+## GenreFighting                              0.188157    
+## GenreMisc                                  5.22e-11 ***
+## GenrePlatform                              0.000793 ***
+## GenrePuzzle                                0.000165 ***
+## GenreRacing                                0.043269 *  
+## GenreRole-Playing                           &lt; 2e-16 ***
+## GenreShooter                               0.000414 ***
+## GenreSimulation                            2.91e-11 ***
+## GenreSports                                0.811327    
+## GenreStrategy                              4.01e-14 ***
+## Critic.Score                                &lt; 2e-16 ***
+## User.Count.Log                              &lt; 2e-16 ***
+## Platform.typeOthers                        0.004248 ** 
+## Platform.typePC                             &lt; 2e-16 ***
+## Platform.typePlaystation                   6.58e-05 ***
+## Platform.typeXbox                          0.003859 ** 
+## Rating.typeE10+                            0.152006    
+## Rating.typeM                                &lt; 2e-16 ***
+## Rating.typeOthers                          0.790814    
+## Rating.typeT                                &lt; 2e-16 ***
+## Publisher.typeAtari                        8.69e-10 ***
+## Publisher.typeCapcom                        &lt; 2e-16 ***
+## Publisher.typeElectronic Arts              0.031403 *  
+## Publisher.typeKonami Digital Entertainment  &lt; 2e-16 ***
+## Publisher.typeNamco Bandai Games           3.04e-14 ***
+## Publisher.typeNintendo                     0.133735    
+## Publisher.typeOthers                        &lt; 2e-16 ***
+## Publisher.typeSega                         8.44e-14 ***
+## Publisher.typeSony Computer Entertainment   &lt; 2e-16 ***
+## Publisher.typeTake-Two Interactive         9.36e-05 ***
+## Publisher.typeTHQ                          0.089092 .  
+## Publisher.typeUbisoft                      1.86e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9177 on 6767 degrees of freedom
+## Multiple R-squared:  0.5735, Adjusted R-squared:  0.5699 
+## F-statistic: 159.6 on 57 and 6767 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> game.lm)
+<span class="kw">summary</span>(model)</code></pre>
+<pre><code>##                  Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## Year.Release     24    521    21.7   25.78 &lt;2e-16 ***
+## Genre            11    527    47.9   56.87 &lt;2e-16 ***
+## Critic.Score      1   1771  1771.3 2103.34 &lt;2e-16 ***
+## User.Count.Log    1   1344  1344.0 1595.92 &lt;2e-16 ***
+## Platform.type     4   2944   736.1  874.11 &lt;2e-16 ***
+## Rating.type       4    165    41.2   48.93 &lt;2e-16 ***
+## Publisher.type   12    389    32.4   38.53 &lt;2e-16 ***
+## Residuals      6767   5699     0.8                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Global sales log is mostly effected by factors of critic score, user count log, platform type, Publisher type and genre in glm analysis. ANOVA shows every factors are in the contribution to global sales log, critic score and user count log are the most important factors.</p>
+<p>Critic score and User.Count.Log positively affect the global sales log, while other factors like Platform type and Genre either lift up or pull down the global sales according to their types. This model will explain the global sales log with R-Square of 0.57.</p>
+<p>Because of the curve smooth line at global sale ~ critic score plot in our previous analysis and its big contribution in linear model analysis, We try a polynomial fit of critic score only. The first two levels are not statistically significant according to our pre-analysis, we use the third and fourth levels only here.</p>
+<pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Global.Sales.Log <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(Critic.Score<span class="op">^</span><span class="dv">4</span>),  <span class="dt">data =</span> game.lm)
+<span class="kw">summary</span>(model)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Global.Sales.Log ~ I(Critic.Score^3) + I(Critic.Score^4), 
+##     data = game.lm)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.8634 -0.7892  0.0950  0.8837  5.5807 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        1.193e+01  7.115e-02 167.722  &lt; 2e-16 ***
+## I(Critic.Score^3) -2.989e-03  7.972e-04  -3.749 0.000179 ***
+## I(Critic.Score^4)  6.076e-04  8.224e-05   7.387 1.67e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.283 on 6822 degrees of freedom
+## Multiple R-squared:  0.1597, Adjusted R-squared:  0.1595 
+## F-statistic: 648.3 on 2 and 6822 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>In total, the coefficients are statistically significant, the model of two levels of critic score itself will explain the data with R square 0.16.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ModelFunc &lt;-<span class="st"> </span><span class="cf">function</span>(x) {model<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span><span class="op">*</span>model<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>x<span class="op">^</span><span class="dv">4</span><span class="op">*</span>model<span class="op">$</span>coefficients[<span class="dv">3</span>]}
+<span class="kw">ggplot</span>(<span class="dt">data =</span> game.lm, <span class="kw">aes</span>(<span class="dt">x =</span> Critic.Score, <span class="dt">y =</span> Global.Sales.Log)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_function</span>(<span class="dt">fun =</span> ModelFunc, <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre>
+<p><img src="book_files/figure-html/unnamed-chunk-499-1.png" width="672" /></p>
+<p>Here is the scatter plot of Global.Sales.Log ~ Critic Score and the model line which predict the global sales log with critic score.</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-500" class="exercise"><strong>Exercise 9.4  </strong></span>Use different plots to visualize the distribution of NA_Sales by Year_of_Release, Genre, Rating and Platform individually or combinedly. Explain the relationship between NA_Sales with these factors. Hint: Take log value for NA_Sales first. It’s better to regroup platform first.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-501" class="exercise"><strong>Exercise 9.5  </strong></span>What’s the correlation between NA_Sales and Critic_Score? Use scatter plot with smooth line or polynomial model line to show the trend. Give your interpretation.
+</div>
+
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-502" class="exercise"><strong>Exercise 9.6  </strong></span>Use linear model and ANOVA to analyze NA_Sales with all the factors which contribute to its variance. Interpret your result breifly. Hint: Check the corrplot in Figure <a href="the-game-sales-dataset.html#fig:game-corrplot">9.3</a> and pay attention to the high correlation among those sales and between those scores.
+</div>
+
+</div>
+<div id="conclusion-1" class="section level2">
+<h2><span class="header-section-number">9.7</span> Conclusion</h2>
+<p>Global and regional sales are not distributed normally, while their log values are close to normal distribution. Most regional sales have the similar pattern as global sales.</p>
+<p>There is positive correlation between critic score and user score. In total, Critic score is lower than user score. No apparent correlation was found between scores and their counts.</p>
+<p>Critic score, user score count log, genre, rating, platform, and publisher together affect the global sales log. Critic score is the most important contributors.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-state-dataset.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-big-and-messy-employee-salary-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
