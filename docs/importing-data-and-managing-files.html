@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2019-06-11" />
+<meta name="date" content="2019-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,8 +176,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
 <li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
 <li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
-<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-file"><i class="fa fa-check"></i><b>4.1.4</b> Import data file</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
 <li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.2</b> Data manipulation in a data frame</a></li>
 <li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.3</b> Data transformation using the dplyr</a></li>
@@ -286,9 +287,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is best to create a separate folder that contains all related files. You can do the same for research projects. In Rstudio, this is called a <strong>Project</strong>. For example you can create a project for each of the chapters in this book. Projects are self-contained and can be moved to another computer or folder and the code will run.</p>
 <blockquote>
 <p>If the first line of your R script is</p>
-<p>setwd(“C:\Users\jenny\path\that\only\I\have”)
-I will come into your office and SET YOUR COMPUTER ON FIRE
-—@JennyBryan on Twitter</p>
+<p>setwd(“C:\Users\jenny\path\that\only\I\have”)</p>
+<p>I will come into your office and SET YOUR COMPUTER ON FIRE</p>
+<p>—@JennyBryan on Twitter</p>
 </blockquote>
 <div class="figure">
 <img src="https://github.com/gexijin/learnR/raw/master/images/dataImport.gif" alt="Animated GIF for creating project and import data." />
@@ -322,8 +323,8 @@ If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these wil
 <p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
 <p>Comma separated values (CSV) files, use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimited text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
 </div>
-<div id="import-data-file" class="section level3">
-<h3><span class="header-section-number">4.1.4</span> Import data file</h3>
+<div id="import-data-files" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> Import data files</h3>
 <p>In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“df”</strong> on the lower left of the import interface.</p>
 <p>We need to check each of the columns and see the data types are correctly read in.
 The first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.
@@ -428,6 +429,11 @@ df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">a
 <p>Note that for numeric columns we are shown mean, median, etc, while for factors the frequencies are shown. This reassured us that the data types are correctly recognized. It also shows missing values for CHARGES.
 Some people got free treatment for heart attack? Maybe not. Missing does not mean zero. Maybe the data was not entered for some patients.</p>
 <p>Except enforcing data type conversion by as.factor, as.numeric and so on, We can also reformat the columns before clicking <strong>Import</strong>:</p>
+</div>
+<div id="close-a-project-when-you-are-done" class="section level3">
+<h3><span class="header-section-number">4.1.6</span> Close a project when you are done</h3>
+<p>Once you are done with a project, you can close it from <strong>File <span class="math inline">\(\rightarrow\)</span>Close Project</strong>. If you do not close a project, <em>Rstuio assumes that you will be continue working on the same project</em>; even after your close Rstudio, the same project and files will be open next time when you start Rstudio. This is convenient, most of times. But I’ve seen some students’ Rstudio environment cluttered with all the things they have been doing for an entire semester. This is not only confusing, but could also lead to errors. For example in this class, you can start a new project for each chapter.</p>
+<p>To open a project, use <strong>File <span class="math inline">\(\rightarrow\)</span>Open Project</strong> and then navigate to the project. Alternatively you can double-click on the Chapter4.Rproj file from Windows or Mac. When a project file is loaded, the entire computing envirionment is set for you. The working directory is set properly. Some of the script files are open. If the script file is not open, you can open it by clicking on it from the <strong>Files</strong> tab in the lower right window.</p>
 </div>
 </div>
 <div id="data-manipulation-in-a-data-frame" class="section level2">
@@ -546,7 +552,7 @@ df2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="
 ## 4     225 41041     F     123   1       4674.     7    81  668.    80
 ## 5     265 41091     F     122   0       9401.     9    81 1045.    80
 ## 6     284 41041     F     121   0       7240.     7    81 1034.    80</code></pre>
-<p><strong>arrange, mutate, filter</strong> are called <strong>action verbs</strong>. For more action verbs, see <a href="https://www.rstudio.com/resources/cheatsheets/#dplyr">dplyr cheat Sheet</a>.</p>
+<p><strong>arrange, mutate, filter</strong> are called <strong>action verbs</strong>. For more action verbs, see dplyr cheat sheet from the Rstudio main menu: <em>Help <span class="math inline">\(\rightarrow\)</span> Cheatsheets <span class="math inline">\(\rightarrow\)</span> R Markdown Cheat Sheet.</em> It is also available on line <a href="https://www.rstudio.com/resources/cheatsheets/#dplyr">dplyr cheat Sheet</a>.</p>
 </div>
 <div id="reading-files-directly-using-read.table" class="section level2">
 <h2><span class="header-section-number">4.4</span> Reading files directly using read.table</h2>
