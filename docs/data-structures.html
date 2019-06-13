@@ -323,7 +323,7 @@ b. Squared each element in x and assign the results to a new vector <em>z</em>.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 3.3  </strong></span>Find two functions which sets and returns the current working directory, respectively.
+<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 3.3  </strong></span>Find two functions which sets and gets the current working directory in R, respectively.
 </div>
 
 </blockquote>
@@ -331,7 +331,7 @@ b. Squared each element in x and assign the results to a new vector <em>z</em>.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 3.4  </strong></span>Find the function that lists all the files in the current working folder.
+<span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 3.4  </strong></span>Find the function that lists all the files in the current working folder in R.
 </div>
 
 </blockquote>
@@ -344,7 +344,7 @@ b. Squared each element in x and assign the results to a new vector <em>z</em>.
 <p>A document will pop up in the Help Window. See the Figure <a href="data-structures.html#fig:ch3-1">3.1</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:ch3-1"></span>
-<img src="images//Ch3_1.png" alt="Sum help" width="60%" />
+<img src="images/ch3_1.png" alt="Sum help" width="60%" />
 <p class="caption">
 Figure 3.1: Sum help
 </p>
@@ -352,7 +352,7 @@ Figure 3.1: Sum help
 <p>At the bottom of the page is some example code. See the Figure <a href="data-structures.html#fig:ch3-2">3.2</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:ch3-2"></span>
-<img src="images//Ch3_2.png" alt="Examples of sum code" width="60%" />
+<img src="images/ch3_2.png" alt="Examples of sum code" width="60%" />
 <p class="caption">
 Figure 3.2: Examples of sum code
 </p>
@@ -372,11 +372,11 @@ Figure 3.2: Examples of sum code
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.2254284 -0.6881735  0.0251364  0.7793964  1.3500000
+## [1] -2.110531791 -0.642631957 -0.002190851  0.405093730  1.350000000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##         0%        25%        50%        75%       100% 
-## -2.2254284 -0.6881735  0.0251364  0.7793964  1.3500000 
+##           0%          25%          50%          75%         100% 
+## -2.110531791 -0.642631957 -0.002190851  0.405093730  1.350000000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -547,7 +547,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1]  5  2 11</code></pre>
+<pre><code>## [1] 5 5 2</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;David&quot;</span>, <span class="st">&quot;Breck&quot;</span>, <span class="st">&quot;Zach&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -1322,13 +1322,13 @@ df2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">150</span>)
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(y, x.id)
 <span class="kw">head</span>(x2)</code></pre></div>
-<pre><code>##            y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1 -0.7560390  1          5.1         3.5          1.4         0.2  setosa
-## 2 -0.5045568  2          4.9         3.0          1.4         0.2  setosa
-## 3  0.2095504  3          4.7         3.2          1.3         0.2  setosa
-## 4 -2.4210549  4          4.6         3.1          1.5         0.2  setosa
-## 5 -0.6153138  5          5.0         3.6          1.4         0.2  setosa
-## 6  0.9153514  6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code>##           y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1  1.807369  1          5.1         3.5          1.4         0.2  setosa
+## 2 -1.156153  2          4.9         3.0          1.4         0.2  setosa
+## 3 -1.114277  3          4.7         3.2          1.3         0.2  setosa
+## 4 -1.744954  4          4.6         3.1          1.5         0.2  setosa
+## 5  1.274535  5          5.0         3.6          1.4         0.2  setosa
+## 6 -1.450540  6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1489,32 +1489,32 @@ dfmg3</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
 <pre><code>##   id       rand
-## 1  1 -0.3806754
-## 2  2 -0.5508427
-## 3  3  1.0637762
-## 4  4  1.0291978
-## 5  5  0.8423139
-## 6  6 -1.5095557</code></pre>
+## 1  1  0.5834233
+## 2  2 -1.3855799
+## 3  3  0.2897003
+## 4  4 -0.1430013
+## 5  5 -1.1275784
+## 6  6 -1.3812977</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
-<pre><code>##      id       rand
-## 95   95  0.6754445
-## 96   96  1.0527501
-## 97   97  1.4051051
-## 98   98  0.9089918
-## 99   99  0.7501466
-## 100 100 -0.1226032</code></pre>
+<pre><code>##      id        rand
+## 95   95  0.98321079
+## 96   96  0.01752770
+## 97   97  0.02035896
+## 98   98 -0.56023166
+## 99   99  0.54424837
+## 100 100  0.16452294</code></pre>
 <p>Now we merge two data frames x and y by a common column named <strong>id</strong>. Note the new data frame z has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris
 x<span class="op">$</span>id =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)
 z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -0.3806754
-## 2  2          4.9         3.0          1.4         0.2  setosa -0.5508427
-## 3  3          4.7         3.2          1.3         0.2  setosa  1.0637762
-## 4  4          4.6         3.1          1.5         0.2  setosa  1.0291978
-## 5  5          5.0         3.6          1.4         0.2  setosa  0.8423139
-## 6  6          5.4         3.9          1.7         0.4  setosa -1.5095557</code></pre>
+## 1  1          5.1         3.5          1.4         0.2  setosa  0.5834233
+## 2  2          4.9         3.0          1.4         0.2  setosa -1.3855799
+## 3  3          4.7         3.2          1.3         0.2  setosa  0.2897003
+## 4  4          4.6         3.1          1.5         0.2  setosa -0.1430013
+## 5  5          5.0         3.6          1.4         0.2  setosa -1.1275784
+## 6  6          5.4         3.9          1.7         0.4  setosa -1.3812977</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(z)</code></pre></div>
 <pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 95   95          5.6         2.7          4.2         1.3 versicolor
@@ -1523,13 +1523,13 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ## 98   98          6.2         2.9          4.3         1.3 versicolor
 ## 99   99          5.1         2.5          3.0         1.1 versicolor
 ## 100 100          5.7         2.8          4.1         1.3 versicolor
-##           rand
-## 95   0.6754445
-## 96   1.0527501
-## 97   1.4051051
-## 98   0.9089918
-## 99   0.7501466
-## 100 -0.1226032</code></pre>
+##            rand
+## 95   0.98321079
+## 96   0.01752770
+## 97   0.02035896
+## 98  -0.56023166
+## 99   0.54424837
+## 100  0.16452294</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1539,12 +1539,12 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
 ##   Petal.Width          Species        rand          
-##  Min.   :0.100   setosa    :50   Min.   :-2.286027  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.595905  
-##  Median :0.800   virginica : 0   Median :-0.009105  
-##  Mean   :0.786                   Mean   :-0.007866  
-##  3rd Qu.:1.300                   3rd Qu.: 0.713015  
-##  Max.   :1.800                   Max.   : 2.273904</code></pre>
+##  Min.   :0.100   setosa    :50   Min.   :-3.256289  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.548992  
+##  Median :0.800   virginica : 0   Median : 0.030793  
+##  Mean   :0.786                   Mean   :-0.003628  
+##  3rd Qu.:1.300                   3rd Qu.: 0.676911  
+##  Max.   :1.800                   Max.   : 2.862849</code></pre>
 </div>
 <div id="strings-and-string-vectors" class="section level3">
 <h3><span class="header-section-number">3.2.4</span> Strings and string vectors</h3>
@@ -1650,7 +1650,7 @@ y</code></pre></div>
 ## [[4]]
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x000000001d0cd358&gt;
+## &lt;bytecode: 0x000000001d0bc5a8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height”, “name”, “BP” and “fun” to the y.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)  
@@ -1667,7 +1667,7 @@ y</code></pre></div>
 ## $fun
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x000000001d0cd358&gt;
+## &lt;bytecode: 0x000000001d0bc5a8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Here is another example for creating a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span>
@@ -1989,21 +1989,21 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 ##  Welch Two Sample t-test
 ## 
 ## data:  r1 and r2
-## t = -0.44653, df = 197.88, p-value = 0.6557
+## t = 2.1603, df = 197.7, p-value = 0.03195
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.3529660  0.2226317
+##  0.02651071 0.58191675
 ## sample estimates:
-##   mean of x   mean of y 
-## -0.05412354  0.01104364</code></pre>
+##  mean of x  mean of y 
+##  0.1688413 -0.1353725</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></code></pre></div>
 <pre><code>## [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
 ## [6] &quot;null.value&quot;  &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></code></pre></div>
-<pre><code>## [1] 0.6557015</code></pre>
+<pre><code>## [1] 0.03195304</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></code></pre></div>
-<pre><code>##   mean of x   mean of y 
-## -0.05412354  0.01104364</code></pre>
+<pre><code>##  mean of x  mean of y 
+##  0.1688413 -0.1353725</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
 <p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p &lt; 0.05.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
@@ -2014,10 +2014,10 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 <span class="kw">hist</span>(pvalues)  <span class="co"># Histogram of p-values</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
-<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0007992 0.2130608 0.4665157 0.4728620 0.7105684 0.9965186</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## 0.001048 0.246133 0.502133 0.502623 0.762212 0.999958</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 27</code></pre>
+<pre><code>## [1] 19</code></pre>
 
 </div>
 </div>
