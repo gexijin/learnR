@@ -25,7 +25,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan">
 
 
-<meta name="date" content="2019-06-13">
+<meta name="date" content="2019-06-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -304,16 +304,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="functions" class="section level3">
 <h3><span class="header-section-number">3.1.4</span> Functions</h3>
-<p>Functions are fundamental building blocks of R. Most of the times when we run R commands, we are calling and executing functions. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let’s try using the sum function, to add up a few numbers. Enter:</p>
+<p>Functions are fundamental building blocks of R. Most of the times when we run R commands, we are calling and executing functions. You call a function by typing its name, followed by one or more arguments to that function in parenthesis. Let’s try using the <strong>sum</strong> function, to add up a few numbers. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] 9</code></pre>
-<p>Some arguments have names. For example, to repeat a value 3 times, you would call the <strong>rep</strong> function and provide its <strong>times</strong> argument:</p>
+<p>The following code shows how to assign the result of a function to a new variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)
+y</code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<p>Some arguments have “names”. For example, to repeat a value 3 times, you would call the <strong>rep</strong> function and provide its <strong>times</strong> argument:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="st">&quot;Yo ho!&quot;</span>, <span class="dt">times =</span> <span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] &quot;Yo ho!&quot; &quot;Yo ho!&quot; &quot;Yo ho!&quot;</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 3.2  </strong></span>Suppose a vector is defined as x &lt;- c(12, 56, 31, -5, 7).<br />
+<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 3.2  </strong></span>Suppose a vector is defined as x &lt;- c(12, 56, 31, -5, 7).<br />
 a. Calculate the mean of all elements in x and assign it to <em>y</em>.<br />
 b. Squared each element in x and assign the results to a new vector <em>z</em>.
 </div>
@@ -323,7 +327,7 @@ b. Squared each element in x and assign the results to a new vector <em>z</em>.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 3.3  </strong></span>Find two functions which sets and gets the current working directory in R, respectively.
+<span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 3.3  </strong></span>Find two functions which sets and gets the current working directory in R, respectively.
 </div>
 
 </blockquote>
@@ -331,7 +335,7 @@ b. Squared each element in x and assign the results to a new vector <em>z</em>.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 3.4  </strong></span>Find the function that lists all the files in the current working folder in R.
+<span id="exr:unnamed-chunk-17" class="exercise"><strong>Exercise 3.4  </strong></span>Find the function that lists all the files in the current working folder in R.
 </div>
 
 </blockquote>
@@ -372,11 +376,11 @@ Figure 3.2: Examples of sum code
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.110531791 -0.642631957 -0.002190851  0.405093730  1.350000000
+## [1] -2.3379800 -0.5438772  0.2738280  1.0157960  1.3500000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##           0%          25%          50%          75%         100% 
-## -2.110531791 -0.642631957 -0.002190851  0.405093730  1.350000000 
+##         0%        25%        50%        75%       100% 
+## -2.3379800 -0.5438772  0.2738280  1.0157960  1.3500000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -398,7 +402,7 @@ Figure 3.2: Examples of sum code
 <pre><code>## [1] 1</code></pre>
 <p>Example commands and plots will show up automatically by typing Return in RStudio. In R, you need to click on the plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">example</span>(boxplot)  <span class="co"># bring example of boxplot</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>I found a lot of help information about R through Google. Google tolerate typos, grammar errors, and different notations. Also, most (99 %) of your questions have been asked and answered on various forums. Many R gurus answered a ton of questions on web sites like** <a href="stackoverflow.com" class="uri">stackoverflow.com</a>**, with example codes! I also use Google as a reference.</p>
 <p>It is important to add comments to your code. Everything after the “#” will be ignored by R when running. We often recycle and re-purpose our codes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)  <span class="co"># return the maximum value of a vector</span></code></pre></div>
@@ -435,7 +439,7 @@ x</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercise 3.5  </strong></span>Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
+<span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 3.5  </strong></span>Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code for sum( ) function in the R help document.
 </div>
 
 </blockquote>
@@ -547,7 +551,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1] 5 5 2</code></pre>
+<pre><code>## [1] 2 5 5</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;David&quot;</span>, <span class="st">&quot;Breck&quot;</span>, <span class="st">&quot;Zach&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -597,7 +601,7 @@ y</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-63" class="exercise"><strong>Exercise 3.6  </strong></span>Using sample selection function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selected integer is an even number, then y returns ‘even’, otherwise y returns ‘odd’.
+<span id="exr:unnamed-chunk-64" class="exercise"><strong>Exercise 3.6  </strong></span>Using sample selection function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selected integer is an even number, then y returns ‘even’, otherwise y returns ‘odd’.
 </div>
 
 </blockquote>
@@ -626,7 +630,7 @@ z</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-69" class="exercise"><strong>Exercise 3.7  </strong></span>Now compute the average of values in z. Ignore the missing values.
+<span id="exr:unnamed-chunk-70" class="exercise"><strong>Exercise 3.7  </strong></span>Now compute the average of values in z. Ignore the missing values.
 </div>
 
 </blockquote>
@@ -705,7 +709,7 @@ fishes</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-85" class="exercise"><strong>Exercise 3.8  </strong></span>Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the <strong>fishes</strong> vector and return a TRUE or FALSE value.
+<span id="exr:unnamed-chunk-86" class="exercise"><strong>Exercise 3.8  </strong></span>Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the <strong>fishes</strong> vector and return a TRUE or FALSE value.
 </div>
 
 </blockquote>
@@ -748,7 +752,7 @@ Figure 3.3: Simple Bar plot
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-93" class="exercise"><strong>Exercise 3.9  </strong></span>Now see if you can set the value for <strong>Tom</strong> to something other than 5 using the name rather than the index.
+<span id="exr:unnamed-chunk-94" class="exercise"><strong>Exercise 3.9  </strong></span>Now see if you can set the value for <strong>Tom</strong> to something other than 5 using the name rather than the index.
 </div>
 
 </blockquote>
@@ -764,7 +768,7 @@ Figure 3.3: Simple Bar plot
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-96" class="exercise"><strong>Exercise 3.10  </strong></span>Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1. And create a bar plot to represent this information.
+<span id="exr:unnamed-chunk-97" class="exercise"><strong>Exercise 3.10  </strong></span>Create a vector representing the prices of groceries, bread $2.5, milk $3.1, jam $5.3, beer $9.1. And create a bar plot to represent this information.
 </div>
 
 </blockquote>
@@ -777,12 +781,12 @@ Figure 3.3: Simple Bar plot
 y &lt;-<span class="st"> </span><span class="kw">sqrt</span>(x)</code></pre></div>
 <p>Then simply call plot with your two vectors:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x, y)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
 <p>Great job! Notice on the graph that values from the first argument (x) are used for the horizontal axis, and values from the second (y) for the vertical.</p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-99" class="exercise"><strong>Exercise 3.11  </strong></span>Create a vector with 21 integers from -10 to 10, and store it in the x variable. Then create a scatter plot of x^2 against x.
+<span id="exr:unnamed-chunk-100" class="exercise"><strong>Exercise 3.11  </strong></span>Create a vector with 21 integers from -10 to 10, and store it in the x variable. Then create a scatter plot of x^2 against x.
 </div>
 
 </blockquote>
@@ -977,11 +981,11 @@ c</code></pre></div>
 ## 2.45 2.20 2.25 2.30 2.50 2.80 2.40 2.45 2.15 2.30</code></pre>
 <p>Heat map is my favorite type of graph for visualizing a large matrix data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">heatmap</span>(x, <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>, <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">5</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-135" class="exercise"><strong>Exercise 3.12  </strong></span>Let <em>subset.iris &lt;- as.matrix(iris[1:10, 1:4])</em>, Using apply function to calculate the mean of <em>subset.iris</em> by column.
+<span id="exr:unnamed-chunk-136" class="exercise"><strong>Exercise 3.12  </strong></span>Let <em>subset.iris &lt;- as.matrix(iris[1:10, 1:4])</em>, Using apply function to calculate the mean of <em>subset.iris</em> by column.
 </div>
 
 </blockquote>
@@ -1013,7 +1017,7 @@ subset.iris</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-139" class="exercise"><strong>Exercise 3.13  </strong></span>Let <em>subset.iris.2 &lt;- as.matrix(iris[, 1:4])</em>, fill blanks in the <em>find.max</em> function defined below to find the maximal value in each column of <em>subset.iris.2</em>.
+<span id="exr:unnamed-chunk-140" class="exercise"><strong>Exercise 3.13  </strong></span>Let <em>subset.iris.2 &lt;- as.matrix(iris[, 1:4])</em>, fill blanks in the <em>find.max</em> function defined below to find the maximal value in each column of <em>subset.iris.2</em>.
 </div>
 
 </blockquote>
@@ -1044,7 +1048,7 @@ y</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pixmap)
 EINSTEIN &lt;-<span class="st"> </span><span class="kw">read.pnm</span>(<span class="st">&quot;EINSTEIN.pgm&quot;</span>, <span class="dt">cellres =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(EINSTEIN)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
 <p>Then let us look at structure of this image:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(EINSTEIN)</code></pre></div>
 <pre><code>## Formal class &#39;pixmapGrey&#39; [package &quot;pixmap&quot;] with 6 slots
@@ -1072,22 +1076,22 @@ EINSTEIN &lt;-<span class="st"> </span><span class="kw">read.pnm</span>(<span cl
 <p>The argument <em>image</em> is the original image, <em>yrange</em> is the range of rows that you want to blur, <em>xrange</em> is the range of columns that you want to blur. The <em>xrange</em> and <em>yrange</em> construct the mosaic region. Since we don’t want to change the original image,therefore we copy the original image to image2 by assigning <em>image</em> to <em>image2</em>. The <em>whitenoise</em> creates a matrix filled with random numbers following uniform distribution. The dimensions of <em>whitenoise</em> is determined by the mosaic region. Replace the values in the original image that you want to blur <em><a href="mailto:image2@grey">image2@grey</a>[yrange,xrange]</em> by the <em>whitenoise</em> matrix.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">EINSTEIN.mosaic &lt;-<span class="st"> </span><span class="kw">mosaic.plot</span>(EINSTEIN, <span class="dv">175</span><span class="op">:</span><span class="dv">249</span>, <span class="dv">118</span><span class="op">:</span><span class="dv">295</span>)
 <span class="kw">plot</span>(EINSTEIN.mosaic)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
 <p>Here, we take <em>yrange=175:249</em> and <em>xrange=118:295</em> to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein’ eyes region. The sub-matrix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.</p>
 <p>The function <em>locator()</em> allows us to find the relevant rows and columns. Type <strong>locator()</strong> in the <em>Console</em> window, then R will wait for you to click a point within an image, then click <em>esc</em> on your keyboard to exit the function. Then the function will return the coordinates of that point in the <em>Console</em> window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in <em>pixmap</em> objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from <em>locator()</em> function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function.</p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-148" class="exercise"><strong>Exercise 3.14  </strong></span>Using the <em>mosaic.plot()</em> function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
+<span id="exr:unnamed-chunk-149" class="exercise"><strong>Exercise 3.14  </strong></span>Using the <em>mosaic.plot()</em> function to blur the image of mona_lisa.pgm by adding mosaic to her eyes region. Your output should look like the graph below.
 </div>
 
 </blockquote>
-<p><img src="book_files/figure-html/unnamed-chunk-149-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
 <hr />
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-150" class="exercise"><strong>Exercise 3.15  </strong></span>Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic.<br />
+<span id="exr:unnamed-chunk-151" class="exercise"><strong>Exercise 3.15  </strong></span>Fill in blanks of the following function so that the eyes region of Mona Lisa is covered by pure color, not mosaic.<br />
 mosaic.plot.2 &lt;- function(picture, yrange, xrange, degree){<br />
 length.y &lt;- _______(yrange)<br />
 length.x &lt;- length(______)<br />
@@ -1170,7 +1174,7 @@ df2</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-158" class="exercise"><strong>Exercise 3.16  </strong></span>What is the class of the R built-in data set <em>mtcars</em>? Show the function that you used to check the class.
+<span id="exr:unnamed-chunk-159" class="exercise"><strong>Exercise 3.16  </strong></span>What is the class of the R built-in data set <em>mtcars</em>? Show the function that you used to check the class.
 </div>
 
 </blockquote>
@@ -1303,7 +1307,7 @@ df2</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-174" class="exercise"><strong>Exercise 3.17  </strong></span>Select a subset which satisfies that the <em>cyl</em> is 6 and <em>mpg</em> greater than 21.2, meanwhile the subset doesn’t include the variable <em>carb</em>.
+<span id="exr:unnamed-chunk-175" class="exercise"><strong>Exercise 3.17  </strong></span>Select a subset which satisfies that the <em>cyl</em> is 6 and <em>mpg</em> greater than 21.2, meanwhile the subset doesn’t include the variable <em>carb</em>.
 </div>
 
 </blockquote>
@@ -1322,13 +1326,13 @@ df2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">150</span>)
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(y, x.id)
 <span class="kw">head</span>(x2)</code></pre></div>
-<pre><code>##           y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1  1.807369  1          5.1         3.5          1.4         0.2  setosa
-## 2 -1.156153  2          4.9         3.0          1.4         0.2  setosa
-## 3 -1.114277  3          4.7         3.2          1.3         0.2  setosa
-## 4 -1.744954  4          4.6         3.1          1.5         0.2  setosa
-## 5  1.274535  5          5.0         3.6          1.4         0.2  setosa
-## 6 -1.450540  6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre><code>##            y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1 -0.5697122  1          5.1         3.5          1.4         0.2  setosa
+## 2  1.5635343  2          4.9         3.0          1.4         0.2  setosa
+## 3 -0.9663301  3          4.7         3.2          1.3         0.2  setosa
+## 4  1.1247303  4          4.6         3.1          1.5         0.2  setosa
+## 5 -1.4478289  5          5.0         3.6          1.4         0.2  setosa
+## 6 -1.2147139  6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1361,7 +1365,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 ## 6           5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>We can view sepal length by species using boxplot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, x)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-179-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>We can obtain summary statistics by category. Let’s calculate the mean of the variables by species:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(. <span class="op">~</span><span class="st"> </span>Species, x, mean)</code></pre></div>
 <pre><code>##      Species Sepal.Length Sepal.Width Petal.Length Petal.Width
@@ -1371,7 +1375,7 @@ x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-181" class="exercise"><strong>Exercise 3.18  </strong></span>Use <em>aggregate()</em> function to calculate the median of the variables: <em>mpg</em>, <em>disp</em>, <em>hp</em>, and <em>wt</em> across the number of cylinders <em>cyl</em> in the <em>mtcars</em> data set.
+<span id="exr:unnamed-chunk-182" class="exercise"><strong>Exercise 3.18  </strong></span>Use <em>aggregate()</em> function to calculate the median of the variables: <em>mpg</em>, <em>disp</em>, <em>hp</em>, and <em>wt</em> across the number of cylinders <em>cyl</em> in the <em>mtcars</em> data set.
 </div>
 
 </blockquote>
@@ -1445,7 +1449,7 @@ da</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-186" class="exercise"><strong>Exercise 3.19  </strong></span>Test if the variables <em>mpg</em>, <em>disp</em>, <em>hp</em>, <em>wt</em> and <em>qsec</em> have significant difference across the three cyl in the R build data set <em>mtcars</em>. Fill the blanks and interpret your conclusion based on the p-values.</p>
+<p><span id="exr:unnamed-chunk-187" class="exercise"><strong>Exercise 3.19  </strong></span>Test if the variables <em>mpg</em>, <em>disp</em>, <em>hp</em>, <em>wt</em> and <em>qsec</em> have significant difference across the three cyl in the R build data set <em>mtcars</em>. Fill the blanks and interpret your conclusion based on the p-values.</p>
 aov.fun.car &lt;- function(temx){<br />
 m2 &lt;- ________(________ ~ _________$______)<br />
 summary(________)<br />
@@ -1489,32 +1493,32 @@ dfmg3</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
 <pre><code>##   id       rand
-## 1  1  0.5834233
-## 2  2 -1.3855799
-## 3  3  0.2897003
-## 4  4 -0.1430013
-## 5  5 -1.1275784
-## 6  6 -1.3812977</code></pre>
+## 1  1 -0.6758942
+## 2  2  0.2495125
+## 3  3 -1.1595937
+## 4  4 -0.7192247
+## 5  5  0.7132483
+## 6  6 -0.6295287</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
 <pre><code>##      id        rand
-## 95   95  0.98321079
-## 96   96  0.01752770
-## 97   97  0.02035896
-## 98   98 -0.56023166
-## 99   99  0.54424837
-## 100 100  0.16452294</code></pre>
+## 95   95  2.18373346
+## 96   96 -1.51278449
+## 97   97  1.09753791
+## 98   98 -0.24653820
+## 99   99 -1.30273312
+## 100 100 -0.04277055</code></pre>
 <p>Now we merge two data frames x and y by a common column named <strong>id</strong>. Note the new data frame z has only 100 rows. We can also merge data frame by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris
 x<span class="op">$</span>id =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)
 z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
 <pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa  0.5834233
-## 2  2          4.9         3.0          1.4         0.2  setosa -1.3855799
-## 3  3          4.7         3.2          1.3         0.2  setosa  0.2897003
-## 4  4          4.6         3.1          1.5         0.2  setosa -0.1430013
-## 5  5          5.0         3.6          1.4         0.2  setosa -1.1275784
-## 6  6          5.4         3.9          1.7         0.4  setosa -1.3812977</code></pre>
+## 1  1          5.1         3.5          1.4         0.2  setosa -0.6758942
+## 2  2          4.9         3.0          1.4         0.2  setosa  0.2495125
+## 3  3          4.7         3.2          1.3         0.2  setosa -1.1595937
+## 4  4          4.6         3.1          1.5         0.2  setosa -0.7192247
+## 5  5          5.0         3.6          1.4         0.2  setosa  0.7132483
+## 6  6          5.4         3.9          1.7         0.4  setosa -0.6295287</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(z)</code></pre></div>
 <pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 95   95          5.6         2.7          4.2         1.3 versicolor
@@ -1524,12 +1528,12 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ## 99   99          5.1         2.5          3.0         1.1 versicolor
 ## 100 100          5.7         2.8          4.1         1.3 versicolor
 ##            rand
-## 95   0.98321079
-## 96   0.01752770
-## 97   0.02035896
-## 98  -0.56023166
-## 99   0.54424837
-## 100  0.16452294</code></pre>
+## 95   2.18373346
+## 96  -1.51278449
+## 97   1.09753791
+## 98  -0.24653820
+## 99  -1.30273312
+## 100 -0.04277055</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1538,13 +1542,13 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ##  Mean   : 50.50   Mean   :5.471   Mean   :3.099   Mean   :2.861  
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
-##   Petal.Width          Species        rand          
-##  Min.   :0.100   setosa    :50   Min.   :-3.256289  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.548992  
-##  Median :0.800   virginica : 0   Median : 0.030793  
-##  Mean   :0.786                   Mean   :-0.003628  
-##  3rd Qu.:1.300                   3rd Qu.: 0.676911  
-##  Max.   :1.800                   Max.   : 2.862849</code></pre>
+##   Petal.Width          Species        rand         
+##  Min.   :0.100   setosa    :50   Min.   :-1.86646  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.74881  
+##  Median :0.800   virginica : 0   Median : 0.04779  
+##  Mean   :0.786                   Mean   : 0.05998  
+##  3rd Qu.:1.300                   3rd Qu.: 0.75943  
+##  Max.   :1.800                   Max.   : 3.18079</code></pre>
 </div>
 <div id="strings-and-string-vectors" class="section level3">
 <h3><span class="header-section-number">3.2.4</span> Strings and string vectors</h3>
@@ -1626,7 +1630,7 @@ segs  <span class="co"># a vector of strings</span></code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-215" class="exercise"><strong>Exercise 3.20  </strong></span>In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.
+<span id="exr:unnamed-chunk-216" class="exercise"><strong>Exercise 3.20  </strong></span>In the iris flower dataset iris, define a new column called FullName which contains the full species name by adding “Iris“ in front of species name. In other words, “setosa” should become “Iris setosa”, “virginica” would be “Iris virginica”, and “versicolor” needs to be “Iris versicolor”.
 </div>
 
 </blockquote>
@@ -1650,7 +1654,7 @@ y</code></pre></div>
 ## [[4]]
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x000000001d0bc5a8&gt;
+## &lt;bytecode: 0x000000001d2e9830&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height”, “name”, “BP” and “fun” to the y.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)  
@@ -1667,7 +1671,7 @@ y</code></pre></div>
 ## $fun
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x000000001d0bc5a8&gt;
+## &lt;bytecode: 0x000000001d2e9830&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Here is another example for creating a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span>
@@ -1741,7 +1745,7 @@ v</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-228" class="exercise"><strong>Exercise 3.21  </strong></span>Access the second component in list1 by three ways as we introduced above. What is the type of list1[“Hobby”] and list1[[“Hobby”]] respectively?
+<span id="exr:unnamed-chunk-229" class="exercise"><strong>Exercise 3.21  </strong></span>Access the second component in list1 by three ways as we introduced above. What is the type of list1[“Hobby”] and list1[[“Hobby”]] respectively?
 </div>
 
 </blockquote>
@@ -1815,7 +1819,7 @@ sale.tag</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-235" class="exercise"><strong>Exercise 3.22  </strong></span>Based on the data set of sale.tag, choose all correct answers from the following options A - F. A: sale.tag[[1]]<br />
+<span id="exr:unnamed-chunk-236" class="exercise"><strong>Exercise 3.22  </strong></span>Based on the data set of sale.tag, choose all correct answers from the following options A - F. A: sale.tag[[1]]<br />
 B: sale.tag[[Spring]]<br />
 C: sale.tag[[“Spring”]]<br />
 D: sale.tag[“Spring”]<br />
@@ -1959,7 +1963,7 @@ v2</code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-250" class="exercise"><strong>Exercise 3.23  </strong></span>Fill blanks in the function <em>my.fun()</em> so that for a given list, the function returns all locations of each element and sort the frequency of the elements in an increasing order. Then apply <em>my.fun()</em> to a set of gender:<br />
+<p><span id="exr:unnamed-chunk-251" class="exercise"><strong>Exercise 3.23  </strong></span>Fill blanks in the function <em>my.fun()</em> so that for a given list, the function returns all locations of each element and sort the frequency of the elements in an increasing order. Then apply <em>my.fun()</em> to a set of gender:<br />
 F F M M M M I I F I F M I F M I I M I I F<br />
 Where F, M and I represent Female, Male and Infant respectively.</p>
 my.fun &lt;- function(f){ y &lt;- unlist(f)<br />
@@ -1989,21 +1993,21 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 ##  Welch Two Sample t-test
 ## 
 ## data:  r1 and r2
-## t = 2.1603, df = 197.7, p-value = 0.03195
+## t = 0.07962, df = 197.99, p-value = 0.9366
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.02651071 0.58191675
+##  -0.2830423  0.3068595
 ## sample estimates:
 ##  mean of x  mean of y 
-##  0.1688413 -0.1353725</code></pre>
+## -0.1329432 -0.1448518</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></code></pre></div>
 <pre><code>## [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
 ## [6] &quot;null.value&quot;  &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></code></pre></div>
-<pre><code>## [1] 0.03195304</code></pre>
+<pre><code>## [1] 0.9366199</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></code></pre></div>
 <pre><code>##  mean of x  mean of y 
-##  0.1688413 -0.1353725</code></pre>
+## -0.1329432 -0.1448518</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
 <p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p &lt; 0.05.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
@@ -2012,12 +2016,12 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
      pvalues[i] =<span class="st"> </span>result<span class="op">$</span>p.value  <span class="co"># p values are stored in the i-th element in the vector</span>
 }  
 <span class="kw">hist</span>(pvalues)  <span class="co"># Histogram of p-values</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-252-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-253-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
-<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.001048 0.246133 0.502133 0.502623 0.762212 0.999958</code></pre>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## 0.0002359 0.2548504 0.4955979 0.5044873 0.7700903 0.9970367</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 19</code></pre>
+<pre><code>## [1] 27</code></pre>
 
 </div>
 </div>
