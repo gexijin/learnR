@@ -6,7 +6,7 @@ Learning objectives:
 - Looking for help documents within R and using Google
 - Common data objects: scalars, vectors, lists, data frames, and matrices
 
-R script is mostly consisted of function calls and data. There are many different types of data objects. Common **data structures** in R include **scalars, vectors, factors, matrices, factors, data frames**, and **lists**. These data structures can contain one or more individual data elements of several types, namely **numeric** (2.5), **character** (“Go Jacks”), or **logical** (TRUE or FALSE). 
+R scripts mostly consist of function calls and data. There are many different types of data objects. Common **data structures** in R include **scalars, vectors, factors, matrices, factors, data frames**, and **lists**. These data structures can contain one or more individual data elements of several types, namely **numeric** (2.5), **character** (“Go Jacks”), or **logical** (TRUE or FALSE). 
 
 ## Basic concepts
 ###	Expressions
@@ -32,7 +32,7 @@ Now try multiplying 45.6 by 78.9.
 
 ###	Logical Values
 
-Some expressions return a "logical value" that take value of either **TRUE** or **FALSE**. Many programming languages refer to these as "Boolean" values. Let's try typing an expression that gives us a logical value:
+Some expressions return a "logical value" that take the value of either **TRUE** or **FALSE**. Many programming languages refer to these as "Boolean" values. Let's try typing an expression that gives us a logical value:
 ```{r}
 3 < 4
 ```
@@ -45,7 +45,7 @@ Note that you need a double-equals sign to check whether two values are equal - 
 
 
 ###	Variables
-As in other programming languages, you can store a value into a variable to access it later. Type **x = 42** to store a value in **x**.  x is a **scalar that contain only one data element**. 
+As in other programming languages, you can store a value into a variable to access it later. Type **x = 42** to store a value in **x**.  x is a **scalar that contains only one data element**. 
 ```{r}
 x = 42
 ```
@@ -113,7 +113,11 @@ b. Squared each element in x and assign the results to a new vector *z*.
 
 >
 ```{exercise}
+<<<<<<< HEAD
+Find two functions which set and return the current working directory, respectively.
+=======
 Find two functions which sets and gets the current working directory in R, respectively.
+>>>>>>> 30873c7d37fcebc2890f2d876a91556566ea8724
 ```
 
 ---
@@ -136,7 +140,7 @@ Often we want to re-use a chunk of code. The most efficient way is to wrap these
 
 A document will pop up in the Help Window. See the Figure \@ref(fig:ch3-1). 
 
-(ref:ch3-1) Sum help
+(ref:ch3-1) Help in formation on the sum function.
 
 ```{r ch3-1, echo=FALSE, out.width='60%', fig.cap='(ref:ch3-1)', fig.align='center'}
 knitr::include_graphics("images//Ch3_1.png")
@@ -184,7 +188,7 @@ A vector is an object that holds a sequence of values of the same type. A vector
 x <- c(5, 2, 22, 11, 5)
 x
 ```
-Here **c** stands for *concatenate*, do not use it as variable name. It is as special as you!
+Here **c** stands for *concatenate*, do not use it as a variable name. It is as special as you!
 
 Vectors can not hold values with different modes (types). Try mixing modes and see what happens:
 ```{r}
@@ -221,7 +225,7 @@ Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code f
 ---
 
 #### Vectors operations
-Next we will try those commands about vector. First let's find out what is the 4th element of our vector x <- c(5, 2, 22, 11, 5), or the elements from 2 to 4.
+First let's find out what is the 4th element of our vector x <- c(5, 2, 22, 11, 5), or the elements from 2 to 4.
 ```{r}
 x[4]
 x[2:4]
@@ -237,9 +241,9 @@ No result is returned but you "captured" the result in a new vector, which holds
 y <- x[2:4]; y
 ```
 
-This does exactly the same in one line. Semicolon separates multiple commands.
+This does exactly the same in one line. A semicolon separates multiple commands.
 
-Now if we want to know the number of elements in the vector
+Now if we want to know the number of elements in the vector.
 ```{r}
 length(x)
 ```
@@ -359,7 +363,7 @@ sample(x, 3)
 Elements in the vector can have names. Type "x" in the command window to see the difference.
 ```{r}
 x <- c(5, 2, 22, 11, 5)
-names(x) <- c("David", "Breck", "Zach", "Amy", "John")
+names(x) <- c("David", "Beck", "Zach", "Amy", "John")
 x
 ```
 
@@ -409,7 +413,7 @@ There are annoying NAs in the subset y. We can remove the NAs by applying *na.rm
 subset(x, x < 0)
 ```
 
-The *ifelse()* function allows us do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true of false. Here are two examples.
+The *ifelse()* function allows us do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true or false. Here are two examples.
 ```{r}
 x <- c(2, -3, 4, -1, -5, 6)
 y <- ifelse(x > 0, 'Positive', 'Negative')
@@ -422,7 +426,7 @@ x <- c(3, 4, -6, 1, -2)
 y <- ifelse (x < 0, abs(x), 2 * x + 1) 
 y
 ```
-In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise multiply the element by 2 then add 1.
+In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise, multiply the element by 2 then add 1.
 
 >
 ```{exercise}
@@ -519,9 +523,9 @@ x <- c(1, 4, 8, 9, 10)
 y <- c(1, 1, 1, 1, 1)
 x+y
 ```
-The operation between vectors with same length is element-wise. For example:
+The operation between vectors with the same length is element-wise. For example:
 ```{r}
-# Operation between two vectors with same length
+# two vectors with the same length
 x <- c(1, 4, 8, 9, 10)
 y <- c(1, 2, 0, 3, 15)
 x+y
@@ -543,7 +547,7 @@ y <- c(1, 2, 1, 2, 1)
 x+y
 ```
 
-#### An example of vector
+#### An example usage of vectors
 Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:
 ```{r}
 c(7, 3, 9)
@@ -572,7 +576,7 @@ fishes[3]
 
 >
 ```{exercise}
-Does Mickey caught more fishes than Tom and Jerry combined? Write R code to verify this statement using the **fishes** vector and return a TRUE or FALSE value.
+Did Mickey catch more fishes than Tom and Jerry combined? Write R code to verify this statement using the **fishes** vector and return a TRUE or FALSE value.
 ```
 
 ---
@@ -582,7 +586,7 @@ Jerry protested that the ¼ inch long fish he caught and released per fishing ru
 fishes[2] <- fishes[2] + 1 
 ```
 
-On the left side, we take the current value of the 2nd element, which is 3, and add an 1 to it. The result (4) is assigned back to the 2nd element itself. As a result, the 2nd element is increased by 1. This is not an math equation, but a value assignment operation. More rigorously, we should write this as fishes[2] **<-** fishes[2] + 1
+On the left side, we take the current value of the 2nd element, which is 3, and add an 1 to it. The result (4) is assigned back to the 2nd element itself. As a result, the 2nd element is increased by 1. This is not a math equation, but a value assignment operation. More rigorously, we should write this as fishes[2] **<-** fishes[2] + 1
 
 We can also directly overwrite the values. 
 ```{r}
@@ -635,7 +639,7 @@ Now see if you can set the value for **Tom** to something other than 5 using the
 
 ---
 
-Tom proposes that their goal for next fishing trip is to double their catches.
+Tom proposes that their goal for their next fishing trip is to double their catches.
 ```{r}
 2 * fishes
 ```
@@ -679,7 +683,7 @@ Create a vector with 21 integers from -10 to 10, and store it in the x variable.
 
 
 ### Matrices 
-**Matrix** is a two dimensional data structure in R programming. Technically, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. 
+**A matrix** is a two-dimensional data structure in R programming. Internally, a matrix is also a vector, but with two additional attributes: the number of rows and the number of columns. A matrix has rows and columns, but it can only contain one type of values, i.e. numbers, characters, or logical values. 
 
 We can create a matrix by using *rbind* or *cbind* function. *rbind* combine all row
 Here are two examples:
@@ -695,14 +699,14 @@ n
 s <- rbind(m,n)      #combine two matrices m and n by row
 s
 ```
-To use *rbind()* combining matrices by row, the matrices must have same number of columns. Similar to *cbind()*, the matrices must have same number of rows.
+To use *rbind()* combining matrices by row, the matrices must have the same number of columns. Similar to *cbind()*, the matrices must have same number of rows.
 
 We can also create a matrix by using the *matrix()* function:
 ```{r}
 x <- matrix(seq(1:12), nrow = 4, ncol = 3)
 x
 ```
-The argument *seq()* create a sequence from 1 to 12, *nrom()* define the number of rows in the matrix, *ncol()* define the number of columns in the matrix. We don't have to give both *nrom()* and *ncol()* since if one is provided, the other is inferred from length of the data.
+The argument *seq()* create a sequence from 1 to 12, *nrom()* define the number of rows in the matrix, *ncol()* define the number of columns in the matrix. We don't have to give both *nrom()* and *ncol()* since if one is provided, the other is inferred from the length of the data.
 ```{r}
 y <- matrix(seq(1:12), nrow = 4)
 y
@@ -718,7 +722,7 @@ The following code will create an empty matrix y:
 w <- matrix(nrow = 4, ncol = 3)
 w
 ```
-We can assign values to the matrix. For example, let's assign the value 3 to the position at first row and first column and value 100 to position of the second row and third column:
+We can assign values to the matrix. For example, let's assign the value 3 to the position at first row and first column and value 100 to the position of the second row and third column:
 ```{r}
 w[1,1] <- 3
 w[2,3] <- 100
@@ -877,7 +881,7 @@ subset.iris
 ```{r}
 find.min.posi(subset.iris)
 ```
-As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row. Similar to other variable. The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Length and Petal.Width respectively.
+As you can see that the minimal value for Sepal.Length is 4.4 which locates at the 9th row.  The minimal value locates at the 9th, 3rd and 10th row for Sepal.Width, Petal.Length and Petal.Width respectively.
 
 >
 ```{exercise}
@@ -907,13 +911,14 @@ y
 
 ---
 
-Another interesting application of matrix is the manipulation of images.You may have heard pixel matrix which represents "picture elements". They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a gray-scale image, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the image at 3rd row and 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%. 
 
-Most time, we need to blur images or add mosaic to a picture for various purposes. Let's use one example to demonstrate how to add mosaic to a gray-scale image.
+Another interesting application of the matrix is the manipulation of images. You may have heard a pixel matrix which represents "picture elements". They are small little dots making up images. Each image is a matrix with thousands or even millions of pixels. Each pixel can only be one color at a time. If we have a gray-scale image, the brightness of color for each pixel is determined by the value assigned to it. In other words, the pixel value is a single number that represents the brightness of the pixel. For example, if the color value 0.2941 is assigned to a pixel which locates 3rd row and 4th column, then the dot at the 3rd row and the 4th column is pretty dark. The range of the colors from black to white correspond to the scale varies from 0% to 100%.
+
+Sometimes we need to blur images or add mosaic to a picture for various purposes. Let's use one example to demonstrate how to add mosaic to a gray-scale image.
 
 **Example: Add mosaic to Einstein image**
 
-Firstly, let's read an gray-scale image of Einstein into R and view the image. 
+Firstly, let's read a gray-scale image of Einstein into R and view the image. 
 ```{r}
 library(pixmap)
 EINSTEIN <- read.pnm("EINSTEIN.pgm", cellres = 1)
@@ -930,7 +935,7 @@ Here we get a new class which is S4 type. We don't go into depth for this time. 
 ```{r}
 class(EINSTEIN@ grey)
 ```
-The class of *EINSTEIN@ grey* is matrix. The output *..@ grey : num [1:512, 1:512]* shows that the dimension of matrix is 512*512. The values "0.596 0.541 0.522 0.529 0.561 ..." represent the brightness values in the matrix. For example, the value of the pixel at 3rd row and 4th column is 0.2941176 as showed below: 
+The class of *EINSTEIN@ grey* is a matrix. The output *..@ grey : num [1:512, 1:512]* shows that the dimension of matrix is 512*512. The values "0.596 0.541 0.522 0.529 0.561 ..." represent the brightness values in the matrix. For example, the value of the pixel at the 3rd row and the 4th column is 0.2941176 as shown below: 
 ```{r}
 EINSTEIN@ grey[3,4]
 ```
@@ -947,14 +952,14 @@ mosaic.plot <- function(image, yrange, xrange){
 }
 ```
 
-The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. Since we don't want to change the original image,therefore we copy the original image to image2 by assigning *image* to *image2*. The *whitenoise* creates a matrix filled with random numbers following uniform distribution. The dimensions of *whitenoise* is determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
+The argument *image* is the original image, *yrange* is the range of rows that you want to blur, *xrange* is the range of columns that you want to blur. The *xrange* and *yrange* construct the mosaic region. Since we don't want to change the original image, therefore we copy the original image to image2. The *whitenoise* creates a matrix filled with random numbers following a uniform distribution. The dimensions of *whitenoise* are determined by the mosaic region. Replace the values in the original image that you want to blur *image2@grey[yrange,xrange]* by the *whitenoise* matrix.
 
 ```{r}
 EINSTEIN.mosaic <- mosaic.plot(EINSTEIN, 175:249, 118:295)
 plot(EINSTEIN.mosaic)
 ```
 
-Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein' eyes region. The sub-matrix is replaced by whitenoise matrix. Therefore the image near eyes region are replaced by random colors.
+Here, we take *yrange=175:249* and *xrange=118:295* to select a sub-matrix from 175th row to 249th row, and 118th column to 295th column. This sub-matrix store the color values of Einstein' eyes region. The sub-matrix is replaced by whitenoise matrix. Therefore the image near the eyes region are replaced by random dots.
 
 The function *locator()* allows us to find the relevant rows and columns. Type **locator()** in the *Console* window, then R will wait for you to click a point within an image, then click *esc* on your keyboard to exit the function. Then the function will return the coordinates of that point in the *Console* window. If you click more points once, then the function will return all coordinates of these points sorted by your clicking order. You must be careful about the y-coordinate. The row numbers in *pixmap* objects increase from the top of the image to the bottom, therefore you need to opposite the y-coordinate by subtracting them from the number of rows in the original image. For example, the y-coordinates that I obtained from *locator()* function are 337 and 263. After subtracting them from 512, I got 175 and 249. They are the yrange used in the mosaic function. 
 
@@ -998,7 +1003,7 @@ class(iris)
 head(iris)
 ```
 
-There are some properties of a data frame.Firstly, the mode for each column in a data frame can be of numeric, factor or character. Such as the class of Sepal.Length is numeric, and the class of Species is factor.
+There are some properties of a data frame. Firstly, the mode for each column in a data frame can be of numeric, factor or character. Such as the class of Sepal.Length is numeric, and the class of Species is a factor.
 ```{r}
 class(iris$Sepal.Length)
 class(iris$Species)
@@ -1007,7 +1012,7 @@ Secondly, the column names must be non-empty. Usually, the columns represent var
 ```{r}
 colnames(iris)
 ```
-Thirdly, each column should contain same number of data items. In other words, each variable contains same observations. Fourthly, the row names are unique. If they are not pre-named, the indices "1", "2", "3", $\cdots$, "n" will be assigned to each row, where "n" is the length of a row or the number of observations. For example, there are 150 observations for each variable in the *iris* data, the rows names are shown below:
+Thirdly, each column should contain the same number of data items. In other words, each variable contains the same observations. Fourthly, the row names are unique. If they are not pre-named, the indices "1", "2", "3", $\cdots$, "n" will be assigned to each row, where "n" is the length of a row or the number of observations. For example, there are 150 observations for each variable in the *iris* data, the rows names are shown below:
 ```{r}
 rownames(iris)
 ```
@@ -1041,7 +1046,7 @@ What is the class of the R built-in data set *mtcars*? Show the function that yo
 
 ---
 
-Once data is read in as **data frame**, these are commands you can use to analyze it. 
+Once data is read in as a **data frame**, these are commands you can use to analyze it. 
 
 Read in data frame x:
 ```{r}
@@ -1116,19 +1121,19 @@ Similar we can obtain a subset that the length of sepal are greater than 7.
 subset(x, Sepal.Length > 7)
 ```
 
-If there are more than one conditions are applied to the data, we use *&* to connect the conditions. For example, we want to select a subset which contains only the species of virginica, and the length of sepal is greater than 7, meanwhile remove the length of petal from the data:
+If there are more than one conditions are applied to the data, we use *&* to connect the conditions. For example, we want to select a subset which contains only the species of virginica, and the sepals are more than 7cm long. We also want to remove the length of petal from the data:
 ```{r}
 x.3conds <- x[x$Sepal.Length>7 & x$Species == "virginica", -3]       # -3 means removing the 3rd column from x.
 ```
 
 >
 ```{exercise}
-Select a subset which satisfies that the *cyl* is 6 and *mpg* greater than 21.2, meanwhile the subset doesn't include the variable *carb*.
+Select a subset which satisfies that the *cyl* is 6 and *mpg* greater than 21.2. The subset shoudl not include the variable *carb*.
 ```
 
 ---
 
-We can add new column named "id" to the data frame, which goes from 1 to 150. Function *head()* is used to view the first 6 rows of the new data set.
+We can add a new column named "id" to the data frame, which goes from 1 to 150. Function *head()* is used to view the first 6 rows of the new data set.
 ```{r}
 x.id <- cbind(id = c(1:150), x)
 head(x.id)
@@ -1147,7 +1152,7 @@ x3 <- rbind(x, newRow)
 tail(x3)
 ```
 
-We can sort the data frame by certain column. For example we need to sort first column in ascending, or to sort second column in descending order.
+We can sort the data frame by a certain column. For example, we need to sort by the first column in ascending, or to sort the second column in descending order.
 ```{r}
 y <- x[order(x[, 1]), ]
 head(y)
@@ -1172,7 +1177,7 @@ Use *aggregate()* function to calculate the median of the variables: *mpg*, *dis
 
 ---
 
-It is easier to conduct statistical analysis after organizing data as data frame. Analysis of variance, or ANOVA tests whether sepal length has significant difference cross species in data frame iris.
+It is easier to conduct statistical analysis after organizing data as a data frame. Analysis of variance, or ANOVA tests whether sepal length has significant difference among species.
 ```{r}
 m <- aov(Sepal.Length ~ Species, iris)
 summary(m)
@@ -1225,7 +1230,7 @@ merge(dfmg1, dfmg2)
 
 ```
 
-Here the two data frames dfmg1 and dfmg2 have the same variable V1. After merging the two data frames, the rows with common elements "A" and "C" in both V1's are selected. If two columns contains similar information, but they have different names in different data frames, then we can use *by.x* and *by.y* arguments to merge them. Let *by.x=* and *by.y=* specify the variable names in the first and second data frame respectively. See the example below.
+Here the two data frames dfmg1 and dfmg2 have the same variable V1. After merging the two data frames, the rows with common elements "A" and "C" in both V1's are selected. If two columns contain similar information, but they have different names in different data frames, then we can use *by.x* and *by.y* arguments to merge them. Let *by.x=* and *by.y=* specify the variable names in the first and second data frame respectively. See the example below.
 
 ```{r}
 dfmg3 <- data.frame(W1 = c("A", "F", "C"), W2 = c(95, 85, 65), stringsAsFactors = FALSE)
@@ -1240,7 +1245,7 @@ head(y)
 tail(y)
 ```
 
-Now we merge two data frames x and y by a common column named **id**. Note the new data frame z has only 100 rows. We can also merge data frame by row names too.
+Now we merge two data frames x and y by a common column named **id**. Note the new data frame z has only 100 rows. We can also merge data frames by row names too.
 ```{r}
 x <- iris
 x$id = c(1:150)
@@ -1263,7 +1268,7 @@ If we want to know the number of character of the string:
 nchar(x)
 ```
 
-We can concatenate strings. By default a space is added.
+We can concatenate strings. By default, a space is added.
 ```{r}
 paste(x, "!!")
 ```
@@ -1346,7 +1351,7 @@ We can add something like "Q" to each element:
 paste(x, "Q")
 ```
 
-To get rid of the space between these element and "Q", try paste0:
+To get rid of the space between these elements and "Q", try paste0:
 ```{r}
 paste0(x, "Q")
 ```
@@ -1356,7 +1361,7 @@ If we want to collapse multiple strings into one, which is joined by space:
 paste(x, collapse = " ")
 ```
 
-Using these functions, we can achieve many things. For example if we have a piece of DNA sequence: 
+Using these functions, we can achieve many things. For example, if we have a piece of DNA sequence: 
 ```{r}
 DNA <- "taaCCATTGtaaGAACATGGTTGTCcaaaCAAGATGCTAGT"
 ```
@@ -1366,7 +1371,7 @@ Note that I am using the assignment operator “<-”, instead of “=”, which
 DNA <- toupper(DNA)
 ```
 
-Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to certain pattern. 
+Next, we want to cut this DNA into smaller pieces by looking for a certain pattern “ATG”. This type of thing happens in nature, as some enzymes cut DNA according to a certain pattern. 
 ```{r}
 segs <- strsplit(DNA, "ATG")
 ```
@@ -1385,11 +1390,11 @@ In the iris flower dataset iris, define a new column called FullName which conta
 
 ---
 
-Some of the materials above has been inspired by  [http://tryr.codeschool.com/](http://tryr.codeschool.com/), which contains more in-depth introduction.
+Some of the materials above have been inspired by  [http://tryr.codeschool.com/](http://tryr.codeschool.com/), which contains more in-depth introduction.
 
 
 ### Lists
-All elements in vectors must be same type. The list can combine objects of different types. Let's start from creating a list:
+All elements in vectors must be of same type. Overcomming this limitation, a list can combine objects of different types. Let's start from creating a list:
 ```{r}
 y <- list(5, "John Doe", c(100, 7), mean) # a list with 4 components
 y
@@ -1419,14 +1424,14 @@ v[[3]] <- x3       #Assign x3 to v[[3]] where x3 is defined as above
 v[[4]] <- x4       #Assign x4 to v[[4]] where x4 is defined as above
 v
 ```
-We used different methods creating list z and v. The list v and z are identical because that we assigned same components for v as that of in z.
+We used different methods creating list z and v. The list v and z are identical because  we assigned the same components for v and z.
 
 There are several different ways to access the elements in a list. For example, to access the third component in y:
 ```{r}
 y <- list(height = 5, name = "John Doe", BP = c(100, 77), fun = mean)
 ```
 ```{r}
-y[[3]]        #Specifing the number in a double square braket
+y[[3]]        #Specifing the number in a double square bracket
 ```
 
 ```{r}
@@ -1435,7 +1440,7 @@ y$BP          #Using $ sign
 ```{r}
 y[["BP"]]     #Using the tag
 ```
-Note: we used **double square bracket** '[[]]' to access the element in a list, which is different from using single square brake '[]' in a vector. If we use single square bracket in a list, we will get a sub-list. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions *class()* and *is.list* can be used to check the types.
+Note: we used **double square bracket** '[[]]' to access the element in a list, which is different from using single square brake '[]' in a vector. If we use a single square bracket in a list, we will get a sub-list. For example, y[3] returns a list, y[[3]] returns a numerical vector. Functions *class()* and *is.list* can be used to check the types.
 
 ```{r}
 y[3]
@@ -1519,7 +1524,7 @@ Based on the data set of sale.tag, choose all correct answers from the following
   F: sale.tag[Spring] 
 1, Which options return a vector.  Answer:___________                 
 2, Which options return a list.    Answer:___________                
-3, Which options returns an error. Answer:___________                
+3, Which options return an error. Answer:___________                
 ```
 
 ---
@@ -1581,7 +1586,7 @@ customer <- list("Alex", "Brandon", "Alex", "Daniel", "Grace", "Mary",
                  "Mary", "Alex", "Tom", "Grace")
 ```
 
-Firstly, we define a function which returns all locations of same elements in a list. 
+Firstly, we define a function which returns all locations of the same elements in a list. 
 
 ```{r}
 loc.names <- function(f){
@@ -1595,9 +1600,9 @@ return(x)
 }
 ```
 
-the *f* will be replaced by your own list. In this example, *f* will be replaced by the list of customer when we apply the function.        
+the *f* will be replaced by your own list. In this example, *f* will be replaced by the list of customers when we apply the function.        
 x <- list () # create an empty list.      
-In the *for* loop, i starts from 1 to the length of y. In our example, the length of y is the length of list of customers: 10.  
+In the *for* loop, i starts from 1 to the length of y. In our example, the length of y is the length of the list of customers: 10.  
 *c.name <- y[i]* # Assign the i-th element in y to a new variable *c.name*. For example, if i=1, y[1] is the "Alex", then *c.name = "Alex"*. 
 
 *x[[c.name]] <- c(x[[c.name]], i)* 
@@ -1631,7 +1636,7 @@ v1 <- loc.names(customer)
 v1
 ```
 
-The output tells us that Alex visited our store at the first, third and eighth days, Brandon came at the second day, etc.
+The output tells us that Alex visited our store at the first, third and eighth days, Brandon came on the second day, etc.
 
 
 Then we use *sapply()* function to calculate the repeat times of each element.
@@ -1650,7 +1655,7 @@ sort(v2, decreasing = T)
 >
 ```{exercise}           
 Fill blanks in the function *my.fun()* so that for a given list, the function returns
-all locations of each element and sort the frequency of the elements in an increasing order. Then apply *my.fun()* to a set of gender:       
+all locations of each element and sort the frequency of the elements in  increasing order. Then apply *my.fun()* to a set of gender:       
   F F M M M M I I F I F M I F M I I M I I F         
 Where F, M and I represent Female, Male and Infant respectively.
 >
@@ -1672,7 +1677,7 @@ __________(gender)                                                  #
 
 ---
 
-Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a p value, a vector of residuals or coefficients, and even a matrix of data.  A list is the natural way to represent this sort of thing as one big object that could be parsed. 
+Many R functions, such as *t.test()*, returns results as a **list**, which contain a series of components, such as a p-value, a vector of residuals or coefficients, and even a matrix of data.  A list is a natural way to represent this sort of thing as one big object that could be parsed. 
 ```{r}
 r1 <- rnorm(100)  # Create 100 random numbers following Normal Distribution
 r2 <- rnorm(100)
@@ -1686,13 +1691,13 @@ t.result$estimate  # Returns mean of r1 and r2
 
 The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.
 
-Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p value. By repeating this process 500 times, we want to see the distribution of p values and count how many times we get significant result with p < 0.05. 
+Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p-value. By repeating this process 500 times, we want to see the distribution of p-values and count how many times we get significant result with p < 0.05. 
 
 ```{r }
 pvalues <- rep(1, 500)  # define a vector containing 500 numbers, all equal to 1.
 for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
      result = t.test(rnorm(100), rnorm(100))    
-     pvalues[i] = result$p.value  # p values are stored in the i-th element in the vector
+     pvalues[i] = result$p.value  # p-values are stored in the i-th element in the vector
 }  
 hist(pvalues)  # Histogram of p-values
 summary(pvalues)   

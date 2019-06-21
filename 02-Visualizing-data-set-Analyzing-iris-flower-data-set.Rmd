@@ -4,15 +4,25 @@ Learning objectives:
 
 - Install and load R packages (ggplot2 and pheatmap)
 - Basic concepts of R graphics
-- Ploting with ggplot2
+- Basic plots with ggplot2
 - Different ways to visualize the iris flower dataset
 
 
 ## Basic concepts of R graphics
 
-In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2, both implemented in additional packages. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics.  The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics by adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
+In addition to the graphics functions in base R, there are many other packages
+we can use to create graphics. The most widely used are lattice and ggplot2,
+both implemented in additional packages. Together with base R graphics,
+sometimes these are referred to as the three independent paradigms of R
+graphics. The lattice package extends base R graphics and enables the creating
+of graphs in multiple facets. The ggplot2 is developed based on a Grammar of
+Graphics (hence the "gg"), a modular approach that builds complex graphics by
+adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
 
-  We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table below. High-level graphics functions initiates new plots, to which new elements could be added using the low level functions. 
+We start with base R graphics. The first import distinction should be made about
+high- and low-level graphic functions in base R. See this table below.
+High-level graphics functions initiate new plots, to which new elements could be
+added using the low-level functions.
   
 
   
@@ -29,7 +39,8 @@ heatmap	     | Using colors to visualize a matrix of numeric values.
 
 Table: High-level graphics functions that can initiate a new plot. 
   
-In contrast, low-level graphics functions does not wipe out the existing plot, they adds elements to it. 
+In contrast, low-level graphics functions do not wipe out the existing plot;
+they add elements to it.
 
 
   Function   |  Memo
@@ -45,12 +56,24 @@ In contrast, low-level graphics functions does not wipe out the existing plot, t
 Table: Low-level graphics functions that add things to an existing plot.
 
 
-Sometimes we generate many graphics quickly for exploratory data analysis (EDA) to get some sense of how the data looks like. We can achieve this by using plotting functions with **default settings** to quickly generate a lot of “plain” plots. R is a very powerful EDA tool. However, you have to know what types of graphs are suitable for the data.  
+Sometimes we generate many graphics quickly for exploratory data analysis (EDA)
+to get some sense of what the data looks like. We can achieve this by using
+plotting functions with **default settings** to quickly generate a lot of
+"plain" plots. R is a very powerful EDA tool. However, you have to know what
+types of graphs are suitable for the data.
 
-Sometimes we want to generate really “cool”-looking graphics for papers, presentations. Making such plots typically requires a bit more coding, as you have to add different parameters easily understood. For me, it usually involves some Google searches of example codes, and then I revise it via trial-and-error. If I cannot make it work, I read the help document. 
+Occasionally we want to generate really "cool"-looking graphics for papers,
+presentations. Making such plots typically requires a bit more coding, as you
+have to add different parameters easily understood. For me, it usually involves
+some Google searches of example codes, and then I revise it via trial-and-error.
+If I cannot make it work, I read the help document.
 
-One of the open secret of R programming is that you can start from a plain figure and keep trying to **refine it step by step** while googling. Let's take a example using the base R graphics.
-This produces a basic scatter plot with the petal length on the x-axis and petal width on the y-axis. Since iris is a data frame, we will use the ```iris$Petal.Length``` to refer to the Petal.Length column. This avoids using the *attach* function. 
+One of the open secrets of R programming is that you can start from a plain
+figure and keep trying to **refine it step by step** while Googling. Let's take
+an example using the base R graphics. This produces a basic scatter plot with
+the petal length on the x-axis and petal width on the y-axis. Since iris is a
+data frame, we will use the ```iris$Petal.Length``` to refer to the Petal.Length
+column. This avoids using the *attach* function.
 
 ```{r, fig.align='center', out.width='80%' }
 plot(iris$Petal.Length, iris$Petal.Width)
@@ -61,7 +84,9 @@ Let's change the marker type.
 plot(iris$Petal.Length, iris$Petal.Width, 
      pch = 2) # change to triangel
 ```
-Note that this command spans two lines. Very long code in the same line makes it hard to read. When you are typing in the Console window, R knows that you are not done and will be waiting for second parenthesis. 
+Note that this command spans two lines. Very long lines make it hard to read.
+When you are typing in the Console window, R knows that you are not done and
+will be waiting for the second parenthesis.
 
 The pch parameter can take values from 0 to 25, each corresponding to different types of marker. See a list [here.](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r)
 
@@ -84,9 +109,13 @@ plot(iris$Petal.Length, iris$Petal.Width,
      pch = types,
      col = "green") 
 ```
-What happens here is that the 150 integers stored in the types vector is used to alter symbols. The first 50 data points (setosa)  are represented by open circles. The next 50 (versicolor) are represented by triangles, while the last 50 in crosses. 
+What happens here is that the 150 integers stored in the types vector are used
+to alter symbols. The first 50 data points (setosa) are represented by open
+circles. The next 50 (versicolor) are represented by triangles, while the last
+50 in crosses.
 
-Follow the same thinning, we also change the color according to species. We generate 3 colors with rainbow() function and then alternate using the species. 
+Follow the same thinking, we also change the color according to species. We
+generate 3 colors with rainbow() function and then alternate using the species.
 
 ```{r, fig.align='center', out.width='80%'}
 plot(iris$Petal.Length, iris$Petal.Width, 
@@ -94,7 +123,10 @@ plot(iris$Petal.Length, iris$Petal.Width,
      col = rainbow(3)[types])
 ```
 
-This figure starts to looks nice, as the three species are easily separated by color and shape. But we are not done. Let's  change the x- and y-labels, and also add a main title.
+This figure starts to looks nice, as the three species are easily separated by
+color and shape. But we are not done. Let's change the x- and y-labels, and also
+add a main title.
+
 
 ```{r, fig.align='center', out.width='80%'}
 plot(iris$Petal.Length, iris$Petal.Width, 
@@ -155,15 +187,30 @@ legend("topleft",
 ```
 This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step with some trial-and-error. 
 
-  Another open secrets of coding is that we frequently steal each other's ideas and code.
-  Note the  textbook *R Graphics Cookbook* includes all kinds of R plots and example code. Some are online: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/). There are also websites lists all sorts of R graphics and example codes that you can use. [http://www.r-graph-gallery.com/](http://www.r-graph-gallery.com/) contains more than 200 such examples. Another one is here: [http://bxhorn.com/r-graphics-gallery/](http://bxhorn.com/r-graphics-gallery/)  If you know what types of graphs you want, it is very easy to start with a template code and swap out the dataset.
+Another open secret of coding is that we frequently steal each other's ideas and
+code. The textbook *R Graphics Cookbook* includes all kinds of R plots and
+example code. Some are online: <http://www.cookbook-r.com/Graphs/>. There are
+also websites lists all sorts of R graphics and example codes that you can use.
+<http://www.r-graph-gallery.com/> contains more than 200 such examples. Another
+one is here: <http://bxhorn.com/r-graphics-gallery/> If you know what types of
+graphs you want, it is very easy to start with the template code and swap out
+the dataset..
 
 
   
 ## The ggplot2 package makes plotting intuitive
 
-Now  we  demonstrate  how  to  use  the ggplot2 package  for  visualizing  data using multiple panels. This package is not included in the base version of R. They need to be downloaded and installed. One of main advantages of R is that it is open, and users can contribute their code as packages. If you are  using **Rstudio**,  you  can  choose **Tools->Install packages** from the main menu, and then enter the name of the package.
-If  you  are  using  R software,  you  can  install  additional  packages,  by clicking **Packages** in the main menu, and select a mirror site. These mirror sites  all  work  the  same,  but  some  may  be  faster. Lately I  just  use cloud mirror. After choosing a mirror and clicking “OK”, you can scroll down the long list to find your package.  Alternatively, you can type this command to install packages. 
+The ggplot2  is powerful R package for visualizing data using
+multiple panels. This package is not included in the base version of R. They
+need to be downloaded and installed. One of the main advantages of R is that it
+is open, and users can contribute their code as packages. If you are using
+**Rstudio**, you can choose **Tools-\>Install packages** from the main menu, and
+then enter the name of the package. If you are using R software, you can install
+additional packages, by clicking **Packages** in the main menu, and select a
+mirror site. These mirror sites all work the same, but some may be faster. After
+choosing a mirror and clicking "OK", you can scroll down the long list to find
+your package. Alternatively, you can type this command to install packages.
+
 ```{r eval =FALSE}
 install.packages ("ggplot2")  # choose the cloud mirror site when asked
 ```
@@ -205,13 +252,16 @@ ggplot(iris, aes(x = Petal.Length, fill = Species)) +
 
 >
 ```{exercise}
-Use boxplot, multiple panel histograms and density plots to investigate whether petal width is the same among three subspecies. 
+Use boxplot, multiple panel histograms, and density plots to investigate whether petal width is the same among three subspecies. 
 ```
 
 
 ## Scatter plots matrix
 
-While data frames can have a mixture of numbers and characters in different columns, a **matrix is often only contain numbers**.  Let’s extract first 4 columns from the data frame iris and convert to a matrix:
+While data frames can have a mixture of numbers and characters in different
+columns, a **matrix often only contains numbers**. Let's extract the first 4
+columns from the data frame iris and convert to a matrix:
+
 ```{r}
 x <- as.matrix(iris[, 1:4])  # convert to matrix
 colMeans(x)  # column means for matrix
@@ -268,7 +318,8 @@ Produce the segments diagram of the state data (state.x77) and offer some interp
 ```
 
 ## Parallel coordinate plot
-Parallel coordinate plot is a straightforward way of visualizing multivariate data using lines.
+The parallel coordinate plot is a straightforward way of visualizing
+multivariate data using lines.
 
 (ref:12-5) Parallel coordinate plots directly visualize high-dimensional data by drawing lines.
 
@@ -322,7 +373,10 @@ par(mar = c(8, 2, 2, 2))  # set figure margins (bottom, left, top, right)
 boxplot(x, las = 2) 
 ```
 
-Notice that las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely. 
+Notice that las = 2 option puts the data labels vertically. The par function
+sets the bottom, left, top and right margins respectively of the plot region in
+the units of the number of lines of text. Here we set the bottom margins to 8
+lines so that the labels can show completely.
 
 
 Instead of plotting 4 columns, we want to generate a boxplot of one column (Petal.Length), sub-grouped by another column (Species). This is called the **formula notation** in R: Sepal length as a function of Species. 
@@ -390,7 +444,19 @@ We first calculate a distance matrix using the **dist** function with the defaul
 
 The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.
 
-First, each of the flower samples is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all 150 flowers. At each iteration, the distances between clusters are recalculated according to one of the methods—*Single linkage, complete linkage, average linkage, and so on*. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the all possible object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances.  However, the default seems to be complete linkage. Thus we need to change that in our final version.
+First, each of the flower samples is treated as a cluster. The algorithm joins
+the two most similar clusters based on a distance function. This is performed
+iteratively until there is just a single cluster containing all 150 flowers. At
+each iteration, the distances between clusters are recalculated according to one
+of the methods---*Single linkage, complete linkage, average linkage, and so on*.
+In the single-linkage method, the distance between two clusters is defined by
+the smallest distance among the all possible object pairs. This approach puts
+'friends of friends' into a cluster. On the contrary, the complete linkage
+method defines the distance as the largest distance between object pairs. It
+finds similar clusters. Between these two extremes, there are many options in
+between. The linkage method I found the most robust is the average linkage
+method, which uses the average of all distances. However, the default seems to
+be the complete linkage. Thus we need to change that in our final version.
 
 **Heat maps** with hierarchical clustering are my favorite way of visualizing data matrices. The rows and columns are reorganized based on hierarchical clustering, and the values in the matrix are coded by colors. Heat maps can directly visualize millions of numbers in one plot. The hierarchical trees also show the similarity among rows and columns. 
 
@@ -402,7 +468,15 @@ heatmap(x,
         )
 ```
 
-Scaling is handled by the **scale** function, which subtracts the mean from each column and then divides by the standard division. Afterwards, all the columns have the same mean of approximately 0 and standard deviation of 1. This is also called standardization. The default color scheme code bigger numbers in yellow and smaller numbers in red. The color bar on the left codes for different species. But we still missing a legend and many other things can be polished. Instead of going down the rabbit hole of adjusting dozens of parameters to heatmap function (and its improved version heatmap.2 in the ggplots package), We will refine this plot using another R package called pheatmap. 
+Scaling is handled by the **scale** function, which subtracts the mean from each
+column and then divides by the standard division. Afterward, all the columns
+have the same mean of approximately 0 and standard deviation of 1. This is also
+called standardization. The default color scheme code bigger numbers in yellow
+and smaller numbers in red. The color bar on the left codes for different
+species. But we still missing a legend and many other things can be polished.
+Instead of going down the rabbit hole of adjusting dozens of parameters to
+heatmap function (and its improved version heatmap.2 in the ggplots package), We
+will refine this plot using another R package called pheatmap. 
 
 
 ```{r eval = FALSE}
@@ -423,9 +497,28 @@ pheatmap(x,
          )
 ```
 
-First we convert the first 4 columns of the iris data frame into a matrix. Then the row names are assigned to be the same, namely, "1" to "150". This is required because row names are used to match with the column annotation information, specified by the annotation_row parameter. Even though we only need the 5th column, i.e. Species, this has to be a data frame. To prevent R from automatically converting a one-column data frame into a vector, we used to *drop = FALSE* option. Multiple columns can be contained in the column annotation data frame to display multiple color bars. The rows could be annotated the same way.
+First, we convert the first 4 columns of the iris data frame into a matrix. Then
+the row names are assigned to be the same, namely, "1" to "150". This is
+required because row names are used to match with the column annotation
+information, specified by the annotation\_row parameter. Even though we only
+need the 5th column, i.e. Species, this has to be a data frame. To prevent R
+from automatically converting a one-column data frame into a vector, we used to
+*drop = FALSE* option. Multiple columns can be contained in the column
+annotation data frame to display multiple color bars. The rows could be
+annotated the same way.
 
-More information about the pheatmap function can be obtained by reading the help document. But most of times, I rely on the online tutorials. Beyond the official documents prepared by the author, there are many documents created by R users across the world. The R user community is uniquely open and supportive. I was researching heatmap.2, a more refined version of heatmap part of the gplots package and landed on Dave Tang's [blog](https://davetang.org/muse/2010/12/06/making-a-heatmap-with-r/), which mentioned that there is more user-friendly package called pheatmap described in his other [blog](https://davetang.org/muse/2018/05/15/making-a-heatmap-in-r-with-the-pheatmap-package/). To figure out the code chuck above, I tried several times and also used Kamil Slowikowski's [blog](https://slowkow.com/notes/pheatmap-tutorial/). 
+More information about the pheatmap function can be obtained by reading the help
+document. But most of the times, I rely on the online tutorials. Beyond the
+official documents prepared by the author, there are many documents created by R
+users across the world. The R user community is uniquely open and supportive. I
+was researching heatmap.2, a more refined version of heatmap part of the gplots
+package and landed on Dave Tang's
+[blog](https://davetang.org/muse/2010/12/06/making-a-heatmap-with-r/), which
+mentioned that there is a more user-friendly package called pheatmap described
+in his other
+[blog](https://davetang.org/muse/2018/05/15/making-a-heatmap-in-r-with-the-pheatmap-package/).
+To figure out the code chuck above, I tried several times and also used Kamil
+Slowikowski's [blog](https://slowkow.com/notes/pheatmap-tutorial/).
 
 We can gain many insights from Figure \@ref(fig:12-3). The 150 flowers in the rows are organized into different clusters. *I. Setosa* samples obviously formed a unique cluster, characterized by smaller (blue) petal length, petal width, and sepal length. The other two subspecies are  not clearly separated but we can notice that some *I. Virginica* samples form a small subcluster showing bigger petals. The columns are also organized into dendrograms, which clearly suggest that petal length and petal width are highly correlated. 
 
@@ -445,7 +538,10 @@ PCA is a linear projection method. As illustrated in Figure \@ref(fig:13-4), it 
 knitr::include_graphics("images/img1304_PCA.png")
 ```
 
-Here’s an example of running PCA in R. Note that “scale=T” in the following command means that the data is normalized before conduction PCA so that each variable has unite variance. 
+Here's an example of running PCA in R. Note that "scale=T" in the following
+command means that the data is normalized before conduction PCA so that each
+variable has unit variance.
+
 ```{r message=FALSE}
 pca = prcomp(iris[, 1:4], scale = TRUE)   
 pca  # Have a look at the results.
@@ -470,7 +566,7 @@ plot(pca$x[, 1:2], pch = 1, col = rainbow(3)[iris$Species],
      legend("topright", levels(iris$Species), fill = rainbow(3))
 ```
 
-The result (left side of Figure \@ref(fig:13-5)) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. From this I observed that the first principal component alone can be used to distinguish the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
+The result (left side of Figure \@ref(fig:13-5)) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. We can see that the first principal component alone can be used to distinguish the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
 
 (ref:13-5) PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
 
@@ -518,7 +614,10 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting g
     	 theme(aspect.ratio = 1)                                      # width and height ratio             
 ```
 
-The result is shown in right side of Figure \@ref(fig:13-5). You can experiment with each of the additional element by commenting out the corresponding line of code. You can also keep adding code to further customize it. 
+The result is shown in the right side of Figure \@ref(fig:13-5). You can
+experiment with each of the additional element by commenting out the
+corresponding line of code. You can also keep adding code to further customize
+it.
 
 >
 ```{exercise}
@@ -526,7 +625,11 @@ Create PCA plot of the state.x77 data set (convert matrix to data frame). Use th
 ```
 
 ## Classification: Predicting the odds of binary outcomes 
-It is easy to distinguish *I. setosa* from the other two species, just based on petal length alone. Here we focus on building a predictive model that can predict between *I. versicolor* and *I. virginica*. For this we use the logistic regression to model the odd ratio of being *I. virginica* as a function of all of the 4 measurements: 
+It is easy to distinguish *I. setosa* from the other two species, just based on
+petal length alone. Here we focus on building a predictive model that can
+predict between *I. versicolor* and *I. virginica*. For this we use the logistic
+regression to model the odds ratio of being *I. virginica* as a function of all
+of the 4 measurements:
 
 $$ln(odds)=ln(\frac{p}{1-p})
                      =a×Sepal.Length + b×Sepal.Width + c×Petal.Length + d×Petal.Width+c+e.$$
@@ -538,10 +641,15 @@ model <- glm(Species ~ . , family = binomial(link = 'logit'),
              data = iris2)  # Species ~ . species as a function of everything else in the dataset
 summary(model)
 ```
-Sepal length and width are not useful in distinguishing versicolor from *virginica*. The most significant (P=0.0465) factor is Petal.Length. One unit increase in petal length will increase the log-odd of being *virginica* by 9.429.  Marginally significant effect is found for Petal.Width. 
+Sepal length and width are not useful in distinguishing versicolor from
+*virginica*. The most significant (P=0.0465) factor is Petal.Length. One unit
+increase in petal length will increase the log-odds of being *virginica* by
+9.429. A marginally significant effect is found for Petal.Width.
 
-If you do not fully understand the mathematics behind linear regression or logistic regression, do not worry about it too much.  Me either. In this class, I just want to show you how to do these analysis in R and interpret the results. 
-I do not understand how computers work. Yet I **use** it every day. 
+If you do not fully understand the mathematics behind linear regression or
+logistic regression, do not worry about it too much.  In this class, I
+just want to show you how to do these analyses in R and interpret the results. I
+do not understand how computers work. Yet I **use** it every day. 
 
 >
 ```{exercise}
