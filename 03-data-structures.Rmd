@@ -349,7 +349,6 @@ x^2
 which (x^2 > 100)
 ```
 
-
 We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is "No". Because the 3 elements are randomly selected.
 ```{r}
 x <- c(5, 2, 22, 11, 5)
@@ -404,73 +403,34 @@ x
 y <- x[x < 0]
 y
 ```
-There are annoying NAs in the vectors x and y. We can remove the NAs by using **!is.na()** function, where the '!' in front of is.na() means NOT: 
+There are annoying NAs in the vectors x and y. We can remove the NAs by using **is.na()** function. 
 ```{r}
-x <- c(NA, 2, -4, NA, 9, -1, 5)
-x
-x<-x[!is.na(x)]   #Remove all NAs in x. Or equivalently, keep all NOT NAs in x. 
-x
+y<-y[!is.na(y)]   #Remove all NAs in y. Or equivalently, keep all NOT NAs in y. 
+                  # The exclamation '!' in front of is.na() means NOT.
+y
 ```
 
-Now the updated variable x contains only numerical values. All NAs have been removed. If we want to assign the new vector to a different variable, we can use the code below.
+Now the updated variable y contains only numerical values. All NAs have been removed. If we want to assign the new vector to a different variable, we can use the code below.
 ```{r}
-z<-x[!is.na(x)]   # Assign the new vector without NAs to z.
+z<-y[!is.na(y)]   # Assign the new vector without NAs to z.
 z                 # Print the new variable. 
 ```
-
-We can use the argument **na.rm = T** or **na.rm = TRUE** to ignore all NAs during calculations. For example:
-```{r}
-x <- c(NA, 2, -4, NA, 9, -1, 5)
-mean(x)             # The NAs are involved during the calculation.
-mean(x, na.rm = T)  # All NAs are ignored during the calculation.
-```
-
 We can also use the *subset()* function to get a "clean" data without NAs. For example: 
 ```{r}
 x <- c(NA, 2, -4, NA, 9, -1, 5)
-subset(x, x < 0)
-```
-
-The *ifelse()* function allows us to do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true or false. Here are two examples.
-```{r}
-x <- c(2, -3, 4, -1, -5, 6)
-y <- ifelse(x > 0, 'Positive', 'Negative')
+y <- subset(x, x < 0)
 y
 ```
-In this example, the element in y is either 'positive' or 'negative'. It depends on x greater than 0 or less than 0.
 
-```{r}
-x <- c(3, 4, -6, 1, -2)
-y <- ifelse (x < 0, abs(x), 2 * x + 1) 
-y
-```
-In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise, multiply the element by 2 then add 1.
-
->
-```{exercise}
-Using sample selection function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selected integer is an even number, then y returns 'even', otherwise y returns 'odd'.
-```
-
----
-
-If we have two vectors and try to compare them with each other:
-```{r}
-x <- c(5, 2, 22, 11, 5)
-y <- c(5, 11, 8)
-z <- match(y, x)
-z
-```
-
-match() returns the locations in 2nd vector. NA means missing, not found. To check if NA is in a vector, we use the function is.na( ). Note that the result is a vector holding logical values. Do we have missing value in our vector? 
+Let's talk more about the function **is.na()** which checks if a vector contains NA of not. Note that the result is a vector holding logical values. Do we have missing value in the vectors x and z? 
 ```{r}
 is.na(x)
-is.na(z)
 ```
 
 Sometimes, when working with sample data, a given value isn't available. But it's not a good idea to just throw those values out. R has a value that explicitly indicates a sample was not available: **NA**. Many functions that work with vectors treat this value specially.
-For our z vector, try to get the sum of its values, and see what the result is:
+For our x vector, try to get the sum of its values, and see what the result is:
 ```{r}
-sum(z)
+sum(x)
 ```
 
 The sum is considered "not available" by default because one of the vector's values was **NA**. This is the responsible thing to do; R won't just blithely add up the numbers without warning you about the incomplete data. We can explicitly tell **sum** (and many other functions) to remove **NA** values before they do their calculations, however.
@@ -480,19 +440,21 @@ Bring up documentation for the **sum** function:
 ? sum
 ```
 
-As you see in the documentation, **sum** can take an optional named argument, **na.rm**. It's set to **FALSE** by default, but if you set it to **TRUE**, all **NA** arguments will be removed from the vector before the calculation is performed.
+As you see in the documentation, **sum** can take an optional named argument, **na.rm**. It's set to **FALSE** by default, but if you set it to **TRUE**, all **NA** arguments will be removed from the vector before the calculation is performed. In other words, we can use the argument **na.rm = T** or **na.rm = TRUE** to ignore all NAs during calculations. For example:
 
 Try calling **sum** again, with **na.rm** parameter set to **TRUE**:
 ```{r}
-sum(z, na.rm = TRUE)
+x <- c(NA, 2, -4, NA, 9, -1, 5)
+sum(x)                # The NAs are involved during the calculation.
+sum(x, na.rm = TRUE)  # All NAs are ignored during the calculation.
 ```
 
 >
 ```{exercise}
-Now compute the average of values in z. Ignore the missing values.
+Suppose a vector var1 <- c(NA, 334, 566, 319, NA, -307). 
+1. Obtain a new vector var2 which removes all NAs from var1.
+2. Using the argument na.rm to calculate the mean of var1. Make sure you ignore all NAs. 
 ```
-
----
 
 Let's using examples to show the differences between NULL and NA.
 ```{r}
@@ -564,6 +526,38 @@ x <- c(1, 4, 8, 9, 10)
 y <- c(1, 2, 1, 2, 1)
 x+y
 ```
+
+
+The *ifelse()* function allows us to do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true or false. Here are two examples.
+```{r}
+x <- c(2, -3, 4, -1, -5, 6)
+y <- ifelse(x > 0, 'Positive', 'Negative')
+y
+```
+In this example, the element in y is either 'positive' or 'negative'. It depends on x greater than 0 or less than 0.
+
+```{r}
+x <- c(3, 4, -6, 1, -2)
+y <- ifelse (x < 0, abs(x), 2 * x + 1) 
+y
+```
+In this example, if an element in x is less than 0, then take the absolute value of the element. Otherwise, multiply the element by 2 then add 1.
+
+>
+```{exercise}
+Using sample selection function randomly select 10 integers from 1 to 100. Create a vector y which satisfies the following conditions: if an selected integer is an even number, then y returns 'even', otherwise y returns 'odd'.
+```
+
+---
+
+If we have two vectors and try to compare them with each other. We can use the match() function. It returns the positions of the first matches of its first argument in its second. For example:
+```{r}
+x <- c(5, 5, 22, 11, 3)
+y <- c(5, 11, 8)
+z <- match(y, x)
+z
+```
+The elements 5 and 8 in y locates at the first and fourth position of x respectively. The function ignores the other 5 which locates at the second position of x. The last element 8 in y is not found in x which return a "NA". 
 
 #### An example usage of vectors
 Once upon a time, Tom, Jerry, and Mickey went fishing and they caught 7, 3, and 9 fishes, respectively. This information can be stored in a vector, like this:
