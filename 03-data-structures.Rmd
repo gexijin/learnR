@@ -255,7 +255,7 @@ summary(x)
 sd(x)
 ```
 
-rank() function ranks the elements. Ties are shown as the average of these ranks. While sort() will sort from the smallest to the biggest, decreasing = T will make it sort form the biggest to the smallest.
+rank() function ranks the elements. Ties are shown as the average of these ranks. While sort() will sort from the smallest to the biggest, decreasing = T will make it sort from the biggest to the smallest.
 ```{r}
 rank(x)
 sort(x)
@@ -404,12 +404,34 @@ x
 y <- x[x < 0]
 y
 ```
-There are annoying NAs in the subset y. We can remove the NAs by applying *na.rm()* function to y. Or we can use the *subset()* function to get a "clean" data without NAs.
+There are annoying NAs in the vectors x and y. We can remove the NAs by using **!is.na()** function, where the '!' in front of is.na() means NOT: 
 ```{r}
+x <- c(NA, 2, -4, NA, 9, -1, 5)
+x
+x<-x[!is.na(x)]   #Remove all NAs in x. Or equivalently, keep all NOT NAs in x. 
+x
+```
+
+Now the updated variable x contains only numerical values. All NAs have been removed. If we want to assign the new vector to a different variable, we can use the code below.
+```{r}
+z<-x[!is.na(x)]   # Assign the new vector without NAs to z.
+z                 # Print the new variable. 
+```
+
+We can use the argument **na.rm = T** or **na.rm = TRUE** to ignore all NAs during calculations. For example:
+```{r}
+x <- c(NA, 2, -4, NA, 9, -1, 5)
+mean(x)             # The NAs are involved during the calculation.
+mean(x, na.rm = T)  # All NAs are ignored during the calculation.
+```
+
+We can also use the *subset()* function to get a "clean" data without NAs. For example: 
+```{r}
+x <- c(NA, 2, -4, NA, 9, -1, 5)
 subset(x, x < 0)
 ```
 
-The *ifelse()* function allows us do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true or false. Here are two examples.
+The *ifelse()* function allows us to do conditional element selection. The usage is *ifelse(test, yes, no)*. The yes and no depends on the test is true or false. Here are two examples.
 ```{r}
 x <- c(2, -3, 4, -1, -5, 6)
 y <- ifelse(x > 0, 'Positive', 'Negative')
