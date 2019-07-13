@@ -6,6 +6,30 @@ Learning objectives:
 - Proper steps to import data
 - Intro to data transformation using dplyr
 
+## Enter data manually
+There are many different ways to get data into R. You can enter data manually (see below), or semi-manually (see below).  You can read data into R from a local file or a file on the internet. You can also use R to retrieve data from databases, local or remote. The most import thing is to read data set into R correctly. A dataset not read in correctly will never be analyzed or visualized correctly.
+
+```{r 9-0, echo=FALSE, out.width='50%', fig.align='center'}
+knitr::include_graphics("images/img0900_note.png")
+```
+
+
+```{r}
+x <- c(2.1, 3.1, 3.2, 5.4)
+sum(x)
+A <- matrix(
+       c(2, 4, 3, 1, 5, 7),  # the data elements 
+       nrow = 2,             # number of rows 
+       ncol = 3)             # number of columns                     
+A                            # show the matrix
+x <- scan()  # Enter values from keyboard, separated by Return key. End by empty line. 
+2.1
+3.1
+4.1
+
+```
+
+You can even use the scan() function to paste a column of numbers from Excel.
 
 ## Project-oriented workflow
 
@@ -152,10 +176,87 @@ Once you are done with a project, you can close it from **File $\rightarrow$Clos
 
 To open a project, use **File $\rightarrow$Open Project** and then navigate to the project. Alternatively you can double-click on the Chapter4.Rproj file from Windows or Mac. When a project file  is loaded, the entire computing envirionment is set for you.  The working directory is set properly. Some of the script files are open. If the script file is not open, you can open it by clicking on it from the **Files** tab in the lower right window. 
 
-```{r}
 
+## Reading files directly using read.table
+
+As you get more experience with R programming, there are many other options to import data.
+
+In summary, we have the following code to read in the data. Reading the heart attack dataset. I am not using the Import Dataset in Rstudio. We have to make sure the file is in the current working directory. To set working directory from Rstudio main menu, go to Session -> Set Working Directory.
+
+```{r results='hide'}
+rm(list = ls())  # Erase all objects in memory
+getwd()  # show working directory
+df <- read.table("datasets/heartatk4R.txt", sep="\t", header = TRUE)
+head(df)  # show the first few rows
+# change several columns to factors
+df$DRG <- as.factor(df$DRG)
+df$DIED <- as.factor(df$DIED)
+df$DIAGNOSIS <- as.factor(df$DIAGNOSIS)
+df$SEX <- as.factor(df$SEX)
+str(df)  # show the data types of columns
+summary(df)  # show summary of dataset
 ```
 
+Alternatively, you can skip all of the above and do this.  
+```{r}
+df <- read.table("http://statland.org/R/RC/heartatk4R.txt", 
+                header = TRUE, 
+                sep = "\t", 
+                colClasses = c("character", "factor", "factor", "factor", 
+                               "factor", "numeric", "numeric", "numeric"))
+```
+
+We are reading data directly from the internet with the URL. And we are specifying the data type for each column. 
+
+
+## General procedure to read data into R:
+1.	If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. 
+2.	Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimited text files, which uses the tab or $\t$ as it is invisible character.  
+3.	Open with a text editor (TexPad, NotePad++) to have a look. 
+4.	Rows and columns?   Row and column names? **row.names = 1, header = T**
+5.	Delimiters between columns?(space, comma, tab…)     **sep = “$\t$”**
+6.	Missing values?  NA, na, NULL, blank, NaN, 0  **missingstring = **
+7.	Open as text file in Excel, choose appropriate delimiter while importing, or use the **Text to Column** under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”->“4-OCT”.  Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.
+9.	read.table ( ),  or read.csv( ). For example,
+ ```x <- read.table(“somefile.txt”, sep = “$\t$”, header = TRUE, missingstring = “NA”)```
+10.	Double check the data with **str(df)**, make sure each column is recognized correctly as **“character”**, **“factor”** and **“numeric”**. 
+Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character.  For example, ```x$ids <- as.character(x$ids)```,  here x is the data frame and ids is the column name.  Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as **factors**. This could be done with something like ```x$treatment <- as.factor(x$treatment)```. 
+
+Refresher using cheat sheets that summarize many R functions is available here: [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/). It is important to know the different types of R objects: **scalars, vectors, data frames, matrix, and lists**. 
+
+
+>
+```{exercise} 
+If you have not created a project for chapter 4, it is time to create one. Download the tab-delimited text file *pulse.txt* from this page (http://statland.org/R/R/pulse.txt). Import pulse.txt into R using two methods: R menu (Show the process by attaching some necessary screenshots.) and R script.     
+a. Rename the file as *chapter4Pulse*.         
+b. Change the class of ActivityL from double to integer.          
+c. After importing *pulse.txt* into R, convert the class of Sex from charater to factor using R code. Don't forget using class() function to check your answer.
+```
+
+---
+
+>
+```{exercise}
+Type in Table \@ref(tab:9-01) in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the  files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure \@ref(fig:9-2)), and the code that convert data types (Age, BloodPressure and	Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as *patients*. Submit the R script your created, data structure of the data set patient,  and use **head(patients)** to show the data. 
+```
+
+```{r echo=FALSE, results='hide'}
+LastName <- c("Smith", "Bird", "Wilson")
+Age <- c("19", "55", "23")
+Sex <- c("M", "F", "M")
+BloodPressure <- c("100", "86", "200")
+Weight <- c("130.2", "300", "212.7")
+HeartAttack <- c("1", "0", "0")
+dat <- data.frame(LastName,	Age, Sex, BloodPressure, Weight, HeartAttack)
+```
+
+```{r 9-01, echo=FALSE}
+knitr::kable(
+  data.frame(dat),
+  booktabs = TRUE,
+  caption = 'An example of a multivariate dataset.'
+)
+```
 
 ## Data manipulation in a data frame 
 We can sort the data by age. Again, type these commands in the script window, instead of directly into the Console window. And save the scripts once a while. 
@@ -240,103 +341,4 @@ head(df2)
 ```
 
 **arrange, mutate, filter** are called **action verbs**. For more action verbs, see dplyr cheat sheet from the Rstudio main menu: *Help $\rightarrow$ Cheatsheets $\rightarrow$ R Markdown Cheat Sheet.*  It is also available on line [dplyr cheat Sheet](https://www.rstudio.com/resources/cheatsheets/#dplyr). 
-
-
-
-## Reading files directly using read.table
-
-As you get more experience with R programming, there are many other options to import data.
-
-In summary, we have the following code to read in the data. Reading the heart attack dataset. I am not using the Import Dataset in Rstudio. We have to make sure the file is in the current working directory. To set working directory from Rstudio main menu, go to Session -> Set Working Directory.
-
-```{r results='hide'}
-rm(list = ls())  # Erase all objects in memory
-getwd()  # show working directory
-df <- read.table("datasets/heartatk4R.txt", sep="\t", header = TRUE)
-head(df)  # show the first few rows
-# change several columns to factors
-df$DRG <- as.factor(df$DRG)
-df$DIED <- as.factor(df$DIED)
-df$DIAGNOSIS <- as.factor(df$DIAGNOSIS)
-df$SEX <- as.factor(df$SEX)
-str(df)  # show the data types of columns
-summary(df)  # show summary of dataset
-```
-
-Alternatively, you can skip all of the above and do this.  
-```{r}
-df <- read.table("http://statland.org/R/RC/heartatk4R.txt", 
-                header = TRUE, 
-                sep = "\t", 
-                colClasses = c("character", "factor", "factor", "factor", 
-                               "factor", "numeric", "numeric", "numeric"))
-```
-
-We are reading data directly from the internet with the URL. And we are specifying the data type for each column. 
-
-
-## General procedure to read data into R:
-1.	If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. 
-2.	Is it a text file   (CSV, txt, …) or Binary file (XLS, XLSX, …)?    Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimited text files, which uses the tab or $\t$ as it is invisible character.  
-3.	Open with a text editor (TexPad, NotePad++) to have a look. 
-4.	Rows and columns?   Row and column names? **row.names = 1, header = T**
-5.	Delimiters between columns?(space, comma, tab…)     **sep = “$\t$”**
-6.	Missing values?  NA, na, NULL, blank, NaN, 0  **missingstring = **
-7.	Open as text file in Excel, choose appropriate delimiter while importing, or use the **Text to Column** under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”->“4-OCT”.  Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.
-9.	read.table ( ),  or read.csv( ). For example,
- ```x <- read.table(“somefile.txt”, sep = “$\t$”, header = TRUE, missingstring = “NA”)```
-10.	Double check the data with **str(df)**, make sure each column is recognized correctly as **“character”**, **“factor”** and **“numeric”**. 
-Pay attention to columns contain numbers but are actually IDs (i.e. student IDs), these should be treated as character.  For example, ```x$ids <- as.character(x$ids)```,  here x is the data frame and ids is the column name.  Also pay attention to columns contain numbers but actually codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3). These need to be reformatted as **factors**. This could be done with something like ```x$treatment <- as.factor(x$treatment)```. 
-
-Refresher using cheat sheets that summarize many R functions is available here: [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/). It is important to know the different types of R objects: **scalars, vectors, data frames, matrix, and lists**. 
-
-## Enter data manually
-There are many different ways to get data into R. You can enter data manually (see below), or semi-manually (see below).  You can read data into R from a local file or a file on the internet. You can also use R to retrieve data from databases, local or remote. The most import thing is to read data set into R correctly. A dataset not read in correctly will never be analyzed or visualized correctly.
-
-```{r 9-0, echo=FALSE, out.width='50%', fig.align='center'}
-knitr::include_graphics("images/img0900_note.png")
-```
-
-
-```{r}
-x <- c(2.1, 3.1, 3.2, 5.4)
-sum(x)
-A <- matrix(
-       c(2, 4, 3, 1, 5, 7),  # the data elements 
-       nrow = 2,             # number of rows 
-       ncol = 3)             # number of columns                     
-A                            # show the matrix
-x <- scan()  # Enter values from keyboard, separated by Return key. End by empty line. 
-2.1
-3.1
-4.1
-
-```
-
-You can even use the scan() function to paste a column of numbers from Excel.
-
-
-
->
-```{exercise}
-Type in Table \@ref(tab:9-01) in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the  files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure \@ref(fig:9-2)), and the code that convert data types (Age, BloodPressure and	Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as *patients*. Submit the R script your created, data structure of the data set patient,  and use **head(patients)** to show the data. 
-```
-
-```{r echo=FALSE, results='hide'}
-LastName <- c("Smith", "Bird", "Wilson")
-Age <- c("19", "55", "23")
-Sex <- c("M", "F", "M")
-BloodPressure <- c("100", "86", "200")
-Weight <- c("130.2", "300", "212.7")
-HeartAttack <- c("1", "0", "0")
-dat <- data.frame(LastName,	Age, Sex, BloodPressure, Weight, HeartAttack)
-```
-
-```{r 9-01, echo=FALSE}
-knitr::kable(
-  data.frame(dat),
-  booktabs = TRUE,
-  caption = 'An example of a multivariate dataset.'
-)
-```
 
