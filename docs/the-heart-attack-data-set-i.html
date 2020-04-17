@@ -712,36 +712,36 @@ Figure 5.7: Mosaic plot of three factors.
 </div>
 <p>Here we nested the tabulate command inside the mosaic plot. As shown in Figure <a href="the-heart-attack-data-set-i.html#fig:5-3">5.7</a>, we further divided each of the 4 quadrants of Figure <a href="the-heart-attack-data-set-i.html#fig:5-2">5.6</a> into three parts according to DRG codes, in red, green and blue. One thing we could tell is that a smaller proportion of surviving males developed complications, compared with females.</p>
 <p>Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).</p>
-<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" title="1">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset. </span></a>
-<a class="sourceLine" id="cb712-2" title="2"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </a></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-379-1.png" width="672" /></p>
-<p>This is a mosaic plot of the whole Titanic dataset</p>
-<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" title="1"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" title="1">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset.</span></a></code></pre></div>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" title="1"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </a></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-380-1.png" width="672" /></p>
+<p>This is a mosaic plot of the whole Titanic dataset</p>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" title="1"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </a></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-381-1.png" width="672" /></p>
 <p>Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-381" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses?</p>
+<p><span id="exr:unnamed-chunk-382" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses?</p>
 </div>
 
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" title="1">DIAGNOSIS &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>DIAGNOSIS</a>
-<a class="sourceLine" id="cb714-2" title="2">SEX &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>SEX</a>
-<a class="sourceLine" id="cb714-3" title="3">counts &lt;-<span class="st"> </span><span class="kw">_____________</span>(DIAGNOSIS, SEX)  <span class="co"># Take SEX as columns </span></a>
-<a class="sourceLine" id="cb714-4" title="4"><span class="kw">barplot</span>(_____________________________________________________)</a>
-<a class="sourceLine" id="cb714-5" title="5"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="fl">0.75</span>)</a>
-<a class="sourceLine" id="cb714-6" title="6"><span class="kw">mosaicplot</span>(_____________________________________________)</a></code></pre></div>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" title="1">DIAGNOSIS &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>DIAGNOSIS</a>
+<a class="sourceLine" id="cb715-2" title="2">SEX &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>SEX</a>
+<a class="sourceLine" id="cb715-3" title="3">counts &lt;-<span class="st"> </span><span class="kw">_____________</span>(DIAGNOSIS, SEX)  <span class="co"># Take SEX as columns </span></a>
+<a class="sourceLine" id="cb715-4" title="4"><span class="kw">barplot</span>(_____________________________________________________)</a>
+<a class="sourceLine" id="cb715-5" title="5"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="fl">0.75</span>)</a>
+<a class="sourceLine" id="cb715-6" title="6"><span class="kw">mosaicplot</span>(_____________________________________________)</a></code></pre></div>
 </div>
 <div id="associations-between-a-categorical-and-a-numeric-variables" class="section level2">
 <h2><span class="header-section-number">5.4</span> Associations between a categorical and a numeric variables?</h2>
 <p>Do women stay longer in the hospital? Does the charges differ for people with different diagnosis (part of the heart affected)? We should know by now how to answer these questions with T-test, and more generally ANOVA, following our examples commands used in our analysis of the Iris flower data set. For data visualization, <strong>boxplot</strong> is the most straight forward way. But beyond boxplot, we can use the ggplot2 package for more detailed examination of distribution of variables in two or more groups.</p>
 
-<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb715-2" title="2"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> SEX, </a>
-<a class="sourceLine" id="cb715-3" title="3">                       <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</a>
-<a class="sourceLine" id="cb715-4" title="4">                             ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb715-5" title="5"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">6</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb715-6" title="6"><span class="st">  </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span></a>
-<a class="sourceLine" id="cb715-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb716-2" title="2"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> SEX, </a>
+<a class="sourceLine" id="cb716-3" title="3">                       <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</a>
+<a class="sourceLine" id="cb716-4" title="4">                             ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb716-5" title="5"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">6</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb716-6" title="6"><span class="st">  </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span></a>
+<a class="sourceLine" id="cb716-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new1"></span>
 <img src="book_files/figure-html/new1-1.png" alt="Histogram of AGE by SEX using ggplot2 package" width="576" />
 <p class="caption">
@@ -751,26 +751,26 @@ Figure 5.8: Histogram of AGE by SEX using ggplot2 package
 <p>Now the two histograms are arranged, and it is very easy to see that women’s age are more skewed to the right, meaning women are considerably older than men. I am surprised at first by this huge difference, as the average age of women if bigger by 11. Further research shows that for women the symptoms of heart attacks are milder and often go unnoticed.</p>
 <p>We can further divide the population according to survival status by adding another factor:</p>
 
-<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb716-2" title="2">heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb716-3" title="3"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, </a>
-<a class="sourceLine" id="cb716-4" title="4">           <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</a>
-<a class="sourceLine" id="cb716-5" title="5">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),</a>
-<a class="sourceLine" id="cb716-6" title="6">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]),</a>
-<a class="sourceLine" id="cb716-7" title="7">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>))<span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb716-8" title="8"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb716-9" title="9"><span class="st">  </span><span class="kw">facet_grid</span>(DIED <span class="op">~</span><span class="st"> </span>SEX) <span class="op">+</span></a>
-<a class="sourceLine" id="cb716-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb717-2" title="2">heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb717-3" title="3"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, </a>
+<a class="sourceLine" id="cb717-4" title="4">           <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</a>
+<a class="sourceLine" id="cb717-5" title="5">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),</a>
+<a class="sourceLine" id="cb717-6" title="6">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]),</a>
+<a class="sourceLine" id="cb717-7" title="7">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>))<span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb717-8" title="8"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb717-9" title="9"><span class="st">  </span><span class="kw">facet_grid</span>(DIED <span class="op">~</span><span class="st"> </span>SEX) <span class="op">+</span></a>
+<a class="sourceLine" id="cb717-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new2"></span>
 <img src="book_files/figure-html/new2-1.png" alt="Histogram of AGE by SEX and DIED using ggplot2 package" width="672" />
 <p class="caption">
 Figure 5.9: Histogram of AGE by SEX and DIED using ggplot2 package
 </p>
 </div>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" title="1"><span class="kw">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" title="1"><span class="kw">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</a></code></pre></div>
 <p>We can see that patients who did not survive heart attack tend to be older, for both men and women. This is perhaps better illustrated with density plot:</p>
 
-<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) </a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new3"></span>
 <img src="book_files/figure-html/new3-1.png" alt="Density plot of AGE by SEX using ggplot2 package" width="576" />
 <p class="caption">
@@ -780,7 +780,7 @@ Figure 5.10: Density plot of AGE by SEX using ggplot2 package
 <p>The result is similar to Figure <a href="the-heart-attack-data-set-i.html#fig:new1">5.8</a>, but as a density plot.</p>
 <p>Now for each gender, we further divide the patients by their survival status. Instead of splitting into multiple panels, the curves are overlaid.</p>
 
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) </a></code></pre></div>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) </a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new4"></span>
 <img src="book_files/figure-html/new4-1.png" alt="Density plot of AGE by SEX and DIED using ggplot2 package" width="576" />
 <p class="caption">
@@ -789,22 +789,22 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-383" class="exercise"><strong>Exercise 5.5  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
+<span id="exr:unnamed-chunk-384" class="exercise"><strong>Exercise 5.5  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-384" class="exercise"><strong>Exercise 5.6  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="the-heart-attack-data-set-i.html#fig:new4">5.11</a>).
+<span id="exr:unnamed-chunk-385" class="exercise"><strong>Exercise 5.6  </strong></span>Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="the-heart-attack-data-set-i.html#fig:new4">5.11</a>).
 </div>
 
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-385" class="exercise"><strong>Exercise 5.7  </strong></span>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
+<p><span id="exr:unnamed-chunk-386" class="exercise"><strong>Exercise 5.7  </strong></span>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-386" class="exercise"><strong>Exercise 5.8  </strong></span>Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
+<span id="exr:unnamed-chunk-387" class="exercise"><strong>Exercise 5.8  </strong></span>Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
 </div>
 
 </div>
@@ -812,7 +812,7 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 <h2><span class="header-section-number">5.5</span> Associations between multiple columns?</h2>
 <p>We can use the ggplot2 package to investigate correlations among multiple columns by figures with multiple panels.</p>
 
-<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-6"></span>
 <img src="book_files/figure-html/5-6-1.png" alt="Multiple boxplots of AGE by DRG and SEX using ggplot2 package" width="480" />
 <p class="caption">
@@ -822,12 +822,12 @@ Figure 5.12: Multiple boxplots of AGE by DRG and SEX using ggplot2 package
 <p>Recall that 121 indicate survivors with complication, 122 survivors with no complication, and 123, died. As you could see this clearly indicate our previous observation people who died in hospital are older than survivors and that patients who developed complications seems to be older than those that did not. Did people with complications stayed longer in the hospital?</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-387" class="exercise"><strong>Exercise 5.9  </strong></span>Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
+<span id="exr:unnamed-chunk-388" class="exercise"><strong>Exercise 5.9  </strong></span>Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-388" class="exercise"><strong>Exercise 5.10  </strong></span>Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure <a href="the-heart-attack-data-set-i.html#fig:14-5">5.13</a>. Offer interpretation.
+<span id="exr:unnamed-chunk-389" class="exercise"><strong>Exercise 5.10  </strong></span>Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure <a href="the-heart-attack-data-set-i.html#fig:14-5">5.13</a>. Offer interpretation.
 </div>
 
 
@@ -839,13 +839,13 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 </div>
 <p>All of these techniques we introduced so far enable us to <strong>LEARN</strong> about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc.</p>
 <p>You should also <strong>INTERACT</strong> with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives.</p>
-<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" title="1"><span class="co"># scatterplot of LOS vs. AGE</span></a>
-<a class="sourceLine" id="cb721-2" title="2"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </a>
-<a class="sourceLine" id="cb721-3" title="3"><span class="co"># scatterplot of LOS vs. AGE, divided by SEX</span></a>
-<a class="sourceLine" id="cb721-4" title="4"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </a>
-<a class="sourceLine" id="cb721-5" title="5"><span class="co"># scatterplot colored by DIED</span></a>
-<a class="sourceLine" id="cb721-6" title="6"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </a></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-389-1.png" width="576" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" title="1"><span class="co"># scatterplot of LOS vs. AGE</span></a>
+<a class="sourceLine" id="cb722-2" title="2"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </a>
+<a class="sourceLine" id="cb722-3" title="3"><span class="co"># scatterplot of LOS vs. AGE, divided by SEX</span></a>
+<a class="sourceLine" id="cb722-4" title="4"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </a>
+<a class="sourceLine" id="cb722-5" title="5"><span class="co"># scatterplot colored by DIED</span></a>
+<a class="sourceLine" id="cb722-6" title="6"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </a></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-390-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:5-7"></span>
@@ -857,9 +857,9 @@ Figure 5.14: A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
 <p>Figure <a href="the-heart-attack-data-set-i.html#fig:5-7">5.14</a> seems to suggest that the positive association between AGE and LOS is noticeable in patients who did not die in hospital, regardless of sex. This is a statistician’s language. Try this instead that could be understood by both the statistician and his/her grandmother. Older patients tend to stay longer in the hospital after surviving a heart attack. This is true for both men and women.</p>
 <p>Another way to visualize complex correlation is bubble plot. <strong>Bubble plot</strong> is an extension of scatter plot. It uses an additional dimension of data to determine the size of the symbols. Interesting video using bubble plot: <a href="http://youtu.be/jbkSRLYSojo">http://youtu.be/jbkSRLYSojo</a></p>
 
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" title="1">y &lt;-<span class="st"> </span>x[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12844</span>, <span class="dv">200</span>), ]   <span class="co"># randomly sample 200 patients</span></a>
-<a class="sourceLine" id="cb722-2" title="2"><span class="kw">plot</span>(y<span class="op">$</span>AGE, y<span class="op">$</span>LOS, <span class="dt">cex =</span> y<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span><span class="dv">6000</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)[y<span class="op">$</span>SEX], <span class="dt">xlab =</span> <span class="st">&quot;AGE&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;LOS&quot;</span>)</a>
-<a class="sourceLine" id="cb722-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">levels</span>(y<span class="op">$</span>SEX), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb723-1" title="1">y &lt;-<span class="st"> </span>x[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12844</span>, <span class="dv">200</span>), ]   <span class="co"># randomly sample 200 patients</span></a>
+<a class="sourceLine" id="cb723-2" title="2"><span class="kw">plot</span>(y<span class="op">$</span>AGE, y<span class="op">$</span>LOS, <span class="dt">cex =</span> y<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span><span class="dv">6000</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)[y<span class="op">$</span>SEX], <span class="dt">xlab =</span> <span class="st">&quot;AGE&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;LOS&quot;</span>)</a>
+<a class="sourceLine" id="cb723-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">levels</span>(y<span class="op">$</span>SEX), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-8"></span>
 <img src="book_files/figure-html/5-8-1.png" alt="Bubble plot example." width="672" />
 <p class="caption">
