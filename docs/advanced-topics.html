@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Advanced topics | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Advanced topics | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2019-07-19" />
+<meta name="date" content="2020-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-heart-attack-dataset-ii.html">
-<link rel="next" href="the-state-dataset.html">
+<link rel="prev" href="the-heart-attack-dataset-ii.html"/>
+<link rel="next" href="the-state-dataset.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,51 +48,78 @@
 
 
 
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -108,7 +136,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
-<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started-trail-delete-this-in-a-few-minutes"><i class="fa fa-check"></i><b>1.1</b> Getting started (Trail: Delete this in a few minutes)</a></li>
 <li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
 <li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
@@ -130,20 +158,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.1</b> Matrices</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.2</b> Data Frames</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.4</b> Lists</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
 <li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
 <li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.2</b> Project-oriented workflow</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.1</b> Import data files</a></li>
-<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.2</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.3</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.2.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.2.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.2.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.2.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.4</b> Import data files</a></li>
+<li class="chapter" data-level="4.2.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.2.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.6</b> Close a project when you are done</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.3</b> Reading files directly using read.table</a></li>
 <li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.4</b> General procedure to read data into R:</a></li>
@@ -313,32 +351,24 @@ Figure 7.4: Chunk of R
 <div id="tidyverse" class="section level2">
 <h2><span class="header-section-number">7.2</span> Tidyverse</h2>
 <p>Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. Now Let’s explain the dplyr package in a little detail for manipulating iris data set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb764-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb765-1" title="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
 <p>In dplyr, we use the pipe operator %&gt;% to send data to the next stage. This is similar to the “+” operator we used in ggplot2. To create a new data frame for setosa with sepals longer than 4.0:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>, Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb766-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb766-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>, Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>)</a></code></pre></div>
 <p>Add a new column that contains the ratios of sepal length to sepal width:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> Sepal.Length <span class="op">/</span><span class="st"> </span>Sepal.Width)</code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb767-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb767-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> Sepal.Length <span class="op">/</span><span class="st"> </span>Sepal.Width)</a></code></pre></div>
 <p>Sort by sepal length in ascending order:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(Sepal.Length)</code></pre></div>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb768-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb768-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(Sepal.Length)</a></code></pre></div>
 <p>The power of dplyr is that we can connect these pipe operators to define a work flow. Suppose we want to see the Iris setosa flowers with the largest ratio of sepal length to sepal width.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>) <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># filter rows</span>
-<span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># select two columns </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> Sepal.Length <span class="op">/</span><span class="st"> </span>Sepal.Width) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># add a new column</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ratio))   <span class="op">%&gt;%</span><span class="st">                       </span><span class="co"># sort in descending order</span>
-<span class="st">  </span><span class="kw">head</span>()   <span class="co"># only show top rows. No more pipes, end of sequence.</span></code></pre></div>
+<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb769-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb769-2" title="2"><span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &quot;setosa&quot;</span>) <span class="op">%&gt;%</span><span class="st">                  </span><span class="co"># filter rows</span></a>
+<a class="sourceLine" id="cb769-3" title="3"><span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># select two columns </span></a>
+<a class="sourceLine" id="cb769-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> Sepal.Length <span class="op">/</span><span class="st"> </span>Sepal.Width) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># add a new column</span></a>
+<a class="sourceLine" id="cb769-5" title="5"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(ratio))   <span class="op">%&gt;%</span><span class="st">                       </span><span class="co"># sort in descending order</span></a>
+<a class="sourceLine" id="cb769-6" title="6"><span class="st">  </span><span class="kw">head</span>()   <span class="co"># only show top rows. No more pipes, end of sequence.</span></a></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width    ratio
 ## 1          4.5         2.3 1.956522
 ## 2          5.0         3.0 1.666667
@@ -348,10 +378,10 @@ Figure 7.4: Chunk of R
 ## 6          5.4         3.4 1.588235</code></pre>
 <p><strong>filter</strong>( ), <strong>mutate</strong>( ) and <strong>arrange</strong>( ) are 3 <strong>“verbs”</strong> that operate on the data frame sequentially. <strong>head</strong>( ) is the function that only shows the top rows. Notice the pipe operator %&gt;% at the end of each line. This code is much easier to read by humans, as it defines a sequence of operations.</p>
 <p>Two other useful verbs are <strong>group_by</strong>( ) and <strong>summarise</strong>( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths and width, and then combine. So it is <strong>“split-apply-combine”</strong>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">group_by</span>(Species)  <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># split by Species </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avgSL =</span> <span class="kw">mean</span>(Sepal.Length), <span class="dt">avgSW =</span> <span class="kw">mean</span>(Sepal.Width)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(avgSL)</code></pre></div>
+<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb771-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb771-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species)  <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># split by Species </span></a>
+<a class="sourceLine" id="cb771-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avgSL =</span> <span class="kw">mean</span>(Sepal.Length), <span class="dt">avgSW =</span> <span class="kw">mean</span>(Sepal.Width)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb771-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(avgSL)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    avgSL avgSW
 ##   &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
@@ -359,39 +389,41 @@ Figure 7.4: Chunk of R
 ## 2 versicolor  5.94  2.77
 ## 3 virginica   6.59  2.97</code></pre>
 <p>Here we created a new data frame with the mean sepal length and sepal width for each of the 3 species. Obviously, we can change <strong>mean</strong>( ) to many other functions. This makes it very easy to summarize large data sets.</p>
-<p>Note: For all the following exercises, you need to do them by using R Markdown. You should submit your .Rmd file and the final document with pdf format. (You do not submit any answer key for these exercises. )</p>
+<p>Note:
+For all the following exercises, you need to do them by using R Markdown. You should submit your .Rmd file and the final document with pdf format. (You do not submit any answer key for these exercises. )</p>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 7.1  </strong></span>Fill in the blanks.<br />
+<p><span id="exr:unnamed-chunk-434" class="exercise"><strong>Exercise 7.1  </strong></span>Fill in the blanks.<br />
 1, Read in the heart attack data same as you used in chapter 4.<br />
 2, Calculate the average cost per day for patients with different DIAGNOSIS codes.<br />
 3, Restrict to females aged older than 20 and younger than 70 who stayed at least one day.<br />
-4, Sort the results in descending order. 5, Use one command with multiple steps.</p>
+4, Sort the results in descending order.
+5, Use one command with multiple steps.</p>
 Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the <strong>head</strong> or <strong>summary</strong> function at the end to examine if the desired data is produced.
 </div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;____Insert Your own Path_____/heartatk4R.txt&quot;</span>,         
-            <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,          
-            <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, 
-                           <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))
-<span class="kw">head</span>(heartatk4R)      </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-df &lt;-<span class="st"> </span>heartatk4R <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;______&quot;</span> <span class="op">&amp;</span><span class="st"> </span>AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span> _____ AGE <span class="op">&lt;</span><span class="st"> </span><span class="dv">70</span> <span class="op">&amp;</span><span class="st"> </span>________) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(___________) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">___________</span>(<span class="dt">CostPerDay =</span> ___________) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">AvgCostPerDay =</span> <span class="kw">__________</span>(CostPerDay, <span class="dt">na.rm =</span> _______)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">___________</span>(<span class="op">-</span>AvgCostPerDay)
-df</code></pre></div>
+<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb773-1" title="1">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;____Insert Your own Path_____/heartatk4R.txt&quot;</span>,         </a>
+<a class="sourceLine" id="cb773-2" title="2">            <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>,          </a>
+<a class="sourceLine" id="cb773-3" title="3">            <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </a>
+<a class="sourceLine" id="cb773-4" title="4">                           <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</a>
+<a class="sourceLine" id="cb773-5" title="5"><span class="kw">head</span>(heartatk4R)      </a></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb774-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb774-2" title="2">df &lt;-<span class="st"> </span>heartatk4R <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb774-3" title="3"><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;______&quot;</span> <span class="op">&amp;</span><span class="st"> </span>AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span> _____ AGE <span class="op">&lt;</span><span class="st"> </span><span class="dv">70</span> <span class="op">&amp;</span><span class="st"> </span>________) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb774-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(___________) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb774-5" title="5"><span class="st">  </span><span class="kw">___________</span>(<span class="dt">CostPerDay =</span> ___________) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb774-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">AvgCostPerDay =</span> <span class="kw">__________</span>(CostPerDay, <span class="dt">na.rm =</span> _______)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb774-7" title="7"><span class="st">  </span><span class="kw">___________</span>(<span class="op">-</span>AvgCostPerDay)</a>
+<a class="sourceLine" id="cb774-8" title="8">df</a></code></pre></div>
 </div>
 <div id="interactive-plots-made-easy-with-plotly" class="section level2">
 <h2><span class="header-section-number">7.3</span> Interactive plots made easy with Plotly</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plotly)
-g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(Petal.Width, Petal.Length , <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() 
-<span class="kw">ggplotly</span>(g)</code></pre></div>
-<div id="htmlwidget-139ca24a60a6af3b0fc6" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-139ca24a60a6af3b0fc6">{"x":{"data":[{"x":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.1<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.0<br />Species: setosa","Petal.Width: 0.5<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.6<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 3.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.7<br />Petal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.8<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.7<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.0<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Petal.Width: 2.5<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 6.6<br />Species: virginica","Petal.Width: 1.7<br />Petal.Length: 4.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.9<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.6<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.4<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.02,2.62],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.5,2,2.5],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Petal.Width","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Petal.Length","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"2389c1f6f40e":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"2389c1f6f40e","visdat":{"2389c1f6f40e":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb775-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb776-1" title="1"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb776-2" title="2">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(Petal.Width, Petal.Length , <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </a>
+<a class="sourceLine" id="cb776-3" title="3"><span class="kw">ggplotly</span>(g)</a></code></pre></div>
+<div id="htmlwidget-2021d767318d042ed0cb" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2021d767318d042ed0cb">{"x":{"data":[{"x":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.1<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.0<br />Species: setosa","Petal.Width: 0.5<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.6<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 3.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.7<br />Petal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.8<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.7<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.0<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Petal.Width: 2.5<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 6.6<br />Species: virginica","Petal.Width: 1.7<br />Petal.Length: 4.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.9<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.6<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.4<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.02,2.62],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.5,2,2.5],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Petal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"11f087d15b5e":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"11f087d15b5e","visdat":{"11f087d15b5e":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in.</p>
 <p>The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc. Here are some helpful websites and information.</p>
 </div>
@@ -400,7 +432,7 @@ g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(iris, <span class
 <p>Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP <a href="http://ge-lab.org/idep/" class="uri">http://ge-lab.org/idep/</a> ) to enable biologists to analyze genomic data on their own. My blog (<a href="http://gex.netlify.com" class="uri">http://gex.netlify.com</a> ) is also created in Rstudio.</p>
 <div id="install-the-shiny-package-by-typing-this-in-the-console." class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Install the Shiny package by typing this in the console.</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;shiny&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb777-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;shiny&quot;</span>)</a></code></pre></div>
 </div>
 <div id="create-a-shiny-web-app-is-a-piece-of-cake" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> Create a Shiny web app is a piece of cake</h3>
@@ -441,23 +473,24 @@ Figure 7.5: Output of the Sepal length in the iris.
 <p><img src="images/Ch7_Adv_top_20.PNG" width="80%" /><img src="images/Ch7_Adv_top_21.PNG" width="80%" /></p>
 <p>Save and run the app. A control widget <strong>Column</strong> presents above the <strong>Number of bins</strong>. We are able to select any of the variable in iris dataset.</p>
 <p><img src="images/Ch7_Adv_top_22.PNG" width="80%" /></p>
-<p>As you may have noticed that, the columns can be selected from the control widget <strong>Column</strong>, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the <strong>server</strong> function, on line 44, the histogram function is given as <strong>hist(x,…)</strong> where <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of columns, we replace <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> by <strong>x &lt;- iris[, input$cid ]</strong> on the line 40. Note that the <strong>input$cid</strong> is consistant with the inserted code <strong>selectInput( “cid”,<span class="math inline">\(\cdots\)</span>)</strong> on line 20: “<strong>sidebarPanel(selectInput(“cid”, “Column”, choices = colnames(iris)),</strong>”.</p>
+<p>As you may have noticed that, the columns can be selected from the control widget <strong>Column</strong>, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the <strong>server</strong> function, on line 44, the histogram function is given as <strong>hist(x,…)</strong> where <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of columns, we replace <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> by <strong>x &lt;- iris[, input$cid ]</strong> on the line 40. Note that the <strong>input$cid</strong> is consistant with the inserted code <strong>selectInput( “cid”,<span class="math inline">\(\cdots\)</span>)</strong> on line 20: “<strong>sidebarPanel(selectInput("cid", "Column", choices = colnames(iris)),</strong>”.</p>
 <p><img src="images/Ch7_Adv_top_23.PNG" width="80%" /><img src="images/Ch7_Adv_top_24.PNG" width="80%" /></p>
 <p>Save and run the code. Select a variable from the <strong>Column</strong>, say <em>Petal.Width</em>, then the histogram of Petal width shows up correctly.</p>
 <p><img src="images/Ch7_Adv_top_25.PNG" width="80%" style="display: block; margin: auto;" /></p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-31" class="exercise"><strong>Exercise 7.2  </strong></span>What happens when you choose the last Column “Species” in the app? Solve the error by deleting the variable Species from the data iris. Hint: Modify the code on line 20: <em>selectInput(“cid”, “Column”, choices = colnames(iris))</em>.
+<span id="exr:unnamed-chunk-451" class="exercise"><strong>Exercise 7.2  </strong></span>What happens when you choose the last Column “Species” in the app?
+Solve the error by deleting the variable Species from the data iris. Hint: Modify the code on line 20: <em>selectInput(“cid”, “Column”, choices = colnames(iris))</em>.
 </div>
 
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-32" class="exercise"><strong>Exercise 7.3  </strong></span>Change the title from “Histogram of x” to “Histogram of <strong><em>&quot; where </em></strong> is the name of the selected variable like “Sepal.Length”. Complete the question by filling in the blanks.
+<span id="exr:unnamed-chunk-452" class="exercise"><strong>Exercise 7.3  </strong></span>Change the title from “Histogram of x” to “Histogram of <strong><em>" where </em></strong> is the name of the selected variable like “Sepal.Length”. Complete the question by filling in the blanks.
 </div>
 
 <p>To change the title, let’s define a main title as <em>titl &lt;- </em>, then assign it to the option “main =___” in the hist() function. Your output should look like the Figure <a href="advanced-topics.html#fig:label27">7.6</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">titl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, <span class="op">**</span>input<span class="op">$</span>cid<span class="op">**</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)
-<span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;green&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">main =</span> _______)</code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb778-1" title="1">titl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, <span class="op">**</span>input<span class="op">$</span>cid<span class="op">**</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb778-2" title="2"><span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;green&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">main =</span> _______)</a></code></pre></div>
 
 <div class="figure" style="text-align: center"><span id="fig:label27"></span>
 <img src="images/Ch7_Adv_top_27.PNG" alt="Output of Exercise 7.4." width="80%" />
@@ -468,10 +501,10 @@ Figure 7.6: Output of <strong>Exercise 7.4</strong>.
 <ol start="5" style="list-style-type: lower-alpha">
 <li>We can build a more complex app by adding an approximation normal distribution line by replace the function <strong>hist(x, breaks = bins, col = ‘green’, border = ‘white’)</strong> by the code below:</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      h &lt;-<span class="st"> </span><span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">10</span>), <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>)
-      yfit &lt;-<span class="st"> </span><span class="kw">dnorm</span>(bins, <span class="dt">mean =</span> <span class="kw">mean</span>(x), <span class="dt">sd =</span> <span class="kw">sd</span>(x)) 
-      yfit &lt;-<span class="st"> </span>yfit <span class="op">*</span><span class="st">  </span><span class="kw">diff</span>( h<span class="op">$</span>mids[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(x) 
-      <span class="kw">lines</span>(bins, yfit, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb779-1" title="1">      h &lt;-<span class="st"> </span><span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">10</span>), <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>)</a>
+<a class="sourceLine" id="cb779-2" title="2">      yfit &lt;-<span class="st"> </span><span class="kw">dnorm</span>(bins, <span class="dt">mean =</span> <span class="kw">mean</span>(x), <span class="dt">sd =</span> <span class="kw">sd</span>(x)) </a>
+<a class="sourceLine" id="cb779-3" title="3">      yfit &lt;-<span class="st"> </span>yfit <span class="op">*</span><span class="st">  </span><span class="kw">diff</span>( h<span class="op">$</span>mids[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(x) </a>
+<a class="sourceLine" id="cb779-4" title="4">      <span class="kw">lines</span>(bins, yfit, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <p>The output should be similar to Figure <a href="advanced-topics.html#fig:label28">7.7</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:label28"></span>
@@ -482,10 +515,11 @@ Figure 7.7: Output of adding an approximation normal distribution curve.
 </div>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-35" class="exercise"><strong>Exercise 7.4  </strong></span>Fill in the blanks to solve the error message in this app by plotting a pie chart when the variable <strong>Species</strong> is selected in the <strong>Column</strong>.
+<span id="exr:unnamed-chunk-455" class="exercise"><strong>Exercise 7.4  </strong></span>Fill in the blanks to solve the error message in this app by plotting a pie chart when the variable <strong>Species</strong> is selected in the <strong>Column</strong>.
 </div>
 
-<p>Steps: 1, Change the <strong>selectInput()</strong> line as its original with all columns selected.</p>
+<p>Steps:
+1, Change the <strong>selectInput()</strong> line as its original with all columns selected.</p>
 <p>2, Separate the variables into two groups, numeric variables (columns 1 throught 4) for histogram and categorical variables (5th column) for pie plot.</p>
 <p>3, Use if() and }else{ for each group.</p>
 <p>Your output of the pie chart should be similar to Figure <a href="advanced-topics.html#fig:label29">7.8</a>.</p>
@@ -496,54 +530,55 @@ Figure 7.7: Output of adding an approximation normal distribution curve.
 Figure 7.8: Pie chart output of <strong>Exercise 7.5</strong>.
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="co"># Define UI for application that draws a histogram</span>
-ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
-   
-   <span class="co"># Application title</span>
-   <span class="kw">titlePanel</span>(<span class="st">&quot;Interactive page for iris data&quot;</span>),
-   
-   <span class="co"># Sidebar with a slider input for number of bins </span>
-   <span class="kw">sidebarLayout</span>(
-      <span class="kw">sidebarPanel</span>(
-        <span class="kw">selectInput</span>(<span class="st">&quot;cid&quot;</span>, <span class="st">&quot;Select the column&quot;</span>, <span class="dt">choices =</span> ___________),
-         <span class="kw">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,
-                     <span class="st">&quot;Number of bins:&quot;</span>,
-                     <span class="dt">min =</span> <span class="dv">1</span>,
-                     <span class="dt">max =</span> <span class="dv">50</span>,
-                     <span class="dt">value =</span> <span class="dv">12</span>)
-      ),
-      
-      <span class="co"># Show a plot of the generated distribution</span>
-      <span class="kw">mainPanel</span>(
-         <span class="kw">plotOutput</span>(<span class="st">&quot;Plot&quot;</span>)
-      ) 
-   )
- )
-
-<span class="co"># Define server logic required to draw a histogram and pie plot</span>
-
-server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
-   
-   output<span class="op">$</span>Plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
-     
-      x    &lt;-<span class="st"> </span>iris[, input<span class="op">$</span>cid]
-      
-      <span class="co"># draw the histogram with the specified number of bins for variable columns</span>
-      <span class="kw">________</span> (input<span class="op">$</span>cid <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(iris)[______]){
-      bins &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> input<span class="op">$</span>bins <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
-      titl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, input<span class="op">$</span>cid, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)
-      <span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;green&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">main =</span> titl)
-      
-      <span class="co"># draw the pie plot for catogorical column Species</span>
-      __________
-        count &lt;-<span class="st"> </span><span class="kw">table</span>(x)
-        labl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">names</span>(count), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, count, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-        titl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Pie plot of&quot;</span>, input<span class="op">$</span>cid, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)
-        <span class="kw">pie</span>(count, <span class="dt">labels =</span> labl, <span class="dt">main =</span> titl)
-      }
-   })
-}</code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" title="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb780-2" title="2"><span class="co"># Define UI for application that draws a histogram</span></a>
+<a class="sourceLine" id="cb780-3" title="3">ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(</a>
+<a class="sourceLine" id="cb780-4" title="4">   </a>
+<a class="sourceLine" id="cb780-5" title="5">   <span class="co"># Application title</span></a>
+<a class="sourceLine" id="cb780-6" title="6">   <span class="kw">titlePanel</span>(<span class="st">&quot;Interactive page for iris data&quot;</span>),</a>
+<a class="sourceLine" id="cb780-7" title="7">   </a>
+<a class="sourceLine" id="cb780-8" title="8">   <span class="co"># Sidebar with a slider input for number of bins </span></a>
+<a class="sourceLine" id="cb780-9" title="9">   <span class="kw">sidebarLayout</span>(</a>
+<a class="sourceLine" id="cb780-10" title="10">      <span class="kw">sidebarPanel</span>(</a>
+<a class="sourceLine" id="cb780-11" title="11">        <span class="kw">selectInput</span>(<span class="st">&quot;cid&quot;</span>, <span class="st">&quot;Select the column&quot;</span>, <span class="dt">choices =</span> ___________),</a>
+<a class="sourceLine" id="cb780-12" title="12">         <span class="kw">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,</a>
+<a class="sourceLine" id="cb780-13" title="13">                     <span class="st">&quot;Number of bins:&quot;</span>,</a>
+<a class="sourceLine" id="cb780-14" title="14">                     <span class="dt">min =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb780-15" title="15">                     <span class="dt">max =</span> <span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb780-16" title="16">                     <span class="dt">value =</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb780-17" title="17">      ),</a>
+<a class="sourceLine" id="cb780-18" title="18">      </a>
+<a class="sourceLine" id="cb780-19" title="19">      <span class="co"># Show a plot of the generated distribution</span></a>
+<a class="sourceLine" id="cb780-20" title="20">      <span class="kw">mainPanel</span>(</a>
+<a class="sourceLine" id="cb780-21" title="21">         <span class="kw">plotOutput</span>(<span class="st">&quot;Plot&quot;</span>)</a>
+<a class="sourceLine" id="cb780-22" title="22">      ) </a>
+<a class="sourceLine" id="cb780-23" title="23">   )</a>
+<a class="sourceLine" id="cb780-24" title="24"> )</a>
+<a class="sourceLine" id="cb780-25" title="25"></a>
+<a class="sourceLine" id="cb780-26" title="26"><span class="co"># Define server logic required to draw a histogram and pie plot</span></a>
+<a class="sourceLine" id="cb780-27" title="27"></a>
+<a class="sourceLine" id="cb780-28" title="28">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb780-29" title="29">   </a>
+<a class="sourceLine" id="cb780-30" title="30">   output<span class="op">$</span>Plot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</a>
+<a class="sourceLine" id="cb780-31" title="31">     </a>
+<a class="sourceLine" id="cb780-32" title="32">      x    &lt;-<span class="st"> </span>iris[, input<span class="op">$</span>cid]</a>
+<a class="sourceLine" id="cb780-33" title="33">      </a>
+<a class="sourceLine" id="cb780-34" title="34">      <span class="co"># draw the histogram with the specified number of bins for variable columns</span></a>
+<a class="sourceLine" id="cb780-35" title="35">      <span class="kw">________</span> (input<span class="op">$</span>cid <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(iris)[______]){</a>
+<a class="sourceLine" id="cb780-36" title="36">      bins &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> input<span class="op">$</span>bins <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb780-37" title="37">      titl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, input<span class="op">$</span>cid, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb780-38" title="38">      <span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;green&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>, <span class="dt">main =</span> titl)</a>
+<a class="sourceLine" id="cb780-39" title="39">      </a>
+<a class="sourceLine" id="cb780-40" title="40">      <span class="co"># draw the pie plot for catogorical column Species</span></a>
+<a class="sourceLine" id="cb780-41" title="41">      __________</a>
+<a class="sourceLine" id="cb780-42" title="42">        count &lt;-<span class="st"> </span><span class="kw">table</span>(x)</a>
+<a class="sourceLine" id="cb780-43" title="43">        labl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">names</span>(count), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, count, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb780-44" title="44">        titl &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Pie plot of&quot;</span>, input<span class="op">$</span>cid, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb780-45" title="45">        <span class="kw">pie</span>(count, <span class="dt">labels =</span> labl, <span class="dt">main =</span> titl)</a>
+<a class="sourceLine" id="cb780-46" title="46">      }</a>
+<a class="sourceLine" id="cb780-47" title="47">   })</a>
+<a class="sourceLine" id="cb780-48" title="48">}</a></code></pre></div>
+<pre><code>## Warning: package &#39;shiny&#39; was built under R version 3.6.3</code></pre>
 </div>
 <div id="pubish-your-app" class="section level3">
 <h3><span class="header-section-number">7.4.4</span> Pubish your app</h3>
@@ -589,8 +624,8 @@ Figure 7.13: Account Setup
 </p>
 </div>
 <p>Step 6: A new window will show up and show you how to finish the next steps. Firstly, install the package <strong>rsconnect</strong>. Then click the “Copy to clipboard” button in Figure <a href="advanced-topics.html#fig:label36">7.14</a>, and paste it into your console to authorize your account. Finally, replace the path in Figure <a href="advanced-topics.html#fig:label37">7.15</a> with the path where your Shiny app is saved. Note, the slash is <strong>forward</strong> not backward in the path. For example, I have a Shiny app named <em>IrisData.R</em> which is saved at ‘C:/Users/Documents/FirstShiny/’, then I run the following code to publish my app.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rsconnect)
-rsconnect<span class="op">::</span><span class="kw">deployApp</span>(<span class="st">&#39;C:/Users/Documents/FirstShiny/IrisData&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb782-1" title="1"><span class="kw">library</span>(rsconnect)</a>
+<a class="sourceLine" id="cb782-2" title="2">rsconnect<span class="op">::</span><span class="kw">deployApp</span>(<span class="st">&#39;C:/Users/Documents/FirstShiny/IrisData&#39;</span>)</a></code></pre></div>
 
 <div class="figure" style="text-align: center"><span id="fig:label36"></span>
 <img src="images/Ch7_Adv_top_36.PNG" alt="Authorization" width="80%" />
@@ -605,7 +640,7 @@ Figure 7.14: Authorization
 Figure 7.15: Change the path to your app
 </p>
 </div>
-<p>Step 7: You can find the link at the bottom of Figure <a href="advanced-topics.html#fig:label38">7.16</a>. The link for my iris data is <a href="https://stat415or515.shinyapps.io/IrisData/" class="uri">https://stat415or515.shinyapps.io/IrisData/</a>.</p>
+<p>Step 7: You can find the link at the bottom of Figure <a href="advanced-topics.html#fig:label38">7.16</a>. The link for my iris data is <a href="https://stat415or515.shinyapps.io/IrisData/">https://stat415or515.shinyapps.io/IrisData/</a>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:label38"></span>
 <img src="images/Ch7_Adv_top_38.PNG" alt="Generating the link" width="80%" />
@@ -613,8 +648,9 @@ Figure 7.15: Change the path to your app
 Figure 7.16: Generating the link
 </p>
 </div>
-<p>Show it off by sending the URL of your data to your friends or your adviser. More instructions can be found in these excellent tutorials: <a href="https://docs.rstudio.com/shinyapps.io/getting-started.html" class="uri">https://docs.rstudio.com/shinyapps.io/getting-started.html</a>, and <a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/" class="uri">https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</a>.</p>
-<p>Solutions to these exercises can be found at GitHub <a href="https://github.com/gexijin/teach/blob/master/app.R" class="uri">https://github.com/gexijin/teach/blob/master/app.R</a></p>
+<p>Show it off by sending the URL of your data to your friends or your adviser. More instructions can be found in these excellent tutorials:
+<a href="https://docs.rstudio.com/shinyapps.io/getting-started.html">https://docs.rstudio.com/shinyapps.io/getting-started.html</a>, and <a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/">https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</a>.</p>
+<p>Solutions to these exercises can be found at GitHub <a href="https://github.com/gexijin/teach/blob/master/app.R">https://github.com/gexijin/teach/blob/master/app.R</a></p>
 </div>
 </div>
 <div id="define-your-own-function" class="section level2">
@@ -622,57 +658,55 @@ Figure 7.16: Generating the link
 <p>We can also easily define our own functions. For example, we have the following arithmetic function:</p>
 <p><span class="math display">\[f(x)=1.5 x^3+ x^2-2x+1\]</span></p>
 <p>Obviously, we can use the following code to do the computing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">5</span>
-<span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" title="1">x &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb783-2" title="2"><span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myf &lt;-<span class="st"> </span><span class="cf">function</span>(x) {                           <span class="co">#Name of my function is myf</span>
-       y =<span class="st"> </span><span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co">#Expression of the function</span>
-       <span class="kw">return</span>(y)                               <span class="co">#Return vaules of the function</span>
-}</code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1">myf &lt;-<span class="st"> </span><span class="cf">function</span>(x) {                           <span class="co">#Name of my function is myf</span></a>
+<a class="sourceLine" id="cb785-2" title="2">       y =<span class="st"> </span><span class="fl">1.57345</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>x<span class="op">^</span><span class="dv">2</span> <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co">#Expression of the function</span></a>
+<a class="sourceLine" id="cb785-3" title="3">       <span class="kw">return</span>(y)                               <span class="co">#Return vaules of the function</span></a>
+<a class="sourceLine" id="cb785-4" title="4">}</a></code></pre></div>
 <p>Note that “{” and “}” signify the beginning and end of a block of code. <strong>“function”</strong> tells R that a function is going to be defined. At the end, the <strong>“return”</strong> statement returns the desired values.</p>
 <p>You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value given x=5.</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" title="1"><span class="kw">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value given x=5.</span></a></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>or</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myf</span>(<span class="dt">x =</span> <span class="dv">5</span>) <span class="co">#</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" title="1"><span class="kw">myf</span>(<span class="dt">x =</span> <span class="dv">5</span>) <span class="co">#</span></a></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>The funtion applies to a vector as well. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">10</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>  <span class="co"># x is a vector with integer values from -10 to 10.</span>
-<span class="kw">myf</span>(x)          <span class="co"># Apply the function myf() to x.</span></code></pre></div>
-<pre><code>##  [1] -1452.45000 -1047.04505  -724.60640  -475.69335  -290.86520
-##  [6]  -160.68125   -75.70080   -26.48315    -3.58760     2.42655
-## [11]     1.00000     1.57345    13.58760    46.48315   109.70080
-## [16]   212.68125   364.86520   575.69335   854.60640  1211.04505
-## [21]  1654.45000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x, <span class="kw">myf</span>(x)) <span class="co"># Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" title="1">x &lt;-<span class="st"> </span><span class="op">-</span><span class="st"> </span><span class="dv">10</span> <span class="op">:</span><span class="st"> </span><span class="dv">10</span>  <span class="co"># x is a vector with integer values from -10 to 10.</span></a>
+<a class="sourceLine" id="cb790-2" title="2"><span class="kw">myf</span>(x)          <span class="co"># Apply the function myf() to x.</span></a></code></pre></div>
+<pre><code>##  [1] -1452.45000 -1047.04505  -724.60640  -475.69335  -290.86520  -160.68125
+##  [7]   -75.70080   -26.48315    -3.58760     2.42655     1.00000     1.57345
+## [13]    13.58760    46.48315   109.70080   212.68125   364.86520   575.69335
+## [19]   854.60640  1211.04505  1654.45000</code></pre>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" title="1"><span class="kw">plot</span>(x, <span class="kw">myf</span>(x)) <span class="co"># Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.</span></a></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-463-1.png" width="672" /></p>
 <p>Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too.</p>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-44" class="exercise"><strong>Exercise 7.5  </strong></span>Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.<br />
+<span id="exr:unnamed-chunk-464" class="exercise"><strong>Exercise 7.5  </strong></span>Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.<br />
 a. Write an R function to implement this arithmetic function.<br />
 b. Use this function to find f(-4.534).<br />
-c. Obtain the graph of the function.
+c. Obtain the graph of the function.
 </div>
-
 </blockquote>
 <hr />
 <p>Let’s define a function to count even numbers in a vector.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#counts the number of even intergers in vec</span>
-evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
-  k &lt;-<span class="st"> </span><span class="dv">0</span>                      <span class="co"># assign 0 to a count varialbe k</span>
-  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Find all elements (represented by i) in vec. </span>
-                              <span class="co"># Values of i are actually vec[1],vec[2],...</span>
-    <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) 
-      k &lt;-<span class="st"> </span>k <span class="op">+</span><span class="st"> </span><span class="dv">1</span>              <span class="co"># test if i is an even or odd number. </span>
-                              <span class="co"># %% is the modulo operator.</span>
-  }
-  <span class="kw">return</span>(k)                   <span class="co">#Return the count of even numbers in vec.</span>
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x=<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector. </span>
-<span class="kw">evencount</span>(x) <span class="co"># Call the function evencount(). Replace vec with defined vector x.</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb793-1" title="1"><span class="co">#counts the number of even intergers in vec</span></a>
+<a class="sourceLine" id="cb793-2" title="2">evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {</a>
+<a class="sourceLine" id="cb793-3" title="3">  k &lt;-<span class="st"> </span><span class="dv">0</span>                      <span class="co"># assign 0 to a count varialbe k</span></a>
+<a class="sourceLine" id="cb793-4" title="4">  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Find all elements (represented by i) in vec. </span></a>
+<a class="sourceLine" id="cb793-5" title="5">                              <span class="co"># Values of i are actually vec[1],vec[2],...</span></a>
+<a class="sourceLine" id="cb793-6" title="6">    <span class="cf">if</span> (i <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) </a>
+<a class="sourceLine" id="cb793-7" title="7">      k &lt;-<span class="st"> </span>k <span class="op">+</span><span class="st"> </span><span class="dv">1</span>              <span class="co"># test if i is an even or odd number. </span></a>
+<a class="sourceLine" id="cb793-8" title="8">                              <span class="co"># %% is the modulo operator.</span></a>
+<a class="sourceLine" id="cb793-9" title="9">  }</a>
+<a class="sourceLine" id="cb793-10" title="10">  <span class="kw">return</span>(k)                   <span class="co">#Return the count of even numbers in vec.</span></a>
+<a class="sourceLine" id="cb793-11" title="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" title="1">x=<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector. </span></a>
+<a class="sourceLine" id="cb794-2" title="2"><span class="kw">evencount</span>(x) <span class="co"># Call the function evencount(). Replace vec with defined vector x.</span></a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>A vaiable is called local variable if it is only visible within a function. Such as <em>k</em> and <em>vec</em> are local variables to the function <strong>evencount()</strong>. They disappear after the function returns.</p>
 <p>k</p>
@@ -680,33 +714,31 @@ evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
 <p>vec</p>
 <p>Error: object ‘vec’ not found</p>
 <p>A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myfun.globle &lt;-<span class="st"> </span><span class="cf">function</span> (x){
-  y &lt;-<span class="st"> </span><span class="dv">1</span>
-  <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y)
-}
-<span class="kw">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># set x=8, and do the calculation: 8-2*y = 8-2*(1)=6</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb796-1" title="1">myfun.globle &lt;-<span class="st"> </span><span class="cf">function</span> (x){</a>
+<a class="sourceLine" id="cb796-2" title="2">  y &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb796-3" title="3">  <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y)</a>
+<a class="sourceLine" id="cb796-4" title="4">}</a>
+<a class="sourceLine" id="cb796-5" title="5"><span class="kw">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># set x=8, and do the calculation: 8-2*y = 8-2*(1)=6</span></a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>Here y is a global variable.</p>
 <p>The function <em>myfun.globle2()</em> defined below returns the same values as above. But both x and y within the the paratheses <em>(x, y=1)</em> following <em>function</em> are local variables.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myfun.globle2 &lt;-<span class="st"> </span><span class="cf">function</span> (x, <span class="dt">y =</span> <span class="dv">1</span>){ <span class="co">#y is set as 1 within the function by default.</span>
-  <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y)
- }
-<span class="kw">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co">#8-2*y = 8-2*(1)=6</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb798-1" title="1">myfun.globle2 &lt;-<span class="st"> </span><span class="cf">function</span> (x, <span class="dt">y =</span> <span class="dv">1</span>){ <span class="co">#y is set as 1 within the function by default.</span></a>
+<a class="sourceLine" id="cb798-2" title="2">  <span class="kw">return</span>(x <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>y)</a>
+<a class="sourceLine" id="cb798-3" title="3"> }</a>
+<a class="sourceLine" id="cb798-4" title="4"><span class="kw">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co">#8-2*y = 8-2*(1)=6</span></a></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-49" class="exercise"><strong>Exercise 7.6  </strong></span>Define a function which returns the count of all odd numbers in the vector x &lt;- 1:99.
+<span id="exr:unnamed-chunk-469" class="exercise"><strong>Exercise 7.6  </strong></span>Define a function which returns the count of all odd numbers in the vector x &lt;- 1:99.
 </div>
-
 </blockquote>
 <hr />
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-50" class="exercise"><strong>Exercise 7.7  </strong></span>Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+<span id="exr:unnamed-chunk-470" class="exercise"><strong>Exercise 7.7  </strong></span>Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
 </div>
-
 </blockquote>
 <hr />
 
@@ -723,11 +755,13 @@ evencount &lt;-<span class="st"> </span><span class="cf">function</span>(vec) {
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -735,12 +769,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -752,6 +785,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -768,10 +805,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
