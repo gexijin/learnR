@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-17" />
+<meta name="date" content="2020-04-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,76 +50,51 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -223,21 +198,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.4.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.4.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
-<li class="chapter" data-level="9.4.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.4.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.5.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.5.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
+<li class="chapter" data-level="9.5.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.5.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.8" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a><ul>
 <li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
@@ -281,10 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="reading-in-and-manipulating-data" class="section level2">
 <h2><span class="header-section-number">8.1</span> Reading in and manipulating data</h2>
 <p>The state data sets include state information in early years around 1970s. We pick state.abb, state.x77, and state.region to form our data file. The detail information is listed here.</p>
-<p><strong>state.abb</strong>:
-A vector with 2-letter abbreviations for the state names.</p>
-<p><strong>state.x77</strong>:
-A matrix with 50 rows and 8 columns giving the following statistics in the respective columns.</p>
+<p><strong>state.abb</strong>: A vector with 2-letter abbreviations for the state names.</p>
+<p><strong>state.x77</strong>: A matrix with 50 rows and 8 columns giving the following statistics in the respective columns.</p>
 <ul>
 <li><p>Population: population estimate as of July 1, 1975</p></li>
 <li><p>Income: per capita income (1974)</p></li>
@@ -295,29 +269,28 @@ A matrix with 50 rows and 8 columns giving the following statistics in the respe
 <li><p>Frost: mean number of days with minimum temperature below freezing (1931-1960) in capital or large city</p></li>
 <li><p>Area: land area in square miles</p></li>
 </ul>
-<p><strong>state.region</strong>:
-A factor containing the region (Northeast, South, North Central, West) that each state belongs to.</p>
+<p><strong>state.region</strong>: A factor containing the region (Northeast, South, North Central, West) that each state belongs to.</p>
 <p>For convenience of analyzing the state data, let’s merge the three data sets into a single data set “sta”. It is a data frame with 10 columns and 50 rows.</p>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" title="1">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77)               <span class="co"># transform matrix into data frame</span></a>
-<a class="sourceLine" id="cb801-2" title="2">sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region) <span class="co">#combine the three data sets</span></a>
-<a class="sourceLine" id="cb801-3" title="3"><span class="kw">colnames</span>(sta)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;State&quot;</span>                <span class="co">#Rename first column</span></a>
-<a class="sourceLine" id="cb801-4" title="4"><span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span>              <span class="co">#Rename the 10th column</span></a>
-<a class="sourceLine" id="cb801-5" title="5"><span class="kw">head</span>(sta)</a></code></pre></div>
-<pre><code>##            State Population Income Illiteracy Life.Exp Murder HS.Grad Frost
-## Alabama       AL       3615   3624        2.1    69.05   15.1    41.3    20
-## Alaska        AK        365   6315        1.5    69.31   11.3    66.7   152
-## Arizona       AZ       2212   4530        1.8    70.55    7.8    58.1    15
-## Arkansas      AR       2110   3378        1.9    70.66   10.1    39.9    65
-## California    CA      21198   5114        1.1    71.71   10.3    62.6    20
-## Colorado      CO       2541   4884        0.7    72.06    6.8    63.9   166
-##              Area Region
-## Alabama     50708  South
-## Alaska     566432   West
-## Arizona    113417   West
-## Arkansas    51945  South
-## California 156361   West
-## Colorado   103766   West</code></pre>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb803-1" title="1"><span class="kw">str</span>(sta)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77)               <span class="co"># transform matrix into data frame</span>
+sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region) <span class="co">#combine the three data sets</span>
+<span class="kw">colnames</span>(sta)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;State&quot;</span>                <span class="co">#Rename first column</span>
+<span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span>              <span class="co">#Rename the 10th column</span>
+<span class="kw">head</span>(sta)</code></pre></div>
+<pre><code>##            State Population Income Illiteracy Life.Exp Murder HS.Grad
+## Alabama       AL       3615   3624        2.1    69.05   15.1    41.3
+## Alaska        AK        365   6315        1.5    69.31   11.3    66.7
+## Arizona       AZ       2212   4530        1.8    70.55    7.8    58.1
+## Arkansas      AR       2110   3378        1.9    70.66   10.1    39.9
+## California    CA      21198   5114        1.1    71.71   10.3    62.6
+## Colorado      CO       2541   4884        0.7    72.06    6.8    63.9
+##            Frost   Area Region
+## Alabama       20  50708  South
+## Alaska       152 566432   West
+## Arizona       15 113417   West
+## Arkansas      65  51945  South
+## California    20 156361   West
+## Colorado     166 103766   West</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(sta)</code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    50 obs. of  10 variables:
 ##  $ State     : Factor w/ 50 levels &quot;AK&quot;,&quot;AL&quot;,&quot;AR&quot;,..: 2 1 4 3 5 6 7 8 9 10 ...
 ##  $ Population: num  3615 365 2212 2110 21198 ...
@@ -329,30 +302,30 @@ A factor containing the region (Northeast, South, North Central, West) that each
 ##  $ Frost     : num  20 152 15 65 20 166 139 103 11 60 ...
 ##  $ Area      : num  50708 566432 113417 51945 156361 ...
 ##  $ Region    : Factor w/ 4 levels &quot;Northeast&quot;,&quot;South&quot;,..: 2 4 4 2 4 4 1 2 2 2 ...</code></pre>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb805-1" title="1"><span class="kw">summary</span>(sta)</a></code></pre></div>
-<pre><code>##      State      Population        Income       Illiteracy       Life.Exp    
-##  AK     : 1   Min.   :  365   Min.   :3098   Min.   :0.500   Min.   :67.96  
-##  AL     : 1   1st Qu.: 1080   1st Qu.:3993   1st Qu.:0.625   1st Qu.:70.12  
-##  AR     : 1   Median : 2838   Median :4519   Median :0.950   Median :70.67  
-##  AZ     : 1   Mean   : 4246   Mean   :4436   Mean   :1.170   Mean   :70.88  
-##  CA     : 1   3rd Qu.: 4968   3rd Qu.:4814   3rd Qu.:1.575   3rd Qu.:71.89  
-##  CO     : 1   Max.   :21198   Max.   :6315   Max.   :2.800   Max.   :73.60  
-##  (Other):44                                                                 
-##      Murder          HS.Grad          Frost             Area       
-##  Min.   : 1.400   Min.   :37.80   Min.   :  0.00   Min.   :  1049  
-##  1st Qu.: 4.350   1st Qu.:48.05   1st Qu.: 66.25   1st Qu.: 36985  
-##  Median : 6.850   Median :53.25   Median :114.50   Median : 54277  
-##  Mean   : 7.378   Mean   :53.11   Mean   :104.46   Mean   : 70736  
-##  3rd Qu.:10.675   3rd Qu.:59.15   3rd Qu.:139.75   3rd Qu.: 81163  
-##  Max.   :15.100   Max.   :67.30   Max.   :188.00   Max.   :566432  
-##                                                                    
-##            Region  
-##  Northeast    : 9  
-##  South        :16  
-##  North Central:12  
-##  West         :13  
-##                    
-##                    
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sta)</code></pre></div>
+<pre><code>##      State      Population        Income       Illiteracy   
+##  AK     : 1   Min.   :  365   Min.   :3098   Min.   :0.500  
+##  AL     : 1   1st Qu.: 1080   1st Qu.:3993   1st Qu.:0.625  
+##  AR     : 1   Median : 2838   Median :4519   Median :0.950  
+##  AZ     : 1   Mean   : 4246   Mean   :4436   Mean   :1.170  
+##  CA     : 1   3rd Qu.: 4968   3rd Qu.:4814   3rd Qu.:1.575  
+##  CO     : 1   Max.   :21198   Max.   :6315   Max.   :2.800  
+##  (Other):44                                                 
+##     Life.Exp         Murder          HS.Grad          Frost       
+##  Min.   :67.96   Min.   : 1.400   Min.   :37.80   Min.   :  0.00  
+##  1st Qu.:70.12   1st Qu.: 4.350   1st Qu.:48.05   1st Qu.: 66.25  
+##  Median :70.67   Median : 6.850   Median :53.25   Median :114.50  
+##  Mean   :70.88   Mean   : 7.378   Mean   :53.11   Mean   :104.46  
+##  3rd Qu.:71.89   3rd Qu.:10.675   3rd Qu.:59.15   3rd Qu.:139.75  
+##  Max.   :73.60   Max.   :15.100   Max.   :67.30   Max.   :188.00  
+##                                                                   
+##       Area                  Region  
+##  Min.   :  1049   Northeast    : 9  
+##  1st Qu.: 36985   South        :16  
+##  Median : 54277   North Central:12  
+##  Mean   : 70736   West         :13  
+##  3rd Qu.: 81163                     
+##  Max.   :566432                     
 ## </code></pre>
 </div>
 <div id="visualizing-data" class="section level2">
@@ -363,27 +336,27 @@ A factor containing the region (Northeast, South, North Central, West) that each
 <li><p>Q-Q plot: Does the sample quantiles almost fall into a straight line ? If yes, then the variable more likely followa a normal distribution.</p></li>
 <li><p>Shapiro-Wilk test: This is a widely used normality test. The null hypothesis is that a variable follows a normal distribution. Small p-value indicates a non-normality of the variable.</p></li>
 </ul>
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb807-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb807-2" title="2">a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span></a>
-<a class="sourceLine" id="cb807-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outouts in 4 rows and 4 columns</span></a>
-<a class="sourceLine" id="cb807-4" title="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ <span class="co"># Use a for loop to test normality of all variables listed in the vector a</span></a>
-<a class="sourceLine" id="cb807-5" title="5">  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract correspoinding values in sta given a[i].</span></a>
-<a class="sourceLine" id="cb807-6" title="6">                      <span class="co"># Take i=1 as an example: a[1]=&#39;Population&#39;. sta[a[1]] is a data frame </span></a>
-<a class="sourceLine" id="cb807-7" title="7">                      <span class="co">#containing state names and corresponding population information. </span></a>
-<a class="sourceLine" id="cb807-8" title="8">                      <span class="co"># Functions, such as hist(), qqnorm() can not be applied to a data frame.</span></a>
-<a class="sourceLine" id="cb807-9" title="9">                      <span class="co"># The sub = sta[a[1]][,1] extracts the poplutlation information from the data </span></a>
-<a class="sourceLine" id="cb807-10" title="10">                      <span class="co"># frame as a numeric vector. Functions can be applied to a vector directly.  </span></a>
-<a class="sourceLine" id="cb807-11" title="11">  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])</a>
-<a class="sourceLine" id="cb807-12" title="12">  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#Q-Q plot</span></a>
-<a class="sourceLine" id="cb807-13" title="13">  <span class="kw">qqline</span>(sub)           <span class="co"># Add a QQ plot line. </span></a>
-<a class="sourceLine" id="cb807-14" title="14">  <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span></a>
-<a class="sourceLine" id="cb807-15" title="15">  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous results in row. </span></a>
-<a class="sourceLine" id="cb807-16" title="16"> }</a>
-<a class="sourceLine" id="cb807-17" title="17">}</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span>
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outouts in 4 rows and 4 columns</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ <span class="co"># Use a for loop to test normality of all variables listed in the vector a</span>
+  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract correspoinding values in sta given a[i].</span>
+                      <span class="co"># Take i=1 as an example: a[1]=&#39;Population&#39;. sta[a[1]] is a data frame </span>
+                      <span class="co">#containing state names and corresponding population information. </span>
+                      <span class="co"># Functions, such as hist(), qqnorm() can not be applied to a data frame.</span>
+                      <span class="co"># The sub = sta[a[1]][,1] extracts the poplutlation information from the data </span>
+                      <span class="co"># frame as a numeric vector. Functions can be applied to a vector directly.  </span>
+  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])
+  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#Q-Q plot</span>
+  <span class="kw">qqline</span>(sub)           <span class="co"># Add a QQ plot line. </span>
+  <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span>
+  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous results in row. </span>
+ }
+}</code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-474-1.png" width="768" /></p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb808-1" title="1">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two column of shapiro.test result</span></a>
-<a class="sourceLine" id="cb808-2" title="2">s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t)    <span class="co"># add variable name for the result</span></a>
-<a class="sourceLine" id="cb808-3" title="3">s.t</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two column of shapiro.test result</span>
+s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t)    <span class="co"># add variable name for the result</span>
+s.t</code></pre></div>
 <pre><code>##     a            statistic p.value     
 ## s.t &quot;Population&quot; 0.769992  1.906393e-07
 ##     &quot;Income&quot;     0.9769037 0.4300105   
@@ -396,10 +369,10 @@ A factor containing the region (Northeast, South, North Central, West) that each
 <p>From the histograms and QQplots we can see that the distribution of Population, Illiteracy and Area skewed to the left. Income and Life.Exp distributed close to normal. The shapiro tests show that Income, Life.Exp and Frost are normally distributed with p value greater than 0.05, while Murder and HS.Grad are almost normally distributed with p value really close to 0.05. There is no evidence that Population, Illiteracy and Area have normal distribution.</p>
 <p>In the state data, there are a categorical variable <em>region</em> which contains 4 observations. What is the distribution of the categorical variable? Let’s take a look at the number of observations(states) in each region and the corresponding percentage.</p>
 
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb810-1" title="1">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(sta<span class="op">$</span>Region), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co">#Count the number of states in each region</span></a>
-<a class="sourceLine" id="cb810-2" title="2">percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(sta<span class="op">$</span>Region)      <span class="co">#Calculate the percentage of states in each region</span></a>
-<a class="sourceLine" id="cb810-3" title="3"><span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="co">#Obtain bar chart based on percentages</span></a>
-<a class="sourceLine" id="cb810-4" title="4"><span class="kw">text</span>(<span class="dt">x=</span><span class="kw">seq</span>(<span class="fl">0.7</span>, <span class="dv">5</span>, <span class="fl">1.2</span>), <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, counts))      <span class="co">#Add count to each bar</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(sta<span class="op">$</span>Region), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co">#Count the number of states in each region</span>
+percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(sta<span class="op">$</span>Region)      <span class="co">#Calculate the percentage of states in each region</span>
+<span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="co">#Obtain bar chart based on percentages</span>
+<span class="kw">text</span>(<span class="dt">x=</span><span class="kw">seq</span>(<span class="fl">0.7</span>, <span class="dv">5</span>, <span class="fl">1.2</span>), <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, counts))      <span class="co">#Add count to each bar</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-region"></span>
 <img src="book_files/figure-html/state-region-1.png" alt="State count in each region" width="672" />
 <p class="caption">
@@ -409,12 +382,12 @@ Figure 8.1: State count in each region
 <p>Bar plot tells us that we have relatively more states in South(16) and less states in Northeast(9). North Central and West have similar number of states(12 and 13).</p>
 <p>If we want to know whether the populations in California and New York are more than the other states like what we have in now days, or the population of South Dakota comparing with other states, we use Lollipop plot to show the population of all states. A lollipop plot is a hybrid of a scatter plot and a barplot. It shows the relationship between two variables. One must be numerical variable, and the other one can be numerical or categorical variable.A lollipop chart is constituted by a point (made with geom_point) and a segment (made by geom_segment). Therefore you can modify this two components using the usual arguments: ‘size’, ‘color’, ‘linetype’, ‘alpha’, ‘shape’, etc. Here is the lollipop chart shows the relationship between state and population.</p>
 
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb811-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb811-2" title="2"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">y =</span> Population)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb811-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">fill=</span><span class="kw">alpha</span>(<span class="st">&quot;orange&quot;</span>, <span class="fl">0.3</span>), <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">shape=</span><span class="dv">20</span>, <span class="dt">stroke=</span><span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb811-4" title="4"><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">xend =</span> State, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> Population)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb811-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Lollipop Chart for Population&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb811-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>), <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">y =</span> Population)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">fill=</span><span class="kw">alpha</span>(<span class="st">&quot;orange&quot;</span>, <span class="fl">0.3</span>), <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">shape=</span><span class="dv">20</span>, <span class="dt">stroke=</span><span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">xend =</span> State, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> Population)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Lollipop Chart for Population&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>), <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-pop"></span>
 <img src="book_files/figure-html/state-pop-1.png" alt="Loppipop plot of population in each state" width="672" />
 <p class="caption">
@@ -424,21 +397,20 @@ Figure 8.2: Loppipop plot of population in each state
 <p>From the plot we can see even in early days, California and New York are the top two states in population. South Dakota have little population even in 1970s.</p>
 <p>Other questions we may ask are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model of other factors to explain their contribution to murder rate? A choropleth map may give us an overall view.</p>
 
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb812-1" title="1"><span class="kw">library</span>(maps)</a></code></pre></div>
-<pre><code>## Warning: package &#39;maps&#39; was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb814-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb814-2" title="2">sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># Create new character vector with lowercase states names</span></a>
-<a class="sourceLine" id="cb814-3" title="3">states &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;state&quot;</span>)        <span class="co"># Extract state data</span></a>
-<a class="sourceLine" id="cb814-4" title="4">map &lt;-<span class="st"> </span><span class="kw">merge</span>(states, sta, <span class="dt">by =</span> <span class="st">&quot;region&quot;</span>, <span class="dt">all.x =</span> T)  <span class="co"># Merge states and state.x77 data</span></a>
-<a class="sourceLine" id="cb814-5" title="5">map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span class="op">$</span>order), ]</a>
-<a class="sourceLine" id="cb814-6" title="6"><span class="kw">ggplot</span>(map, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb814-7" title="7"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Murder)) <span class="op">+</span><span class="st">   </span></a>
-<a class="sourceLine" id="cb814-8" title="8"><span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb814-9" title="9"><span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">10</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb814-10" title="10"><span class="st">  </span><span class="kw">coord_map</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb814-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb814-12" title="12"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Murder Rate&quot;</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb814-13" title="13"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maps)
+<span class="kw">library</span>(ggplot2)
+sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># Create new character vector with lowercase states names</span>
+states &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;state&quot;</span>)        <span class="co"># Extract state data</span>
+map &lt;-<span class="st"> </span><span class="kw">merge</span>(states, sta, <span class="dt">by =</span> <span class="st">&quot;region&quot;</span>, <span class="dt">all.x =</span> T)  <span class="co"># Merge states and state.x77 data</span>
+map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span class="op">$</span>order), ]
+<span class="kw">ggplot</span>(map, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group)) <span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Murder)) <span class="op">+</span><span class="st">   </span>
+<span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">10</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_map</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Murder Rate&quot;</span>)) <span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-map"></span>
 <img src="book_files/figure-html/state-map-1.png" alt="Map of murder rate distribution" width="672" />
 <p class="caption">
@@ -447,13 +419,12 @@ Figure 8.3: Map of murder rate distribution
 </div>
 <p>We can see from the map that the bottom and right of the map are close to red while the top middle and left are yellow. There is an area on top-right are yellow too. The map tells us that murder rate are higher in south and east states but less in north central, northwest and northeast states.</p>
 
-<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb815-1" title="1"><span class="kw">library</span>(ggridges)</a></code></pre></div>
-<pre><code>## Warning: package &#39;ggridges&#39; was built under R version 3.6.2</code></pre>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb817-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Region, <span class="dt">fill =</span> Region)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb817-2" title="2"><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb817-3" title="3"><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb817-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),</a>
-<a class="sourceLine" id="cb817-5" title="5">        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>), <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggridges)
+<span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Region, <span class="dt">fill =</span> Region)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),
+        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>), <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-murder"></span>
 <img src="book_files/figure-html/state-murder-1.png" alt="Ridgeline plot for murder rate in each region" width="672" />
 <p class="caption">
@@ -466,10 +437,10 @@ Figure 8.4: Ridgeline plot for murder rate in each region
 <span id="exr:unnamed-chunk-475" class="exercise"><strong>Exercise 8.1  </strong></span>Similar to Figure <a href="the-state-dataset.html#fig:state-map">8.3</a>, use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb to state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:
 </div>
 
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb818-1" title="1">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77) </a>
-<a class="sourceLine" id="cb818-2" title="2">sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region)</a>
-<a class="sourceLine" id="cb818-3" title="3"><span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span> </a>
-<a class="sourceLine" id="cb818-4" title="4">......</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77) 
+sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region)
+<span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span> 
+......</code></pre></div>
 <hr />
 
 <div class="exercise">
@@ -482,16 +453,14 @@ Figure 8.4: Ridgeline plot for murder rate in each region
 <h2><span class="header-section-number">8.3</span> Analyzing the relationship among variables</h2>
 <p>To visulize the linear relationship among variables in a plot, a scatter matrix is the best choice. A scatter matrix is a pair-wise scatter plot of multiple variables presented in a matrix format. It measures the linear relationship among variables. The range of correlation coefficient is [-1, 1]. The coefficient -1 implies two variables are strictly negative related, such as <span class="math inline">\(y=-x\)</span>. And coefficient 1 implies positive related, such as <span class="math inline">\(y=2x+1\)</span>. Here is an example of how to make a scatter matrix.</p>
 
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb819-1" title="1">st &lt;-<span class="st"> </span>sta[, <span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co">#take numeric variables as goal matrix</span></a>
-<a class="sourceLine" id="cb819-2" title="2"><span class="kw">library</span>(ellipse) </a></code></pre></div>
-<pre><code>## Warning: package &#39;ellipse&#39; was built under R version 3.6.2</code></pre>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb821-1" title="1"><span class="kw">library</span>(corrplot)</a></code></pre></div>
-<pre><code>## Warning: package &#39;corrplot&#39; was built under R version 3.6.2</code></pre>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb823-1" title="1">corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)) <span class="co"># Calculate correlation matrix</span></a>
-<a class="sourceLine" id="cb823-2" title="2">col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>))   <span class="co">#Color values. Red, yellow and blue represent that the coefficients are -1, 0 and 1 respectively. You can use more than 3 colors to represent the coefficients ranging from -1 to 1.</span></a>
-<a class="sourceLine" id="cb823-3" title="3"><span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, </a>
-<a class="sourceLine" id="cb823-4" title="4">               <span class="dt">number.cex =</span> <span class="fl">.8</span>, <span class="dt">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="dt">upper.col =</span> <span class="kw">col</span>(<span class="dv">10</span>), </a>
-<a class="sourceLine" id="cb823-5" title="5">               <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>) <span class="co">#Type ?corrplot.mixed in the Console to get help in detail.</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">st &lt;-<span class="st"> </span>sta[, <span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co">#take numeric variables as goal matrix</span>
+<span class="kw">library</span>(ellipse) 
+<span class="kw">library</span>(corrplot)
+corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)) <span class="co"># Calculate correlation matrix</span>
+col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>))   <span class="co">#Color values. Red, yellow and blue represent that the coefficients are -1, 0 and 1 respectively. You can use more than 3 colors to represent the coefficients ranging from -1 to 1.</span>
+<span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, 
+               <span class="dt">number.cex =</span> .<span class="dv">8</span>, <span class="dt">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="dt">upper.col =</span> <span class="kw">col</span>(<span class="dv">10</span>), 
+               <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>) <span class="co">#Type ?corrplot.mixed in the Console to get help in detail.</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-corrplot"></span>
 <img src="book_files/figure-html/state-corrplot-1.png" alt="Corrplot for numeric variables" width="576" />
 <p class="caption">
@@ -509,7 +478,7 @@ Figure 8.5: Corrplot for numeric variables
 <hr />
 <p>Now let’s see the cluster situation of these variables.</p>
 
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb824-1" title="1"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)))))  <span class="co"># hierarchical clustering</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)))))  <span class="co"># hierarchical clustering</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-dendrogram"></span>
 <img src="book_files/figure-html/state-dendrogram-1.png" alt="Cluster dendrogram for state numeric variables" width="672" />
 <p class="caption">
@@ -525,7 +494,7 @@ Figure 8.6: Cluster dendrogram for state numeric variables
 <hr />
 <p>we can use density plot to see the distribution of Illiteracy by region.</p>
 
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb825-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-illiteracy"></span>
 <img src="book_files/figure-html/state-illiteracy-1.png" alt="Illiteracy distribution by region" width="672" />
 <p class="caption">
@@ -541,16 +510,16 @@ Figure 8.7: Illiteracy distribution by region
 <hr />
 <p>Because of the relationship of Murder with both Population and Area, We add one more column of Pop.Density for the population per square miles of area to see the correlation between Murder and this density.</p>
 
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb826-1" title="1">sta<span class="op">$</span>Pop.Density &lt;-<span class="st"> </span>sta<span class="op">$</span>Population<span class="op">/</span>sta<span class="op">$</span>Area</a>
-<a class="sourceLine" id="cb826-2" title="2"><span class="kw">boxplot</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sta<span class="op">$</span>Pop.Density &lt;-<span class="st"> </span>sta<span class="op">$</span>Population<span class="op">/</span>sta<span class="op">$</span>Area
+<span class="kw">boxplot</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-population"></span>
 <img src="book_files/figure-html/state-population-1.png" alt="Box plot of population by region" width="672" />
 <p class="caption">
 Figure 8.8: Box plot of population by region
 </p>
 </div>
-<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb827-1" title="1">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region, sta)</a>
-<a class="sourceLine" id="cb827-2" title="2"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region, sta)
+<span class="kw">summary</span>(model)</code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
 ## sta$Region   3  1.051  0.3502      12 6.3e-06 ***
 ## Residuals   46  1.343  0.0292                    
@@ -559,10 +528,10 @@ Figure 8.8: Box plot of population by region
 <p>The box plot shows that Pop.Density of Northeast is much more than the other regions, while West has lowest Pop.Density. ANOVA test with p value of 6.3e-06 also let us reject the null hypothesis that mean Pop.Densities are same for different regions, which means at least one of the regional population densities is different from the others.</p>
 <p>Here is the scatterplot for Illiteracy and Murder with Population per area.</p>
 
-<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb829-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">y =</span> Murder)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb829-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> Pop.Density, <span class="dt">color =</span> Region)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb829-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x) <span class="op">+</span><span class="st">  </span><span class="co"># add regression line</span></a>
-<a class="sourceLine" id="cb829-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">y =</span> Murder)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> Pop.Density, <span class="dt">color =</span> Region)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x) <span class="op">+</span><span class="st">  </span><span class="co"># add regression line</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-IlliteracyMurder"></span>
 <img src="book_files/figure-html/state-IlliteracyMurder-1.png" alt="Scatterplot for illiteracy and murder sized by population density and colored by region" width="672" />
 <p class="caption">
@@ -572,10 +541,10 @@ Figure 8.9: Scatterplot for illiteracy and murder sized by population density an
 <p>The plot shows that murder and illiteracy are positive correlated. All states in other three regions have murder rate less than 12 per 100,000 population except some of south states have murder over 12 per 100,000 population. All north central states(red) has illiteracy less than 1, all northeast states have less than 1.5 of illiteracy. The illiteracy of west and south states have much bigger variance. More Northeast states have big population density but middle illiteracy rate comparing with the states in the other three regions.</p>
 <p>Because of the high correlation of murder and Life.Exp, we will take a look of the distribution of Life.Exp.</p>
 
-<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb830-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Region, <span class="dt">y =</span> Life.Exp, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb830-2" title="2"><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">trim=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb830-3" title="3"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span><span class="fl">0.1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb830-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Region, <span class="dt">y =</span> Life.Exp, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">trim=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width=</span><span class="fl">0.1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-LifeExp"></span>
 <img src="book_files/figure-html/state-LifeExp-1.png" alt="Regional life expectancy" width="672" />
 <p class="caption">
@@ -585,17 +554,17 @@ Figure 8.10: Regional life expectancy
 <p>On average, south has lower life expectancy than the other three regions. North Central has highest Life.Exp, while West has spread out distribution with two long tails on each ends, which means some west states have really long life expectancy, while some states expect short life though they are in the same region.</p>
 <p>Here is the plot for murder with the information of variables in the other cluster. According to the corrplot, we believe they affect the murder rate too, more or less.</p>
 
-<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb831-1" title="1"><span class="co"># group income into IncomeType first</span></a>
-<a class="sourceLine" id="cb831-2" title="2">sta.income &lt;-<span class="st"> </span>sta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">IncomeType =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;Under3500&quot;</span>,  </a>
-<a class="sourceLine" id="cb831-3" title="3">                             <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;3500-4000&quot;</span>,</a>
-<a class="sourceLine" id="cb831-4" title="4">                                    <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4500</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4000</span>, <span class="st">&quot;4000-4500&quot;</span>,</a>
-<a class="sourceLine" id="cb831-5" title="5">                                           <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4500</span>, <span class="st">&quot;4500-5000&quot;</span>, </a>
-<a class="sourceLine" id="cb831-6" title="6">                                                  <span class="st">&quot;Above5000&quot;</span>))))))</a>
-<a class="sourceLine" id="cb831-7" title="7"><span class="kw">ggplot</span>(sta.income, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Life.Exp)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb831-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> IncomeType, <span class="dt">color =</span> Region, <span class="dt">size =</span> HS.Grad)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb831-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x) <span class="op">+</span></a>
-<a class="sourceLine" id="cb831-10" title="10"><span class="st">  </span><span class="co">#labs(title = &quot;Murder Vs Life.Exp with HS.Grad and IncomeType by region&quot;) +</span></a>
-<a class="sourceLine" id="cb831-11" title="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># group income into IncomeType first</span>
+sta.income &lt;-<span class="st"> </span>sta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">IncomeType =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;Under3500&quot;</span>,  
+                             <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;3500-4000&quot;</span>,
+                                    <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4500</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4000</span>, <span class="st">&quot;4000-4500&quot;</span>,
+                                           <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4500</span>, <span class="st">&quot;4500-5000&quot;</span>, 
+                                                  <span class="st">&quot;Above5000&quot;</span>))))))
+<span class="kw">ggplot</span>(sta.income, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Life.Exp)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> IncomeType, <span class="dt">color =</span> Region, <span class="dt">size =</span> HS.Grad)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x) <span class="op">+</span>
+<span class="st">  </span><span class="co">#labs(title = &quot;Murder Vs Life.Exp with HS.Grad and IncomeType by region&quot;) +</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-LifeMurder"></span>
 <img src="book_files/figure-html/state-LifeMurder-1.png" alt="Relationship between murder rate and life expectancy, high school graduation and income" width="672" />
 <p class="caption">
@@ -615,21 +584,21 @@ Figure 8.11: Relationship between murder rate and life expectancy, high school g
 <div id="the-whole-picture-of-the-data-set" class="section level2">
 <h2><span class="header-section-number">8.4</span> The whole picture of the data set</h2>
 
-<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb832-1" title="1"><span class="kw">library</span>(gplots)</a></code></pre></div>
-<pre><code>## Warning: package &#39;gplots&#39; was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb834-1" title="1">st.matrix &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(st) <span class="co"># transfer the data frame to matrix</span></a>
-<a class="sourceLine" id="cb834-2" title="2">s &lt;-<span class="st"> </span><span class="kw">apply</span>(st.matrix, <span class="dv">2</span>, <span class="cf">function</span>(y)(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(y))  <span class="co"># standardize data</span></a>
-<a class="sourceLine" id="cb834-3" title="3">a &lt;-<span class="st"> </span><span class="kw">heatmap.2</span>(s, </a>
-<a class="sourceLine" id="cb834-4" title="4">          <span class="dt">col =</span> <span class="kw">greenred</span>(<span class="dv">75</span>),   <span class="co">#color green red</span></a>
-<a class="sourceLine" id="cb834-5" title="5">          <span class="dt">density.info =</span> <span class="st">&quot;none&quot;</span>, </a>
-<a class="sourceLine" id="cb834-6" title="6">          <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, </a>
-<a class="sourceLine" id="cb834-7" title="7">          <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>, </a>
-<a class="sourceLine" id="cb834-8" title="8">          <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>)[sta<span class="op">$</span>Region],  </a>
-<a class="sourceLine" id="cb834-9" title="9">          <span class="dt">srtCol =</span> <span class="dv">45</span>,  <span class="co">#column labels at 45 degree</span></a>
-<a class="sourceLine" id="cb834-10" title="10">          <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">8</span>), <span class="co"># bottom and right margins</span></a>
-<a class="sourceLine" id="cb834-11" title="11">          <span class="dt">lhei =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb834-12" title="12">) </a>
-<a class="sourceLine" id="cb834-13" title="13"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(sta<span class="op">$</span>Region), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)  <span class="co"># add legend </span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gplots)</code></pre></div>
+<pre><code>## Warning: package &#39;gplots&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">st.matrix &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(st) <span class="co"># transfer the data frame to matrix</span>
+s &lt;-<span class="st"> </span><span class="kw">apply</span>(st.matrix, <span class="dv">2</span>, <span class="cf">function</span>(y)(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(y))  <span class="co"># standardize data</span>
+a &lt;-<span class="st"> </span><span class="kw">heatmap.2</span>(s, 
+          <span class="dt">col =</span> <span class="kw">greenred</span>(<span class="dv">75</span>),   <span class="co">#color green red</span>
+          <span class="dt">density.info =</span> <span class="st">&quot;none&quot;</span>, 
+          <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, 
+          <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>, 
+          <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>)[sta<span class="op">$</span>Region],  
+          <span class="dt">srtCol =</span> <span class="dv">45</span>,  <span class="co">#column labels at 45 degree</span>
+          <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">8</span>), <span class="co"># bottom and right margins</span>
+          <span class="dt">lhei =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)
+) 
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(sta<span class="op">$</span>Region), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)  <span class="co"># add legend </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-heatmap"></span>
 <img src="book_files/figure-html/state-heatmap-1.png" alt="Heat map for whole state data set" width="768" />
 <p class="caption">
@@ -639,8 +608,8 @@ Figure 8.12: Heat map for whole state data set
 <p>Same as cluster Dendrogram plot, Life.Exp, Income, HS.Grad, together with Frost build one cluster, while Illiteracy, Murder and Population and area build another cluster.</p>
 <p>Compare with other states, lots of south states with lower Life.Exp, Income, HS.Grad have higher Murder and Illiteracy, like Mississippi and Alabama. On the contrary, some northern and western states which have higher Life.Exp, Income, HS.Grad show lower Area, Population, Murder and Illiteracy, like Nebraska and South Dakota. Though the income of South Dakota show a little bit green.</p>
 
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb835-1" title="1"><span class="kw">row.names</span>(st) &lt;-<span class="st"> </span>sta<span class="op">$</span>State</a>
-<a class="sourceLine" id="cb835-2" title="2"><span class="kw">stars</span>(st, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="fl">1.5</span>), <span class="dt">draw.segments =</span> T)   </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(st) &lt;-<span class="st"> </span>sta<span class="op">$</span>State
+<span class="kw">stars</span>(st, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="fl">1.5</span>), <span class="dt">draw.segments =</span> T)   </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-segment"></span>
 <img src="book_files/figure-html/state-segment-1.png" alt="Segment diagram for all states" width="768" />
 <p class="caption">
@@ -649,8 +618,8 @@ Figure 8.13: Segment diagram for all states
 </div>
 <p>The segment Diagram shows us different aspects of each state. For example, South Dakota has big Frost(yellow), big Life Expectancy(blue), relative high percentage of high school graduation rate(pink) and good income(red), but has small area and really tiny, almost nothing comparing with other states in population, illiteracy and murder.</p>
 <p>We use principal components analysis to explore the data a little bit more!</p>
-<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb836-1" title="1">pca =<span class="st"> </span><span class="kw">prcomp</span>(st, <span class="dt">scale =</span> T)  <span class="co">#scale = T to normalize the data</span></a>
-<a class="sourceLine" id="cb836-2" title="2">pca</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca =<span class="st"> </span><span class="kw">prcomp</span>(st, <span class="dt">scale =</span> T)  <span class="co">#scale = T to normalize the data</span>
+pca</code></pre></div>
 <pre><code>## Standard deviations (1, .., p=8):
 ## [1] 1.8970755 1.2774659 1.0544862 0.8411327 0.6201949 0.5544923 0.3800642
 ## [8] 0.3364338
@@ -674,47 +643,46 @@ Figure 8.13: Segment diagram for all states
 ## HS.Grad    -0.64464647 -0.393019181 -0.30724183
 ## Frost       0.21268413 -0.472013140  0.02834442
 ## Area        0.14836054  0.286260213  0.01320320</code></pre>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb838-1" title="1"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-482-1.png" width="672" /></p>
-<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb839-1" title="1"><span class="kw">summary</span>(pca)  <span class="co">#shows the importance of the components</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pca)  <span class="co">#shows the importance of the components</span></code></pre></div>
 <pre><code>## Importance of components:
-##                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
-## Standard deviation     1.8971 1.2775 1.0545 0.84113 0.62019 0.55449 0.38006
-## Proportion of Variance 0.4499 0.2040 0.1390 0.08844 0.04808 0.03843 0.01806
-## Cumulative Proportion  0.4499 0.6539 0.7928 0.88128 0.92936 0.96780 0.98585
-##                            PC8
-## Standard deviation     0.33643
-## Proportion of Variance 0.01415
-## Cumulative Proportion  1.00000</code></pre>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb841-1" title="1">percentVar &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="kw">summary</span>(pca)<span class="op">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">0</span>) <span class="co"># compute % variances</span></a>
-<a class="sourceLine" id="cb841-2" title="2">percentVar</a></code></pre></div>
+##                           PC1    PC2    PC3     PC4     PC5     PC6
+## Standard deviation     1.8971 1.2775 1.0545 0.84113 0.62019 0.55449
+## Proportion of Variance 0.4499 0.2040 0.1390 0.08844 0.04808 0.03843
+## Cumulative Proportion  0.4499 0.6539 0.7928 0.88128 0.92936 0.96780
+##                            PC7     PC8
+## Standard deviation     0.38006 0.33643
+## Proportion of Variance 0.01806 0.01415
+## Cumulative Proportion  0.98585 1.00000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">percentVar &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="kw">summary</span>(pca)<span class="op">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">0</span>) <span class="co"># compute % variances</span>
+percentVar</code></pre></div>
 <pre><code>## PC1 PC2 PC3 PC4 PC5 PC6 PC7 
 ##  45  20  14   9   5   4   2</code></pre>
 <p>The first two components account for 45% and 20%, together 65% of the variance. The third component attributes a little bit less but still over 10% of the variance. The barplot of each component’s variance shows how the each component dominate.</p>
 
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb843-1" title="1"><span class="kw">library</span>(ggfortify)</a></code></pre></div>
-<pre><code>## Warning: package &#39;ggfortify&#39; was built under R version 3.6.3</code></pre>
-<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb845-1" title="1"><span class="kw">row.names</span>(sta) &lt;-<span class="st"> </span>sta<span class="op">$</span>State</a>
-<a class="sourceLine" id="cb845-2" title="2"><span class="kw">autoplot</span>(<span class="kw">prcomp</span>(st,  <span class="dt">scale =</span> T), <span class="dt">data =</span> sta, </a>
-<a class="sourceLine" id="cb845-3" title="3">         <span class="dt">colour =</span> <span class="st">&#39;Region&#39;</span>, <span class="dt">shape =</span> <span class="ot">FALSE</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">label.size =</span> <span class="fl">3.5</span>,</a>
-<a class="sourceLine" id="cb845-4" title="4">         <span class="dt">loadings =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">loadings.label =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb845-5" title="5">         <span class="dt">loadings.label.size =</span> <span class="dv">4</span>, <span class="dt">loadings.label.colour =</span> <span class="st">&#39;blue&#39;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggfortify)</code></pre></div>
+<pre><code>## Warning: package &#39;ggfortify&#39; was built under R version 3.5.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(sta) &lt;-<span class="st"> </span>sta<span class="op">$</span>State
+<span class="kw">autoplot</span>(<span class="kw">prcomp</span>(st,  <span class="dt">scale =</span> T), <span class="dt">data =</span> sta, 
+         <span class="dt">colour =</span> <span class="st">&#39;Region&#39;</span>, <span class="dt">shape =</span> <span class="ot">FALSE</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">label.size =</span> <span class="fl">3.5</span>,
+         <span class="dt">loadings =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">loadings.label =</span> <span class="ot">TRUE</span>, 
+         <span class="dt">loadings.label.size =</span> <span class="dv">4</span>, <span class="dt">loadings.label.colour =</span> <span class="st">&#39;blue&#39;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-bioplot"></span>
 <img src="book_files/figure-html/state-bioplot-1.png" alt="Bioplot for PCA" width="672" />
 <p class="caption">
 Figure 8.14: Bioplot for PCA
 </p>
 </div>
-<p>The Biplot illustrate the special role of these variables to the first and second component of the variance. Illiteracy positively contribute to component of the variance PC1, while Life.Exp and Frost negatively contribute to component of the variance PC1. Area positively contribute to component of the variance PC2. The other four variables contribute to both component of the variance PC1 and PC2 positively or negatively.
-From the figure we also find that many states in south region such as Louisiana(LA) and Mississippi(MS) are mainly affected by Illiteracy and murder rate, while some north central states like Minnesota(MN) and North Dakota(ND) are mainly affected by life expectancy and frost. Area is the main effect for two states in West region, Alaska(AK) and California(CA).</p>
+<p>The Biplot illustrate the special role of these variables to the first and second component of the variance. Illiteracy positively contribute to component of the variance PC1, while Life.Exp and Frost negatively contribute to component of the variance PC1. Area positively contribute to component of the variance PC2. The other four variables contribute to both component of the variance PC1 and PC2 positively or negatively. From the figure we also find that many states in south region such as Louisiana(LA) and Mississippi(MS) are mainly affected by Illiteracy and murder rate, while some north central states like Minnesota(MN) and North Dakota(ND) are mainly affected by life expectancy and frost. Area is the main effect for two states in West region, Alaska(AK) and California(CA).</p>
 </div>
 <div id="linear-model-analysis" class="section level2">
 <h2><span class="header-section-number">8.5</span> Linear model analysis</h2>
 <p>According to the analysis above, we try to find a model to explain murder rate. Because of the high correlation of HS.Grad with Illiteracy, Life.Exp and Income, we will not put HS.Grad in the model. Similar reason, we leave Frost out too.</p>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb846-1" title="1">lm.data &lt;-<span class="st"> </span>sta[, <span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">9</span><span class="op">:</span><span class="dv">10</span>)]</a>
-<a class="sourceLine" id="cb846-2" title="2">lm.data &lt;-<span class="st"> </span><span class="kw">within</span>(lm.data, Region &lt;-<span class="st"> </span><span class="kw">relevel</span>(Region, <span class="dt">ref =</span> <span class="st">&quot;South&quot;</span>))  <span class="co"># set region South as reference</span></a>
-<a class="sourceLine" id="cb846-3" title="3">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Murder <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> lm.data)</a>
-<a class="sourceLine" id="cb846-4" title="4"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm.data &lt;-<span class="st"> </span>sta[, <span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">9</span><span class="op">:</span><span class="dv">10</span>)]
+lm.data &lt;-<span class="st"> </span><span class="kw">within</span>(lm.data, Region &lt;-<span class="st"> </span><span class="kw">relevel</span>(Region, <span class="dt">ref =</span> <span class="st">&quot;South&quot;</span>))  <span class="co"># set region South as reference</span>
+model &lt;-<span class="st"> </span><span class="kw">lm</span>(Murder <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> lm.data)
+<span class="kw">summary</span>(model)</code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Murder ~ ., data = lm.data)
@@ -740,8 +708,7 @@ From the figure we also find that many states in south region such as Louisiana(
 ## Residual standard error: 1.552 on 41 degrees of freedom
 ## Multiple R-squared:  0.852,  Adjusted R-squared:  0.8232 
 ## F-statistic: 29.51 on 8 and 41 DF,  p-value: 1.168e-14</code></pre>
-<p>Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another relative smaller factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow:
-<span class="math inline">\(Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast\)</span></p>
+<p>Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another relative smaller factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow: <span class="math inline">\(Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast\)</span></p>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-484" class="exercise"><strong>Exercise 8.7  </strong></span>Do linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a> and pay attention to the high correlation between murder rate and life expectancy.
@@ -817,7 +784,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

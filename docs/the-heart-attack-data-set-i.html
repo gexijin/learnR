@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-17" />
+<meta name="date" content="2020-04-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,76 +50,51 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
 </head>
@@ -223,21 +198,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.4.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.4.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
-<li class="chapter" data-level="9.4.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.4.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.5.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.5.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
+<li class="chapter" data-level="9.5.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.5.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.8" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a><ul>
 <li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
@@ -280,11 +256,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> The heart attack data set (I)</h1>
 <p>The heart attack data set (<a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>), included in the ActivStats<sup>1</sup> CD, contains all 12,844 cases of hospital discharges of the patients admitted for heart attack but did not have surgery in New York State in 1993. This information is essential for the interpretation of our results, as this is a purely <strong>observational study</strong>. It is not a random sample or <strong>controlled experiment</strong>.</p>
 <p>The data set is formatted as a table (Table <a href="the-heart-attack-data-set-i.html#tab:4-01">5.1</a>) with rows representing cases and columns representing characteristics, which is a typical format for many datasets. If you download and open the file in NotePad++ or Excel, you can see that the columns are separated by tabs, and there are <strong>missing values</strong> noted by “NA”. Four columns (DIAGNOSIS, SEX, DRG, DIED) contain <strong>nominal</strong> values, representing labels of <strong>categories</strong>. See an excellent explanation of data types <a href="http://www.mymarketresearchmethods.com/types-of-data-nominal-ordinal-interval-ratio/">here</a>. DIAGNOSIS column contains codes defined in the International Classification of Diseases (IDC), 9th Edition. This is the code that your doctor sends to your insurance company for billing. The numbers, such as 41041, actually code for which part of the heart was affected. Although these are numbers, it does not make any sense to add or subtract or compute the mean. If I have a room of 30 students each with student ids, such as 732324, it does not make any sense to compute the average of these numbers. Such <strong>categorical data needs to be recognized as factors in R</strong>. Similarly, DRG column has three possible numbers, 121 for survivors with cardiovascular complications, 122 for survivors without complications, and 123 for patients who died. Moreover, DIED also codes for prognosis, it is 1 if the patient passed away, and 0 if survived.</p>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb684-1" title="1">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, </a>
-<a class="sourceLine" id="cb684-2" title="2">                         <span class="dt">header =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb684-3" title="3">                         <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, </a>
-<a class="sourceLine" id="cb684-4" title="4">                         <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </a>
-<a class="sourceLine" id="cb684-5" title="5">                                        <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, 
+                         <span class="dt">header =</span> <span class="ot">TRUE</span>, 
+                         <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, 
+                         <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, 
+                                        <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</code></pre></div>
 <table>
 <caption><span id="tab:4-01">Table 5.1: </span>First 15 rows of the heart attack dataset</caption>
 <thead>
@@ -457,8 +433,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>• Import data files into R</p>
 <p>• Exploratory data analysis (EDA)</p>
 <p>• Statistical modeling (regression)</p>
-<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" title="1">x &lt;-<span class="st"> </span>heartatk4R  <span class="co"># Make a copy of the data for manipulation, call it x. </span></a>
-<a class="sourceLine" id="cb685-2" title="2"><span class="kw">str</span>(x)  <span class="co"># structure of data object, data types for each column</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>heartatk4R  <span class="co"># Make a copy of the data for manipulation, call it x. </span>
+<span class="kw">str</span>(x)  <span class="co"># structure of data object, data types for each column</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    12844 obs. of  8 variables:
 ##  $ Patient  : chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
 ##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41001&quot;,&quot;41011&quot;,..: 5 5 9 8 9 9 9 9 5 5 ...
@@ -477,19 +453,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span id="exr:unnamed-chunk-361" class="exercise"><strong>Exercise 5.1  </strong></span>Perform the following analysis for the heartatk4R dataset. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Graphical EDA: Plot distribution of <strong>charges</strong> using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running <strong>temp = CHARGES [ ! is.na (CHARGES) ]</strong> and then run your plot on <strong>temp</strong>.</p></li>
-<li><p>Quantitative EDA: test of normality, and confidence interval. Note that if the Shapiro-Wilk normality test cannot handle the 12,000 data points, you can either try to find other tests in the nortest library or sample randomly by running <strong>temp = sample( CHARGES, 4000)</strong></p>
-</div></li>
+<li>Quantitative EDA: test of normality, and confidence interval. Note that if the Shapiro-Wilk normality test cannot handle the 12,000 data points, you can either try to find other tests in the nortest library or sample randomly by running <strong>temp = sample( CHARGES, 4000)</strong>
+</div>
+</li>
 </ol>
 <p>You can attach your data set if you want to refer to the columns directly by name, such as LOS instead of x$LOS.</p>
-<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb687-1" title="1"><span class="kw">attach</span>(x) </a></code></pre></div>
-<p>For categorical columns, we want to know how many different levels, and their frequencies. In addition to quantitative analysis, we also use various charts.
-For categorical values such as SEX and DIAGNOSIS, we can produce <strong>pie charts and bar plots</strong>, or percentages using the <strong>table( )</strong> function followed by <strong>pie( )</strong> and <strong>barplot()</strong>.</p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" title="1"><span class="kw">barplot</span>(<span class="kw">table</span>(DIAGNOSIS))</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(x) </code></pre></div>
+<p>For categorical columns, we want to know how many different levels, and their frequencies. In addition to quantitative analysis, we also use various charts. For categorical values such as SEX and DIAGNOSIS, we can produce <strong>pie charts and bar plots</strong>, or percentages using the <strong>table( )</strong> function followed by <strong>pie( )</strong> and <strong>barplot()</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="kw">table</span>(DIAGNOSIS))</code></pre></div>
 <p>This generates a bar plot of counts. This basic plot could be further refined:</p>
 
-<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb689-1" title="1">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(DIAGNOSIS), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co"># tabulate&amp;sort </span></a>
-<a class="sourceLine" id="cb689-2" title="2">percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(DIAGNOSIS)  <span class="co"># convert to %</span></a>
-<a class="sourceLine" id="cb689-3" title="3"><span class="kw">barplot</span>(percentages, <span class="dt">las =</span> <span class="dv">3</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)  <span class="co"># Figure 4.1</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(DIAGNOSIS), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co"># tabulate&amp;sort </span>
+percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(DIAGNOSIS)  <span class="co"># convert to %</span>
+<span class="kw">barplot</span>(percentages, <span class="dt">las =</span> <span class="dv">3</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)  <span class="co"># Figure 4.1</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:4-1"></span>
 <img src="book_files/figure-html/4-1-1.png" alt="Barplot by percentage." width="672" />
 <p class="caption">
@@ -498,11 +474,11 @@ Figure 5.1: Barplot by percentage.
 </div>
 <p>Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line: barplot(100* sort(table(DIAGNOSIS), decreasing=T) / length(DIAGNOSIS), las = 3, ylab = “Percentage”, col = “green”).</p>
 
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb690-1" title="1"><span class="kw">table</span>(SEX)  <span class="co"># tabulate the frequencies of M and F</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(SEX)  <span class="co"># tabulate the frequencies of M and F</span></code></pre></div>
 <pre><code>## SEX
 ##    F    M 
 ## 5065 7779</code></pre>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb692-1" title="1"><span class="kw">pie</span>(<span class="kw">table</span>(SEX))  <span class="co"># pie chart</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pie</span>(<span class="kw">table</span>(SEX))  <span class="co"># pie chart</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:14-2"></span>
 <img src="book_files/figure-html/14-2-1.png" alt="Pie chart of patients by SEX." width="50%" />
 <p class="caption">
@@ -514,11 +490,11 @@ Figure 5.2: Pie chart of patients by SEX.
 <span id="exr:unnamed-chunk-364" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the counts and percentages of each levels of DRG by filling the blanks below. Use bar plot and pie charts similar to Figure <a href="the-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="the-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.
 </div>
 
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb693-1" title="1">drg &lt;-<span class="st"> </span>__________               <span class="co">#Import values of DRG </span></a>
-<a class="sourceLine" id="cb693-2" title="2">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">________</span>(drg), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co"># tabulate &amp; sort </span></a>
-<a class="sourceLine" id="cb693-3" title="3">percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>__________  <span class="co"># Compute the percentage and convert to %</span></a>
-<a class="sourceLine" id="cb693-4" title="4"><span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="co"># barplot</span></a>
-<a class="sourceLine" id="cb693-5" title="5"><span class="kw">_________</span>(counts)  <span class="co"># pie chart</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drg &lt;-<span class="st"> </span>__________               <span class="co">#Import values of DRG </span>
+counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">________</span>(drg), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co"># tabulate &amp; sort </span>
+percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>__________  <span class="co"># Compute the percentage and convert to %</span>
+<span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>) <span class="co"># barplot</span>
+<span class="kw">_________</span>(counts)  <span class="co"># pie chart</span></code></pre></div>
 </div>
 <div id="possible-correlation-between-two-numeric-columns" class="section level2">
 <h2><span class="header-section-number">5.2</span> Possible correlation between two numeric columns?</h2>
@@ -568,7 +544,7 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 </tbody>
 </table>
 <p>There is a small, but statistically significant correlation between age and length of stay in the hospital after a heart attack. <strong>The plain English interpretation (the explanation that could be understood by your grandmother) is this</strong>: Older people tend to stay slightly longer in the hospital after a heart attack.</p>
-<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" title="1"><span class="kw">cor.test</span>(AGE, LOS)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(AGE, LOS)</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -587,9 +563,9 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 <p><strong>Spearman’s rank correlation coefficient <span class="math inline">\(\rho\)</span></strong> is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores <span class="math inline">\(X_i\)</span>, <span class="math inline">\(Y_i\)</span>are converted to ranks <span class="math inline">\(R_{x_i}\)</span>, <span class="math inline">\(R_{y_i}\)</span>, and the differences <span class="math inline">\(d_i\)</span> = <span class="math inline">\(R_{x_i}\)</span>-<span class="math inline">\(R_{y_i}\)</span> between the ranks of each observation on the two variables are calculated.</p>
 <p>If there are no tied ranks, then <span class="math inline">\(\rho\)</span> is given by:<span class="math display">\[ρ=1-\frac{6∑d_{i}^{2}}{n(n_{}^{2}-1)}\]</span></p>
 <p>In R, we can calculate Spearman’s <span class="math inline">\(\rho\)</span> and test its significance but customize the cor.test() function:</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb696-1" title="1"><span class="kw">cor.test</span>(AGE, LOS, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning in cor.test.default(AGE, LOS, method = &quot;spearman&quot;): Cannot compute exact
-## p-value with ties</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(AGE, LOS, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</code></pre></div>
+<pre><code>## Warning in cor.test.default(AGE, LOS, method = &quot;spearman&quot;): Cannot compute
+## exact p-value with ties</code></pre>
 <pre><code>## 
 ##  Spearman&#39;s rank correlation rho
 ## 
@@ -601,8 +577,8 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 ## 0.1661032</code></pre>
 <p>Interpretation of Spearman’s <span class="math inline">\(\rho\)</span> is similar to Pearson’s r. The statistical significance can also be determined similarly as demonstrated above. Alternative non-parametric statistic for correlation is Kendall tau rank correlation coefficient.</p>
 <p>We already know that we could use scatter plots to visualize correlation between two numeric columns. But when there are many data points, in this case we have over 12,000, it could be hard to comprehend. This is especially the case, when the data is integers and there are a lot of data points overlap on top of each other. Yes, graphics can be misleading.</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" title="1"><span class="kw">plot</span>(AGE, LOS)  <span class="co"># standard scatter plot    </span></a>
-<a class="sourceLine" id="cb699-2" title="2"><span class="kw">smoothScatter</span>(AGE, LOS)  <span class="co"># a smoothed color density representation of a scatterplot  </span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(AGE, LOS)  <span class="co"># standard scatter plot    </span>
+<span class="kw">smoothScatter</span>(AGE, LOS)  <span class="co"># a smoothed color density representation of a scatterplot  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-370"></span>
 <img src="book_files/figure-html/unnamed-chunk-370-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-370-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
 <p class="caption">
@@ -614,18 +590,18 @@ Figure 5.4: Smoothed Scatter plots use colors to code for the density of data po
 <span id="exr:unnamed-chunk-371" class="exercise"><strong>Exercise 5.3  </strong></span>Investigate the correlation between length of stay and charges by filling in the blanks below. Remember to include plain English interpretation of your results even your grandpa can understand.
 </div>
 
-<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" title="1">LOS &lt;-<span class="st"> </span>______________       <span class="co"># import the values of LOS in the heart attack data</span></a>
-<a class="sourceLine" id="cb700-2" title="2">CHARGES &lt;-<span class="st"> </span>_____________    <span class="co">#import the values of Charges</span></a>
-<a class="sourceLine" id="cb700-3" title="3"><span class="kw">cor.test</span>(LOS, CHARGES, <span class="dt">method =</span> ___________)  <span class="co"># Pearson correlation</span></a>
-<a class="sourceLine" id="cb700-4" title="4"><span class="kw">cor.test</span>(LOS, CHARGES, <span class="dt">method =</span> __________)   <span class="co"># spearman correlation</span></a>
-<a class="sourceLine" id="cb700-5" title="5"><span class="kw">plot</span>(LOS, CHARGES)  <span class="co"># standard scatter plot </span></a>
-<a class="sourceLine" id="cb700-6" title="6"><span class="kw">__________</span>(LOS, CHARGES)  <span class="co"># a smoothed color density representation of a scatterplot</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LOS &lt;-<span class="st"> </span>______________       <span class="co"># import the values of LOS in the heart attack data</span>
+CHARGES &lt;-<span class="st"> </span>_____________    <span class="co">#import the values of Charges</span>
+<span class="kw">cor.test</span>(LOS, CHARGES, <span class="dt">method =</span> ___________)  <span class="co"># Pearson correlation</span>
+<span class="kw">cor.test</span>(LOS, CHARGES, <span class="dt">method =</span> __________)   <span class="co"># spearman correlation</span>
+<span class="kw">plot</span>(LOS, CHARGES)  <span class="co"># standard scatter plot </span>
+<span class="kw">__________</span>(LOS, CHARGES)  <span class="co"># a smoothed color density representation of a scatterplot</span></code></pre></div>
 </div>
 <div id="associations-between-categorical-variables" class="section level2">
 <h2><span class="header-section-number">5.3</span> Associations between categorical variables?</h2>
 <p>There are four columns in the heart attack data set that contain categorical values (DIAGNOSIS, DRG, SEX, and DIED). These columns could be associated with each other. For example, there is a correlation between SEX and DIED. Are men and women equally likely to survive a heart attack?</p>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb701-1" title="1">counts &lt;-<span class="st"> </span><span class="kw">table</span>(SEX, DIED)  <span class="co"># tabulates SEX and DIED and generate counts in a two dimension array.</span></a>
-<a class="sourceLine" id="cb701-2" title="2">counts</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(SEX, DIED)  <span class="co"># tabulates SEX and DIED and generate counts in a two dimension array.</span>
+counts</code></pre></div>
 <table>
 <caption><span id="tab:5-01">Table 5.3: </span>A 2x2 contingency table summarizing the distribution of DIED frequency by SEX.</caption>
 <thead>
@@ -649,13 +625,13 @@ Figure 5.4: Smoothed Scatter plots use colors to code for the density of data po
 </tbody>
 </table>
 <p>We got a contingency table as shown in Table <a href="the-heart-attack-data-set-i.html#tab:5-01">5.3</a>. To convert into percentages of survived, we can do:</p>
-<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb702-1" title="1">counts <span class="op">/</span><span class="st"> </span><span class="kw">rowSums</span>(counts) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts <span class="op">/</span><span class="st"> </span><span class="kw">rowSums</span>(counts) </code></pre></div>
 <pre><code>##    DIED
 ## SEX          0          1
 ##   F 0.84856861 0.15143139
 ##   M 0.91734156 0.08265844</code></pre>
 <p>We can see that 15.1% of females died in the hospital, much higher than the 8.26% for male patients. This gender difference is quite a surprise to me. But could this happen just by chance? To answer this question, we need a statistical test. Chi-square test can be used for testing the correlation of two categorical variables. The null hypothesis is that men and women are equally likely to die from a heart attack.</p>
-<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb704-1" title="1"><span class="kw">chisq.test</span>(counts)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chisq.test</span>(counts)</code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
 ## 
@@ -663,7 +639,7 @@ Figure 5.4: Smoothed Scatter plots use colors to code for the density of data po
 ## X-squared = 147.76, df = 1, p-value &lt; 2.2e-16</code></pre>
 <p>Have you seen this p-value before? Probably! It is the smallest non-zero number R shows for lots of tests. However, p is definitely small! Hence we reject the hypothesis that the mortality rate is the same for men and women. Looking at the data, it is higher for women. The chi-square test for a 2x2 contingency table gives accurate p-values provided that the number of expected observation is greater than 5. If this is not true, then you should use the Fisher Exact test. The chi-square test is an approximation to the Fisher Exact test. The Fisher Exact test is computationally intensive; Karl Pearson developed the chi-square approximation before we had computers to do the work. With fast computers available today, you can use the Fisher Exact test for quite large data sets, and be more confident in the p-values.</p>
 <p>You can use the chi-square test for contingency tables that have more than two rows or two columns. For contingency tables that have more than two rows or two columns, the p-value computed by the chi square approximation is reasonably accurate provided that the expected number of observations in every cell is greater than 1, and that no more than 20 percent of the cells have an expected number of observations less than 5. Again, the Fisher Exact test can handle quite large data sets with today’s computers, and avoid the problems with chi-square test.</p>
-<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb706-1" title="1"><span class="kw">fisher.test</span>(counts)  <span class="co"># Fisher’s Exact test</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fisher.test</span>(counts)  <span class="co"># Fisher’s Exact test</span></code></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
@@ -678,22 +654,22 @@ Figure 5.4: Smoothed Scatter plots use colors to code for the density of data po
 <p>In this case, the result of fisher’s test is the same as chi-square test.</p>
 <p>If you want to make your point to a boss who is either stupid or too busy, you need a chart. Below we show two types of barplots: stacked and side by side.</p>
 
-<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb708-1" title="1">counts &lt;-<span class="st"> </span><span class="kw">table</span>(DIED, SEX)  <span class="co"># SEX define columns now, as I want the bars to represent M or F.  </span></a>
-<a class="sourceLine" id="cb708-2" title="2"><span class="co"># Figure A</span></a>
-<a class="sourceLine" id="cb708-3" title="3"><span class="kw">text</span>(<span class="fl">0.42</span>, <span class="dv">7500</span>, <span class="dt">labels =</span> <span class="st">&quot;A&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">table</span>(DIED, SEX)  <span class="co"># SEX define columns now, as I want the bars to represent M or F.  </span>
+<span class="co"># Figure A</span>
+<span class="kw">text</span>(<span class="fl">0.42</span>, <span class="dv">7500</span>, <span class="dt">labels =</span> <span class="st">&quot;A&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-1"></span>
 <img src="book_files/figure-html/5-1-1.png" alt="Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side." width="50%" /><img src="book_files/figure-html/5-1-2.png" alt="Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side." width="50%" />
 <p class="caption">
 Figure 5.5: Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side.
 </p>
 </div>
-<p>You can add an argument, such as “<em>args.legend = list(x = "topleft")</em>”, in the function barplot() to change the position of legends. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A:</p>
-<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb709-1" title="1"><span class="kw">barplot</span>(counts, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="dt">beside =</span> F,</a>
-<a class="sourceLine" id="cb709-2" title="2">        <span class="dt">args.legend =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;topleft&quot;</span>))</a></code></pre></div>
+<p>You can add an argument, such as “<em>args.legend = list(x = “topleft”)</em>”, in the function barplot() to change the position of legends. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(counts, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="dt">beside =</span> F,
+        <span class="dt">args.legend =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;topleft&quot;</span>))</code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-378-1.png" width="672" /></p>
 <p>Another way of showing the proportions is mosaic plot.</p>
 
-<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb710-1" title="1"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED), <span class="dt">color =</span> T)  <span class="co"># Figure 4.6</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED), <span class="dt">color =</span> T)  <span class="co"># Figure 4.6</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-2"></span>
 <img src="book_files/figure-html/5-2-1.png" alt="Mosaic plot of DIED by SEX." width="576" />
 <p class="caption">
@@ -703,7 +679,7 @@ Figure 5.6: Mosaic plot of DIED by SEX.
 <p>The mosaic plot in Figure <a href="the-heart-attack-data-set-i.html#fig:5-2">5.6</a> is similar to the barplot in Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a>, but the bars are stretched to the same height, the width is defined by proportion of Male vs. Female. The size of the four blocks in the figure represents the counts of the corresponding combination. Also note that the blocks are also color-coded for different combination. Horizontally, the blocks are divided by SEX, we could observe that there are more men in this dataset than women. Vertically, the blocks are divided by DIED (1 for died in hospital). We could conclude that regardless of gender, only a small proportion of patients died in hospital. Between men and women, we also see that the percentage of women that died in hospital is higher than that in men. This is a rather unusual.</p>
 <p>We could use mosaic plots for multiple factors.</p>
 
-<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" title="1"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED, DRG), <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))  <span class="co"># Figure 4.7</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED, DRG), <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))  <span class="co"># Figure 4.7</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-3"></span>
 <img src="book_files/figure-html/5-3-1.png" alt="Mosaic plot of three factors." width="672" />
 <p class="caption">
@@ -712,11 +688,11 @@ Figure 5.7: Mosaic plot of three factors.
 </div>
 <p>Here we nested the tabulate command inside the mosaic plot. As shown in Figure <a href="the-heart-attack-data-set-i.html#fig:5-3">5.7</a>, we further divided each of the 4 quadrants of Figure <a href="the-heart-attack-data-set-i.html#fig:5-2">5.6</a> into three parts according to DRG codes, in red, green and blue. One thing we could tell is that a smaller proportion of surviving males developed complications, compared with females.</p>
 <p>Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).</p>
-<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" title="1">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset.</span></a></code></pre></div>
-<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" title="1"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-380-1.png" width="672" /></p>
 <p>This is a mosaic plot of the whole Titanic dataset</p>
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" title="1"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-381-1.png" width="672" /></p>
 <p>Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
 
@@ -724,24 +700,24 @@ Figure 5.7: Mosaic plot of three factors.
 <p><span id="exr:unnamed-chunk-382" class="exercise"><strong>Exercise 5.4  </strong></span>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses?</p>
 </div>
 
-<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" title="1">DIAGNOSIS &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>DIAGNOSIS</a>
-<a class="sourceLine" id="cb715-2" title="2">SEX &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>SEX</a>
-<a class="sourceLine" id="cb715-3" title="3">counts &lt;-<span class="st"> </span><span class="kw">_____________</span>(DIAGNOSIS, SEX)  <span class="co"># Take SEX as columns </span></a>
-<a class="sourceLine" id="cb715-4" title="4"><span class="kw">barplot</span>(_____________________________________________________)</a>
-<a class="sourceLine" id="cb715-5" title="5"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="fl">0.75</span>)</a>
-<a class="sourceLine" id="cb715-6" title="6"><span class="kw">mosaicplot</span>(_____________________________________________)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DIAGNOSIS &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>DIAGNOSIS
+SEX &lt;-<span class="st"> </span>heartatk4R<span class="op">$</span>SEX
+counts &lt;-<span class="st"> </span><span class="kw">_____________</span>(DIAGNOSIS, SEX)  <span class="co"># Take SEX as columns </span>
+<span class="kw">barplot</span>(_____________________________________________________)
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">cex =</span> <span class="fl">0.75</span>)
+<span class="kw">mosaicplot</span>(_____________________________________________)</code></pre></div>
 </div>
 <div id="associations-between-a-categorical-and-a-numeric-variables" class="section level2">
 <h2><span class="header-section-number">5.4</span> Associations between a categorical and a numeric variables?</h2>
 <p>Do women stay longer in the hospital? Does the charges differ for people with different diagnosis (part of the heart affected)? We should know by now how to answer these questions with T-test, and more generally ANOVA, following our examples commands used in our analysis of the Iris flower data set. For data visualization, <strong>boxplot</strong> is the most straight forward way. But beyond boxplot, we can use the ggplot2 package for more detailed examination of distribution of variables in two or more groups.</p>
 
-<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb716-2" title="2"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> SEX, </a>
-<a class="sourceLine" id="cb716-3" title="3">                       <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</a>
-<a class="sourceLine" id="cb716-4" title="4">                             ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb716-5" title="5"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">6</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb716-6" title="6"><span class="st">  </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span></a>
-<a class="sourceLine" id="cb716-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> SEX, 
+                       <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),
+                             ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">6</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new1"></span>
 <img src="book_files/figure-html/new1-1.png" alt="Histogram of AGE by SEX using ggplot2 package" width="576" />
 <p class="caption">
@@ -751,26 +727,26 @@ Figure 5.8: Histogram of AGE by SEX using ggplot2 package
 <p>Now the two histograms are arranged, and it is very easy to see that women’s age are more skewed to the right, meaning women are considerably older than men. I am surprised at first by this huge difference, as the average age of women if bigger by 11. Further research shows that for women the symptoms of heart attacks are milder and often go unnoticed.</p>
 <p>We can further divide the population according to survival status by adding another factor:</p>
 
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb717-2" title="2">heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb717-3" title="3"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, </a>
-<a class="sourceLine" id="cb717-4" title="4">           <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</a>
-<a class="sourceLine" id="cb717-5" title="5">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),</a>
-<a class="sourceLine" id="cb717-6" title="6">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]),</a>
-<a class="sourceLine" id="cb717-7" title="7">                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>))<span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb717-8" title="8"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb717-9" title="9"><span class="st">  </span><span class="kw">facet_grid</span>(DIED <span class="op">~</span><span class="st"> </span>SEX) <span class="op">+</span></a>
-<a class="sourceLine" id="cb717-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, 
+           <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),
+                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),
+                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]),
+                 ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>))<span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(DIED <span class="op">~</span><span class="st"> </span>SEX) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new2"></span>
 <img src="book_files/figure-html/new2-1.png" alt="Histogram of AGE by SEX and DIED using ggplot2 package" width="672" />
 <p class="caption">
 Figure 5.9: Histogram of AGE by SEX and DIED using ggplot2 package
 </p>
 </div>
-<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" title="1"><span class="kw">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</code></pre></div>
 <p>We can see that patients who did not survive heart attack tend to be older, for both men and women. This is perhaps better illustrated with density plot:</p>
 
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> .<span class="dv">3</span>) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new3"></span>
 <img src="book_files/figure-html/new3-1.png" alt="Density plot of AGE by SEX using ggplot2 package" width="576" />
 <p class="caption">
@@ -780,7 +756,7 @@ Figure 5.10: Density plot of AGE by SEX using ggplot2 package
 <p>The result is similar to Figure <a href="the-heart-attack-data-set-i.html#fig:new1">5.8</a>, but as a density plot.</p>
 <p>Now for each gender, we further divide the patients by their survival status. Instead of splitting into multiple panels, the curves are overlaid.</p>
 
-<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> .<span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new4"></span>
 <img src="book_files/figure-html/new4-1.png" alt="Density plot of AGE by SEX and DIED using ggplot2 package" width="576" />
 <p class="caption">
@@ -812,7 +788,7 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 <h2><span class="header-section-number">5.5</span> Associations between multiple columns?</h2>
 <p>We can use the ggplot2 package to investigate correlations among multiple columns by figures with multiple panels.</p>
 
-<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" title="1"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>(<span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-6"></span>
 <img src="book_files/figure-html/5-6-1.png" alt="Multiple boxplots of AGE by DRG and SEX using ggplot2 package" width="480" />
 <p class="caption">
@@ -839,12 +815,12 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 </div>
 <p>All of these techniques we introduced so far enable us to <strong>LEARN</strong> about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc.</p>
 <p>You should also <strong>INTERACT</strong> with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives.</p>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" title="1"><span class="co"># scatterplot of LOS vs. AGE</span></a>
-<a class="sourceLine" id="cb722-2" title="2"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </a>
-<a class="sourceLine" id="cb722-3" title="3"><span class="co"># scatterplot of LOS vs. AGE, divided by SEX</span></a>
-<a class="sourceLine" id="cb722-4" title="4"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </a>
-<a class="sourceLine" id="cb722-5" title="5"><span class="co"># scatterplot colored by DIED</span></a>
-<a class="sourceLine" id="cb722-6" title="6"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># scatterplot of LOS vs. AGE</span>
+<span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() 
+<span class="co"># scatterplot of LOS vs. AGE, divided by SEX</span>
+<span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  
+<span class="co"># scatterplot colored by DIED</span>
+<span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-390-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
 
@@ -855,11 +831,11 @@ Figure 5.14: A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
 </p>
 </div>
 <p>Figure <a href="the-heart-attack-data-set-i.html#fig:5-7">5.14</a> seems to suggest that the positive association between AGE and LOS is noticeable in patients who did not die in hospital, regardless of sex. This is a statistician’s language. Try this instead that could be understood by both the statistician and his/her grandmother. Older patients tend to stay longer in the hospital after surviving a heart attack. This is true for both men and women.</p>
-<p>Another way to visualize complex correlation is bubble plot. <strong>Bubble plot</strong> is an extension of scatter plot. It uses an additional dimension of data to determine the size of the symbols. Interesting video using bubble plot: <a href="http://youtu.be/jbkSRLYSojo">http://youtu.be/jbkSRLYSojo</a></p>
+<p>Another way to visualize complex correlation is bubble plot. <strong>Bubble plot</strong> is an extension of scatter plot. It uses an additional dimension of data to determine the size of the symbols. Interesting video using bubble plot: <a href="http://youtu.be/jbkSRLYSojo" class="uri">http://youtu.be/jbkSRLYSojo</a></p>
 
-<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb723-1" title="1">y &lt;-<span class="st"> </span>x[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12844</span>, <span class="dv">200</span>), ]   <span class="co"># randomly sample 200 patients</span></a>
-<a class="sourceLine" id="cb723-2" title="2"><span class="kw">plot</span>(y<span class="op">$</span>AGE, y<span class="op">$</span>LOS, <span class="dt">cex =</span> y<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span><span class="dv">6000</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)[y<span class="op">$</span>SEX], <span class="dt">xlab =</span> <span class="st">&quot;AGE&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;LOS&quot;</span>)</a>
-<a class="sourceLine" id="cb723-3" title="3"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">levels</span>(y<span class="op">$</span>SEX), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span>x[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12844</span>, <span class="dv">200</span>), ]   <span class="co"># randomly sample 200 patients</span>
+<span class="kw">plot</span>(y<span class="op">$</span>AGE, y<span class="op">$</span>LOS, <span class="dt">cex =</span> y<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span><span class="dv">6000</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)[y<span class="op">$</span>SEX], <span class="dt">xlab =</span> <span class="st">&quot;AGE&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;LOS&quot;</span>)
+<span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">levels</span>(y<span class="op">$</span>SEX), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">pch =</span> <span class="dv">1</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-8"></span>
 <img src="book_files/figure-html/5-8-1.png" alt="Bubble plot example." width="672" />
 <p class="caption">
@@ -869,7 +845,7 @@ Figure 5.15: Bubble plot example.
 <p>Figure <a href="the-heart-attack-data-set-i.html#fig:5-8">5.15</a> is a busy plot. Female patients are shown in red while males in blue. Size of the plot is proportional to charges. So on this plot we are visualizing 4 columns of data!</p>
 <p>Other common methods we can use to detect complex correlations and structures include principal component analysis (PCA), Multidimensional scaling (MDS), hierarchical clustering etc.</p>
 <ol style="list-style-type: decimal">
-<li>Velleman, P. F.; Data Description Inc. ActivStats, 2000-2001 release.; A.W. Longman,: Glenview, IL, 2001.</li>
+<li>Velleman, P. F.; Data Description Inc. ActivStats, 2000-2001 release.; A.W. Longman,: Glenview, IL, 2001.</li>
 </ol>
 
 </div>
@@ -935,7 +911,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
