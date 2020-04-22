@@ -392,11 +392,11 @@ Figure 3.2: Examples of sum code
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.6258345 -0.6425377  0.1748951  0.8670524  1.3500000
+## [1] -1.7433012 -0.6150566  0.1762866  0.6935905  1.3500000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
 ##         0%        25%        50%        75%       100% 
-## -2.6258345 -0.6425377  0.1748951  0.8670524  1.3500000 
+## -1.7433012 -0.6150566  0.1762866  0.6935905  1.3500000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -567,7 +567,7 @@ x<span class="op">^</span><span class="dv">2</span></code></pre></div>
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No”. Because the 3 elements are randomly selected.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">sample</span>(x, <span class="dv">3</span>)</code></pre></div>
-<pre><code>## [1]  2 11  5</code></pre>
+<pre><code>## [1]  2 22 11</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)
 <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;David&quot;</span>, <span class="st">&quot;Beck&quot;</span>, <span class="st">&quot;Zach&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)
@@ -1361,12 +1361,12 @@ Select a subset which satisfies that the <em>cyl</em> is 6 and <em>mpg</em> grea
 x2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(y, x.id)
 <span class="kw">head</span>(x2)</code></pre></div>
 <pre><code>##             y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1  0.64933496  1          5.1         3.5          1.4         0.2  setosa
-## 2 -0.94669073  2          4.9         3.0          1.4         0.2  setosa
-## 3  0.08963155  3          4.7         3.2          1.3         0.2  setosa
-## 4 -0.76437360  4          4.6         3.1          1.5         0.2  setosa
-## 5  0.56392050  5          5.0         3.6          1.4         0.2  setosa
-## 6  1.64120146  6          5.4         3.9          1.7         0.4  setosa</code></pre>
+## 1  0.93758697  1          5.1         3.5          1.4         0.2  setosa
+## 2  0.56767179  2          4.9         3.0          1.4         0.2  setosa
+## 3 -0.83200061  3          4.7         3.2          1.3         0.2  setosa
+## 4  0.71139073  4          4.6         3.1          1.5         0.2  setosa
+## 5  0.03121192  5          5.0         3.6          1.4         0.2  setosa
+## 6  0.06388585  6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">newRow &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)
 x3 &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, newRow)
@@ -1526,33 +1526,33 @@ dfmg3</code></pre></div>
 <p>We use data.frame() function to define a new data frame with 100 rows and two columns, <em>ids</em> and <em>rand</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">rand =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>))
 <span class="kw">head</span>(y)</code></pre></div>
-<pre><code>##   id        rand
-## 1  1 -0.35902901
-## 2  2 -0.04830217
-## 3  3 -1.93512782
-## 4  4  0.34176293
-## 5  5  0.71267816
-## 6  6  1.08973112</code></pre>
+<pre><code>##   id       rand
+## 1  1 -0.9603010
+## 2  2 -0.5634112
+## 3  3 -0.5255474
+## 4  4 -0.2588590
+## 5  5 -1.3812964
+## 6  6  0.1901457</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(y)</code></pre></div>
 <pre><code>##      id       rand
-## 95   95  1.3028609
-## 96   96  0.3329903
-## 97   97 -0.1849832
-## 98   98  0.7303902
-## 99   99  1.0707918
-## 100 100 -0.8928938</code></pre>
+## 95   95  1.1449303
+## 96   96 -0.7464061
+## 97   97 -1.0046146
+## 98   98  0.2171936
+## 99   99  0.3616849
+## 100 100  0.2302860</code></pre>
 <p>Now we merge two data frames x and y by a common column named <strong>id</strong>. Note the new data frame z has only 100 rows. We can also merge data frames by row names too.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris
 x<span class="op">$</span>id =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">150</span>)
 z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;id&quot;</span>)
 <span class="kw">head</span>(z)</code></pre></div>
-<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species        rand
-## 1  1          5.1         3.5          1.4         0.2  setosa -0.35902901
-## 2  2          4.9         3.0          1.4         0.2  setosa -0.04830217
-## 3  3          4.7         3.2          1.3         0.2  setosa -1.93512782
-## 4  4          4.6         3.1          1.5         0.2  setosa  0.34176293
-## 5  5          5.0         3.6          1.4         0.2  setosa  0.71267816
-## 6  6          5.4         3.9          1.7         0.4  setosa  1.08973112</code></pre>
+<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
+## 1  1          5.1         3.5          1.4         0.2  setosa -0.9603010
+## 2  2          4.9         3.0          1.4         0.2  setosa -0.5634112
+## 3  3          4.7         3.2          1.3         0.2  setosa -0.5255474
+## 4  4          4.6         3.1          1.5         0.2  setosa -0.2588590
+## 5  5          5.0         3.6          1.4         0.2  setosa -1.3812964
+## 6  6          5.4         3.9          1.7         0.4  setosa  0.1901457</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(z)</code></pre></div>
 <pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 ## 95   95          5.6         2.7          4.2         1.3 versicolor
@@ -1562,12 +1562,12 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ## 99   99          5.1         2.5          3.0         1.1 versicolor
 ## 100 100          5.7         2.8          4.1         1.3 versicolor
 ##           rand
-## 95   1.3028609
-## 96   0.3329903
-## 97  -0.1849832
-## 98   0.7303902
-## 99   1.0707918
-## 100 -0.8928938</code></pre>
+## 95   1.1449303
+## 96  -0.7464061
+## 97  -1.0046146
+## 98   0.2171936
+## 99   0.3616849
+## 100  0.2302860</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(z)</code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1577,12 +1577,12 @@ z &lt;-<span class="st"> </span><span class="kw">merge</span>(x, y, <span class=
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
 ##   Petal.Width          Species        rand        
-##  Min.   :0.100   setosa    :50   Min.   :-2.0410  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.3604  
-##  Median :0.800   virginica : 0   Median : 0.2175  
-##  Mean   :0.786                   Mean   : 0.1166  
-##  3rd Qu.:1.300                   3rd Qu.: 0.7171  
-##  Max.   :1.800                   Max.   : 2.8188</code></pre>
+##  Min.   :0.100   setosa    :50   Min.   :-3.3002  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.9191  
+##  Median :0.800   virginica : 0   Median :-0.1948  
+##  Mean   :0.786                   Mean   :-0.2972  
+##  3rd Qu.:1.300                   3rd Qu.: 0.2659  
+##  Max.   :1.800                   Max.   : 1.5148</code></pre>
 </div>
 <div id="strings-and-string-vectors" class="section level3">
 <h3><span class="header-section-number">3.2.4</span> Strings and string vectors</h3>
@@ -1688,7 +1688,7 @@ y</code></pre></div>
 ## [[4]]
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x0000000017c68218&gt;
+## &lt;bytecode: 0x0000000017c54fb8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height”, “name”, “BP” and “fun” to the y.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">height =</span> <span class="dv">5</span>, <span class="dt">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="dt">BP =</span> <span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="dt">fun =</span> mean)  
@@ -1705,7 +1705,7 @@ y</code></pre></div>
 ## $fun
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x0000000017c68218&gt;
+## &lt;bytecode: 0x0000000017c54fb8&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Here is another example for creating a list:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="dt">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span>
@@ -2033,21 +2033,21 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 ##  Welch Two Sample t-test
 ## 
 ## data:  r1 and r2
-## t = 0.92345, df = 197.97, p-value = 0.3569
+## t = -0.29162, df = 195.68, p-value = 0.7709
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.1311282  0.3620931
+##  -0.3479623  0.2583133
 ## sample estimates:
-##   mean of x   mean of y 
-##  0.05977001 -0.05571242</code></pre>
+##    mean of x    mean of y 
+## -0.047739151 -0.002914612</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></code></pre></div>
 <pre><code>## [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
 ## [6] &quot;null.value&quot;  &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></code></pre></div>
-<pre><code>## [1] 0.3568949</code></pre>
+<pre><code>## [1] 0.7708856</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t.result<span class="op">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></code></pre></div>
-<pre><code>##   mean of x   mean of y 
-##  0.05977001 -0.05571242</code></pre>
+<pre><code>##    mean of x    mean of y 
+## -0.047739151 -0.002914612</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
 <p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, and perform t-test and get the p-value. By repeating this process 500 times, we want to see the distribution of p-values and count how many times we get significant result with p &lt; 0.05.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pvalues &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span>
@@ -2059,9 +2059,9 @@ t.result &lt;-<span class="st"> </span><span class="kw">t.test</span>(r1, r2) <s
 <p><img src="book_files/figure-html/unnamed-chunk-335-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pvalues)   </code></pre></div>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-## 0.001301 0.262962 0.520366 0.511844 0.761701 0.997112</code></pre>
+## 0.001018 0.252738 0.530678 0.520879 0.788595 0.999620</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(pvalues <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></code></pre></div>
-<pre><code>## [1] 18</code></pre>
+<pre><code>## [1] 20</code></pre>
 
 </div>
 </div>
