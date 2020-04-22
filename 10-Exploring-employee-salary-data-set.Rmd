@@ -5,7 +5,6 @@ This original data set is taken from the Payroll Data from online "https://data.
 ## Read in and clean data
 ```{r eval=FALSE}
 raw0 <- read.csv("datasets/State_Employee_Payroll_Data_Calendar_Year_2015_through_Present.csv")
-str(raw0)
 employID <- unique(raw0$EmplId.Empl.Rcd)
 sample <- sample(employID, 8500)
 raw <- raw0[raw0$EmplId.Empl.Rcd %in% sample, ] %>% droplevels()
@@ -13,7 +12,8 @@ str(raw)
 write.csv(raw, file = "datasets/state_employee_salary_data_2017.csv", row.names = FALSE)
 ```
 
-From the sampled data set, We will pick full time employees as our goal and focus on the interested variables.
+From the sampled data set, We will pick full time employees as our goal and focus on the interested variables. 
+Please pay attention to the difference of "read.csv" and "read_csv". "read.csv()" define the variables as factor or numeric smartly, and categorize NA or empty space as one level independently; While "read_csv()" may need define class by yourself and treat missing value as "NA", and will NOT count the missing value as one level. Here for our data, we will rename the missing variable as "unknown" later, it's necessary to read in the data using "read.csv()"!
 ```{r message=FALSE}
 library(dplyr)
 raw <- read.csv("datasets/state_employee_salary_data_2017.csv")
@@ -64,7 +64,7 @@ raw26 <- raw26[-which(raw26$EmplId.Empl.Rcd == empl38$EmplId.Empl.Rcd), ]
 ```
 
 We check the situation whether different genders are indexed for same employee. 
-```{r}
+```{r warning=FALSE}
 df <- raw26 %>% 
   group_by(EmplId.Empl.Rcd, Sex) %>% 
   summarise(Total.Gross = sum(Tot.Gross ))
@@ -72,7 +72,7 @@ dupliSex <- df[duplicated(df$EmplId.Empl.Rcd), ]
 dupliSex
 ```
 
-There is no employee having different sex recorded. We will check whether sex "U" employee is still in our data
+With tibble of zero row, we conclude that there is no employee having different sex recorded. We will check whether sex "U" employee is still in our data
 
 ```{r}
 raw26[which(raw26$Sex == "U"), ]
@@ -88,7 +88,7 @@ dupliEthnic.Grp <- df[duplicated(df$EmplId.Empl.Rcd), ]
 dupliEthnic.Grp
 ```
 
-There is no different ethnic recorder for the same employee. 
+Tibble of zero row tells us that there is no different ethnic recorder for the same employee. 
 
 Now we notice that some employees even have gross income or biweekly rate less then zero. We consider to remove those employees. 
 
