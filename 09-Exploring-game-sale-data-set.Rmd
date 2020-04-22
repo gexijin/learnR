@@ -139,6 +139,11 @@ library(ggplot2)
 ggplot(game, aes(x = Platform.type)) + geom_bar(fill = "blue")
 ```
 
+```{r}
+a <- ggplot(game, aes(x = Platform.type)) + geom_bar(fill = "blue")
+a
+```
+
 As the bar plot shown here, Playstation is the biggest group, then xbox and nintendo. While others are the smallest type.
 
 ```{r}
@@ -545,8 +550,6 @@ Publisher. <- head(names(sort(table(game$Publisher), decreasing = TRUE)), 12)
 game <- game %>%
 mutate(Publisher.type = ifelse(Publisher %in% Publisher., as.character(Publisher), "Others")) 
 game.lm <- game[, c(3:4, 11, 21, 23:26)]
-#game.log$Genre.type <- as.factor(game.log$Genre.type)
-#game.lm$Publisher.type <- as.factor(game.lm$Publisher.type)
 ```
 
 ```{r}
