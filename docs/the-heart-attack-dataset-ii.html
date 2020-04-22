@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-19" />
+<meta name="date" content="2020-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +111,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
-<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started-trail-delete-this-in-a-few-minutes"><i class="fa fa-check"></i><b>1.1</b> Getting started (Trail: Delete this in a few minutes)</a></li>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
 <li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
 <li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
@@ -316,14 +316,17 @@ Figure 6.2: Changing color and shape to represent multivariate data in ggplot2.
 </div>
 <p>At each step, we add additional information about these patients (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-2">6.2</a>). With ggplot2, we can visualize complex, multivariate data by mapping different columns into diverse types of aesthetics. Figure <a href="the-heart-attack-dataset-ii.html#fig:15-1">6.1</a> shows a strong positive correlation between charges and length of hospital stay, which is expected as many itemized costs are billed daily. Note there are over 12,000 data points on these plots, many are plotted near or exactly at the same places, especially at the lower left corner. stat_density2d() can be used to color code density.</p>
 <p>These plots are big in file size when you save it in a vector format (<strong>metafile</strong>), which often offer higher resolution. If you have many such plots in a paper or thesis, your file size can be big. These problems can be avoided if you use the <strong>bitmap</strong> format.</p>
+<blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-397" class="exercise"><strong>Exercise 6.1  </strong></span>Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis.
+<p><span id="exr:unnamed-chunk-393" class="exercise"><strong>Exercise 6.1  </strong></span></p>
+<p>Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis.</p>
+<p>heartatk4R &lt;- read.table(_______________________________)</p>
+<p>ggplot(heartatk4R, aes(x = _______, y = ________, color = _________, shape = _________)) +</p>
+geom_point()
 </div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R &lt;-<span class="st"> </span><span class="kw">read.table</span>(_______________________________)
-<span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> _______, <span class="dt">y =</span> ________, <span class="dt">color =</span> _________, <span class="dt">shape =</span> _________))         
-<span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+</blockquote>
 </div>
 <div id="histograms-and-density-plots" class="section level2">
 <h2><span class="header-section-number">6.2</span> Histograms and density plots</h2>
@@ -359,41 +362,45 @@ Figure 6.4: Density plots.
 </p>
 </div>
 <p>Recall the DRG=121 represents patients who survived but developed complications; DRG=122 denotes those without complications and DRG=123 are patients who did not survive. Figure <a href="the-heart-attack-dataset-ii.html#fig:15-4">6.4</a>C suggests that women in all three groups are older than men counterparts. If we examine the distribution of male patients’ age distribution across facets, we can see that the distribution is skewed to the right in deceased patients (DRG=123), indicating that perhaps older people are less likely to survive a heart attack. Survivors without complications (DRG= 122) tend to be younger than survivors with complications.</p>
+<blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-404" class="exercise"><strong>Exercise 6.2  </strong></span>Create density plots like Figure 6.5 to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.
+<p><span id="exr:unnamed-chunk-399" class="exercise"><strong>Exercise 6.2  </strong></span></p>
+<p>Create density plots like Figure 6.5 to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.</p>
+<p>ggplot(heartatk4R, aes(_________, _________)) + ______________(alpha = 0.3) +</p>
+_________(________ ~ .) + xlim(________, _____)
 </div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(_________, _________)) <span class="op">+</span><span class="st"> </span><span class="kw">______________</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">       </span><span class="kw">_________</span>(________ <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(________, _____)</code></pre></div>
-
-<div class="figure" style="text-align: center"><span id="fig:15-5"></span>
-<img src="book_files/figure-html/15-5-1.png" alt="Distribution of LOS by DRG groups grouped by SEX." width="576" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-400"></span>
+<img src="book_files/figure-html/unnamed-chunk-400-1.png" alt="Distribution of LOS by DRG groups grouped by SEX" width="576" />
 <p class="caption">
-Figure 6.5: Distribution of LOS by DRG groups grouped by SEX.
+Figure 6.5: Distribution of LOS by DRG groups grouped by SEX
 </p>
+</blockquote>
 </div>
 </div>
 <div id="box-plots-and-violin-plots" class="section level2">
 <h2><span class="header-section-number">6.3</span> Box plots and Violin plots</h2>
 <p>We can follow the same rule to generate boxplots using the geom_boxplot ( ). Let’s start with a basic version.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()  <span class="co"># basic boxplot </span>
-<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 5.6A</span>
-<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 5.6B</span></code></pre></div>
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 6.6A</span>
+<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 6.6B</span></code></pre></div>
 <p>The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins.</p>
+<blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-407" class="exercise"><strong>Exercise 6.3  </strong></span>Generate a violin plot like Figure <a href="the-heart-attack-dataset-ii.html#fig:15-6">6.6</a>C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+<p><span id="exr:unnamed-chunk-402" class="exercise"><strong>Exercise 6.3  </strong></span></p>
+<p>Generate a violin plot like Figure 6.6C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.</p>
+<p>ggplot(heartatk4R, ___________________) + _____________ + ______________ +</p>
+labs(x = “DRG groups”, y = “Length of Stay(days)”) + ylim(0, 20)
 </div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, ___________________) <span class="op">+</span><span class="st"> </span>_____________ <span class="op">+</span><span class="st"> </span>______________ <span class="op">+</span><span class="st"> </span>
-<span class="st">       </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;DRG groups&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Length of Stay(days)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">20</span>) </code></pre></div>
-
-<div class="figure" style="text-align: center"><span id="fig:15-6"></span>
-<img src="images/img1506_boxviolin.png" alt="Boxplot and violin plots using ggplot2." width="640" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-403"></span>
+<img src="images/img1506_boxviolin.png" alt="Boxplot and violin plots using ggplot2" width="640" />
 <p class="caption">
-Figure 6.6: Boxplot and violin plots using ggplot2.
+Figure 6.6: Boxplot and violin plots using ggplot2
 </p>
+</blockquote>
 </div>
 </div>
 <div id="bar-plot-with-error-bars" class="section level2">
@@ -498,22 +505,25 @@ Figure 6.8: The length of stay summarized by diagnosis and sex. Error bars repre
 Figure 6.9: Mean ages for patients with different diagnosis and treatment outcome.
 </p>
 </div>
+<blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-416" class="exercise"><strong>Exercise 6.4  </strong></span>Generate Figure <a href="the-heart-attack-dataset-ii.html#fig:15-9">6.9</a> and offer your interpretation. Hint: Modify both the summarizing script and the plotting script.
+<p><span id="exr:unnamed-chunk-411" class="exercise"><strong>Exercise 6.4  </strong></span></p>
+<p>Generate Figure <a href="the-heart-attack-dataset-ii.html#fig:15-9">6.9</a> and offer your interpretation. Hint: Modify both the summarizing script and the plotting script.</p>
+<p>df &lt;- heartatk4R %&gt;%</p>
+<p>_____________(DIAGNOSIS, DRG) %&gt;% # two grouping variables</p>
+<p>_____________(mean = mean(AGE),</p>
+<p>sd = sd(AGE),</p>
+<p>n = n(),</p>
+<p>se = sd(AGE) / sqrt(n()))</p>
+<p>ggplot(df, aes(_________________________) + # mapping</p>
+<p>_______________(stat = “identity”, position = “dodge”) + # bars mean</p>
+<p>_______________(x = “Diagnosis codes”, y = “Age(yrs)”) + # axes labels</p>
+<p>_______________(aes(__________________, ________________), # error bars</p>
+position = position_dodge(.9), width = 0.2)
 </div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>heartatk4R <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">_____________</span>(DIAGNOSIS, DRG) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># two grouping variables</span>
-<span class="st">  </span><span class="kw">_____________</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(AGE),  
-            <span class="dt">sd   =</span> <span class="kw">sd</span>(AGE), 
-            <span class="dt">n    =</span> <span class="kw">n</span>(),  
-            <span class="dt">se   =</span> <span class="kw">sd</span>(AGE) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">n</span>())) 
-<span class="kw">ggplot</span>(df, <span class="kw">aes</span>(_________________________) <span class="op">+</span><span class="st">  </span><span class="co"># mapping</span>
-<span class="st">       </span><span class="kw">_______________</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># bars mean</span>
-<span class="st">       </span><span class="kw">_______________</span>(<span class="dt">x =</span> <span class="st">&quot;Diagnosis codes&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Age(yrs)&quot;</span>) <span class="op">+</span><span class="st">    </span><span class="co"># axes labels</span>
-<span class="st">       </span><span class="kw">_______________</span>(<span class="kw">aes</span>(__________________, ________________),   <span class="co"># error bars</span>
-                     <span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">9</span>), <span class="dt">width =</span> <span class="fl">0.2</span>)</code></pre></div>
+</blockquote>
 <p>Overall, our investigation reveals that women are much older than men when admitted to hospital for heart attack. Therefore, prognosis is also poor with high mortality and complication rates. It is probably not because they develop heart attack later in life. It seems that symptoms are subtler in women and often get ignored. Heart attack can sometimes manifest as back pain, numbness in the arm, or pain in the jaw or teeth! (Warning: statistics professor is talking about medicine!)</p>
 <p>As you could see from these plots, <strong>ggplot2</strong> generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users. Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can <strong>google it, try the example code</strong>, and modify it to fit your needs. It is all free! Enjoy coding!</p>
 </div>
@@ -593,13 +603,16 @@ Figure 6.9: Mean ages for patients with different diagnosis and treatment outcom
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
 <p>Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.</p>
+<blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-420" class="exercise"><strong>Exercise 6.5  </strong></span>Use multiple linear regression to investigate the factors associated with length of stay. Obviously we need to exclude charges in our model. Interpret your results.
+<p><span id="exr:unnamed-chunk-414" class="exercise"><strong>Exercise 6.5  </strong></span></p>
+<p>Use multiple linear regression to investigate the factors associated with length of stay. Obviously we need to exclude charges in our model. Interpret your results.</p>
+<p>fit &lt;- ___________(LOS ~ SEX + AGE + DRG + DIAGNOSIS, data = ___________)</p>
+___________(fit)
 </div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">___________</span>(LOS <span class="op">~</span><span class="st"> </span>SEX <span class="op">+</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>DRG <span class="op">+</span><span class="st"> </span>DIAGNOSIS, <span class="dt">data =</span> ___________)
-<span class="kw">___________</span>(fit) </code></pre></div>
+</blockquote>
 <p>This is not part of the exercise, but another problem we could look into is who are more likely to have complications. We should only focuse on the surviving patients and do logistic regression.</p>
 <p>We still need pair-wised examinations, because we cannot put two highly correlated factors in the same model.</p>
 

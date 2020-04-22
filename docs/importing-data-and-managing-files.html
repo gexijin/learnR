@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-19" />
+<meta name="date" content="2020-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +111,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
-<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started-trail-delete-this-in-a-few-minutes"><i class="fa fa-check"></i><b>1.1</b> Getting started (Trail: Delete this in a few minutes)</a></li>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
 <li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
 <li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
@@ -476,18 +476,19 @@ df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-347" class="exercise"><strong>Exercise 4.1  </strong></span>If you have not created a project for chapter 4, it is time to create one. Download the tab-delimited text file <em>pulse.txt</em> from this page (<a href="http://statland.org/R/R/pulse.txt" class="uri">http://statland.org/R/R/pulse.txt</a>). Import pulse.txt into R using two methods: R menu (Show the process by attaching some necessary screenshots.) and R script.<br />
+<p><span id="exr:unnamed-chunk-346" class="exercise"><strong>Exercise 4.1  </strong></span></p>
+If you have not created a project for chapter 4, it is time to create one. Download the tab-delimited text file <em>pulse.txt</em> from this page (<a href="http://statland.org/R/R/pulse.txt" class="uri">http://statland.org/R/R/pulse.txt</a>). Import pulse.txt into R using two methods: R menu (Show the process by attaching some necessary screenshots.) and R script.<br />
 a. Rename the file as <em>chapter4Pulse</em>.<br />
 b. Change the class of ActivityL from double to integer.<br />
 c. After importing <em>pulse.txt</em> into R, convert the class of Sex from charater to factor using R code. Don’t forget using class() function to check your answer.
 </div>
 
 </blockquote>
-<hr />
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-348" class="exercise"><strong>Exercise 4.2  </strong></span>Type in Table <a href="importing-data-and-managing-files.html#tab:9-01">4.1</a> in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure <a href="importing-data-and-managing-files.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
+<p><span id="exr:unnamed-chunk-347" class="exercise"><strong>Exercise 4.2  </strong></span></p>
+Type in Table <a href="importing-data-and-managing-files.html#tab:9-01">4.1</a> in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure <a href="importing-data-and-managing-files.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
 </div>
 
 </blockquote>
@@ -542,7 +543,7 @@ c. After importing <em>pulse.txt</em> into R, convert the class of Sex from char
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(df2<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre></div>
 <p>You can now do things like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(df2<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>df2<span class="op">$</span>ag)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-353-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-352-1.png" width="672" /></p>
 <p>Each box represents an age group. Older patients tends to stay longer in the hospital after being admitted for heart attack.</p>
 <p>You can extract a subset of cases:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df3 &lt;-<span class="st"> </span><span class="kw">subset</span>(df2, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
@@ -573,14 +574,6 @@ df4 &lt;-<span class="st"> </span><span class="kw">subset</span>(df3, AGE <span 
 ##  Max.   :100.00  
 ## </code></pre>
 <p>Try not to attach the data when you are manipulation data like this.</p>
-<blockquote>
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-355" class="exercise"><strong>Exercise 4.3  </strong></span>
-</div>
-
-</blockquote>
-<hr />
 </div>
 <div id="data-transformation-using-the-dplyr" class="section level2">
 <h2><span class="header-section-number">4.6</span> Data transformation using the dplyr</h2>

@@ -1,7 +1,6 @@
 # The game sales dataset
 
-This is a test for build book! Try again!
-This is a video game sales data including game sales of North America, European, Japan and other area, together they make the global sale. The data also give the information about the critic score, user score and the number of critics or users who gave these two scores. This data is downloaded from [https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv](https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv). 
+This is a video game sales data including game sales of North America, European, Japan and other area, together they make the global sale. The data also give the information about the critic score, user score and the number of critics or users who gave these two scores. This data was downloaded from [https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv](https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv). 
 
 The detail about the data is listed as follow:
 
@@ -38,7 +37,7 @@ Developer: Party responsible for creating the game
 Rating: The ESRB ratings: 
 E for "Everyone"; E10+ for "Everyone 10+"; T for "Teen"; M for "Mature"; AO for "Adults Only"; RP for "Rating Pending"; K-A for kids to adults.
 
-After downloading the data, We replace N/A with NA first in excel and save it as csv file and read in. We remove these observations with empty string of Rating and 6825 observations was left in our data set "game". We notice that there are lots of zero sales value. To prepare these variables ready for being taken log value to make them normal or close to normal distribution, we transform the sales into its basic units and plus 1. We also divide critic score by 10 to march the scale unit of user score.
+After downloading the data, We replaced N/A with NA first in excel and saved it as csv file and read in. We removed these observations with empty string of Rating and 6825 observations was left in our data set "game". We noticed that there were lots of sales value with zero. To prepare these variables ready for being taken log value to make them normal or close to normal distribution, we transformed the sales into its basic units and plus 1. We also divided critic score by 10 to march the scale unit of user score.
 
 ##Reading in data and manage data
 ```{r message=FALSE}
@@ -71,7 +70,7 @@ str(game)
 summary(game)
 ```
 
-Summary of these variables tell us that some of games were published in the same name; PS2 is the most popular platform; Action is the most popular Genre; Electronic Arts has the most high frequency among the publishers; Rating T and E are the two most released ratings; For these sales, though the minimums, several quantiles and medians are small, but the maximums are high, which means there are real good sale games among them; Extreme big maximum User count hints so many users score some special games. 
+Summary of these variables tells us that some of games were published in the same name; PS2 is the most popular platform; Action is the most popular Genre; Electronic Arts has the most high frequency among the publishers; Rating T and E are the two most released ratings; For these sales, though the minimums, several quantiles and medians are small, but the maximums are high, which means there are real good sale games among them; Extreme big maximum User count hints so many users scored some special games. 
 
 Our pre-analysis shows that these variables are not normally distributed, especially those sales and score counts variables. We take logs to transform these variables.
 ```{r}
@@ -196,7 +195,10 @@ ggplotly(p)
 
 For all platform and rating combination, Playstation games are released most in all other three different rating types except Everyone 10 age plus. Nintendo is the most popular game for Everyone 10+, it's the second popular platform for rating Everyone. Xbox is the second popular platform for rating mature and teenage,and it's the third favorite platform for rating everyone and everyone 10+. Most Other platform games are rated as Everyone.
 
+>
 ```{exercise}
+
+>
 Download the game sale data set and clean the data as similar as described in the beginning of this chapter, produce a masaic plot between genre and rating. Interpret your plot breifly.
 ```
 
@@ -219,7 +221,7 @@ corrplot.mixed(corMatrix, order = "AOE", lower = "number", lower.col = "black",
 
 There are high r values of 0.75, 0.65, 0.52 and 0.42 between the log value of Global.Sales and regional sales, we will consider to use Global.Sales.Log as our target sales to analyze the relationship of sales with other variables later. On the other hand, there are good positive correlation between regional sales too. User Score is positive correlated to Critic Score with r of 0.58. There is little correlation between User Count log value and User Score. 
 
-(ref:game-dendrogram) Cluster dendrogram for numeric variables
+(ref:game-dendrogram) Exercise dendrogram for numeric variables
 
 ```{r game-dendrogram, fig.cap='(ref:game-dendrogram)', fig.align='center'}
 plot(hclust(as.dist(1 - cor(as.matrix(st)))))  # hierarchical clustering
@@ -276,11 +278,18 @@ p2 <- ggplot(game, aes(x = User.Count.Log, y = User.Score)) +
 
 Critic.Score has a pretty good correlation to Critic.Count.Log, with an r value of 0.41 in the correlation analysis above, though Critic.Count.Log doesn’t have impact over Critic.Score. While User.Score looks like independent on User.Count.Log.
 
+>
 ```{exercise}
+
+>
 Use ggplot2 package to get a scatter plot with smooth line between Global_Sales and NA_Sales. Use plain sentence to explain what you find in the plot.
 ```
 
+
+>
 ```{exercise}
+
+>
 Use density plot of Global_Sales, NA_Sales, EU_Sales, JP_Sales and Other_Sales to illustrate the relationship among these sales. Interpret your plot.
 ```
 
@@ -566,15 +575,24 @@ ggplot(data = game.lm, aes(x = Critic.Score, y = Global.Sales.Log)) +
 
 Here is the scatter plot of Global.Sales.Log ~ Critic Score and the model line which predict the global sales log with critic score.
 
+>
 ```{exercise}
+
+>
 Use different plots to visualize the distribution of NA_Sales by Year_of_Release, Genre, Rating and Platform individually or combinedly. Explain the relationship between NA_Sales with these factors. Hint: Take log value for NA_Sales first. It is better to regroup platform first.
 ```
 
+>
 ```{exercise}
+
+>
 What is the correlation between NA_Sales and Critic_Score? Use scatter plot with smooth line or polynomial model line to show the trend. Give your interpretation.
 ```
 
+>
 ```{exercise}
+
+>
 Use linear model and ANOVA to analyze NA_Sales with all the factors which contribute to its variance. Interpret your result breifly. Hint: Check the corrplot in Figure \@ref(fig:game-corrplot) and pay attention to the high correlation among those sales and between those scores.
 ```
 

@@ -40,11 +40,13 @@ If you are single and meet someone in a bar, you typically start with small talk
 
 As a first step, we are going to examine each column separately. This can be very basic things such as mean, median, ranges, distributions, and normality. This is important because sometimes the data is so skewed or far from normal distribution that we need to use **non-parametric tests**, or **transformate the raw data** using log transformation, or more generally box-cox transformation, before conducting other analyses. 
 
+>
 ```{exercise}
+
+>
 Perform the following analysis for the heartatk4R dataset. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google. 
-
+>
 a.	Graphical EDA: Plot distribution of **charges** using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running **temp = CHARGES [ ! is.na (CHARGES)  ]**  and then run your plot on **temp**. 
-
 b.	Quantitative EDA: test of normality, and confidence interval. Note that if the Shapiro-Wilk normality test cannot handle the 12,000 data points, you can either try to find other tests in the nortest library or sample randomly by running **temp = sample( CHARGES, 4000)** 
 ```
 
@@ -79,16 +81,18 @@ table(SEX)  # tabulate the frequencies of M and F
 pie(table(SEX))  # pie chart
 ```
 
-
+>
 ```{exercise}
 Compute the counts and percentages of each levels of DRG by filling the blanks below. Use bar plot and pie charts similar to Figure \@ref(fig:4-1) and Figure \@ref(fig:14-2) to visualize. Briefly discuss your results.
-```
-
-```{r eval=F}
+>
 drg <- __________               #Import values of DRG 
+>
 counts <- sort(________(drg), decreasing = TRUE)  # tabulate & sort 
+>
 percentages <- 100 * __________  # Compute the percentage and convert to %
+>
 barplot(percentages, ylab = "Percentage", col = "blue") # barplot
+>
 _________(counts)  # pie chart
 ```
 
@@ -160,17 +164,23 @@ text(30, 37, labels = "plot(AGE, LOS)", col = "red")
 smoothScatter(AGE, LOS)  # a smoothed color density representation of a scatterplot  
 text(37, 37, labels = "smoothScatter(AGE, LOS)", col = "red")
 ```
- 
-```{exercise}
-Investigate the correlation between length of stay and charges by filling in the blanks below. Remember to include plain English interpretation of your results even your grandpa can understand. 
-```
 
-```{r eval=F}
+>
+```{exercise}
+
+>
+Investigate the correlation between length of stay and charges by filling in the blanks below. Remember to include plain English interpretation of your results even your grandpa can understand. 
+>
 LOS <- ______________       # import the values of LOS in the heart attack data
+>
 CHARGES <- _____________    #import the values of Charges
+>
 cor.test(LOS, CHARGES, method = ___________)  # Pearson correlation
+>
 cor.test(LOS, CHARGES, method = __________)   # spearman correlation
+>
 plot(LOS, CHARGES)  # standard scatter plot 
+>
 __________(LOS, CHARGES)  # a smoothed color density representation of a scatterplot
 ```
 
@@ -274,15 +284,21 @@ mosaicplot(Titanic, color = rainbow(2))
 
 Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?
 
+>
 ```{exercise}
-The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses? 
 
-```{r eval=F}
+>
+The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses? >
 DIAGNOSIS <- heartatk4R$DIAGNOSIS
+>
 SEX <- heartatk4R$SEX
+>
 counts <- _____________(DIAGNOSIS, SEX)  # Take SEX as columns 
+>
 barplot(_____________________________________________________)
+>
 legend("topleft", legend = rownames(counts), fill = rainbow(9), ncol = 3, cex = 0.75)
+>
 mosaicplot(_____________________________________________)
 ```
 
@@ -339,20 +355,32 @@ Now for each gender, we further divide the patients by their survival status. In
 ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + geom_density(alpha = .3) + facet_grid(SEX ~ .) 
 ```
 
+>
 ```{exercise}
+
+>
 Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results. 
 ```
 
+>
 ```{exercise}
+
+>
 Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure \@ref(fig:new4)). 
 ```
 
+>
 ```{exercise}
+
+>
 Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t. 
 
 ```
 
+>
 ```{exercise}
+
+>
 Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes. 
 ```
 
@@ -367,18 +395,25 @@ ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_boxplot(color = "blue") + facet
 
 Recall that 121 indicate survivors with complication, 122 survivors with no complication, and 123, died. As you could see this clearly indicate our previous observation people who died in hospital are older than survivors and that patients who developed complications seems to be older than those that did not. Did people with complications stayed longer in the hospital? 
 
+>
 ```{exercise}
+
+>
 Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
 ```
 
+>
 ```{exercise}
-Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure \@ref(fig:14-5).  Offer interpretation.
+
+>
+Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure 5.13.  Offer interpretation.
 ```
-
-(ref:14-5) Multiple boxplots using ggplot2 package
-
-```{r 14-5, echo=FALSE, fig.width=6, fig.height=4, fig.cap='(ref:14-5)', fig.align='center'}
-ggplot(heartatk4R, aes(x = SEX, y = AGE)) + geom_boxplot(color = "blue") + coord_flip() + facet_grid(DRG ~ .)
+>
+```{r echo=FALSE, fig.width=6, fig.height=4, fig.cap='Multiple boxplots using ggplot2 package', fig.align='center'}
+ggplot(heartatk4R, aes(x = SEX, y = AGE)) + 
+  geom_boxplot(color = "blue") + coord_flip() + facet_grid(DRG ~ .) +
+  ggtitle("Multiple boxplots using ggplot2 package") +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
   All of these techniques we introduced so far enable us to **LEARN** about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc. 

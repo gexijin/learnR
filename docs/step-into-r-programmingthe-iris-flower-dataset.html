@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-19" />
+<meta name="date" content="2020-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +111,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
-<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started-trail-delete-this-in-a-few-minutes"><i class="fa fa-check"></i><b>1.1</b> Getting started (Trail: Delete this in a few minutes)</a></li>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
 <li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
 <li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
@@ -260,8 +260,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Data frames.</li>
 <li>The absolute basics: import data, check data types, attach, and then plot and analyze using column names.</li>
 </ul>
-<div id="getting-started-trail-delete-this-in-a-few-minutes" class="section level2">
-<h2><span class="header-section-number">1.1</span> Getting started (Trail: Delete this in a few minutes)</h2>
+<div id="getting-started" class="section level2">
+<h2><span class="header-section-number">1.1</span> Getting started</h2>
 <ol style="list-style-type: decimal">
 <li><p>Install R from <a href="file:///I:\book\ch1\www.R-project.org">www.R-project.org</a>. Choose the cloud server or any U.S. mirror site.</p></li>
 <li><p>Install RStudio Desktop from <a href="file:///I:\book\ch1\www.RStudio.com">www.RStudio.com</a>. Rstudio uses the R software in the background but provides a more user-friendly interface. R commands can be typed directly into the “Console” window. Or you can enter them in the “R Script” window and click the “Run” button. If you have an older version of R or Rstudio, I will recommend upgrading to the new version.</p></li>
@@ -296,14 +296,14 @@ Species
 </div>
 <div id="data-frames-have-rows-and-columns-the-iris-flower-dataset" class="section level2">
 <h2><span class="header-section-number">1.2</span> Data frames have rows and columns: the Iris flower dataset</h2>
-<p>In 1936, Edgar Anderson collected data to quantify the geographic variation of <em>Iris</em> flowers. The data set consists of 50 samples from each of the three sub-species ( <em>Iris setosa</em>, <em>Iris virginica,</em> and <em>Iris versicolor</em>). Four features were measured from each sample: the lengths and the widths of sepals and petals, in centimeters (cm). This data is included in R software. Download this dataset from <a href="https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv">GitHub</a>, and open it in Excel. Have a quick look at the data, think about what distinguishes the three species? If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to? <strong>Think</strong> (!) for a few minutes while eyeballing the data at Wikipedia. Getting familiar with this dataset is vital to follow this book.</p>
+<p>In 1936, Edgar Anderson collected data to quantify the geographic variation of <em>Iris</em> flowers. The data set consists of 50 samples from each of the three sub-species ( <em>Iris setosa</em>, <em>Iris virginica,</em> and <em>Iris versicolor</em>). Four features were measured from each sample: the lengths and the widths of sepals and petals, in centimeters (cm). This data is included in R software. Download this dataset from <a href="https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv">GitHub</a>, and open it in Excel. Have a quick look at the data, think about what distinguishes the three species. If we have a flower with sepals of 6.5cm long and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most likely belong to? <strong>Think</strong> (!) for a few minutes while eyeballing the data at Wikipedia. Getting familiar with this dataset is vital to follow this book.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="images/img0101_iris.png" alt="Iris flower. Photo from Wikipedia." width="50%" />
 <p class="caption">
 Figure 1.1: Iris flower. Photo from Wikipedia.
 </p>
 </div>
-<p>The downloaded iris data can be imported into R by selecting <strong>Import Dataset</strong> in the <strong>File</strong> menu, and then choose <strong>“From text(readr)…”</strong>. As the default settings work well in this case, we just need to click <strong>Import</strong> in the pop-up window. That’s it! There is no need to spend half of a semester to learn how to import data like some people used to complain about SAS. If you have trouble importin this data file, you can skip this step as this data set is included in the R software.</p>
+<p>The downloaded iris data can be imported into R by selecting <strong>Import Dataset</strong> in the <strong>File</strong> menu, and then choose <strong>“From text(readr)…”</strong>. As the default settings work well in this case, we just need to click <strong>Import</strong> in the pop-up window. That’s it! There is no need to spend half of a semester to learn how to import data like some people used to complain about SAS. If you have trouble importing this data file, you can skip this step as this data set is included in the R software.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="images/img0102_dataframe.png" alt="Example of a data frame. " width="80%" />
 <p class="caption">
@@ -327,9 +327,8 @@ iris[<span class="dv">3</span>, <span class="dv">1</span><span class="op">:</spa
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 1.1  </strong></span>Type <strong>data()</strong> in the R Console window. The pop-up window - R data sets - contain all built-in data sets in package ‘datasets’. Choose a data set whose structure is data frame, then answer the following questions:</p>
-</blockquote>
-<blockquote>
+<p><span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 1.1  </strong></span></p>
+<p>Type <strong>data()</strong> in the R Console window. The pop-up window - R data sets - contain all built-in data sets in package ‘datasets’. Choose a data set whose structure is data frame, then answer the following questions:</p>
 <ol style="list-style-type: lower-alpha">
 <li>Display the first few rows of the data set. <strong>NOT</strong> all values in your data set.<br />
 </li>
@@ -408,10 +407,14 @@ Figure 1.3: Boxplot of petal length (A) and of all 4 columns (B).
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 1.4  </strong></span>a. Check the data structure of the built-in data set mtcars.<br />
-b. Get the boxplot of Mile Per Gallon (mpg) in the data set mtcars.
+<p><span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 1.4  </strong></span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Check the data structure of the built-in data set mtcars.<br />
+</li>
+<li>Get the boxplot of Mile Per Gallon (mpg) in the data set mtcars.
 </div>
-
+</li>
+</ol>
 </blockquote>
 To quantify the variance, we can compute the <strong>standard deviation</strong> σ:
 <span class="math display">\[\begin{align}
@@ -454,10 +457,14 @@ Figure 1.5: Sequence plot, histogram, lag plot and normal Q-Q plot.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-21" class="exercise"><strong>Exercise 1.5  </strong></span>a. Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution<br />
-b. generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-5">1.6</a>.
+<p><span id="exr:unnamed-chunk-21" class="exercise"><strong>Exercise 1.5  </strong></span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution<br />
+</li>
+<li>generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-5">1.6</a>.
 </div>
-
+</li>
+</ol>
 </blockquote>
 
 <div class="figure" style="text-align: center"><span id="fig:1-5"></span>
@@ -469,7 +476,8 @@ Figure 1.6: Plots for randomly generated numbers following a normal distribution
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-22" class="exercise"><strong>Exercise 1.6  </strong></span>Generate scatter plot, histogram, lag plot, and Q-Q plot for the Septal length in the iris dataset.
+<p><span id="exr:unnamed-chunk-22" class="exercise"><strong>Exercise 1.6  </strong></span></p>
+Generate scatter plot, histogram, lag plot, and Q-Q plot for the Septal length in the iris dataset.
 </div>
 
 </blockquote>
@@ -490,7 +498,8 @@ Figure 1.6: Plots for randomly generated numbers following a normal distribution
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercise 1.7  </strong></span>Compute 95% confidence interval of petal length.
+<p><span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercise 1.7  </strong></span></p>
+Compute 95% confidence interval of petal length.
 </div>
 
 </blockquote>
@@ -505,10 +514,14 @@ Figure 1.6: Plots for randomly generated numbers following a normal distribution
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercise 1.8  </strong></span>a. Run Shapiro’s test on sepal width. Does it follow a normal distribution given the significant level is 0.05?<br />
-b. Generate histogram and Q-Q plot for sepal width. Do the plots show a Normal approximation?
+<p><span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercise 1.8  </strong></span></p>
+<ol style="list-style-type: lower-alpha">
+<li>Run Shapiro’s test on sepal width. Does it follow a normal distribution given the significant level is 0.05?<br />
+</li>
+<li>Generate histogram and Q-Q plot for sepal width. Do the plots show a Normal approximation?
 </div>
-
+</li>
+</ol>
 </blockquote>
 </div>
 <div id="analyzing-a-column-of-categorical-values" class="section level2">
@@ -565,14 +578,15 @@ Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 1.9  </strong></span>The <strong>mtcars</strong> data description can be found here: <a href="https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html" class="uri">https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html</a>.</p>
+<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 1.9  </strong></span></p>
+<p>The <strong>mtcars</strong> data description can be found here: <a href="https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html" class="uri">https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html</a>.</p>
 <p>Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -&gt; factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.</p>
-<ul>
+<ol style="list-style-type: lower-alpha">
 <li>Color the scatter plot by Number of cylinders;</li>
 <li>Add legend to the top right.
 </div>
 </li>
-</ul>
+</ol>
 </blockquote>
 <p>We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, such as Pearson’s correlation coefficient, r. It ranges from -1 to 1.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(x, y) </code></pre></div>
@@ -625,7 +639,8 @@ Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-35" class="exercise"><strong>Exercise 1.10  </strong></span>Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
+<p><span id="exr:unnamed-chunk-35" class="exercise"><strong>Exercise 1.10  </strong></span></p>
+Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
 </div>
 
 </blockquote>
@@ -667,7 +682,8 @@ y  <span class="co"># y contain 50 measurements</span></code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-40" class="exercise"><strong>Exercise 1.11  </strong></span>Use boxplot and t-test to investigate whether sepal width is different between I. versicolor and I. virginica. Interpret your results.
+<p><span id="exr:unnamed-chunk-40" class="exercise"><strong>Exercise 1.11  </strong></span></p>
+Use boxplot and t-test to investigate whether sepal width is different between I. versicolor and I. virginica. Interpret your results.
 </div>
 
 </blockquote>
@@ -693,7 +709,8 @@ Figure 1.11: Boxplot of sepal width across 3 species.
 <blockquote>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-41" class="exercise"><strong>Exercise 1.12  </strong></span>Use boxplot and ANOVA to investigate whether petal width is the same among three subspecies.
+<p><span id="exr:unnamed-chunk-41" class="exercise"><strong>Exercise 1.12  </strong></span></p>
+Use boxplot and ANOVA to investigate whether petal width is the same among three subspecies.
 </div>
 
 </blockquote>

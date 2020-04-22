@@ -72,15 +72,17 @@ At each step, we add additional information about these patients (Figure \@ref(f
 
 These plots are big in file size when you save it in a vector format (**metafile**), which often offer higher resolution. If you have many such plots in a paper or thesis, your file size can be big. These problems can be avoided if you use the **bitmap** format. 
 
+>
 ```{exercise}
+
+>
 Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis.
-```
-
-```{r eval=F}
+>
 heartatk4R <- read.table(_______________________________)
-ggplot(heartatk4R, aes(x = _______, y = ________, color = _________, shape = _________))         
-+ geom_point()
-
+>
+ggplot(heartatk4R, aes(x = _______, y = ________, color = _________, shape = _________)) +
+>
+ geom_point()
 ```
 
 ## Histograms and density plots
@@ -132,51 +134,50 @@ knitr::include_graphics("images/img1504_density.png")
 
 Recall the DRG=121 represents patients who survived but developed complications; DRG=122 denotes those without complications and DRG=123 are patients who did not survive.  Figure \@ref(fig:15-4)C suggests that women in all three groups are older than men counterparts. If we examine the distribution of male patients’ age distribution across facets, we can see that the distribution is skewed to the right in deceased patients (DRG=123), indicating that perhaps older people are less likely to survive a heart attack. Survivors without complications (DRG= 122) tend to be younger than survivors with complications. 
 
+>
 ```{exercise}
-Create density plots like Figure 6.5 to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.
-```
 
-```{r eval=F}
+>
+Create density plots like Figure 6.5 to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.
+>
 ggplot(heartatk4R, aes(_________, _________)) + ______________(alpha = 0.3) + 
+>
        _________(________ ~ .) + xlim(________, _____)
 ```
-
-(ref:15-5) Distribution of LOS by DRG groups grouped by SEX.
-
-```{r 15-5, echo=FALSE, warning=FALSE, fig.width=6, fig.height=4, fig.cap='(ref:15-5)', fig.align='center'}
+>
+```{r echo=FALSE, warning=FALSE, fig.width=6, fig.height=4, fig.cap='Distribution of LOS by DRG groups grouped by SEX', fig.align='center'}
 ggplot(df, aes(x = LOS, fill = DRG)) + geom_density(alpha = 0.3) + 
-       facet_grid(SEX ~ .) + xlim(0, 20)  
+       facet_grid(SEX ~ .) + xlim(0, 20)
 ```
 
 ## Box plots and Violin plots
 We can follow the same rule to generate boxplots using the geom_boxplot ( ). Let’s start with a basic version.
 ```{r fig.keep='none'}
 ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot()  # basic boxplot 
-ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot() + facet_grid(DRG ~ .)  # Figure 5.6A
-ggplot(df, aes(x = SEX, y = AGE)) + geom_violin() + facet_grid(DRG ~ .)  # Figure 5.6B
+ggplot(df, aes(x = SEX, y = AGE)) + geom_boxplot() + facet_grid(DRG ~ .)  # Figure 6.6A
+ggplot(df, aes(x = SEX, y = AGE)) + geom_violin() + facet_grid(DRG ~ .)  # Figure 6.6B
 ```
 
 The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins. 
 
-
+>
 ```{exercise}
-Generate a violin plot like Figure \@ref(fig:15-6)C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
-```
 
-```{r eval=F}
+>
+Generate a violin plot like Figure 6.6C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.
+>
 ggplot(heartatk4R, ___________________) + _____________ + ______________ + 
+>
        labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20) 
 ```
-
-(ref:15-6) Boxplot and violin plots using ggplot2.
-
-```{r 15-6, echo=FALSE, fig.cap='(ref:15-6)', fig.align='center'}
+>
+```{r echo=FALSE, fig.cap='Boxplot and violin plots using ggplot2', fig.align='center'}
 knitr::include_graphics("images/img1506_boxviolin.png")
 ```
 
 ```{r echo=FALSE, fig.keep='none', warning=FALSE}
 ggplot(df, aes(x = DRG, y = LOS)) + geom_violin()  + facet_grid(SEX ~ .) + 
-       labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20)  # Figure 5.6C
+       labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20)  # Figure 6.6C
 ```
 
 ## Bar plot with error bars
@@ -261,21 +262,32 @@ ggplot(stats3, aes(x = DIAGNOSIS, y = mean, fill = DRG)) +  # mapping
                      position = position_dodge(.9), width = 0.2)
 ```
 
+>
 ```{exercise}
-Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
-```
 
-```{r eval=F}
+>
+Generate Figure \@ref(fig:15-9) and offer your interpretation. Hint: Modify both the summarizing script and the plotting script. 
+>
 df <- heartatk4R %>% 
+>
   _____________(DIAGNOSIS, DRG) %>%   # two grouping variables
-  _____________(mean = mean(AGE),  
+>
+  _____________(mean = mean(AGE), 
+>
             sd   = sd(AGE), 
-            n    = n(),  
+>
+            n    = n(), 
+>
             se   = sd(AGE) / sqrt(n())) 
+>
 ggplot(df, aes(_________________________) +  # mapping
-       _______________(stat = "identity", position = "dodge") +  # bars mean
+>
+       _______________(stat = "identity", position = "dodge") +  # bars mean
+>
        _______________(x = "Diagnosis codes", y = "Age(yrs)") +    # axes labels
+>
        _______________(aes(__________________, ________________),   # error bars
+>
                      position = position_dodge(.9), width = 0.2)
 ```
 
@@ -305,12 +317,14 @@ summary(fit)
 
 Note that DIED is 1 for people died, and 0 otherwise. So a negative coefficient indicates less likely to die, hence more likely to survive. Males are more likely to survive heart attack, compared with females of the same age, and with the same diagnosis. People who stayed longer are less likely to die. Older people are more likely to die. Compared with people with diagnosis code of 41001, those diagnosed with 41071, 41041, and 41091, are more likely to survive.
 
+>
 ```{exercise}
-Use multiple linear regression to investigate the factors associated with length of stay. Obviously we need to exclude charges in our model. Interpret your results.
-```
 
-```{r eval=F}
+>
+Use multiple linear regression to investigate the factors associated with length of stay. Obviously we need to exclude charges in our model. Interpret your results.
+>
 fit <- ___________(LOS ~ SEX + AGE + DRG + DIAGNOSIS, data = ___________)
+>
 ___________(fit) 
 ```
 
