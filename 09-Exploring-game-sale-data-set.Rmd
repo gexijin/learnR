@@ -297,18 +297,20 @@ Use density plot of Global_Sales, NA_Sales, EU_Sales, JP_Sales and Other_Sales t
 ## Analysis of sales
 ###  By Year.Release
 
-(ref:game-SalesYear) Total sales by year
+(ref:game-SalesYear1) Total sales by year
 
-```{r game-SalesYear, fig.width=8, fig.height=4, fig.cap='(ref:game-SalesYear)', fig.align='center'}
+```{r game-SalesYear1, fig.width=8, fig.height=4, fig.cap='(ref:game-SalesYear1)', fig.align='center'}
 Year.Release <- game$Year.Release 
 counts <- data.frame(table(Year.Release))
 p <- game %>%
   select(Year.Release, Global.Sales) %>%
   group_by(Year.Release) %>%
   summarise(Total.Sales = sum(Global.Sales))
+
 q <- cbind.data.frame(p, counts[2])
 names(q)[3] <- "count"
 q$count <- as.numeric(q$count)
+
 
 ggplot(q, aes(x = Year.Release, y = Total.Sales, label = q$count)) +
   geom_col(fill = "green") +
