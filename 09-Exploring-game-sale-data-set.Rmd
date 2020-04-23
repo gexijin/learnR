@@ -306,11 +306,9 @@ p <- game %>%
   select(Year.Release, Global.Sales) %>%
   group_by(Year.Release) %>%
   summarise(Total.Sales = sum(Global.Sales))
-
 q <- cbind.data.frame(p, counts[2])
 names(q)[3] <- "count"
 q$count <- as.numeric(q$count)
-
 
 ggplot(q, aes(x = Year.Release, y = Total.Sales, label = q$count)) +
   geom_col(fill = "green") +
@@ -328,9 +326,9 @@ We can see from the histogram of total sales that there is very little sales bef
 
 ###  By Region
 
-(ref:game-SalesRegion) Total sales by region
+(ref:game-SalesRegion1) Total sales by region
 
-```{r game-SalesRegion, fig.width=9, fig.height=4, fig.cap='(ref:game-SalesRegion)', fig.align='center'}
+```{r game-SalesRegion1, fig.width=9, fig.height=4, fig.cap='(ref:game-SalesRegion1)', fig.align='center'}
 library(reshape2)
 game %>%
   select(Year.Release, NA.Sales.Log, EU.Sales.Log, JP.Sales.Log, 
@@ -353,9 +351,9 @@ The pattern of log value for these regional sales in those years are similar for
 
 ###  By Rating
 
-(ref:game-SalesRating) Sales by rating type
+(ref:game-SalesRating1) Sales by rating type
 
-```{r game-SalesRating, fig.cap='(ref:game-SalesRating)', fig.align='center'}
+```{r game-SalesRating1, fig.cap='(ref:game-SalesRating1)', fig.align='center'}
 game$Rating.type <- as.factor(game$Rating.type)
 x <- game[, c(6:10)]
 matplot(t(x), type = "l", col = rainbow(5)[game$Rating.type])
@@ -367,9 +365,9 @@ The figure shows one E game(for everyone) which was sold mainly in North America
 
 ###  By Genre
 
-(ref:game-SalesGenre) Year wise log global sales by Genre
+(ref:game-SalesGenre1) Year wise log global sales by Genre
 
-```{r game-SalesGenre, fig.cap='(ref:game-SalesGenre)', fig.align='center'}
+```{r game-SalesGenre1, fig.cap='(ref:game-SalesGenre1)', fig.align='center'}
 game %>% 
   select(Year.Release, Global.Sales.Log, Genre) %>%
   group_by(Year.Release, Genre) %>%
@@ -426,9 +424,9 @@ Among these 20 top sale games, the first two games, Wii Sports and Grand Theft A
 
 ###  By Rating & Genre & Critic score
 
-(ref:game-Sales) Total sales for genre and rating with critic score
+(ref:game-Sales1) Total sales for genre and rating with critic score
 
-```{r game-Sales, fig.width=12, fig.height=8, fig.cap='(ref:game-Sales)', fig.align='center'}
+```{r game-Sales1, fig.width=12, fig.height=8, fig.cap='(ref:game-Sales1)', fig.align='center'}
 p1 <- game %>%
   select(Rating.type, Global.Sales, Genre, Critic.Score) %>%
   group_by(Rating.type, Genre) %>%
@@ -455,9 +453,9 @@ For genre & rating & Global.sale combination, Everyone sports game are so popula
 
 ###  By Platform
 
-(ref:game-SalesPlatform) Yearly market share by platform type
+(ref:game-SalesPlatform1) Yearly market share by platform type
 
-```{r game-SalesPlatform, fig.cap='(ref:game-SalesPlatform)', fig.align='center'}
+```{r game-SalesPlatform1, fig.cap='(ref:game-SalesPlatform1)', fig.align='center'}
 library(viridis)
 library(scales)
 p <- game %>%
