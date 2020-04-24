@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2020-04-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -256,7 +256,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 8</span> The state dataset</h1>
 <div id="reading-in-and-manipulating-data" class="section level2">
 <h2><span class="header-section-number">8.1</span> Reading in and manipulating data</h2>
-<p>The state data sets include state information in early years around 1970s. We pick state.abb, state.x77, and state.region to form our data file. The detail information is listed here.</p>
+<p>The state data sets include state information in early years around 1970s in USA. We pick state.abb, state.x77, and state.region to form our data file. The detail information is listed here.</p>
 <p><strong>state.abb</strong>:<br />
 A vector with 2-letter abbreviations for the state names.</p>
 <p><strong>state.x77</strong>: A matrix with 50 rows and 8 columns giving the following statistics in the respective columns.</p>
@@ -339,18 +339,15 @@ sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, 
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span>
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outouts in 4 rows and 4 columns</span>
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outputs in 4 rows and 4 columns</span>
 <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ <span class="co"># Use a for loop to test normality of all variables listed in the vector a</span>
-  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract correspoinding values in sta given a[i].</span>
-                      <span class="co"># Take i=1 as an example: a[1]=&#39;Population&#39;. sta[a[1]] is a data frame </span>
-                      <span class="co">#containing state names and corresponding population information. </span>
-                      <span class="co"># Functions, such as hist(), qqnorm() can not be applied to a data frame.</span>
-                      <span class="co"># The sub = sta[a[1]][,1] extracts the poplutlation information from the data </span>
-                      <span class="co"># frame as a numeric vector. Functions can be applied to a vector directly.  </span>
-  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])
+  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract corresponding variable a[i] in data frame sta as a numeric vector</span>
+                        
+  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i]) <span class="co">#Histogram</span>
   <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#Q-Q plot</span>
   <span class="kw">qqline</span>(sub)           <span class="co"># Add a QQ plot line. </span>
-  <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span>
+ 
+   <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span>
   } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous results in row. </span>
  }
 }</code></pre></div>
@@ -381,7 +378,7 @@ Figure 8.1: State count in each region
 </p>
 </div>
 <p>Bar plot tells us that we have relatively more states in South(16) and less states in Northeast(9). North Central and West have similar number of states(12 and 13).</p>
-<p>If we want to know whether the populations in California and New York are more than the other states like what we have in now days, or the population of South Dakota comparing with other states, we use Lollipop plot to show the population of all states. A lollipop plot is a hybrid of a scatter plot and a barplot. It shows the relationship between two variables. One must be numerical variable, and the other one can be numerical or categorical variable.A lollipop chart is constituted by a point (made with geom_point) and a segment (made by geom_segment). Therefore you can modify this two components using the usual arguments: ‘size’, ‘color’, ‘linetype’, ‘alpha’, ‘shape’, etc. Here is the lollipop chart shows the relationship between state and population.</p>
+<p>A lollipop plot is a hybrid of a scatter plot and a barplot. It shows the relationship between two variables. One must be numerical variable, and the other one can be numerical or categorical variable. A lollipop chart is constituted by a point (made with geom_point) and a segment (made by geom_segment). Therefore you can modify this two components using the usual arguments: ‘size’, ‘color’, ‘linetype’, ‘alpha’, ‘shape’, etc. Here is the lollipop chart shows the relationship between state and population.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">y =</span> Population)) <span class="op">+</span>

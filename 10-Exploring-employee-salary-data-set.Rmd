@@ -68,11 +68,11 @@ We check the situation whether different genders are indexed for same employee.
 df <- raw26 %>% 
   group_by(EmplId.Empl.Rcd, Sex) %>% 
   summarise(Total.Gross = sum(Tot.Gross ))
-dupliSex <- df[duplicated(df$EmplId.Empl.Rcd), ]
-dupliSex
+dupliSex <- df[duplicated(df$EmplId.Empl.Rcd), ]  #Data frame for sex duplication obs.
+nrow(dupliSex)                                    #row count for data frame
 ```
 
-With tibble of zero row, we conclude that there is no employee having different sex recorded. We will check whether sex "U" employee is still in our data
+With zero row of sex duplication observation, we conclude that there is no employee having different sex recorded. We will check whether sex "U" employee is still in our data
 
 ```{r}
 raw26[which(raw26$Sex == "U"), ]
@@ -80,15 +80,15 @@ raw26[which(raw26$Sex == "U"), ]
 
 sex "U" employees are already removed. Then we will check about the duplication situation of ethnic group.
 
-```{r}
+```{r warning=FALSE}
 df <- raw26 %>% 
   group_by(EmplId.Empl.Rcd, Ethnic.Grp) %>%
   summarise(Total.Gross = sum(Tot.Gross ))
-dupliEthnic.Grp <- df[duplicated(df$EmplId.Empl.Rcd), ]
-dupliEthnic.Grp
+dupliEthnic.Grp <- df[duplicated(df$EmplId.Empl.Rcd), ]  #Data frame for Ethnic duplication obs.
+nrow(dupliEthnic.Grp)                                    #row count for data frame
 ```
 
-Tibble of zero row tells us that there is no different ethnic recorder for the same employee. 
+Zero row of Ethnic duplication observation tells us that there is no different ethnic recorder for the same employee. 
 
 Now we notice that some employees even have gross income or biweekly rate less then zero. We consider to remove those employees. 
 
@@ -628,20 +628,21 @@ LM model indicate that Average Gross is related with all factors including Age, 
 >
 Create a folder, download the data file "state_empoyee_salary_data_2017.csv" into it, and create an Rstudio project in the folder. Read in the data file, peak the structure of your data set and clean it step by step:
 >  
-a. Select only columns of "EmplId.Empl.Rcd", "Bi.Weekly.Comp.Rate", "Age", "Ethnic", "Sex", "Full.Part", "City", get summary information for all these variables. Make sure EmplId.Empl.Rcd, sex, ethnic to be factor, age and biweekly rate to be numeric.
+a. Select only columns of "EmplId.Empl.Rcd", "Bi.Weekly.Comp.Rate", "Age", "Ethnic.Grp", "Sex", "Full.Part", "City", get summary information for all these variables. Make sure "EmplId.Empl.Rcd", "Sex", "Ethnic.Grp" to be factor, "Age" and "Bi.Weekly.Comp.Rate" to be numeric.
 b. Pick up full time employees in city "Hartford".
 c. Select only those employees with 26 pay checks for 2017 ficial year(Hint:Each employee has unique ID of "EmplId.Empl.Rcd"). 
 d. Remove sex group other than "F" and "M" if there is any. Hint:Use str() after droplevels().
-e. Replace level of empty space in Ethnic.Grp as “unknown”.
-f. Remove emplolyees with Bi.Weekly.Comp.Rate equal or less than zero if there is any.
-g. Group your data set by EmplId.Empl.Rcd, Ethnic.Grp, Sex. For each employee, take round of mean age and  mean of Bi.Weekly.Comp.Rate as Age and Bi.Weekly.Rate for your data set.
+e. Replace level of empty space in "Ethnic.Grp" as “unknown”.
+f. Remove emplolyees with "Bi.Weekly.Comp.Rate" equal or less than zero if there is any.
+g. Group your data set by "EmplId.Empl.Rcd", "Ethnic.Grp", and "Sex". For each employee, 
+take the mean of "Age", and the mean of "Bi.Weekly.Comp.Rate". Then round the means to the nearest integer and rename them as "Age" and "Bi.Weekly.Rate".
 h. Show structure and summary of your data set. 
-i. Show the distribution of "Bi-Weekly Comp Rate" and "Age" using histogram and QQ plot. Test the normality. Transform by taking log value if it is necessary.
-j. Using pie plot to show the distribution of Sex.
+i. Show the distribution of "Bi.Weekly.Rate" and "Age" using histogram and QQ plot. Test the normality. Transform by taking log value if it is necessary.
+j. Using pie plot to show the distribution of "Sex".
 k. List the count number and percent of employees in each ethnic group. 
-l. Using scatter plot to view the relationship between average Bi-Weekly Comp Rate and Age, add regression line and give your interpretation.
-m. Using box plot to view the relationship between average Bi-Weekly Comp Rate by Ethnic group.
-n. Using density plot to view the distribution of Bi-Weekly Comp Rate for different sex group, package ggplot2 is refered. 
-o. Do ANOVA test to check whether male are the same as female in Bi-Weekly Comp Rate in city "Hartford".
-p. Explore the interaction of ethnic and sex to Bi-Weekly Comp Rate using density ridges plot and interpret your plot.
+l. Using scatter plot to view the relationship between average "Bi.Weekly.Rate" and "Age", add regression line and give your interpretation.
+m. Using box plot to view the relationship between "Bi.Weekly.Rate" by Ethnic groups.
+n. Using a density plot similar to Figure \@ref(fig:salary-GrossSex) to view the distribution of "Bi.Weekly.Rate" for different sex. Package ggplot2 is referred. 
+o. Do ANOVA test to check whether male are the same as female in "Bi.Weekly.Rate" in city "Hartford".
+p. Explore the interaction of "Ethnic.Grp" and "Sex" to "Bi.Weekly.Rate" using density ridges plot and interpret your plot.
 ```
