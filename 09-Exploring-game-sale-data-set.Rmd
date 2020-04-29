@@ -1,6 +1,6 @@
 # The game sales dataset
 
-This is a video game sales data including game sales of North America, European, Japan and other area, together they make the global sale. The data also give the information about the critic score, user score and the number of critics or users who gave these two scores. This data was downloaded from [https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv](https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv). 
+This is a video game sales data including game sales of North America, European, Japan and other area, together they make the global sale. The data also give the information about the critic score, user score and the counts of critics or users who gave these two scores. This data was downloaded from [https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv](https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings#Video_Games_Sales_as_at_22_Dec_2016.csv). 
 
 The detail about the data is listed as follow:
 
@@ -40,7 +40,7 @@ E for "Everyone"; E10+ for "Everyone 10+"; T for "Teen"; M for "Mature"; AO for 
 After downloading the data, We replaced N/A with NA first in excel and saved it as csv file and read in. We removed these observations with empty string of Rating and 6825 observations was left in our data set "game". We noticed that there were lots of sales value with zero. To prepare these variables ready for being taken log value to make them normal or close to normal distribution, we transformed the sales into its basic units and plus 1. We also divided critic score by 10 to march the scale unit of user score.
 
 ##Reading in data and manage data
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 tem <- read.csv("datasets/video-game-sales-at-22-Dec-2016.csv")
 tem <- na.omit(tem)  #remove NA
 
@@ -111,8 +111,9 @@ s.t <- s.t[, 1:2]  # take first two column of shapiro.test result
 s.t <- cbind(name, s.t) # add variable name for the result
 s.t
 ```
+Histograms and qq plots of these original sales show no normal distribution, but the log value of these sales are much close to normally distributed, especially the log value of global sales. Though the Shapiro test with p value lass than 0.05 deny its normality, it's much better than the other sales or other log values of sales. Maybe the missing value of sale is the reason of abnormality. We will pay more attention to the log value of global sales later.
 
-From the histograms and qq plots we can see that two scores, their count log values, and global sales log are close to normal distribution. Though the Shapiro test still deny the normality of these log values. We assume they are normally distributed in our analysis.
+From the histograms and qq plots we also see that two scores and log values of their counts are close to normal distribution. Though the Shapiro test still deny the normality of these log values. We assume they are normally distributed in our analysis.
 
 There are lots of interest points in this data set such as the distribution of global and regional sales, their relationship; the correlation of critic score and user score, and their counts; whether these scores are the main effect for sales, or the effect of other factors matter to sales such as genre, rating, platform, publisher, and so on. First let's do visualization.
 
@@ -140,7 +141,7 @@ library(ggplot2)
 ggplot(game, aes(x = Platform.type)) + geom_bar(fill = "blue")
 ```
 
-As the bar plot shown here, Playstation is the biggest group, then xbox and nintendo. While others are the smallest type.
+As the bar plot shown here, Playstation is the biggest group, then xbox and nintendo. While "Others" is the smallest type.
 
 ```{r}
 dat <- data.frame(table(game$Genre))
@@ -159,7 +160,7 @@ theme(plot.title = element_text(hjust = 0.5))
 ```
 
 Action, Sports and Shooter are the first three biggest genre. Action occupies almost 25% genre. Three of
-them together contribute half of genre count. Puzzle, Adventure and Stratage have relative less count.
+them together contribute over half of genre count. Puzzle, Adventure and Stratage have relatively less count.
 
 We regroup rating AO, RP and K-A as "Others" because there are only few observations of these ratings.
 ```{r}
@@ -180,21 +181,21 @@ pie(counts, labels = lbls, col = rainbow(length(lbls)),
 main="Pie Chart of Ratings with sample sizes")
 ```
 
-According to the order, the most popular ratings are T, E, M and E10+. Other ratings only occupy very little in the all games.
+According to the order, the most popular ratings are T, E, M and E10+. "Others" rating only occupy very little portion in the all games.
 
 (ref:game-mosaic) Mosaic plot between platform type and rating type
 
-```{r game-mosaic, fig.cap='(ref:game-mosaic)', fig.align='center'}
+```{r game-mosaic, warning=FALSE, message=FALSE, fig.cap='(ref:game-mosaic)', fig.align='center'}
 library(ggmosaic)
 library(plotly)
 p <- ggplot(game) +
   geom_mosaic(aes(x = product(Rating.type), fill = Platform.type), na.rm=TRUE) +
-  labs(x="Rating.type", y = "Platform Type", title="Mosaic Plot") +
+  labs(x="Rating Type", y = "Platform Type", title="Mosaic Plot") +
   theme(axis.text.y = element_blank())
 ggplotly(p)
 ```
 
-For all platform and rating combination, Playstation games are released most in all other three different rating types except Everyone 10 age plus. Nintendo is the most popular game for Everyone 10+, it's the second popular platform for rating Everyone. Xbox is the second popular platform for rating mature and teenage,and it's the third favorite platform for rating everyone and everyone 10+. Most Other platform games are rated as Everyone.
+As we noticed previously, Rating Type of "Others" cannot be seen here in plot because of its small amount. For all platform and rating combination, Playstation games occupy the most portion in all other three different rating types except Everyone 10 age plus. Nintendo is the most popular game for Everyone 10+, it's the second popular platform for rating Everyone. Xbox is the second popular platform for rating Mature and Teenage, and it's the third favorite platform for rating Everyone and Everyone 10+. Most "Others" platform games are rated as Everyone.
 
 >
 ```{exercise}
@@ -228,7 +229,7 @@ There are high r values of 0.75, 0.65, 0.52 and 0.42 between the log value of Gl
 plot(hclust(as.dist(1 - cor(as.matrix(st)))))  # hierarchical clustering
 ```
 
-All sales’ log value except JP.Sales.Log build one cluster, scores build second cluster, and log value of counts and JP.Sales build another one. In sales cluster, Other.Sales.Log is the closest to Global.Sales.Log, then NA.Sales.Log, and EU.Sales.Log is the next.
+All sales’ log value except JP.Sales.Log build one cluster; Scores, log value of counts and JP.Sales build the second cluster. In first cluster, Other.Sales.Log is the closest to Global.Sales.Log, then NA.Sales.Log, and EU.Sales.Log is the next.
 
 ## Analysis of score and count
 
@@ -262,11 +263,11 @@ There is positive correlation between Critic.Score and User.Score. In total, Cri
 t.test(game$Critic.Score, game$User.Score)
 ```
 
-T-test with p value of much less than 0.05 let us accept the alternative hypothesis with 95% confidence that there is significant difference in the means of critic score and user score. The mean of critic score is 7.03, and mean of user score is 7.19.
+T-test with p value of much less than 0.05 let us accept the alternative hypothesis with 95% confidence that there is significant difference between the means of critic score and user score. The mean of critic score is 7.03, and mean of user score is 7.19.
 
 (ref:game-count) Binhex plot for critic count and user count
 
-```{r game-count, fig.cap='(ref:game-count)', fig.align='center'}
+```{r warning=FALSE, game-count, fig.cap='(ref:game-count)', fig.align='center'}
 p1 <- ggplot(game, aes(x = Critic.Count.Log, y = Critic.Score)) +
   stat_binhex() + # Bin 2d plane into hexagons
   scale_fill_gradientn(colours = c("black", "red"),
@@ -297,9 +298,9 @@ Use density plot of Global_Sales, NA_Sales, EU_Sales, JP_Sales and Other_Sales t
 ## Analysis of sales
 ###  By Year.Release
 
-(ref:game-SalesYear1) Total sales by year
+(ref:game-SalesYear1) Total global sales and game released by year
 
-```{r game-SalesYear1, fig.width=8, fig.height=4, fig.cap='(ref:game-SalesYear1)', fig.align='center'}
+```{r game-SalesYear1, message=FALSE, warning=FALSE, fig.width=8, fig.height=4, fig.cap='(ref:game-SalesYear1)', fig.align='center'}
 Year.Release <- game$Year.Release 
 counts <- data.frame(table(Year.Release))
 p <- game %>%
@@ -318,11 +319,10 @@ ggplot(q, aes(x = Year.Release, y = Total.Sales, label = q$count)) +
         panel.background = element_rect(fill = "purple"),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
-  scale_x_discrete("Year.Release", labels = as.character(Year.Release), breaks = Year.Release)
-  labs(title = "Global Sales Each Year", x = "Year Release", y = "Global Sales")
+  scale_x_discrete("Year.Release", labels = as.character(Year.Release), breaks = Year.Release) 
 ```
 
-We can see from the histogram of total sales that there is very little sales before 1996, only one game was released for each year. For several years between 1996 and 2000 the sales increased slowly. The count of games too. After that there is a big climbing in total sales and the number of released games. The top sales happened in 2008, and the most count games was released in that year too. After that both total sales and count of games sloped down.
+We can see from the histogram of total sales that there is very little sales before 1996, only one game was released for each year. For several years between 1996 and 2000 the sales increased slowly. The count of games too. After that there is a big rise in total sales and the number of released games. The top sales happened in 2008, and the most count games was released in that year too. After that both total sales and count of games went downhill.
 
 ###  By Region
 
@@ -347,7 +347,7 @@ ggplot(aes(x = Year.Release, y = total.sales, color = variable, group = variable
          panel.grid.minor = element_blank())
 ```
 
-The pattern of log value for these regional sales in those years are similar for Global, North America, Europe, and Others. Japan is much different from them. Same conclusion as cluster analysis.
+The pattern of log value for these regional sales in those years are similar for Global, North America, Europe, and Others. Japan is much different from them, which matches the previous cluster analysis.
 
 ###  By Rating
 
@@ -381,7 +381,7 @@ game %>%
          theme(plot.title = element_text(hjust = 0.5)) 
 ```
 
-The figure shows the golden year for games are from 2007 to 2009, these games together occur above 7000 total.sales.log each of those years. Action and sports keeps on the top sale for almost all of those 20 years, occupying biggest portion of the total global sales log. Adventure, Puzzle and Strategy are on the bottom of the sale log list. 
+The figure shows the golden year for games are from 2007 to 2009, these games together produced above 7000 total.sales.log in each of those years. Action and sports keeps on the top sale for almost all of those 20 years, occupying biggest portion of the total global sales log. Adventure, Puzzle and Strategy are on the bottom of the sale log list. 
 
 ### by Score 
 
@@ -394,10 +394,10 @@ p1 <- ggplot(game, aes(x = Critic.Score, y = Global.Sales.Log)) +
 p2 <- ggplot(game, aes(x = User.Score, y = Global.Sales.Log)) + 
   geom_point(aes(color = Rating)) + 
   geom_smooth()
-grid.arrange(p1, p2, nrow = 1,ncol = 2)
+grid.arrange(p1, p2, nrow = 1, ncol = 2)
 ```
 
-Independent from Genre and Rating, the higher of Score, the better of Global.Sales.Log. Especially for Critic.Score bigger than 9, Global.Sales straight rising. Global.Sales rise slowly with User.Score.
+Independent from Genre and Rating, the higher of Critic Score, the better of Global.Sales.Log. Especially for Critic.Score bigger than 9, Global.Sales.Log straightly rises. Global.Sales.Log rises very slowly with User.Score.
 
 ```{r }
 game$Name <- gsub("Brain Age: Train Your Brain in Minutes a Day",  #shorten the game name
@@ -420,7 +420,7 @@ ggplot(p1, aes(x = factor(Name, levels = Name))) +
   theme(plot.title = element_text(hjust = 0.5)) 
 ```
 
-Among these 20 top sale games, the first two games, Wii Sports and Grand Theft Auto V have much better sales than the others. For most games, average critic score is higher than average user score, which agree with our density plot Figure\@ref(fig:game-score). Two Call of Duty games got really lower average user score comparing with other top sales games.
+Among these 20 top sale games, the first two games, Wii Sports and Grand Theft Auto V have much better sales than the others. For most games, average critic score is higher than average user score, which agree with our density plot in Figure \@ref(fig:game-score). Two Call of Duty games got really lower average user score comparing with other top sales games.
 
 ###  By Rating & Genre & Critic score
 
@@ -449,13 +449,13 @@ ggplot() +
         panel.grid.minor = element_blank()) 
 ```
 
-For genre & rating & Global.sale combination, Everyone sports game are so popular that it occupy the first in global sales in this group. Rating Mature contribute big portion in both Action and Shooter global sales. On average these three top sales genres show relatively higher critic score. Fighting, adventure and racing games got relatively lower average critic score. We can also see from the figure that adventure, puzzle and stratage do sell less comparing with other genres.
+For genre & rating & Global.sale combination, Everyone*sports game is so popular that it occupy the first in global sales among all combinations. Rating Mature contributes big portions in both Action and Shooter global sales. On average these three top sales genres show relatively higher critic score. Fighting, adventure and racing games get relatively lower average critic score. We can also see from the figure that adventure, puzzle and stratage do sell less comparing with other genres.
 
 ###  By Platform
 
 (ref:game-SalesPlatform1) Yearly market share by platform type
 
-```{r game-SalesPlatform1, fig.cap='(ref:game-SalesPlatform1)', fig.align='center'}
+```{r game-SalesPlatform1, message=FALSE, fig.cap='(ref:game-SalesPlatform1)', fig.align='center'}
 library(viridis)
 library(scales)
 p <- game %>%
@@ -470,7 +470,7 @@ ggplot(p, aes(x = Year.Release., fill = Platform.type)) +
   scale_y_continuous(labels = percent_format()) 
 ```
 
-Nintendo and Xbox came after 1990. Before that PC and Playstation occupied the game market, PC are the main platform at that time. After 1995, the portion of PC and Playstation shrinked, while Nintendo and Xbox grew fast and took over more portion than Playstation and PC in the market. Together with Nintendo and Xbox, there were other game platform sprouting out in early 1990s, but they last for 20 years and disappeared. From around 2010, the portions of these 4 platforms keep relatively evenly and stablly.
+Nintendo and Xbox came after 1990. Before that PC and Playstation occupied the game market, PC are the main platform at that time. After 1995, the portion of PC and Playstation shrinked, while Nintendo and Xbox grew fast and took over more portion than Playstation and PC in the market. Together with Nintendo and Xbox, there were other game platform sprouting out in early 1990s, but they last for 20 years and disappeared. From around 2010, the portions of Nintendo, PC, Playstation, and Xbox, these 4 platforms keep relatively evenly and stably.
 
 ```{r}
 #compute 1-way ANOVA test for log value of global sales by Platform Type
@@ -481,7 +481,7 @@ par(mar = c(4, 10, 2, 1))
 plot(tukey, las = 1)
 ```
 
-ANOVA test shows that there is at lease one of the platform type is significant different from the others. In detail, the plot of Turkey tests tells us that there is significant difference between all other pairs of platform types but between Xbox and Nintendo, others and Nintendo.
+ANOVA test shows that there is at lease one of the mean values of Global.Sales.Log for those platform types is significant different from the others. In detail, the plot of Turkey tests tells us that there is significant difference between all other pairs of platform types but between Xbox and Nintendo, others and Nintendo.
 
 (ref:game-PlatformRating) Global sales log by platform and rating type 
 
@@ -501,7 +501,7 @@ ggplot(game, aes(Critic.Score, Global.Sales.Log, color = Platform.type)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-Most genre plots in Figure \@ref(fig:game-PlatformScore) illustrate that there are positive correlation between Global.Sales.Log and Critic Score, the higher the critic score, the better the global sales log value. Most puzzle games were from Nintendo, while lots of stratage games are PC. For other genres, all platforms shared the portion relatively evenly. Lots of PC(green) shared lower market portion in different genres, while some of Nintendo(red) games in sports, racing, platform, and misc were sold really well. At the same time, Playstation action and racing games, and Xbox misc, action and shooter games show higher global sales log too.
+Most genre plots in Figure \@ref(fig:game-PlatformScore) illustrate that there are positive correlation between Global.Sales.Log and Critic Score, the higher the critic score, the better the global sales log value. Most puzzle games were from Nintendo, while lots of stratage games are PC. For other genres, all platforms shared the portion relatively evenly. Lots of PC(green) shared lower market portion in different genres, while some of Nintendo(red) games in sports, racing, platform, and misc were sold really well. At the same time, Playstation with genre of action, fighting, and racing games, Xbox with genre of misc, action, and shooter games show higher global sales log too.
 
 ##  Effect of platform type to priciple components
 ```{r}
@@ -534,7 +534,7 @@ set.seed(1)
 autoplot(kmeans(st, 3), data = st, label = FALSE, label.size = 0.1)
 ```
 
-Together with PCA Figure \@ref(fig:game-pca), we will find that the first cluster is contributed mainly by PC. The second cluster is contributed mainly by Xbox and Playstation. Xbox, Nintendo, and Playstation together build the third cluster. 
+Together with PCA Figure \@ref(fig:game-pca), we will find that the first cluster is contributed mainly by PC and Playstation. The second cluster is contributed mainly by Xbox, Nintendo and Playstation. Playstation, Xbox, Nintendo, and PC all together build the third cluster. 
 
 ## Models for global sales
 Because there are too many of levels in Publisher and Developer, and there is apparent correlation between them, we use only top 12 levels of Publisher and classified the other publishers as "Others"; Because of the good correlation between Critic.Score and User.Score, we use only critic score; Also we use only log value of user score count because of it's closer correlation to global sales log. We will not put other sales log variables in our model because their apparent correlation with global sales log.
@@ -555,17 +555,25 @@ model <- aov(Global.Sales.Log ~ ., data = game.lm)
 summary(model)
 ```
 
-Global sales log is mostly effected by factors of critic score, user count log, platform type, Publisher type and genre in glm analysis. ANOVA shows every factors are in the contribution to global sales log, critic score and user count log are the most important factors.
+Global sales log is mostly effected by factors of critic score, user count log, platform type, Publisher type and genre in glm analysis. ANOVA shows every factor is significant in the contribution to global sales log. Critic score and user count log are the most important factors.
 
 Critic score and User.Count.Log positively affect the global sales log, while other factors like Platform type and Genre either lift up or pull down the global sales according to their types. This model will explain the global sales log with R-Square of 0.57.
 
-Because of the curve smooth line at global sale ~ critic score plot in our previous analysis and its big contribution in linear model analysis, We try a polynomial fit of critic score only. The first two levels are not statistically significant according to our pre-analysis, we use the third and fourth levels only here.
+Because of the curve smooth lin2e at global sale ~ critic score plot in our previous analysis(Figure \@ref(fig:game-SalesScore)) and critic score's big contribution in linear model analysis, We try a polynomial fit of critic score only. 
+
+```{r}
+model <- lm(Global.Sales.Log ~ 
+           Critic.Score + I(Critic.Score^2) + I(Critic.Score^3) + I(Critic.Score^4),  data = game.lm)
+summary(model)
+```
+
+The first two levels are not statistically significant according to our pre-analysis, so here we use the third and fourth levels only.
 ```{r }
 model <- lm(Global.Sales.Log ~ I(Critic.Score^3) + I(Critic.Score^4),  data = game.lm)
 summary(model)
 ```
 
-In total, the coefficients are statistically significant, the model of two levels of critic score itself will explain the data with R square 0.16.
+In total, the coefficients are statistically significant, the model of two levels of critic score itself will explain the Global.Sales.Log with R square 0.16.
 ```{r}
 ModelFunc <- function(x) {model$coefficients[1] + x^3*model$coefficients[2] + x^4*model$coefficients[3]}
 ggplot(data = game.lm, aes(x = Critic.Score, y = Global.Sales.Log)) + 
@@ -601,4 +609,4 @@ Global and regional sales are not distributed normally, while their log values a
 
 There is positive correlation between critic score and user score. In total, Critic score is lower than user score. No apparent correlation was found between scores and their counts.
 
-Critic score, user score count log, genre, rating, platform, and publisher together affect the global sales log. Critic score is the most important contributors. 
+Critic score, user score count log, genre, rating, platform, and publisher together affect the global sales log. Critic score is the most important contributor. 

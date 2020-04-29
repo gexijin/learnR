@@ -43,7 +43,7 @@ summary(sta)
 
 ## Visualizing data
 
-Let's start from visualizing the distributions of numeric variables. In many cases, we want to know if our data follows a normal distribution or not. Here are some ways that we can check the normality of a variable.
+Let's start from visualizing the distributions of numeric variables. In many cases, we want to know if our data follows a normal distribution or not so that we can decide whether some methods are suitable or not. Here are some ways that we can check the normality of a variable.
 
 - Histogram: Does the histogram approaches to a normal density curve? If yes, then the variable more likely follows a normal distribution.
 
@@ -51,7 +51,7 @@ Let's start from visualizing the distributions of numeric variables. In many cas
 
 - Shapiro-Wilk test: This is a widely used normality test. The null hypothesis is that a variable follows a normal distribution. Small p-value indicates a non-normality of the variable.
 
-```{r message=FALSE, fig.width=8, fig.height=8}
+```{r message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 library(dplyr)
 a <- colnames(sta)[2:9] # pick up all numeric columns/variables according to the names 
 par(mfrow = c(4, 4))    # layout outputs in 4 rows and 4 columns
@@ -71,9 +71,9 @@ s.t <- cbind(a, s.t)    # add variable name for the result
 s.t
 ```
 
-From the histograms and QQplots we can see that the distribution of Population, Illiteracy and Area skewed to the left. Income and Life.Exp distributed close to normal. The shapiro tests show that Income, Life.Exp and Frost are normally distributed with p value greater than 0.05, while Murder and HS.Grad are almost normally distributed with p value really close to 0.05. There is no evidence that Population, Illiteracy and Area have normal distribution.
+From the histograms and QQplots we can see that the distribution of Population, Illiteracy and Area skewed to the left. Income and Life.Exp distributed close to normal. The shapiro tests show that Income, Life.Exp and Frost are normally distributed with p value greater than 0.05, while Murder and HS.Grad are almost normally distributed with p value really close to 0.05. There is no evidence that Population, Illiteracy and Area having normal distribution.
 
-In the state data, there are a categorical variable *region* which contains 4 observations. What is the distribution of the categorical variable? Let's take a look at the number of observations(states) in each region and the corresponding percentage.
+In the state data, there is a categorical variable *region* which contains 4 observations. What is the distribution of the categorical variable? Let's take a look at the number of observations(states) in each region and the corresponding percentage.
 
 (ref:state-region) State count in each region
 
@@ -86,7 +86,7 @@ text(x=seq(0.7, 5, 1.2), 2, paste("n=", counts))      #Add count to each bar
 
 Bar plot tells us that we have relatively more states in South(16) and less states in Northeast(9). North Central and West have similar number of states(12 and 13).
 
-A lollipop plot is a hybrid of a scatter plot and a barplot. It shows the relationship between two variables. One must be numerical variable, and the other one can be numerical or categorical variable. A lollipop chart is constituted by a point (made with geom_point) and a segment (made by geom_segment). Therefore you can modify this two components using the usual arguments: ‘size’, ‘color’, ‘linetype’, ‘alpha’, ‘shape’, etc. Here is the lollipop chart shows the relationship between state and population.
+A lollipop plot is a hybrid of a scatter plot and a barplot. Here is the lollipop chart shows the relationship between state and population.
 
 (ref:state-pop) Loppipop plot of population in each state
 
@@ -101,7 +101,9 @@ ggplot(sta, aes(x = State, y = Population)) +
 
 From the plot we can see even in early days, California and New York are the top two states in population. South Dakota have little population even in 1970s.
 
-Other questions we may ask are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model of other factors to explain their contribution to murder rate? A choropleth map may give us an overall view.
+Other questions we may ask are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model of other factors to explain their contribution to murder rate? 
+
+A choropleth map may give us an overall view.
 
 (ref:state-map) Map of murder rate distribution
 
@@ -122,7 +124,7 @@ ggplot(map, aes(x = long, y = lat, group = group)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-We can see from the map that the bottom and right of the map are close to red while the top middle and left are yellow. There is an area on top-right are yellow too. The map tells us that murder rate are higher in south and east states but less in north central, northwest and northeast states.
+We can see from the map that the bottom and right of the map are close to red while the top middle and left are yellow. There is an area on top-right are yellow too, which means that murder rate are higher in south and east states but less in north central, northwest and northeast states.
 
 (ref:state-murder) Ridgeline plot for murder rate in each region
 
@@ -135,24 +137,25 @@ ggplot(sta, aes(x = Murder, y = Region, fill = Region)) +
         axis.title.x = element_text(hjust = 0.5), axis.title.y = element_text(hjust = 0.5))
 ```
 
-The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has big murder rate than other regions. 
+The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has bigger murder rate than the other regions. 
 
 >
 ```{exercise}
 
 >
-Similar to Figure \@ref(fig:state-map), use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb to state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:
-```
+Similar to Figure \@ref(fig:state-map), use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb and state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:
 >
-```{r eval=F}
 tem <- data.frame(state.x77) 
+>
 sta <- cbind(state.abb, tem, state.region)
+>
 colnames(sta)[10] <- "Region" 
+>
 ......
 ```
 
 >
-```{Exercise}
+```{exercise}
 
 >
 Similar to Figure \@ref(fig:state-murder), use ridgeline plot to explore the regional distribution of Illiteracy for state.x77 and state.region data sets and interpret your figure.
@@ -160,7 +163,7 @@ Similar to Figure \@ref(fig:state-murder), use ridgeline plot to explore the reg
 
 ## Analyzing the relationship among variables
 
-To visulize the linear relationship among variables in a plot, a scatter matrix is the best choice. A scatter matrix is a pair-wise scatter plot of multiple variables presented in a matrix format. It measures the linear relationship among variables. The range of correlation coefficient is [-1, 1]. The coefficient -1 implies two variables are strictly negative related, such as $y=-x$. And coefficient 1 implies positive related, such as $y=2x+1$. Here is an example of how to make a scatter matrix.
+A scatter matrix is a pair-wise scatter plot of multiple variables presented in a matrix format. To visulize the linear relationship among variables in a plot, a scatter matrix is the best choice. The range of correlation coefficient is [-1, 1]. The coefficient -1 implies two variables are strictly negative related, such as $y=-x$. And coefficient 1 implies positive related, such as $y=2x+1$. Here is the scatter matrix for our state data.
 
 (ref:state-corrplot) Corrplot for numeric variables
 
@@ -179,7 +182,7 @@ On the top-right of correlation figure we can see the red and narrow shape betwe
 
 The pearson and spearman correlation matrix on the bottom-left gives us the r values between each pair of the variables, which confirm the correlation shape on the top-right.
 
-Positive correlation between Murder and Illiteracy with r value of 0.70, which means the lower education level the state have, the higher murder rate chance it will happen in that state; Negative correlations between Murder and Life.Exp, Frost, with r value of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life expectation the state will have; And the colder of the weather, the lower chance the murder will occur: too cold to murder?!
+Positive correlation between Murder and Illiteracy with r value of 0.70, which means the lower education level the state have, the higher murder rate chance it will happen in that state; Negative correlations between Murder and Life.Exp, Frost, with r value of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life expectation the state will have; And the colder of the weather, the lower chance the murder will occur. Why? Is it not easy for the bad person live in cold area?
 
 >
 ```{exercise}
@@ -214,7 +217,7 @@ we can use density plot to see the distribution of Illiteracy by region.
 ggplot(sta, aes(x = Illiteracy, fill = Region)) + geom_density(alpha = 0.3)
 ```
 
-We can see that north central region has narrow density distribution with most Illiteracy less than 1 percent of population. While south region has an open distribution with illiteracy covered from 0.5 to 3, and most south states have illiteracy between 1.5 and 2.2. Though region west has a spread out distribution too, but it's left skewed, which means there are still lots of west states with illiteracy less than 1% of population. Most northeast region states have illiteracy less then 1.5% of population. 
+We can see that north central region has narrow density distribution with most Illiteracy less than 1 percent of population. While south region has an open and bell shaped distribution with illiteracy covered from 0.5 to 3. Though region west has a spread out distribution too, but it's left skewed; There are lots of west states with illiteracy of less than 1% of its population. Most northeast region states have illiteracy less then 1.5% of its population. 
 
 >
 ```{exercise}
@@ -225,7 +228,7 @@ Similar to Figure \@ref(fig:state-illiteracy), use density plot to see the distr
 
 Because of the relationship of Murder with both Population and Area, We add one more column of Pop.Density for the population per square miles of area to see the correlation between Murder and this density.
 
-(ref:state-population) Box plot of population by region
+(ref:state-population) Box plot of population density by region
 
 ```{r state-population, fig.cap='(ref:state-population)', fig.align='center'}
 sta$Pop.Density <- sta$Population/sta$Area
@@ -234,7 +237,7 @@ model <- aov(sta$Pop.Density ~ sta$Region, sta)
 summary(model)
 ```
 
-The box plot shows that Pop.Density of Northeast is much more than the other regions, while West has lowest Pop.Density. ANOVA test with p value of 6.3e-06 also let us reject the null hypothesis that mean Pop.Densities are same for different regions, which means at least one of the regional population densities is different from the others.
+The box plot shows that the mean Pop.Density of Northeast is much more than the other regions, while West has lowest mean Pop.Density. ANOVA test with p value of 6.3e-06 also let us reject the null hypothesis that mean Pop.Densities are same for different regions, which means at least one of the regional mean population densities is different from the others.
 
 Here is the scatterplot for Illiteracy and Murder with Population per area.
 
@@ -247,7 +250,7 @@ ggplot(sta, aes(x = Illiteracy, y = Murder)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-The plot shows that murder and illiteracy are positive correlated. All states in other three regions have murder rate less than 12 per 100,000 population except some of south states have murder over 12 per 100,000 population. All north central states(red) has illiteracy less than 1, all northeast states have less than 1.5 of illiteracy. The illiteracy of west and south states have much bigger variance. More Northeast states have big population density but middle illiteracy rate comparing with the states in the other three regions.
+The plot shows that murder and illiteracy are positive correlated. All states in other three regions have murder rate less than 12 per 100,000 population except some of south states(green). All north central states(blue) has illiteracy less than 1, all northeast states(red) have less than 1.5 of illiteracy. The illiteracy of west(purple) and south states have much bigger variance, some west states has illiteracy less than 0.5, while some south state has illiteracy more than 2.75. Many Northeast states have big population density but middle illiteracy rate comparing with the states in the other three regions.
 
 Because of the high correlation of murder and Life.Exp, we will take a look of the distribution of Life.Exp.
 
@@ -255,14 +258,14 @@ Because of the high correlation of murder and Life.Exp, we will take a look of t
 
 ```{r state-LifeExp, fig.cap='(ref:state-LifeExp)', fig.align='center'}
 ggplot(sta, aes(x = Region, y = Life.Exp, fill = Region)) + 
-  geom_violin(trim=FALSE) + 
-  geom_boxplot(width=0.1) +
+  geom_violin(trim = FALSE) + 
+  geom_boxplot(width = 0.1) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-On average, south has lower life expectancy than the other three regions. North Central has highest Life.Exp, while West has spread out distribution with two long tails on each ends, which means some west states have really long life expectancy, while some states expect short life though they are in the same region.
+On average, south has lower life expectancy than the other three regions. North Central has highest Life.Exp. West has extending distribution with two long tails on each ends, which means some west states have really long life expectancy, while some states expect short life though they are in the same region.
 
-Here is the plot for murder with the information of variables in the other cluster. According to the corrplot, we believe they affect the murder rate too, more or less.
+According to the corrplot, there are other variables in the other cluster, such as life expectancy, high school graduation and income. We are interested whether they affect the murder rate. Here is the plot for relationship between murder and these variables. 
 
 (ref:state-LifeMurder) Relationship between murder rate and life expectancy, high school graduation and income
 
@@ -276,15 +279,14 @@ sta.income <- sta %>% mutate(IncomeType = factor(ifelse(Income < 3500, "Under350
 ggplot(sta.income, aes(x = Murder, y = Life.Exp)) + 
   geom_point(aes(shape = IncomeType, color = Region, size = HS.Grad)) + 
   geom_smooth(method = 'lm',formula = y ~ x) +
-  #labs(title = "Murder Vs Life.Exp with HS.Grad and IncomeType by region") +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-Murder is negatively correlated with Life.Exp. Some states with higher murder rate over 12 have relatively small symbols, which means their high school graduation rates are as less as 40%; And these small symbols with murder rate bigger than 12 are all colored as green, which means they all belong to south region. 
+Murder is negatively correlated with Life.Exp. Some states with higher murder rate over 12 have relatively small symbols, which means their high school graduation rates are close to 40%; And these small symbols with murder rate bigger than 12 are all colored as green, which means they all belong to south region. 
 
 It looks like the income type does not affect the murder rate a lot because all different symbols scatter around in different murder rates, especially between murder rate 8 and 10.
 
-Most southern states has lower HS.Grad high, low Life.Exp but higher murder frequency, while states in other three regions have relative higher HS.Grad and income but lower murder rate.
+Most southern states has lower HS.Grad, lower Life.Exp but higher murder frequency, while states in other three regions have relative higher HS.Grad and income but lower murder rate.
 
 >
 ```{exercise}
@@ -293,12 +295,13 @@ Most southern states has lower HS.Grad high, low Life.Exp but higher murder freq
 Use scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure \@ref(fig:state-dendrogram). Interpret your plot.
 ```
 
-
 ## The whole picture of the data set 
+
+We analyzed the relationship of murder rate with the variables in both clusters. It looks like all variables are correlated, more or less. Now let's see the whole picture of these variables. Heatmap and Segment diagram are the popular methods.
 
 (ref:state-heatmap) Heat map for whole state data set
 
-```{r state-heatmap, message=FALSE, fig.width=8, fig.height=10, fig.cap='(ref:state-heatmap)', fig.align='center'}
+```{r state-heatmap, message=FALSE, warning=FALSE, fig.width=8, fig.height=10, fig.cap='(ref:state-heatmap)', fig.align='center'}
 library(gplots)
 st.matrix <- as.matrix(st) # transfer the data frame to matrix
 s <- apply(st.matrix, 2, function(y)(y - mean(y)) / sd(y))  # standardize data
@@ -315,7 +318,7 @@ a <- heatmap.2(s,
 legend("topright", levels(sta$Region), fill = rainbow(4), cex = 0.8)  # add legend 
 ```
 
-Same as cluster Dendrogram plot, Life.Exp, Income, HS.Grad, together with Frost build one cluster, while Illiteracy, Murder and Population and area build another cluster.
+Same as cluster Dendrogram plot, Heatmap shows that Life.Exp, Income, HS.Grad, together with Frost build one cluster, while Illiteracy, Murder and Population and area build another cluster.
 
 Compare with other states, lots of south states with lower Life.Exp, Income, HS.Grad have higher Murder and Illiteracy, like Mississippi and Alabama. On the contrary, some northern and western states which have higher Life.Exp, Income, HS.Grad show lower Area, Population, Murder and Illiteracy, like Nebraska and South Dakota. Though the income of South Dakota show a little bit green.
 
@@ -326,7 +329,7 @@ row.names(st) <- sta$State
 stars(st, key.loc = c(13, 1.5), draw.segments = T)   
 ```
 
-The segment Diagram shows us different aspects of each state. For example, South Dakota has big Frost(yellow), big Life Expectancy(blue), relative high percentage of high school graduation rate(pink) and good income(red), but has small area and really tiny, almost nothing comparing with other states in population, illiteracy and murder.
+The segment Diagram shows us different aspects of each state. For example, South Dakota has big Frost(yellow), big Life Expectancy(blue), relative high percentage of high school graduation rate(pink) and good income(red), but has small area and really tiny population, illiteracy and murder rate comparing with other states.
 
 We use principal components analysis to explore the data a little bit more!
 ```{r}
@@ -338,11 +341,11 @@ percentVar <- round(100 * summary(pca)$importance[2, 1:7], 0) # compute % varian
 percentVar
 ```
 
-The first two components account for 45% and 20%, together 65% of the variance. The third component attributes a little bit less but still over 10% of the variance. The barplot of each component's variance shows how the each component dominate. 
+The first two components contribute 45% and 20%, together 65% of the variance. The third component is a little bit less but still over 10% of the variance. The barplot of each component's variance shows how the each component dominate. 
 
 (ref:state-bioplot) Bioplot for PCA 
 
-```{r state-bioplot, fig.cap='(ref:state-bioplot)', fig.align='center'}
+```{r state-bioplot, warning=FALSE, fig.cap='(ref:state-bioplot)', fig.align='center'}
 library(ggfortify)
 row.names(sta) <- sta$State
 autoplot(prcomp(st,  scale = T), data = sta, 
@@ -363,7 +366,7 @@ model <- lm(Murder ~ .,  data = lm.data)
 summary(model)
 ```
 
-Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another relative smaller factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow:
+Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow:
 $Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast$ 
 
 >
