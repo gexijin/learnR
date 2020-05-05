@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-29" />
+<meta name="date" content="2020-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,7 +305,7 @@ Figure 1.1: Iris flower. Photo from Wikipedia.
 </div>
 <p>The downloaded iris data can be imported into R by selecting <strong>Import Dataset</strong> in the <strong>File</strong> menu, and then choose <strong>“From text(readr)…”</strong>. As the default settings work well in this case, we just need to click <strong>Import</strong> in the pop-up window. That’s it! There is no need to spend half of a semester to learn how to import data like some people used to complain about SAS. If you have trouble importing this data file, you can skip this step as this data set is included in the R software.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
-<img src="images/img0102_dataframe.png" alt="Example of a data frame. " width="80%" />
+<img src="images/img0102_dataframe.png" alt="Example of a data frame." width="80%" />
 <p class="caption">
 Figure 1.2: Example of a data frame.
 </p>
@@ -317,8 +317,8 @@ Figure 1.2: Example of a data frame.
 <span class="kw">str</span>(iris)   <span class="co"># show the structure</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(iris)</code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<p>While the first 4 columns contain <strong>numeric</strong> values, the 5<sup>th</sup> column contains <strong>characters</strong> indicating which sub-species a sample belongs to. This is an important distinction, as they are treated differently in R. Sometimes we need to overwrite data types guessed by R, which can be done during the data importing process</p>
-<p>The imported data is stored in a <strong>data frame</strong> called <em>iris</em>, which contains both numeric and character columns. Individual values in a data frame can be accessed using row and column indices. Another data structure is a <strong>matrix</strong> which contains only one type of variables. More discussion about data frame, matrix, and other data structures are introduced in the later chapters.</p>
+<p>While the first 4 columns contain <strong>numeric</strong> values, the 5<sup>th</sup> column contains <strong>characters</strong> indicating which sub-species a sample belongs to. This is an important distinction, as they are treated differently in R. Sometimes we need to overwrite data types guessed by R, which can be done during the data importing process.</p>
+<p>The imported data is stored in a <strong>data frame</strong> called <em>iris</em>, which contains both numeric and character columns. Individual values in a data frame can be accessed using row and column indices. Another data structure is a <strong>matrix</strong> which contains only one type of variables. More discussion about data frame, matrix, and other data structures are introduced in chapter 3.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris[<span class="dv">3</span>, <span class="dv">4</span>]    <span class="co"># shows the value in 3rd row, 4th column: 0.2.</span>
 iris[<span class="dv">3</span>, ]     <span class="co"># shows all of row 3</span>
 iris[, <span class="dv">4</span>]     <span class="co"># shows all of column 4</span>
@@ -344,7 +344,7 @@ iris[<span class="dv">3</span>, <span class="dv">1</span><span class="op">:</spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(iris)  <span class="co"># Column names. </span></code></pre></div>
 <pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
 ## [5] &quot;Species&quot;</code></pre>
-<p>Remember these column names, as we are going to use them in our analysis now. Note that sepal length information is contained in the column named <strong>Sepal.Length</strong>. Since R is case sensitive, we have to type these column names exactly as above. R is case-sensitive. “iris$petal.length” will not be recognized. We can retrieve an entire column by using the data frame name followed by the column name.</p>
+<p>Remember these column names, as we are going to use them in our analysis now. Note that sepal length information is contained in the column named <strong>Sepal.Length</strong>. Since R is case sensitive, we have to type these column names exactly as above. We can retrieve an entire column by using the data frame name followed by the column name. R is case-sensitive. “iris$petal.length” will not be recognized.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris<span class="op">$</span>Petal.Length  <span class="co"># The 150 numbers in the Petal length column</span></code></pre></div>
 <p>This is the recommended, safer way of referring to columns. But if you are as lazy as me and do not want to type the data frame name repeatedly. This is a shortcut by attaching a data frame the columns can be accessed directly. One disadvantage is that it will be cause issues if two datasets have the same variable names, or if the data is transformed. We typically do not recommend doing it but here we want to make things simple.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attach</span>(iris)
@@ -379,7 +379,7 @@ Petal.Length  <span class="co"># The 150 numbers in the Petal length column</spa
 </div>
 <div id="analyzing-one-set-of-numbers" class="section level2">
 <h2><span class="header-section-number">1.3</span> Analyzing one set of numbers</h2>
-<p>First, let’s retrieve the 150 in the nubmerspetal length column and store it in an vector called x.</p>
+<p>First, let’s retrieve the 150 nubmer in the spetal length column and store it in an vector called x.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>Petal.Length   </code></pre></div>
 <p>Some might complain that nothing happens after you type in this command. Although nothing is printed out, you have created a new <strong>vector</strong> called x in the memory. You can find it in the top right panel in the <strong>Environment</strong> tab. <em>The process of programming is all about creating and modifying data objects; these data objects can be printed out or operated on.</em></p>
 <p><strong>A vector</strong> holds a series of values, such as numbers and characters. R made it very easy to do the same calculations (add, subtract, multiply,…) on all of them at once or collectively.</p>
@@ -392,7 +392,7 @@ Petal.Length  <span class="co"># The 150 numbers in the Petal length column</spa
 <li><p>Average petal length is 3.758.</p></li>
 <li><p>The mid-point, or median, is 5.35, as about half of the numbers are smaller than 5.35. Why the median is different from the mean? What happens if there is a typo and one number is entered 340cm instead of 3.40cm?</p></li>
 <li><p>The 3rd quartile, or 75<sup>th</sup> percentile, is 5.1, as 75% of the flowers have petals shorter than 5.1. If a student’s GPA ranks 5<sup>th</sup> in a class of 25, he/she is at 80<sup>th</sup> percentile.</p></li>
-<li><p>The 1st quartile, or 25<sup>th</sup> percentile, is 1.6. Only 25% of the flowers have petals shorter than 1.6. These summary statistics are graphically represented as a boxplot in the Figure &lt;span class=“redoc” id=“redoc-citation-1”&gt;<span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(fig:1-3)A. Boxplots are more useful when multiple sets of numbers are compared.</p></li>
+<li><p>The 1st quartile, or 25<sup>th</sup> percentile, is 1.6. Only 25% of the flowers have petals shorter than 1.6. These summary statistics are graphically represented as a boxplot in the Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-3">1.3</a>A. Boxplots are more useful when multiple sets of numbers are compared.</p></li>
 </ul>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(x)   <span class="co"># Figure 1.3A.</span>
@@ -433,9 +433,9 @@ where
 <p>With R, it is easy to generate graphs.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(x)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
-<img src="book_files/figure-html/unnamed-chunk-20-1.png" alt="Barplot of petal length" width="80%" />
+<img src="book_files/figure-html/unnamed-chunk-20-1.png" alt="Barplot of petal length." width="80%" />
 <p class="caption">
-Figure 1.4: Barplot of petal length
+Figure 1.4: Barplot of petal length.
 </p>
 </div>
 <p>This figure suggests that the first 50 flowers (Iris setosa) have much shorter petals than the other two species. The last 50 flowers (Iris virginica) have slightly longer petals than the middle (Iris versicolor).</p>
@@ -461,7 +461,7 @@ Figure 1.5: Sequence plot, histogram, lag plot and normal Q-Q plot.
 <ol style="list-style-type: lower-alpha">
 <li>Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution<br />
 </li>
-<li>generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-5">1.6</a>.
+<li>Generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-5">1.6</a>.
 </div>
 </li>
 </ol>
@@ -574,13 +574,13 @@ Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 <pre><code>## [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(Species)    <span class="co"># show the structure of Species.</span></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
-<p>Perhaps due to adaption to the environment, change in petal length leads to better survival. With the smallest petals, <em>Iris Setosa</em> is found in Arctic regions. <em>Iris versicolor</em> is often found in the Eastern United States and Eastern Canada. <em>Iris virginica</em> “is common along the coastal plain from Florida to Georgia in the Southeastern United States <span class="math display">\[Wikipedia\]</span>.” It appears the iris flowers in warmer places are much larger than those in colder ones. With R, it is very easy to generate lots of graphics. But we still have to do the thinking. It requires to put the plots in context.</p>
+<p>Perhaps due to adaption to the environment, change in petal length leads to better survival. With the smallest petals, <em>Iris Setosa</em> is found in Arctic regions. <em>Iris versicolor</em> is often found in the Eastern United States and Eastern Canada. <em>Iris virginica</em> “is common along the coastal plain from Florida to Georgia in the Southeastern United States–<em>Wikipedia</em>.” It appears the iris flowers in warmer places are much larger than those in colder ones. With R, it is very easy to generate lots of graphics. But we still have to do the thinking. It requires to put the plots in context.</p>
 <blockquote>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 1.9  </strong></span></p>
 <p>The <strong>mtcars</strong> data description can be found here: <a href="https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html" class="uri">https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html</a>.</p>
-<p>Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -&gt; factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.</p>
+<p>Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -&gt; as.factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Color the scatter plot by Number of cylinders;</li>
 <li>Add legend to the top right.
@@ -607,7 +607,7 @@ Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 <p>Through hypothesis testing of the correlation, we reject the null hypothesis that the true correlation is zero. That means the correlation is statistically significant. Note that Pearson’s correlation coefficient is not robust against outliers and other methods such as Spearman’s exists. See help info:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?cor  <span class="co"># show help info on cor ( )</span></code></pre></div>
 <p>We can also determine the equation that links petal length and petal width. This is so called regression analysis. We assume</p>
-<pre><code>     $Petal.Length = a × Petal.Width + c + e$, 
+<pre><code>     $Petal.Length = a × Petal.Width + c + e, 
      </code></pre>
 <p>where <span class="math inline">\(a\)</span> is the slope parameter, <span class="math inline">\(c\)</span> is a constant, and <span class="math inline">\(e\)</span> is some random error. This linear model can be determined by a method that minimizes the least squared-error:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)  <span class="co"># Linear Model (lm)</span>
@@ -634,7 +634,7 @@ Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 <p><span class="math inline">\(Petal.Length = 2.22944 × Petal.Width + 1.08356\)</span>.</p>
 <p>This model can be put on the scatter plot as a line.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(model)
-<span class="kw">abline</span>(model)  <span class="co"># add regression line to plot. Figure 1.8.</span></code></pre></div>
+<span class="kw">abline</span>(model)  <span class="co"># add regression line to plot. Figure 1.9</span></code></pre></div>
 <p>Sometimes, we use this type of regression analysis to investigate whether variables are associated.</p>
 <blockquote>
 
@@ -690,9 +690,9 @@ Use boxplot and t-test to investigate whether sepal width is different between I
 </div>
 <div id="testing-the-difference-among-multiple-groups-anova" class="section level2">
 <h2><span class="header-section-number">1.7</span> Testing the difference among multiple groups (ANOVA)</h2>
-<p>As indicated by Figure <a href="#fig:2-4"><strong>??</strong></a>, sepal width has small variation across species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).</p>
+<p>As indicated by Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:2-5">1.11</a>, sepal width has small variation across species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species)  <span class="co"># Figure 1.12</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species)  <span class="co"># Figure 1.11</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:2-5"></span>
 <img src="book_files/figure-html/2-5-1.png" alt="Boxplot of sepal width across 3 species." width="672" />
 <p class="caption">

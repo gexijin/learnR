@@ -81,7 +81,7 @@ import data like some people used to complain about SAS. If you have trouble
 importing this data file, you can skip this step as this data set is included in
 the R software.
 
-```{r echo=FALSE, out.width='80%', fig.cap='Example of a data frame. ', fig.align='center'}
+```{r echo=FALSE, out.width='80%', fig.cap='Example of a data frame.', fig.align='center'}
 knitr::include_graphics("images/img0102_dataframe.png")
 ```
 
@@ -101,13 +101,13 @@ While the first 4 columns contain **numeric** values, the 5^th^ column contains
 **characters** indicating which sub-species a sample belongs to. This is an
 important distinction, as they are treated differently in R. Sometimes we need
 to overwrite data types guessed by R, which can be done during the data
-importing process
+importing process.
 
 The imported data is stored in a **data frame** called *iris*, which contains
 both numeric and character columns. Individual values in a data frame can be
 accessed using row and column indices. Another data structure is a **matrix**
 which contains only one type of variables. More discussion about data frame,
-matrix, and other data structures are introduced in the later chapters.
+matrix, and other data structures are introduced in chapter 3.
 
 ```{r echo=TRUE, results='hide'}
 iris[3, 4]    # shows the value in 3rd row, 4th column: 0.2.
@@ -140,8 +140,7 @@ knitr::include_graphics("images/img0100_tips.png")
 colnames(iris)  # Column names. 
 ```
 
-Remember these column names, as we are going to use them in our analysis now. Note that sepal length information is contained in the column named **Sepal.Length**. Since R is case sensitive, we have to type these column names exactly as above. R is case-sensitive. “iris$petal.length” will not be recognized.
-We can retrieve an entire column by using the data frame name followed by the column name.
+Remember these column names, as we are going to use them in our analysis now. Note that sepal length information is contained in the column named **Sepal.Length**. Since R is case sensitive, we have to type these column names exactly as above. We can retrieve an entire column by using the data frame name followed by the column name.  R is case-sensitive. “iris$petal.length” will not be recognized.
 ```{r echo=TRUE, results='hide'}
 iris$Petal.Length  # The 150 numbers in the Petal length column
 ```
@@ -184,9 +183,9 @@ b. Use R to find the maximal value of mpg in the data set **mtcars**.
 
 ## Analyzing one set of numbers
 
-First, let's retrieve the 150 in the nubmerspetal length column and store it in
+First, let's retrieve the 150 nubmer in the spetal length column and store it in
 an vector called x.
-```{r}
+```{r} 
 x <- Petal.Length   
 ```
 
@@ -220,11 +219,10 @@ This produces a lot of useful information.
     
 -   The 1st quartile, or 25^th^ percentile, is 1.6. Only 25% of the flowers have
     petals shorter than 1.6. These summary statistics are graphically
-    represented as a boxplot in the Figure \<span class="redoc"
-    id="redoc-citation-1"\>@ref(fig:1-3)A. Boxplots are more
+    represented as a boxplot in the Figure \@ref(fig:1-3)A. Boxplots are more
     useful when multiple sets of numbers are compared.
 
-(ref:1-3) Boxplot of petal length (A) and of all 4 columns (B). 
+(ref:1-3) Boxplot of petal length (A) and of all 4 columns (B).
 
 ```{r 1-3, echo=c(1, 5), fig.show='hold', out.width='50%', fig.cap='(ref:1-3)', fig.align='center'}
 boxplot(x)   # Figure 1.3A.
@@ -271,7 +269,7 @@ petal length. This is consistent with the boxplot above. Perhaps changes in
 petal length lead to better survival in different habitats.
 
 With R, it is easy to generate graphs.
-```{r out.width='80%', fig.cap='Barplot of petal length', fig.align='center'}
+```{r out.width='80%', fig.cap='Barplot of petal length.', fig.align='center'}
 barplot(x)
 ```
 
@@ -308,11 +306,11 @@ Q-Q plot can help check if data follows a Gaussian distribution, which is widely
 
 >
 a. Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution    
-b. generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure \@ref(fig:1-5).      
+b. Generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure \@ref(fig:1-5).      
 ```
 
 
-(ref:1-5) Plots for randomly generated numbers following a normal distribution. 
+(ref:1-5) Plots for randomly generated numbers following a normal distribution.
 
 ```{r 1-5, echo=FALSE, fig.show='hold', out.width='50%', out.length='50%', fig.cap='(ref:1-5)', fig.align='center'}
 x <- rnorm(500)
@@ -428,7 +426,7 @@ Perhaps due to adaption to the environment, change in petal length leads to
 better survival. With the smallest petals, *Iris Setosa* is found in Arctic
 regions. *Iris versicolor* is often found in the Eastern United States and
 Eastern Canada. *Iris virginica* "is common along the coastal plain from Florida
-to Georgia in the Southeastern United States \[Wikipedia\]." It appears the iris
+to Georgia in the Southeastern United States--*Wikipedia*." It appears the iris
 flowers in warmer places are much larger than those in colder ones. With R, it
 is very easy to generate lots of graphics. But we still have to do the thinking.
 It requires to put the plots in context.
@@ -439,7 +437,7 @@ It requires to put the plots in context.
 >
 The **mtcars** data description can be found here: [https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html](https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html). 
 >
-Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -> factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.
+Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -> as.factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.
 >
 a. Color the scatter plot by Number of cylinders;
 b. Add legend to the top right.
@@ -463,7 +461,7 @@ Note that Pearson’s correlation coefficient is not robust against outliers and
 ```
 We can also determine the equation that links petal length and petal width. This is so called regression analysis. We assume
 
-         $Petal.Length = a × Petal.Width + c + e$, 
+         $Petal.Length = a × Petal.Width + c + e, 
          
 where $a$ is the slope parameter, $c$ is a constant, and $e$ is some random error.   This linear model can be determined by a method that minimizes the least squared-error:
 ```{r}
@@ -478,7 +476,7 @@ $Petal.Length = 2.22944 × Petal.Width + 1.08356$.
 This model can be put on the scatter plot as a line.
 ```{r fig.keep='none'}
 plot(model)
-abline(model)  # add regression line to plot. Figure 1.8.
+abline(model)  # add regression line to plot. Figure 1.9
 ```
 
 Sometimes, we use this type of regression analysis to investigate whether variables are associated. 
@@ -532,12 +530,12 @@ Use boxplot and t-test to investigate whether sepal width is different between I
 
 
 ## Testing the difference among multiple groups (ANOVA)
-As indicated by Figure \@ref(fig:2-4), sepal width has small variation across species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).
+As indicated by Figure \@ref(fig:2-5), sepal width has small variation across species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).
 
 (ref:2-5) Boxplot of sepal width across 3 species.
 
 ```{r 2-5, echo=c(1,3), fig.cap='(ref:2-5)', fig.align='center'}
-boxplot(Sepal.Width ~ Species)  # Figure 1.12
+boxplot(Sepal.Width ~ Species)  # Figure 1.11
 text(2.5, 4.2, labels = "boxplot(Sepal.Width~Species)", col = "red")
 summary(aov(Sepal.Width ~ Species))
 ```

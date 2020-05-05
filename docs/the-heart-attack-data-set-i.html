@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-29" />
+<meta name="date" content="2020-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -451,7 +451,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-359" class="exercise"><strong>Exercise 5.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-358" class="exercise"><strong>Exercise 5.1  </strong></span></p>
 <p>Perform the following analysis for the heartatk4R dataset. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Graphical EDA: Plot distribution of <strong>charges</strong> using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running <strong>temp = CHARGES [ ! is.na (CHARGES) ]</strong> and then run your plot on <strong>temp</strong>.</li>
@@ -468,14 +468,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(DIAGNOSIS), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co"># tabulate&amp;sort </span>
 percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(DIAGNOSIS)  <span class="co"># convert to %</span>
-<span class="kw">barplot</span>(percentages, <span class="dt">las =</span> <span class="dv">3</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)  <span class="co"># Figure 4.1</span></code></pre></div>
+<span class="kw">barplot</span>(percentages, <span class="dt">las =</span> <span class="dv">3</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)  <span class="co"># Figure 5.1</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:4-1"></span>
 <img src="book_files/figure-html/4-1-1.png" alt="Barplot by percentage." width="672" />
 <p class="caption">
 Figure 5.1: Barplot by percentage.
 </p>
 </div>
-<p>Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line: barplot(100* sort(table(DIAGNOSIS), decreasing=T) / length(DIAGNOSIS), las = 3, ylab = “Percentage”, col = “green”).</p>
+<p>Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="dv">100</span><span class="op">*</span><span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(DIAGNOSIS), <span class="dt">decreasing=</span>T) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(DIAGNOSIS), <span class="dt">las =</span> <span class="dv">3</span>, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>)</code></pre></div>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(SEX)  <span class="co"># tabulate the frequencies of M and F</span></code></pre></div>
 <pre><code>## SEX
@@ -491,7 +492,7 @@ Figure 5.2: Pie chart of patients by SEX.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-362" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the counts and percentages of each levels of DRG by filling the blanks below. Use bar plot and pie charts similar to Figure <a href="the-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="the-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.</p>
+<p><span id="exr:unnamed-chunk-362" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the count and percentage of each level of DRG by filling the blanks below. Use bar plot and pie chart similar to Figure <a href="the-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="the-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.</p>
 <p>drg &lt;- __________ #Import values of DRG</p>
 <p>counts &lt;- sort(________(drg), decreasing = TRUE) # tabulate &amp; sort</p>
 <p>percentages &lt;- 100 * __________ # Compute the percentage and convert to %</p>
@@ -505,8 +506,8 @@ _________(counts) # pie chart
 <h2><span class="header-section-number">5.2</span> Possible correlation between two numeric columns?</h2>
 <p>This is done using various measures of correlation coefficients such as Pearson’s correlation coefficients (PPC), which is given by</p>
 <p><span class="math display">\[r=∑_{i=1}^{n}(\frac{x_i-\bar{x}}{s_x}) (\frac{y_i-\bar{y}}{s_y})\]</span></p>
-<p>where <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are the <span class="math inline">\(i^{th}\)</span> values, <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> are sample means, and <span class="math inline">\(s_x\)</span>s and <span class="math inline">\(s_y\)</span> are sample standard deviations.</p>
-<p>Note that Pearson’s correlation ranges from -1 to 1, with -1 and 1 indicating perfect negative and possitive correlation respectively. <strong>Negative correlation is just as important and informative as positive ones</strong>.</p>
+<p>where <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are the <span class="math inline">\(i^{th}\)</span> values, <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> are sample means, and <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> are sample standard deviations.</p>
+<p>Note that Pearson’s correlation ranges from -1 to 1, with -1 and 1 indicating perfect negative and possitive correlation respectively. <strong>Negative correlations are just as important and informative as positive ones</strong>.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:4-2"></span>
 <img src="images/img0402_coefficient.png" alt="Interpretation of Pearson’s correlation coefficient. The numbers are Pearson’s correlation coefficient r." width="80%" />
@@ -565,7 +566,7 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 <p><img src="images/img0400_sample.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Like many commonly-used parametric statistical methods which rely on means and standard deviations, the Pearson’s correlation coefficient is not robust, meaning its value are sensitive to outliers and can be misleading. It is also very sensitive to distribution.</p>
 <p><strong>Non-parametric</strong> approaches typically rank original data and do calculations on the ranks instead of raw data. They are often more robust. The only drawback might be loss of sensitivity. There are corresponding non-parametric versions for most of the parametric tests.</p>
-<p><strong>Spearman’s rank correlation coefficient <span class="math inline">\(\rho\)</span></strong> is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores <span class="math inline">\(X_i\)</span>, <span class="math inline">\(Y_i\)</span>are converted to ranks <span class="math inline">\(R_{x_i}\)</span>, <span class="math inline">\(R_{y_i}\)</span>, and the differences <span class="math inline">\(d_i\)</span> = <span class="math inline">\(R_{x_i}\)</span>-<span class="math inline">\(R_{y_i}\)</span> between the ranks of each observation on the two variables are calculated.</p>
+<p><strong>Spearman’s rank correlation coefficient <span class="math inline">\(\rho\)</span></strong> is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores <span class="math inline">\(X_i\)</span>, <span class="math inline">\(Y_i\)</span> are converted to ranks <span class="math inline">\(R_{x_i}\)</span>, <span class="math inline">\(R_{y_i}\)</span>, and the differences <span class="math inline">\(d_i\)</span> = <span class="math inline">\(R_{x_i}\)</span>-<span class="math inline">\(R_{y_i}\)</span> between the ranks of each observation on the two variables are calculated.</p>
 <p>If there are no tied ranks, then <span class="math inline">\(\rho\)</span> is given by:<span class="math display">\[ρ=1-\frac{6∑d_{i}^{2}}{n(n_{}^{2}-1)}\]</span></p>
 <p>In R, we can calculate Spearman’s <span class="math inline">\(\rho\)</span> and test its significance but customize the cor.test() function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor.test</span>(AGE, LOS, <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span>)</code></pre></div>
@@ -671,13 +672,13 @@ counts</code></pre></div>
 Figure 5.5: Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side.
 </p>
 </div>
-<p>You can add an argument, such as “<em>args.legend = list(x = “topleft”)</em>”, in the function barplot() to change the position of legends. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A:</p>
+<p>You can add an argument, such as “<em>args.legend = list(x = “topleft”)</em>”, in the function barplot() to change the position of legend. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(counts, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="dt">beside =</span> F,
         <span class="dt">args.legend =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;topleft&quot;</span>))</code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-374-1.png" width="672" /></p>
 <p>Another way of showing the proportions is mosaic plot.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED), <span class="dt">color =</span> T)  <span class="co"># Figure 4.6</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED), <span class="dt">color =</span> T)  <span class="co"># Figure 5.6</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-2"></span>
 <img src="book_files/figure-html/5-2-1.png" alt="Mosaic plot of DIED by SEX." width="576" />
 <p class="caption">
@@ -687,7 +688,7 @@ Figure 5.6: Mosaic plot of DIED by SEX.
 <p>The mosaic plot in Figure <a href="the-heart-attack-data-set-i.html#fig:5-2">5.6</a> is similar to the barplot in Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a>, but the bars are stretched to the same height, the width is defined by proportion of Male vs. Female. The size of the four blocks in the figure represents the counts of the corresponding combination. Also note that the blocks are also color-coded for different combination. Horizontally, the blocks are divided by SEX, we could observe that there are more men in this dataset than women. Vertically, the blocks are divided by DIED (1 for died in hospital). We could conclude that regardless of gender, only a small proportion of patients died in hospital. Between men and women, we also see that the percentage of women that died in hospital is higher than that in men. This is a rather unusual.</p>
 <p>We could use mosaic plots for multiple factors.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED, DRG), <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))  <span class="co"># Figure 4.7</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED, DRG), <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))  <span class="co"># Figure 5.7</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:5-3"></span>
 <img src="book_files/figure-html/5-3-1.png" alt="Mosaic plot of three factors." width="672" />
 <p class="caption">
@@ -699,15 +700,16 @@ Figure 5.7: Mosaic plot of three factors.
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset.</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-376-1.png" width="672" /></p>
-<p>This is a mosaic plot of the whole Titanic dataset</p>
+<p>This is a mosaic plot of the whole Titanic dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-377-1.png" width="672" /></p>
-<p>Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?</p>
+<p>Think about the questions: Did men and women survive by equal proportion? Did girls and women survive by equal proportion?</p>
 <blockquote>
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-378" class="exercise"><strong>Exercise 5.4  </strong></span></p>
-<p>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses? &gt; DIAGNOSIS &lt;- heartatk4R$DIAGNOSIS</p>
+<p>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses?</p>
+<p>DIAGNOSIS &lt;- heartatk4R$DIAGNOSIS</p>
 <p>SEX &lt;- heartatk4R$SEX</p>
 <p>counts &lt;- _____________(DIAGNOSIS, SEX) # Take SEX as columns</p>
 <p>barplot(_____________________________________________________)</p>
@@ -726,7 +728,7 @@ mosaicplot(_____________________________________________)
                        <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),
                              ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">6</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st">   </span><span class="co">#split a graph according to panels defined by SEX</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new1"></span>
 <img src="book_files/figure-html/new1-1.png" alt="Histogram of AGE by SEX using ggplot2 package" width="576" />
@@ -745,7 +747,7 @@ heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="k
                  ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]),
                  ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">4</span>])) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>))<span class="op">+</span><span class="st">  </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(DIED <span class="op">~</span><span class="st"> </span>SEX) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(DIED <span class="op">~</span><span class="st"> </span>SEX) <span class="op">+</span><span class="st">   </span><span class="co">#split a graph according to matrix of panels defined by DIED*SEX</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:new2"></span>
 <img src="book_files/figure-html/new2-1.png" alt="Histogram of AGE by SEX and DIED using ggplot2 package" width="672" />
@@ -753,7 +755,6 @@ heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="k
 Figure 5.9: Histogram of AGE by SEX and DIED using ggplot2 package
 </p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</code></pre></div>
 <p>We can see that patients who did not survive heart attack tend to be older, for both men and women. This is perhaps better illustrated with density plot:</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> .<span class="dv">3</span>) </code></pre></div>
@@ -777,7 +778,7 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-379" class="exercise"><strong>Exercise 5.5  </strong></span></p>
-Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results.
+Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histogram and density plot. Interpret your results.
 </div>
 
 </blockquote>
@@ -793,10 +794,10 @@ Use the ggplot2 package to compare the distribution of lengths of stay among pat
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-381" class="exercise"><strong>Exercise 5.7  </strong></span></p>
-<p>Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.</p>
-</blockquote>
+Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.
 </div>
 
+</blockquote>
 <blockquote>
 
 <div class="exercise">
@@ -840,8 +841,6 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 </p>
 </blockquote>
 </div>
-<p>All of these techniques we introduced so far enable us to <strong>LEARN</strong> about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc.</p>
-<p>You should also <strong>INTERACT</strong> with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># scatterplot of LOS vs. AGE</span>
 <span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() 
 <span class="co"># scatterplot of LOS vs. AGE, divided by SEX</span>
@@ -849,7 +848,7 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 <span class="co"># scatterplot colored by DIED</span>
 <span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-386-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
+<p>Here we only show the figure for third code. Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:5-7"></span>
 <img src="book_files/figure-html/5-7-1.png" alt="A scatter plot of LOS vs. AGE, using SEX and DIED as factors." width="672" />
@@ -871,6 +870,8 @@ Figure 5.15: Bubble plot example.
 </div>
 <p>Figure <a href="the-heart-attack-data-set-i.html#fig:5-8">5.15</a> is a busy plot. Female patients are shown in red while males in blue. Size of the plot is proportional to charges. So on this plot we are visualizing 4 columns of data!</p>
 <p>Other common methods we can use to detect complex correlations and structures include principal component analysis (PCA), Multidimensional scaling (MDS), hierarchical clustering etc.</p>
+<p>All of these techniques we introduced so far enable us to <strong>LEARN</strong> about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc.</p>
+<p>You should also <strong>INTERACT</strong> with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives.</p>
 <ol style="list-style-type: decimal">
 <li>Velleman, P. F.; Data Description Inc. ActivStats, 2000-2001 release.; A.W. Longman,: Glenview, IL, 2001.</li>
 </ol>

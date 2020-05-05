@@ -69,10 +69,13 @@ This generates a bar plot of counts. This basic plot could be further refined:
 ```{r 4-1, fig.cap='(ref:4-1)', fig.align='center'}
 counts <- sort(table(DIAGNOSIS), decreasing = TRUE)  # tabulate&sort 
 percentages <- 100 * counts / length(DIAGNOSIS)  # convert to %
-barplot(percentages, las = 3, ylab = "Percentage", col = "green")  # Figure 4.1
+barplot(percentages, las = 3, ylab = "Percentage", col = "green")  # Figure 5.1
 ```
 
-Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line: barplot(100* sort(table(DIAGNOSIS), decreasing=T) / length(DIAGNOSIS), las = 3, ylab = "Percentage", col = "green").
+Note that the “las = 3”, changes the orientation of the labels to vertical. Try plot without it or set it to 2. Of course you can do all these in one line.
+```{r eval=FALSE}
+barplot(100* sort(table(DIAGNOSIS), decreasing=T) / length(DIAGNOSIS), las = 3, ylab = "Percentage", col = "green")
+```
 
 (ref:14-2) Pie chart of patients by SEX.
 
@@ -83,7 +86,7 @@ pie(table(SEX))  # pie chart
 
 >
 ```{exercise}
-Compute the counts and percentages of each levels of DRG by filling the blanks below. Use bar plot and pie charts similar to Figure \@ref(fig:4-1) and Figure \@ref(fig:14-2) to visualize. Briefly discuss your results.
+Compute the count and percentage of each level of DRG by filling the blanks below. Use bar plot and pie chart similar to Figure \@ref(fig:4-1) and Figure \@ref(fig:14-2) to visualize. Briefly discuss your results.
 >
 drg <- __________               #Import values of DRG 
 >
@@ -102,9 +105,9 @@ This is done using various measures of correlation coefficients such as Pearson�
 
 $$r=∑_{i=1}^{n}(\frac{x_i-\bar{x}}{s_x}) (\frac{y_i-\bar{y}}{s_y})$$ 
 
-where $x_i$ and $y_i$ are the $i^{th}$ values, $\bar{x}$ and $\bar{y}$ are sample means, and $s_x$s and $s_y$ are sample standard deviations. 
+where $x_i$ and $y_i$ are the $i^{th}$ values, $\bar{x}$ and $\bar{y}$ are sample means, and $s_x$ and $s_y$ are sample standard deviations. 
 
-Note that Pearson’s correlation ranges from -1 to 1, with -1 and 1 indicating perfect negative and possitive correlation respectively. **Negative correlation is just as important and informative as positive ones**. 
+Note that Pearson’s correlation ranges from -1 to 1, with -1 and 1 indicating perfect negative and possitive correlation respectively. **Negative correlations are just as important and informative as positive ones**. 
 
 (ref:4-2) Interpretation of Pearson's correlation coefficient. The numbers are Pearson’s correlation coefficient r. 
 
@@ -145,7 +148,7 @@ Like many commonly-used parametric statistical methods which rely on means and s
 
 **Non-parametric** approaches typically rank original data and do calculations on the ranks instead of raw data. They are often more robust. The only drawback might be loss of sensitivity. There are corresponding non-parametric versions for most of the parametric tests.
 
-**Spearman’s rank correlation coefficient $\rho$** is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores $X_i$, $Y_i$are converted to ranks $R_{x_i}$, $R_{y_i}$, and the differences   $d_i$ = $R_{x_i}$-$R_{y_i}$ between the ranks of each observation on the two variables are calculated.
+**Spearman’s rank correlation coefficient $\rho$** is a non-parametric measure of correlation. The Spearman correlation coefficient ρ is often thought of as being the Pearson correlation coefficient between the ranked variables. In practice, however, a simpler procedure is normally used to calculate ρ. The n raw scores $X_i$, $Y_i$ are converted to ranks $R_{x_i}$, $R_{y_i}$, and the differences   $d_i$ = $R_{x_i}$-$R_{y_i}$ between the ranks of each observation on the two variables are calculated.
 
 If there are no tied ranks, then $\rho$ is given by:$$ρ=1-\frac{6∑d_{i}^{2}}{n(n_{}^{2}-1)}$$
 
@@ -239,7 +242,7 @@ barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", besi
 text(1, 7000, labels = "B")
 ```
 
-You can add an argument, such as "*args.legend = list(x = "topleft")*", in the function barplot() to change the position of legends. For example, we can move the legend to the top-left of Figure \@ref(fig:5-1) A:
+You can add an argument, such as "*args.legend = list(x = "topleft")*", in the function barplot() to change the position of legend. For example, we can move the legend to the top-left of Figure \@ref(fig:5-1) A.
 
 ```{r}
 barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = F,
@@ -252,7 +255,7 @@ Another way of showing the proportions is mosaic plot.
 (ref:5-2) Mosaic plot of DIED by SEX.
 
 ```{r 5-2, fig.width=6, fig.height=4, fig.cap='(ref:5-2)', fig.align='center'}
-mosaicplot(table(SEX, DIED), color = T)  # Figure 4.6
+mosaicplot(table(SEX, DIED), color = T)  # Figure 5.6
 ```
 
 The mosaic plot in Figure \@ref(fig:5-2) is similar to the barplot in Figure \@ref(fig:5-1), but the bars are stretched to the same height, the width is defined by proportion of Male vs. Female. The size of the four blocks in the figure represents the counts of the corresponding combination. Also note that the blocks are also color-coded for different combination. Horizontally, the blocks are divided by SEX, we could observe that there are more men in this dataset than women. Vertically, the blocks are divided by DIED (1 for died in hospital). We could conclude that regardless of gender, only a small proportion of patients died in hospital. Between men and women, we also see that the percentage of women that died in hospital is higher than that in men. This is a rather unusual.
@@ -262,7 +265,7 @@ We could use mosaic plots for multiple factors.
 (ref:5-3) Mosaic plot of three factors.
 
 ```{r 5-3, fig.cap='(ref:5-3)', fig.align='center'}
-mosaicplot(table(SEX, DIED, DRG), color = rainbow(3))  # Figure 4.7
+mosaicplot(table(SEX, DIED, DRG), color = rainbow(3))  # Figure 5.7
 ```
 
 Here we nested the tabulate command inside the mosaic plot. As shown in Figure \@ref(fig:5-3), we further divided each of the 4 quadrants of Figure \@ref(fig:5-2) into three parts according to DRG codes, in red, green and blue. One thing we could tell is that a smaller proportion of surviving males developed complications, compared with females. 
@@ -277,18 +280,19 @@ Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).
 mosaicplot(~ Sex + Age + Survived, data = Titanic, color = rainbow(2))  
 ```
 
-This is a mosaic plot of the whole Titanic dataset
+This is a mosaic plot of the whole Titanic dataset.
 ```{r}
 mosaicplot(Titanic, color = rainbow(2)) 
 ```
 
-Think about the questions: Did men and women survived by equal proportion? Did girls and women survived by equal proportion?
+Think about the questions: Did men and women survive by equal proportion? Did girls and women survive by equal proportion?
 
 >
 ```{exercise}
 
 >
-The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses? >
+The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses? 
+>
 DIAGNOSIS <- heartatk4R$DIAGNOSIS
 >
 SEX <- heartatk4R$SEX
@@ -313,7 +317,7 @@ ggplot(heartatk4R, aes(x = AGE, group = SEX,
                        y = c(..count..[..group.. == 1]/sum(..count..[..group.. == 1]),
                              ..count..[..group.. == 2]/sum(..count..[..group.. == 2])) * 100)) + 
   geom_histogram(binwidth = 6, colour = "black", fill = "lightblue") + 
-  facet_grid(SEX ~ .) +
+  facet_grid(SEX ~ .) +   #split a graph according to panels defined by SEX
   labs(y = "Percent of Total")
 ```
 
@@ -323,7 +327,7 @@ We can further divide the population according to survival status by adding anot
 
 (ref:new2) Histogram of AGE by SEX and DIED using ggplot2 package
 
-```{r new2, message=FALSE, fig.cap='(ref:new2)', fig.align='center'}
+```{r new2, warning=FALSE, message=FALSE, fig.cap='(ref:new2)', fig.align='center'}
 library(dplyr)
 heartatk4R %>% mutate(GROUP = paste(DIED, SEX, sep = "-")) %>% 
 ggplot(aes(x = AGE, group = GROUP, 
@@ -332,9 +336,8 @@ ggplot(aes(x = AGE, group = GROUP,
                  ..count..[..group.. == 3]/sum(..count..[..group.. == 3]),
                  ..count..[..group.. == 4]/sum(..count..[..group.. == 4])) * 100))+  
   geom_histogram(binwidth = 5, colour = "black", fill = "lightblue") +
-  facet_grid(DIED ~ SEX) +
+  facet_grid(DIED ~ SEX) +   #split a graph according to matrix of panels defined by DIED*SEX
   labs(y = "Percent of Total")
-detach("package:dplyr")
 ```
 
 We can see that patients who did not survive heart attack tend to be older, for both men and women. This is perhaps better illustrated with density plot:
@@ -359,7 +362,7 @@ ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + geom_density(alpha = .3) + facet
 ```{exercise}
 
 >
-Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histograms and density plot. Interpret your results. 
+Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histogram and density plot. Interpret your results. 
 ```
 
 >
@@ -374,7 +377,6 @@ Use the ggplot2 package to compare the distribution of lengths of stay among pat
 
 >
 Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t. 
-
 ```
 
 >
@@ -416,9 +418,6 @@ ggplot(heartatk4R, aes(x = SEX, y = AGE)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-  All of these techniques we introduced so far enable us to **LEARN** about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc. 
-  
-  You should also **INTERACT** with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives. 
 
 ```{r fig.width=6, fig.height=4, fig.keep='last', fig.align='center'}
 # scatterplot of LOS vs. AGE
@@ -429,7 +428,7 @@ ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .)
 ggplot(heartatk4R, aes(x = AGE, y = LOS, color = DIED)) + geom_point() + facet_grid(SEX ~ .)  
 ```
 
-
+Here we only show the figure for third code.
 Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure. 
 
 (ref:5-7) A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
@@ -438,7 +437,6 @@ Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(
 # scatterplot of LOS vs. AGE, divided by SEX and DIED
 ggplot(heartatk4R, aes(x = AGE, y = LOS)) + geom_point(color = "blue") + facet_grid(SEX ~ DIED)  
 ```
-
 
 Figure \@ref(fig:5-7) seems to suggest that the positive association between AGE and LOS is noticeable in patients who did not die in hospital, regardless of sex. This is a statistician’s language. Try this instead that could be understood by both the statistician and his/her grandmother. Older patients tend to stay longer in the hospital after surviving a heart attack. This is true for both men and women. 
 
@@ -455,5 +453,10 @@ legend("topleft", levels(y$SEX), col = rainbow(2), pch = 1)
 Figure \@ref(fig:5-8) is a busy plot. Female patients are shown in red while males in blue. Size of the plot is proportional to charges. So on this plot we are visualizing 4 columns of data!
 
 Other common methods we can use to detect complex correlations and structures include principal component analysis (PCA), Multidimensional scaling (MDS), hierarchical clustering etc. 
+
+ All of these techniques we introduced so far enable us to **LEARN** about your dataset without any of priori hypothesis, ideas, and judgments. Many companies claim that they want to know their customers first as individuals and then do business. Same thing applies to data mining. You need to know you dataset as it is before making predictions, classifications etc. 
+  
+  You should also **INTERACT** with your data by asking questions based on domain knowledge and common sense. Generates lots and lots of plots to support or reject hypothesis you may have. I demonstrated this by using the heart attack dataset in the last few pages. You should do the same thing when you have a new dataset. Sometimes, the thing that you discovered is more important than the initial objectives. 
+
 
 1.	Velleman, P. F.; Data Description Inc. ActivStats, 2000-2001 release.; A.W. Longman,: Glenview, IL, 2001.

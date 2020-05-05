@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-04-29" />
+<meta name="date" content="2020-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -264,7 +264,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="basic-concepts-of-r-graphics" class="section level2">
 <h2><span class="header-section-number">2.1</span> Basic concepts of R graphics</h2>
 <p>In addition to the graphics functions in base R, there are many other packages we can use to create graphics. The most widely used are lattice and ggplot2, both implemented in additional packages. Together with base R graphics, sometimes these are referred to as the three independent paradigms of R graphics. The lattice package extends base R graphics and enables the creating of graphs in multiple facets. The ggplot2 is developed based on a Grammar of Graphics (hence the “gg”), a modular approach that builds complex graphics by adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.</p>
-<p>We start with base R graphics. The first import distinction should be made about high- and low-level graphic functions in base R. See this table below. High-level graphics functions initiate new plots, to which new elements could be added using the low-level functions.</p>
+<p>We start with base R graphics. The first import distinction should be made about high- and low-level graphics functions in base R. See this table below. High-level graphics functions initiate new plots, to which new elements could be added using the low-level functions.</p>
 <table style="width:81%;">
 <caption>High-level graphics functions that can initiate a new plot.</caption>
 <colgroup>
@@ -429,22 +429,21 @@ PCC</code></pre></div>
 <span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, 
        <span class="kw">levels</span>(iris<span class="op">$</span>Species), 
        <span class="dt">pch =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-51"></span>
-<img src="book_files/figure-html/unnamed-chunk-51-1.png" alt="Heatmap for iris flower dataset." width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:23-5"></span>
+<img src="book_files/figure-html/23-5-1.png" alt="A refined scatter plot using base R graphics." width="80%" />
 <p class="caption">
-Figure 2.1: Heatmap for iris flower dataset.
+Figure 2.1: A refined scatter plot using base R graphics.
 </p>
 </div>
 <p>This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step with some trial-and-error.</p>
-<p>Another open secret of coding is that we frequently steal each other’s ideas and code. The textbook <em>R Graphics Cookbook</em> includes all kinds of R plots and example code. Some are online: <a href="http://www.cookbook-r.com/Graphs/" class="uri">http://www.cookbook-r.com/Graphs/</a>. There are also websites lists all sorts of R graphics and example codes that you can use. <a href="http://www.r-graph-gallery.com/" class="uri">http://www.r-graph-gallery.com/</a> contains more than 200 such examples. Another one is here: <a href="http://bxhorn.com/r-graphics-gallery/" class="uri">http://bxhorn.com/r-graphics-gallery/</a> If you know what types of graphs you want, it is very easy to start with the template code and swap out the dataset..</p>
+<p>Another open secret of coding is that we frequently steal each other’s ideas and code. The textbook <em>R Graphics Cookbook</em> includes all kinds of R plots and example code. Some are online: <a href="http://www.cookbook-r.com/Graphs/" class="uri">http://www.cookbook-r.com/Graphs/</a>. There are also websites lists all sorts of R graphics and example codes that you can use. <a href="http://www.r-graph-gallery.com/" class="uri">http://www.r-graph-gallery.com/</a> contains more than 200 such examples. Another one is here: <a href="http://bxhorn.com/r-graphics-gallery/" class="uri">http://bxhorn.com/r-graphics-gallery/</a>. If you know what types of graphs you want, it is very easy to start with the template code and swap out the dataset.</p>
 </div>
 <div id="the-ggplot2-package-makes-plotting-intuitive" class="section level2">
 <h2><span class="header-section-number">2.2</span> The ggplot2 package makes plotting intuitive</h2>
 <p>The ggplot2 is powerful R package for visualizing data using multiple panels. This package is not included in the base version of R. They need to be downloaded and installed. One of the main advantages of R is that it is open, and users can contribute their code as packages. If you are using <strong>Rstudio</strong>, you can choose <strong>Tools-&gt;Install packages</strong> from the main menu, and then enter the name of the package. If you are using R software, you can install additional packages, by clicking <strong>Packages</strong> in the main menu, and select a mirror site. These mirror sites all work the same, but some may be faster. After choosing a mirror and clicking “OK”, you can scroll down the long list to find your package. Alternatively, you can type this command to install packages.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span> (<span class="st">&quot;ggplot2&quot;</span>)  <span class="co"># choose the cloud mirror site when asked</span></code></pre></div>
-<p>Packages only need to be installed once. But every time you need to use <strong>functions or data</strong> in a package, we have to <strong>load</strong> it from your hard drive.</p>
+<p>Packages only need to be installed once. But every time you need to use <strong>functions or data</strong> in a package, you have to <strong>load</strong> it from your hard drive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)  <span class="co"># load the ggplot2 package</span></code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.3</code></pre>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color =</span> Species)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
@@ -455,7 +454,7 @@ Figure 2.2: Basic scatter plot using the ggplot2 package.
 </p>
 </div>
 <p>Notice that this command span two lines. The first line defines the plotting space. The ending “+” signifies that another layer ( data points) of plotting is added. The ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.</p>
-<p>It is also much easier to generate a plot like Figure <a href="#fig:23-5"><strong>??</strong></a>.</p>
+<p>It is also much easier to generate a plot like Figure <a href="visualizing-the-iris-flower-data-set.html#fig:23-5">2.1</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">y =</span> Petal.Width) ) <span class="op">+</span><span class="st">    </span><span class="co"># define space</span>
 <span class="st">  </span><span class="kw">geom_point</span>( <span class="kw">aes</span>(<span class="dt">color =</span> Species, <span class="dt">shape =</span> Species) ) <span class="op">+</span><span class="st">    </span><span class="co"># add points</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span>lm) <span class="op">+</span><span class="st">                                </span><span class="co"># add trend line  </span>
@@ -463,19 +462,20 @@ Figure 2.2: Basic scatter plot using the ggplot2 package.
 <span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Petal length (cm)&quot;</span>) <span class="op">+</span><span class="st">                              </span><span class="co"># x-axis labels</span>
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Petal width (cm)&quot;</span>) <span class="op">+</span><span class="st">                               </span><span class="co"># y-axis labels</span>
 <span class="st">  </span><span class="kw">ggtitle</span>( <span class="st">&quot;Correlation between petal length and width&quot;</span>)   <span class="co"># title</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" /></p>
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Petal.Length, <span class="dt">fill =</span> Species)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_density</span>( <span class="dt">alpha =</span> <span class="fl">0.3</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:2-7"></span>
-<img src="book_files/figure-html/2-7-1.png" alt="(ref:2-7)" width="672" />
+<img src="book_files/figure-html/2-7-1.png" alt="Density plot of petal length, grouped by species." width="672" />
 <p class="caption">
-Figure 2.3: (ref:2-7)
+Figure 2.3: Density plot of petal length, grouped by species.
 </p>
 </div>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-55" class="exercise"><strong>Exercise 2.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-54" class="exercise"><strong>Exercise 2.1  </strong></span></p>
 Use boxplot, multiple panel histograms, and density plots to investigate whether petal width is the same among three subspecies.
 </div>
 
@@ -494,9 +494,9 @@ Use boxplot, multiple panel histograms, and density plots to investigate whether
 <p>The same thing can be done with rows via <strong>rowMeans(x)</strong> and <strong>rowSums(x)</strong>.</p>
 <p>We can generate a matrix of scatter plots simply by:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(x) </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(x, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species])  <span class="co"># Figure 2.18</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-58"></span>
-<img src="book_files/figure-html/unnamed-chunk-58-1.png" alt="Scatter plot matrix." width="672" />
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairs</span>(x, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species])  <span class="co"># Figure 2.4</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-57"></span>
+<img src="book_files/figure-html/unnamed-chunk-57-1.png" alt="Scatter plot matrix." width="672" />
 <p class="caption">
 Figure 2.4: Scatter plot matrix.
 </p>
@@ -504,7 +504,7 @@ Figure 2.4: Scatter plot matrix.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-59" class="exercise"><strong>Exercise 2.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-58" class="exercise"><strong>Exercise 2.2  </strong></span></p>
 Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots.
 </div>
 
@@ -512,14 +512,14 @@ Look at this large plot for a moment. What do you see? Provide interpretation of
 </div>
 <div id="star-and-segment-diagrams" class="section level2">
 <h2><span class="header-section-number">2.4</span> Star and segment diagrams</h2>
-<p><strong>Star plot uses stars to visualize multidimensional data.</strong> Radar chart is a useful way to display multivariate observations with an arbitrary number of variables. Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!</p>
+<p><strong>Star plot uses stars to visualize multidimensional data.</strong> Radar chart is a useful way to display multivariate observations with an arbitrary number of variables. Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was first used by Georg von Mayr in 1877!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
 <span class="kw">stars</span>(x)         <span class="co"># do I see any diamonds?</span>
 <span class="kw">stars</span>(x, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">0</span>))    <span class="co"># What does this tell you?</span></code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-61" class="exercise"><strong>Exercise 2.3  </strong></span></p>
+<p><span id="exr:unnamed-chunk-60" class="exercise"><strong>Exercise 2.3  </strong></span></p>
 Based on the star plot, what is your overall impression regarding the differences among these 3 species of flowers?
 </div>
 
@@ -536,8 +536,8 @@ Figure 2.5: Star plots and segments diagrams.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-63" class="exercise"><strong>Exercise 2.4  </strong></span></p>
-Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 &lt;- as.data.frame(state.x77),then attach df.state.x77.
+<p><span id="exr:unnamed-chunk-62" class="exercise"><strong>Exercise 2.4  </strong></span></p>
+Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 &lt;- as.data.frame(state.x77), then attach df.state.x77.
 </div>
 
 </blockquote>
@@ -585,8 +585,8 @@ Figure 2.7: Bar plot of average petal lengths for 3 species
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-64" class="exercise"><strong>Exercise 2.5  </strong></span></p>
-Write R code to generate Figure <a href="visualizing-the-iris-flower-data-set.html#fig:12-8">2.7</a>, which show the means of petal length for each of the species with error bars corresponding to standard deviations. Bar plot of average petal lengths for 3 species Bar plot of average petal lengths for 3 species.
+<p><span id="exr:unnamed-chunk-63" class="exercise"><strong>Exercise 2.5  </strong></span></p>
+Write R code to generate a figure similar to Figure <a href="visualizing-the-iris-flower-data-set.html#fig:12-8">2.7</a>. Show the means of petal width for each of the species with error bars corresponding to standard deviations.
 </div>
 
 </blockquote>
@@ -598,33 +598,33 @@ Write R code to generate Figure <a href="visualizing-the-iris-flower-data-set.ht
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>))  <span class="co"># set figure margins (bottom, left, top, right)</span>
 <span class="kw">boxplot</span>(x, <span class="dt">las =</span> <span class="dv">2</span>) </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:12-6"></span>
-<img src="book_files/figure-html/12-6-1.png" alt="Box plot of all 4 columns" width="80%" />
+<img src="book_files/figure-html/12-6-1.png" alt="Box plot of all 4 columns." width="80%" />
 <p class="caption">
-Figure 2.8: Box plot of all 4 columns
+Figure 2.8: Box plot of all 4 columns.
 </p>
 </div>
 <p>Notice that las = 2 option puts the data labels vertically. The par function sets the bottom, left, top and right margins respectively of the plot region in the units of the number of lines of text. Here we set the bottom margins to 8 lines so that the labels can show completely.</p>
 <p>Instead of plotting 4 columns, we want to generate a boxplot of one column (Petal.Length), sub-grouped by another column (Species). This is called the <strong>formula notation</strong> in R: Sepal length as a function of Species.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(iris<span class="op">$</span>Sepal.Length <span class="op">~</span><span class="st"> </span>iris<span class="op">$</span>Species)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>The similar plot can be generated by ggplot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-67-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>The benefit of using ggplot2 is evident as we can easily refine it.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length, <span class="dt">color =</span> Species)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="fl">0.2</span>))</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-68"></span>
-<img src="book_files/figure-html/unnamed-chunk-68-1.png" alt="Box plot with raw data points. This is getting increasingly popular." width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-67"></span>
+<img src="book_files/figure-html/unnamed-chunk-67-1.png" alt="Box plot with raw data points. This is getting increasingly popular." width="80%" />
 <p class="caption">
 Figure 2.9: Box plot with raw data points. This is getting increasingly popular.
 </p>
 </div>
 <p>On top of the boxplot, we add another layer representing the raw data points for each of the species. Since lining up data points on a straight line is hard to see, we jittered the relative x-position within each subspecies randomly. We also color-coded three species simply by adding “color = Species”. Many of the low-level graphics details are handled for us by ggplot2 as the legend is generated automatically.</p>
-<p>The bar plot with error bar in @Bar plot of average petal lengths for 3 species we generated above is called dynamite plots for its similarity.<strong>“The dynamite plots must die!”</strong>, argued renowned statistician Rafael Irizarry in his <a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">blog</a>. Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.</p>
+<p>The bar plot with error bar in @(fig:22-1) we generated above is called dynamite plots for its similarity. <strong>“The dynamite plots must die!”</strong>, argued renowned statistician Rafael Irizarry in his <a href="https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/">blog</a>. Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.</p>
 </div>
 <div id="combining-plots" class="section level2">
 <h2><span class="header-section-number">2.8</span> Combining plots</h2>
@@ -648,7 +648,7 @@ Figure 2.10: Combine multiple histograms.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-69" class="exercise"><strong>Exercise 2.6  </strong></span></p>
+<p><span id="exr:unnamed-chunk-68" class="exercise"><strong>Exercise 2.6  </strong></span></p>
 Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flower data set. Arrange your plots in 1 row and 4 columns. Include straight lines and interpretations.
 </div>
 
@@ -659,7 +659,7 @@ Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flowe
 <p>Hierarchical clustering summarizes observations into trees representing the overall similarities.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">disMatarix &lt;-<span class="st"> </span><span class="kw">dist</span>(x)
 <span class="kw">plot</span>( <span class="kw">hclust</span>(disMatarix) )</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>We first calculate a distance matrix using the <strong>dist</strong> function with the default Euclidean distance method. The distance matrix is then used by the <strong>hclust</strong> function to generate a hierarchical clustering tree with the default complete linkage method, which is then plotted in a nested command.</p>
 <p>The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.</p>
 <p>First, each of the flower samples is treated as a cluster. The algorithm joins the two most similar clusters based on a distance function. This is performed iteratively until there is just a single cluster containing all 150 flowers. At each iteration, the distances between clusters are recalculated according to one of the methods—<em>Single linkage, complete linkage, average linkage, and so on</em>. In the single-linkage method, the distance between two clusters is defined by the smallest distance among the all possible object pairs. This approach puts ‘friends of friends’ into a cluster. On the contrary, the complete linkage method defines the distance as the largest distance between object pairs. It finds similar clusters. Between these two extremes, there are many options in between. The linkage method I found the most robust is the average linkage method, which uses the average of all distances. However, the default seems to be the complete linkage. Thus we need to change that in our final version.</p>
@@ -669,13 +669,12 @@ Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flowe
         <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>, 
         <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[iris<span class="op">$</span>Species]
         )</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
-<p>Scaling is handled by the <strong>scale</strong> function, which subtracts the mean from each column and then divides by the standard division. Afterward, all the columns have the same mean of approximately 0 and standard deviation of 1. This is also called standardization. The default color scheme code bigger numbers in yellow and smaller numbers in red. The color bar on the left codes for different species. But we still missing a legend and many other things can be polished. Instead of going down the rabbit hole of adjusting dozens of parameters to heatmap function (and its improved version heatmap.2 in the ggplots package), We will refine this plot using another R package called pheatmap.</p>
+<p><img src="book_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p>Scaling is handled by the <strong>scale</strong> function, which subtracts the mean from each column and then divides by the standard division. Afterward, all the columns have the same mean of approximately 0 and standard deviation of 1. This is also called standardization. The default color scheme codes bigger numbers in yellow and smaller numbers in red. The color bar on the left codes for different species. But we still miss a legend and many other things can be polished. Instead of going down the rabbit hole of adjusting dozens of parameters to heatmap function (and it’s improved version heatmap.2 in the ggplots package), We will refine this plot using another R package called pheatmap.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;pheatmap&quot;</span>)</code></pre></div>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pheatmap)</code></pre></div>
-<pre><code>## Warning: package &#39;pheatmap&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># convert to matrix</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pheatmap)
+x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]) <span class="co"># convert to matrix</span>
 <span class="kw">row.names</span>(x) &lt;-<span class="st"> </span><span class="kw">row.names</span>(iris) <span class="co"># assign row names in the matrix</span>
 <span class="kw">pheatmap</span>(x, 
          <span class="dt">scale =</span> <span class="st">&quot;column&quot;</span>,
@@ -689,7 +688,7 @@ Create a combined plot for Q-Q plot of the 4 numeric variables in the iris flowe
 Figure 2.11: Heatmap for iris flower dataset.
 </p>
 </div>
-<p>First, we convert the first 4 columns of the iris data frame into a matrix. Then the row names are assigned to be the same, namely, “1” to “150”. This is required because row names are used to match with the column annotation information, specified by the annotation_row parameter. Even though we only need the 5th column, i.e. Species, this has to be a data frame. To prevent R from automatically converting a one-column data frame into a vector, we used to <em>drop = FALSE</em> option. Multiple columns can be contained in the column annotation data frame to display multiple color bars. The rows could be annotated the same way.</p>
+<p>First, we convert the first 4 columns of the iris data frame into a matrix. Then the row names are assigned to be the same, namely, “1” to “150”. This is required because row names are used to match with the column annotation information, specified by the annotation_row parameter. Even though we only need the 5th column, i.e. Species, this has to be a data frame. To prevent R from automatically converting a one-column data frame into a vector, we used <em>drop = FALSE</em> option. Multiple columns can be contained in the column annotation data frame to display multiple color bars. The rows could be annotated the same way.</p>
 <p>More information about the pheatmap function can be obtained by reading the help document. But most of the times, I rely on the online tutorials. Beyond the official documents prepared by the author, there are many documents created by R users across the world. The R user community is uniquely open and supportive. I was researching heatmap.2, a more refined version of heatmap part of the gplots package and landed on Dave Tang’s <a href="https://davetang.org/muse/2010/12/06/making-a-heatmap-with-r/">blog</a>, which mentioned that there is a more user-friendly package called pheatmap described in his other <a href="https://davetang.org/muse/2018/05/15/making-a-heatmap-in-r-with-the-pheatmap-package/">blog</a>. To figure out the code chuck above, I tried several times and also used Kamil Slowikowski’s <a href="https://slowkow.com/notes/pheatmap-tutorial/">blog</a>.</p>
 <p>We can gain many insights from Figure <a href="visualizing-the-iris-flower-data-set.html#fig:12-3">2.11</a>. The 150 flowers in the rows are organized into different clusters. <em>I. Setosa</em> samples obviously formed a unique cluster, characterized by smaller (blue) petal length, petal width, and sepal length. The other two subspecies are not clearly separated but we can notice that some <em>I. Virginica</em> samples form a small subcluster showing bigger petals. The columns are also organized into dendrograms, which clearly suggest that petal length and petal width are highly correlated.</p>
 </div>
@@ -720,7 +719,7 @@ pca  <span class="co"># Have a look at the results.</span></code></pre></div>
 ## Petal.Width   0.5648565 -0.06694199 -0.6342727  0.5235971</code></pre>
 <p>Note that the first principal component is positively correlated with Sepal length, petal length, and petal width. Recall that these three variables are highly correlated. Sepal width is the variable that is almost the same across three species with small standard deviation. PC2 is mostly determined by sepal width, less so by sepal length.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(pca)   <span class="co"># this shows the structure of the object, listing all parts. </span></code></pre></div>
 <pre><code>## List of 5
 ##  $ sdev    : num [1:4] 1.708 0.956 0.383 0.144
@@ -780,7 +779,7 @@ pcaData &lt;-<span class="st"> </span><span class="kw">cbind</span>(pcaData, iri
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-79" class="exercise"><strong>Exercise 2.7  </strong></span></p>
+<p><span id="exr:unnamed-chunk-78" class="exercise"><strong>Exercise 2.7  </strong></span></p>
 Create PCA plot of the state.x77 data set (convert matrix to data frame). Use the state.region information to color code the states. Interpret your results. Hint: do not forget normalization using the scale option.
 </div>
 
@@ -827,7 +826,7 @@ model &lt;-<span class="st"> </span><span class="kw">glm</span>(Species <span cl
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-81" class="exercise"><strong>Exercise 2.8  </strong></span></p>
+<p><span id="exr:unnamed-chunk-80" class="exercise"><strong>Exercise 2.8  </strong></span></p>
 <p>So far, we used a variety of techniques to investigate the iris flower dataset. Recall that in the very beginning, I asked you to eyeball the data and answer two questions:</p>
 <ol style="list-style-type: lower-alpha">
 <li>What distinguishes these three species?</li>

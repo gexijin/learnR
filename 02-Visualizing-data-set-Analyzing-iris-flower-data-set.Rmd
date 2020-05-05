@@ -20,7 +20,7 @@ Graphics (hence the "gg"), a modular approach that builds complex graphics by
 adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
 
 We start with base R graphics. The first import distinction should be made about
-high- and low-level graphic functions in base R. See this table below.
+high- and low-level graphics functions in base R. See this table below.
 High-level graphics functions initiate new plots, to which new elements could be
 added using the low-level functions.
   
@@ -166,13 +166,11 @@ roundedPCC = round(PCC, 2) # round to the 2nd place after decimal point.
 text(5, 0.5, paste("R=", roundedPCC) ) # add text to plot
 ```
 
-
 To finish up this plot, we add a legend. 
 
 (ref:23-5) A refined scatter plot using base R graphics.
 
-
-```{r, fig.cap='(ref:12-3)', fig.align='center', out.width='80%'}
+```{r 23-5, fig.cap='(ref:23-5)', fig.align='center', out.width='80%'}
 plot(iris$Petal.Length, iris$Petal.Width, 
      pch = types,  # marker type
      col = rainbow(3)[types],  # color
@@ -185,6 +183,7 @@ legend("topleft",
        levels(iris$Species), 
        pch = 1:3, col = rainbow(3))
 ```
+
 This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step with some trial-and-error. 
 
 Another open secret of coding is that we frequently steal each other's ideas and
@@ -192,9 +191,9 @@ code. The textbook *R Graphics Cookbook* includes all kinds of R plots and
 example code. Some are online: <http://www.cookbook-r.com/Graphs/>. There are
 also websites lists all sorts of R graphics and example codes that you can use.
 <http://www.r-graph-gallery.com/> contains more than 200 such examples. Another
-one is here: <http://bxhorn.com/r-graphics-gallery/> If you know what types of
+one is here: <http://bxhorn.com/r-graphics-gallery/>. If you know what types of
 graphs you want, it is very easy to start with the template code and swap out
-the dataset..
+the dataset.
 
 
   
@@ -211,15 +210,13 @@ mirror site. These mirror sites all work the same, but some may be faster. After
 choosing a mirror and clicking "OK", you can scroll down the long list to find
 your package. Alternatively, you can type this command to install packages.
 
-```{r eval =FALSE}
+```{r eval=FALSE}
 install.packages ("ggplot2")  # choose the cloud mirror site when asked
 ```
-Packages only need to be installed once. But every time you need to use **functions or data** in a package, we have to **load** it from your hard drive. 
-```{r message=FALSE}
+Packages only need to be installed once. But every time you need to use **functions or data** in a package, you have to **load** it from your hard drive. 
+```{r message=FALSE, warning=FALSE}
 library(ggplot2)  # load the ggplot2 package
 ```
-
-
 
 (ref:2-6) Basic scatter plot using the ggplot2 package.
 
@@ -231,8 +228,9 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = Species)) +
 Notice that this command span two lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. The ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
 
 
-It is also much easier to generate a plot like Figure \@ref(fig:23-5).
-```{r , fig.align='center', out.width='80%' }
+It is also much easier to generate a plot like Figure \@ref(fig:23-5). 
+
+```{r fig.align='center', out.width='80%' }
 ggplot(iris, aes(x = Petal.Length, y = Petal.Width) ) +    # define space
   geom_point( aes(color = Species, shape = Species) ) +    # add points
   geom_smooth(method =lm) +                                # add trend line  
@@ -242,13 +240,12 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width) ) +    # define space
   ggtitle( "Correlation between petal length and width")   # title
 ```
 
+(ref:2-7) Density plot of petal length, grouped by species.
 
 ```{r 2-7, fig.cap='(ref:2-7)', fig.align='center' }
 ggplot(iris, aes(x = Petal.Length, fill = Species)) + 
   geom_density( alpha = 0.3)
 ```
-
-
 
 >
 ```{exercise}
@@ -271,16 +268,13 @@ colSums(x)
 ```
 The same thing can be done with rows via **rowMeans(x)** and **rowSums(x)**. 
 
-
-
-
 We can generate a matrix of scatter plots simply by:
 ```{r fig.keep="none"}
 pairs(x) 
 ```
 
 ```{r fig.cap='Scatter plot matrix.', fig.align='center'}
-pairs(x, col = rainbow(3)[iris$Species])  # Figure 2.18
+pairs(x, col = rainbow(3)[iris$Species])  # Figure 2.4
 ```
 
 >
@@ -292,7 +286,7 @@ Look at this large plot for a moment. What do you see? Provide interpretation of
 
 
 ## Star and segment diagrams
-**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot is first used by Georg von Mayr in 1877!
+**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was first used by Georg von Mayr in 1877!
 ```{r fig.keep='none'}
 x <- iris[, 1:4]
 stars(x)         # do I see any diamonds?
@@ -322,7 +316,7 @@ knitr::include_graphics("images/img1204n_starsegment.png")
 ```{exercise}
 
 >
-Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 <- as.data.frame(state.x77),then attach df.state.x77.
+Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 <- as.data.frame(state.x77), then attach df.state.x77.
 ```
 
 ## Parallel coordinate plot
@@ -367,8 +361,7 @@ text(xloc, 0.5, paste("n=", Nsamples))   # add sample size to each group
 ```{exercise}
 
 >
-Write R code to generate Figure \@ref(fig:12-8), which show the means of petal length for each of the species with error bars corresponding to standard deviations. 
-(ref:12-8) Bar plot of average petal lengths for 3 species.
+Write R code to generate a figure similar to Figure \@ref(fig:12-8). Show the means of petal width for each of the species with error bars corresponding to standard deviations. 
 ```
 
 ## Box plot and death to the dynamite plots
@@ -376,7 +369,7 @@ Write R code to generate Figure \@ref(fig:12-8), which show the means of petal l
 boxplot(x)  # plain version. 
 ```
 
-(ref:12-6) Box plot of all 4 columns
+(ref:12-6) Box plot of all 4 columns.
 
 ```{r 12-6, message=FALSE, out.width='80%', fig.cap='(ref:12-6)', fig.align='center'}
 par(mar = c(8, 2, 2, 2))  # set figure margins (bottom, left, top, right)
@@ -415,7 +408,7 @@ ggplot(iris, aes(x = Species, y = Sepal.Length, color = Species)) +
 ```
 On top of the boxplot, we add another layer representing the raw data points for each of the species. Since lining up data points on a straight line is hard to see, we jittered the relative x-position within each subspecies randomly. We also color-coded three species simply by adding "color = Species". Many of the low-level graphics details are handled for us by ggplot2 as the legend is generated automatically.
 
-The bar plot with error bar in \ref@(ref:12-8) we generated above is called dynamite plots for its similarity.**"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/).  Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
+The bar plot with error bar in \ref@(fig:22-1) we generated above is called dynamite plots for its similarity. **"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
 
 
 ## Combining plots
@@ -483,11 +476,11 @@ heatmap(x,
 Scaling is handled by the **scale** function, which subtracts the mean from each
 column and then divides by the standard division. Afterward, all the columns
 have the same mean of approximately 0 and standard deviation of 1. This is also
-called standardization. The default color scheme code bigger numbers in yellow
+called standardization. The default color scheme codes bigger numbers in yellow
 and smaller numbers in red. The color bar on the left codes for different
-species. But we still missing a legend and many other things can be polished.
+species. But we still miss a legend and many other things can be polished.
 Instead of going down the rabbit hole of adjusting dozens of parameters to
-heatmap function (and its improved version heatmap.2 in the ggplots package), We
+heatmap function (and it's improved version heatmap.2 in the ggplots package), We
 will refine this plot using another R package called pheatmap. 
 
 
@@ -497,7 +490,7 @@ install.packages("pheatmap")
 
 (ref:12-3) Heatmap for iris flower dataset.
 
-```{r 12-3, message=FALSE, fig.cap='(ref:12-3)', fig.align='center'}
+```{r 12-3, warning=FALSE, message=FALSE, fig.cap='(ref:12-3)', fig.align='center'}
 library(pheatmap)
 x <- as.matrix(iris[, 1:4]) # convert to matrix
 row.names(x) <- row.names(iris) # assign row names in the matrix
@@ -514,7 +507,7 @@ the row names are assigned to be the same, namely, "1" to "150". This is
 required because row names are used to match with the column annotation
 information, specified by the annotation\_row parameter. Even though we only
 need the 5th column, i.e. Species, this has to be a data frame. To prevent R
-from automatically converting a one-column data frame into a vector, we used to
+from automatically converting a one-column data frame into a vector, we used 
 *drop = FALSE* option. Multiple columns can be contained in the column
 annotation data frame to display multiple color bars. The rows could be
 annotated the same way.

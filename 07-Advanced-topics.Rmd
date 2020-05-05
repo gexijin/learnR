@@ -17,7 +17,7 @@ Let's start learning R Markdown from its cheat sheet. Click the RStudio IDE unde
 knitr::include_graphics("images/Ch7_Adv_top_0.PNG")
 ```
 
-To create a R Markdown file by the following process, firstly, you can open a new .Rmd file at File $\rightarrow$ New File $\rightarrow$. In the open window, feel free to change the **Title**. For example, you can change the **Untitled** to **MyFirstRmd**. Then choose the default output format from the three options: HTML, PDF or WORD. Then click "OK". 
+To create an R Markdown file by the following process, firstly, you need to open a new .Rmd file at File $\rightarrow$ New File $\rightarrow$. In the open window, feel free to change the **Title**. For example, you can change the **Untitled** to **MyFirstRmd**. Then choose the default output format from the three options: HTML, PDF or WORD. Then click "OK". 
 
 (ref:label1)  Create a new RMarkdown file
 
@@ -27,7 +27,7 @@ knitr::include_graphics("images/Ch7_Adv_top_1.PNG")
 
 A new .Rmd file named MyFirstRmd.Rmd is created. 
 
-The first part of the file is the YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes "\-". See the Figure \@ref(fig:label2). It specifies the key arguments for the document, such as **title**, **author**, **date**, and output format. The output format is html in the example. You may see the **output: pdf_document**, which means that the default format you have chosen is **PDF** when you created the file. 
+The first part of the file is YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes "\-". See Figure \@ref(fig:label2). It specifies the key arguments for the document, such as **title**, **author**, **date**, and output format. The output format is html in the example. You may see the **output: pdf_document**, which means that the default format you have chosen is **PDF** when you created the file. 
 
 (ref:label2)  YAML Header
 
@@ -36,7 +36,7 @@ knitr::include_graphics("images/Ch7_Adv_top_2.PNG")
 ```
 
  
-The second part of a .Rmd file is surrounded by three back ticks "`". They are called chunks of R. Figure \@ref(fig:label3) is an example of a chunk. The "nm_cars" after r in the \{ \} is the name of the chunk.  
+The second part of an .Rmd file is surrounded by three back ticks "`". They are called chunks of R. Figure \@ref(fig:label3) is an example of a chunk. The "nm_cars" after r in the \{ \} is the name of the chunk.  
 
 (ref:label3)  Chunk of R
 
@@ -87,20 +87,20 @@ knitr::include_graphics("images//Ch7_Adv_top_9.PNG")
 8, **error = TRUE** allows the render to continue even if code returns an error.
 
 
-The third part of a .Rmd file is the text mixed with symbols like # or *.
+The third part of an .Rmd file is the text mixed with symbols like # or *.
 
 ```{r echo=FALSE, out.width='100%'}
 knitr::include_graphics("images//Ch7_Adv_top_4.PNG")
 ```
 
-You can type your text like how you do in MS Word files. The pound symbol **#** implies a heading. The number of pounders indicate the heading level, it runs from 1 to 6. One **#** presents the first level header, two **#**s implies the second level header, and etc. Here is an output of various level headers.
+You can type your text like how you do in MS Word files. The pound symbol **#** implies a heading. The number of pounders indicates the heading level, it runs from 1 to 6. One **#** presents the first level header, two **#**s imply the second level header, and etc. Here is an output of various level headers.
 
 
 ```{r echo=FALSE, out.width='60%'}
 knitr::include_graphics("images//Ch7_Adv_top_5.PNG")
 ```
 
-The symbol \* arounds a word before and after will give an italic text format. If two \*s around a word before and after will bold the word. Such as, \*Italic\* and \*\*bold\*\* will be *Italic* and **bold** in the output file.
+The symbol \* around a word before and after will give an italic text format. Two \*s around a word before and after will bold the word. Such as, \*Italic\* and \*\*bold\*\* will be *Italic* and **bold** in the output file.
 
 The last step is to obtain the output by clicking the **Knit** button on the top of the .Rmd file. You will be asked to name the file and save it to your PC if it is the first time you knit the file. Do as instructed, then an output file will be opened automatically. 
 
@@ -209,8 +209,6 @@ ggplotly(g)
 
 We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in. 
 
-The R community is uniquely supportive. There are lots of free online books, tutorials, example codes, etc. Here are some helpful websites and information.
-
 
 ## Shiny Apps   
 Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP http://ge-lab.org/idep/ ) to enable biologists to analyze genomic data on their own.  My blog (http://gex.netlify.com ) is also created in Rstudio. 
@@ -227,7 +225,7 @@ install.packages("shiny")
 knitr::include_graphics("images/img1201_shiny.png")
 ```
 
-Start a new Shiny app use the shortcut shown above. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name, such as *test1*. Save the app to your local PC. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called test1.app.R. Click on **Run App** on the top-right of the script window, a histogram will pop up. We can custermize the number of bins of the histogram by moving the sliding bar.
+Start a new Shiny app usING the shortcut shown above. Or, select **File -> New File -> Shiny Web App** from the RStudio main menu. Give your app a name, such as *test1*. Save the app to your local PC. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called test1.app.R. Click on **Run App** on the top-right of the script window, a histogram will pop up. We can custermize the number of bins of the histogram by moving the sliding bar.
 
 ```{r echo=FALSE, out.width='60%', fig.align='center'}
 knitr::include_graphics("images//Ch7_Adv_top_10.PNG")
@@ -281,7 +279,7 @@ Save the changes and run the app again, we have the histogram with 12 bins by de
 knitr::include_graphics("images//Ch7_Adv_top_19.PNG")
 ```
 
-d.	We can change 'Sepal.Length' to other columns by assigning x to other variables. Would it be cool if the user can choose the variable from the output? To make it, we need to add a control widget by inserting this line of code after line 20: "selectInput("cid", "Column", choices = colnames(iris)),". Do not forget the comma at the very end! 
+d.	We can change 'Sepal.Length' to other columns by assigning x to other variables. Would it be cool if the user can choose the variable from the output? To make it, we need to add a control widget by inserting this line of code after line 20: "selectInput("cid", "Column", choices = colnames(iris)),". **Do not forget the comma at the very end! **
 
 ```{r echo=FALSE, out.width='80%'}
 knitr::include_graphics("images//Ch7_Adv_top_20.PNG")
@@ -295,7 +293,7 @@ knitr::include_graphics("images//Ch7_Adv_top_22.PNG")
 ```
 
 
-As you may have noticed that, the columns can be selected from the control widget **Column**, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the **server** function, on line 44, the histogram function is given as **hist(x,...)** where **x <- iris[, 'Sepal.Length']** sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of columns, we replace **x <- iris[, 'Sepal.Length']** by **x <- iris[, input\$cid ]** on the line 40. Note that the **input\$cid** is consistant with the inserted code **selectInput( "cid",$\cdots$)** on line 20: "**sidebarPanel(selectInput("cid", "Column", choices = colnames(iris)),**".
+As you may have noticed that, the columns can be selected from the control widget **Column**, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the **server** function, on line 44, the histogram function is given as **hist(x,...)** where **x <- iris[, 'Sepal.Length']** sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of column, we replace **x <- iris[, 'Sepal.Length']** by **x <- iris[, input\$cid ]** on the line 40. Note that the **input\$cid** is consistant with the inserted code **selectInput( "cid",$\cdots$)** on line 20: "**sidebarPanel(selectInput("cid", "Column", choices = colnames(iris)),**".
 
 ```{r echo=FALSE, out.width='80%'}
 knitr::include_graphics("images//Ch7_Adv_top_23.PNG")
@@ -316,13 +314,13 @@ What happens when you choose the last Column "Species" in the app?
 Solve the error by deleting the variable Species from the data iris. Hint: Modify the code on line 20: *selectInput(“cid”, “Column”, choices = colnames(iris))*. 
 ```
 
-To change the title, let's define a main title as *titl <- *, then assign it to the option "main =___ " in the hist() function. Your output should look like the Figure 7.6.
+To change the title, let's define a main title as *titl <- *, then assign it to the option "main =___ " in the hist() function.
 
 >
 ```{exercise}
 
 >
-Change the title from “Histogram of x” to "Histogram of __" where _ is the name of the selected variable like “Sepal.Length”. Complete the question by filling in the blanks.
+Change the title from “Histogram of x” to "Histogram of __" where _ is the name of the selected variable like “Sepal.Length”. Complete the question by filling in the blanks. Your output should look like the Figure 7.6.
 >
 titl <- paste("Histogram of", **input$cid**, sep = " ")
 >
@@ -334,7 +332,7 @@ knitr::include_graphics("images/Ch7_Adv_top_27.PNG")
 ```
 
 
-e.	We can build a more complex app by adding an approximation normal distribution line by replace the function **hist(x, breaks = bins, col = 'green', border = 'white')** by the code below:
+e.	We can build a more complex app by adding an approximation normal distribution line by replace the function **hist(x, breaks = bins, col = 'green', border = 'white')** with the code below:
 
 ```{r eval=F}
       h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
@@ -359,7 +357,7 @@ Fill in the blanks to solve the error message in this app by plotting a pie char
 >
 Hint steps:
 >
-1, Change the **selectInput()** line as its original with all columns selected. 
+1, Make sure the **selectInput()** line same as its original with all columns selected. 
 >
 2, Separate the variables into two groups, numeric variables (columns 1 throught 4) for histogram and categorical variables (5th column) for pie plot. 
 >
@@ -371,7 +369,7 @@ knitr::include_graphics("images/Ch7_Adv_top_29.PNG")
 ```
 
 
-```{r, eval=FALSE, message=FALSE, warning=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -412,7 +410,7 @@ server <- function(input, output) {
       hist(x, breaks = bins, col = 'green', border = 'white', main = titl)
       
       # draw the pie plot for catogorical column Species
-      __________
+        __________
         count <- table(x)
         labl <- paste(names(count), "\n", count, sep = "")
         titl <- paste("Pie plot of", input$cid, sep = " ")
@@ -424,7 +422,7 @@ server <- function(input, output) {
 ```
 
 
-```{r echo=F}
+```{r echo=F, warning=FALSE}
 library(shiny)
 
 # Define UI for application that draws a histogram
@@ -483,7 +481,7 @@ server <- function(input, output) {
 ### Pubish your app
 You can publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. If this is the first time you publish a shiny app, here are the steps.
 
-Step 1: Click on "Publish" button in at the top-right of the window. Then click on "ShinyApps.io" in the Connect Account window as shown in the Figure \@ref(fig:label30).
+Step 1: Click on "Publish" button at the top-right of the window. Then click on "ShinyApps.io" in the Connect Account window as shown in the Figure \@ref(fig:label30).
 
 (ref:label30) : Connect Account.
 
@@ -515,7 +513,7 @@ Step 4: Type your email, password and confirm password in the window as shown in
 knitr::include_graphics("images/Ch7_Adv_top_33.PNG")
 ```
 
-Step 5: In the **Account Setup** window Figure \@ref(fig:label34), type an account name that you would like to use, then click on "Save". Everyone will have a unique accout name. For example, if you type "MyFirstShiny", then the border of the box turn to red which a reminder that the name is occupied. You need to pick up another name. I picked up my account name "stat415or515". 
+Step 5: In the **Account Setup** window Figure \@ref(fig:label34), type an account name that you would like to use, then click on "Save". Everyone will have a unique accout name. For example, if you type "MyFirstShiny", then the border of the box turn to red which is a reminder that the name is occupied. You need to pick up another name. I picked up my account name "stat415or515". 
 
 (ref:label34) Account Setup
 
@@ -629,7 +627,7 @@ x=c(2, 5, 7, 8, 14, 12, 8, 3) # Define a new vector.
 evencount(x) # Call the function evencount(). Replace vec with defined vector x.
 ```
 
-A vaiable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
+A variable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
 
 k
 
@@ -650,7 +648,7 @@ myfun.globle(8)    # set x=8, and do the calculation: 8-2*y = 8-2*(1)=6
 ```
 Here y is a global variable.
 
-The function *myfun.globle2()* defined below returns the same values as above. But both x and y within the the paratheses *(x, y=1)* following *function* are local variables.
+The function *myfun.globle2()* defined below returns the same value as above. But both x and y within the paratheses *(x, y=1)* in following *function*() are local variables.
 ```{r}
 myfun.globle2 <- function (x, y = 1){ #y is set as 1 within the function by default.
   return(x - 2 * y)

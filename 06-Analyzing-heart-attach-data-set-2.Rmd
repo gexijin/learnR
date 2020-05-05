@@ -1,6 +1,6 @@
 # The heart attack dataset (II)
 
-We continue to investigate the heart attack dataset. First, let’s read the data in again and change several variables to factors. Note that you must set the working directory to where the data file is stored on your computer. I encourage you to define a project associated with a folder.
+We continue to investigate the heart attack dataset. First, let’s read in the data again and change several variables to factors. Note that you must set the working directory to where the data file is stored on your computer. I encourage you to define a project associated with a folder.
 ```{r}
 # set working directory, not necessary if loading a project
 #setwd("C:/Ge working/RBook/learnR/datasets")  
@@ -16,7 +16,6 @@ str(df)  # double check
 Hadley Wickham wrote the ggplot2 package in 2005 following Leland Wilkinson’s grammar of graphics, which provides a formal, structured way of visualizing data. Similarly, R was originally written by Robert Gentleman and Ross Ihaka in the 1990s; Linux was developed by Linus Torvalds, a student, at the same period. A few superheroes can make computing much easier for millions of people. ggplot2 uses a different approach to graphics. 
 
 ```{r fig.keep='none'}
-#install.packages("ggplot2") # install the package
 library(ggplot2)  # load the package
 ggplot(df, aes(x = LOS, y = CHARGES))  # Specify data frame and aesthetic mapping
 ```
@@ -31,7 +30,7 @@ Thus, it is a two-step process to generate a scatter plot. This seems cumbersome
 ggplot(df, aes(x = LOS, y = CHARGES)) + geom_point() + stat_smooth(method = lm)
 ```
 
-As we keep adding elements to the plot, this line of code gets longer. So we break the code into multiple lines as below. The “+” at the end of the lines signifies that the plot is not finished and tell R to keep reading the next line. This code below does the same thing as the above, but it is easier to read.  I often use the tab key in the second line to remind myself that it is continued from the above line. 
+As we keep adding elements to the plot, this line of code gets longer. So we break the code into multiple lines as below. The “+” at the end of the line signifies that the plot is not finished and tell R to keep reading the next line. This code below does the same thing as the above, but it is easier to read.  I often use the tab key in the second line to remind myself that it is continued from the above line. 
 ```{r fig.keep='none',warning=FALSE}
 ggplot(df, aes(x = LOS, y = CHARGES)) +  # aesthetic mapping
 	     geom_point() +                    # add data points    
@@ -110,20 +109,20 @@ ggplot(df, aes(x = AGE)) + geom_density(alpha = 0.3)  # all data
 
 Use color to differentiate sex:
 ```{r fig.keep='none'} 
-ggplot(df, aes(x = AGE, color = SEX)) + geom_density(alpha = 0.3)  # Figure 5.4A
+ggplot(df, aes(x = AGE, color = SEX)) + geom_density(alpha = 0.3)  # Figure 6.4A
 ```
 
 Here, we split the dataset into two portions, men and women, and plotted their density distribution on the same plot. Figure \@ref(fig:15-4)A shows that age distribution is very different between men and women. Women’s distribution is skewed to the right and they are on average over ten years older than men. This is surprising, given that this dataset contains all heart attack admissions in New York state in 1993. 
 
 The fill mapping changes the “inside” color:
 ```{r fig.keep='none'}
-ggplot(df, aes(x = AGE, fill = SEX)) + geom_density(alpha = 0.3)  # Figure 5.4B
+ggplot(df, aes(x = AGE, fill = SEX)) + geom_density(alpha = 0.3)  # Figure 6.4B
 ```
 
 This plot shows the same information. It looks nicer, at least to me. We can **split the plot into multiple facets**:
 ```{r fig.keep='none'}
 ggplot(df, aes(x = AGE, fill = SEX)) + 
-       geom_density(alpha = 0.3) + facet_grid(DRG ~.)  # Figure 5.4C
+       geom_density(alpha = 0.3) + facet_grid(DRG ~.)  # Figure 6.4C
 ```
 
 (ref:15-4) Density plots.
@@ -186,9 +185,9 @@ Suppose we are interested in examining whether people with certain diagnosis cod
 aggregate(df, by = list(df$DIAGNOSIS), FUN = mean, na.rm = TRUE)
 ```
 
-We can be happy with this table and call it quits. However, tables are often not as easy to interpret as a nicely formatted graph. Instead of the aggregate function, we use the powerful dplyr package to summarize the data and then to generate a bar plot showing both the means and standard errors.  I stole some code and ideas from R graphics cookbook and this website: [http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/](http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/)
-```{r message=FALSE}
-#install.packages("dplyr") # dplyr package for summary statistics by group
+We can be happy with this table and call it quits. However, tables are often not as easy to interpret as a nicely formatted graph. Instead of the aggregate function, we use the powerful dplyr package to summarize the data and then to generate a bar plot showing both the means and standard errors.  I stole some code and ideas from R graphics cookbook and this website: [http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/](http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/).
+
+```{r warning=FALSE, message=FALSE}
 library(dplyr)  # load the package
 ```
 
@@ -217,7 +216,7 @@ ggplot(stats, aes(x = DIAGNOSIS, y = mean)) +   # data & aesthetic mapping
 	     geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)  # error bars
 ```
 
-Note that the mean-se and mean+se refer to the two columns in the stats data frame and defines the error bars. Because we have an extremely large sample size, the standard errors are small. People with a diagnosis of 41031 stays shorter in the hospital. By looking up the IDC code in [http://www.nuemd.com](http://www.nuemd.com), we notice that this code represents “Acute myocardial infarction of inferoposterior wall, initial episode of care”, which probably makes sense.
+Note that the mean-se and mean+se refer to the two columns in the stats data frame and define the error bars. Because we have an extremely large sample size, the standard errors are small. People with a diagnosis of 41031 stay shorter in the hospital. By looking up the IDC code in [http://www.nuemd.com](http://www.nuemd.com), we notice that this code represents “Acute myocardial infarction of inferoposterior wall, initial episode of care”, which probably makes sense.
 
 As we did previously, we want to define the LOS bars for men and women separately. We first need to go back and generate different summary statistics.
 ```{r message=FALSE}
@@ -305,9 +304,13 @@ fit <- lm(CHARGES ~ SEX + LOS + AGE + DRG + DIAGNOSIS, data = df)
 summary(fit) 
 ```
 
-As we could see from above, one levels for factors (such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. This is really small number compared to overall charges and also the p value is just marginally significant for this large sample. This is in contrast to the **t.test(CHARGES ~ SEX)**, when we got the opposite conclusion. This is because we did not control for other factors. 
+As we could see from above, one level for each factor(such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. It is really small number compared to overall charges and also the p value is just marginally significant for this large sample(0.02956). This is in contrast to the **t.test(CHARGES ~ SEX)** shown below, when we got the opposite conclusion with much smaller p value of 4.573e-07. It is because we did not control for other factors. 
 
-The most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the **t value** is an indicator of significance.  LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males.   Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 41091, 41051 and 41071 incurred less charges compared with those with 41001.  
+```{r}
+t.test(CHARGES ~ SEX, data = df)
+```
+
+Back to our multiple linear regression model we can see that the most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the **t value** is an indicator of significance.  LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males.   Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 41091, 41051 and 41071 incurred less charges compared with those with 41001.  
 
 To investigate mortality, which is a binary outcome, we use **logistic regression**.  
 ```{r}
