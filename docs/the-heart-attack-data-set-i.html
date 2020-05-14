@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2020-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -451,7 +451,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-358" class="exercise"><strong>Exercise 5.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-359" class="exercise"><strong>Exercise 5.1  </strong></span></p>
 <p>Perform the following analysis for the heartatk4R dataset. If you forgot the R commands, refer to our previous learning materials. You may also find these commands faster by asking Dr. Google.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Graphical EDA: Plot distribution of <strong>charges</strong> using box plot, histogram, qqplot, lag plot, sequence plot. And interpret your results in PLAIN English. Note that there are missing values in this column that may cause some problems for some plots. You can remove missing values by defining a new variable by running <strong>temp = CHARGES [ ! is.na (CHARGES) ]</strong> and then run your plot on <strong>temp</strong>.</li>
@@ -492,7 +492,7 @@ Figure 5.2: Pie chart of patients by SEX.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-362" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the count and percentage of each level of DRG by filling the blanks below. Use bar plot and pie chart similar to Figure <a href="the-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="the-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.</p>
+<p><span id="exr:unnamed-chunk-363" class="exercise"><strong>Exercise 5.2  </strong></span>Compute the count and percentage of each level of DRG by filling the blanks below. Use bar plot and pie chart similar to Figure <a href="the-heart-attack-data-set-i.html#fig:4-1">5.1</a> and Figure <a href="the-heart-attack-data-set-i.html#fig:14-2">5.2</a> to visualize. Briefly discuss your results.</p>
 <p>drg &lt;- __________ #Import values of DRG</p>
 <p>counts &lt;- sort(________(drg), decreasing = TRUE) # tabulate &amp; sort</p>
 <p>percentages &lt;- 100 * __________ # Compute the percentage and convert to %</p>
@@ -585,8 +585,8 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 <p>We already know that we could use scatter plots to visualize correlation between two numeric columns. But when there are many data points, in this case we have over 12,000, it could be hard to comprehend. This is especially the case, when the data is integers and there are a lot of data points overlap on top of each other. Yes, graphics can be misleading.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(AGE, LOS)  <span class="co"># standard scatter plot    </span>
 <span class="kw">smoothScatter</span>(AGE, LOS)  <span class="co"># a smoothed color density representation of a scatterplot  </span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-367"></span>
-<img src="book_files/figure-html/unnamed-chunk-367-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-367-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-368"></span>
+<img src="book_files/figure-html/unnamed-chunk-368-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-368-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
 <p class="caption">
 Figure 5.4: Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points.
 </p>
@@ -594,7 +594,7 @@ Figure 5.4: Smoothed Scatter plots use colors to code for the density of data po
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-368" class="exercise"><strong>Exercise 5.3  </strong></span></p>
+<p><span id="exr:unnamed-chunk-369" class="exercise"><strong>Exercise 5.3  </strong></span></p>
 <p>Investigate the correlation between length of stay and charges by filling in the blanks below. Remember to include plain English interpretation of your results even your grandpa can understand.</p>
 <p>LOS &lt;- ______________ # import the values of LOS in the heart attack data</p>
 <p>CHARGES &lt;- _____________ #import the values of Charges</p>
@@ -675,7 +675,7 @@ Figure 5.5: Barplot showing the correlation of two categorical variables. A. Sta
 <p>You can add an argument, such as “<em>args.legend = list(x = “topleft”)</em>”, in the function barplot() to change the position of legend. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(counts, <span class="dt">legend =</span> <span class="kw">rownames</span>(counts), <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>), <span class="dt">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="dt">beside =</span> F,
         <span class="dt">args.legend =</span> <span class="kw">list</span>(<span class="dt">x =</span> <span class="st">&quot;topleft&quot;</span>))</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-374-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-375-1.png" width="672" /></p>
 <p>Another way of showing the proportions is mosaic plot.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="kw">table</span>(SEX, DIED), <span class="dt">color =</span> T)  <span class="co"># Figure 5.6</span></code></pre></div>
@@ -699,15 +699,15 @@ Figure 5.7: Mosaic plot of three factors.
 <p>Activity: interpret the mosaic plot of the Titanic dataset(built-in in R).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">? Titanic   <span class="co"># this leads you to information about the famous Titanic dataset.</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Sex <span class="op">+</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Survived, <span class="dt">data =</span> Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>))  </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-376-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-377-1.png" width="672" /></p>
 <p>This is a mosaic plot of the whole Titanic dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(Titanic, <span class="dt">color =</span> <span class="kw">rainbow</span>(<span class="dv">2</span>)) </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-377-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-378-1.png" width="672" /></p>
 <p>Think about the questions: Did men and women survive by equal proportion? Did girls and women survive by equal proportion?</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-378" class="exercise"><strong>Exercise 5.4  </strong></span></p>
+<p><span id="exr:unnamed-chunk-379" class="exercise"><strong>Exercise 5.4  </strong></span></p>
 <p>The DIAGNOSIS column contains IDC codes that specifies the part of the heart that are affected. Use a stacked bar plot and a mosaic plot to compare the difference in frequency of DIAGNOSIS between men and women. Based on your observation, do you think men and women are equal in their frequencies of diagnoses?</p>
 <p>DIAGNOSIS &lt;- heartatk4R$DIAGNOSIS</p>
 <p>SEX &lt;- heartatk4R$SEX</p>
@@ -739,9 +739,8 @@ Figure 5.8: Histogram of AGE by SEX using ggplot2 package
 <p>Now the two histograms are arranged, and it is very easy to see that women’s age are more skewed to the right, meaning women are considerably older than men. I am surprised at first by this huge difference, as the average age of women if bigger by 11. Further research shows that for women the symptoms of heart attacks are milder and often go unnoticed.</p>
 <p>We can further divide the population according to survival status by adding another factor:</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-heartatk4R <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">GROUP =</span> <span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heartatk4R<span class="op">$</span>GROUP &lt;-<span class="st"> </span><span class="kw">paste</span>(DIED, SEX, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)
+<span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">group =</span> GROUP, 
            <span class="dt">y =</span> <span class="kw">c</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),
                  ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">2</span>]),
                  ..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(..count..[..group.. <span class="op">==</span><span class="st"> </span><span class="dv">3</span>]),
@@ -777,7 +776,7 @@ Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-379" class="exercise"><strong>Exercise 5.5  </strong></span></p>
+<p><span id="exr:unnamed-chunk-380" class="exercise"><strong>Exercise 5.5  </strong></span></p>
 Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not. Use both histogram and density plot. Interpret your results.
 </div>
 
@@ -785,7 +784,7 @@ Use the ggplot2 package to compare the distribution of lengths of stay among pat
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-380" class="exercise"><strong>Exercise 5.6  </strong></span></p>
+<p><span id="exr:unnamed-chunk-381" class="exercise"><strong>Exercise 5.6  </strong></span></p>
 Use the ggplot2 package to compare the distribution of lengths of stay among patients who survived and those who did not, but compare men and women separately (similar to Figure <a href="the-heart-attack-data-set-i.html#fig:new4">5.11</a>).
 </div>
 
@@ -793,7 +792,7 @@ Use the ggplot2 package to compare the distribution of lengths of stay among pat
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-381" class="exercise"><strong>Exercise 5.7  </strong></span></p>
+<p><span id="exr:unnamed-chunk-382" class="exercise"><strong>Exercise 5.7  </strong></span></p>
 Use student’s t-test, boxplot, histogram and density plots to compare the age distribution between survived and those who didn’t.
 </div>
 
@@ -801,7 +800,7 @@ Use student’s t-test, boxplot, histogram and density plots to compare the age 
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-382" class="exercise"><strong>Exercise 5.8  </strong></span></p>
+<p><span id="exr:unnamed-chunk-383" class="exercise"><strong>Exercise 5.8  </strong></span></p>
 Use ANOVA, boxplot, and histogram and density plots to compare the charges among people who have different DRG codes.
 </div>
 
@@ -822,7 +821,7 @@ Figure 5.12: Multiple boxplots of AGE by DRG and SEX using ggplot2 package
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-383" class="exercise"><strong>Exercise 5.9  </strong></span></p>
+<p><span id="exr:unnamed-chunk-384" class="exercise"><strong>Exercise 5.9  </strong></span></p>
 Are the surviving women younger than the women who died? Similar question can be asked for men. Produce a figure that compares, in a gender-specific way, age distribution between patients who died in the hospital and those who survived.
 </div>
 
@@ -830,12 +829,12 @@ Are the surviving women younger than the women who died? Similar question can be
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-384" class="exercise"><strong>Exercise 5.10  </strong></span></p>
+<p><span id="exr:unnamed-chunk-385" class="exercise"><strong>Exercise 5.10  </strong></span></p>
 Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure 5.13. Offer interpretation.
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-385"></span>
-<img src="book_files/figure-html/unnamed-chunk-385-1.png" alt="Multiple boxplots using ggplot2 package" width="576" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-386"></span>
+<img src="book_files/figure-html/unnamed-chunk-386-1.png" alt="Multiple boxplots using ggplot2 package" width="576" />
 <p class="caption">
 Figure 5.13: Multiple boxplots using ggplot2 package
 </p>
@@ -847,7 +846,7 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 <span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> DRG, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  
 <span class="co"># scatterplot colored by DIED</span>
 <span class="kw">ggplot</span>(heartatk4R, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> LOS, <span class="dt">color =</span> DIED)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(SEX <span class="op">~</span><span class="st"> </span>.)  </code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-386-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-387-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Here we only show the figure for third code. Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:5-7"></span>

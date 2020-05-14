@@ -186,7 +186,7 @@ b. Use R to find the maximal value of mpg in the data set **mtcars**.
 First, let's retrieve the 150 nubmer in the spetal length column and store it in
 an vector called x.
 ```{r} 
-x <- Petal.Length   
+x <- iris$Petal.Length   
 ```
 
 Some might complain that nothing happens after you type in this command.
@@ -277,19 +277,22 @@ This figure suggests that the first 50 flowers (Iris setosa) have much shorter
 petals than the other two species. The last 50 flowers (Iris virginica) have
 slightly longer petals than the middle (Iris versicolor).
 
-(ref:1-4) Sequence plot, histogram, lag plot and normal Q-Q plot. 
+(ref:1-4) Scatter plot, histogram, lag plot and normal Q-Q plot. 
 
-```{r 1-4, echo=c(1, 3, 5, 7, 8), fig.show='hold', out.width='50%', fig.cap='(ref:1-4)', fig.align='center'}
-plot(x)  # Run sequence plot
+```{r 1-4, echo=c(1, 4, 6, 9, 10), fig.show='hold', out.width='50%', fig.cap='(ref:1-4)', fig.align='center'}
+plot(x)  # Run scatter plot
 legend("topleft", inset = .02, cex = 2, legend = "plot(x)",  box.lty = 0)
+title("Scatter plot of x")
 hist(x)  # histogram
 legend(1.6, 36, cex = 2, legend = "hist(x)",  box.lty = 0)
 lag.plot(x)
 legend("topleft", inset = .02, cex = 2, legend = "lag.plot(x)",  box.lty = 0)
+title("Lag plot of x")
 qqnorm(x)  # Q-Q plot for normal distribution
 qqline(x) 
 legend("topleft", inset = .02, cex = 2, legend = "qqnorm(x)",  box.lty = 0)
 ```
+There are three different groups in the scatter plot. x of one group is much smaller than the other two groups.
 
 Histogram shows the distribution of data. The histogram top right of Figure \@ref(fig:1-4) shows that there are more flowers with Petal Length between 1 and 1.5.  It also shows that the data does not show a bell-curved distribution.
 
@@ -315,8 +318,10 @@ b. Generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should l
 ```{r 1-5, echo=FALSE, fig.show='hold', out.width='50%', out.length='50%', fig.cap='(ref:1-5)', fig.align='center'}
 x <- rnorm(500)
 plot(x)   # Run sequence plot    
+title("Scatter plot of x")
 hist(x)   # histogram
 lag.plot(x)
+title("Lag plot of x")
 qqnorm(x)  #Q-Q plot for normal distribution
 qqline(x) 
 ```

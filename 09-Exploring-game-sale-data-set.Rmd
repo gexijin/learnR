@@ -107,7 +107,7 @@ for (i in 1:length(name)){
   } else {s.t <- rbind(s.t, shapiro.test(sub))
  }
 }
-s.t <- s.t[, 1:2]  # take first two column of shapiro.test result
+s.t <- s.t[, 1:2]  # take first two columns of shapiro.test result
 s.t <- cbind(name, s.t) # add variable name for the result
 s.t
 ```
@@ -134,7 +134,7 @@ game <- game %>%
 ```
 
 
-(ref:game-PlatformType1) Bar plot of platform type
+(ref:game-PlatformType1) Bar plot of platform type.
 
 ```{r game-PlatformType1, fig.cap='(ref:game-PlatformType1)', fig.align='center'}
 library(ggplot2)
@@ -154,7 +154,7 @@ library(ggplot2)
 ggplot(dat, aes(fill = dat$Genre, ymax = ymax, ymin = ymin, xmax = 4, xmin = 3)) +
 geom_rect(colour = "grey30") + # background color
 coord_polar(theta = "y") + # coordinate system to polar
-xlim(c(0, 4)) +
+xlim(c(0, 4)) +  
 labs(title = "Ring plot for Genre", fill = "Genre") +
 theme(plot.title = element_text(hjust = 0.5))
 ```
@@ -171,26 +171,24 @@ game <- game %>% mutate(Rating.type = ifelse(Rating %in% rating, as.character(Ra
 
 ```{r}
 counts <- sort(table(game$Rating.type), decreasing = TRUE)
-names(counts)[1] <- "T - Teen"  # rename the names of counts for detail information
-names(counts)[2] <- "E - Everyone"
-names(counts)[3] <- "M - Mature"
-names(counts)[4] <- "E10+ - Everyone 10+"
+# rename the names of counts for detail information
+names(counts) <- c("T - Teen", "E - Everyone", "M - Mature", "E10+ - Everyone 10+", "Others")
 pct <- paste(round(counts/sum(counts) * 100), "%", sep = " ")
-lbls <- paste(names(counts), "\n", pct, sep = " ")  # labels with count number
+lbls <- paste(names(counts), "\n", pct, sep = " ")  # Rating information and percentage
 pie(counts, labels = lbls, col = rainbow(length(lbls)),
 main="Pie Chart of Ratings with sample sizes")
 ```
 
 According to the order, the most popular ratings are T, E, M and E10+. "Others" rating only occupy very little portion in the all games.
 
-(ref:game-mosaic) Mosaic plot between platform type and rating type
+(ref:game-mosaic) Mosaic plot between platform type and rating type.
 
 ```{r game-mosaic, warning=FALSE, message=FALSE, fig.cap='(ref:game-mosaic)', fig.align='center'}
 library(ggmosaic)
 library(plotly)
 p <- ggplot(game) +
-  geom_mosaic(aes(x = product(Rating.type), fill = Platform.type), na.rm=TRUE) +
-  labs(x="Rating Type", y = "Platform Type", title="Mosaic Plot") +
+  geom_mosaic(aes(x = product(Rating.type), fill = Platform.type), na.rm = TRUE) +
+  labs(x = "Rating Type", y = "Platform Type", title="Mosaic Plot") +
   theme(axis.text.y = element_blank())
 ggplotly(p)
 ```
@@ -206,12 +204,12 @@ Download the game sale data set and clean the data as similar as described in th
 
 ## Correlation among numeric variables
 
-(ref:game-corrplot) Corrplot among numeric variables
+(ref:game-corrplot) Corrplot among numeric variables.
 
 ```{r game-corrplot, fig.width=8, fig.height=8, fig.cap='(ref:game-corrplot)', fig.align='center'}
 st <- game[, c(11, 13, 17:23)]  # take numeric variables as goal matrix
 st <- na.omit(st)
-library(ellipse)  # install.packages("ellipses")
+library(ellipse)  
 library(corrplot)
 corMatrix <- cor(as.matrix(st))  # correlation matrix
 col <- colorRampPalette(c("#7F0000", "red", "#FF7F00", "yellow", "#7FFF7F",
@@ -223,7 +221,7 @@ corrplot.mixed(corMatrix, order = "AOE", lower = "number", lower.col = "black",
 
 There are high r values of 0.75, 0.65, 0.52 and 0.42 between the log value of Global.Sales and regional sales, we will consider to use Global.Sales.Log as our target sales to analyze the relationship of sales with other variables later. On the other hand, there are good positive correlation between regional sales too. User Score is positive correlated to Critic Score with r of 0.58. There is little correlation between User Count log value and User Score. 
 
-(ref:game-dendrogram) Exercise dendrogram for numeric variables
+(ref:game-dendrogram) Exercise dendrogram for numeric variables.
 
 ```{r game-dendrogram, fig.cap='(ref:game-dendrogram)', fig.align='center'}
 plot(hclust(as.dist(1 - cor(as.matrix(st)))))  # hierarchical clustering
@@ -233,7 +231,7 @@ All sales’ log value except JP.Sales.Log build one cluster; Scores, log value 
 
 ## Analysis of score and count
 
-(ref:game-score) Scatter and density plot for critic score and user score
+(ref:game-score) Scatter and density plot for critic score and user score.
 
 ```{r game-score, message=FALSE, warning=FALSE, fig.width=10, fig.height=3, fig.cap='(ref:game-score)', fig.align='center'}
 library(ggpmisc)  #package for function stat_poly_eq
@@ -246,12 +244,11 @@ p1 <- ggplot(game, aes(x = User.Score, y = Critic.Score)) +
                eq.with.lhs = "italic(hat(y))~`=`~",  # add ^ on y
                aes(label = paste(..eq.label.., ..rr.label.., sep = "*plain(\",\")~")),
                label.x.npc = "left", label.y.npc = 0.9,   # position of the equation label
-               parse = TRUE)   
+               parse = TRUE)  # output.type as "expression" 
 p2 <- ggplot() + 
   geom_density(data = game, aes(x = Critic.Score), color = "darkblue", fill = "lightblue") + 
   geom_density(data = game, aes(x = User.Score), color = "darkgreen", fill = "lightgreen", alpha=.5) +
-  labs(x = "Critic.Score-blue, User.Score-green") +
-  theme(plot.title = element_text(hjust = 0.5)) 
+  labs(x = "Critic.Score-blue, User.Score-green") 
 
 library(gridExtra)
 grid.arrange(p1, p2, nrow = 1, ncol = 2)
@@ -265,7 +262,7 @@ t.test(game$Critic.Score, game$User.Score)
 
 T-test with p value of much less than 0.05 let us accept the alternative hypothesis with 95% confidence that there is significant difference between the means of critic score and user score. The mean of critic score is 7.03, and mean of user score is 7.19.
 
-(ref:game-count) Binhex plot for critic count and user count
+(ref:game-count) Binhex plot for critic count and user count.
 
 ```{r warning=FALSE, game-count, fig.cap='(ref:game-count)', fig.align='center'}
 p1 <- ggplot(game, aes(x = Critic.Count.Log, y = Critic.Score)) +
@@ -298,7 +295,7 @@ Use density plot of Global_Sales, NA_Sales, EU_Sales, JP_Sales and Other_Sales t
 ## Analysis of sales
 ###  By Year.Release
 
-(ref:game-SalesYear1) Total global sales and game released by year
+(ref:game-SalesYear1) Total global sales and game released by year.
 
 ```{r game-SalesYear1, message=FALSE, warning=FALSE, fig.width=8, fig.height=4, fig.cap='(ref:game-SalesYear1)', fig.align='center'}
 Year.Release <- game$Year.Release 
@@ -307,7 +304,7 @@ p <- game %>%
   select(Year.Release, Global.Sales) %>%
   group_by(Year.Release) %>%
   summarise(Total.Sales = sum(Global.Sales))
-q <- cbind.data.frame(p, counts[2])
+q <- cbind.data.frame(p, counts[2])  #add counts to data frame
 names(q)[3] <- "count"
 q$count <- as.numeric(q$count)
 
@@ -326,22 +323,20 @@ We can see from the histogram of total sales that there is very little sales bef
 
 ###  By Region
 
-(ref:game-SalesRegion1) Total sales by region
+(ref:game-SalesRegion1) Year wise log global sales by region.
 
 ```{r game-SalesRegion1, fig.width=9, fig.height=4, fig.cap='(ref:game-SalesRegion1)', fig.align='center'}
 library(reshape2)
 game %>%
   select(Year.Release, NA.Sales.Log, EU.Sales.Log, JP.Sales.Log, 
          Other.Sales.Log, Global.Sales.Log) %>%
-  melt(id.vars = "Year.Release") %>% 
+  melt(id.vars = "Year.Release") %>%   #stacks other columns into "Year.Release"
   group_by(Year.Release, variable) %>% 
   summarise(total.sales = sum(value)) %>%
 ggplot(aes(x = Year.Release, y = total.sales, color = variable, group = variable)) +
    geom_point() + geom_line() + 
-   labs(title = "Regional Global Sales Log Distribution Each Year", 
-         x = "Year Release", y = "Total Sales Log Value", color = "Region") +
-   theme(plot.title = element_text(hjust = 0.5),
-         axis.text.x = element_text(angle = 90),
+   labs(x = "Year Release", y = "Total Sales Log Value", color = "Region") +
+   theme(axis.text.x = element_text(angle = 90),
          panel.background = element_rect(fill="pink"),
          panel.grid.major = element_blank(),
          panel.grid.minor = element_blank())
@@ -351,7 +346,7 @@ The pattern of log value for these regional sales in those years are similar for
 
 ###  By Rating
 
-(ref:game-SalesRating1) Sales by rating type
+(ref:game-SalesRating1) Sales by rating type.
 
 ```{r game-SalesRating1, fig.cap='(ref:game-SalesRating1)', fig.align='center'}
 game$Rating.type <- as.factor(game$Rating.type)
@@ -365,7 +360,7 @@ The figure shows one E game(for everyone) which was sold mainly in North America
 
 ###  By Genre
 
-(ref:game-SalesGenre1) Year wise log global sales by Genre
+(ref:game-SalesGenre1) Year wise log global sales by Genre.
 
 ```{r game-SalesGenre1, fig.cap='(ref:game-SalesGenre1)', fig.align='center'}
 game %>% 
@@ -377,20 +372,19 @@ game %>%
          theme(legend.position = "right", axis.text.x = element_text(angle = 90),
                panel.background = element_rect(fill = "blue"),
                panel.grid.major = element_blank(),
-               panel.grid.minor=element_blank()) +
-         theme(plot.title = element_text(hjust = 0.5)) 
+               panel.grid.minor=element_blank()) 
 ```
 
 The figure shows the golden year for games are from 2007 to 2009, these games together produced above 7000 total.sales.log in each of those years. Action and sports keeps on the top sale for almost all of those 20 years, occupying biggest portion of the total global sales log. Adventure, Puzzle and Strategy are on the bottom of the sale log list. 
 
 ### by Score 
 
-(ref:game-SalesScore) Global sales by critic and user score
+(ref:game-SalesScore) Global sales by critic and user score.
 
 ```{r game-SalesScore, warning=FALSE, message=FALSE, fig.width=12, fig.height=4, fig.cap='(ref:game-SalesScore)', fig.align='center'}
 p1 <- ggplot(game, aes(x = Critic.Score, y = Global.Sales.Log)) + 
   geom_point(aes(color = Genre)) + 
-  geom_smooth()
+  geom_smooth()  # Regression line
 p2 <- ggplot(game, aes(x = User.Score, y = Global.Sales.Log)) + 
   geom_point(aes(color = Rating)) + 
   geom_smooth()
@@ -424,7 +418,7 @@ Among these 20 top sale games, the first two games, Wii Sports and Grand Theft A
 
 ###  By Rating & Genre & Critic score
 
-(ref:game-Sales1) Total sales for genre and rating with critic score
+(ref:game-Sales1) Total sales for genre and rating with critic score.
 
 ```{r game-Sales1, fig.width=12, fig.height=8, fig.cap='(ref:game-Sales1)', fig.align='center'}
 p1 <- game %>%
@@ -433,16 +427,16 @@ p1 <- game %>%
   summarise(Total.Sales = sum(Global.Sales)/10^8, Avg.Score = mean(Critic.Score)) 
 p2 <- p1 %>% group_by(Genre) %>% summarise(Avg.Critic.Score = mean(Avg.Score))
 ggplot() + 
-  geom_bar(data = p1, 
-           aes(x = Genre, y = Total.Sales, fill = Rating.type), stat = "Identity", position = "dodge") +
+  geom_bar(data = p1, aes(x = Genre, y = Total.Sales, fill = Rating.type), 
+           stat = "Identity", position = "dodge") +
   geom_line(data = p2, 
-            aes(x = Genre, y = Avg.Critic.Score, group = 1, color = "Avg.Critic.Score"), size = 2) +
-  geom_point(data = p2, 
-             aes(x = Genre, y = Avg.Critic.Score, shape = "Avg.Critic.Score"), size = 3, color = "Blue") +
-  scale_colour_manual("Score", breaks = "Avg.Critic.Score", values = "yellow") +
-  scale_shape_manual("Score", values = 19) +
+            aes(x = Genre, y = Avg.Critic.Score, group = 1, color = "Avg.Critic.Score"), 
+            size = 2) +
+  geom_point(data = p2, aes(x = Genre, y = Avg.Critic.Score, shape = "Avg.Critic.Score"), 
+             size = 3, color = "Blue") +
+  scale_colour_manual("Score", breaks = "Avg.Critic.Score", values = "yellow") + 
+  scale_shape_manual("Score", values = 19) +   #add scale for line and point plot
   theme(axis.text.x = element_text(angle = 90), 
-        plot.title = element_text(hjust = 0.5),
         legend.position="bottom",
         panel.background = element_rect(fill = "black"),
         panel.grid.major = element_blank(),
@@ -453,7 +447,7 @@ For genre & rating & Global.sale combination, Everyone*sports game is so popular
 
 ###  By Platform
 
-(ref:game-SalesPlatform1) Yearly market share by platform type
+(ref:game-SalesPlatform1) Yearly market share by platform type.
 
 ```{r game-SalesPlatform1, message=FALSE, fig.cap='(ref:game-SalesPlatform1)', fig.align='center'}
 library(viridis)
@@ -465,7 +459,6 @@ p <- game %>%
 ggplot(p, aes(x = Year.Release., fill = Platform.type)) +
   geom_density(position = "fill") +
   labs(y = "Market Share") +
-  theme(plot.title = element_text(hjust = 0.5)) +
   scale_fill_viridis(discrete = TRUE) +
   scale_y_continuous(labels = percent_format()) 
 ```
@@ -483,22 +476,22 @@ plot(tukey, las = 1)
 
 ANOVA test shows that there is at lease one of the mean values of Global.Sales.Log for those platform types is significant different from the others. In detail, the plot of Turkey tests tells us that there is significant difference between all other pairs of platform types but between Xbox and Nintendo, others and Nintendo.
 
-(ref:game-PlatformRating) Global sales log by platform and rating type 
+(ref:game-PlatformRating) Global sales log by platform and rating type.
 
 ```{r game-PlatformRating, fig.width=10, fig.height=4, fig.cap='(ref:game-PlatformRating)', fig.align='center'}
 game$Platform.type <- as.factor(game$Platform.type)
 ggplot(game, aes(x = Platform.type, y = Global.Sales.Log, fill = Rating.type)) +
-  geom_boxplot() 
+       geom_boxplot() 
 ```
 
 In total, PC has lower Global sales log comparing with other platform type, while Playstation and Xbox have higher sale mediums for different rating types. Rating of Everyone sold pretty well in all platform type, while rating Mature sold better in PC, Playstation and Xbox.
 
-(ref:game-PlatformScore) Global sales log by critic score for different platform type and genre 
+(ref:game-PlatformScore) Global sales log by critic score for different platform type and genre.
 
 ```{r game-PlatformScore, fig.width=10, fig.height=6, fig.cap='(ref:game-PlatformScore)', fig.align='center'}
 ggplot(game, aes(Critic.Score, Global.Sales.Log, color = Platform.type)) + 
-  geom_point() + facet_wrap(~ Genre) +
-  theme(plot.title = element_text(hjust = 0.5))
+       geom_point() + 
+       facet_wrap(~ Genre)
 ```
 
 Most genre plots in Figure \@ref(fig:game-PlatformScore) illustrate that there are positive correlation between Global.Sales.Log and Critic Score, the higher the critic score, the better the global sales log value. Most puzzle games were from Nintendo, while lots of stratage games are PC. For other genres, all platforms shared the portion relatively evenly. Lots of PC(green) shared lower market portion in different genres, while some of Nintendo(red) games in sports, racing, platform, and misc were sold really well. At the same time, Playstation with genre of action, fighting, and racing games, Xbox with genre of misc, action, and shooter games show higher global sales log too.
@@ -510,10 +503,9 @@ pca = prcomp(st, scale = T)  #scale = T to normalize the data
 percentVar <- round(100 * summary(pca)$importance[2, 1:9], 0)  # compute % variances
 ```
 
-(ref:game-pca) PCA plot colored with platform type
+(ref:game-pca) PCA plot colored with platform type.
 
 ```{r game-pca, fig.cap='(ref:game-pca)', fig.align='center'}
-#head(pca$x) # the new coordinate values for each observation
 pcaData <- as.data.frame(pca$x[, 1:2]) #First and Second principal component value
 pcaData <- cbind(pcaData, game$Platform.type)  #add platform type as third col. for cluster purpose
 colnames(pcaData) <- c("PC1", "PC2", "Platform")
@@ -526,7 +518,7 @@ ggplot(pcaData, aes(PC1, PC2, color = Platform, shape = Platform)) +
 
 PC, Xbox, Playstation and Nintendo occupy in their own positions in the PCA figure, which illustrate that they play different important role in components of the variance of PC1 and PC2. 
 
-(ref:game-Kmeans) Kmeans PCA figure using ggfortify
+(ref:game-Kmeans) Kmeans PCA figure using ggfortify.
 
 ```{r warning=FALSE, game-Kmeans, fig.cap='(ref:game-Kmeans)', fig.align='center'}
 library(ggfortify)

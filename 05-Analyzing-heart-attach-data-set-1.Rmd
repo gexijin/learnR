@@ -326,11 +326,9 @@ Now the two histograms are arranged, and it is very easy to see that women’s a
 We can further divide the population according to survival status by adding another factor:
 
 (ref:new2) Histogram of AGE by SEX and DIED using ggplot2 package
-
 ```{r new2, warning=FALSE, message=FALSE, fig.cap='(ref:new2)', fig.align='center'}
-library(dplyr)
-heartatk4R %>% mutate(GROUP = paste(DIED, SEX, sep = "-")) %>% 
-ggplot(aes(x = AGE, group = GROUP, 
+heartatk4R$GROUP <- paste(DIED, SEX, sep = "-")
+ggplot(heartatk4R, aes(x = AGE, group = GROUP, 
            y = c(..count..[..group.. == 1]/sum(..count..[..group.. == 1]),
                  ..count..[..group.. == 2]/sum(..count..[..group.. == 2]),
                  ..count..[..group.. == 3]/sum(..count..[..group.. == 3]),

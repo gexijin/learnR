@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2020-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -337,22 +337,21 @@ sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, 
 <li><p>Q-Q plot: Does the sample quantiles almost fall into a straight line ? If yes, then the variable more likely followa a normal distribution.</p></li>
 <li><p>Shapiro-Wilk test: This is a widely used normality test. The null hypothesis is that a variable follows a normal distribution. Small p-value indicates a non-normality of the variable.</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span>
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outputs in 4 rows and 4 columns</span>
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ <span class="co"># Use a for loop to test normality of all variables listed in the vector a</span>
-  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract corresponding variable a[i] in data frame sta as a numeric vector</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ 
+  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract corresponding variable a[i] in sta</span>
                         
-  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i]) <span class="co">#Histogram</span>
-  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#Q-Q plot</span>
+  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])
+  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#</span>
   <span class="kw">qqline</span>(sub)           <span class="co"># Add a QQ plot line. </span>
  
    <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span>
-  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous results in row. </span>
+  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous row</span>
  }
 }</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-467-1.png" width="768" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two column of shapiro.test result</span>
+<p><img src="book_files/figure-html/unnamed-chunk-468-1.png" width="768" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two columnS of shapiro.test result</span>
 s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t)    <span class="co"># add variable name for the result</span>
 s.t</code></pre></div>
 <pre><code>##     a            statistic p.value     
@@ -367,14 +366,14 @@ s.t</code></pre></div>
 <p>From the histograms and QQplots we can see that the distribution of Population, Illiteracy and Area skewed to the left. Income and Life.Exp distributed close to normal. The shapiro tests show that Income, Life.Exp and Frost are normally distributed with p value greater than 0.05, while Murder and HS.Grad are almost normally distributed with p value really close to 0.05. There is no evidence that Population, Illiteracy and Area having normal distribution.</p>
 <p>In the state data, there is a categorical variable <em>region</em> which contains 4 observations. What is the distribution of the categorical variable? Let’s take a look at the number of observations(states) in each region and the corresponding percentage.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(sta<span class="op">$</span>Region), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co">#Count the number of states in each region</span>
-percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(sta<span class="op">$</span>Region)      <span class="co">#Calculate the percentage of states in each region</span>
-<span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="co">#Obtain bar chart based on percentages</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(sta<span class="op">$</span>Region), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co">#number of states in each region</span>
+percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(sta<span class="op">$</span>Region)      
+<span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;lightblue&quot;</span>) 
 <span class="kw">text</span>(<span class="dt">x=</span><span class="kw">seq</span>(<span class="fl">0.7</span>, <span class="dv">5</span>, <span class="fl">1.2</span>), <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, counts))      <span class="co">#Add count to each bar</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-region"></span>
-<img src="book_files/figure-html/state-region-1.png" alt="State count in each region" width="672" />
+<img src="book_files/figure-html/state-region-1.png" alt="State count in each region." width="672" />
 <p class="caption">
-Figure 8.1: State count in each region
+Figure 8.1: State count in each region.
 </p>
 </div>
 <p>Bar plot tells us that we have relatively more states in South(16) and less states in Northeast(9). North Central and West have similar number of states(12 and 13).</p>
@@ -382,14 +381,13 @@ Figure 8.1: State count in each region
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">y =</span> Population)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">fill=</span><span class="kw">alpha</span>(<span class="st">&quot;orange&quot;</span>, <span class="fl">0.3</span>), <span class="dt">alpha=</span><span class="fl">0.5</span>, <span class="dt">shape=</span><span class="dv">20</span>, <span class="dt">stroke=</span><span class="dv">2</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">xend =</span> State, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> Population)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Lollipop Chart for Population&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>), <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>)) <span class="co">#rotate axis lable</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-pop"></span>
-<img src="book_files/figure-html/state-pop-1.png" alt="Loppipop plot of population in each state" width="672" />
+<img src="book_files/figure-html/state-pop-1.png" alt="Loppipop plot of population in each state." width="672" />
 <p class="caption">
-Figure 8.2: Loppipop plot of population in each state
+Figure 8.2: Loppipop plot of population in each state.
 </p>
 </div>
 <p>From the plot we can see even in early days, California and New York are the top two states in population. South Dakota have little population even in 1970s.</p>
@@ -398,22 +396,21 @@ Figure 8.2: Loppipop plot of population in each state
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maps)
 <span class="kw">library</span>(ggplot2)
-sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># Create new character vector with lowercase states names</span>
+sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># lowercase states&#39; names</span>
 states &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;state&quot;</span>)        <span class="co"># Extract state data</span>
 map &lt;-<span class="st"> </span><span class="kw">merge</span>(states, sta, <span class="dt">by =</span> <span class="st">&quot;region&quot;</span>, <span class="dt">all.x =</span> T)  <span class="co"># Merge states and state.x77 data</span>
-map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span class="op">$</span>order), ]
+map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span class="op">$</span>order), ]  <span class="co">#must order first</span>
 <span class="kw">ggplot</span>(map, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group)) <span class="op">+</span><span class="st">  </span>
 <span class="st">  </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Murder)) <span class="op">+</span><span class="st">   </span>
 <span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">10</span>))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_map</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Murder Rate&quot;</span>)) <span class="op">+</span><span class="st">  </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Murder Rate&quot;</span>))   </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-map"></span>
-<img src="book_files/figure-html/state-map-1.png" alt="Map of murder rate distribution" width="672" />
+<img src="book_files/figure-html/state-map-1.png" alt="Map of murder rate distribution." width="672" />
 <p class="caption">
-Figure 8.3: Map of murder rate distribution
+Figure 8.3: Map of murder rate distribution.
 </p>
 </div>
 <p>We can see from the map that the bottom and right of the map are close to red while the top middle and left are yellow. There is an area on top-right are yellow too, which means that murder rate are higher in south and east states but less in north central, northwest and northeast states.</p>
@@ -421,20 +418,21 @@ Figure 8.3: Map of murder rate distribution
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggridges)
 <span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Region, <span class="dt">fill =</span> Region)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),
-        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>), <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st">  </span><span class="co">#no color on backgroud</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,  <span class="co">#no show legend</span>
+        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),  <span class="co">#x axis title in the center</span>
+        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))  <span class="co">#y axis title in the center</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-murder"></span>
-<img src="book_files/figure-html/state-murder-1.png" alt="Ridgeline plot for murder rate in each region" width="672" />
+<img src="book_files/figure-html/state-murder-1.png" alt="Ridgeline plot for murder rate in each region." width="672" />
 <p class="caption">
-Figure 8.4: Ridgeline plot for murder rate in each region
+Figure 8.4: Ridgeline plot for murder rate in each region.
 </p>
 </div>
 <p>The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has bigger murder rate than the other regions.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-468" class="exercise"><strong>Exercise 8.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-469" class="exercise"><strong>Exercise 8.1  </strong></span></p>
 <p>Similar to Figure <a href="the-state-dataset.html#fig:state-map">8.3</a>, use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb and state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:</p>
 <p>tem &lt;- data.frame(state.x77)</p>
 <p>sta &lt;- cbind(state.abb, tem, state.region)</p>
@@ -446,7 +444,7 @@ Figure 8.4: Ridgeline plot for murder rate in each region
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-469" class="exercise"><strong>Exercise 8.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-470" class="exercise"><strong>Exercise 8.2  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-murder">8.4</a>, use ridgeline plot to explore the regional distribution of Illiteracy for state.x77 and state.region data sets and interpret your figure.
 </div>
 
@@ -460,14 +458,14 @@ Similar to Figure <a href="the-state-dataset.html#fig:state-murder">8.4</a>, use
 <span class="kw">library</span>(ellipse) 
 <span class="kw">library</span>(corrplot)
 corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)) <span class="co"># Calculate correlation matrix</span>
-col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>))   <span class="co">#Color values. Red, yellow and blue represent that the coefficients are -1, 0 and 1 respectively. You can use more than 3 colors to represent the coefficients ranging from -1 to 1.</span>
+col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>))  <span class="co">#3 colors to represent coefficients -1 to 1.</span>
 <span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, 
                <span class="dt">number.cex =</span> .<span class="dv">8</span>, <span class="dt">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="dt">upper.col =</span> <span class="kw">col</span>(<span class="dv">10</span>), 
-               <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>) <span class="co">#Type ?corrplot.mixed in the Console to get help in detail.</span></code></pre></div>
+               <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>) <span class="co">#mix plots of &quot;number&quot; and &quot;ellipse&quot;</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-corrplot"></span>
-<img src="book_files/figure-html/state-corrplot-1.png" alt="Corrplot for numeric variables" width="576" />
+<img src="book_files/figure-html/state-corrplot-1.png" alt="Corrplot for numeric variables." width="576" />
 <p class="caption">
-Figure 8.5: Corrplot for numeric variables
+Figure 8.5: Corrplot for numeric variables.
 </p>
 </div>
 <p>On the top-right of correlation figure we can see the red and narrow shape between Murder and Life.Exp which shows high negative correlation, the blue narrow shape between Murder and Illiteracy which shows high positive correlation, the red-orange narrow shape between Murder and Frost, HS.Grad which show median negative correlation, also the orange shape between Murder and Income which shows small negative correlation and light-blue shape between Murder and both Area and Population which show small positive correlation.</p>
@@ -476,7 +474,7 @@ Figure 8.5: Corrplot for numeric variables
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-470" class="exercise"><strong>Exercise 8.3  </strong></span></p>
+<p><span id="exr:unnamed-chunk-471" class="exercise"><strong>Exercise 8.3  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a>, plot a scatter matrix among 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of the scatter matrix plot.
 </div>
 
@@ -485,16 +483,16 @@ Similar to Figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a>, p
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)))))  <span class="co"># hierarchical clustering</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-dendrogram"></span>
-<img src="book_files/figure-html/state-dendrogram-1.png" alt="Cluster dendrogram for state numeric variables" width="672" />
+<img src="book_files/figure-html/state-dendrogram-1.png" alt="Cluster dendrogram for state numeric variables." width="672" />
 <p class="caption">
-Figure 8.6: Cluster dendrogram for state numeric variables
+Figure 8.6: Cluster dendrogram for state numeric variables.
 </p>
 </div>
 <p>The cluster Dendrogram tells us that there are two clusters for these variables. Murder is mostly close to Illiteracy, and then to Population and Area. Similar situation, HS.Grad is mostly close to Income, and then to Life.Exp and Frost. Though illiteracy and HS.Grad are in different cluster, we know for the same state, illiteracy is highly correlated with high school graduation rate , the lower the illiteracy, the higher the high school graduation rate. r value of -0.66 between Illiteracy and HS.Grad in the corrplot tells the same story.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-471" class="exercise"><strong>Exercise 8.4  </strong></span></p>
+<p><span id="exr:unnamed-chunk-472" class="exercise"><strong>Exercise 8.4  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-dendrogram">8.6</a>, plot a cluster dendrogram of the 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of your output.
 </div>
 
@@ -503,16 +501,16 @@ Similar to Figure <a href="the-state-dataset.html#fig:state-dendrogram">8.6</a>,
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-illiteracy"></span>
-<img src="book_files/figure-html/state-illiteracy-1.png" alt="Illiteracy distribution by region" width="672" />
+<img src="book_files/figure-html/state-illiteracy-1.png" alt="Illiteracy distribution by region." width="672" />
 <p class="caption">
-Figure 8.7: Illiteracy distribution by region
+Figure 8.7: Illiteracy distribution by region.
 </p>
 </div>
 <p>We can see that north central region has narrow density distribution with most Illiteracy less than 1 percent of population. While south region has an open and bell shaped distribution with illiteracy covered from 0.5 to 3. Though region west has a spread out distribution too, but it’s left skewed; There are lots of west states with illiteracy of less than 1% of its population. Most northeast region states have illiteracy less then 1.5% of its population.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-472" class="exercise"><strong>Exercise 8.5  </strong></span></p>
+<p><span id="exr:unnamed-chunk-473" class="exercise"><strong>Exercise 8.5  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-illiteracy">8.7</a>, use density plot to see the distribution of <em>mpg</em> by <em>cyl</em> in the data set <em>mtcars</em>.
 </div>
 
@@ -522,9 +520,9 @@ Similar to Figure <a href="the-state-dataset.html#fig:state-illiteracy">8.7</a>,
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sta<span class="op">$</span>Pop.Density &lt;-<span class="st"> </span>sta<span class="op">$</span>Population<span class="op">/</span>sta<span class="op">$</span>Area
 <span class="kw">boxplot</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-population"></span>
-<img src="book_files/figure-html/state-population-1.png" alt="Box plot of population density by region" width="672" />
+<img src="book_files/figure-html/state-population-1.png" alt="Box plot of population density by region." width="672" />
 <p class="caption">
-Figure 8.8: Box plot of population density by region
+Figure 8.8: Box plot of population density by region.
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region, sta)
@@ -539,12 +537,11 @@ Figure 8.8: Box plot of population density by region
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">y =</span> Murder)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> Pop.Density, <span class="dt">color =</span> Region)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x) <span class="op">+</span><span class="st">  </span><span class="co"># add regression line</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x)  <span class="co"># add regression line</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-IlliteracyMurder"></span>
-<img src="book_files/figure-html/state-IlliteracyMurder-1.png" alt="Scatterplot for illiteracy and murder sized by population density and colored by region" width="672" />
+<img src="book_files/figure-html/state-IlliteracyMurder-1.png" alt="Scatterplot for illiteracy and murder sized by population density and colored by region." width="672" />
 <p class="caption">
-Figure 8.9: Scatterplot for illiteracy and murder sized by population density and colored by region
+Figure 8.9: Scatterplot for illiteracy and murder sized by population density and colored by region.
 </p>
 </div>
 <p>The plot shows that murder and illiteracy are positive correlated. All states in other three regions have murder rate less than 12 per 100,000 population except some of south states(green). All north central states(blue) has illiteracy less than 1, all northeast states(red) have less than 1.5 of illiteracy. The illiteracy of west(purple) and south states have much bigger variance, some west states has illiteracy less than 0.5, while some south state has illiteracy more than 2.75. Many Northeast states have big population density but middle illiteracy rate comparing with the states in the other three regions.</p>
@@ -552,31 +549,30 @@ Figure 8.9: Scatterplot for illiteracy and murder sized by population density an
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Region, <span class="dt">y =</span> Life.Exp, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">trim =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width =</span> <span class="fl">0.1</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-LifeExp"></span>
-<img src="book_files/figure-html/state-LifeExp-1.png" alt="Regional life expectancy" width="672" />
+<img src="book_files/figure-html/state-LifeExp-1.png" alt="Regional life expectancy." width="672" />
 <p class="caption">
-Figure 8.10: Regional life expectancy
+Figure 8.10: Regional life expectancy.
 </p>
 </div>
 <p>On average, south has lower life expectancy than the other three regions. North Central has highest Life.Exp. West has extending distribution with two long tails on each ends, which means some west states have really long life expectancy, while some states expect short life though they are in the same region.</p>
 <p>According to the corrplot, there are other variables in the other cluster, such as life expectancy, high school graduation and income. We are interested whether they affect the murder rate. Here is the plot for relationship between murder and these variables.</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># group income into IncomeType first</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="co"># group income into IncomeType first</span>
 sta.income &lt;-<span class="st"> </span>sta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">IncomeType =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;Under3500&quot;</span>,  
                              <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;3500-4000&quot;</span>,
-                                    <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4500</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4000</span>, <span class="st">&quot;4000-4500&quot;</span>,
-                                           <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4500</span>, <span class="st">&quot;4500-5000&quot;</span>, 
-                                                  <span class="st">&quot;Above5000&quot;</span>))))))
+                               <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4500</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4000</span>, <span class="st">&quot;4000-4500&quot;</span>,
+                                 <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4500</span>, <span class="st">&quot;4500-5000&quot;</span>, 
+                                   <span class="st">&quot;Above5000&quot;</span>))))))
 <span class="kw">ggplot</span>(sta.income, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Life.Exp)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> IncomeType, <span class="dt">color =</span> Region, <span class="dt">size =</span> HS.Grad)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-LifeMurder"></span>
-<img src="book_files/figure-html/state-LifeMurder-1.png" alt="Relationship between murder rate and life expectancy, high school graduation and income" width="672" />
+<img src="book_files/figure-html/state-LifeMurder-1.png" alt="Relationship between murder rate and life expectancy, high school graduation and income." width="672" />
 <p class="caption">
-Figure 8.11: Relationship between murder rate and life expectancy, high school graduation and income
+Figure 8.11: Relationship between murder rate and life expectancy, high school graduation and income.
 </p>
 </div>
 <p>Murder is negatively correlated with Life.Exp. Some states with higher murder rate over 12 have relatively small symbols, which means their high school graduation rates are close to 40%; And these small symbols with murder rate bigger than 12 are all colored as green, which means they all belong to south region.</p>
@@ -585,7 +581,7 @@ Figure 8.11: Relationship between murder rate and life expectancy, high school g
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-473" class="exercise"><strong>Exercise 8.6  </strong></span></p>
+<p><span id="exr:unnamed-chunk-474" class="exercise"><strong>Exercise 8.6  </strong></span></p>
 Use scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure <a href="the-state-dataset.html#fig:state-dendrogram">8.6</a>. Interpret your plot.
 </div>
 
@@ -606,13 +602,13 @@ a &lt;-<span class="st"> </span><span class="kw">heatmap.2</span>(s,
           <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>)[sta<span class="op">$</span>Region],  
           <span class="dt">srtCol =</span> <span class="dv">45</span>,  <span class="co">#column labels at 45 degree</span>
           <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">8</span>), <span class="co"># bottom and right margins</span>
-          <span class="dt">lhei =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)
+          <span class="dt">lhei =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)  <span class="co"># relative heights of the rows</span>
 ) 
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(sta<span class="op">$</span>Region), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)  <span class="co"># add legend </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-heatmap"></span>
-<img src="book_files/figure-html/state-heatmap-1.png" alt="Heat map for whole state data set" width="768" />
+<img src="book_files/figure-html/state-heatmap-1.png" alt="Heat map for whole state data set." width="768" />
 <p class="caption">
-Figure 8.12: Heat map for whole state data set
+Figure 8.12: Heat map for whole state data set.
 </p>
 </div>
 <p>Same as cluster Dendrogram plot, Heatmap shows that Life.Exp, Income, HS.Grad, together with Frost build one cluster, while Illiteracy, Murder and Population and area build another cluster.</p>
@@ -621,9 +617,9 @@ Figure 8.12: Heat map for whole state data set
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(st) &lt;-<span class="st"> </span>sta<span class="op">$</span>State
 <span class="kw">stars</span>(st, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="fl">1.5</span>), <span class="dt">draw.segments =</span> T)   </code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-segment"></span>
-<img src="book_files/figure-html/state-segment-1.png" alt="Segment diagram for all states" width="768" />
+<img src="book_files/figure-html/state-segment-1.png" alt="Segment diagram for all states." width="768" />
 <p class="caption">
-Figure 8.13: Segment diagram for all states
+Figure 8.13: Segment diagram for all states.
 </p>
 </div>
 <p>The segment Diagram shows us different aspects of each state. For example, South Dakota has big Frost(yellow), big Life Expectancy(blue), relative high percentage of high school graduation rate(pink) and good income(red), but has small area and really tiny population, illiteracy and murder rate comparing with other states.</p>
@@ -653,8 +649,8 @@ pca</code></pre></div>
 ## HS.Grad    -0.64464647 -0.393019181 -0.30724183
 ## Frost       0.21268413 -0.472013140  0.02834442
 ## Area        0.14836054  0.286260213  0.01320320</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures.</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-474-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-475-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(pca)  <span class="co">#shows the importance of the components</span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3     PC4     PC5     PC6
@@ -678,9 +674,9 @@ percentVar</code></pre></div>
          <span class="dt">loadings =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">loadings.label =</span> <span class="ot">TRUE</span>, 
          <span class="dt">loadings.label.size =</span> <span class="dv">4</span>, <span class="dt">loadings.label.colour =</span> <span class="st">&#39;blue&#39;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-bioplot"></span>
-<img src="book_files/figure-html/state-bioplot-1.png" alt="Bioplot for PCA" width="672" />
+<img src="book_files/figure-html/state-bioplot-1.png" alt="Bioplot for PCA." width="672" />
 <p class="caption">
-Figure 8.14: Bioplot for PCA
+Figure 8.14: Bioplot for PCA.
 </p>
 </div>
 <p>The Biplot illustrate the special role of these variables to the first and second component of the variance. Illiteracy positively contribute to component of the variance PC1, while Life.Exp and Frost negatively contribute to component of the variance PC1. Area positively contribute to component of the variance PC2. The other four variables contribute to both component of the variance PC1 and PC2 positively or negatively. From the figure we also find that many states in south region such as Louisiana(LA) and Mississippi(MS) are mainly affected by Illiteracy and murder rate, while some north central states like Minnesota(MN) and North Dakota(ND) are mainly affected by life expectancy and frost. Area is the main effect for two states in West region, Alaska(AK) and California(CA).</p>
@@ -721,7 +717,7 @@ model &lt;-<span class="st"> </span><span class="kw">lm</span>(Murder <span clas
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-476" class="exercise"><strong>Exercise 8.7  </strong></span></p>
+<p><span id="exr:unnamed-chunk-477" class="exercise"><strong>Exercise 8.7  </strong></span></p>
 Do linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a> and pay attention to the high correlation between murder rate and life expectancy.
 </div>
 

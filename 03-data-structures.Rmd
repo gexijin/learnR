@@ -117,7 +117,7 @@ b. Square each element in x and assign the results to a new vector *z*.
 ```{exercise}
 
 >
-Use google to find two functions which sets and gets the current working directory in R, respectively.
+Use Google to find functions which set and get the current working directory in R, respectively.
 ```
 
 
@@ -125,7 +125,7 @@ Use google to find two functions which sets and gets the current working directo
 ```{exercise}
 
 >
-Use google to find the function which lists all the files in the current working folder in R. 
+Use Google to find the function which lists all the files in the current working folder in R. 
 ```
 
 
@@ -1047,7 +1047,7 @@ rownames(iris)
 ```
 
 We can create a data frame by using function *data.frame()* to combine vectors. For example:
-```{r}
+```{r results='hide'}
 x <- c("A", "B", "C", "D")
 y <- c(41, 32, 13, 89)
 z <- c("TRUE", "FALSE", "FALSE", "TRUE")
@@ -1055,7 +1055,11 @@ df1 <- data.frame(x, y, z)
 df1
 ```
 
-As you can see in the output, the *<fctr>* underneath the x means that the class of x has been changed from a character to a factor. So does the z. We can check the change by the *class()* function:
+```{r echo=FALSE, fig.width = 4, fig.align='center'}
+knitr::include_graphics("images/img0300_CharacterToFactor.png")
+```
+
+As you can see in the output, the *\<fctr\>* underneath the x means that the class of x has been changed from a character to a factor. So does the z. We can check the change by the *class()* function:
 ```{r}
 class(x)
 class(df1$x)
@@ -1580,7 +1584,7 @@ mean.x
 ```
 The *mean.x* returns a list consisting of 20 and 6 which are means of components of x respectively. 
 
-When the list returned by *lapply()* could be simplified to a vector or matrix, we can use function *sapply()* (for *simplified [l]apply*). Let's redo the previous example by *sapply()* function.
+When the list returned by *lapply()* could be simplified to a vector or matrix, we can use function *sapply()*. Let's redo the previous example by *sapply()* function.
 ```{r}
 mean.x.2 <- sapply(x, mean)
 mean.x.2

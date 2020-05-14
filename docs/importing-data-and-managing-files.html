@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-05" />
+<meta name="date" content="2020-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -339,7 +339,7 @@ df &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class=
         <span class="dt">DRG =</span> <span class="kw">col_character</span>(), <span class="dt">LOS =</span> <span class="kw">col_integer</span>()), 
     <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)
 <span class="kw">View</span>(df)</code></pre></div>
-<p>Before you click on the <strong>Import</strong> button, I highly recommend that you select all the codes and copy it to the script file. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on x object, which is a data frame named after the input file. You data is now available as x.</p>
+<p>Before you click on the <strong>Import</strong> button, I highly recommend that you select all the codes and copy it to the script file. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on df object, which is a data frame named after the input file. You data is now available as df.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-2"></span>
 <img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio." width="483" />
@@ -475,7 +475,7 @@ df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-345" class="exercise"><strong>Exercise 4.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-346" class="exercise"><strong>Exercise 4.1  </strong></span></p>
 If you have not created a project for chapter 4, it is time to create one. Download the tab-delimited text file <em>pulse.txt</em> from this page (<a href="http://statland.org/R/R/pulse.txt" class="uri">http://statland.org/R/R/pulse.txt</a>). Import pulse.txt into R using two methods: R menu (Show the process by attaching some necessary screenshots.) and R script.<br />
 a. Rename the file as <em>chapter4Pulse</em>.<br />
 b. Change the class of ActivityL from double to integer.<br />
@@ -486,7 +486,7 @@ c. After importing <em>pulse.txt</em> into R, convert the class of Sex from char
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-346" class="exercise"><strong>Exercise 4.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-347" class="exercise"><strong>Exercise 4.2  </strong></span></p>
 Type in Table <a href="importing-data-and-managing-files.html#tab:9-01">4.1</a> in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure <a href="importing-data-and-managing-files.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
 </div>
 
@@ -542,7 +542,7 @@ Type in Table <a href="importing-data-and-managing-files.html#tab:9-01">4.1</a> 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df2<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(df2<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></code></pre></div>
 <p>You can now do things like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(df2<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>df2<span class="op">$</span>ag)</code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-351-1.png" width="672" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-352-1.png" width="672" /></p>
 <p>Each box represents an age group. Older patients tends to stay longer in the hospital after being admitted for heart attack.</p>
 <p>You can extract a subset of cases:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df3 &lt;-<span class="st"> </span><span class="kw">subset</span>(df2, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span>
