@@ -110,11 +110,13 @@ The employees with negative or zero Tot.Gross and biweekly rate are removed. Now
 
 (ref:salary-TotGross) Scatterplot of total gross income.
 
-```{r salary-TotGross, fig.cap='(ref:salary-TotGross)', fig.align='center'}
-plot(salary$Tot.Gross, ylab = "Total gross income")
+```{r salary-TotGross, fig.show='hold', out.width='50%', fig.cap='(ref:salary-TotGross)', fig.align='center'}
+plot(salary$Tot.Gross)
+lag.plot(salary$Tot.Gross)
 ```
 
-Most total gross point scatter under \$20000, some of them are even above \$60000.
+Both scatter plot and lag plot show that most total gross point scatter under \$20000, some of them are even above \$60000.
+
 We will not keep those employees with Job.Indicator as "S" too.
 
 ```{r}
@@ -188,7 +190,7 @@ salary$Gross.Log <- log(salary$Tot.Gross)
 
 ```{r salary-HistQQ, fig.width=10, fig.height=8, fig.cap='(ref:salary-HistQQ)', fig.align='center'}
 variable <- c("Tot.Gross", "Gross.Log", "Age")  # pick up the numeric columns
-par(mfrow = c(3, 2))  # layout in 3 rows and 3 columns
+par(mfrow = c(3, 2))  # layout in 3 rows and 2 columns
 for (i in 1:length(variable)){
   sub <- unlist(salary[variable[i]])
   submean <- mean(sub)
@@ -266,16 +268,26 @@ The top unions by count are Service Maintain, Correctional officers, and Social 
 (ref:salary-GrossAge) Average gross and log of gross distribution by age.
 
 ```{r salary-GrossAge, message=FALSE, fig.width=10, fig.height=5, fig.cap='(ref:salary-GrossAge)', fig.align='center'}
-salary %>% 
+p1 <- salary %>% 
   group_by(Age) %>%
   summarise(Avg.Gross = mean(Tot.Gross)) %>%
 ggplot(aes(x = Age, y = Avg.Gross)) +
-  geom_bar(stat = 'identity', col = "lightblue", fill="blue") + 
+  geom_bar(stat = 'identity', col = "lightblue", fill = "blue") + 
   scale_x_continuous(breaks = seq(20, 90, 10)) +
   labs(y = "Average gross income")
+# p2 get density2D plot
+p2 <- ggplot(salary, aes(x = Age, y = Gross.Log)) + 
+  stat_density2d(aes(fill = ..density..^0.25), geom = "tile", contour = FALSE, n = 200) +  
+  scale_fill_continuous(low = "white", high = "dodgerblue3") +
+  scale_x_continuous(breaks = seq(10, 100, 10)) +
+  scale_y_continuous(breaks = seq(2, 12, 1)) +
+  theme(legend.position = "none", panel.background = element_blank())
+# display p1 and p2 in same row
+library(gridExtra)
+grid.arrange(p1, p2, nrow = 1)
 ```
 
-In total, the older the employees, the higher their gross income. 
+In total, the older the employees, the higher their gross income. Density plot shows lots of employees have log gross income around 8. 
 
 Now we separate age into groups with age gap of 10.
 ```{r}
