@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Step into R programming–the iris flower dataset | Learn R through examples</title>
-  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Step into R programming–the iris flower dataset | Learn R through examples" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   <meta name="github-repo" content="gexijin/learnR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 1 Step into R programming–the iris flower dataset | Learn R through examples" />
   
-  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   
 
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-26" />
+<meta name="date" content="2021-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="visualizing-the-iris-flower-data-set.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,35 +51,32 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -87,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -122,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -135,16 +134,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
-<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-contain-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames contain rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
-<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
-<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-categorical-variable"><i class="fa fa-check"></i><b>1.4</b> Analyzing a categorical variable</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#the-relationship-between-two-numerical-variables"><i class="fa fa-check"></i><b>1.5</b> The relationship between two numerical variables</a></li>
 <li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
 <li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (ANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
 <li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-makes-plotting-intuitive"><i class="fa fa-check"></i><b>2.2</b> The ggplot2 package makes plotting intuitive</a></li>
 <li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.3</b> Scatter plots matrix</a></li>
@@ -157,64 +158,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#projecting-high-dimensional-data-with-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.10</b> Projecting high-dimensional data with principal component analysis (PCA)</a></li>
 <li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
-<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
-<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
-<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.1</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.2</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.4</b> Lists</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
+<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.2</b> Project-oriented workflow</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.2.1</b> Create a project in a new folder</a></li>
-<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.2.2</b> Create a script file and comment (!)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.2.3</b> Copy data files to the new directory</a></li>
-<li class="chapter" data-level="4.2.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.4</b> Import data files</a></li>
-<li class="chapter" data-level="4.2.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.5</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.2.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.6</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.2</b> Project-oriented workflow</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.1</b> Import data files</a></li>
+<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.2</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.3</b> Close a project when you are done</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.3</b> Reading files directly using read.table</a></li>
 <li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.4</b> General procedure to read data into R:</a></li>
 <li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.5</b> Data manipulation in a data frame</a></li>
 <li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.6</b> Data transformation using the dplyr</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a><ul>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
 <li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
 <li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
 <li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
 <li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a><ul>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
 <li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
 <li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
 <li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
 <li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
-<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
-<li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
-<li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.1</b> Pubish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a><ul>
+<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="the-state-dataset.html"><a href="the-state-dataset.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
 <li class="chapter" data-level="8.2" data-path="the-state-dataset.html"><a href="the-state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
 <li class="chapter" data-level="8.3" data-path="the-state-dataset.html"><a href="the-state-dataset.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
@@ -222,11 +219,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="the-state-dataset.html"><a href="the-state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
 <li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
 <li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
 <li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
 <li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
 <li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
@@ -239,20 +238,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
 <li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a><ul>
+<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
-<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
 <li class="chapter" data-level="10.2.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
 <li class="chapter" data-level="10.2.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
 <li class="chapter" data-level="10.2.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
 <li class="chapter" data-level="10.3.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
 <li class="chapter" data-level="10.3.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
 <li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
 </ul></li>
@@ -276,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="step-into-r-programmingthe-iris-flower-dataset" class="section level1">
+<div id="step-into-r-programmingthe-iris-flower-dataset" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Step into R programming–the iris flower dataset</h1>
 <p>Learning objectives:</p>
 <ul>
@@ -284,63 +287,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Data frames.</li>
 <li>The absolute basics: import data, check data types, attach, and then plot and analyze using column names.</li>
 </ul>
-<div id="getting-started" class="section level2">
+<div id="getting-started" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Getting started</h2>
 <ol style="list-style-type: decimal">
-<li><p>Install R from <a href="file:///I:\book\ch1\www.R-project.org">www.R-project.org</a>.
-Choose the cloud server or any U.S. mirror site.</p></li>
+<li><p>Install R from <a href="https://www.r-project.org/">www.R-project.org</a>.
+Choose the cloud server or any mirror site.</p></li>
 <li><p>Install RStudio Desktop from
-<a href="file:///I:\book\ch1\www.RStudio.com">www.RStudio.com</a>. Rstudio uses the R
-software in the background but provides a more user-friendly interface. R
+<a href="https://www.rstudio.com/products/rstudio/download/#download">www.RStudio.com</a>. RStudio uses R
+in the background but provides a more user-friendly interface. R
 commands can be typed directly into the “Console” window. Or you can enter
 them in the “R Script” window and click the “Run” button. If you have an
-older version of R or Rstudio, I will recommend upgrading to the new
+older version of R or Rstudio, we recommend upgrading to the latest
 version.</p></li>
 <li><p>Alternatively, you can use R and Rstudio through a web browser via <a href="https://rstudio.cloud/">Rstudio
 Cloud.</a> Some universities also host their own
 Rstudio server on more powerful computers.</p></li>
 </ol>
 <p><img src="images/img0100_Rstudio.png" width="80%" /></p>
-<p>As a quick sample session, let’s try all of these commands below in the Console window. If you understand all of these, you probably do not need this book. Consider more advanced books like <a href="https://r4ds.had.co.nz/">R for Data Science</a>. If it takes a few months to type these 243 characters, try <a href="www.RapidTyping.com">www.RapidTyping.com</a> first.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">head</span>(iris)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">str</span>(iris)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">summary</span>(iris)</a>
-<a class="sourceLine" id="cb1-4" title="4">x &lt;-<span class="st"> </span>iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw">head</span>(x)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw">boxplot</span>(x)</a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="kw">plot</span>(x[, <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>])</a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="kw">abline</span>( <span class="kw">lm</span>(x[, <span class="dv">4</span>] <span class="op">~</span><span class="st"> </span>x[, <span class="dv">3</span>]) )</a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="kw">pairs</span>(x)</a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="kw">stars</span>(x)</a>
-<a class="sourceLine" id="cb1-11" title="11"></a>
-<a class="sourceLine" id="cb1-12" title="12">PL &lt;-<span class="st"> </span>x<span class="op">$</span>Petal.Length</a>
-<a class="sourceLine" id="cb1-13" title="13">PL</a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="kw">barplot</span>(PL)</a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="kw">hist</span>(PL)</a>
-<a class="sourceLine" id="cb1-16" title="16">Species &lt;-<span class="st"> </span>iris<span class="op">$</span>Species</a>
-<a class="sourceLine" id="cb1-17" title="17">Species</a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="kw">pie</span>( <span class="kw">table</span>(Species) )</a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="kw">boxplot</span>(PL <span class="op">~</span><span class="st"> </span>Species )</a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="kw">summary</span>( <span class="kw">aov</span>(PL <span class="op">~</span><span class="st"> </span>Species) )</a></code></pre></div>
+<p>As a quick sample session, let’s try all of these commands below in the Console window. R is case-sensitive; “Species” and “species” are two different variables. If you understand all of these, you probably do not need this book; consider more advanced books like <a href="https://r4ds.had.co.nz/">R for Data Science</a>. If it takes a few months to type these 243 characters, try <a href="www.RapidTyping.com">www.RapidTyping.com</a> first.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span>
+<span id="cb1-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris)</span>
+<span id="cb1-3"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris)</span>
+<span id="cb1-4"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb1-5"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x)</span>
+<span id="cb1-6"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span>
+<span id="cb1-7"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x[, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb1-8"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>( <span class="fu">lm</span>(x[, <span class="dv">4</span>] <span class="sc">~</span> x[, <span class="dv">3</span>]) )</span>
+<span id="cb1-9"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(x)</span>
+<span id="cb1-10"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">stars</span>(x)</span>
+<span id="cb1-11"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-12" aria-hidden="true" tabindex="-1"></a>PL <span class="ot">&lt;-</span> x<span class="sc">$</span>Petal.Length</span>
+<span id="cb1-13"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-13" aria-hidden="true" tabindex="-1"></a>PL</span>
+<span id="cb1-14"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(PL)</span>
+<span id="cb1-15"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(PL)</span>
+<span id="cb1-16"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-16" aria-hidden="true" tabindex="-1"></a>Species <span class="ot">&lt;-</span> iris<span class="sc">$</span>Species</span>
+<span id="cb1-17"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-17" aria-hidden="true" tabindex="-1"></a>Species</span>
+<span id="cb1-18"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>( <span class="fu">table</span>(Species) )</span>
+<span id="cb1-19"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(PL <span class="sc">~</span> Species )</span>
+<span id="cb1-20"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( <span class="fu">aov</span>(PL <span class="sc">~</span> Species) )</span></code></pre></div>
 <div class="figure">
-<img src="https://github.com/gexijin/learnR/raw/master/images/demo.gif" alt="Animated GIF for screen shot." />
+<img src="https://github.com/gexijin/learnR/raw/master/images/demo.gif" alt="" />
 <p class="caption">Animated GIF for screen shot.</p>
 </div>
 </div>
-<div id="data-frames-have-rows-and-columns-the-iris-flower-dataset" class="section level2">
-<h2><span class="header-section-number">1.2</span> Data frames have rows and columns: the Iris flower dataset</h2>
-<p>In 1936, Edgar Anderson collected data to quantify the geographic variation of
-<em>Iris</em> flowers. The data set consists of 50 samples from each of the three
+<div id="data-frames-contain-rows-and-columns-the-iris-flower-dataset" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Data frames contain rows and columns: the Iris flower dataset</h2>
+<p>In 1936, Edgar Anderson collected data to quantify the geographic variations of
+<a href="https://en.wikipedia.org/wiki/Iris_flower_data_set"><em>Iris</em> flowers</a>.
+The data set consists of 50 samples from each of the three
 sub-species ( <em>Iris setosa</em>, <em>Iris virginica,</em> and <em>Iris versicolor</em>). Four
-features were measured from each sample: the lengths and the widths of sepals
-and petals, in centimeters (cm). This data is included in R software. Download
+features were measured in centimeters (cm): the lengths and the widths of both sepals
+and petals. This is one of many built-in datasets in R. Download
 this dataset from
 <a href="https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv">GitHub</a>,
 and open it in Excel. Have a quick look at the data, think about what
 distinguishes the three species. If we have a flower with sepals of 6.5cm long
 and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most
-likely belong to? <strong>Think</strong> (!) for a few minutes while eyeballing the data at
-Wikipedia. Getting familiar with this dataset is vital to follow this book.</p>
+likely belong to? <strong>Think</strong> (!) for a few minutes while eyeballing the data.
+Write down your guessed species.
+Getting familiar with this dataset is vital for this and next chapters.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="images/img0101_iris.png" alt="Iris flower. Photo from Wikipedia." width="50%" />
 <p class="caption">
@@ -348,45 +353,69 @@ Figure 1.1: Iris flower. Photo from Wikipedia.
 </p>
 </div>
 <p>The downloaded iris data can be imported into R by selecting <strong>Import Dataset</strong>
-in the <strong>File</strong> menu, and then choose <strong>“From text(readr)…”</strong>. As the default
+in the <strong>File</strong> menu, and then choose <strong>“From Text(base)…”</strong>. As the default
 settings work well in this case, we just need to click <strong>Import</strong> in the pop-up
 window. That’s it! There is no need to spend half of a semester to learn how to
-import data like some people used to complain about SAS. If you have trouble
+import data, like some people used to complain when learning SAS. If you have trouble
 importing this data file, you can skip this step as this data set is included in
-the R software.</p>
+R.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="images/img0102_dataframe.png" alt="Example of a data frame." width="80%" />
 <p class="caption">
 Figure 1.2: Example of a data frame.
 </p>
 </div>
-<p>To answer these questions, let’s visualize and analyze the data with R. Type these commands without the comments after “#”.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">iris        <span class="co"># print the whole dataset</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">dim</span>(iris)   <span class="co"># show the dimension of the data frame</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw">head</span>(iris)  <span class="co"># show the first few rows</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="kw">str</span>(iris)   <span class="co"># show the structure</span></a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">class</span>(iris)</a></code></pre></div>
-<pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<p>While the first 4 columns contain <strong>numeric</strong> values, the 5<sup>th</sup> column contains
-<strong>characters</strong> indicating which sub-species a sample belongs to. This is an
-important distinction, as they are treated differently in R. Sometimes we need
-to overwrite data types guessed by R, which can be done during the data
-importing process.</p>
+<p>To answer these questions, let us visualize and analyze the data with R. Type these commands without the comments marked by “#.”</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(iris) <span class="co"># show as a spreadsheet</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)  <span class="co"># first few rows</span></span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(iris)   <span class="co"># show the structure</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 <p>The imported data is stored in a <strong>data frame</strong> called <em>iris</em>, which contains
-both numeric and character columns. Individual values in a data frame can be
-accessed using row and column indices. Another data structure is a <strong>matrix</strong>
-which contains only one type of variables. More discussion about data frame,
-matrix, and other data structures are introduced in chapter 3.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">iris[<span class="dv">3</span>, <span class="dv">4</span>]    <span class="co"># shows the value in 3rd row, 4th column: 0.2.</span></a>
-<a class="sourceLine" id="cb5-2" title="2">iris[<span class="dv">3</span>, ]     <span class="co"># shows all of row 3</span></a>
-<a class="sourceLine" id="cb5-3" title="3">iris[, <span class="dv">4</span>]     <span class="co"># shows all of column 4</span></a>
-<a class="sourceLine" id="cb5-4" title="4">iris[<span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]  <span class="co"># shows row 3, columns 1 to 4</span></a></code></pre></div>
-<p><strong>To do the exercises, you need to creat a new Word document. Then copy and paste the R code and results to the Word document. Save it as a PDF file. Submit both the Word and PDF files to the Dropbox.</strong></p>
+information on 5 variables for 150 observations (flowers). While the first 4 variables/columns contain <strong>numeric</strong> values,
+the 5<sup>th</sup> column contains
+<strong>characters</strong> indicating which sub-species a sample belongs to. This is an
+important distinction, as they are treated differently in R.<br />
+Sometimes we need to overwrite data types guessed by R, which can be done during the data
+importing process. If you are using the built-in iris data, the Species column is a <strong>factor</strong> with three levels.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris) <span class="co"># summary statistics</span></span></code></pre></div>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+##        Species  
+##  setosa    :50  
+##  versicolor:50  
+##  virginica :50  
+##                 
+##                 
+## </code></pre>
+<p>The <em>summary</em> function provides us with information on the distribution of each variables. There are 50 observations for each of the three sub-species.</p>
+<p>Individual values in a <strong>data frame</strong> can be accessed using row and column indices.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb9-1" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">3</span>, <span class="dv">4</span>]    <span class="co"># value in 3rd row, 4th column: 0.2.</span></span>
+<span id="cb9-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb9-2" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">3</span>, ]     <span class="co"># all of 3rd row</span></span>
+<span id="cb9-3"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb9-3" aria-hidden="true" tabindex="-1"></a>iris[, <span class="dv">4</span>]     <span class="co"># all of column 4</span></span>
+<span id="cb9-4"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb9-4" aria-hidden="true" tabindex="-1"></a>iris[<span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]  <span class="co"># row 3, columns 1 to 4</span></span></code></pre></div>
+<p><strong>To do the exercises, you need to create a Word document. Then copy-and-paste the R code and results to it. Save it as a PDF file. Submit both the Word and PDF files to the Dropbox.</strong></p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-8" class="exercise"><strong>Exercise 1.1  </strong></span></p>
-<p>Type <strong>data()</strong> in the R Console window. The pop-up window - R data sets - contain all built-in data sets in package ‘datasets’. Choose a data set whose structure is data frame, then answer the following questions:</p>
+<p><span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 1.1  </strong></span></p>
+<p>Type <strong>data()</strong> in the R Console window. The pop-up window - R data sets - contain all built-in data sets in package ‘datasets.’ Choose a data set whose structure is data frame, then answer the following questions:</p>
 <ol style="list-style-type: lower-alpha">
 <li>Display the first few rows of the data set. <strong>NOT</strong> all values in your data set.<br />
 </li>
@@ -398,23 +427,28 @@ matrix, and other data structures are introduced in chapter 3.</p>
 </blockquote>
 <p>You can replace the <strong>iris</strong> data set with any of the built-in data sets as long as its data structure is <strong>data frame</strong>. Make sure you check the structure of the data set by the <strong>class()</strong> function. Note: You will need to change the variable names and ranges of rows and columns.</p>
 <p><img src="images/img0100_tips.png" width="45%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">colnames</span>(iris)  <span class="co"># Column names. </span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(iris)  <span class="co"># Column names</span></span></code></pre></div>
 <pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot;  &quot;Species&quot;</code></pre>
-<p>Remember these column names, as we are going to use them in our analysis now. Note that sepal length information is contained in the column named <strong>Sepal.Length</strong>. Since R is case sensitive, we have to type these column names exactly as above. We can retrieve an entire column by using the data frame name followed by the column name. R is case-sensitive. “iris$petal.length” will not be recognized.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">iris<span class="op">$</span>Petal.Length  <span class="co"># The 150 numbers in the Petal length column</span></a></code></pre></div>
+<p>Remember these column names, as we are going to use them in our analysis. Note that sepal
+length information is contained in the column named <strong>Sepal.Length</strong>.
+We can retrieve an entire column by using the data frame name followed by the column name.
+R is case-sensitive. “iris$petal.length” will not be recognized.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb12-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">$</span>Petal.Length  <span class="co"># 150 petal lengths </span></span></code></pre></div>
 <p>This is the recommended, safer way of referring to columns. But if you are as
 lazy as me and do not want to type the data frame name repeatedly. This is a
 shortcut by attaching a data frame the columns can be accessed directly. One
-disadvantage is that it will be cause issues if two datasets
-have the same variable names, or if the data is transformed. We typically do not recommend doing it but here we want to make things simple.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">attach</span>(iris)</a>
-<a class="sourceLine" id="cb9-2" title="2">Petal.Length  <span class="co"># The 150 numbers in the Petal length column</span></a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">mean</span>(Petal.Length)   <span class="co"># mean( ) is a function that operates on Petal.Length</span></a></code></pre></div>
+disadvantage is that it will cause issues if two datasets
+have the same variable names, or if the data is transformed or changed later on.
+We typically do not recommend doing it but here we want to make things simple.
+We should attach a dataset after we are sure that we will not making changes to it.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(iris)  <span class="co"># Forget this sneaky shortcut after chapter 3!</span></span>
+<span id="cb13-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb13-2" aria-hidden="true" tabindex="-1"></a>Petal.Length  <span class="co"># 150 petal lengths</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Petal.Length)   <span class="co"># mean( ) is a function that operates on Petal.Length</span></span></code></pre></div>
 <pre><code>## [1] 3.758</code></pre>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 1.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 1.2  </strong></span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Compute the mean of the sepal length in the data set <strong>iris</strong>.<br />
 </li>
@@ -422,11 +456,12 @@ have the same variable names, or if the data is transformed. We typically do not
 </div></li>
 </ol>
 </blockquote>
-<p>The best way to learn about other R functions is Google search.</p>
+<p>The best way to find and learn R functions is Google search. The R community is uniquely supportive.
+There are many example codes and answers to even the dumbest questions on sites like StackOverflow.com.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-15" class="exercise"><strong>Exercise 1.3  </strong></span></p>
+<p><span id="exr:unnamed-chunk-16" class="exercise"><strong>Exercise 1.3  </strong></span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Google “R square root function” to find the R function, and compute the value of <span class="math inline">\(\sqrt{56.7}\)</span>.<br />
 </li>
@@ -435,25 +470,25 @@ have the same variable names, or if the data is transformed. We typically do not
 </ol>
 </blockquote>
 </div>
-<div id="analyzing-one-set-of-numbers" class="section level2">
+<div id="analyzing-one-set-of-numbers" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Analyzing one set of numbers</h2>
-<p>First, let’s retrieve the 150 nubmer in the spetal length column and store it in
-an vector called x.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">x &lt;-<span class="st"> </span>iris<span class="op">$</span>Petal.Length   </a></code></pre></div>
+<p>First, let us retrieve the 150 numbers in the petal length column and store it in
+an <strong>vector</strong> called PL.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb16-1" aria-hidden="true" tabindex="-1"></a>PL <span class="ot">&lt;-</span> iris<span class="sc">$</span>Petal.Length   </span></code></pre></div>
 <p>Some might complain that nothing happens after you type in this command.
-Although nothing is printed out, you have created a new <strong>vector</strong> called x in
+Although nothing is printed out, you have created a new <strong>vector</strong> called PL in
 the memory. You can find it in the top right panel in the <strong>Environment</strong> tab.
-<em>The process of programming is all about creating and modifying data objects;
-these data objects can be printed out or operated on.</em></p>
-<p><strong>A vector</strong> holds a series of values, such as numbers and characters. R made it
+<em>The process of programming is all about creating and modifying data objects.</em></p>
+<p><img src="images/environment.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><strong>A vector</strong> holds a series of numbers or characters. R made it
 very easy to do the same calculations (add, subtract, multiply,…) on all of
 them at once or collectively.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">summary</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(PL)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   1.000   1.600   4.350   3.758   5.100   6.900</code></pre>
-<p>This produces a lot of useful information.</p>
+<p>This produces a lot of useful information about the distribution of petal length:</p>
 <ul>
-<li><p>The minimum petal length is 1.0, and the maximum is 6.9.</p></li>
+<li><p>The minimum is 1.0, and the maximum is 6.9.</p></li>
 <li><p>Average petal length is 3.758.</p></li>
 <li><p>The mid-point, or median, is 5.35, as about half of the numbers are smaller
 than 5.35. Why the median is different from the mean? What happens if there
@@ -467,23 +502,21 @@ represented as a boxplot in the Figure <a href="step-into-r-programmingthe-iris-
 useful when multiple sets of numbers are compared.</p></li>
 </ul>
 
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">boxplot</span>(x)   <span class="co"># Figure 1.3A.</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="kw">boxplot</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])  <span class="co"># boxplot Figure 1.3B.</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(PL)   <span class="co"># Figure 1.3A.</span></span>
+<span id="cb19-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(iris[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])  <span class="co"># boxplot Figure 1.3B.</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:1-3"></span>
 <img src="book_files/figure-html/1-3-1.png" alt="Boxplot of petal length (A) and of all 4 columns (B)." width="50%" /><img src="book_files/figure-html/1-3-2.png" alt="Boxplot of petal length (A) and of all 4 columns (B)." width="50%" />
 <p class="caption">
 Figure 1.3: Boxplot of petal length (A) and of all 4 columns (B).
 </p>
 </div>
-<p>In Rstudio, you can copy a plot to the clipboard using the <strong>Export</strong> button on
+<p>In RStudio, you can copy a plot to the clipboard using the <strong>Export</strong> button on
 top of the plot area. Or you can click <strong>zoom</strong>, right click on the popup plot
-and select <strong>“Copy Image”</strong>. Then you can paste the plot into Word. If you are
-using native R software, instead of Rstudio, you can right-click on the plots
-and copy as meta-file.</p>
+and select <strong>“Copy Image”</strong>. Then you can paste the plot into Word.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-18" class="exercise"><strong>Exercise 1.4  </strong></span></p>
+<p><span id="exr:unnamed-chunk-20" class="exercise"><strong>Exercise 1.4  </strong></span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Check the data structure of the built-in data set mtcars.<br />
 </li>
@@ -500,47 +533,49 @@ where
 \bar x=\frac{1}{N}(x_{1}+x_{2}+...x_{N})
 \end{align}\]</span>
 If all the measurements are close to the mean (µ), then standard deviation should be small.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">sd</span>(x)  <span class="co"># standard deviation</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(PL)  <span class="co"># standard deviation</span></span></code></pre></div>
 <pre><code>## [1] 1.765298</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">sd</span>(Sepal.Width) </a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(Sepal.Width) </span></code></pre></div>
 <pre><code>## [1] 0.4358663</code></pre>
 <p>As we can see, these flowers have similar sepal width, but they differ widely in
 petal length. This is consistent with the boxplot above. Perhaps changes in
 petal length lead to better survival in different habitats.</p>
 <p>With R, it is easy to generate graphs.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">barplot</span>(x)</a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
-<img src="book_files/figure-html/unnamed-chunk-20-1.png" alt="Barplot of petal length." width="80%" />
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(PL)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="book_files/figure-html/unnamed-chunk-22-1.png" alt="Barplot of petal length." width="80%" />
 <p class="caption">
 Figure 1.4: Barplot of petal length.
 </p>
 </div>
 <p>This figure suggests that the first 50 flowers (Iris setosa) have much shorter
 petals than the other two species. The last 50 flowers (Iris virginica) have
-slightly longer petals than the middle (Iris versicolor).</p>
+slightly longer petals than those of Iris versicolor.</p>
 
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">plot</span>(x)  <span class="co"># Run scatter plot</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">hist</span>(x)  <span class="co"># histogram</span></a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="kw">lag.plot</span>(x)</a>
-<a class="sourceLine" id="cb21-4" title="4"><span class="kw">qqnorm</span>(x)  <span class="co"># Q-Q plot for normal distribution</span></a>
-<a class="sourceLine" id="cb21-5" title="5"><span class="kw">qqline</span>(x) </a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PL)  <span class="co"># Run scatter plot</span></span>
+<span id="cb25-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(PL)  <span class="co"># histogram</span></span>
+<span id="cb25-3"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lag.plot</span>(PL)</span>
+<span id="cb25-4"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(PL)  <span class="co"># Q-Q plot for normal distribution</span></span>
+<span id="cb25-5"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(PL) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:1-4"></span>
 <img src="book_files/figure-html/1-4-1.png" alt="Scatter plot, histogram, lag plot and normal Q-Q plot." width="50%" /><img src="book_files/figure-html/1-4-2.png" alt="Scatter plot, histogram, lag plot and normal Q-Q plot." width="50%" /><img src="book_files/figure-html/1-4-3.png" alt="Scatter plot, histogram, lag plot and normal Q-Q plot." width="50%" /><img src="book_files/figure-html/1-4-4.png" alt="Scatter plot, histogram, lag plot and normal Q-Q plot." width="50%" />
 <p class="caption">
 Figure 1.5: Scatter plot, histogram, lag plot and normal Q-Q plot.
 </p>
 </div>
-<p>There are three different groups in the scatter plot. x of one group is much smaller than the other two groups.</p>
-<p>Histogram shows the distribution of data. The histogram top right of Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-4">1.5</a> shows that there are more flowers with Petal Length between 1 and 1.5. It also shows that the data does not show a bell-curved distribution.</p>
+<p>There are three different groups in the scatter plot. The petal length of one group is much smaller than the other two groups.</p>
+<p>Histogram shows the distribution of data by plotting the frequency of data in bins.
+The histogram top right of Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-4">1.5</a> shows that there are more flowers
+with Petal Length between 1 and 1.5. It also shows that the data does not show a bell-curved distribution.</p>
 <p>The lag plot is a scatter plot against the same set of number with an offset of
 1. Any structure in a lag plot indicates non-randomness in the order in which
-the data is presented. We can clearly see three big clusters, indicating that
+the data is presented. We can clearly see three clusters, indicating that
 values are centered around three levels sequentially.</p>
-<p>Q-Q plot can help check if data follows a Gaussian distribution, which is widely observed in many situations. Also referred to as normal distribution, it is the pre-requisite for many statistical methods. See Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-5">1.6</a> for an example of normal distribution. Quantiles of the data is compared against those in a normal distribution. If the data points on a Q-Q plot form a straight line, the data has a normal distribution.</p>
+<p>Q-Q (quantile-quantile) plots can help check if data follows a Gaussian distribution, which is widely observed in many situations. Also referred to as normal distribution, it is the pre-requisite for many statistical methods. See Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:1-5">1.6</a> for an example of normal distribution. Quantiles of the data is compared against those in a normal distribution. If the data points on a Q-Q plot form a straight line, the data has a normal distribution.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-21" class="exercise"><strong>Exercise 1.5  </strong></span></p>
+<p><span id="exr:unnamed-chunk-23" class="exercise"><strong>Exercise 1.5  </strong></span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution<br />
 </li>
@@ -558,43 +593,45 @@ Figure 1.6: Plots for randomly generated numbers following a normal distribution
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-22" class="exercise"><strong>Exercise 1.6  </strong></span></p>
+<p><span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercise 1.6  </strong></span></p>
 Generate scatter plot, histogram, lag plot, and Q-Q plot for the Septal length in the iris dataset.
 </div>
 </blockquote>
 <p>We can also do a one-sample t-test of mean:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">t.test</span>(Sepal.Length, <span class="dt">mu =</span> <span class="fl">5.8</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(PL, <span class="at">mu =</span> <span class="fl">3.7</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
-## data:  Sepal.Length
-## t = 0.64092, df = 149, p-value = 0.5226
-## alternative hypothesis: true mean is not equal to 5.8
+## data:  PL
+## t = 0.4024, df = 149, p-value = 0.688
+## alternative hypothesis: true mean is not equal to 3.7
 ## 95 percent confidence interval:
-##  5.709732 5.976934
+##  3.473185 4.042815
 ## sample estimates:
 ## mean of x 
-##  5.843333</code></pre>
-<p>In this case, our hypothesis is that the true average of sepal length for all iris flowers is 5.8. Since p-value is quite big, we accept this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean is between 5.71 and 5.98.</p>
+##     3.758</code></pre>
+<p>In this case, our null hypothesis is that the true average of petal length for all iris flowers is 3.7. Since p-value is quite big, there is no evidence to reject this hypothesis. This function also tells us the 95% confidence interval on the mean. Based on our sample of 150 iris flowers, we are 95% confident that the true mean (if we were to meaure all iris flowers in the world) is between 5.71 and 5.98.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercise 1.7  </strong></span></p>
-Compute 95% confidence interval of petal length.
+<p><span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercise 1.7  </strong></span></p>
+Compute 95% confidence interval of sepal length.
 </div>
 </blockquote>
-<p>We can perform hypothesis testing on whether a set of numbers derived from normal distribution. The null hypothesis is that the data is from a normal distribution.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">shapiro.test</span>(Petal.Length)</a></code></pre></div>
+<p>We can perform hypothesis testing on whether a set of numbers are derived from normal distribution.
+When interpreting results from hypothesis testing, it is important to start by examining what
+the null hypothesis is. Here the null hypothesis is that the data is from a normal distribution.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(PL)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
-## data:  Petal.Length
+## data:  PL
 ## W = 0.87627, p-value = 7.412e-10</code></pre>
-<p>If petal length is normally distributed, there is only 7.412×10<sup>-10</sup> chance of getting a test statistic of 0.87627, which is observed in our sample of 150 flowers. In other words, it is highly unlikely that petal length follows a normal distribution. We reject the normal distribution hypothesis.</p>
+<p>If petal length is normally distributed, there is only 7.412×10<sup>-10</sup> chance of getting the observed test statistic of 0.87627. In other words, it is highly unlikely that petal length follows a normal distribution. We reject the normal distribution hypothesis, which could be corroborated by our plots above. In statistics, we rely on both charts and statistical models.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercise 1.8  </strong></span></p>
+<p><span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercise 1.8  </strong></span></p>
 <ol style="list-style-type: lower-alpha">
 <li>Run Shapiro’s test on sepal width. Does it follow a normal distribution given the significant level is 0.05?<br />
 </li>
@@ -603,32 +640,30 @@ Compute 95% confidence interval of petal length.
 </ol>
 </blockquote>
 </div>
-<div id="analyzing-a-column-of-categorical-values" class="section level2">
-<h2><span class="header-section-number">1.4</span> Analyzing a column of categorical values</h2>
-<p>In the iris dataset, the last column contains the species information. These are “string” values or categorical values.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">counts &lt;-<span class="st"> </span><span class="kw">table</span>(Species)  <span class="co"># tabulate the frequencies</span></a>
-<a class="sourceLine" id="cb26-2" title="2">counts</a></code></pre></div>
+<div id="analyzing-a-categorical-variable" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Analyzing a categorical variable</h2>
+<p>In the iris dataset, the last column contains the species information. We call this a <strong>categorical variable</strong>.
+Bar and Pie charts are very effective in showing proportions. We can see that the three species are each represented with 50 observations.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb30-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">table</span>(Species)  <span class="co"># tabulate the frequencies</span></span>
+<span id="cb30-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb30-2" aria-hidden="true" tabindex="-1"></a>counts</span></code></pre></div>
 <pre><code>## Species
 ##     setosa versicolor  virginica 
 ##         50         50         50</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">pie</span>(counts)  <span class="co"># See Figure 1.7A</span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="kw">barplot</span>(counts)  <span class="co"># See Figure 1.7B</span></a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
-<img src="book_files/figure-html/unnamed-chunk-27-1.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" /><img src="book_files/figure-html/unnamed-chunk-27-2.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" />
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(counts)  <span class="co"># See Figure 1.7A</span></span>
+<span id="cb32-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(counts)  <span class="co"># See Figure 1.7B</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="book_files/figure-html/unnamed-chunk-29-1.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" /><img src="book_files/figure-html/unnamed-chunk-29-2.png" alt="Frequencies of categorical values visualized by Pie chart (A) and bar chart (B)." width="50%" />
 <p class="caption">
 Figure 1.7: Frequencies of categorical values visualized by Pie chart (A) and bar chart (B).
 </p>
 </div>
-<p>Pie charts are very effective in showing proportions.</p>
-<p>We can see that the three species are each represented with 50 observations.</p>
 </div>
-<div id="analyzing-the-relationship-between-two-sets-of-numbers" class="section level2">
-<h2><span class="header-section-number">1.5</span> Analyzing the relationship between two sets of numbers</h2>
+<div id="the-relationship-between-two-numerical-variables" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> The relationship between two numerical variables</h2>
 <p>Scatter plot is very effective in visualizing the correlation between two columns of numbers.</p>
 
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">x &lt;-<span class="st"> </span>Petal.Width  <span class="co"># just lazy</span></a>
-<a class="sourceLine" id="cb29-2" title="2">y &lt;-<span class="st"> </span>Petal.Length </a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="kw">plot</span>(x, y)        <span class="co"># scatterplot,  refined version in Figure 1.9</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb33-1" aria-hidden="true" tabindex="-1"></a>PW <span class="ot">&lt;-</span> iris<span class="sc">$</span>Petal.Width  <span class="co"># just lazy</span></span>
+<span id="cb33-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PW, PL)        <span class="co"># scatterplot,  refined version in Figure 1.9</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:2-1"></span>
 <img src="book_files/figure-html/2-1-1.png" alt="Scatter plot of petal width and petal length." width="80%" />
 <p class="caption">
@@ -648,24 +683,26 @@ the low left. The other two species also show a difference in this plot, even
 though they are not easily separated. This is a very important insight into this
 dataset.</p>
 
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">plot</span>(x, y, <span class="dt">col =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>)[Species])  <span class="co"># change colors based on Species </span></a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="kw">levels</span>(Species), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">3</span>))  <span class="co"># add legends on topleft.</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb34-1" aria-hidden="true" tabindex="-1"></a>SP <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb34-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(PW, PL, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">3</span>)[SP])  <span class="co"># change colors based on Species </span></span>
+<span id="cb34-3"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="fu">levels</span>(SP), <span class="at">fill =</span> <span class="fu">rainbow</span>(<span class="dv">3</span>))  <span class="co"># add legends on topleft.</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:2-2"></span>
 <img src="book_files/figure-html/2-2-1.png" alt="Scatter plot shows the correlation of petal width and petal length." width="80%" />
 <p class="caption">
 Figure 1.9: Scatter plot shows the correlation of petal width and petal length.
 </p>
 </div>
-<p>There are 3 species, therefore we select 3 for the rainbow() function. The 3
-colors will correspond the 3 species. The <strong>class(Species)</strong> returns the data
-structure of Species is a “factor”. The <strong>levels(Species)</strong> function shows all
+<p>We generate a vector of 3 colors using the rainbow() function. The 3
+colors will correspond the 3 species.
+To change the color for a specific data point, we defined a new variable SP
+by converting the last column into a <strong>factor</strong>.
+The <strong>class(Species)</strong> returns the data
+structure of SP is a “factor.” The <strong>levels(Species)</strong> function shows all
 levels of Species. The function <strong>str(Species)</strong> shows that the Species is a
-factor with 3 levels which are internally coded as 1, 2, and 3.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">class</span>(Species)  <span class="co"># Show the data structure of Species.</span></a></code></pre></div>
-<pre><code>## [1] &quot;factor&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">levels</span>(Species) <span class="co"># Show all levels of a factor variable.</span></a></code></pre></div>
-<pre><code>## [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">str</span>(Species)    <span class="co"># show the structure of Species.</span></a></code></pre></div>
+factor with 3 levels which are internally coded as 1, 2, and 3.
+This enables us to change the colors. This kind of base plotting has been simplified by
+modern systems such as ggplot2, which we will discuss later. So you do not have to remember all of this.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(SP)    <span class="co"># show the structure of Species.</span></span></code></pre></div>
 <pre><code>##  Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 <p>Perhaps due to adaption to the environment, change in petal length leads to
 better survival. With the smallest petals, <em>Iris Setosa</em> is found in Arctic
@@ -674,11 +711,11 @@ Eastern Canada. <em>Iris virginica</em> “is common along the coastal plain fro
 to Georgia in the Southeastern United States–<em>Wikipedia</em>.” It appears the iris
 flowers in warmer places are much larger than those in colder ones. With R, it
 is very easy to generate lots of graphics. But we still have to do the thinking.
-It requires to put the plots in context.</p>
+It requires us to interpret the charts in the context.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 1.9  </strong></span></p>
+<p><span id="exr:unnamed-chunk-31" class="exercise"><strong>Exercise 1.9  </strong></span></p>
 <p>The <strong>mtcars</strong> data description can be found here: <a href="https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html">https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html</a>.</p>
 <p>Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -&gt; as.factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.</p>
 <ol style="list-style-type: lower-alpha">
@@ -687,15 +724,16 @@ It requires to put the plots in context.</p>
 </div></li>
 </ol>
 </blockquote>
-<p>We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, such as Pearson’s correlation coefficient, r. It ranges from -1 to 1.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">cor</span>(x, y) </a></code></pre></div>
+<p>We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, such as Pearson’s correlation coefficient. It ranges from -1 to 1. Zero means no correlation.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(PW, PL) </span></code></pre></div>
 <pre><code>## [1] 0.9628654</code></pre>
-<p>This means the petal width and petal length are strongly and positively correlated.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">cor.test</span>(x, y)</a></code></pre></div>
+<p>This means the petal width and petal length are strongly and positively correlated. we can add this informtion on the plot as text:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="fu">paste</span>(<span class="st">&quot;R=0.96&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(PW, PL)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
-## data:  x and y
+## data:  PW and PL
 ## t = 43.387, df = 148, p-value &lt; 2.2e-16
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
@@ -703,18 +741,18 @@ It requires to put the plots in context.</p>
 ## sample estimates:
 ##       cor 
 ## 0.9628654</code></pre>
-<p>Through hypothesis testing of the correlation, we reject the null hypothesis that the true correlation is zero. That means the correlation is statistically significant.
-Note that Pearson’s correlation coefficient is not robust against outliers and other methods such as Spearman’s exists. See help info:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">?cor  <span class="co"># show help info on cor ( )</span></a></code></pre></div>
+<p>Through hypothesis testing, we reject the null hypothesis that the true correlation is zero (no correlation). That means the correlation is statistically significant.
+Note that Pearson’s correlation coefficient is not robust against outliers
+and other methods such as Spearman’s exists. See help info:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb42-1" aria-hidden="true" tabindex="-1"></a>?cor  <span class="co"># show help info on cor ( )</span></span></code></pre></div>
 <p>We can also determine the equation that links petal length and petal width. This is so called regression analysis. We assume</p>
-<pre><code>     $Petal.Length = a × Petal.Width + c + e, 
-     </code></pre>
-<p>where <span class="math inline">\(a\)</span> is the slope parameter, <span class="math inline">\(c\)</span> is a constant, and <span class="math inline">\(e\)</span> is some random error. This linear model can be determined by a method that minimizes the least squared-error:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">model &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x)  <span class="co"># Linear Model (lm)</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="kw">summary</span>(model)      <span class="co"># shows the details</span></a></code></pre></div>
+<p><span class="math inline">\(Petal.Length = \alpha × Petal.Width + c + e\)</span>,</p>
+<p>where <span class="math inline">\(\alpha\)</span> is the slope parameter, <span class="math inline">\(c\)</span> is a constant, and <span class="math inline">\(e\)</span> is some random error. This linear model can be determined by a method that minimizes the least squared-error:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb43-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(PL <span class="sc">~</span> PW)  <span class="co"># Linear Model (lm)</span></span>
+<span id="cb43-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)      <span class="co"># shows the details</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = y ~ x)
+## lm(formula = PL ~ PW)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
@@ -723,49 +761,60 @@ Note that Pearson’s correlation coefficient is not robust against outliers and
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
 ## (Intercept)  1.08356    0.07297   14.85   &lt;2e-16 ***
-## x            2.22994    0.05140   43.39   &lt;2e-16 ***
+## PW           2.22994    0.05140   43.39   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.4782 on 148 degrees of freedom
 ## Multiple R-squared:  0.9271, Adjusted R-squared:  0.9266 
 ## F-statistic:  1882 on 1 and 148 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>As we can see, we estimated that <em>a</em>=2.22944 and <em>c</em>=1.08356. Both parameters are significantly different from zero as the p-values are &lt;2×10<sup>-16</sup> in both cases. In other words, we can reliably predict</p>
+<p>Note that in the regression model, the tilde(~) links a response variable
+on the right with one or more independent variables on the right side.
+It is a shortcut for an operator. We are defining a statistical model where
+the PL is modeled as a function of PW. In addition to regression models, we also use formula in plots.</p>
+<p>As we can see, we estimated that <span class="math inline">\(\alpha=2.22944\)</span> and <span class="math inline">\(c=1.08356\)</span>. Both parameters are significantly
+different from zero as the p-values are &lt;2×10<sup>-16</sup> in both cases. In other words, we can reliably predict</p>
 <p><span class="math inline">\(Petal.Length = 2.22944 × Petal.Width + 1.08356\)</span>.</p>
 <p>This model can be put on the scatter plot as a line.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">plot</span>(model)</a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="kw">abline</span>(model)  <span class="co"># add regression line to plot. Figure 1.9</span></a></code></pre></div>
-<p>Sometimes, we use this type of regression analysis to investigate whether variables are associated.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model)  <span class="co"># add regression line to plot. Figure 1.9</span></span></code></pre></div>
+<p>And we can get the diagnostic plots for regression analysis:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model)    <span class="co"># diagnostic plots for regression</span></span></code></pre></div>
+<p>Sometimes, we use this type of regression analysis to investigate whether variables are significantly associated.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-35" class="exercise"><strong>Exercise 1.10  </strong></span></p>
-Investigate the relationship between sepal length and sepal width using scatter plots, correlation coefficients, test of correlation, and linear regression. Again interpret all your results in PLAIN and proper English.
+<p><span id="exr:unnamed-chunk-39" class="exercise"><strong>Exercise 1.10  </strong></span></p>
+Investigate the relationship between sepal length and sepal width using scatter p
+lots, correlation coefficients, test of correlation, and linear regression.
+Again interpret all your results in PLAIN and proper English.
 </div>
 </blockquote>
 </div>
-<div id="testing-the-differences-between-two-groups" class="section level2">
+<div id="testing-the-differences-between-two-groups" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> Testing the differences between two groups</h2>
-<p>Are boys taller than girls of the same age? Such situations are common. We have measurements of two groups of objects and want to know if the observed differences are real or due to random sampling error.</p>
+<p>Are boys taller than girls of the same age? Such situations are common.
+We have measurements of a random <strong>sample</strong> from a <strong>population</strong>. From the sample we want
+to know if the observed differences among the two groups
+reflect real differences in the population or due to random sampling error.</p>
 
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">boxplot</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Species)  </a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
-<img src="book_files/figure-html/unnamed-chunk-36-1.png" alt="Boxplot of petal length, grouped by species." width="80%" />
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Petal.Length <span class="sc">~</span> Species)  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
+<img src="book_files/figure-html/unnamed-chunk-40-1.png" alt="Boxplot of petal length, grouped by species." width="80%" />
 <p class="caption">
 Figure 1.10: Boxplot of petal length, grouped by species.
 </p>
 </div>
-<p>From the boxplot, it is obvious that <em>I. Setosa</em> has much shorter petals. But are there significant differences between <em>I. versicolor</em> and <em>I. virginica</em>? We only had a small sample of 50 flowers for each species. But we want to draw some conclusion about the two species in general. We could measure all the iris flowers across the world; Or we could use statistics to make inference. First we need to extract these data</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">x &lt;-<span class="st"> </span>Petal.Length[<span class="dv">51</span><span class="op">:</span><span class="dv">100</span>]  <span class="co"># extract Petal Length of iris versicolor</span></a>
-<a class="sourceLine" id="cb47-2" title="2">x  <span class="co"># x contain 50 measurements</span></a>
-<a class="sourceLine" id="cb47-3" title="3">y &lt;-<span class="st"> </span>Petal.Length[<span class="dv">101</span><span class="op">:</span><span class="dv">150</span>]  <span class="co"># extract Petal length of iris virginica</span></a>
-<a class="sourceLine" id="cb47-4" title="4">y  <span class="co"># y contain 50 measurements</span></a></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">boxplot</span>(x, y)  <span class="co"># a boxplot of the two groups of values</span></a>
-<a class="sourceLine" id="cb48-2" title="2"><span class="kw">t.test</span>(x, y)</a></code></pre></div>
+<p>From the boxplot, it is obvious that <em>I. Setosa</em> has much shorter petals. But are there significant differences between <em>I. versicolor</em> and <em>I. virginica</em>? We only had a small sample of 50 flowers for each species. But we want to draw some conclusion about the two species in general. We could measure all the iris flowers across the world; Or we could use statistics to make inference. First we need to extract these data:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb48-1" aria-hidden="true" tabindex="-1"></a>PL1 <span class="ot">&lt;-</span> Petal.Length[<span class="dv">51</span><span class="sc">:</span><span class="dv">100</span>]  <span class="co"># extract Petal Length of iris versicolor</span></span>
+<span id="cb48-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb48-2" aria-hidden="true" tabindex="-1"></a>PL1  <span class="co"># a vector with 50 numbers</span></span>
+<span id="cb48-3"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb48-3" aria-hidden="true" tabindex="-1"></a>PL2 <span class="ot">&lt;-</span> Petal.Length[<span class="dv">101</span><span class="sc">:</span><span class="dv">150</span>]  <span class="co"># extract Petal length of iris virginica</span></span>
+<span id="cb48-4"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb48-4" aria-hidden="true" tabindex="-1"></a>PL2  <span class="co"># y contain 50 measurements</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(PL1, PL2)  <span class="co"># a boxplot of the two groups of values</span></span>
+<span id="cb49-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(PL1, PL2)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
-## data:  x and y
+## data:  PL1 and PL2
 ## t = -12.604, df = 95.57, p-value &lt; 2.2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
@@ -773,41 +822,41 @@ Figure 1.10: Boxplot of petal length, grouped by species.
 ## sample estimates:
 ## mean of x mean of y 
 ##     4.260     5.552</code></pre>
-<p>In this student’s t-test, our null hypothesis is that the mean petal length is the same for <em>I. versicolor</em> and <em>I. virginica</em>. A small p-value of 2.2x10<sup>-16</sup> indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the true mean is different. If we measure all <em>I. versicolor</em> and <em>I. virginica</em> flowers in the world and compute their true average petal lengths, it is very likely that the two averages will differ. On the other hand, if p-value is larger than a threshold, typically 0.05, we will accept the null hypothesis and conclude that real average petal length is the same.</p>
-<p>We actually do not need to separate two set of numbers into two data objects in order to do t-test or compare them side-by-side on one plot. We can do it right within the data frame. R can separate data points by another column.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">x2 &lt;-<span class="st"> </span>iris[<span class="dv">51</span><span class="op">:</span><span class="dv">150</span>, ]  <span class="co"># Extract rows 51 to 150</span></a>
-<a class="sourceLine" id="cb50-2" title="2"><span class="kw">t.test</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> x2)  <span class="co"># t-test </span></a>
-<a class="sourceLine" id="cb50-3" title="3"><span class="kw">boxplot</span>(Petal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> <span class="kw">droplevels</span>(x2))  <span class="co">#removes empty levels in Species</span></a></code></pre></div>
+<p>In this Student’s t-test, our null hypothesis is that the mean petal length is the same for <em>I. versicolor</em> and <em>I. virginica</em>. A small p-value of 2.2x10<sup>-16</sup> indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the true mean is different. If we measure all <em>I. versicolor</em> and <em>I. virginica</em> flowers in the world and compute their true average petal lengths, it is very likely that the two averages will differ. On the other hand, if p-value is larger than a threshold, typically 0.05, we will accept the null hypothesis and conclude that real average petal length is the same.</p>
+<p>We actually do not need to separate two set of numbers into two data objects in order to do t-test. We can do it right within the data frame. R can separate data points by another column.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb51-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> iris[<span class="dv">51</span><span class="sc">:</span><span class="dv">150</span>, ]  <span class="co"># Extract rows 51 to 150</span></span>
+<span id="cb51-2"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> df)  <span class="co"># t-test </span></span>
+<span id="cb51-3"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Petal.Length <span class="sc">~</span> Species, <span class="at">data =</span> <span class="fu">droplevels</span>(df))  <span class="co">#removes empty levels in Species</span></span></code></pre></div>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-40" class="exercise"><strong>Exercise 1.11  </strong></span></p>
+<p><span id="exr:unnamed-chunk-44" class="exercise"><strong>Exercise 1.11  </strong></span></p>
 Use boxplot and t-test to investigate whether sepal width is different between I. versicolor and I. virginica. Interpret your results.
 </div>
 </blockquote>
 </div>
-<div id="testing-the-difference-among-multiple-groups-anova" class="section level2">
+<div id="testing-the-difference-among-multiple-groups-anova" class="section level2" number="1.7">
 <h2><span class="header-section-number">1.7</span> Testing the difference among multiple groups (ANOVA)</h2>
 <p>As indicated by Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:2-5">1.11</a>, sepal width has small variation across species. We want to know if the mean sepal width is the same across 3 species. This is done through Analysis of Variance (ANOVA).</p>
 
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">boxplot</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species)  <span class="co"># Figure 1.11</span></a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Width <span class="sc">~</span> Species)  <span class="co"># Figure 1.11</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:2-5"></span>
 <img src="book_files/figure-html/2-5-1.png" alt="Boxplot of sepal width across 3 species." width="672" />
 <p class="caption">
 Figure 1.11: Boxplot of sepal width across 3 species.
 </p>
 </div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">summary</span>(<span class="kw">aov</span>(Sepal.Width <span class="op">~</span><span class="st"> </span>Species))</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="step-into-r-programmingthe-iris-flower-dataset.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( <span class="fu">aov</span>(Sepal.Width <span class="sc">~</span> Species) )</span></code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
 ## Species       2  11.35   5.672   49.16 &lt;2e-16 ***
 ## Residuals   147  16.96   0.115                   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>Since p-value is much smaller than 0.05, we reject the null hypothesis. The mean sepal width is not the same for 3 species. This is the only thing we can conclude from this. The boxplot in Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:2-5">1.11</a> seems to indicate that <em>I. Setosa</em> has wider sepals.</p>
+<p>Since p-value is much smaller than 0.05, we reject the null hypothesis. The mean sepal width is not the same for 3 species. This is the only thing we can conclude from this, since this is how the hypothesis was set up. The boxplot in Figure <a href="step-into-r-programmingthe-iris-flower-dataset.html#fig:2-5">1.11</a> seems to indicate that <em>I. Setosa</em> has wider sepals.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-41" class="exercise"><strong>Exercise 1.12  </strong></span></p>
+<p><span id="exr:unnamed-chunk-45" class="exercise"><strong>Exercise 1.12  </strong></span></p>
 Use boxplot and ANOVA to investigate whether petal width is the same among three subspecies.
 </div>
 </blockquote>
@@ -844,6 +893,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
