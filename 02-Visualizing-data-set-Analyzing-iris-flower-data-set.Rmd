@@ -69,38 +69,40 @@ data frame, we will use the ```iris$Petal.Length``` to refer to the Petal.Length
 column. This avoids using the *attach* function.
 
 ```{r, fig.align='center', out.width='80%' }
-plot(iris$Petal.Length, iris$Petal.Width)
+PL <- iris$Petal.Length
+PW <- iris$Petal.Width
+plot(PL, PW)
 ```
   
 Let's change the marker type. 
 ```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = 2) # change to triangle
+plot(PL, PW, pch = 2) # change to triangle
 ```
-Note that this command spans two lines. Very long lines make it hard to read.
-When you are typing in the Console window, R knows that you are not done and
-will be waiting for the second parenthesis.
 
-The pch parameter can take values from 0 to 25, each corresponding to different types of marker. See a list [here.](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r)
 
-We can also change the color of the data points easily with the *col* parameter.
+The **pch** parameter can take values from 0 to 25, each corresponding to different types of marker. See a list [here.](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r)
+
+There are many other parameters to the **plot** function in R. You can get these 
+from the documentation
+```{r, eval=FALSE}
+? plot
+```
+
+
+We can also change the color of the data points easily with the **col** parameter.
 ```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = 2,
-     col = "green") # change to green
+plot(PL, PW, pch = 2, col = "green") # change to green
 ```
 
 Next, we want to use different markers according to species. First, lets get the information. 
 ```{r, fig.align='center', out.width='80%'}
-types <- as.numeric(iris$Species)
-types
+speciesID <- as.numeric(iris$Species)
+speciesID
 ```
 This is possible because Species is a **factor** with 3 predefined levels and the individual elements take 1, 2 or 3. Now we can change the symbols based on species with this:
 
 ```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = types,
-     col = "green") 
+plot(PL, PW, pch = speciesID, col = "green") 
 ```
 What happens here is that the 150 integers stored in the types vector are used
 to alter symbols. The first 50 data points (setosa) are represented by open
@@ -111,73 +113,79 @@ Follow the same thinking, we also change the color according to species. We
 generate 3 colors with rainbow() function and then alternate using the species.
 
 ```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = types,
-     col = rainbow(3)[types])
+plot(PL, PW, pch = speciesID, col = rainbow(3)[speciesID])
 ```
 
 This figure starts to looks nice, as the three species are easily separated by
-color and shape. But we are not done. Let's change the x- and y-labels, and also
-add a main title.
+color and shape. But we are not done. Let us change the x- and y-labels, and also
+add a main title. 
 
 
 ```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = types,
-     col = rainbow(3)[types],
-     xlab = "Petal length (cm)",
-     ylab = "Petal width (cm)",
-     main = "Correlation of Petal length and width")
+plot(PL, PW,                               #x and y
+     pch = speciesID,                      #marker type
+     col = rainbow(3)[speciesID],          # color
+     xlab = "Petal length (cm)",           # x label
+     ylab = "Petal width (cm)",            # y label
+     main = "Petal width vs. length")      # main title
 ```
+Note that this command spans many lines. Very long lines make it hard to read.
+The benefit of multiple lines is that we can clearly see each line contain a parameter.
+When you are typing in the Console window, R knows that you are not done and
+will be waiting for the second parenthesis. 
 
+It is essential to write your code so that it could be easily understood by others 
+(or your future self). See 
+[breif](http://adv-r.had.co.nz/Style.html) and 
+[detailed](https://style.tidyverse.org/) style guides.  This is like checking the 
+dressing code before going to an event. 
 
-A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add this trend line.  
+A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add a trend line using **abline**, a low level graphics function.  
 ```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = types,
-     col = rainbow(3)[types],
+plot(PL, PW, 
+     pch = speciesID,
+     col = rainbow(3)[speciesID],
      xlab = "Petal length (cm)",
      ylab = "Petal width (cm)",
-     main = "Correlation of Petal length and width")
-abline( lm(iris$Petal.Width ~ iris$Petal.Length) ) # the order is reversed as we need y ~ x.
+     main = "Petal width vs. length")
+abline( lm(PW ~ PL) ) # the order is reversed as we need y ~ x.
 ```
-The ```lm(iris$Petal.Width ~ iris$Petal.Length)``` generates a linear model (lm) of petal width as a function petal length. y ~ x is **formula notation** that used in many different situations. This linear model is used to plot the trend line.
+The ```lm(PW ~ PL)``` generates a linear model (lm) of petal width as a function petal 
+length. y ~ x is **formula notation** that used in many different situations.
+This linear regression model is used to plot the trend line.
 
 
-We calculate the Pearson's correlation coefficient and mark it to the plot. The **text** function is used to place strings created with the *paste* function at the location of coordinate of (x=5, y=0.5). 
-```{r, fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = types,
-     col = rainbow(3)[types],
-     xlab = "Petal length (cm)",
-     ylab = "Petal width (cm)",
-     main = "Correlation of Petal length and width")
-abline( lm(iris$Petal.Width ~ iris$Petal.Length) )
-PCC = cor(iris$Petal.Length, iris$Petal.Width)  # Pearson's correlation coefficient
+We calculate the Pearson's correlation coefficient and mark it to the plot. 
+```{r, fig.show=FALSE}
+PCC <- cor(PW, PL)  # Pearson's correlation coefficient
+PCC <- round(PCC, 2) # round to the 2nd place after decimal point.
 PCC
-roundedPCC = round(PCC, 2) # round to the 2nd place after decimal point.
-text(5, 0.5, paste("R=", roundedPCC) ) # add text to plot
 ```
 
-To finish up this plot, we add a legend. 
+The **text** function is used to place strings created with the *paste* function at the location of coordinate of (x=5, y=0.5). To finish up this plot, we add a legend. Here is how we have everything together.
 
 (ref:23-5) A refined scatter plot using base R graphics.
 
 ```{r 23-5, fig.cap='(ref:23-5)', fig.align='center', out.width='80%'}
-plot(iris$Petal.Length, iris$Petal.Width, 
-     pch = types,  # marker type
-     col = rainbow(3)[types],  # color
+PL <- iris$Petal.Length
+PW <- iris$Petal.Width
+plot(PL, PW,  
+     pch = speciesID,                # marker type
+     col = rainbow(3)[speciesID],    # color
      xlab = "Petal length (cm)",
      ylab = "Petal width (cm)",
-     main = "Correlation of Petal length and width")
-abline( lm(iris$Petal.Width ~ iris$Petal.Length) ) # regression line
-text(5, 0.5, paste("R=", roundedPCC ))  # add text annotation
+     main = "Petal width vs. length")
+abline( lm(PW ~ PL) )  # regression line
+text(5, 0.5, paste("R=", PCC) )  # add text annotation
 legend("topleft", 
        levels(iris$Species), 
-       pch = 1:3, col = rainbow(3))
+       pch = 1:3, 
+       col = rainbow(3))
 ```
 
-This chunk of code is impressive! You should be proud of yourself. We know that we build it up step-by-step with some trial-and-error. 
+While **plot** is a high-level graphics function that starts a new plot, **abline**, **text**, and **legend** are all low-level functions that add to existing plot. This chunk of code is impressive! You should be proud of yourself if you are able to generate this plot. We know that we build it up step-by-step with some trial-and-error. 
+
+
 
 Another open secret of coding is that we frequently steal each other's ideas and
 code. The textbook *R Graphics Cookbook* includes all kinds of R plots and
@@ -198,19 +206,19 @@ columns, a **matrix often only contains numbers**. Let's extract the first 4
 columns from the data frame iris and convert to a matrix:
 
 ```{r}
-x <- as.matrix(iris[, 1:4])  # convert to matrix
-colMeans(x)  # column means for matrix
-colSums(x)
+ma <- as.matrix(iris[, 1:4])  # convert to matrix
+colMeans(ma)  # column means for matrix
+colSums(ma)
 ```
 The same thing can be done with rows via **rowMeans(x)** and **rowSums(x)**. 
 
 We can generate a matrix of scatter plots simply by:
 ```{r fig.keep="none"}
-pairs(x) 
+pairs(ma) 
 ```
 
 ```{r fig.cap='Scatter plot matrix.', fig.align='center'}
-pairs(x, col = rainbow(3)[iris$Species])  # Figure 2.4
+pairs(ma, col = rainbow(3)[iris$Species])  # Figure 2.4
 ```
 
 >
@@ -224,9 +232,9 @@ Look at this large plot for a moment. What do you see? Provide interpretation of
 ## Star and segment diagrams
 **Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was first used by Georg von Mayr in 1877!
 ```{r fig.keep='none'}
-x <- iris[, 1:4]
-stars(x)         # do I see any diamonds?
-stars(x, key.loc = c(17,0))    # What does this tell you?
+df <- iris[, 1:4]
+stars(df)         # do I see any diamonds?
+stars(df, key.loc = c(17,0))    # What does this tell you?
 ```
 
 >
@@ -239,7 +247,7 @@ Based on the star plot, what is your overall impression regarding the difference
 
 The stars() function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements. 
 ```{r fig.keep='none'}
-stars(x, key.loc = c(20,0.5), draw.segments = TRUE )    
+stars(df, key.loc = c(20,0.5), draw.segments = TRUE )    
 ```
 
 (ref:12-4) Star plots and segments diagrams.
@@ -257,7 +265,7 @@ Produce the segments diagram of the state data (state.x77) and offer some interp
 
 
   
-## The ggplot2 package makes plotting intuitive
+## The ggplot2 package is intuitive and powerful
 In addition to the graphics functions in base R, there are many other packages
 we can use to create graphics. The most widely used are lattice and ggplot2,
 both implemented in additional packages. Together with base R graphics,
@@ -288,7 +296,7 @@ ggplot2 is a modular, intuitive system for plotting, as we use different functio
 -   **facets**  ( multiple plots)
 -   **Labels** and **annotations** 
 
-
+Detailed tutorials on ggplot2 can be find [here](https://uc-r.github.io/ggplot_intro) and by its [author](https://r4ds.had.co.nz/data-visualisation.html). Here we present a quick demo.
 
 
 ```{r eval=FALSE}
@@ -300,7 +308,7 @@ Packages only need to be installed once. But every time you need to use the **fu
 library(ggplot2)  # load the ggplot2 package
 ```
 
-Notice that ggplot2 command span multiple lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. Also, the ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
+
 
 (ref:2-6) Basic scatter plot using the ggplot2 package.
 
@@ -336,7 +344,7 @@ ggplot(data = iris) +
   annotate("text", x = 5, y = 0.5, label = "R=0.96") 
 ```
 
-
+Some ggplot2 commands span multiple lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. Also, the ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
 It is also much easier to generate a plot like Figure \@ref(fig:23-5). 
 
 ```{r fig.align='center', out.width='80%' }
@@ -350,7 +358,8 @@ ggplot(iris, aes(x = Petal.Length, y = Petal.Width) ) +    # define space
 ```
 
 
-
+As you can see, data visualization is similar to painting in that we first find a blank canvas, paint background, sketch outlines, and then add details.
+![Animated GIF from GIPHY by @maluduque](https://github.com/gexijin/learnR/raw/master/images/drawing.gif)
 
 >
 ```{exercise}
@@ -486,7 +495,7 @@ First, we convert the first 4 columns of the iris data frame into a matrix. Then
 the row names are assigned to be the same, namely, "1" to "150". This is
 required because row names are used to match with the column annotation
 information, specified by the annotation\_row parameter. Even though we only
-need the 5th column, i.e. Species, this has to be a data frame. To prevent R
+need the 5th column, i.e., Species, this has to be a data frame. To prevent R
 from automatically converting a one-column data frame into a vector, we used 
 *drop = FALSE* option. Multiple columns can be contained in the column
 annotation data frame to display multiple color bars. The rows could be
@@ -626,4 +635,4 @@ Review all the analysis we did, examine the raw data, and answer the above quest
 References:
 1 Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.
 
-![Animated GIF](https://github.com/gexijin/learnR/raw/master/images/drawing.gif)
+
