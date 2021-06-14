@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2021-06-13" />
+<meta name="date" content="2021-06-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#other-types-of-plots-with-ggplot2"><i class="fa fa-check"></i><b>2.5</b> Other types of plots with ggplot2</a></li>
 <li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.6</b> Hierarchical clustering and heat map</a></li>
 <li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.7</b> Principal component analysis (PCA)</a></li>
-<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.8</b> Classification: Predicting the odds of binary outcomes</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-by-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.8</b> Classification by predicting the odds of binary outcomes</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
 <ul>
@@ -653,16 +653,17 @@ Figure 2.9: Basic scatter plot using the ggplot2 package.
 </div>
 <p>Some ggplot2 commands span multiple lines. The first line defines the plotting space. The ending “+” signifies that another layer ( data points) of plotting is added. Also, the ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
 It is also much easier to generate a plot like Figure <a href="visualizing-the-iris-flower-data-set.html#fig:23-5">2.1</a>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="visualizing-the-iris-flower-data-set.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width) ) <span class="sc">+</span>    <span class="co"># define space</span></span>
-<span id="cb30-2"><a href="visualizing-the-iris-flower-data-set.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>(<span class="at">color =</span> Species, <span class="at">shape =</span> Species) ) <span class="sc">+</span>    <span class="co"># add points</span></span>
-<span id="cb30-3"><a href="visualizing-the-iris-flower-data-set.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span>lm) <span class="sc">+</span>                                <span class="co"># add trend line  </span></span>
-<span id="cb30-4"><a href="visualizing-the-iris-flower-data-set.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">5</span>, <span class="at">y =</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="st">&quot;R=0.96&quot;</span>) <span class="sc">+</span>     <span class="co"># annotate with text</span></span>
-<span id="cb30-5"><a href="visualizing-the-iris-flower-data-set.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Petal length (cm)&quot;</span>) <span class="sc">+</span>                              <span class="co"># x-axis labels</span></span>
-<span id="cb30-6"><a href="visualizing-the-iris-flower-data-set.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Petal width (cm)&quot;</span>) <span class="sc">+</span>                               <span class="co"># y-axis labels</span></span>
-<span id="cb30-7"><a href="visualizing-the-iris-flower-data-set.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>( <span class="st">&quot;Correlation between petal length and width&quot;</span>)   <span class="co"># title</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="visualizing-the-iris-flower-data-set.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="visualizing-the-iris-flower-data-set.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Petal.Length, <span class="at">y =</span> Petal.Width) <span class="sc">+</span>                 <span class="co"># define space</span></span>
+<span id="cb30-3"><a href="visualizing-the-iris-flower-data-set.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>(<span class="at">color =</span> Species, <span class="at">shape =</span> Species) ) <span class="sc">+</span>    <span class="co"># add points</span></span>
+<span id="cb30-4"><a href="visualizing-the-iris-flower-data-set.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span>lm) <span class="sc">+</span>                                <span class="co"># add trend line  </span></span>
+<span id="cb30-5"><a href="visualizing-the-iris-flower-data-set.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">5</span>, <span class="at">y =</span> <span class="fl">0.5</span>, <span class="at">label =</span> <span class="st">&quot;R=0.96&quot;</span>) <span class="sc">+</span>     <span class="co"># annotate with text</span></span>
+<span id="cb30-6"><a href="visualizing-the-iris-flower-data-set.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Petal length (cm)&quot;</span>) <span class="sc">+</span>                              <span class="co"># x-axis labels</span></span>
+<span id="cb30-7"><a href="visualizing-the-iris-flower-data-set.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Petal width (cm)&quot;</span>) <span class="sc">+</span>                               <span class="co"># y-axis labels</span></span>
+<span id="cb30-8"><a href="visualizing-the-iris-flower-data-set.html#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>( <span class="st">&quot;Correlation between petal length and width&quot;</span>)   <span class="co"># title</span></span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="book_files/figure-html/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>As you can see, data visualization is similar to painting in that we first find a blank canvas, paint background, sketch outlines, and then add details.
+<p>As you can see, data visualization using ggplot2 is similar to painting: we first find a blank canvas, paint background, sketch outlines, and then add details.
 <img src="https://github.com/gexijin/learnR/raw/master/images/drawing.gif" alt="Animated GIF from GIPHY by (maluduque?)" /></p>
 <blockquote>
 
@@ -686,7 +687,7 @@ Use boxplot, multiple panel histograms, and density plots to investigate whether
 <span id="cb32-2"><a href="visualizing-the-iris-flower-data-set.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris) <span class="sc">+</span></span>
 <span id="cb32-3"><a href="visualizing-the-iris-flower-data-set.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Species, <span class="at">y =</span> Sepal.Length, <span class="at">color =</span> Species) <span class="sc">+</span></span>
 <span id="cb32-4"><a href="visualizing-the-iris-flower-data-set.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-24-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="book_files/figure-html/unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Here we use Species, a categorical variable, as x-coordinate. Essentially, we
 use it to define three groups of data. The y-axis is the sepal length, whose distribution we are interested in. The benefit of using ggplot2 is evident as we can easily refine it.</p>
 
@@ -695,7 +696,7 @@ use it to define three groups of data. The y-axis is the sepal length, whose dis
 <span id="cb33-3"><a href="visualizing-the-iris-flower-data-set.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb33-4"><a href="visualizing-the-iris-flower-data-set.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="fl">0.2</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
-<img src="book_files/figure-html/unnamed-chunk-25-1.png" alt="Box plot with raw data points. This is getting increasingly popular." width="60%" />
+<img src="book_files/figure-html/unnamed-chunk-25-1.png" alt="Box plot with raw data points. This is getting increasingly popular." width="80%" />
 <p class="caption">
 Figure 2.10: Box plot with raw data points. This is getting increasingly popular.
 </p>
@@ -801,7 +802,7 @@ Slowikowski’s <a href="https://slowkow.com/notes/pheatmap-tutorial/">blog</a>.
 </div>
 <div id="principal-component-analysis-pca" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Principal component analysis (PCA)</h2>
-<p>This section can be skipped, as it contains more statistics than R programming.</p>
+<p>This section can be skipped, as it contains more statistics than R programming. To visualize high-dimensional data, we use PCA to map data to l</p>
 <p>PCA is a linear dimension-reduction method. As illustrated in Figure <a href="visualizing-the-iris-flower-data-set.html#fig:13-4">2.14</a>, it tries to define a new set of orthogonal coordinates to represent the data such that the new coordinates can be ranked by the amount of variation or information it captures in the dataset. After running PCA, you get many pieces of information:</p>
 <ul>
 <li>How the new coordinates are defined,</li>
@@ -890,8 +891,8 @@ Create PCA plot of the state.x77 data set (convert matrix to data frame). Use th
 </div>
 </blockquote>
 </div>
-<div id="classification-predicting-the-odds-of-binary-outcomes" class="section level2" number="2.8">
-<h2><span class="header-section-number">2.8</span> Classification: Predicting the odds of binary outcomes</h2>
+<div id="classification-by-predicting-the-odds-of-binary-outcomes" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Classification by predicting the odds of binary outcomes</h2>
 <p>This section can be skipped, as it contains more statistics than R programming.</p>
 <p>It is easy to distinguish <em>I. setosa</em> from the other two species, just based on
 petal length alone. Here we focus on building a predictive model that can
