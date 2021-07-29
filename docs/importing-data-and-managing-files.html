@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Importing data and managing files | Learn R through examples</title>
-  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Importing data and managing files | Learn R through examples" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   <meta name="github-repo" content="gexijin/learnR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Importing data and managing files | Learn R through examples" />
   
-  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   
 
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-26" />
+<meta name="date" content="2021-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="data-structures.html"/>
 <link rel="next" href="the-heart-attack-data-set-i.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,35 +51,32 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -87,9 +85,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -122,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -135,86 +134,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
-<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-contain-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames contain rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
-<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
-<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-categorical-variable"><i class="fa fa-check"></i><b>1.4</b> Analyzing a categorical variable</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#the-relationship-between-two-numerical-variables"><i class="fa fa-check"></i><b>1.5</b> The relationship between two numerical variables</a></li>
 <li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
 <li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (ANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
-<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-makes-plotting-intuitive"><i class="fa fa-check"></i><b>2.2</b> The ggplot2 package makes plotting intuitive</a></li>
-<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.3</b> Scatter plots matrix</a></li>
-<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.4</b> Star and segment diagrams</a></li>
-<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.5</b> Parallel coordinate plot</a></li>
-<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.6</b> Bar plot with error bar</a></li>
-<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#box-plot-and-death-to-the-dynamite-plots"><i class="fa fa-check"></i><b>2.7</b> Box plot and death to the dynamite plots</a></li>
-<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#combining-plots"><i class="fa fa-check"></i><b>2.8</b> Combining plots</a></li>
-<li class="chapter" data-level="2.9" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.9</b> Hierarchical clustering and heat map</a></li>
-<li class="chapter" data-level="2.10" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#projecting-high-dimensional-data-with-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.10</b> Projecting high-dimensional data with principal component analysis (PCA)</a></li>
-<li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.2</b> Scatter plots matrix</a></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.3</b> Star and segment diagrams</a></li>
+<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-is-intuitive-and-powerful"><i class="fa fa-check"></i><b>2.4</b> The ggplot2 package is intuitive and powerful</a></li>
+<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#other-types-of-plots-with-ggplot2"><i class="fa fa-check"></i><b>2.5</b> Other types of plots with ggplot2</a></li>
+<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.6</b> Hierarchical clustering and heat map</a></li>
+<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.7</b> Principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-by-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.8</b> Classification by predicting the odds of binary outcomes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
-<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
-<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
-<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.1</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.2</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.4</b> Lists</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
-<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.2</b> Project-oriented workflow</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.2.1</b> Create a project in a new folder</a></li>
-<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.2.2</b> Create a script file and comment (!)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.2.3</b> Copy data files to the new directory</a></li>
-<li class="chapter" data-level="4.2.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.4</b> Import data files</a></li>
-<li class="chapter" data-level="4.2.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.5</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.2.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.6</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.3</b> Reading files directly using read.table</a></li>
-<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.4</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.2</b> Reading files directly using read.table</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.3</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.4</b> Enter data manually</a></li>
 <li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.5</b> Data manipulation in a data frame</a></li>
 <li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.6</b> Data transformation using the dplyr</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a><ul>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
 <li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
 <li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
 <li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
 <li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a><ul>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
 <li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
 <li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
 <li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
 <li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
-<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
-<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
-<li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
-<li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.1</b> Pubish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a><ul>
+<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="the-state-dataset.html"><a href="the-state-dataset.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
 <li class="chapter" data-level="8.2" data-path="the-state-dataset.html"><a href="the-state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
 <li class="chapter" data-level="8.3" data-path="the-state-dataset.html"><a href="the-state-dataset.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
@@ -222,11 +219,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="the-state-dataset.html"><a href="the-state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
 <li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
 <li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
 <li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
 <li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
 <li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
@@ -239,20 +238,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
 <li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a><ul>
+<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
-<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
 <li class="chapter" data-level="10.2.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
 <li class="chapter" data-level="10.2.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
 <li class="chapter" data-level="10.2.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
 <li class="chapter" data-level="10.3.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
 <li class="chapter" data-level="10.3.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
 <li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
 </ul></li>
@@ -276,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="importing-data-and-managing-files" class="section level1">
+<div id="importing-data-and-managing-files" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Importing data and managing files</h1>
 <p>Learning objectives:</p>
 <ul>
@@ -284,32 +287,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Proper steps to import data</li>
 <li>Intro to data transformation using dplyr</li>
 </ul>
-<div id="enter-data-manually" class="section level2">
-<h2><span class="header-section-number">4.1</span> Enter data manually</h2>
-<p>There are many different ways to get data into R. You can enter data manually (see below), or semi-manually (see below). You can read data into R from a local file or a file on the internet. You can also use R to retrieve data from databases, local or remote. The most important thing is to read data set into R correctly. A dataset not read in correctly will never be analyzed or visualized correctly.</p>
-<p><img src="images/img0900_note.png" width="50%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb631-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)</a>
-<a class="sourceLine" id="cb631-2" title="2"><span class="kw">sum</span>(x)</a></code></pre></div>
-<pre><code>## [1] 13.8</code></pre>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb633-1" title="1">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(</a>
-<a class="sourceLine" id="cb633-2" title="2">       <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># the data elements </span></a>
-<a class="sourceLine" id="cb633-3" title="3">       <span class="dt">nrow =</span> <span class="dv">2</span>,             <span class="co"># number of rows </span></a>
-<a class="sourceLine" id="cb633-4" title="4">       <span class="dt">ncol =</span> <span class="dv">3</span>)             <span class="co"># number of columns                     </span></a>
-<a class="sourceLine" id="cb633-5" title="5">A                            <span class="co"># show the matrix</span></a></code></pre></div>
-<pre><code>##      [,1] [,2] [,3]
-## [1,]    2    3    5
-## [2,]    4    1    7</code></pre>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" title="1">x &lt;-<span class="st"> </span><span class="kw">scan</span>()  <span class="co"># Enter values from keyboard, separated by Return key. End by empty line. </span></a>
-<a class="sourceLine" id="cb635-2" title="2"><span class="fl">2.1</span></a></code></pre></div>
-<pre><code>## [1] 2.1</code></pre>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" title="1"><span class="fl">3.1</span></a></code></pre></div>
-<pre><code>## [1] 3.1</code></pre>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" title="1"><span class="fl">4.1</span></a></code></pre></div>
-<pre><code>## [1] 4.1</code></pre>
-<p>You can even use the scan() function to paste a column of numbers from Excel.</p>
-</div>
-<div id="project-oriented-workflow" class="section level2">
-<h2><span class="header-section-number">4.2</span> Project-oriented workflow</h2>
+<div id="project-oriented-workflow" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Project-oriented workflow</h2>
 <p>It is best to create a separate folder that contains all related files. You can do the same for research projects. In Rstudio, this is called a <strong>Project</strong>. For example you can create a project for each of the chapters in this book. Projects are self-contained and can be moved to another computer or folder and the code will run.</p>
 <blockquote>
 <p>If the first line of your R script is</p>
@@ -320,19 +299,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <iframe width="851" height="638" src="https://www.youtube.com/embed/Hm8Fc5HbXXQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <div class="figure">
-<img src="https://github.com/gexijin/learnR/raw/master/images/dataImport.gif" alt="Animated GIF for creating project and import data." />
+<img src="https://github.com/gexijin/learnR/raw/master/images/dataImport.gif" alt="" />
 <p class="caption">Animated GIF for creating project and import data.</p>
 </div>
-<div id="create-a-project-in-a-new-folder" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Create a project in a new folder</h3>
-<p>Start by setting up a project in a new folder by going to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose where the directory will be created on your hard drive. I created a directory called “Chapter4” under “D:\RBook”. Rstudio creates a Project file named like “Chapter4.Rproj”, which contains information such as scripts files and working folders. Projects files can be saved and later opened from <strong>File-&gt;Open</strong>. In Windows you can also just double-click on the project file. You get everything ready to go on a particular assignment or research project.</p>
+<div id="create-a-project-in-a-new-folder" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Create a project in a new folder</h3>
+<p>Start by setting up a project in a new folder by going to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose where the directory will be created on your hard drive. I created a directory called “Chapter4” under “D:\RBook.” Rstudio creates a Project file named like “Chapter4.Rproj,” which contains information such as scripts files and working folders. Projects files can be saved and later opened from <strong>File-&gt;Open</strong>. In Windows you can also just double-click on the project file. You get everything ready to go on a particular assignment or research project.</p>
 <p>This folder is your <strong>working folder</strong>, a default folder for reading files, writing outputs etc.</p>
 <p>More advanced users should consider create a project using version control, so that all versions of your code is backup and easily shared by <a href="https://github.com/">GitHub</a>. See <a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a> by Jenny Bryan.</p>
 </div>
-<div id="create-a-script-file-and-comment" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Create a script file and comment (!)</h3>
+<div id="create-a-script-file-and-comment" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Create a script file and comment (!)</h3>
 <p>Once you have a new project created, the first step is to start a new script file by clicking the <strong>File +</strong> button or go to <strong>File-&gt;New file</strong> and choose <strong>R script file</strong>. By default, the script file is called Untitled1.R. Rstudio will ask you to change it the first time you hit “Save” button.</p>
-<p>Start your R script by adding comments on background information. Comments starting with “#” are ignored by R when running, but they are helpful for humans, including the future self, to understand the code. We re-cycle and re-use our codes over and over, so it is vital to add information about what a chunk of code does. Figure <a href="importing-data-and-managing-files.html#fig:9-1">4.1</a> shows a recommended workflow for beginning your script. Click “Save” button and name your file something like “Data Import.R”.</p>
+<p>Start your R script by adding comments on background information. Comments starting with “#” are ignored by R when running, but they are helpful for humans, including the future self, to understand the code. We re-cycle and re-use our codes over and over, so it is vital to add information about what a chunk of code does. Figure <a href="importing-data-and-managing-files.html#fig:9-1">4.1</a> shows a recommended workflow for beginning your script. Click “Save” button and name your file something like “Data Import.R.”</p>
 <p><strong>Write your scripts while saving your project files</strong>. If you click on the <strong>Run</strong> button, Rstudio runs the current line of code where your cursor is located. You can also select multiple lines and run them at once. You can jump back and forth but remember you are operating on the data objects sequentially. So sometimes you want to get a fresh start by running the reset line, namely:<strong>rm(list=ls())</strong>. This command lists and then deletes all data objects from R’s brain. As you develop your coding skills, following these guidelines can make you more efficient. Remember to save everything once a while by hitting the <strong>Save</strong> button on the main icon bar! Even though Rstudio saves your scripts every 5 seconds, it can crash.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-1"></span>
@@ -342,32 +321,32 @@ Figure 4.1: Beginning a project in Rstudio, a recommended workflow: commenting, 
 </p>
 </div>
 </div>
-<div id="copy-data-files-to-the-new-directory" class="section level3">
-<h3><span class="header-section-number">4.2.3</span> Copy data files to the new directory</h3>
+<div id="copy-data-files-to-the-new-directory" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Copy data files to the new directory</h3>
 <p>This is done outside of Rstudio on Windows or Mac interface. Download the heartatk4R.txt file from this page <a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>. It is a tab-delimited text file, meaning the different columns are separated by tab. We also need to get some context about the data and how it is collected. At the minimum level, we need to know the meaning of each columns.</p>
 <p><strong>File unzipping, conversion, and context.</strong>
 If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do. Is it a text file (CSV, txt, …) or Binary file (XLS, XLSX, …)? Convert binary to text file using corresponding application. Comma separated values (CSV) files, use comma to separate the columns. Another common type is tab-delimited text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character.</p>
 <p><strong>Checking the file with text editor and Excel.</strong> Before reading files into R, we often need to open the files to take a look. Notepad or WordPad that come with Windows is very limited (and so amateur)! Do not even think about using Microsoft Word! I strongly recommend that you install a powerful text editor such as NotePad++ (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a>), or TextPad (<a href="https://www.textpad.com/" class="uri">https://www.textpad.com/</a>). If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (<a href="https://sourceforge.net/projects/npptor/" class="uri">https://sourceforge.net/projects/npptor/</a>) to send R commands from NotePad++ directly to R, and I love it!</p>
-<p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R”. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
+<p>Regardless of their extensions in file names, all <strong>plain text files</strong> can be opened by these text editors. Plain text files only contain text without any formatting, links and images. The file names can be “poems.txt,” “poems.tex,” “students.csv,” or just “data” without extension. I often save my R scripts as text file with names like “code_1-22-2017.R.” You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified.</p>
 <p>Comma separated values (CSV) files use comma to separate the columns. CSV files can also be conveniently opened by Excel. And Rstudio likes it too. So let’s try to use CSV files. Another common type is tab-delimited text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character. Other types of files such as Excel .xls or .xlsx files often needed to be saved as CSV files.</p>
 </div>
-<div id="import-data-files" class="section level3">
-<h3><span class="header-section-number">4.2.4</span> Import data files</h3>
-<p>In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab”, and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“df”</strong> on the lower left of the import interface.</p>
+<div id="import-data-files" class="section level3" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Import data files</h3>
+<p>In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab,” and the preview shows that the data is correctly parsed into multiple columns. You can also change the name of your data object by changing the default “heartatk4R” to <strong>“df”</strong> on the lower left of the import interface.</p>
 <p>We need to check each of the columns and see the data types are correctly read in.
 The first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.
 So in this dialog interface, DIAGNOSIS, DRG, and DIED should be changed from <strong>“double” to “character”</strong>.
 As shown in Figure <a href="importing-data-and-managing-files.html#fig:9-2">4.2</a>, you can click on the automatically guessed data type under each of the column names as shown in Figure <a href="importing-data-and-managing-files.html#fig:9-2">4.2</a>. By selecting “character” from the drop down, you can successfully format this column as a character.</p>
-<p>On the other hand, LOS (length of stay in days) and AGE should be numbers. But because 10 is presented as “0010”, these columns are automatically recognized as characters. We have to force R to read these columns as integers by clicking on the column title and select <strong>integer</strong>.
+<p>On the other hand, LOS (length of stay in days) and AGE should be numbers. But because 10 is presented as “0010,” these columns are automatically recognized as characters. We have to force R to read these columns as integers by clicking on the column title and select <strong>integer</strong>.
 We have to change LOS and AGE from <strong>“character” to “integer”</strong>.</p>
 <p>The awesome nerds at Rstudio actually helped you generating these 3 lines of code:</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" title="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb641-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, </a>
-<a class="sourceLine" id="cb641-3" title="3">    <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">escape_double =</span> <span class="ot">FALSE</span>, <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">AGE =</span> <span class="kw">col_integer</span>(), </a>
-<a class="sourceLine" id="cb641-4" title="4">        <span class="dt">DIAGNOSIS =</span> <span class="kw">col_character</span>(), <span class="dt">DIED =</span> <span class="kw">col_character</span>(), </a>
-<a class="sourceLine" id="cb641-5" title="5">        <span class="dt">DRG =</span> <span class="kw">col_character</span>(), <span class="dt">LOS =</span> <span class="kw">col_integer</span>()), </a>
-<a class="sourceLine" id="cb641-6" title="6">    <span class="dt">trim_ws =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb641-7" title="7"><span class="kw">View</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="importing-data-and-managing-files.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="importing-data-and-managing-files.html#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, </span>
+<span id="cb1-3"><a href="importing-data-and-managing-files.html#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">AGE =</span> <span class="fu">col_integer</span>(), </span>
+<span id="cb1-4"><a href="importing-data-and-managing-files.html#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">DIAGNOSIS =</span> <span class="fu">col_character</span>(), <span class="at">DIED =</span> <span class="fu">col_character</span>(), </span>
+<span id="cb1-5"><a href="importing-data-and-managing-files.html#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">DRG =</span> <span class="fu">col_character</span>(), <span class="at">LOS =</span> <span class="fu">col_integer</span>()), </span>
+<span id="cb1-6"><a href="importing-data-and-managing-files.html#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="importing-data-and-managing-files.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df)</span></code></pre></div>
 <p>Before you click on the <strong>Import</strong> button, I highly recommend that you select all the codes and copy it to the script file. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on df object, which is a data frame named after the input file. You data is now available as df.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:9-2"></span>
@@ -377,11 +356,11 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 </p>
 </div>
 </div>
-<div id="check-and-convert-data-types" class="section level3">
-<h3><span class="header-section-number">4.2.5</span> Check and convert data types</h3>
+<div id="check-and-convert-data-types" class="section level3" number="4.1.5">
+<h3><span class="header-section-number">4.1.5</span> Check and convert data types</h3>
 <p>Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using as.numeric, as.factor, or as.character functions.</p>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" title="1"><span class="kw">str</span>(df)  <span class="co"># structure of data object, data types for each column</span></a></code></pre></div>
-<pre><code>## tibble [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="importing-data-and-managing-files.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># structure of data object, data types for each column</span></span></code></pre></div>
+<pre><code>## spec_tbl_df[,8] [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Patient  : num [1:12844] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: chr [1:12844] &quot;41041&quot; &quot;41041&quot; &quot;41091&quot; &quot;41081&quot; ...
 ##  $ SEX      : chr [1:12844] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
@@ -402,21 +381,21 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 ##   ..   AGE = col_integer()
 ##   .. )</code></pre>
 <p>We can reformat categorical values <strong>factors</strong>. We are going to use <code>df$SEX</code> to refer to the SEX column of the data frame df:</p>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb644-1" title="1">df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span></a>
-<a class="sourceLine" id="cb644-2" title="2">df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>SEX)</a>
-<a class="sourceLine" id="cb644-3" title="3">df<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DRG)</a>
-<a class="sourceLine" id="cb644-4" title="4">df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIED)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="importing-data-and-managing-files.html#cb4-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span></span>
+<span id="cb4-2"><a href="importing-data-and-managing-files.html#cb4-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>SEX)</span>
+<span id="cb4-3"><a href="importing-data-and-managing-files.html#cb4-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DRG <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DRG)</span>
+<span id="cb4-4"><a href="importing-data-and-managing-files.html#cb4-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIED <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIED)</span></code></pre></div>
 <p>Factors are very similar to character vectors. But factors have defined levels and their values are stored as integers.</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb645-1" title="1"><span class="kw">nlevels</span>(df<span class="op">$</span>DIAGNOSIS)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="importing-data-and-managing-files.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nlevels</span>(df<span class="sc">$</span>DIAGNOSIS)</span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb647-1" title="1"><span class="kw">levels</span>(df<span class="op">$</span>DIAGNOSIS)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="importing-data-and-managing-files.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>DIAGNOSIS)</span></code></pre></div>
 <pre><code>## [1] &quot;41001&quot; &quot;41011&quot; &quot;41021&quot; &quot;41031&quot; &quot;41041&quot; &quot;41051&quot; &quot;41071&quot; &quot;41081&quot; &quot;41091&quot;</code></pre>
 <p>Note “41001” is the <strong>reference level</strong> for this factor and it is coded as 1. The reference level for factors are important when we interpret results from regression, as effects are represented relative to the reference level. The reference level are defined based on the order they appear in the dataset. Sometimes we need to change the reference level.</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb649-1" title="1">df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">relevel</span>( df<span class="op">$</span>DIAGNOSIS, <span class="st">&quot;41091&quot;</span>)</a>
-<a class="sourceLine" id="cb649-2" title="2"><span class="kw">levels</span>(df<span class="op">$</span>DIAGNOSIS)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="importing-data-and-managing-files.html#cb9-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">relevel</span>( df<span class="sc">$</span>DIAGNOSIS, <span class="st">&quot;41091&quot;</span>)</span>
+<span id="cb9-2"><a href="importing-data-and-managing-files.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>DIAGNOSIS)</span></code></pre></div>
 <pre><code>## [1] &quot;41091&quot; &quot;41001&quot; &quot;41011&quot; &quot;41021&quot; &quot;41031&quot; &quot;41041&quot; &quot;41051&quot; &quot;41071&quot; &quot;41081&quot;</code></pre>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb651-1" title="1"><span class="kw">str</span>(df)  <span class="co"># double check structure of data</span></a></code></pre></div>
-<pre><code>## tibble [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="importing-data-and-managing-files.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># double check structure of data</span></span></code></pre></div>
+<pre><code>## spec_tbl_df[,8] [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Patient  : num [1:12844] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41091&quot;,&quot;41001&quot;,..: 6 6 1 9 1 1 1 1 6 6 ...
 ##  $ SEX      : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 1 2 2 1 1 2 1 ...
@@ -436,7 +415,7 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 ##   ..   LOS = col_integer(),
 ##   ..   AGE = col_integer()
 ##   .. )</code></pre>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb653-1" title="1"><span class="kw">summary</span>(df)  <span class="co"># a summary often gives us a lot of useful information </span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="importing-data-and-managing-files.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)  <span class="co"># a summary often gives us a lot of useful information </span></span></code></pre></div>
 <pre><code>##     Patient        DIAGNOSIS    SEX       DRG       DIED         CHARGES     
 ##  Min.   :    1   41091  :5213   F:5065   121:5387   0:11434   Min.   :    3  
 ##  1st Qu.: 3212   41041  :2665   M:7779   122:6047   1: 1410   1st Qu.: 5422  
@@ -458,37 +437,37 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 Some people got free treatment for heart attack? Maybe not. Missing does not mean zero. Maybe the data was not entered for some patients.</p>
 <p>Except enforcing data type conversion by as.factor, as.numeric and so on, We can also reformat the columns before clicking <strong>Import</strong> as we described in 4.2.4.</p>
 </div>
-<div id="close-a-project-when-you-are-done" class="section level3">
-<h3><span class="header-section-number">4.2.6</span> Close a project when you are done</h3>
+<div id="close-a-project-when-you-are-done" class="section level3" number="4.1.6">
+<h3><span class="header-section-number">4.1.6</span> Close a project when you are done</h3>
 <p>Once you are done with a project, you can close it from <strong>File <span class="math inline">\(\rightarrow\)</span>Close Project</strong>. If you do not close a project, <em>Rstuio assumes that you will be continue working on the same project</em>; even after your close Rstudio, the same project and files will be open next time when you start Rstudio. This is convenient, most of times. But I’ve seen some students’ Rstudio environment cluttered with all the things they have been doing for an entire semester. This is not only confusing, but could also lead to errors. For example in this class, you can start a new project for each chapter.</p>
 <p>To open a project, use <strong>File <span class="math inline">\(\rightarrow\)</span>Open Project</strong> and then navigate to the project. Alternatively you can double-click on the Chapter4.Rproj file from Windows or Mac. When a project file is loaded, the entire computing envirionment is set for you. The working directory is set properly. Some of the script files are open. If the script file is not open, you can open it by clicking on it from the <strong>Files</strong> tab in the lower right window.</p>
 </div>
 </div>
-<div id="reading-files-directly-using-read.table" class="section level2">
-<h2><span class="header-section-number">4.3</span> Reading files directly using read.table</h2>
+<div id="reading-files-directly-using-read.table" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Reading files directly using read.table</h2>
 <p>As you get more experience with R programming, there are many other options to import data, except using the Import Dataset in Rstudio.</p>
 <p>In summary, we have the following code to read in the heart attack dataset. We have to make sure the file is in the current working directory. To set working directory from Rstudio main menu, go to Session -&gt; Set Working Directory.</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb655-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())  <span class="co"># Erase all objects in memory</span></a>
-<a class="sourceLine" id="cb655-2" title="2"><span class="kw">getwd</span>()  <span class="co"># show working directory</span></a>
-<a class="sourceLine" id="cb655-3" title="3">df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb655-4" title="4"><span class="kw">head</span>(df)  <span class="co"># show the first few rows</span></a>
-<a class="sourceLine" id="cb655-5" title="5"><span class="co"># change several columns to factors</span></a>
-<a class="sourceLine" id="cb655-6" title="6">df<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DRG)</a>
-<a class="sourceLine" id="cb655-7" title="7">df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIED)</a>
-<a class="sourceLine" id="cb655-8" title="8">df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIAGNOSIS)</a>
-<a class="sourceLine" id="cb655-9" title="9">df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>SEX)</a>
-<a class="sourceLine" id="cb655-10" title="10"><span class="kw">str</span>(df)  <span class="co"># show the data types of columns</span></a>
-<a class="sourceLine" id="cb655-11" title="11"><span class="kw">summary</span>(df)  <span class="co"># show summary of dataset</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="importing-data-and-managing-files.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())  <span class="co"># Erase all objects in memory</span></span>
+<span id="cb15-2"><a href="importing-data-and-managing-files.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()  <span class="co"># show working directory</span></span>
+<span id="cb15-3"><a href="importing-data-and-managing-files.html#cb15-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="at">sep=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="importing-data-and-managing-files.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)  <span class="co"># show the first few rows</span></span>
+<span id="cb15-5"><a href="importing-data-and-managing-files.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># change several columns to factors</span></span>
+<span id="cb15-6"><a href="importing-data-and-managing-files.html#cb15-6" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DRG <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DRG)</span>
+<span id="cb15-7"><a href="importing-data-and-managing-files.html#cb15-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIED <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIED)</span>
+<span id="cb15-8"><a href="importing-data-and-managing-files.html#cb15-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIAGNOSIS)</span>
+<span id="cb15-9"><a href="importing-data-and-managing-files.html#cb15-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>SEX)</span>
+<span id="cb15-10"><a href="importing-data-and-managing-files.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># show the data types of columns</span></span>
+<span id="cb15-11"><a href="importing-data-and-managing-files.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)  <span class="co"># show summary of dataset</span></span></code></pre></div>
 <p>Alternatively, you can skip all of the above and do this.</p>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb656-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, </a>
-<a class="sourceLine" id="cb656-2" title="2">                <span class="dt">header =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb656-3" title="3">                <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, </a>
-<a class="sourceLine" id="cb656-4" title="4">                <span class="dt">colClasses =</span> <span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </a>
-<a class="sourceLine" id="cb656-5" title="5">                               <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="importing-data-and-managing-files.html#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, </span>
+<span id="cb16-2"><a href="importing-data-and-managing-files.html#cb16-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb16-3"><a href="importing-data-and-managing-files.html#cb16-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
+<span id="cb16-4"><a href="importing-data-and-managing-files.html#cb16-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </span>
+<span id="cb16-5"><a href="importing-data-and-managing-files.html#cb16-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</span></code></pre></div>
 <p>We are reading data directly from the internet with the URL. And we are specifying the data type for each column.</p>
 </div>
-<div id="general-procedure-to-read-data-into-r" class="section level2">
-<h2><span class="header-section-number">4.4</span> General procedure to read data into R:</h2>
+<div id="general-procedure-to-read-data-into-r" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> General procedure to read data into R:</h2>
 <ol style="list-style-type: decimal">
 <li>If data is compressed, unzip using 7-zip, WinRAR, Winzip, gzip. Any of these will do.</li>
 <li>Is it a text file (CSV, txt, …) or Binary file (XLS, XLSX, …)? Convert binary to text file using corresponding application. Comma separated values (CSV) files use comma to separate the columns. Another common type is tab-delimited text files, which uses the tab or <span class="math inline">\(\t\)</span> as it is invisible character.<br />
@@ -497,7 +476,7 @@ Some people got free treatment for heart attack? Maybe not. Missing does not mea
 <li>Rows and columns? Row and column names? <strong>row.names = 1, header = T</strong></li>
 <li>Delimiters between columns?(space, comma, tab…) <strong>sep = “<span class="math inline">\(\t\)</span>”</strong></li>
 <li>Missing values? NA, na, NULL, blank, NaN, 0 <strong>missingstring = </strong></li>
-<li>Open as text file in Excel, choose appropriate delimiter while importing, or use the <strong>Text to Column</strong> under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”-&gt;“4-OCT”. Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.</li>
+<li>Open as text file in Excel, choose appropriate delimiter while importing, or use the <strong>Text to Column</strong> under Data in Excel. Beware of the annoying automatic conversion in Excel “OCT4”-&gt;“4-OCT.” Edit column names by removing spaces, or shorten them for easy of reference in R. Save as CSV for reading in R.</li>
 <li>read.table( ), or read.csv( ). For example,
 <code>x &lt;- read.table(“somefile.txt”, sep = “\t”, header = TRUE, missingstring = “NA”)</code></li>
 <li>Double check the data with <strong>str(x)</strong>, make sure each column is recognized correctly as <strong>“character”</strong>, <strong>“factor”</strong> and <strong>“numeric”</strong>.
@@ -507,7 +486,7 @@ Pay attention to columns contain numbers but are actually IDs (i.e. student IDs
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-346" class="exercise"><strong>Exercise 4.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-10" class="exercise"><strong>Exercise 4.1  </strong></span></p>
 If you have not created a project for chapter 4, it is time to create one. Download the tab-delimited text file <em>pulse.txt</em> from this page (<a href="http://statland.org/R/R/pulse.txt" class="uri">http://statland.org/R/R/pulse.txt</a>). Import pulse.txt into R using two methods: R menu (Show the process by attaching some necessary screenshots.) and R script.<br />
 a. Rename the file as <em>chapter4Pulse</em>.<br />
 b. Change the class of ActivityL from double to integer.<br />
@@ -517,7 +496,7 @@ c. After importing <em>pulse.txt</em> into R, convert the class of Sex from cha
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-347" class="exercise"><strong>Exercise 4.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-11" class="exercise"><strong>Exercise 4.2  </strong></span></p>
 Type in Table <a href="importing-data-and-managing-files.html#tab:9-01">4.1</a> in Excel and save as a CSV file and a tab-delimited tex file. Create a new Rstudio project as outlined above. Copy the files to the new folder. Import the CSV file to Rstudio. Create a script file which includes the rm(list = ls()) and getwd() command, the generated R code when importing the CSV file, (similar to those shown in Figure <a href="importing-data-and-managing-files.html#fig:9-2">4.2</a>), and the code that convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit the R script your created, data structure of the data set patient, and use <strong>head(patients)</strong> to show the data.
 </div>
 </blockquote>
@@ -561,24 +540,48 @@ Type in Table <a href="importing-data-and-managing-files.html#tab:9-01">4.1</a> 
 </tbody>
 </table>
 </div>
-<div id="data-manipulation-in-a-data-frame" class="section level2">
+<div id="enter-data-manually" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Enter data manually</h2>
+<p>There are many different ways to get data into R. You can enter data manually (see below), or semi-manually (see below). You can read data into R from a local file or a file on the internet. You can also use R to retrieve data from databases, local or remote. The most important thing is to read data set into R correctly. A dataset not read in correctly will never be analyzed or visualized correctly.</p>
+<p><img src="images/img0900_note.png" width="50%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="importing-data-and-managing-files.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)</span>
+<span id="cb17-2"><a href="importing-data-and-managing-files.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div>
+<pre><code>## [1] 13.8</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="importing-data-and-managing-files.html#cb19-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb19-2"><a href="importing-data-and-managing-files.html#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># the data elements </span></span>
+<span id="cb19-3"><a href="importing-data-and-managing-files.html#cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">nrow =</span> <span class="dv">2</span>,             <span class="co"># number of rows </span></span>
+<span id="cb19-4"><a href="importing-data-and-managing-files.html#cb19-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">3</span>)             <span class="co"># number of columns                     </span></span>
+<span id="cb19-5"><a href="importing-data-and-managing-files.html#cb19-5" aria-hidden="true" tabindex="-1"></a>A                            <span class="co"># show the matrix</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    3    5
+## [2,]    4    1    7</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="importing-data-and-managing-files.html#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scan</span>()  <span class="co"># Enter values from keyboard, separated by Return key. End by empty line. </span></span>
+<span id="cb21-2"><a href="importing-data-and-managing-files.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fl">2.1</span></span></code></pre></div>
+<pre><code>## [1] 2.1</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="importing-data-and-managing-files.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3.1</span></span></code></pre></div>
+<pre><code>## [1] 3.1</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="importing-data-and-managing-files.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fl">4.1</span></span></code></pre></div>
+<pre><code>## [1] 4.1</code></pre>
+<p>You can even use the scan() function, and then copy and paste a column of numbers from Excel.</p>
+</div>
+<div id="data-manipulation-in-a-data-frame" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Data manipulation in a data frame</h2>
 <p>For our heartattach dataset <em>df</em>, we can sort the data by age. Again, type these commands in the script window, instead of directly into the Console window. And save the scripts once a while.</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb657-1" title="1">df2 &lt;-<span class="st"> </span>df[<span class="kw">order</span>(df<span class="op">$</span>AGE), ]  <span class="co"># sort by ascending order by AGE</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="importing-data-and-managing-files.html#cb27-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>AGE), ]  <span class="co"># sort by ascending order by AGE</span></span></code></pre></div>
 <p><strong>Global Environment</strong> window contains the names and sizes of all the variables or objects in the computer memory. R programming is all about creating and modifying these objects in the memory with clear, step-by-step instructions. We also can sort the data by clicking on the column names in spreadsheet from Global Environment.</p>
 <p>Just like in Excel, you can add a new column with computed results:</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb658-1" title="1">df2<span class="op">$</span>pdc &lt;-<span class="st"> </span>df2<span class="op">$</span>CHARGES <span class="op">/</span><span class="st"> </span>df2<span class="op">$</span>LOS</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="importing-data-and-managing-files.html#cb28-1" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>pdc <span class="ot">&lt;-</span> df2<span class="sc">$</span>CHARGES <span class="sc">/</span> df2<span class="sc">$</span>LOS</span></code></pre></div>
 <p>Here we created a new column pdc to represent per day cost.
 We can also create a column to represent age groups using the floor function just returns the integer part.</p>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb659-1" title="1">df2<span class="op">$</span>ag &lt;-<span class="st"> </span><span class="kw">floor</span>(df2<span class="op">$</span>AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="importing-data-and-managing-files.html#cb29-1" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>ag <span class="ot">&lt;-</span> <span class="fu">floor</span>(df2<span class="sc">$</span>AGE<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span></span></code></pre></div>
 <p>You can now do things like this:</p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb660-1" title="1"><span class="kw">boxplot</span>(df2<span class="op">$</span>CHARGES <span class="op">~</span><span class="st"> </span>df2<span class="op">$</span>ag)</a></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-352-1.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="importing-data-and-managing-files.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df2<span class="sc">$</span>CHARGES <span class="sc">~</span> df2<span class="sc">$</span>ag)</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Each box represents an age group. Older patients tends to stay longer in the hospital after being admitted for heart attack.</p>
 <p>You can extract a subset of cases:</p>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb661-1" title="1">df3 &lt;-<span class="st"> </span><span class="kw">subset</span>(df2, SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span></a>
-<a class="sourceLine" id="cb661-2" title="2">df4 &lt;-<span class="st"> </span><span class="kw">subset</span>(df3, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)  <span class="co"># only people older than 80</span></a>
-<a class="sourceLine" id="cb661-3" title="3"><span class="kw">summary</span>(df4)   </a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="importing-data-and-managing-files.html#cb31-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">subset</span>(df2, SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span></span>
+<span id="cb31-2"><a href="importing-data-and-managing-files.html#cb31-2" aria-hidden="true" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> <span class="fu">subset</span>(df3, AGE <span class="sc">&gt;</span> <span class="dv">80</span>)  <span class="co"># only people older than 80</span></span>
+<span id="cb31-3"><a href="importing-data-and-managing-files.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df4)   </span></code></pre></div>
 <pre><code>##    Patient            DIAGNOSIS   SEX       DRG      DIED       CHARGES     
 ##  Length:1263        41091  :564   F:1263   121:679   0:929   Min.   :   92  
 ##  Class :character   41071  :224   M:   0   122:250   1:334   1st Qu.: 5179  
@@ -597,17 +600,17 @@ We can also create a column to represent age groups using the floor function jus
 ##                                    NA&#39;s   :74</code></pre>
 <p>Try not to attach the data when you are manipulation data like this.</p>
 </div>
-<div id="data-transformation-using-the-dplyr" class="section level2">
+<div id="data-transformation-using-the-dplyr" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Data transformation using the dplyr</h2>
 <p>Following the same style of ggplot, the dplyr package, a part of the <a href="https://www.tidyverse.org/">Tidyverse</a>, makes data transformation more intuitive.</p>
 <p>First we need to install the dplyr package.</p>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb663-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="importing-data-and-managing-files.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>With dplyr, data transformation becomes fun.</p>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb664-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb664-2" title="2"></a>
-<a class="sourceLine" id="cb664-3" title="3">df2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># pipe operator; data is send to the next step</span></a>
-<a class="sourceLine" id="cb664-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(AGE) <span class="co"># sort in ascending order; desc(AGE) for descending order</span></a>
-<a class="sourceLine" id="cb664-5" title="5"><span class="kw">head</span>(df2)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="importing-data-and-managing-files.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb34-2"><a href="importing-data-and-managing-files.html#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="importing-data-and-managing-files.html#cb34-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>  <span class="co"># pipe operator; data is send to the next step</span></span>
+<span id="cb34-4"><a href="importing-data-and-managing-files.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AGE) <span class="co"># sort in ascending order; desc(AGE) for descending order</span></span>
+<span id="cb34-5"><a href="importing-data-and-managing-files.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
 <pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE
 ## 1    5411     41041   M 122    0  6214.00   4  20
 ## 2   10853     41091   F 122    0  6726.27   4  21
@@ -615,9 +618,9 @@ We can also create a column to represent age groups using the floor function jus
 ## 4   10738     41011   M 121    0       NA   8  23
 ## 5    4247     41091   F 122    0 10672.00   6  24
 ## 6    5199     41041   M 121    0  7596.00   8  24</code></pre>
-<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb666-1" title="1">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb666-2" title="2"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">pdc =</span> CHARGES <span class="op">/</span><span class="st"> </span>LOS) <span class="co"># new column by dividing two columns</span></a>
-<a class="sourceLine" id="cb666-3" title="3"><span class="kw">head</span>(df2)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="importing-data-and-managing-files.html#cb36-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="importing-data-and-managing-files.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">pdc =</span> CHARGES <span class="sc">/</span> LOS) <span class="co"># new column by dividing two columns</span></span>
+<span id="cb36-3"><a href="importing-data-and-managing-files.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
 <pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE      pdc
 ## 1    5411     41041   M 122    0  6214.00   4  20 1553.500
 ## 2   10853     41091   F 122    0  6726.27   4  21 1681.568
@@ -625,9 +628,9 @@ We can also create a column to represent age groups using the floor function jus
 ## 4   10738     41011   M 121    0       NA   8  23       NA
 ## 5    4247     41091   F 122    0 10672.00   6  24 1778.667
 ## 6    5199     41041   M 121    0  7596.00   8  24  949.500</code></pre>
-<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb668-1" title="1">df2 &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb668-2" title="2"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">ag =</span> <span class="kw">floor</span>(AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) <span class="co"># new column, age group</span></a>
-<a class="sourceLine" id="cb668-3" title="3"><span class="kw">head</span>(df2)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="importing-data-and-managing-files.html#cb38-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="importing-data-and-managing-files.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">ag =</span> <span class="fu">floor</span>(AGE<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>) <span class="co"># new column, age group</span></span>
+<span id="cb38-3"><a href="importing-data-and-managing-files.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
 <pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE      pdc ag
 ## 1    5411     41041   M 122    0  6214.00   4  20 1553.500 20
 ## 2   10853     41091   F 122    0  6726.27   4  21 1681.568 20
@@ -635,9 +638,9 @@ We can also create a column to represent age groups using the floor function jus
 ## 4   10738     41011   M 121    0       NA   8  23       NA 20
 ## 5    4247     41091   F 122    0 10672.00   6  24 1778.667 20
 ## 6    5199     41041   M 121    0  7596.00   8  24  949.500 20</code></pre>
-<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb670-1" title="1">df3 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb670-2" title="2"><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="co"># filtering</span></a>
-<a class="sourceLine" id="cb670-3" title="3"><span class="kw">head</span>(df3)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="importing-data-and-managing-files.html#cb40-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="importing-data-and-managing-files.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span>, AGE <span class="sc">&gt;</span> <span class="dv">80</span>) <span class="co"># filtering</span></span>
+<span id="cb40-3"><a href="importing-data-and-managing-files.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df3)</span></code></pre></div>
 <pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE
 ## 1       7     41091   F 121    0 10958.52  15  84
 ## 2      13     41091   F 122    0       NA   9  83
@@ -646,12 +649,12 @@ We can also create a column to represent age groups using the floor function jus
 ## 5      51     41011   F 121    0  7589.00  11  81
 ## 6      67     41011   F 123    1 16428.80   8  81</code></pre>
 <p>The real power and efficiency of dplyr comes when you connect the pipes to do data transformation in multiple steps.</p>
-<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb672-1" title="1">df2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb672-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(AGE) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb672-3" title="3"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">pdc =</span> CHARGES <span class="op">/</span><span class="st"> </span>LOS) <span class="op">%&gt;%</span><span class="st">   </span></a>
-<a class="sourceLine" id="cb672-4" title="4"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">ag =</span> <span class="kw">floor</span>(AGE<span class="op">/</span><span class="dv">10</span>) <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb672-5" title="5"><span class="st">  </span><span class="kw">filter</span>(SEX <span class="op">==</span><span class="st"> &quot;F&quot;</span>, AGE <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)</a>
-<a class="sourceLine" id="cb672-6" title="6"><span class="kw">head</span>(df2)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="importing-data-and-managing-files.html#cb42-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="importing-data-and-managing-files.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(AGE) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="importing-data-and-managing-files.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">pdc =</span> CHARGES <span class="sc">/</span> LOS) <span class="sc">%&gt;%</span>   </span>
+<span id="cb42-4"><a href="importing-data-and-managing-files.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">ag =</span> <span class="fu">floor</span>(AGE<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="importing-data-and-managing-files.html#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span>, AGE <span class="sc">&gt;</span> <span class="dv">80</span>)</span>
+<span id="cb42-6"><a href="importing-data-and-managing-files.html#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
 <pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE       pdc ag
 ## 1      36     41041   F 121    0  2584.10   9  81  287.1222 80
 ## 2      51     41011   F 121    0  7589.00  11  81  689.9091 80
@@ -692,6 +695,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
