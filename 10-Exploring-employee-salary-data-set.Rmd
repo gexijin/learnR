@@ -1,26 +1,34 @@
 # The messy salary data
 
-This original salary data set is taken from the Payroll Data from online "https://data.ct.gov/Government/State-Employee-Payroll-Data-Calendar-Year-2015-thr/virr-yb6n/data", Which includes the pay information from Calendar Year 2015 to the most recent pay period for Connecticut state employees. We take the subset only for 2017 fiscal year, which includes more than 1.77 million observations, 38 variables and 102,101 employees. For convenience, we randomly took 8500 employees from this subset as our focused data set ("state_empoyee_salary_data_2017.csv"). We are interested in those full time employees who got 26 pay checks in 2017 fiscal year. The relationships between income with other variables like age, sex, ethnic, union and so on are analyzed. First let's clean our sampled data set.
+This original salary data set is taken from the Payroll Data from online "https://data.ct.gov/Government/State-Employee-Payroll-Data-Calendar-Year-2015-thr/virr-yb6n/data", Which includes the payment information from Calendar Year 2015 to the most recent pay period for Connecticut state employees. We take the subset only for the 2017 fiscal year, which includes more than 1.77 million observations, 38 variables, and 102,101 employees. For convenience, we randomly took 8500 employees from this subset as our focused data set ("state_empoyee_salary_data_2017.csv"). We are interested in those full-time employees who got 26 paychecks in the 2017 fiscal year. The relationships between income and other variables like age, sex, ethnic, union, and so on are analyzed. 
+
+First, let's clean our sampled data set.
 
 ## Read in and clean data
 
-row0 is the subset only for 2017 fiscal year, seperated from the original whole dataset and saved as .csv file previously. Here we only show how we get the subset "raw" of sampled 8500 employee which can be found in our dataset file. 
+raw0 is the subset only for 2017 fiscal year, seperated from the original whole dataset and saved as CSV file previously. Here we only show how we get the subset "raw" of sampled 8500 employee which can be found in our dataset file. 
 ```{r eval=FALSE}
 raw0 <- read.csv("datasets/State_Employee_Payroll_Data_Calendar_Year_2017.csv")
-employID <- unique(raw0$EmplId.Empl.Rcd)
-sample <- sample(employID, 8500)  #randomly take 8500 employees
-raw <- raw0[raw0$EmplId.Empl.Rcd %in% sample, ] %>% droplevels() #get focuse data set
+sample <- sample(employID, 8500)  # Randomly take 8500 employees
+raw <- raw0[raw0$EmplId.Empl.Rcd %in% sample, ] %>% droplevels() # Get focus data set
 str(raw)
 write.csv(raw, file = "datasets/state_employee_salary_data_2017.csv", row.names = FALSE) 
 ```
 
-From the sampled data set, We will pick full time employees as our goal and focus on the interested variables. 
-Please pay attention to the different read-in methods between "read.csv" and "read_csv". "read.csv()" define the variables as factor or numeric smartly, and categorize NA or empty space as one level independently; While "read_csv()" may need define class by yourself, treat missing value as "NA", and will NOT count the missing value as one level. Here for our analysis, we will rename the missing "Ethric.Grp" as "unknown" later, so it's necessary to read in the data using "read.csv()"!
+From the sampled data set, We will only pick full-time employees and focus on the interested variables such as different incomes, Age, Sex, Ethnic, Union description, and so on.
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
 raw <- read.csv("datasets/state_employee_salary_data_2017.csv")
-raw1 <- filter(raw, Full.Part == "F")  # pick full time employee
-raw2 <- raw1[, -c(1:2, 5:9, 11:12, 19:23, 31:33, 35:36)]  # keep only the interested variables
+raw1 <- filter(raw, Full.Part == "F")  # Pick full time employee
+raw2 <- raw1[, -c(1:2, 5:9, 11:12, 19:23, 31:33, 35:36)]  # Keep only the interested variables
+```
+
+Factorize the categorical variables.
+```{r}
+raw2$EmplId.Empl.Rcd <- as.factor(raw2$EmplId.Empl.Rcd)
+raw2$Sex <- as.factor(raw2$Sex)
+raw2$Ethnic.Grp <- as.factor(raw2$Ethnic.Grp)
+raw2$Union.Descr <- as.factor(raw2$Union.Descr)
 ```
 
 We remove the variables we are not interested in. Now we will check the situation of employees.
@@ -40,10 +48,13 @@ The most employee-occurrence is 26. We will focus on the employees who have 26 p
 ```{r}
 subEmpl26 <- counts[which(counts$Freq != 26), ]
 len <- length(subEmpl26$EmplId.Empl.Rcd)
-for(i in 1:len){
-    j <- which(raw2$EmplId.Empl.Rcd == as.character(subEmpl26$EmplId.Empl.Rcd)[i])
-    if(i == 1) id = j
-    else if(i > 1) id = c(id, j)
+for (i in 1:len) {
+  j <- which(raw2$EmplId.Empl.Rcd == as.character(subEmpl26$EmplId.Empl.Rcd)[i])
+  if (i == 1) {
+    id = j
+  } else if (i > 1) {
+    id = c(id, j)
+  }
 }
 raw26 <- raw2[-id, ]   # remove employees with check count not equal 26
 ```
@@ -60,53 +71,57 @@ barplot(counts, col = rainbow(26), axis.lty = 1, xlab = "Check Date", ylab = "Co
 
 The counts of checks for bi week almost the same, which means the employees kept same all the time in 2017 except 03/08/2017. We will remove the employee in this check date.
 
-```{r}
+```{r }
 empl38 <- raw26[which(raw26$Check.Dt == "03/08/2017 12:00:00 AM"), ]
 raw26 <- raw26[-which(raw26$EmplId.Empl.Rcd == empl38$EmplId.Empl.Rcd), ]
 ```
 
 Now we check the situation whether different genders are indexed for same employee. 
-```{r warning=FALSE}
+```{r warning=FALSE, message=FALSE}
 df <- raw26 %>% 
   group_by(EmplId.Empl.Rcd, Sex) %>% 
   summarise(Total.Gross = sum(Tot.Gross ))
-dupliSex <- df[duplicated(df$EmplId.Empl.Rcd), ]  #Data frame for sex duplication obs.
-nrow(dupliSex)                                    #row count for data frame
+dupliSex <- df[duplicated(df$EmplId.Empl.Rcd), ]  # Data frame for sex duplication obs.
+nrow(dupliSex)                                    # Row count for data frame
 ```
 
-With zero row of sex duplication observation, we conclude that there is no employee having different sex recorded. We will check whether sex "U" employee is still in our data
+With zero rows of sex duplication observation, we conclude that no employee has different sex recorded. We will check whether sex "U" employee is still in our data.
 
 ```{r}
 nrow(raw26[which(raw26$Sex == "U"), ])
 ```
 
-There is no sex "U" employees among those who got 26 pay check in 2017 ficial year, it's already removed. Then we will check about the duplication situation of ethnic group.
+There is no sex "U" employee among those who got 26 pay checks in 2017 fiscal year. They were already removed in previous steps. Then we will check about the duplication situation of ethnic groups.
 
-```{r warning=FALSE}
+```{r warning=FALSE, message=FALSE}
 df <- raw26 %>% 
   group_by(EmplId.Empl.Rcd, Ethnic.Grp) %>%
   summarise(Total.Gross = sum(Tot.Gross ))
-dupliEthnic.Grp <- df[duplicated(df$EmplId.Empl.Rcd), ]  #Data frame for Ethnic duplication obs.
-nrow(dupliEthnic.Grp)                                    #row count for data frame
+dupliEthnic.Grp <- df[duplicated(df$EmplId.Empl.Rcd), ]  # Data frame for Ethnic duplication obs.
+nrow(dupliEthnic.Grp)                                    # Row count for data frame
 ```
 
-Zero row of Ethnic duplication observation tells us that there is no different ethnic recorded for the same employee. 
+Zero row of Ethnic duplication observation tells us that there is no different ethnic record for the same employee. 
 
-Now we notice that some employees even have gross income or biweekly rate less then zero. We consider to remove those employees. 
+Now we notice that some employees even have gross income or biweekly rate less than zero. We consider to remove those employees. 
 
 ```{r}
 salary <- raw26
 subGross0 <- salary[which(salary$Tot.Gross <= 0 | salary$Bi.Weekly.Comp.Rate <= 0), ]
 len <- length(unique(subGross0$EmplId.Empl.Rcd))
-for(i in 1:len){
+for (i in 1:len) {
     j <- which(salary$EmplId.Empl.Rcd == unique(subGross0$EmplId.Empl.Rcd)[i])
-    if(i == 1) id = j
-    else if(i > 1) id = c(id, j)
-  }
-salary <- salary[-id, ]  #remove employees with negative or zero Tot.Gross and Bi.Weekly.Comp.Rate
+    if (i == 1) {
+      id = j
+    } else if (i > 1) { 
+      id = c(id, j)
+    }
+}
+# Remove employees with negative or zero Tot.Gross and Bi.Weekly.Comp.Rate
+salary <- salary[-id, ]  
 ```
 
-The employees with negative or zero Tot.Gross and biweekly rate are removed. Now let's check the distribution of total gross.
+The employees with negative or zero Tot.Gross and biweekly rates are removed. Now let's check the distribution of total gross.
 
 (ref:salary-TotGross) Scatterplot and lagplot of total gross income.
 
@@ -115,24 +130,27 @@ plot(salary$Tot.Gross)
 lag.plot(salary$Tot.Gross)
 ```
 
-Both scatter plot and lag plot show that most total gross point scatter under \$20000, some of them are even above \$60000.
+Both scatter plot and lag plot show that most total gross salary points scatter under \$20000, some of them are even above \$60000.
 
 We will not keep those employees with Job.Indicator as "S" too.
 
 ```{r}
 subIndicator <- salary[which(salary$Job.Indicator == "S"), ]
 len <- length(unique(subIndicator$EmplId.Empl.Rcd))
-for(i in 1:len){
+for (i in 1:len) {
     j <- which(salary$EmplId.Empl.Rcd == unique(subIndicator$EmplId.Empl.Rcd)[i])
-    if(i == 1) id = j
-    else if(i > 1) id = c(id, j)
-  }
-salary <- salary[-id, ]  #remove employees with Job indicator as "S"
+    if (i == 1) {
+      id = j
+    } else if(i > 1) {
+      id = c(id, j)
+    }
+}
+salary <- salary[-id, ]  # Remove employees with Job indicator as "S"
 ```
 
 Employees with Job indicator as "S" are moved. We also will not consider those employees with duplicated union descriptions.
 
-```{r}
+```{r message=FALSE}
 df <- salary %>% 
   group_by(EmplId.Empl.Rcd, Union.Descr) %>%
   summarise(Total.Gross = sum(Tot.Gross ))
@@ -140,18 +158,24 @@ dupliUnion <- df[duplicated(df$EmplId.Empl.Rcd), ]
 len <- length(dupliUnion$EmplId.Empl.Rcd)
 for(i in 1:len){
     j <- which(salary$EmplId.Empl.Rcd == dupliUnion$EmplId.Empl.Rcd[i])
-    if(i == 1) id = j
-    else if(i > 1) id = c(id, j)
-  }
-salary <- salary[-id, ]  # remove employees with different Union descreption
+    if (i == 1) {
+      id = j
+    } else if (i > 1) {
+      id = c(id, j)
+    }
+}
+salary <- salary[-id, ]  # remove employees with different Union description
 ```
 
-Finally, we cleaned our data according to our interest and we will group our left observations according to employee ID "EmplId.Empl.Rcd", and just select variables like sex, ethnic group, union description, age, total gross and biweekly rate. We take round for age of each employee.
-```{r}
-salary <- salary %>% group_by(EmplId.Empl.Rcd, Sex, Ethnic.Grp, Union.Descr) %>% 
+Finally, we cleaned our data according to our interest and we will group our left observations according to employee ID "EmplId.Empl.Rcd", and just select variables like sex, ethnic group, union description, age, total gross, and biweekly rate. We take round for age of each employee.
+```{r message=FALSE}
+salary <- salary %>% 
+  group_by(EmplId.Empl.Rcd, Sex, Ethnic.Grp, Union.Descr) %>% 
   summarise(Age = round(mean(Age), 0), Tot.Gross = mean(Tot.Gross), 
             Bi.Weekly.Rate = mean(Bi.Weekly.Comp.Rate)) %>%
-  group_by(EmplId.Empl.Rcd) %>% filter(n() == 1) %>% droplevels()
+  group_by(EmplId.Empl.Rcd) %>% 
+  filter(n() == 1) %>% 
+  droplevels()
 str(data.frame(salary))
 ```
 
@@ -163,25 +187,19 @@ levels(salary$Ethnic.Grp)[levels(salary$Ethnic.Grp) == ""] <- "unknown"
 We replace level of empty space in Ethnic.Grp as "unknown".
 
 ```{r}
-str(data.frame(salary))
 summary(salary)
 ```
 
-Now 3441 employees are included in our data set. These employees include both male and female, aged from 22 to 81, group into 8 different ethnics. They belong to 54 different Unions. The minimum total gross is \$568.7 and maximum is \$17530.3. Biweekly rate range is from \$25.78 to \$12884.62.
+Now 3441 employees are included in our data set. These employees include both males and females, aged from 22 to 81, group into 8 different ethnicities. They belong to 54 different Unions. The minimum total gross is \$568.7 and the maximum is \$17530.3. The biweekly rate ranges from \$25.78 to \$12884.62.
 
-As for this salary data, we will focus on the total gross income of these state employees. We are interested in the points such as:
-How about the distribution of the total gross income?
-Are male and female paid equally?
-Is there any difference in total gross for different age and age group?
-Do some ethnic group get better pay than the others?
-What's the most important factor effecting the gross income of these state employees?
+As for this salary data, we will focus on the total gross income of these state employees. We are interested in the points such as: How about the distribution of the total gross income? Are males and females paid equally? Is there any difference in total gross for different ages and age groups? Do some ethnic groups get better payment than others? What's the most important factor affecting the gross income of these state employees?
 
-First , let's see the information of these variables.
+First, let's see the information of these variables.
 
 ## Information about the variables
 ### Income and age
 
-From previous plots of total gross, we know that "Tot.Gross" is not scattered randomly. We need to transform total gross first.
+From the pre-analysis of total gross(Figure 10.3), we know that "Tot.Gross" is not scattered randomly. We need to transform total gross first.
 ```{r}
 salary$Gross.Log <- log(salary$Tot.Gross)
 ```
@@ -189,8 +207,8 @@ salary$Gross.Log <- log(salary$Tot.Gross)
 (ref:salary-HistQQ) Histogram and QQ plot for total gross, log of gross and age.
 
 ```{r salary-HistQQ, fig.width=10, fig.height=8, fig.cap='(ref:salary-HistQQ)', fig.align='center'}
-variable <- c("Tot.Gross", "Gross.Log", "Age")  # pick up the numeric columns
-par(mfrow = c(3, 2))  # layout in 3 rows and 2 columns
+variable <- c("Tot.Gross", "Gross.Log", "Age")  # Pick up the numeric columns
+par(mfrow = c(3, 2))  # Layout in 3 rows and 2 columns
 for (i in 1:length(variable)){
   sub <- unlist(salary[variable[i]])
   submean <- mean(sub)
@@ -198,22 +216,24 @@ for (i in 1:length(variable)){
   abline(v = submean, col = "blue", lwd = 1)
   qqnorm(sub, main = paste("Q-Q Plot of", variable[i], sep = " "))
   qqline(sub) 
-  if (i == 1) {s.t <- shapiro.test(sub)
-  } else {s.t <- rbind(s.t, shapiro.test(sub))
+  if (i == 1) {
+    s.t <- shapiro.test(sub)
+  } else {
+    s.t <- rbind(s.t, shapiro.test(sub))
  }
 }
-s.t <- s.t[, 1:2]  # take first two columns of shapiro.test result
-s.t <- cbind(variable, s.t) # add variable name for the result
+s.t <- s.t[, 1:2]  # Take first two columns of shapiro.test result
+s.t <- cbind(variable, s.t) # Add variable name for the result
 s.t
 ```
 
-Tot gross is not statistically normally distributed. It's extremely left skewed distributed.
+Tot gross is not statistically normally distributed. It's extremely left-skewed distributed.
 
 The distribution of Gross.Log, transformation of Tot.Gross is closer to normality than Tot.Gross.
 
-Highest frequency employees are aged between 45 and 50 years old. The distribution of age is close to bell shape.
+The highest frequency employees are aged between 45 and 50 years old. The distribution of age is close to the bell shape.
 
-Shapiro tests deny the normality of all these three numeric variables.
+Shapiro tests deny the normality of all these three numeric variables, though we assume they are normally distributed in our analyses.
 
 ### Ethnic group
 ```{r warning=FALSE}
@@ -224,8 +244,8 @@ ggplot(counts, aes(x = reorder(Var1, Freq), y = Freq)) +
   geom_bar(stat = 'identity', fill = rainbow(8)) + 
   geom_text(aes(x = c(8:1), y = Freq + 100 , label = perc), size = 3.5) +
   labs(x = 'Ethnic Group', y = 'Freqency', title = 'Ethnic group by count') +  
-  theme_bw() +  # classic dark-on-light
-  coord_flip() +  # flip the plot
+  theme_bw() +  # Classic dark-on-light
+  coord_flip() +  # Flip the plot
   theme(plot.title = element_text(hjust = 0.5)) 
 ```
 
@@ -235,18 +255,18 @@ ggplot(counts, aes(x = reorder(Var1, Freq), y = Freq)) +
 ```{r warning=FALSE, message=FALSE}
 library(plotrix)
 counts <- sort(table(salary$Sex), decreasing = TRUE)
-#labels with count number and percentage
+# Labels with count number and percentage
 p <- paste(round(counts/sum(counts), 2)*100, "%", sep = "")
 lbls <- paste(names(counts), "\n", counts, p, sep = "  ") 
 pie3D(counts, labels = lbls, explode = 0.05,
-    main = "Pie chart of sex", labelcex = 1.0, labelpos=c(1.8, 5.0))
+    main = "Pie chart of sex", labelcex = 1.0, labelpos = c(1.8, 5.0))
 ```
 
-There are around 4% more female than male in the state employees. 
+There are around 4% more females than males in the state employees. 
 
 ### Union descreption
 ```{r warning=FALSE}
-top10Union <- data.frame(sort(table(salary$Union.Descr), decreasing = TRUE)[1:10]) #by count
+top10Union <- data.frame(sort(table(salary$Union.Descr), decreasing = TRUE)[1:10]) # By count
 names(top10Union)[1] <- "Union.Descr"
 topUnion <- salary %>%
   group_by(Union.Descr) %>%
@@ -257,10 +277,10 @@ df <- data.frame(top10Union, topUnion)
 names(df)[1]<- "Top unions by count"
 names(df)[3]<- "Top unions by log of gross"
 library(knitr)
-kable(df, booktabs=TRUE, caption = "Top unions by count and average log value of gross")
+kable(df, booktabs = TRUE, caption = "Top unions by count and average log value of gross")
 ```
 
-The top unions by count are Service Maintain, Correctional officers, and Social & Human Services. But according to average gross, the first four are all come from university or college. Except Managerial, the top unions by count are totally different from top unions by average gross.
+The top three unions by count are Service Maintain, Correctional officers, and Social & Human Services. While according to the average gross, the first three are all come from university or college. Except for Managerial, the top 10 unions by count are totally different from top 10 unions by the average gross.
 
 ## Analysis of gross income
 ### Age
@@ -287,7 +307,7 @@ library(gridExtra)
 grid.arrange(p1, p2, nrow = 1)
 ```
 
-In total, the older the employees, the higher their gross income. Density plot shows lots of employees have log gross income around 8. 
+In total, the older the employees are, the more they earn. They average gross income are around 3000. The density plot shows lots of employees have a log gross of income around 8. 
 
 Now we separate age into groups with age gap of 10.
 ```{r}
@@ -305,24 +325,24 @@ ggplot() +
             aes(label = round(Avg.Gross.Log, 2), x = Age., y = Avg.Gross.Log - 0.1))
 ```
 
-With average 10 years of age increasing, log value of gross increase step by step until age 80.
+With every 10 years of age increasing, the log values of gross increase step by step except age group 80-90.
 
 ```{r}
 model <- aov(salary$Gross.Log~salary$Age.)
 summary(model)
 ```
 
-With p value of much less than 0.05, we reject the null hypothesis that there is no significant difference among these means of log value of gross income for different age groups, which means there is at least one of the means of log value of gross income is different from the others.
+With p-value of much less than 0.05, we reject the null hypothesis that there is no significant difference among these means of log value of gross income for different age groups, which means there is at least one of the means of log value of gross income is different from the others.
 
 ```{r message=FALSE, warning=FALSE}
 library(agricolae)
-# LSD.test need provide degrees of freedom and mean square for errors. We can got it from aov.
+# LSD.test needs to provide degrees of freedom and mean square for errors. We can get it from aov.
 res <- LSD.test(salary$Gross.Log, salary$Age., 
-                DFerror = model$df.residual, MSerror=anova(model)[["Mean Sq"]][2])  
+                DFerror = model$df.residual, MSerror = anova(model)[["Mean Sq"]][2])  
 res$groups
 ```
 
-From the information of pairwise comparison, the total different alpha beta index indicates that these 8 age groups are significantly different from each other in mean log value of total gross income. The elder the age, the higher the log value of gross income, except for age group between 80 and 90, which has the lowest mean log gross income comparing with all other age groups.
+From the information of pairwise comparison, the total different alpha-beta index indicates that these 8 age groups are significantly different from each other in mean log value of total gross income. The elder the age, the higher the log value of gross income, except for the age group between 80 and 90, which has the lowest mean log gross income comparing with all other age groups.
 
 (ref:salary-UnionAge) Percentage of union descriptions by age group.
 
@@ -339,11 +359,11 @@ ggplot(aes(x = Age, y = Avg.Gross, fill = Union.Descr)) +
   scale_x_continuous(breaks = seq(10, 100, 10)) +
   labs(y = "Percentage") +
   theme(panel.background = element_rect(fill = "black"),
-  panel.grid.major = element_blank(), panel.grid.minor=element_blank())
+  panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 ggplotly(p)
 ```
 
-This is the distribution of average gross percentage of Union Descriptions by age group. By use mouse we can find out the information of percentage occupation of union description for certain age. For example, for age 22, Administrative Clerical, Exempt/Elected/Appointed, Service/Maintenance and UCHC Univ Hlth Professional these four union share the total Log of gross almost equally, while for age 81, the only union is Legislative Management.
+This is the distribution of average gross percentage of Union Descriptions by age group. By using a mouse we can find out the information of percentage occupation of union description for a certain age. For example, for age 22, Administrative Clerical, Exempt/Elected/Appointed, Service/Maintenance and UCHC Univ Hlth Professional these four unions share the total Log of gross almost equally, while for age 81, the only union is Legislative Management.
 
 ### Sex
 
@@ -351,25 +371,25 @@ This is the distribution of average gross percentage of Union Descriptions by ag
 
 ```{r salary-GrossSex, fig.width=8, fig.height=4, fig.cap='(ref:salary-GrossSex)', fig.align='center'}
 par(mfrow = c(1, 2))
-# density plot for each sex
+# Density plot for each sex
 df1 <- salary[which(salary$Sex == "F"), ]
 df2 <- salary[which(salary$Sex == "M"), ]
 plot(density(df1$Gross.Log), col = "red", xlab = "Log of Gross", 
      main = "Density plot for each sex")
-lines(density(df2$Gross.Log), col = "blue")  #add density line of df2 to density plot of df1
-legend("topright", c("M","F"), lty = c(1, 1), col = c("blue", "red"))  #add legend
+lines(density(df2$Gross.Log), col = "blue")  # Add density line of df2 to density plot of df1
+legend("topright", c("M","F"), lty = c(1, 1), col = c("blue", "red"))  # Add legend
 # LSD comparison for sex grouop
 model <- aov(salary$Gross.Log~salary$Sex)
 res <- LSD.test(salary$Gross.Log, salary$Sex, 
-                DFerror = model$df.residual, MSerror=anova(model)[["Mean Sq"]][2]) 
+                DFerror = model$df.residual, MSerror = anova(model)[["Mean Sq"]][2]) 
 gross <- round(res$groups[, "salary$Gross.Log"], 2)
 plot(res, xlab = "Sex Group", ylab = "Range between max and min", 
      main = "Sex groups and variation range")
 text(x = c(seq(from = 1, to = 10, by = 1.2)), y = 8, gross)
 ```
 
-Density plot shows blue male line is later than red female line, which means male has bigger log of gross than female in total. The density peak of female is earlier than male also tell the same story.
-The total different alpha beta index indicates that these 2 sex groups are significantly different from each other in mean log of gross, male get higher gross income than female.
+Density plot shows the blue male line is later than the red female line, which means male has a bigger log of gross than female in total. The density peak of the female group is earlier than the male group also tell the same story.
+The total different alpha-beta index indicates that these 2 sex groups are significantly different from each other in the mean log of gross, males get higher gross income than females.
 
 (ref:salary-EthnicSex1) Log of gross comparison by ethnic and sex group.
 
@@ -397,13 +417,13 @@ library(gridExtra)
 grid.arrange(p1, p2, nrow = 1)
 ```  
 
-Both plots tell us that for other ethnic groups except Asian, male has higher average log gross than female. On average, Asian female earn similar as male. Amind male have more bigger log of gross than Amind female. From the left point-line plot we can see the same situation for Pacif ethnic. Because of the tiny amount of PACIF employees, there is no ridge showing in the right density-ridge plot.
+Both plots tell us that for other ethnic groups except Asian, the male has a higher average log gross than the female. On average, Asian females earn similar as males. Amind males have much bigger log of gross than Amind females. From the left point-line plot, we can see the same situation for Pacif ethnic: Pacif males have much bigger log of gross than Pacif females. Because of the tiny amount of PACIF employees, there is no ridge showing in the right density-ridge plot.
 
 (ref:salary-Diverging) Diverging bars of stanardized log of gross income.
 
 ```{r salary-Diverging, fig.width=8, fig.height=8, fig.cap='(ref:salary-Diverging)', fig.align='center'}
 # Standardize Gross.Log first. Separate into two groups "Below average" and "Above average"
-Sd.Gross <- round((salary$Gross.Log - mean(salary$Gross.Log))/sd(salary$Gross.Log), 2)
+Sd.Gross <- round((salary$Gross.Log - mean(salary$Gross.Log)) / sd(salary$Gross.Log), 2)
 Gross.Type <- ifelse(Sd.Gross < 0, "Below average", "Above average")
 Sex <- salary$Sex
 Category <- salary$Union.Descr
@@ -411,13 +431,13 @@ df <- data.frame(Category, Sd.Gross, Gross.Type, Sex)
 
 ggplot(df, aes(x = Category, y = Sd.Gross)) + 
   geom_bar(stat = 'identity', aes(fill = Gross.Type), width = .5)  +
-  facet_wrap(~ Sex) +   # arranges panels according to sex
+  facet_wrap(~ Sex) +   # Arranges panels according to sex
   labs(x = "Union Descreption", y = "Standardized log of gross") + 
-  coord_flip() +   # horizontal plot
+  coord_flip() +   # Horizontal plot
   theme(legend.position = "top")
 ```
 
-From the figure we can see that for both male and female, the pattern of above and below average for almost all of the union description are similar. The only difference is the difference in total standardized log value of gross for male and female. For example, for union UCHC Univ Hlth Professionals on top, administrative Clerical on the bottom and other two unions like service/maintenance and Correctional Officers, all these four unions have more standardized log value of gross below average, which means these are relatively low pay unions. At the same time, female UCHC Univ Hlth Professionals, administrative Clerical and male service/maintenance and Correctional Officers get this log value less comparing with the other gender in the same union, which may be explained that more females work in Univ Hlth Professionals, administrative Clerical union, while more males work as service/maintenance and Correctional Officers. On the other hand, union Uconn Faculty, Engineer Scien Tech, Health professional and Judicial Professional have more standardized log value of gross above average, which means they are good pay union. Maybe there are less female Uconn Faculty and Engineer Scien Tech, and less male Health professional and Judicial Professional because these combinations get less positive log value than the other gender in the same union.
+From the figure we can see that for both male and female, the pattern of above and below average for almost all of the union descriptions are similar. The only difference is the difference in total standardized log value of gross for male and female. For example, for union UCHC Univ Hlth Professionals on top, administrative Clerical on the bottom and other two unions like service/maintenance and Correctional Officers, all these four unions have more standardized log value of gross below average, which means these four are relatively low pay unions. At the same time, female UCHC Univ Hlth Professionals, administrative Clerical and male service/maintenance and Correctional Officers get this log value less comparing with the other gender in the same union, which may be explained that more females work in Univ Hlth Professionals, administrative Clerical union, while more males work as service/maintenance and Correctional Officers. On the other hand, union Uconn Faculty, Engineer Scien Tech, Health professional and Judicial Professional have more standardized log value of gross above average, which means they are good pay union. Maybe there are fewer female Uconn Faculty and Engineer Scien Tech, and fewer male Health Professional and Judicial Professional because these combinations get less positive log value than the other gender in the same union.
 
 ### Ethnic Group
 
@@ -442,20 +462,20 @@ ggplot(aes(x = Gross.Log, y = Ethnic.Grp, color = Ethnic.Grp, fill = Ethnic.Grp)
   xlim(6.0, 10.0) +
   coord_flip() +
   theme(legend.position = "none")
-# display two plots in same row 
+# Display two plots in same row 
 grid.arrange(p1, p2, nrow = 1)
 ```
 
-From the bar figure we can see that Asian and White have relatively high gross incomes, Pacif and unknown get lower gross incomes. There is no big difference of variance for all other ethnic groups but Pacif, next Amind. Density ridge plot shows White, Asian and Nespec have biggest density above log of gross of 8.5, while unknown, Amind and Hispa have more density below 8. Ethnic Black's density keep even at both sides of log of gross of 8. At the same time, ethnic group of white, black, and unknown have relatively symmetrical density distribution; 
+From the bar figure we can see that Asian, Nspec, and White have relatively high gross incomes, Pacif and unknown get lower gross incomes. There is no big difference of variance for all other ethnic groups but Pacif, next Amind. Density ridge plot shows White, Asian, and Nespec have THE biggest density above log of gross of 8.5, while unknown, Amind and Hispa have more density below 8. Ethnic Black's density keepS even at both sides of log of gross of 8. At the same time, ethnic groups of white, black, and unknown have relatively symmetrical density distribution; 
 Asian and Nespec have upper skewed density; While AMIND and HISPA have lower skewed density.
 
 (ref:salary-EthnicRank) Ethnic rank plot by count and log of gross.
 
 ```{r salary-EthnicRank, message=FALSE, fig.cap='(ref:salary-EthnicRank)', fig.align='center'}
-# get ethnic order according frequency of count
+# Get ethnic order according to the frequency of count
 CountEthnic <- data.frame(sort(table(salary$Ethnic.Grp), decreasing = TRUE))
 
-# get ethnic order according log of gross income
+# Get ethnic order according log of gross income
 GrossEthnic <- salary %>%
   group_by(Ethnic.Grp) %>%
   summarise(Avg.Gross = mean(Gross.Log)) %>%
@@ -472,7 +492,7 @@ dat <- data.frame(Rank, EthnicType, EthnicGroup)
 ggplot(dat, aes(y = Rank, x = EthnicType, label = EthnicGroup, group = EthnicGroup) )+
   geom_line(size = 1) +
   geom_point(aes(color = EthnicGroup), size = 5) +
-  scale_y_continuous(breaks = seq(0,10,1)) +
+  scale_y_continuous(breaks = seq(0, 10, 1)) +
 annotate("text", x = 0.7, y = Rank[1:8], label = EthnicGroup[1:8], hjust = 0, cex = 3.5) +
 annotate("text", x = 2.1, y = Rank[9:16], label = EthnicGroup[9:16], hjust = 0, cex = 3.5) 
 ```
@@ -483,7 +503,7 @@ According to count, most of the state employees are white and Black. Hispa and N
 model <- aov(Gross.Log ~ Ethnic.Grp, data = salary)
 tukey <- TukeyHSD(model)
 par(mar = c(4, 10, 2, 1))
-psig = as.numeric(apply(tukey$Ethnic.Grp[, 2:3], 1, prod) >= 0) + 1
+psig <- as.numeric(apply(tukey$Ethnic.Grp[, 2:3], 1, prod) >= 0) + 1
 plot(tukey, col = psig, las = 1, cex.axis = 0.7, yaxt = "n")
 for (j in 1:length(psig)){
 axis(2, at = j,labels = rownames(tukey$Ethnic.Grp)[length(psig) - j + 1],
@@ -497,23 +517,23 @@ There is no significant difference between the means of log gross for black pair
 ggplot(salary, aes(x = Age, y = Gross.Log, colour = Sex, shape = Sex)) +
   geom_point() +
   ggtitle("Scatterplot of log of gross vs Age by Sex and Ethnic") +
-  facet_wrap(~ Ethnic.Grp) +  # arrange panels by Ethnic Group
-  geom_smooth(aes(colour = Sex), method = 'lm',formula = y ~ x)  +  # add the regression line
+  facet_wrap(~ Ethnic.Grp) +  # Arrange panels by Ethnic Group
+  geom_smooth(aes(colour = Sex), method = 'lm',formula = y ~ x)  +  # Add the regression line
   theme(plot.title = element_text(hjust = 0.5), legend.position = c(0.85, 0.15))
 ```
 
-In our data set, we have much more employees in white, but really little in Pacif. For both male and female, with increasing in age, log of gross increase slightly for all other ethnics but Nspec. For most ethnics, male and female have similar pattern for the relation between age and log of gross. For ethnic unknown and Amind, male's log of gross increase faster than female, but for Asian, male's log of gross increase slower than female. 
+In our data set, we have much more employees in white, but very little in Pacif. For both male and female, with the increase in age, log of gross increase slightly for all other ethnic groups but Nspec. For most ethnic groups, male and female have a similar pattern for the relationship between age and log of gross. For ethnic unknown and Amind, male's log of gross increase faster than female, but for Asian, male's log of gross increase slower than female. 
 
 ## Analysis of gross income type
 ### Gross Type
-According to the average log of gross for each employee, we separate the employees into three groups: High.Gross with average log of gross greater than 8.5, Middle.Gross with average log of gross greater than 7.8, and Low.Gross with average log of gross equal or less than 7.8.
+According to the average log of gross for each employee, we separate the employees into three groups: High.Gross with average log of gross greater than 8.5, Middle.Gross with average log of gross between 7.8 and 8.5, and Low.Gross with average log of gross equal or less than 7.8.
 ```{r}
-#regroup gross by average log of gross for each EmplId.Empl.Rcd as Gross.Type
+# Regroup gross by average log of gross for each EmplId.Empl.Rcd as Gross.Type
 High.Gross <- as.vector(salary$EmplId.Empl.Rcd[which(salary$Gross.Log > 8.5)])
 Middle.Gross <- as.vector(salary$EmplId.Empl.Rcd[which(salary$Gross.Log > 7.8)])
 salary <- salary %>%
-mutate(Gross.Type =                           
-  ifelse(EmplId.Empl.Rcd %in% High.Gross, "High",
+  mutate(Gross.Type =                           
+    ifelse(EmplId.Empl.Rcd %in% High.Gross, "High",
       ifelse(EmplId.Empl.Rcd %in% Middle.Gross, "Middle",
        "Low")))
 ```
@@ -521,15 +541,18 @@ mutate(Gross.Type =
 For each gross type, we try to get information about total number of observation, percentage, employee number, average log of gross, average of total gross and standardized total gross.
 ```{r warning=FALSE, message=FALSE}
 library(janitor)
-df1 <- salary %>% group_by(Gross.Type) %>% 
-       tabyl(Gross.Type) 
-df2 <- salary %>% group_by(Gross.Type) %>% 
-       summarise(Avg.Log.Gross = mean(Gross.Log), Avg.Tot.Gross = mean(Tot.Gross)) 
-df <- merge(df1, df2, by="Gross.Type") %>% arrange(desc(Avg.Log.Gross)) 
+df1 <- salary %>% 
+  group_by(Gross.Type) %>% 
+  tabyl(Gross.Type) 
+df2 <- salary %>% 
+  group_by(Gross.Type) %>% 
+  summarise(Avg.Log.Gross = mean(Gross.Log), Avg.Tot.Gross = mean(Tot.Gross)) 
+df <- merge(df1, df2, by="Gross.Type") %>% 
+  arrange(desc(Avg.Log.Gross)) 
 df <- round(df[, 2:5], 2)  # round all numeric variables to decimal 2
-Gross.Type = c("High, Gross.Log>8.5", "Middle, Gross.Log>7.8","Low, Gross.Log<=7.8") 
+Gross.Type = c("High, Gross.Log>8.5", "Middle, Gross.Log>7.8", "Low, Gross.Log<=7.8") 
 df <- cbind(Gross.Type, df)
-kable(df,  booktabs=TRUE, caption = "Table of gross type")
+kable(df,  booktabs = TRUE, caption = "Table of gross type")
 ```
 
 
@@ -543,15 +566,16 @@ ggplot(df, aes(x = Gross.Type,
   labs(x = "Gross Type", y = "Employee Number", 
        title = "Average gross and employee distribution for each gross type") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  geom_text(x= c(1, 2, 3), y = c(2000, 1900, 1800), size = 4, color = "black")
+  geom_text(x = c(1, 2, 3), y = c(2000, 1900, 1800), size = 4, color = "black")
 ```
 
-High gross group occupy 6% of the total employees. Around 68% employees earned middle gross, and around 26% employees earned low. The gross decrease straightly. The real average total gross change from 6307 dollars/Bi-weekly to 3380, then to 2066 for high, middle and low gross group. The average real gross income for high gross group is more than 3 times of that for low gross group.
+The high gross group occupies 6% of the total employees. Around 68% of employees earn middle gross, and around 26% of employees earn low. The gross decrease straightly. The average total gross changes from 6307 dollars/Bi-weekly to 3380, then to 2066 for the high, middle and low gross group. The average gross income for the high gross group is more than 3 times of that for the low gross group.
 
 ### Ethnic and Sex and age
 ```{r}
-salary %>% mutate(EthnicSex = paste(Ethnic.Grp, Sex, sep = "-")) %>%
-tabyl(EthnicSex, Gross.Type,  show_missing_levels = FALSE) %>%
+salary %>% 
+  mutate(EthnicSex = paste(Ethnic.Grp, Sex, sep = "-")) %>%
+  tabyl(EthnicSex, Gross.Type,  show_missing_levels = FALSE) %>%
   adorn_totals("row") %>%
   adorn_totals("col") %>%
   adorn_percentages("all") %>%
@@ -562,7 +586,7 @@ tabyl(EthnicSex, Gross.Type,  show_missing_levels = FALSE) %>%
 
 In high gross type, white male occupy much bigger portion than any other male or female ethnic groups. For other ethnic groups with high gross income, female's portion is equal or higher than male.
 
-Situation keeps similar to high gross type for middle gross type, white and Asian male occupy more portion than white and Asian female, while for other ethnics, female is more than male.
+The situation keeps similar for high gross type and middle gross type, white and Asian male occupy more portion than white and Asian female, while for other ethnics, female is more than male.
 
 For low gross type, no matter the ethnic the employees belong, female is more than male. 
 
@@ -570,7 +594,7 @@ In total, only white male is more than female, but for all other ethnics, female
 
 For all other ethnics, over half of the employees belong to middle gross type, but unknown group has more people in low gross type.
  
-```{r }
+```{r warning=FALSE}
 library(ggmosaic)
 h_mosaic <- ggplot(data = salary) +
   geom_mosaic(aes(x = product(Sex, Ethnic.Grp), fill = Age.), 
@@ -585,43 +609,44 @@ ggplotly(h_mosaic, width = 750, height = 500) %>%
   layout(legend = list(orientation = "h", y = 1))
 ```
 
-Here is the mosaic plot of each sub group we discussed in the above table of gross type and ethnic group. They are high, middle and low gross type from upper to lower. We add age group as another factor. There are much more elder employees above 50 appearing in high gross group, especially the male elders aged between 70 and 80.
+Here is the mosaic plot of each subgroup we discussed in the above table of gross type and ethnic group. They are high, low, and middle gross types from top to bottom. We add age group as another factor. There are much more elder employees above 50 appearing in the high gross group, especially the male elders aged between 70 and 80.
 
 
 ##  LM and ANOVA analysis
-According to our previous analysis we try to fit a model for log of gross with Age., Ethnic.Grp, Sex, and Union description. 
+According to our previous analysis we try to fit a model for log of gross with Age group, Ethnic.Grp, Sex, and Union description. 
 ```{r}
-salaryglm <- salary[, -c(1, 6:7, 9:10)] # remove first col. of EmplId.Empl.Rcd
+salaryglm <- salary[, -c(1, 6:7, 9:10)] # Remove first col. of EmplId.Empl.Rcd and other variables
+str(salaryglm)
 ```
 
 ```{r warning=FALSE }
 model0 <- lm(Gross.Log ~ ., data = salaryglm)
-ss <- coef(summary(model0))  # take only coeficient of summary
-ss.sig <- ss[ss[, "Pr(>|t|)"] < 0.05, ][1:20, ]  # show first 20 coeficient with p<0.05
+ss <- coef(summary(model0))  # Take only coefficient of summary
+ss.sig <- ss[ss[, "Pr(>|t|)"] < 0.05, ][1:20, ]  # Show first 20 coefficient with p < 0.05
 ss.sig
-# show Adjusted R-squared value
+# Show Adjusted R-squared value
 statistic <- paste("Adjusted R-squared",round(summary(model0)$adj.r.squared, 4), sep = ": ")
 statistic
 model1 <- aov(Gross.Log ~ ., data = salaryglm)
 summary(model1)
 ```
 
-LM model indicate that Average Gross is related with all factors including Age, Ethnic group, Sex, and Union description. ANOVA test illustrates Average Gross is significantly affected by all four factors, especially by age and sex.
+LM model indicates that log value of gross income is related to all factors including Age group, Ethnic group, Sex, and Union description. ANOVA test illustrates that log Gross is significantly affected by all these four factors.
 
 
 ## Conclusion
 
 - Total Gross is not statistically normally distributed. It skewed to left. After taking log transformation, it is more close to normality.
 
-- The elder the age, the higher the gross income, but not for age group between 80 and 90.
+- The elder the age, the higher the gross income, but not for the age group between 80 and 90.
 
-- On average, males earn more than females in the same age, ethnic, union.
+- On average, males earn more than females of the same age, ethnic, and union.
 
 - The means of log gross are significantly different for different ethnic groups. On average, Asian and white are the top two groups. PACIF and unknown are the last.
 
-- The real average total gross change from 6307 dollars bi-weekly to 3380, and to 2066 for high , middle and low gross group. High, middle and low gross group occupy 6%, 68%, and 26% of the total employees. White male occupy much bigger portion in high gross group, especially the elder white male.
+- The real average total gross change from 6307 dollars bi-weekly to 3380, and to 2066 for the high , middle, and low gross group. High, middle and low gross groups occupy 6%, 68%, and 26% of the total employees. White males occupy much bigger portion in high gross group, especially the elder white males.
 
-- Age group, Union description, Sex, and Ethnic group together will explained 50% of log variance of gross. 
+- Age group, Union description, Sex, and Ethnic group together explained around 50% of variance of log gross. 
 
 >
 ```{exercise}
@@ -629,21 +654,21 @@ LM model indicate that Average Gross is related with all factors including Age, 
 >
 Create a folder, download the data file "state_empoyee_salary_data_2017.csv" into it, and create an Rstudio project in the folder. Read in the data file, peak the structure of your data set and clean it step by step:
 >  
-a. Select only columns of "EmplId.Empl.Rcd", "Bi.Weekly.Comp.Rate", "Age", "Ethnic.Grp", "Sex", "Full.Part", "City", get summary information for all these variables. Make sure "EmplId.Empl.Rcd", "Sex", "Ethnic.Grp" to be factor, "Age" and "Bi.Weekly.Comp.Rate" to be numeric.
-b. Pick up full time employees in city "Hartford".
-c. Select only those employees with 26 pay checks for 2017 ficial year(Hint:Each employee has unique ID of "EmplId.Empl.Rcd"). 
-d. Remove sex group other than "F" and "M" if there is any. Hint:Use str() after droplevels().
+a. Select only columns of "EmplId.Empl.Rcd", "Bi.Weekly.Comp.Rate", "Age", "Ethnic.Grp", "Sex", "Full.Part", "City", get summary information for all these variables. Make sure "EmplId.Empl.Rcd", "Sex", "Ethnic.Grp" to be factors, "Age" and "Bi.Weekly.Comp.Rate" to be numerics.
+b. Pick up full-time employees in the city "Hartford".
+c. Select only those employees with 26 paychecks for the 2017 fiscal year(Hint: Each employee has a unique ID of "EmplId.Empl.Rcd"). 
+d. Remove sex group other than "F" and "M" if there is any. Hint: Use str() after droplevels().
 e. Replace level of empty space in "Ethnic.Grp" as “unknown”.
-f. Remove emplolyees with "Bi.Weekly.Comp.Rate" equal or less than zero if there is any.
+f. Remove employees with "Bi.Weekly.Comp.Rate" equal or less than zero if there is any.
 g. Group your data set by "EmplId.Empl.Rcd", "Ethnic.Grp", and "Sex". For each employee, 
 take the mean of "Age", and the mean of "Bi.Weekly.Comp.Rate". Then round the means to the nearest integer and rename them as "Age" and "Bi.Weekly.Rate".
 h. Show structure and summary of your data set. 
 i. Show the distribution of "Bi.Weekly.Rate" and "Age" using histogram and QQ plot. Test the normality. Transform by taking log value if it is necessary.
 j. Using pie plot to show the distribution of "Sex".
 k. List the count number and percent of employees in each ethnic group. 
-l. Using scatter plot to view the relationship between average "Bi.Weekly.Rate" and "Age", add regression line and give your interpretation.
+l. Using a scatter plot to view the relationship between average "Bi.Weekly.Rate" and "Age", add a regression line and give your interpretation.
 m. Using box plot to view the relationship between "Bi.Weekly.Rate" by Ethnic groups.
 n. Using a density plot similar to Figure \@ref(fig:salary-GrossSex) to view the distribution of "Bi.Weekly.Rate" for different sex. Package ggplot2 is referred. 
-o. Do ANOVA test to check whether male are the same as female in "Bi.Weekly.Rate" in city "Hartford".
-p. Explore the interaction of "Ethnic.Grp" and "Sex" to "Bi.Weekly.Rate" using density ridges plot similar to Figure \@ref(fig:salary-EthnicSex) and interpret your plot.
+o. Do ANOVA test to check whether males are the same as females in "Bi.Weekly.Rate" in city "Hartford".
+p. Explore the interaction of "Ethnic.Grp" and "Sex" to "Bi.Weekly.Rate" using density ridges plot similar to Figure \@ref(fig:salary-EthnicSex1) and interpret your plot.
 ```
