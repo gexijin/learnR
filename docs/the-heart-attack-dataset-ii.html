@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 The heart attack dataset (II) | Learn R through examples</title>
-  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 The heart attack dataset (II) | Learn R through examples" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   <meta name="github-repo" content="gexijin/learnR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 6 The heart attack dataset (II) | Learn R through examples" />
   
-  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   
 
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-26" />
+<meta name="date" content="2021-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   
 <link rel="prev" href="the-heart-attack-data-set-i.html"/>
 <link rel="next" href="advanced-topics.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,35 +51,38 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -87,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -122,6 +126,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -135,37 +140,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
-<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-contain-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames contain rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
-<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
-<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-categorical-variable"><i class="fa fa-check"></i><b>1.4</b> Analyzing a categorical variable</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#the-relationship-between-two-numerical-variables"><i class="fa fa-check"></i><b>1.5</b> The relationship between two numerical variables</a></li>
 <li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
 <li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (ANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
-<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-makes-plotting-intuitive"><i class="fa fa-check"></i><b>2.2</b> The ggplot2 package makes plotting intuitive</a></li>
-<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.3</b> Scatter plots matrix</a></li>
-<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.4</b> Star and segment diagrams</a></li>
-<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.5</b> Parallel coordinate plot</a></li>
-<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.6</b> Bar plot with error bar</a></li>
-<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#box-plot-and-death-to-the-dynamite-plots"><i class="fa fa-check"></i><b>2.7</b> Box plot and death to the dynamite plots</a></li>
-<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#combining-plots"><i class="fa fa-check"></i><b>2.8</b> Combining plots</a></li>
-<li class="chapter" data-level="2.9" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.9</b> Hierarchical clustering and heat map</a></li>
-<li class="chapter" data-level="2.10" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#projecting-high-dimensional-data-with-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.10</b> Projecting high-dimensional data with principal component analysis (PCA)</a></li>
-<li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.2</b> Scatter plots matrix</a></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.3</b> Star and segment diagrams</a></li>
+<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-is-intuitive-and-powerful"><i class="fa fa-check"></i><b>2.4</b> The ggplot2 package is intuitive and powerful</a></li>
+<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#other-types-of-plots-with-ggplot2"><i class="fa fa-check"></i><b>2.5</b> Other types of plots with ggplot2</a></li>
+<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.6</b> Hierarchical clustering and heat map</a></li>
+<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.7</b> Principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-by-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.8</b> Classification by predicting the odds of binary outcomes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
 <li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
 <li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
 <li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
 <li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
 <li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
@@ -173,40 +180,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
-<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.2</b> Project-oriented workflow</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.2.1</b> Create a project in a new folder</a></li>
-<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.2.2</b> Create a script file and comment (!)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.2.3</b> Copy data files to the new directory</a></li>
-<li class="chapter" data-level="4.2.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.4</b> Import data files</a></li>
-<li class="chapter" data-level="4.2.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.5</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.2.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.6</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.3</b> Reading files directly using read.table</a></li>
-<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.4</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.2</b> Reading files directly using read.table</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.3</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.4</b> Enter data manually</a></li>
 <li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.5</b> Data manipulation in a data frame</a></li>
 <li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.6</b> Data transformation using the dplyr</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a><ul>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
 <li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
 <li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
 <li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
 <li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a><ul>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
 <li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
 <li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
 <li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
 <li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
-<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
@@ -214,7 +227,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a><ul>
+<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="the-state-dataset.html"><a href="the-state-dataset.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
 <li class="chapter" data-level="8.2" data-path="the-state-dataset.html"><a href="the-state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
 <li class="chapter" data-level="8.3" data-path="the-state-dataset.html"><a href="the-state-dataset.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
@@ -222,37 +236,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="the-state-dataset.html"><a href="the-state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
 <li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.4.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.4.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
-<li class="chapter" data-level="9.4.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.4.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.5.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.5.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
+<li class="chapter" data-level="9.5.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.5.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.8" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a><ul>
+<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
-<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
 <li class="chapter" data-level="10.2.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
 <li class="chapter" data-level="10.2.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
 <li class="chapter" data-level="10.2.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
 <li class="chapter" data-level="10.3.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
 <li class="chapter" data-level="10.3.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
 <li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
 </ul></li>
@@ -276,17 +297,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-heart-attack-dataset-ii" class="section level1">
+<div id="the-heart-attack-dataset-ii" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> The heart attack dataset (II)</h1>
 <p>We continue to investigate the heart attack dataset. First, let’s read in the data again and change several variables to factors. Note that you must set the working directory to where the data file is stored on your computer. I encourage you to define a project associated with a folder.</p>
-<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" title="1"><span class="co"># set working directory, not necessary if loading a project</span></a>
-<a class="sourceLine" id="cb711-2" title="2"><span class="co">#setwd(&quot;C:/Ge working/RBook/learnR/datasets&quot;)  </span></a>
-<a class="sourceLine" id="cb711-3" title="3">df &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)  <span class="co"># read data</span></a>
-<a class="sourceLine" id="cb711-4" title="4">df<span class="op">$</span>DRG &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DRG)  <span class="co"># convert DRG variable to factor</span></a>
-<a class="sourceLine" id="cb711-5" title="5">df<span class="op">$</span>DIED &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIED)</a>
-<a class="sourceLine" id="cb711-6" title="6">df<span class="op">$</span>DIAGNOSIS &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>DIAGNOSIS)</a>
-<a class="sourceLine" id="cb711-7" title="7">df<span class="op">$</span>SEX &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df<span class="op">$</span>SEX)</a>
-<a class="sourceLine" id="cb711-8" title="8"><span class="kw">str</span>(df)  <span class="co"># double check </span></a></code></pre></div>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb711-1"><a href="the-heart-attack-dataset-ii.html#cb711-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set working directory, not necessary if loading a project</span></span>
+<span id="cb711-2"><a href="the-heart-attack-dataset-ii.html#cb711-2" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(&quot;C:/Ge working/RBook/learnR/datasets&quot;)  </span></span>
+<span id="cb711-3"><a href="the-heart-attack-dataset-ii.html#cb711-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;datasets/heartatk4R.txt&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)  <span class="co"># read data</span></span>
+<span id="cb711-4"><a href="the-heart-attack-dataset-ii.html#cb711-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DRG <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DRG)  <span class="co"># convert DRG variable to factor</span></span>
+<span id="cb711-5"><a href="the-heart-attack-dataset-ii.html#cb711-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIED <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIED)</span>
+<span id="cb711-6"><a href="the-heart-attack-dataset-ii.html#cb711-6" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIAGNOSIS)</span>
+<span id="cb711-7"><a href="the-heart-attack-dataset-ii.html#cb711-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>SEX)</span>
+<span id="cb711-8"><a href="the-heart-attack-dataset-ii.html#cb711-8" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># double check </span></span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    12844 obs. of  8 variables:
 ##  $ Patient  : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41001&quot;,&quot;41011&quot;,..: 5 5 9 8 9 9 9 9 5 5 ...
@@ -296,30 +317,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  $ CHARGES  : num  4752 3941 3657 1481 1681 ...
 ##  $ LOS      : int  10 6 5 2 1 9 15 15 2 1 ...
 ##  $ AGE      : int  79 34 76 80 55 84 84 70 76 65 ...</code></pre>
-<div id="scatter-plot-in-ggplot2" class="section level2">
+<div id="scatter-plot-in-ggplot2" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Scatter plot in ggplot2</h2>
 <p>Hadley Wickham wrote the ggplot2 package in 2005 following Leland Wilkinson’s grammar of graphics, which provides a formal, structured way of visualizing data. Similarly, R was originally written by Robert Gentleman and Ross Ihaka in the 1990s; Linux was developed by Linus Torvalds, a student, at the same period. A few superheroes can make computing much easier for millions of people. ggplot2 uses a different approach to graphics.</p>
-<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" title="1"><span class="kw">library</span>(ggplot2)  <span class="co"># load the package</span></a>
-<a class="sourceLine" id="cb713-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES))  <span class="co"># Specify data frame and aesthetic mapping</span></a></code></pre></div>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb713-1"><a href="the-heart-attack-dataset-ii.html#cb713-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  <span class="co"># load the package</span></span>
+<span id="cb713-2"><a href="the-heart-attack-dataset-ii.html#cb713-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES))  <span class="co"># Specify data frame and aesthetic mapping</span></span></code></pre></div>
 <p>This line does not finish the plot; it just specifies the name of the data frame, which is the required input data type, and defines the so-called <strong>aesthetic mapping</strong>: LOS maps to x-axis while CHARGES maps to the y-axis. To complete the plot, we use the geom_point function to add data points, which is called <strong>geometric objects</strong>.</p>
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()   <span class="co"># scatter plot</span></a></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="the-heart-attack-dataset-ii.html#cb714-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>()   <span class="co"># scatter plot</span></span></code></pre></div>
 <p>Thus, it is a two-step process to generate a scatter plot. This seems cumbersome at first, but it is convenient to add additional features or customize the plot step by step. Let’s add a trend line with a confidence interval.</p>
-<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm)</a></code></pre></div>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="the-heart-attack-dataset-ii.html#cb715-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p>As we keep adding elements to the plot, this line of code gets longer. So we break the code into multiple lines as below. The “+” at the end of the line signifies that the plot is not finished and tell R to keep reading the next line. This code below does the same thing as the above, but it is easier to read. I often use the tab key in the second line to remind myself that it is continued from the above line.</p>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES)) <span class="op">+</span><span class="st">  </span><span class="co"># aesthetic mapping</span></a>
-<a class="sourceLine" id="cb717-2" title="2"><span class="st">         </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">                    </span><span class="co"># add data points    </span></a>
-<a class="sourceLine" id="cb717-3" title="3"><span class="st">       </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm)          <span class="co"># add trend line</span></a></code></pre></div>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="the-heart-attack-dataset-ii.html#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span>  <span class="co"># aesthetic mapping</span></span>
+<span id="cb717-2"><a href="the-heart-attack-dataset-ii.html#cb717-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_point</span>() <span class="sc">+</span>                    <span class="co"># add data points    </span></span>
+<span id="cb717-3"><a href="the-heart-attack-dataset-ii.html#cb717-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)          <span class="co"># add trend line</span></span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p>As you can see from this code, it also enables us to add comments for each step, making the code easy to read. This is important, as we often recycle our codes.</p>
 <p>We can also customize the plot by adding additional lines of code (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-1">6.1</a>):</p>
 
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES)) <span class="op">+</span><span class="st">                 </span><span class="co"># aesthetic mapping</span></a>
-<a class="sourceLine" id="cb719-2" title="2"><span class="st">       </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">                                   </span><span class="co"># add data points    </span></a>
-<a class="sourceLine" id="cb719-3" title="3"><span class="st">       </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm) <span class="op">+</span><span class="st">                       </span><span class="co"># add trend line</span></a>
-<a class="sourceLine" id="cb719-4" title="4"><span class="st">       </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">25</span>) <span class="op">+</span><span class="st">                                        </span><span class="co"># change plotting limits of x-axis </span></a>
-<a class="sourceLine" id="cb719-5" title="5"><span class="st">       </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Length of stay&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Charges ($)&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># change x and y labels</span></a>
-<a class="sourceLine" id="cb719-6" title="6"><span class="st">       </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">45000</span>, <span class="dt">label =</span> (<span class="st">&quot;R = 0.74&quot;</span>))  <span class="co"># add text to plot coordinates</span></a></code></pre></div>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="the-heart-attack-dataset-ii.html#cb719-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span>                 <span class="co"># aesthetic mapping</span></span>
+<span id="cb719-2"><a href="the-heart-attack-dataset-ii.html#cb719-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span>                                   <span class="co"># add data points    </span></span>
+<span id="cb719-3"><a href="the-heart-attack-dataset-ii.html#cb719-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>                       <span class="co"># add trend line</span></span>
+<span id="cb719-4"><a href="the-heart-attack-dataset-ii.html#cb719-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">25</span>) <span class="sc">+</span>                                        <span class="co"># change plotting limits of x-axis </span></span>
+<span id="cb719-5"><a href="the-heart-attack-dataset-ii.html#cb719-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Length of stay&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Charges ($)&quot;</span>) <span class="sc">+</span>  <span class="co"># change x and y labels</span></span>
+<span id="cb719-6"><a href="the-heart-attack-dataset-ii.html#cb719-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="dv">45000</span>, <span class="at">label =</span> (<span class="st">&quot;R = 0.74&quot;</span>))  <span class="co"># add text to plot coordinates</span></span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:15-1"></span>
 <img src="book_files/figure-html/15-1-1.png" alt="Scatter plot using ggplot2." width="480" />
@@ -327,13 +348,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 6.1: Scatter plot using ggplot2.
 </p>
 </div>
-<p>You can learn other ways to customize your plot by googling. For example, try to find a way to add title to the plot by using keyword “ggplot2 add title to plot”.</p>
+<p>You can learn other ways to customize your plot by googling. For example, try to find a way to add title to the plot by using keyword “ggplot2 add title to plot.”</p>
 <p>It is easy to represent other characteristics of data points (columns) using additional aesthetic mappings, such as linetype, color, size, fill (“inside” color).</p>
-<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()               <span class="co"># basic scatter plot</span></a>
-<a class="sourceLine" id="cb721-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES, <span class="dt">color =</span> DRG)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()  <span class="co"># map DRG to color</span></a></code></pre></div>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="the-heart-attack-dataset-ii.html#cb721-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>()               <span class="co"># basic scatter plot</span></span>
+<span id="cb721-2"><a href="the-heart-attack-dataset-ii.html#cb721-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES, <span class="at">color =</span> DRG)) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># map DRG to color</span></span></code></pre></div>
 
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> LOS, <span class="dt">y =</span> CHARGES, <span class="dt">color =</span> DRG, <span class="dt">shape =</span> SEX)) <span class="op">+</span><span class="st">  </span><span class="co"># map SEX to shape</span></a>
-<a class="sourceLine" id="cb722-2" title="2"><span class="st">       </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="the-heart-attack-dataset-ii.html#cb722-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES, <span class="at">color =</span> DRG, <span class="at">shape =</span> SEX)) <span class="sc">+</span>  <span class="co"># map SEX to shape</span></span>
+<span id="cb722-2"><a href="the-heart-attack-dataset-ii.html#cb722-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:15-2"></span>
 <img src="book_files/figure-html/15-2-1.png" alt="Changing color and shape to represent multivariate data in ggplot2." width="576" />
 <p class="caption">
@@ -345,7 +366,7 @@ Figure 6.2: Changing color and shape to represent multivariate data in ggplot2.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-394" class="exercise"><strong>Exercise 6.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-397" class="exercise"><strong>Exercise 6.1  </strong></span></p>
 <p>Use ggplot2 to generate a scatter plot of age vs. charges in the heart attack dataset. Use different shapes of data points to represent DRG and color-code data points based on diagnosis.</p>
 <p>heartatk4R &lt;- read.table(_______________________________)</p>
 <p>ggplot(heartatk4R, aes(x = _______, y = ________, color = _________, shape = _________)) +</p>
@@ -353,17 +374,17 @@ geom_point()
 </div>
 </blockquote>
 </div>
-<div id="histograms-and-density-plots" class="section level2">
+<div id="histograms-and-density-plots" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Histograms and density plots</h2>
 <p>In addition to data points(geom_points), there are many other <strong>geometric objects</strong>, such as histogram(geom_histogram), lines (geom_line), and bars (geom_bar), and so on. We can use these geometric objects to generate different types of plots.
 To plot a basic histogram:</p>
-<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb723-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="the-heart-attack-dataset-ii.html#cb723-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <p>Then we can refine it and add a density curve (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-3">6.3</a>):</p>
 
-<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">y =</span> ..density..)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb724-2" title="2"><span class="st">       </span><span class="kw">geom_histogram</span>(<span class="dt">fill =</span> <span class="st">&quot;cornsilk&quot;</span>, </a>
-<a class="sourceLine" id="cb724-3" title="3">                      <span class="dt">colour =</span> <span class="st">&quot;grey60&quot;</span>, <span class="dt">size =</span> <span class="fl">.2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb724-4" title="4"><span class="st">       </span><span class="kw">geom_density</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="the-heart-attack-dataset-ii.html#cb724-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">y =</span> ..density..)) <span class="sc">+</span> </span>
+<span id="cb724-2"><a href="the-heart-attack-dataset-ii.html#cb724-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;cornsilk&quot;</span>, </span>
+<span id="cb724-3"><a href="the-heart-attack-dataset-ii.html#cb724-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>, <span class="at">size =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb724-4"><a href="the-heart-attack-dataset-ii.html#cb724-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_density</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:15-3"></span>
 <img src="book_files/figure-html/15-3-1.png" alt="Histogram with density curve." width="576" />
 <p class="caption">
@@ -371,15 +392,15 @@ Figure 6.3: Histogram with density curve.
 </p>
 </div>
 <p>Combined density plots are useful in comparing the distribution of subgroups of data points.</p>
-<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb725-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># all data</span></a></code></pre></div>
+<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="the-heart-attack-dataset-ii.html#cb725-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># all data</span></span></code></pre></div>
 <p>Use color to differentiate sex:</p>
-<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">color =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4A</span></a></code></pre></div>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="the-heart-attack-dataset-ii.html#cb726-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">color =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4A</span></span></code></pre></div>
 <p>Here, we split the dataset into two portions, men and women, and plotted their density distribution on the same plot. Figure <a href="the-heart-attack-dataset-ii.html#fig:15-4">6.4</a>A shows that age distribution is very different between men and women. Women’s distribution is skewed to the right and they are on average over ten years older than men. This is surprising, given that this dataset contains all heart attack admissions in New York state in 1993.</p>
 <p>The fill mapping changes the “inside” color:</p>
-<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb727-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4B</span></a></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="the-heart-attack-dataset-ii.html#cb727-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4B</span></span></code></pre></div>
 <p>This plot shows the same information. It looks nicer, at least to me. We can <strong>split the plot into multiple facets</strong>:</p>
-<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> AGE, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-2" title="2"><span class="st">       </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span>.)  <span class="co"># Figure 6.4C</span></a></code></pre></div>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="the-heart-attack-dataset-ii.html#cb728-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> </span>
+<span id="cb728-2"><a href="the-heart-attack-dataset-ii.html#cb728-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span>.)  <span class="co"># Figure 6.4C</span></span></code></pre></div>
 
 <div class="figure" style="text-align: center"><span id="fig:15-4"></span>
 <img src="images/img1504_density.png" alt="Density plots." width="640" />
@@ -391,35 +412,35 @@ Figure 6.4: Density plots.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-400" class="exercise"><strong>Exercise 6.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-403" class="exercise"><strong>Exercise 6.2  </strong></span></p>
 <p>Create density plots like Figure 6.5 to compare the distribution of length of hospital stay (LOS) for patients with different DRG groups, separately for men and women. Offer interpretation in the context of the dataset. Limit the x-axis to 0 to 20.</p>
 <p>ggplot(heartatk4R, aes(_________, _________)) + ______________(alpha = 0.3) +</p>
 _________(________ ~ .) + xlim(________, _____)
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-401"></span>
-<img src="book_files/figure-html/unnamed-chunk-401-1.png" alt="Distribution of LOS by DRG groups grouped by SEX" width="576" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-404"></span>
+<img src="book_files/figure-html/unnamed-chunk-404-1.png" alt="Distribution of LOS by DRG groups grouped by SEX" width="576" />
 <p class="caption">
 Figure 6.5: Distribution of LOS by DRG groups grouped by SEX
 </p>
 </blockquote>
 </div>
 </div>
-<div id="box-plots-and-violin-plots" class="section level2">
+<div id="box-plots-and-violin-plots" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Box plots and Violin plots</h2>
 <p>We can follow the same rule to generate boxplots using the geom_boxplot ( ). Let’s start with a basic version.</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb729-1" title="1"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()  <span class="co"># basic boxplot </span></a>
-<a class="sourceLine" id="cb729-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 6.6A</span></a>
-<a class="sourceLine" id="cb729-3" title="3"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> SEX, <span class="dt">y =</span> AGE)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_violin</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(DRG <span class="op">~</span><span class="st"> </span>.)  <span class="co"># Figure 6.6B</span></a></code></pre></div>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="the-heart-attack-dataset-ii.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()  <span class="co"># basic boxplot </span></span>
+<span id="cb729-2"><a href="the-heart-attack-dataset-ii.html#cb729-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span> .)  <span class="co"># Figure 6.6A</span></span>
+<span id="cb729-3"><a href="the-heart-attack-dataset-ii.html#cb729-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span> .)  <span class="co"># Figure 6.6B</span></span></code></pre></div>
 <p>The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-403" class="exercise"><strong>Exercise 6.3  </strong></span></p>
+<p><span id="exr:unnamed-chunk-406" class="exercise"><strong>Exercise 6.3  </strong></span></p>
 <p>Generate a violin plot like Figure 6.6C to compare the distribution of length of hospital stay among patients with different prognosis outcomes (DRG), separately for men and women. Interpret your result. Note the axes labels are customized.</p>
 <p>ggplot(heartatk4R, ___________________) + _____________ + ______________ +</p>
-labs(x = “DRG groups”, y = “Length of Stay(days)”) + ylim(0, 20)
+labs(x = “DRG groups,” y = “Length of Stay(days)”) + ylim(0, 20)
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-404"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-407"></span>
 <img src="images/img1506_boxviolin.png" alt="Boxplot and violin plots using ggplot2" width="640" />
 <p class="caption">
 Figure 6.6: Boxplot and violin plots using ggplot2
@@ -427,10 +448,10 @@ Figure 6.6: Boxplot and violin plots using ggplot2
 </blockquote>
 </div>
 </div>
-<div id="bar-plot-with-error-bars" class="section level2">
+<div id="bar-plot-with-error-bars" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Bar plot with error bars</h2>
 <p>Suppose we are interested in examining whether people with certain diagnosis codes stays longer or shorter in the hospital after a heart attack. We can, of course, use the aggregate function to generate a table with means LOS by category.</p>
-<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb730-1" title="1"><span class="kw">aggregate</span>(df, <span class="dt">by =</span> <span class="kw">list</span>(df<span class="op">$</span>DIAGNOSIS), <span class="dt">FUN =</span> mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="the-heart-attack-dataset-ii.html#cb730-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(df, <span class="at">by =</span> <span class="fu">list</span>(df<span class="sc">$</span>DIAGNOSIS), <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##   Group.1  Patient DIAGNOSIS SEX DRG DIED   CHARGES      LOS      AGE
 ## 1   41001 7130.229        NA  NA  NA   NA 10868.030 7.775161 65.56317
 ## 2   41011 6413.323        NA  NA  NA   NA 10631.803 7.728618 65.81305
@@ -442,19 +463,19 @@ Figure 6.6: Boxplot and violin plots using ggplot2
 ## 8   41081 8384.725        NA  NA  NA   NA  9633.123 7.048780 68.04181
 ## 9   41091 6165.481        NA  NA  NA   NA  9511.093 7.625743 67.10359</code></pre>
 <p>We can be happy with this table and call it quits. However, tables are often not as easy to interpret as a nicely formatted graph. Instead of the aggregate function, we use the powerful dplyr package to summarize the data and then to generate a bar plot showing both the means and standard errors. I stole some code and ideas from R graphics cookbook and this website: <a href="http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/">http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/</a>.</p>
-<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb732-1" title="1"><span class="kw">library</span>(dplyr)  <span class="co"># load the package</span></a></code></pre></div>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="the-heart-attack-dataset-ii.html#cb732-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  <span class="co"># load the package</span></span></code></pre></div>
 <p>To summarize data by groups/factors, the dplyr package uses a similar type of grammar like ggplot2, where operations are added sequentially. Similar to pipes in Unix, commands separated by “%&gt;%” are executed sequentially where the output of one step becomes the input of the next. The follow 6 lines are part of one command, consisting of three big steps.</p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb733-1" title="1">stats &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># names of the new data frame and the data frame to be summarized</span></a>
-<a class="sourceLine" id="cb733-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(DIAGNOSIS) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># grouping variable</span></a>
-<a class="sourceLine" id="cb733-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(LOS),  <span class="co"># mean of each group</span></a>
-<a class="sourceLine" id="cb733-4" title="4">            <span class="dt">sd   =</span> <span class="kw">sd</span>(LOS),    <span class="co"># standard deviation of each group</span></a>
-<a class="sourceLine" id="cb733-5" title="5">            <span class="dt">n    =</span> <span class="kw">n</span>(),        <span class="co"># sample size per group</span></a>
-<a class="sourceLine" id="cb733-6" title="6">            <span class="dt">se   =</span> <span class="kw">sd</span>(LOS) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">n</span>()))  <span class="co"># standard error of each group</span></a></code></pre></div>
+<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="the-heart-attack-dataset-ii.html#cb733-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>  <span class="co"># names of the new data frame and the data frame to be summarized</span></span>
+<span id="cb733-2"><a href="the-heart-attack-dataset-ii.html#cb733-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DIAGNOSIS) <span class="sc">%&gt;%</span>  <span class="co"># grouping variable</span></span>
+<span id="cb733-3"><a href="the-heart-attack-dataset-ii.html#cb733-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(LOS),  <span class="co"># mean of each group</span></span>
+<span id="cb733-4"><a href="the-heart-attack-dataset-ii.html#cb733-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(LOS),    <span class="co"># standard deviation of each group</span></span>
+<span id="cb733-5"><a href="the-heart-attack-dataset-ii.html#cb733-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n    =</span> <span class="fu">n</span>(),        <span class="co"># sample size per group</span></span>
+<span id="cb733-6"><a href="the-heart-attack-dataset-ii.html#cb733-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se   =</span> <span class="fu">sd</span>(LOS) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))  <span class="co"># standard error of each group</span></span></code></pre></div>
 <p>The resultant data frame is a detailed summary of the data by DIAGNOSIS:</p>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb734-1" title="1">stats</a></code></pre></div>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="the-heart-attack-dataset-ii.html#cb734-1" aria-hidden="true" tabindex="-1"></a>stats</span></code></pre></div>
 <pre><code>## # A tibble: 9 x 5
 ##   DIAGNOSIS  mean    sd     n     se
-##   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;
+## * &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;
 ## 1 41001      7.78  5.69   467 0.263 
 ## 2 41011      7.73  5.34  1824 0.125 
 ## 3 41021      7.56  5.26   250 0.333 
@@ -466,25 +487,25 @@ Figure 6.6: Boxplot and violin plots using ggplot2
 ## 9 41091      7.63  5.14  5213 0.0712</code></pre>
 <p>Now we can use ggplot2 to plot these statistics (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-7">6.7</a>):</p>
 
-<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb736-1" title="1"><span class="kw">ggplot</span>(stats, <span class="kw">aes</span>(<span class="dt">x =</span> DIAGNOSIS, <span class="dt">y =</span> mean)) <span class="op">+</span><span class="st">   </span><span class="co"># data &amp; aesthetic mapping</span></a>
-<a class="sourceLine" id="cb736-2" title="2"><span class="st">         </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span><span class="st">            </span><span class="co"># bars represent average</span></a>
-<a class="sourceLine" id="cb736-3" title="3"><span class="st">         </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mean <span class="op">-</span><span class="st"> </span>se, <span class="dt">ymax =</span> mean <span class="op">+</span><span class="st"> </span>se), <span class="dt">width =</span> <span class="fl">0.2</span>)  <span class="co"># error bars</span></a></code></pre></div>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="the-heart-attack-dataset-ii.html#cb736-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stats, <span class="fu">aes</span>(<span class="at">x =</span> DIAGNOSIS, <span class="at">y =</span> mean)) <span class="sc">+</span>   <span class="co"># data &amp; aesthetic mapping</span></span>
+<span id="cb736-2"><a href="the-heart-attack-dataset-ii.html#cb736-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span>            <span class="co"># bars represent average</span></span>
+<span id="cb736-3"><a href="the-heart-attack-dataset-ii.html#cb736-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>)  <span class="co"># error bars</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:15-7"></span>
 <img src="book_files/figure-html/15-7-1.png" alt="Average LOS by DIAGNOSIS group with error bars representing standard error." width="576" />
 <p class="caption">
 Figure 6.7: Average LOS by DIAGNOSIS group with error bars representing standard error.
 </p>
 </div>
-<p>Note that the mean-se and mean+se refer to the two columns in the stats data frame and define the error bars. Because we have an extremely large sample size, the standard errors are small. People with a diagnosis of 41031 stay shorter in the hospital. By looking up the IDC code in <a href="http://www.nuemd.com">http://www.nuemd.com</a>, we notice that this code represents “Acute myocardial infarction of inferoposterior wall, initial episode of care”, which probably makes sense.</p>
+<p>Note that the mean-se and mean+se refer to the two columns in the stats data frame and define the error bars. Because we have an extremely large sample size, the standard errors are small. People with a diagnosis of 41031 stay shorter in the hospital. By looking up the IDC code in <a href="http://www.nuemd.com">http://www.nuemd.com</a>, we notice that this code represents “Acute myocardial infarction of inferoposterior wall, initial episode of care,” which probably makes sense.</p>
 <p>As we did previously, we want to define the LOS bars for men and women separately. We first need to go back and generate different summary statistics.</p>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" title="1">stats2 &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb737-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(DIAGNOSIS, SEX) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># two grouping variables</span></a>
-<a class="sourceLine" id="cb737-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(LOS),  </a>
-<a class="sourceLine" id="cb737-4" title="4">            <span class="dt">sd   =</span> <span class="kw">sd</span>(LOS), </a>
-<a class="sourceLine" id="cb737-5" title="5">            <span class="dt">n    =</span> <span class="kw">n</span>(),  </a>
-<a class="sourceLine" id="cb737-6" title="6">            <span class="dt">se   =</span> <span class="kw">sd</span>(LOS) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">n</span>())) </a></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="the-heart-attack-dataset-ii.html#cb737-1" aria-hidden="true" tabindex="-1"></a>stats2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb737-2"><a href="the-heart-attack-dataset-ii.html#cb737-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DIAGNOSIS, SEX) <span class="sc">%&gt;%</span>   <span class="co"># two grouping variables</span></span>
+<span id="cb737-3"><a href="the-heart-attack-dataset-ii.html#cb737-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(LOS),  </span>
+<span id="cb737-4"><a href="the-heart-attack-dataset-ii.html#cb737-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(LOS), </span>
+<span id="cb737-5"><a href="the-heart-attack-dataset-ii.html#cb737-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n    =</span> <span class="fu">n</span>(),  </span>
+<span id="cb737-6"><a href="the-heart-attack-dataset-ii.html#cb737-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se   =</span> <span class="fu">sd</span>(LOS) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())) </span></code></pre></div>
 <p>The entire dataset was divided into 18 groups according to all possible combinations of DIAGNOSIS and SEX. For each group, the LOS numbers are summarized in terms of mean, standard deviation (sd), observations (n), and standard errors(se). Below is the resultant data frame with summary statistics:</p>
-<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb738-1" title="1">stats2</a></code></pre></div>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="the-heart-attack-dataset-ii.html#cb738-1" aria-hidden="true" tabindex="-1"></a>stats2</span></code></pre></div>
 <pre><code>## # A tibble: 18 x 6
 ## # Groups:   DIAGNOSIS [9]
 ##    DIAGNOSIS SEX    mean    sd     n     se
@@ -509,11 +530,11 @@ Figure 6.7: Average LOS by DIAGNOSIS group with error bars representing standard
 ## 18 41091     M      7.15  4.63  3135 0.0826</code></pre>
 <p>Now we are ready to generate bar plot for men and women separately using the fill aesthetic mapping:</p>
 
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" title="1"><span class="kw">ggplot</span>(stats2, <span class="kw">aes</span>(<span class="dt">x =</span> DIAGNOSIS, <span class="dt">y =</span> mean, <span class="dt">fill =</span> SEX)) <span class="op">+</span><span class="st">  </span><span class="co"># mapping</span></a>
-<a class="sourceLine" id="cb740-2" title="2"><span class="st">       </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span><span class="st">    </span><span class="co"># bars for mean of LOS</span></a>
-<a class="sourceLine" id="cb740-3" title="3"><span class="st">       </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Diagnosis codes&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Length of Stay&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># axes labels</span></a>
-<a class="sourceLine" id="cb740-4" title="4"><span class="st">       </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> mean <span class="op">-</span><span class="st"> </span>se, <span class="dt">ymax =</span> mean <span class="op">+</span><span class="st"> </span>se),  <span class="co"># error bars</span></a>
-<a class="sourceLine" id="cb740-5" title="5">       <span class="dt">position =</span> <span class="kw">position_dodge</span>(.<span class="dv">9</span>), <span class="dt">width =</span> <span class="fl">0.2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="the-heart-attack-dataset-ii.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stats2, <span class="fu">aes</span>(<span class="at">x =</span> DIAGNOSIS, <span class="at">y =</span> mean, <span class="at">fill =</span> SEX)) <span class="sc">+</span>  <span class="co"># mapping</span></span>
+<span id="cb740-2"><a href="the-heart-attack-dataset-ii.html#cb740-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span>    <span class="co"># bars for mean of LOS</span></span>
+<span id="cb740-3"><a href="the-heart-attack-dataset-ii.html#cb740-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Diagnosis codes&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Length of Stay&quot;</span>) <span class="sc">+</span>  <span class="co"># axes labels</span></span>
+<span id="cb740-4"><a href="the-heart-attack-dataset-ii.html#cb740-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se),  <span class="co"># error bars</span></span>
+<span id="cb740-5"><a href="the-heart-attack-dataset-ii.html#cb740-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:15-8"></span>
 <img src="book_files/figure-html/15-8-1.png" alt="The length of stay summarized by diagnosis and sex. Error bars represent standard error." width="576" />
 <p class="caption">
@@ -530,7 +551,7 @@ Figure 6.9: Mean ages for patients with different diagnosis and treatment outcom
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-412" class="exercise"><strong>Exercise 6.4  </strong></span></p>
+<p><span id="exr:unnamed-chunk-415" class="exercise"><strong>Exercise 6.4  </strong></span></p>
 <p>Generate Figure <a href="the-heart-attack-dataset-ii.html#fig:15-9">6.9</a> and offer your interpretation. Hint: Modify both the summarizing script and the plotting script.</p>
 <p>df &lt;- heartatk4R %&gt;%</p>
 <p>_____________(DIAGNOSIS, DRG) %&gt;% # two grouping variables</p>
@@ -539,8 +560,8 @@ Figure 6.9: Mean ages for patients with different diagnosis and treatment outcom
 <p>n = n(),</p>
 <p>se = sd(AGE) / sqrt(n()))</p>
 <p>ggplot(df, aes(_________________________) + # mapping</p>
-<p>_______________(stat = “identity”, position = “dodge”) + # bars mean</p>
-<p>_______________(x = “Diagnosis codes”, y = “Age(yrs)”) + # axes labels</p>
+<p>_______________(stat = “identity,” position = “dodge”) + # bars mean</p>
+<p>_______________(x = “Diagnosis codes,” y = “Age(yrs)”) + # axes labels</p>
 <p>_______________(aes(__________________, ________________), # error bars</p>
 position = position_dodge(.9), width = 0.2)
 </div>
@@ -549,12 +570,12 @@ position = position_dodge(.9), width = 0.2)
 <p>As you could see from these plots, <strong>ggplot2</strong> generates nicely-looking, publication-ready graphics. Moreover, it is a relatively structured way of customizing plots. That is why it is becoming popular among R users.
 Once again, there are many example codes and answered R coding questions online. Whatever you want to do, you can <strong>google it, try the example code</strong>, and modify it to fit your needs. It is all free! Enjoy coding!</p>
 </div>
-<div id="statistical-models-are-easy-interpretations-and-verifications-are-not" class="section level2">
+<div id="statistical-models-are-easy-interpretations-and-verifications-are-not" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> Statistical models are easy; interpretations and verifications are not!</h2>
 <p>By using pair-wised correlation analysis, we found that women have a much higher mortality rate than men due to heart attack. We also found that women are much older than men. These are obviously confounding effects.</p>
 <p>We need to <strong>delineate the effects of multiple factors using multiple linear regression</strong>. In our model below, we express the charges as a function of all other factors using <strong>multiple linear regression</strong>.</p>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb741-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">lm</span>(CHARGES <span class="op">~</span><span class="st"> </span>SEX <span class="op">+</span><span class="st"> </span>LOS <span class="op">+</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>DRG <span class="op">+</span><span class="st"> </span>DIAGNOSIS, <span class="dt">data =</span> df)</a>
-<a class="sourceLine" id="cb741-2" title="2"><span class="kw">summary</span>(fit) </a></code></pre></div>
+<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="the-heart-attack-dataset-ii.html#cb741-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(CHARGES <span class="sc">~</span> SEX <span class="sc">+</span> LOS <span class="sc">+</span> AGE <span class="sc">+</span> DRG <span class="sc">+</span> DIAGNOSIS, <span class="at">data =</span> df)</span>
+<span id="cb741-2"><a href="the-heart-attack-dataset-ii.html#cb741-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit) </span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = CHARGES ~ SEX + LOS + AGE + DRG + DIAGNOSIS, data = df)
@@ -587,7 +608,7 @@ Once again, there are many example codes and answered R coding questions online.
 ## Multiple R-squared:  0.569,  Adjusted R-squared:  0.5685 
 ## F-statistic:  1232 on 13 and 12131 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>As we could see from above, one level for each factor(such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. It is really small number compared to overall charges and also the p value is just marginally significant for this large sample(0.02956). This is in contrast to the <strong>t.test(CHARGES ~ SEX)</strong> shown below, when we got the opposite conclusion with much smaller p value of 4.573e-07. It is because we did not control for other factors.</p>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb743-1" title="1"><span class="kw">t.test</span>(CHARGES <span class="op">~</span><span class="st"> </span>SEX, <span class="dt">data =</span> df)</a></code></pre></div>
+<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="the-heart-attack-dataset-ii.html#cb743-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(CHARGES <span class="sc">~</span> SEX, <span class="at">data =</span> df)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -601,8 +622,8 @@ Once again, there are many example codes and answered R coding questions online.
 ##       10260.660        9631.185</code></pre>
 <p>Back to our multiple linear regression model we can see that the most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the <strong>t value</strong> is an indicator of significance. LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males. Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 41091, 41051 and 41071 incurred less charges compared with those with 41001.</p>
 <p>To investigate mortality, which is a binary outcome, we use <strong>logistic regression</strong>.</p>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb745-1" title="1">fit &lt;-<span class="st"> </span><span class="kw">glm</span>(DIED <span class="op">~</span><span class="st"> </span>SEX <span class="op">+</span><span class="st"> </span>LOS <span class="op">+</span><span class="st"> </span>AGE <span class="op">+</span><span class="st"> </span>DIAGNOSIS, <span class="dt">family =</span> <span class="kw">binomial</span>( ), <span class="dt">data =</span> df)</a>
-<a class="sourceLine" id="cb745-2" title="2"><span class="kw">summary</span>(fit)</a></code></pre></div>
+<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="the-heart-attack-dataset-ii.html#cb745-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(DIED <span class="sc">~</span> SEX <span class="sc">+</span> LOS <span class="sc">+</span> AGE <span class="sc">+</span> DIAGNOSIS, <span class="at">family =</span> <span class="fu">binomial</span>( ), <span class="at">data =</span> df)</span>
+<span id="cb745-2"><a href="the-heart-attack-dataset-ii.html#cb745-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = DIED ~ SEX + LOS + AGE + DIAGNOSIS, family = binomial(), 
@@ -640,7 +661,7 @@ Once again, there are many example codes and answered R coding questions online.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-416" class="exercise"><strong>Exercise 6.5  </strong></span></p>
+<p><span id="exr:unnamed-chunk-419" class="exercise"><strong>Exercise 6.5  </strong></span></p>
 <p>Use multiple linear regression to investigate the factors associated with length of stay. Obviously we need to exclude charges in our model. Interpret your results.</p>
 <p>fit &lt;- ___________(LOS ~ SEX + AGE + DRG + DIAGNOSIS, data = ___________)</p>
 ___________(fit)
@@ -680,6 +701,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

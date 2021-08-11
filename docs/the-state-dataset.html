@@ -5,26 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 The state dataset | Learn R through examples</title>
-  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 The state dataset | Learn R through examples" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   <meta name="github-repo" content="gexijin/learnR" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 8 The state dataset | Learn R through examples" />
   
-  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions welcome." />
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
   
 
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2020-05-26" />
+<meta name="date" content="2021-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   
 <link rel="prev" href="advanced-topics.html"/>
 <link rel="next" href="the-game-sales-dataset.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,35 +51,38 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -87,9 +91,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -122,6 +126,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 </head>
 
 <body>
@@ -135,37 +140,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a><ul>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
-<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-have-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames have rows and columns: the Iris flower dataset</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#data-frames-contain-rows-and-columns-the-iris-flower-dataset"><i class="fa fa-check"></i><b>1.2</b> Data frames contain rows and columns: the Iris flower dataset</a></li>
 <li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.3</b> Analyzing one set of numbers</a></li>
-<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-column-of-categorical-values"><i class="fa fa-check"></i><b>1.4</b> Analyzing a column of categorical values</a></li>
-<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-the-relationship-between-two-sets-of-numbers"><i class="fa fa-check"></i><b>1.5</b> Analyzing the relationship between two sets of numbers</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-categorical-variable"><i class="fa fa-check"></i><b>1.4</b> Analyzing a categorical variable</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#the-relationship-between-two-numerical-variables"><i class="fa fa-check"></i><b>1.5</b> The relationship between two numerical variables</a></li>
 <li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.6</b> Testing the differences between two groups</a></li>
 <li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.7</b> Testing the difference among multiple groups (ANOVA)</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a><ul>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
-<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-makes-plotting-intuitive"><i class="fa fa-check"></i><b>2.2</b> The ggplot2 package makes plotting intuitive</a></li>
-<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.3</b> Scatter plots matrix</a></li>
-<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.4</b> Star and segment diagrams</a></li>
-<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#parallel-coordinate-plot"><i class="fa fa-check"></i><b>2.5</b> Parallel coordinate plot</a></li>
-<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#bar-plot-with-error-bar"><i class="fa fa-check"></i><b>2.6</b> Bar plot with error bar</a></li>
-<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#box-plot-and-death-to-the-dynamite-plots"><i class="fa fa-check"></i><b>2.7</b> Box plot and death to the dynamite plots</a></li>
-<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#combining-plots"><i class="fa fa-check"></i><b>2.8</b> Combining plots</a></li>
-<li class="chapter" data-level="2.9" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.9</b> Hierarchical clustering and heat map</a></li>
-<li class="chapter" data-level="2.10" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#projecting-high-dimensional-data-with-principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.10</b> Projecting high-dimensional data with principal component analysis (PCA)</a></li>
-<li class="chapter" data-level="2.11" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.11</b> Classification: Predicting the odds of binary outcomes</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#scatter-plots-matrix"><i class="fa fa-check"></i><b>2.2</b> Scatter plots matrix</a></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.3</b> Star and segment diagrams</a></li>
+<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#the-ggplot2-package-is-intuitive-and-powerful"><i class="fa fa-check"></i><b>2.4</b> The ggplot2 package is intuitive and powerful</a></li>
+<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#other-types-of-plots-with-ggplot2"><i class="fa fa-check"></i><b>2.5</b> Other types of plots with ggplot2</a></li>
+<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.6</b> Hierarchical clustering and heat map</a></li>
+<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.7</b> Principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-by-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.8</b> Classification by predicting the odds of binary outcomes</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a><ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a><ul>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
 <li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
 <li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
 <li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
 <li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a><ul>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
 <li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
 <li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
@@ -173,40 +180,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a><ul>
-<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.1</b> Enter data manually</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.2</b> Project-oriented workflow</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.2.1</b> Create a project in a new folder</a></li>
-<li class="chapter" data-level="4.2.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.2.2</b> Create a script file and comment (!)</a></li>
-<li class="chapter" data-level="4.2.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.2.3</b> Copy data files to the new directory</a></li>
-<li class="chapter" data-level="4.2.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.2.4</b> Import data files</a></li>
-<li class="chapter" data-level="4.2.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.2.5</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.2.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.2.6</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.3</b> Reading files directly using read.table</a></li>
-<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.4</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.2</b> Reading files directly using read.table</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.3</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.4</b> Enter data manually</a></li>
 <li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.5</b> Data manipulation in a data frame</a></li>
 <li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-transformation-using-the-dplyr"><i class="fa fa-check"></i><b>4.6</b> Data transformation using the dplyr</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a><ul>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
 <li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
 <li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
 <li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
 <li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a><ul>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
 <li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
 <li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
 <li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
 <li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a><ul>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
 <li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
-<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a><ul>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a>
+<ul>
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
@@ -214,7 +227,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a><ul>
+<li class="chapter" data-level="8" data-path="the-state-dataset.html"><a href="the-state-dataset.html"><i class="fa fa-check"></i><b>8</b> The state dataset</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="the-state-dataset.html"><a href="the-state-dataset.html#reading-in-and-manipulating-data"><i class="fa fa-check"></i><b>8.1</b> Reading in and manipulating data</a></li>
 <li class="chapter" data-level="8.2" data-path="the-state-dataset.html"><a href="the-state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
 <li class="chapter" data-level="8.3" data-path="the-state-dataset.html"><a href="the-state-dataset.html#analyzing-the-relationship-among-variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
@@ -222,37 +236,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="the-state-dataset.html"><a href="the-state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
 <li class="chapter" data-level="8.6" data-path="the-state-dataset.html"><a href="the-state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a><ul>
-<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.1</b> Visualization of categorical variables</a></li>
-<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.2</b> Correlation among numeric variables</a></li>
-<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.3</b> Analysis of score and count</a></li>
-<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.4</b> Analysis of sales</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.4.1</b> By Year.Release</a></li>
-<li class="chapter" data-level="9.4.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.4.2</b> By Region</a></li>
-<li class="chapter" data-level="9.4.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.4.3</b> By Rating</a></li>
-<li class="chapter" data-level="9.4.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.4.4</b> By Genre</a></li>
-<li class="chapter" data-level="9.4.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.4.5</b> by Score</a></li>
-<li class="chapter" data-level="9.4.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.4.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
-<li class="chapter" data-level="9.4.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.4.7</b> By Platform</a></li>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.5.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.5.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
+<li class="chapter" data-level="9.5.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.5.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.5</b> Effect of platform type to priciple components</a></li>
-<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.6</b> Models for global sales</a></li>
-<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.7</b> Conclusion</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.8" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a><ul>
+<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
-<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a><ul>
+<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
 <li class="chapter" data-level="10.2.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
 <li class="chapter" data-level="10.2.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
 <li class="chapter" data-level="10.2.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a><ul>
+<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
 <li class="chapter" data-level="10.3.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
 <li class="chapter" data-level="10.3.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a><ul>
+<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a>
+<ul>
 <li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
 <li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
 </ul></li>
@@ -276,13 +297,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-state-dataset" class="section level1">
+<div id="the-state-dataset" class="section level1" number="8">
 <h1><span class="header-section-number">Chapter 8</span> The state dataset</h1>
-<div id="reading-in-and-manipulating-data" class="section level2">
+<div id="reading-in-and-manipulating-data" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Reading in and manipulating data</h2>
-<p>The state data sets include state information in early years around 1970s in USA. We pick state.abb, state.x77, and state.region to form our data file. The detail information is listed here.</p>
-<p><strong>state.abb</strong>:<br />
-A vector with 2-letter abbreviations for the state names.</p>
+<p>The state data sets include state information in the early years around the 1970s in the USA. We pick state.abb, state.x77, and state.region to form our data files. The detailed information is listed here.</p>
+<p><strong>state.abb</strong>: A vector with 2-letter abbreviations for the state names.</p>
 <p><strong>state.x77</strong>:
 A matrix with 50 rows and 8 columns giving the following statistics in the respective columns.</p>
 <ul>
@@ -296,13 +316,13 @@ A matrix with 50 rows and 8 columns giving the following statistics in the respe
 <li><p>Area: land area in square miles</p></li>
 </ul>
 <p><strong>state.region</strong>:
-A factor containing the region (Northeast, South, North Central, West) that each state belongs to.</p>
-<p>For convenience of analyzing the state data, let’s merge the three data sets into a single data set “sta”. It is a data frame with 10 columns and 50 rows.</p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" title="1">tem &lt;-<span class="st"> </span><span class="kw">data.frame</span>(state.x77)               <span class="co"># transform matrix into data frame</span></a>
-<a class="sourceLine" id="cb780-2" title="2">sta &lt;-<span class="st"> </span><span class="kw">cbind</span>(state.abb, tem, state.region) <span class="co">#combine the three data sets</span></a>
-<a class="sourceLine" id="cb780-3" title="3"><span class="kw">colnames</span>(sta)[<span class="dv">1</span>] &lt;-<span class="st"> &quot;State&quot;</span>                <span class="co">#Rename first column</span></a>
-<a class="sourceLine" id="cb780-4" title="4"><span class="kw">colnames</span>(sta)[<span class="dv">10</span>] &lt;-<span class="st"> &quot;Region&quot;</span>              <span class="co">#Rename the 10th column</span></a>
-<a class="sourceLine" id="cb780-5" title="5"><span class="kw">head</span>(sta)</a></code></pre></div>
+A factor containing the regions (Northeast, South, North Central, West) that each state belongs to.</p>
+<p>For the convenience of analyzing the state data, let’s merge the three data sets into a single data set “sta.” It is a data frame with 10 columns and 50 rows.</p>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="the-state-dataset.html#cb780-1" aria-hidden="true" tabindex="-1"></a>tem <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(state.x77)               <span class="co"># Transform matrix into data frame</span></span>
+<span id="cb780-2"><a href="the-state-dataset.html#cb780-2" aria-hidden="true" tabindex="-1"></a>sta <span class="ot">&lt;-</span> <span class="fu">cbind</span>(state.abb, tem, state.region) <span class="co"># Combine the three data sets</span></span>
+<span id="cb780-3"><a href="the-state-dataset.html#cb780-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sta)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;State&quot;</span>                <span class="co"># Rename first column</span></span>
+<span id="cb780-4"><a href="the-state-dataset.html#cb780-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sta)[<span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Region&quot;</span>              <span class="co"># Rename the 10th column</span></span>
+<span id="cb780-5"><a href="the-state-dataset.html#cb780-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sta)</span></code></pre></div>
 <pre><code>##            State Population Income Illiteracy Life.Exp Murder HS.Grad Frost
 ## Alabama       AL       3615   3624        2.1    69.05   15.1    41.3    20
 ## Alaska        AK        365   6315        1.5    69.31   11.3    66.7   152
@@ -317,9 +337,9 @@ A factor containing the region (Northeast, South, North Central, West) that each
 ## Arkansas    51945  South
 ## California 156361   West
 ## Colorado   103766   West</code></pre>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb782-1" title="1"><span class="kw">str</span>(sta)</a></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="the-state-dataset.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sta)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    50 obs. of  10 variables:
-##  $ State     : Factor w/ 50 levels &quot;AK&quot;,&quot;AL&quot;,&quot;AR&quot;,..: 2 1 4 3 5 6 7 8 9 10 ...
+##  $ State     : chr  &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; ...
 ##  $ Population: num  3615 365 2212 2110 21198 ...
 ##  $ Income    : num  3624 6315 4530 3378 5114 ...
 ##  $ Illiteracy: num  2.1 1.5 1.8 1.9 1.1 0.7 1.1 0.9 1.3 2 ...
@@ -329,57 +349,56 @@ A factor containing the region (Northeast, South, North Central, West) that each
 ##  $ Frost     : num  20 152 15 65 20 166 139 103 11 60 ...
 ##  $ Area      : num  50708 566432 113417 51945 156361 ...
 ##  $ Region    : Factor w/ 4 levels &quot;Northeast&quot;,&quot;South&quot;,..: 2 4 4 2 4 4 1 2 2 2 ...</code></pre>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" title="1"><span class="kw">summary</span>(sta)</a></code></pre></div>
-<pre><code>##      State      Population        Income       Illiteracy       Life.Exp    
-##  AK     : 1   Min.   :  365   Min.   :3098   Min.   :0.500   Min.   :67.96  
-##  AL     : 1   1st Qu.: 1080   1st Qu.:3993   1st Qu.:0.625   1st Qu.:70.12  
-##  AR     : 1   Median : 2838   Median :4519   Median :0.950   Median :70.67  
-##  AZ     : 1   Mean   : 4246   Mean   :4436   Mean   :1.170   Mean   :70.88  
-##  CA     : 1   3rd Qu.: 4968   3rd Qu.:4814   3rd Qu.:1.575   3rd Qu.:71.89  
-##  CO     : 1   Max.   :21198   Max.   :6315   Max.   :2.800   Max.   :73.60  
-##  (Other):44                                                                 
-##      Murder          HS.Grad          Frost             Area       
-##  Min.   : 1.400   Min.   :37.80   Min.   :  0.00   Min.   :  1049  
-##  1st Qu.: 4.350   1st Qu.:48.05   1st Qu.: 66.25   1st Qu.: 36985  
-##  Median : 6.850   Median :53.25   Median :114.50   Median : 54277  
-##  Mean   : 7.378   Mean   :53.11   Mean   :104.46   Mean   : 70736  
-##  3rd Qu.:10.675   3rd Qu.:59.15   3rd Qu.:139.75   3rd Qu.: 81163  
-##  Max.   :15.100   Max.   :67.30   Max.   :188.00   Max.   :566432  
-##                                                                    
-##            Region  
-##  Northeast    : 9  
-##  South        :16  
-##  North Central:12  
-##  West         :13  
-##                    
-##                    
-## </code></pre>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="the-state-dataset.html#cb784-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sta)</span></code></pre></div>
+<pre><code>##     State             Population        Income       Illiteracy   
+##  Length:50          Min.   :  365   Min.   :3098   Min.   :0.500  
+##  Class :character   1st Qu.: 1080   1st Qu.:3993   1st Qu.:0.625  
+##  Mode  :character   Median : 2838   Median :4519   Median :0.950  
+##                     Mean   : 4246   Mean   :4436   Mean   :1.170  
+##                     3rd Qu.: 4968   3rd Qu.:4814   3rd Qu.:1.575  
+##                     Max.   :21198   Max.   :6315   Max.   :2.800  
+##     Life.Exp         Murder          HS.Grad          Frost       
+##  Min.   :67.96   Min.   : 1.400   Min.   :37.80   Min.   :  0.00  
+##  1st Qu.:70.12   1st Qu.: 4.350   1st Qu.:48.05   1st Qu.: 66.25  
+##  Median :70.67   Median : 6.850   Median :53.25   Median :114.50  
+##  Mean   :70.88   Mean   : 7.378   Mean   :53.11   Mean   :104.46  
+##  3rd Qu.:71.89   3rd Qu.:10.675   3rd Qu.:59.15   3rd Qu.:139.75  
+##  Max.   :73.60   Max.   :15.100   Max.   :67.30   Max.   :188.00  
+##       Area                  Region  
+##  Min.   :  1049   Northeast    : 9  
+##  1st Qu.: 36985   South        :16  
+##  Median : 54277   North Central:12  
+##  Mean   : 70736   West         :13  
+##  3rd Qu.: 81163                     
+##  Max.   :566432</code></pre>
 </div>
-<div id="visualizing-data" class="section level2">
+<div id="visualizing-data" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Visualizing data</h2>
-<p>Let’s start from visualizing the distributions of numeric variables. In many cases, we want to know if our data follows a normal distribution or not so that we can decide whether some methods are suitable or not. Here are some ways that we can check the normality of a variable.</p>
+<p>Let’s start by visualizing the distributions of numeric variables. In many cases, we want to know if our data follows a normal distribution or not so that we can decide whether some methods are suitable or not. Here are some ways that we can check the normality of a variable.</p>
 <ul>
-<li><p>Histogram: Does the histogram approaches to a normal density curve? If yes, then the variable more likely follows a normal distribution.</p></li>
-<li><p>Q-Q plot: Does the sample quantiles almost fall into a straight line ? If yes, then the variable more likely followa a normal distribution.</p></li>
+<li><p>Histogram: Does the histogram approach a normal density curve? If yes, then the variable more likely follows a normal distribution.</p></li>
+<li><p>Q-Q plot: Do the sample quantiles almost fall into a straight line? If yes, then the variable more likely follows a normal distribution.</p></li>
 <li><p>Shapiro-Wilk test: This is a widely used normality test. The null hypothesis is that a variable follows a normal distribution. Small p-value indicates a non-normality of the variable.</p></li>
 </ul>
-<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" title="1">a &lt;-<span class="st"> </span><span class="kw">colnames</span>(sta)[<span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co"># pick up all numeric columns/variables according to the names </span></a>
-<a class="sourceLine" id="cb786-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># layout outputs in 4 rows and 4 columns</span></a>
-<a class="sourceLine" id="cb786-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(a)){ </a>
-<a class="sourceLine" id="cb786-4" title="4">  sub =<span class="st"> </span>sta[a[i]][,<span class="dv">1</span>] <span class="co"># Extract corresponding variable a[i] in sta</span></a>
-<a class="sourceLine" id="cb786-5" title="5">                        </a>
-<a class="sourceLine" id="cb786-6" title="6">  <span class="kw">hist</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>), <span class="dt">xlab =</span> a[i])</a>
-<a class="sourceLine" id="cb786-7" title="7">  <span class="kw">qqnorm</span>(sub, <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#</span></a>
-<a class="sourceLine" id="cb786-8" title="8">  <span class="kw">qqline</span>(sub)           <span class="co"># Add a QQ plot line. </span></a>
-<a class="sourceLine" id="cb786-9" title="9"> </a>
-<a class="sourceLine" id="cb786-10" title="10">   <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {s.t &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(sub) <span class="co"># Normality test for population</span></a>
-<a class="sourceLine" id="cb786-11" title="11">  } <span class="cf">else</span> {s.t &lt;-<span class="st"> </span><span class="kw">rbind</span>(s.t, <span class="kw">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous row</span></a>
-<a class="sourceLine" id="cb786-12" title="12"> }</a>
-<a class="sourceLine" id="cb786-13" title="13">}</a></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-468-1.png" width="768" /></p>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" title="1">s.t &lt;-<span class="st"> </span>s.t[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]       <span class="co"># take the first two columnS of shapiro.test result</span></a>
-<a class="sourceLine" id="cb787-2" title="2">s.t &lt;-<span class="st"> </span><span class="kw">cbind</span>(a, s.t)    <span class="co"># add variable name for the result</span></a>
-<a class="sourceLine" id="cb787-3" title="3">s.t</a></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="the-state-dataset.html#cb786-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">colnames</span>(sta)[<span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>] <span class="co"># Pick up all numeric columns/variables according to the names </span></span>
+<span id="cb786-2"><a href="the-state-dataset.html#cb786-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))    <span class="co"># Layout outputs in 4 rows and 4 columns</span></span>
+<span id="cb786-3"><a href="the-state-dataset.html#cb786-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(a)){ </span>
+<span id="cb786-4"><a href="the-state-dataset.html#cb786-4" aria-hidden="true" tabindex="-1"></a>  sub <span class="ot">=</span> sta[a[i]][,<span class="dv">1</span>]   <span class="co"># Extract corresponding variable a[i] in sta</span></span>
+<span id="cb786-5"><a href="the-state-dataset.html#cb786-5" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb786-6"><a href="the-state-dataset.html#cb786-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(sub, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">&quot;Hist. of&quot;</span>, a[i], <span class="at">sep =</span> <span class="st">&quot; &quot;</span>), <span class="at">xlab =</span> a[i])</span>
+<span id="cb786-7"><a href="the-state-dataset.html#cb786-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqnorm</span>(sub, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">&quot;Q-Q Plot of&quot;</span>, a[i], <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)) <span class="co">#</span></span>
+<span id="cb786-8"><a href="the-state-dataset.html#cb786-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qqline</span>(sub)           <span class="co"># Add a QQ plot line. </span></span>
+<span id="cb786-9"><a href="the-state-dataset.html#cb786-9" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb786-10"><a href="the-state-dataset.html#cb786-10" aria-hidden="true" tabindex="-1"></a>   <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb786-11"><a href="the-state-dataset.html#cb786-11" aria-hidden="true" tabindex="-1"></a>     s.t <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(sub) <span class="co"># Normality test for population</span></span>
+<span id="cb786-12"><a href="the-state-dataset.html#cb786-12" aria-hidden="true" tabindex="-1"></a>   } <span class="cf">else</span> {</span>
+<span id="cb786-13"><a href="the-state-dataset.html#cb786-13" aria-hidden="true" tabindex="-1"></a>     s.t <span class="ot">&lt;-</span> <span class="fu">rbind</span>(s.t, <span class="fu">shapiro.test</span>(sub)) <span class="co"># Bind a new test result to previous row</span></span>
+<span id="cb786-14"><a href="the-state-dataset.html#cb786-14" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb786-15"><a href="the-state-dataset.html#cb786-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-471-1.png" width="768" /></p>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="the-state-dataset.html#cb787-1" aria-hidden="true" tabindex="-1"></a>s.t <span class="ot">&lt;-</span> s.t[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]       <span class="co"># Take the first two columns of shapiro.test result</span></span>
+<span id="cb787-2"><a href="the-state-dataset.html#cb787-2" aria-hidden="true" tabindex="-1"></a>s.t <span class="ot">&lt;-</span> <span class="fu">cbind</span>(a, s.t)    <span class="co"># Add variable name for the result</span></span>
+<span id="cb787-3"><a href="the-state-dataset.html#cb787-3" aria-hidden="true" tabindex="-1"></a>s.t</span></code></pre></div>
 <pre><code>##     a            statistic p.value     
 ## s.t &quot;Population&quot; 0.769992  1.906393e-07
 ##     &quot;Income&quot;     0.9769037 0.4300105   
@@ -389,50 +408,50 @@ A factor containing the region (Northeast, South, North Central, West) that each
 ##     &quot;HS.Grad&quot;    0.9531029 0.04581562  
 ##     &quot;Frost&quot;      0.9545618 0.05267472  
 ##     &quot;Area&quot;       0.5717872 7.591835e-11</code></pre>
-<p>From the histograms and QQplots we can see that the distribution of Population, Illiteracy and Area skewed to the left. Income and Life.Exp distributed close to normal. The shapiro tests show that Income, Life.Exp and Frost are normally distributed with p value greater than 0.05, while Murder and HS.Grad are almost normally distributed with p value really close to 0.05. There is no evidence that Population, Illiteracy and Area having normal distribution.</p>
+<p>From the histograms and QQplots we can see that the distributions of Population, Illiteracy, and Area skew to the left. Income and Life.Exp are distributed close to normal. The shapiro tests show that Income, Life.Exp and Frost are normally distributed with p-values greater than 0.05, while Murder and HS.Grad are almost normally distributed with p-values very close to 0.05. There is no evidence that Population, Illiteracy, and Area having normal distribution.</p>
 <p>In the state data, there is a categorical variable <em>region</em> which contains 4 observations. What is the distribution of the categorical variable? Let’s take a look at the number of observations(states) in each region and the corresponding percentage.</p>
 
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" title="1">counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(sta<span class="op">$</span>Region), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)  <span class="co">#number of states in each region</span></a>
-<a class="sourceLine" id="cb789-2" title="2">percentages &lt;-<span class="st"> </span><span class="dv">100</span> <span class="op">*</span><span class="st"> </span>counts <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(sta<span class="op">$</span>Region)      </a>
-<a class="sourceLine" id="cb789-3" title="3"><span class="kw">barplot</span>(percentages, <span class="dt">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;lightblue&quot;</span>) </a>
-<a class="sourceLine" id="cb789-4" title="4"><span class="kw">text</span>(<span class="dt">x=</span><span class="kw">seq</span>(<span class="fl">0.7</span>, <span class="dv">5</span>, <span class="fl">1.2</span>), <span class="dv">2</span>, <span class="kw">paste</span>(<span class="st">&quot;n=&quot;</span>, counts))      <span class="co">#Add count to each bar</span></a></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="the-state-dataset.html#cb789-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">table</span>(sta<span class="sc">$</span>Region), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)  <span class="co"># Number of states in each region</span></span>
+<span id="cb789-2"><a href="the-state-dataset.html#cb789-2" aria-hidden="true" tabindex="-1"></a>percentages <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> counts <span class="sc">/</span> <span class="fu">length</span>(sta<span class="sc">$</span>Region)      </span>
+<span id="cb789-3"><a href="the-state-dataset.html#cb789-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(percentages, <span class="at">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="at">col =</span> <span class="st">&quot;lightblue&quot;</span>) </span>
+<span id="cb789-4"><a href="the-state-dataset.html#cb789-4" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fl">0.7</span>, <span class="dv">5</span>, <span class="fl">1.2</span>), <span class="dv">2</span>, <span class="fu">paste</span>(<span class="st">&quot;n=&quot;</span>, counts))      <span class="co"># Add count to each bar</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-region"></span>
 <img src="book_files/figure-html/state-region-1.png" alt="State count in each region." width="672" />
 <p class="caption">
 Figure 8.1: State count in each region.
 </p>
 </div>
-<p>Bar plot tells us that we have relatively more states in South(16) and less states in Northeast(9). North Central and West have similar number of states(12 and 13).</p>
+<p>The barplot tells us that we have relatively more states in the South(16) and fewer states in the Northeast(9). North Central and West have a similar number of states(12 and 13).</p>
 <p>A lollipop plot is a hybrid of a scatter plot and a barplot. Here is the lollipop chart shows the relationship between state and population.</p>
 
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb790-2" title="2"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">y =</span> Population)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb790-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb790-4" title="4"><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> State, <span class="dt">xend =</span> State, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">yend =</span> Population)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb790-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>)) <span class="co">#rotate axis lable</span></a></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="the-state-dataset.html#cb790-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb790-2"><a href="the-state-dataset.html#cb790-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sta, <span class="fu">aes</span>(<span class="at">x =</span> State, <span class="at">y =</span> Population)) <span class="sc">+</span></span>
+<span id="cb790-3"><a href="the-state-dataset.html#cb790-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb790-4"><a href="the-state-dataset.html#cb790-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> State, <span class="at">xend =</span> State, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">yend =</span> Population)) <span class="sc">+</span></span>
+<span id="cb790-5"><a href="the-state-dataset.html#cb790-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="co"># Rotate axis label</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-pop"></span>
-<img src="book_files/figure-html/state-pop-1.png" alt="Loppipop plot of population in each state." width="672" />
+<img src="book_files/figure-html/state-pop-1.png" alt="Loppipop plot of the population in each state." width="672" />
 <p class="caption">
-Figure 8.2: Loppipop plot of population in each state.
+Figure 8.2: Loppipop plot of the population in each state.
 </p>
 </div>
-<p>From the plot we can see even in early days, California and New York are the top two states in population. South Dakota have little population even in 1970s.</p>
-<p>Other questions we may ask are: how about the murder rate distribution in early days? Is it the same for different states and different regions? What are the main effect factors to murder rate? Can we use model of other factors to explain their contribution to murder rate?</p>
+<p>From the plot we can see that even in the early days, California and New York are the top two states in population. South Dakota had little population even in the 1970s.</p>
+<p>Other questions we may ask are: how about the murder rate distribution in the early days? Is it the same for different states and different regions? What are the main effect factors for the murder rate? Can we use a model of other factors to explain their contribution to the murder rate?</p>
 <p>A choropleth map may give us an overall view.</p>
 
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" title="1"><span class="kw">library</span>(maps)</a>
-<a class="sourceLine" id="cb791-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb791-3" title="3">sta<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">tolower</span>(state.name)  <span class="co"># lowercase states&#39; names</span></a>
-<a class="sourceLine" id="cb791-4" title="4">states &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;state&quot;</span>)        <span class="co"># Extract state data</span></a>
-<a class="sourceLine" id="cb791-5" title="5">map &lt;-<span class="st"> </span><span class="kw">merge</span>(states, sta, <span class="dt">by =</span> <span class="st">&quot;region&quot;</span>, <span class="dt">all.x =</span> T)  <span class="co"># Merge states and state.x77 data</span></a>
-<a class="sourceLine" id="cb791-6" title="6">map &lt;-<span class="st"> </span>map[<span class="kw">order</span>(map<span class="op">$</span>order), ]  <span class="co">#must order first</span></a>
-<a class="sourceLine" id="cb791-7" title="7"><span class="kw">ggplot</span>(map, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb791-8" title="8"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Murder)) <span class="op">+</span><span class="st">   </span></a>
-<a class="sourceLine" id="cb791-9" title="9"><span class="st">  </span><span class="kw">geom_path</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb791-10" title="10"><span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colours =</span> <span class="kw">rev</span>(<span class="kw">heat.colors</span>(<span class="dv">10</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb791-11" title="11"><span class="st">  </span><span class="kw">coord_map</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb791-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb791-13" title="13"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Murder Rate&quot;</span>))   </a></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="the-state-dataset.html#cb791-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
+<span id="cb791-2"><a href="the-state-dataset.html#cb791-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb791-3"><a href="the-state-dataset.html#cb791-3" aria-hidden="true" tabindex="-1"></a>sta<span class="sc">$</span>region <span class="ot">&lt;-</span> <span class="fu">tolower</span>(state.name)  <span class="co"># Lowercase states&#39; names</span></span>
+<span id="cb791-4"><a href="the-state-dataset.html#cb791-4" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">&quot;state&quot;</span>)        <span class="co"># Extract state data</span></span>
+<span id="cb791-5"><a href="the-state-dataset.html#cb791-5" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">merge</span>(states, sta, <span class="at">by =</span> <span class="st">&quot;region&quot;</span>, <span class="at">all.x =</span> T)  <span class="co"># Merge states and state.x77 data</span></span>
+<span id="cb791-6"><a href="the-state-dataset.html#cb791-6" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> map[<span class="fu">order</span>(map<span class="sc">$</span>order), ]     <span class="co"># Must order first</span></span>
+<span id="cb791-7"><a href="the-state-dataset.html#cb791-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(map, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span>  </span>
+<span id="cb791-8"><a href="the-state-dataset.html#cb791-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Murder)) <span class="sc">+</span>   </span>
+<span id="cb791-9"><a href="the-state-dataset.html#cb791-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>() <span class="sc">+</span> </span>
+<span id="cb791-10"><a href="the-state-dataset.html#cb791-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> <span class="fu">rev</span>(<span class="fu">heat.colors</span>(<span class="dv">10</span>))) <span class="sc">+</span></span>
+<span id="cb791-11"><a href="the-state-dataset.html#cb791-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_map</span>() <span class="sc">+</span></span>
+<span id="cb791-12"><a href="the-state-dataset.html#cb791-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>) <span class="sc">+</span></span>
+<span id="cb791-13"><a href="the-state-dataset.html#cb791-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">&quot;Murder Rate&quot;</span>))   </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-map"></span>
 <img src="book_files/figure-html/state-map-1.png" alt="Map of murder rate distribution." width="672" />
 <p class="caption">
@@ -441,212 +460,210 @@ Figure 8.3: Map of murder rate distribution.
 </div>
 <p>We can see from the map that the bottom and right of the map are close to red while the top middle and left are yellow. There is an area on top-right are yellow too, which means that murder rate are higher in south and east states but less in north central, northwest and northeast states.</p>
 
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" title="1"><span class="kw">library</span>(ggridges)</a></code></pre></div>
-<pre><code>## Warning: package &#39;ggridges&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Region, <span class="dt">fill =</span> Region)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb794-2" title="2"><span class="st">  </span><span class="kw">geom_density_ridges</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb794-3" title="3"><span class="st">  </span><span class="kw">theme_ridges</span>() <span class="op">+</span><span class="st">  </span><span class="co">#no color on backgroud</span></a>
-<a class="sourceLine" id="cb794-4" title="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,  <span class="co">#no show legend</span></a>
-<a class="sourceLine" id="cb794-5" title="5">        <span class="dt">axis.title.x =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),  <span class="co">#x axis title in the center</span></a>
-<a class="sourceLine" id="cb794-6" title="6">        <span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>))  <span class="co">#y axis title in the center</span></a></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="the-state-dataset.html#cb792-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb792-2"><a href="the-state-dataset.html#cb792-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sta, <span class="fu">aes</span>(<span class="at">x =</span> Murder, <span class="at">y =</span> Region, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
+<span id="cb792-3"><a href="the-state-dataset.html#cb792-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>() <span class="sc">+</span></span>
+<span id="cb792-4"><a href="the-state-dataset.html#cb792-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span>                                 <span class="co"># No color on backgroud</span></span>
+<span id="cb792-5"><a href="the-state-dataset.html#cb792-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,                  <span class="co"># No show legend</span></span>
+<span id="cb792-6"><a href="the-state-dataset.html#cb792-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>),  <span class="co"># x axis title in the center</span></span>
+<span id="cb792-7"><a href="the-state-dataset.html#cb792-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))  <span class="co"># y axis title in the center</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-murder"></span>
 <img src="book_files/figure-html/state-murder-1.png" alt="Ridgeline plot for murder rate in each region." width="672" />
 <p class="caption">
 Figure 8.4: Ridgeline plot for murder rate in each region.
 </p>
 </div>
-<p>The ridgeline plot tells us that murder rate skewed to the left for region west, northeast and north central, but skewed to the right for region south, which confirm with map above that south has bigger murder rate than the other regions.</p>
+<p>The ridgeline plot tells us that the murder rate skewed to the left for region west, northeast, and north central, but skewed to the right for the region south, which confirms with the map above that south has a bigger murder rate than the other regions.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-469" class="exercise"><strong>Exercise 8.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-472" class="exercise"><strong>Exercise 8.1  </strong></span></p>
 <p>Similar to Figure <a href="the-state-dataset.html#fig:state-map">8.3</a>, use choropleth map to obtain the Illiteracy map in state.x77 data set and give a brief interpretation. Hint: You can combine state.abb and state.x77 or use the row names of state.x77 data set directly. You can start from importing the data:</p>
 <p>tem &lt;- data.frame(state.x77)</p>
 <p>sta &lt;- cbind(state.abb, tem, state.region)</p>
 <p>colnames(sta)[10] &lt;- “Region”</p>
-……
 </div>
 </blockquote>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-470" class="exercise"><strong>Exercise 8.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-473" class="exercise"><strong>Exercise 8.2  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-murder">8.4</a>, use ridgeline plot to explore the regional distribution of Illiteracy for state.x77 and state.region data sets and interpret your figure.
 </div>
 </blockquote>
 </div>
-<div id="analyzing-the-relationship-among-variables" class="section level2">
+<div id="analyzing-the-relationship-among-variables" class="section level2" number="8.3">
 <h2><span class="header-section-number">8.3</span> Analyzing the relationship among variables</h2>
-<p>A scatter matrix is a pair-wise scatter plot of multiple variables presented in a matrix format. To visulize the linear relationship among variables in a plot, a scatter matrix is the best choice. The range of correlation coefficient is [-1, 1]. The coefficient -1 implies two variables are strictly negative related, such as <span class="math inline">\(y=-x\)</span>. And coefficient 1 implies positive related, such as <span class="math inline">\(y=2x+1\)</span>. Here is the scatter matrix for our state data.</p>
+<p>A scatter matrix is a pair-wise scatter plot of multiple variables presented in a matrix format. To visualize the linear relationship among variables in a plot, a scatter matrix is the best choice. The range of the correlation coefficient is [-1, 1]. The coefficient -1 implies two variables are strictly negatively related, such as <span class="math inline">\(y=-x\)</span>. And coefficient 1 implies positive related, such as <span class="math inline">\(y=2x+1\)</span>. Here is the scatter matrix for our state data.</p>
 
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb795-1" title="1">st &lt;-<span class="st"> </span>sta[, <span class="dv">2</span><span class="op">:</span><span class="dv">9</span>] <span class="co">#take numeric variables as goal matrix</span></a>
-<a class="sourceLine" id="cb795-2" title="2"><span class="kw">library</span>(ellipse) </a>
-<a class="sourceLine" id="cb795-3" title="3"><span class="kw">library</span>(corrplot)</a>
-<a class="sourceLine" id="cb795-4" title="4">corMatrix &lt;-<span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)) <span class="co"># Calculate correlation matrix</span></a>
-<a class="sourceLine" id="cb795-5" title="5">col &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>))  <span class="co">#3 colors to represent coefficients -1 to 1.</span></a>
-<a class="sourceLine" id="cb795-6" title="6"><span class="kw">corrplot.mixed</span>(corMatrix, <span class="dt">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="dt">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="dt">lower.col =</span> <span class="st">&quot;black&quot;</span>, </a>
-<a class="sourceLine" id="cb795-7" title="7">               <span class="dt">number.cex =</span> <span class="fl">.8</span>, <span class="dt">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="dt">upper.col =</span> <span class="kw">col</span>(<span class="dv">10</span>), </a>
-<a class="sourceLine" id="cb795-8" title="8">               <span class="dt">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="dt">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="dt">tl.col =</span> <span class="st">&quot;black&quot;</span>) <span class="co">#mix plots of &quot;number&quot; and &quot;ellipse&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="the-state-dataset.html#cb793-1" aria-hidden="true" tabindex="-1"></a>st <span class="ot">&lt;-</span> sta[, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>] <span class="co"># Take numeric variables as goal matrix</span></span>
+<span id="cb793-2"><a href="the-state-dataset.html#cb793-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ellipse) </span>
+<span id="cb793-3"><a href="the-state-dataset.html#cb793-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb793-4"><a href="the-state-dataset.html#cb793-4" aria-hidden="true" tabindex="-1"></a>corMatrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">as.matrix</span>(st)) <span class="co"># Calculate correlation matrix</span></span>
+<span id="cb793-5"><a href="the-state-dataset.html#cb793-5" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;blue&quot;</span>))  <span class="co"># 3 colors to represent coefficients -1 to 1.</span></span>
+<span id="cb793-6"><a href="the-state-dataset.html#cb793-6" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(corMatrix, <span class="at">order =</span> <span class="st">&quot;AOE&quot;</span>, <span class="at">lower =</span> <span class="st">&quot;number&quot;</span>, <span class="at">lower.col =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb793-7"><a href="the-state-dataset.html#cb793-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">number.cex =</span> .<span class="dv">8</span>, <span class="at">upper =</span> <span class="st">&quot;ellipse&quot;</span>,  <span class="at">upper.col =</span> <span class="fu">col</span>(<span class="dv">10</span>), </span>
+<span id="cb793-8"><a href="the-state-dataset.html#cb793-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">diag =</span> <span class="st">&quot;u&quot;</span>, <span class="at">tl.pos =</span> <span class="st">&quot;lt&quot;</span>, <span class="at">tl.col =</span> <span class="st">&quot;black&quot;</span>) <span class="co"># Mix plots of &quot;number&quot; and &quot;ellipse&quot;</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-corrplot"></span>
 <img src="book_files/figure-html/state-corrplot-1.png" alt="Corrplot for numeric variables." width="576" />
 <p class="caption">
 Figure 8.5: Corrplot for numeric variables.
 </p>
 </div>
-<p>On the top-right of correlation figure we can see the red and narrow shape between Murder and Life.Exp which shows high negative correlation, the blue narrow shape between Murder and Illiteracy which shows high positive correlation, the red-orange narrow shape between Murder and Frost, HS.Grad which show median negative correlation, also the orange shape between Murder and Income which shows small negative correlation and light-blue shape between Murder and both Area and Population which show small positive correlation.</p>
-<p>The pearson and spearman correlation matrix on the bottom-left gives us the r values between each pair of the variables, which confirm the correlation shape on the top-right.</p>
-<p>Positive correlation between Murder and Illiteracy with r value of 0.70, which means the lower education level the state have, the higher murder rate chance it will happen in that state; Negative correlations between Murder and Life.Exp, Frost, with r value of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life expectation the state will have; And the colder of the weather, the lower chance the murder will occur. Why? Is it not easy for the bad person live in cold area?</p>
+<p>On the top-right of the correlation figure, we can see that the red and narrow shape between Murder and Life.Exp shows a high negative correlation, the blue narrow shape between Murder and Illiteracy shows a high positive correlation, the red-orange narrow shapes between Murder and Frost, HS.Grad show a mild negative correlation, also the orange shape between Murder and Income shows small negative correlation and light-blue shapes between Murder and both Area and Population show a small positive correlation.</p>
+<p>The pearson and spearman correlation matrix on the bottom-left gives us the r-values between each pair of the variables, which confirm the correlation shape on the top-right.</p>
+<p>Positive correlation between Murder and Illiteracy with an r-value of 0.70 means that the lower education level the state has, the higher chance of murder rate the state will have; Negative correlations between Murder and Life.Exp, Frost, with r-values of -0.78, and -0.54 illustrate that the more occurrence of murder, the shorter life the state will expect; And the colder the weather, the lower chance the murder will occur. It’s interesting! Is it not easy for a murderer living in a cold area?</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-471" class="exercise"><strong>Exercise 8.3  </strong></span></p>
+<p><span id="exr:unnamed-chunk-474" class="exercise"><strong>Exercise 8.3  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a>, plot a scatter matrix among 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of the scatter matrix plot.
 </div>
 </blockquote>
 <p>Now let’s see the cluster situation of these variables.</p>
 
-<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb796-1" title="1"><span class="kw">plot</span>(<span class="kw">hclust</span>(<span class="kw">as.dist</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">cor</span>(<span class="kw">as.matrix</span>(st)))))  <span class="co"># hierarchical clustering</span></a></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="the-state-dataset.html#cb794-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">hclust</span>(<span class="fu">as.dist</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">cor</span>(<span class="fu">as.matrix</span>(st)))))  <span class="co"># Hierarchical clustering</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-dendrogram"></span>
 <img src="book_files/figure-html/state-dendrogram-1.png" alt="Cluster dendrogram for state numeric variables." width="672" />
 <p class="caption">
 Figure 8.6: Cluster dendrogram for state numeric variables.
 </p>
 </div>
-<p>The cluster Dendrogram tells us that there are two clusters for these variables. Murder is mostly close to Illiteracy, and then to Population and Area. Similar situation, HS.Grad is mostly close to Income, and then to Life.Exp and Frost. Though illiteracy and HS.Grad are in different cluster, we know for the same state, illiteracy is highly correlated with high school graduation rate , the lower the illiteracy, the higher the high school graduation rate. r value of -0.66 between Illiteracy and HS.Grad in the corrplot tells the same story.</p>
+<p>The cluster Dendrogram tells us that there are two clusters for these variables. Murder is mostly close to Illiteracy, and then to Population and Area. Similar situation, HS.Grad is mostly close to Income, and then to Life.Exp and Frost. Though illiteracy and HS.Grad are in the different clusters, we know for the same state, illiteracy is highly correlated with high school graduation rate; the lower the illiteracy, the higher the high school graduation rate. An r-value of -0.66 between Illiteracy and HS.Grad in the corrplot tells the same story.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-472" class="exercise"><strong>Exercise 8.4  </strong></span></p>
+<p><span id="exr:unnamed-chunk-475" class="exercise"><strong>Exercise 8.4  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-dendrogram">8.6</a>, plot a cluster dendrogram of the 7 variables: <em>mpg</em>, <em>cyl</em>, <em>disp</em>, <em>hp</em>, <em>drat</em>, <em>wt</em> and <em>qsec</em> in the data set <em>mtcars</em>. Give a brief interpretation of your output.
 </div>
 </blockquote>
 <p>we can use density plot to see the distribution of Illiteracy by region.</p>
 
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb797-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb795-1"><a href="the-state-dataset.html#cb795-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sta, <span class="fu">aes</span>(<span class="at">x =</span> Illiteracy, <span class="at">fill =</span> Region)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-illiteracy"></span>
 <img src="book_files/figure-html/state-illiteracy-1.png" alt="Illiteracy distribution by region." width="672" />
 <p class="caption">
 Figure 8.7: Illiteracy distribution by region.
 </p>
 </div>
-<p>We can see that north central region has narrow density distribution with most Illiteracy less than 1 percent of population. While south region has an open and bell shaped distribution with illiteracy covered from 0.5 to 3. Though region west has a spread out distribution too, but it’s left skewed; There are lots of west states with illiteracy of less than 1% of its population. Most northeast region states have illiteracy less then 1.5% of its population.</p>
+<p>We can see that the north-central region has narrow density distribution with most Illiteracy less than 1 percent of the population. While the south region has an open and bell-shaped distribution with illiteracy covered from 0.5 to 3. Though region west has a spread out distribution too, it’s left-skewed; There are lots of west states with illiteracy of less than 1% of its population. Most northeast region states have illiteracy less than 1.5% of their population.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-473" class="exercise"><strong>Exercise 8.5  </strong></span></p>
+<p><span id="exr:unnamed-chunk-476" class="exercise"><strong>Exercise 8.5  </strong></span></p>
 Similar to Figure <a href="the-state-dataset.html#fig:state-illiteracy">8.7</a>, use density plot to see the distribution of <em>mpg</em> by <em>cyl</em> in the data set <em>mtcars</em>.
 </div>
 </blockquote>
 <p>Because of the relationship of Murder with both Population and Area, We add one more column of Pop.Density for the population per square miles of area to see the correlation between Murder and this density.</p>
 
-<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb798-1" title="1">sta<span class="op">$</span>Pop.Density &lt;-<span class="st"> </span>sta<span class="op">$</span>Population<span class="op">/</span>sta<span class="op">$</span>Area</a>
-<a class="sourceLine" id="cb798-2" title="2"><span class="kw">boxplot</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region)</a></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="the-state-dataset.html#cb796-1" aria-hidden="true" tabindex="-1"></a>sta<span class="sc">$</span>Pop.Density <span class="ot">&lt;-</span> sta<span class="sc">$</span>Population<span class="sc">/</span>sta<span class="sc">$</span>Area</span>
+<span id="cb796-2"><a href="the-state-dataset.html#cb796-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(sta<span class="sc">$</span>Pop.Density <span class="sc">~</span> sta<span class="sc">$</span>Region, <span class="at">xlab =</span> <span class="st">&quot;Region&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Population Density&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-population"></span>
 <img src="book_files/figure-html/state-population-1.png" alt="Box plot of population density by region." width="672" />
 <p class="caption">
 Figure 8.8: Box plot of population density by region.
 </p>
 </div>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" title="1">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sta<span class="op">$</span>Pop.Density <span class="op">~</span><span class="st"> </span>sta<span class="op">$</span>Region, sta)</a>
-<a class="sourceLine" id="cb799-2" title="2"><span class="kw">summary</span>(model)</a></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="the-state-dataset.html#cb797-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(sta<span class="sc">$</span>Pop.Density <span class="sc">~</span> sta<span class="sc">$</span>Region, sta)</span>
+<span id="cb797-2"><a href="the-state-dataset.html#cb797-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value  Pr(&gt;F)    
 ## sta$Region   3  1.051  0.3502      12 6.3e-06 ***
 ## Residuals   46  1.343  0.0292                    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>The box plot shows that the mean Pop.Density of Northeast is much more than the other regions, while West has lowest mean Pop.Density. ANOVA test with p value of 6.3e-06 also let us reject the null hypothesis that mean Pop.Densities are same for different regions, which means at least one of the regional mean population densities is different from the others.</p>
+<p>The box plot shows that the mean Pop.Density of Northeast is much more than the other regions, while West has the lowest mean Pop.Density. ANOVA test with a p-value of 6.3e-06 also give us the evidence to reject the null hypothesis that the mean Pop.Densities are the same for different regions, which means at least one of the regional mean population densities is different from the others.</p>
 <p>Here is the scatterplot for Illiteracy and Murder with Population per area.</p>
 
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Illiteracy, <span class="dt">y =</span> Murder)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb801-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> Pop.Density, <span class="dt">color =</span> Region)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb801-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x)  <span class="co"># add regression line</span></a></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="the-state-dataset.html#cb799-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sta, <span class="fu">aes</span>(<span class="at">x =</span> Illiteracy, <span class="at">y =</span> Murder)) <span class="sc">+</span> </span>
+<span id="cb799-2"><a href="the-state-dataset.html#cb799-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> Pop.Density, <span class="at">color =</span> Region)) <span class="sc">+</span> </span>
+<span id="cb799-3"><a href="the-state-dataset.html#cb799-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>,<span class="at">formula =</span> y <span class="sc">~</span> x)  <span class="co"># Add regression line</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-IlliteracyMurder"></span>
 <img src="book_files/figure-html/state-IlliteracyMurder-1.png" alt="Scatterplot for illiteracy and murder sized by population density and colored by region." width="672" />
 <p class="caption">
 Figure 8.9: Scatterplot for illiteracy and murder sized by population density and colored by region.
 </p>
 </div>
-<p>The plot shows that murder and illiteracy are positive correlated. All states in other three regions have murder rate less than 12 per 100,000 population except some of south states(green). All north central states(blue) has illiteracy less than 1, all northeast states(red) have less than 1.5 of illiteracy. The illiteracy of west(purple) and south states have much bigger variance, some west states has illiteracy less than 0.5, while some south state has illiteracy more than 2.75. Many Northeast states have big population density but middle illiteracy rate comparing with the states in the other three regions.</p>
-<p>Because of the high correlation of murder and Life.Exp, we will take a look of the distribution of Life.Exp.</p>
+<p>The plot shows that murder and illiteracy are positively correlated. All states in the other three regions have murder rates of less than 12 per 100,000 population except some of the south states(green). All north-central states(blue) have illiteracy less than 1, all northeast states(red) have less than 1.5 of illiteracy. The illiteracy of west(purple) and south states have much bigger variance, some western states have illiteracy less than 0.5, while some south states have illiteracy more than 2.75. Many Northeast states have big population densities but middle illiteracy rates compared with the states in the other three regions.</p>
+<p>Because of the high correlation of murder and Life.Exp, we will take a look at the distribution of Life.Exp.</p>
 
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" title="1"><span class="kw">ggplot</span>(sta, <span class="kw">aes</span>(<span class="dt">x =</span> Region, <span class="dt">y =</span> Life.Exp, <span class="dt">fill =</span> Region)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb802-2" title="2"><span class="st">  </span><span class="kw">geom_violin</span>(<span class="dt">trim =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb802-3" title="3"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width =</span> <span class="fl">0.1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="the-state-dataset.html#cb800-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sta, <span class="fu">aes</span>(<span class="at">x =</span> Region, <span class="at">y =</span> Life.Exp, <span class="at">fill =</span> Region)) <span class="sc">+</span> </span>
+<span id="cb800-2"><a href="the-state-dataset.html#cb800-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb800-3"><a href="the-state-dataset.html#cb800-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-LifeExp"></span>
 <img src="book_files/figure-html/state-LifeExp-1.png" alt="Regional life expectancy." width="672" />
 <p class="caption">
 Figure 8.10: Regional life expectancy.
 </p>
 </div>
-<p>On average, south has lower life expectancy than the other three regions. North Central has highest Life.Exp. West has extending distribution with two long tails on each ends, which means some west states have really long life expectancy, while some states expect short life though they are in the same region.</p>
-<p>According to the corrplot, there are other variables in the other cluster, such as life expectancy, high school graduation and income. We are interested whether they affect the murder rate. Here is the plot for relationship between murder and these variables.</p>
+<p>On average, the south has a lower life expectancy than the other three regions. North Central has the highest Life.Exp. West has extending distribution with two long tails on each end, which means some west states have very long life expectancy, while some states expect short life expectancy though they are in the same region.</p>
+<p>According to the corrplot, there are other variables in the other cluster, such as life expectancy, high school graduation and income. We are interested in whether they affect the murder rate. Here is the plot for relationship between murder and these variables. Firstly we group the income into 5 IncomeTypes.</p>
 
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb803-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb803-2" title="2"><span class="co"># group income into IncomeType first</span></a>
-<a class="sourceLine" id="cb803-3" title="3">sta.income &lt;-<span class="st"> </span>sta <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">IncomeType =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;Under3500&quot;</span>,  </a>
-<a class="sourceLine" id="cb803-4" title="4">                             <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3500</span>, <span class="st">&quot;3500-4000&quot;</span>,</a>
-<a class="sourceLine" id="cb803-5" title="5">                               <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">4500</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4000</span>, <span class="st">&quot;4000-4500&quot;</span>,</a>
-<a class="sourceLine" id="cb803-6" title="6">                                 <span class="kw">ifelse</span>(Income <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span> <span class="op">&amp;</span><span class="st"> </span>Income <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4500</span>, <span class="st">&quot;4500-5000&quot;</span>, </a>
-<a class="sourceLine" id="cb803-7" title="7">                                   <span class="st">&quot;Above5000&quot;</span>))))))</a>
-<a class="sourceLine" id="cb803-8" title="8"><span class="kw">ggplot</span>(sta.income, <span class="kw">aes</span>(<span class="dt">x =</span> Murder, <span class="dt">y =</span> Life.Exp)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb803-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape =</span> IncomeType, <span class="dt">color =</span> Region, <span class="dt">size =</span> HS.Grad)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb803-10" title="10"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>, <span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x)</a></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="the-state-dataset.html#cb801-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb801-2"><a href="the-state-dataset.html#cb801-2" aria-hidden="true" tabindex="-1"></a><span class="co"># group income into IncomeType first</span></span>
+<span id="cb801-3"><a href="the-state-dataset.html#cb801-3" aria-hidden="true" tabindex="-1"></a>sta.income <span class="ot">&lt;-</span> sta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">IncomeType =</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(Income <span class="sc">&lt;</span> <span class="dv">3500</span>, <span class="st">&quot;Under3500&quot;</span>,  </span>
+<span id="cb801-4"><a href="the-state-dataset.html#cb801-4" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">ifelse</span>(Income <span class="sc">&lt;</span> <span class="dv">4000</span> <span class="sc">&amp;</span> Income <span class="sc">&gt;=</span> <span class="dv">3500</span>, <span class="st">&quot;3500-4000&quot;</span>,</span>
+<span id="cb801-5"><a href="the-state-dataset.html#cb801-5" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">ifelse</span>(Income <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">&amp;</span> Income <span class="sc">&gt;=</span> <span class="dv">4000</span>, <span class="st">&quot;4000-4500&quot;</span>,</span>
+<span id="cb801-6"><a href="the-state-dataset.html#cb801-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="fu">ifelse</span>(Income <span class="sc">&lt;</span> <span class="dv">5000</span> <span class="sc">&amp;</span> Income <span class="sc">&gt;=</span> <span class="dv">4500</span>, <span class="st">&quot;4500-5000&quot;</span>, </span>
+<span id="cb801-7"><a href="the-state-dataset.html#cb801-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">&quot;Above5000&quot;</span>))))))</span>
+<span id="cb801-8"><a href="the-state-dataset.html#cb801-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sta.income, <span class="fu">aes</span>(<span class="at">x =</span> Murder, <span class="at">y =</span> Life.Exp)) <span class="sc">+</span> </span>
+<span id="cb801-9"><a href="the-state-dataset.html#cb801-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> IncomeType, <span class="at">color =</span> Region, <span class="at">size =</span> HS.Grad)) <span class="sc">+</span> </span>
+<span id="cb801-10"><a href="the-state-dataset.html#cb801-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>, <span class="at">formula =</span> y <span class="sc">~</span> x)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-LifeMurder"></span>
-<img src="book_files/figure-html/state-LifeMurder-1.png" alt="Relationship between murder rate and life expectancy, high school graduation and income." width="672" />
+<img src="book_files/figure-html/state-LifeMurder-1.png" alt="Relationship between murder rate and life expectancy, high school graduation, and income." width="672" />
 <p class="caption">
-Figure 8.11: Relationship between murder rate and life expectancy, high school graduation and income.
+Figure 8.11: Relationship between murder rate and life expectancy, high school graduation, and income.
 </p>
 </div>
-<p>Murder is negatively correlated with Life.Exp. Some states with higher murder rate over 12 have relatively small symbols, which means their high school graduation rates are close to 40%; And these small symbols with murder rate bigger than 12 are all colored as green, which means they all belong to south region.</p>
-<p>It looks like the income type does not affect the murder rate a lot because all different symbols scatter around in different murder rates, especially between murder rate 8 and 10.</p>
-<p>Most southern states has lower HS.Grad, lower Life.Exp but higher murder frequency, while states in other three regions have relative higher HS.Grad and income but lower murder rate.</p>
+<p>Murder is negatively correlated with Life.Exp. Some states with higher murder rates over 12 have relatively small symbols, which means their high school graduation rates are close to 40%; And these small symbols with murder rates bigger than 12 are all colored as green, which means they all belong to the south region.</p>
+<p>It looks like the income type does not affect the murder rate a lot because all different symbols scatter around in different murder rates, especially between murder rates 8 and 10.</p>
+<p>Most southern states have lower HS.Grad, lower Life.Exp but higher murder frequency, while states in the other three regions have relatively higher high school graduation rate and income but lower murder rate.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-474" class="exercise"><strong>Exercise 8.6  </strong></span></p>
-Use scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure <a href="the-state-dataset.html#fig:state-dendrogram">8.6</a>. Interpret your plot.
+<p><span id="exr:unnamed-chunk-477" class="exercise"><strong>Exercise 8.6  </strong></span></p>
+Use a scatter plot to analyze the correlation between Illiteracy and those variables in the other cluster shown in Figure <a href="the-state-dataset.html#fig:state-dendrogram">8.6</a>. Interpret your plot.
 </div>
 </blockquote>
 </div>
-<div id="the-whole-picture-of-the-data-set" class="section level2">
+<div id="the-whole-picture-of-the-data-set" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> The whole picture of the data set</h2>
-<p>We analyzed the relationship of murder rate with the variables in both clusters. It looks like all variables are correlated, more or less. Now let’s see the whole picture of these variables. Heatmap and Segment diagram are the popular methods.</p>
+<p>We analyzed the relationship of murder rate with the variables in both clusters. It looks like all variables are correlated, more or less. Now let’s see the whole picture of these variables. Heat map and Segment diagram are the popular methods.</p>
 
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb804-1" title="1"><span class="kw">library</span>(gplots)</a>
-<a class="sourceLine" id="cb804-2" title="2">st.matrix &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(st) <span class="co"># transfer the data frame to matrix</span></a>
-<a class="sourceLine" id="cb804-3" title="3">s &lt;-<span class="st"> </span><span class="kw">apply</span>(st.matrix, <span class="dv">2</span>, <span class="cf">function</span>(y)(y <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(y)) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(y))  <span class="co"># standardize data</span></a>
-<a class="sourceLine" id="cb804-4" title="4">a &lt;-<span class="st"> </span><span class="kw">heatmap.2</span>(s, </a>
-<a class="sourceLine" id="cb804-5" title="5">          <span class="dt">col =</span> <span class="kw">greenred</span>(<span class="dv">75</span>),   <span class="co">#color green red</span></a>
-<a class="sourceLine" id="cb804-6" title="6">          <span class="dt">density.info =</span> <span class="st">&quot;none&quot;</span>, </a>
-<a class="sourceLine" id="cb804-7" title="7">          <span class="dt">trace =</span> <span class="st">&quot;none&quot;</span>, </a>
-<a class="sourceLine" id="cb804-8" title="8">          <span class="dt">scale =</span> <span class="st">&quot;none&quot;</span>, </a>
-<a class="sourceLine" id="cb804-9" title="9">          <span class="dt">RowSideColors =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>)[sta<span class="op">$</span>Region],  </a>
-<a class="sourceLine" id="cb804-10" title="10">          <span class="dt">srtCol =</span> <span class="dv">45</span>,  <span class="co">#column labels at 45 degree</span></a>
-<a class="sourceLine" id="cb804-11" title="11">          <span class="dt">margins =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">8</span>), <span class="co"># bottom and right margins</span></a>
-<a class="sourceLine" id="cb804-12" title="12">          <span class="dt">lhei =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)  <span class="co"># relative heights of the rows</span></a>
-<a class="sourceLine" id="cb804-13" title="13">) </a>
-<a class="sourceLine" id="cb804-14" title="14"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="kw">levels</span>(sta<span class="op">$</span>Region), <span class="dt">fill =</span> <span class="kw">rainbow</span>(<span class="dv">4</span>), <span class="dt">cex =</span> <span class="fl">0.8</span>)  <span class="co"># add legend </span></a></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="the-state-dataset.html#cb802-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gplots)</span>
+<span id="cb802-2"><a href="the-state-dataset.html#cb802-2" aria-hidden="true" tabindex="-1"></a>st.matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(st)    <span class="co"># Transfer the data frame to matrix</span></span>
+<span id="cb802-3"><a href="the-state-dataset.html#cb802-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">apply</span>(st.matrix, <span class="dv">2</span>, <span class="cf">function</span>(y)(y <span class="sc">-</span> <span class="fu">mean</span>(y)) <span class="sc">/</span> <span class="fu">sd</span>(y))  <span class="co"># Standardize data</span></span>
+<span id="cb802-4"><a href="the-state-dataset.html#cb802-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">heatmap.2</span>(s, </span>
+<span id="cb802-5"><a href="the-state-dataset.html#cb802-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="fu">greenred</span>(<span class="dv">75</span>), <span class="co"># Color green red</span></span>
+<span id="cb802-6"><a href="the-state-dataset.html#cb802-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">density.info =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb802-7"><a href="the-state-dataset.html#cb802-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">trace =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb802-8"><a href="the-state-dataset.html#cb802-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">scale =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb802-9"><a href="the-state-dataset.html#cb802-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">RowSideColors =</span> <span class="fu">rainbow</span>(<span class="dv">4</span>)[sta<span class="sc">$</span>Region],  </span>
+<span id="cb802-10"><a href="the-state-dataset.html#cb802-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">srtCol =</span> <span class="dv">45</span>,        <span class="co"># Column labels at 45 degree</span></span>
+<span id="cb802-11"><a href="the-state-dataset.html#cb802-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">margins =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>),  <span class="co"># Bottom and right margins</span></span>
+<span id="cb802-12"><a href="the-state-dataset.html#cb802-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">lhei =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)     <span class="co"># Relative heights of the rows</span></span>
+<span id="cb802-13"><a href="the-state-dataset.html#cb802-13" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb802-14"><a href="the-state-dataset.html#cb802-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">levels</span>(sta<span class="sc">$</span>Region), <span class="at">fill =</span> <span class="fu">rainbow</span>(<span class="dv">4</span>), <span class="at">cex =</span> <span class="fl">0.8</span>)  <span class="co"># Add legend </span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-heatmap"></span>
 <img src="book_files/figure-html/state-heatmap-1.png" alt="Heat map for whole state data set." width="768" />
 <p class="caption">
 Figure 8.12: Heat map for whole state data set.
 </p>
 </div>
-<p>Same as cluster Dendrogram plot, Heatmap shows that Life.Exp, Income, HS.Grad, together with Frost build one cluster, while Illiteracy, Murder and Population and area build another cluster.</p>
-<p>Compare with other states, lots of south states with lower Life.Exp, Income, HS.Grad have higher Murder and Illiteracy, like Mississippi and Alabama. On the contrary, some northern and western states which have higher Life.Exp, Income, HS.Grad show lower Area, Population, Murder and Illiteracy, like Nebraska and South Dakota. Though the income of South Dakota show a little bit green.</p>
+<p>Same as cluster Dendrogram plot, Heatmap shows that Life.Exp, Income, HS.Grad, together with Frost build one cluster, while Illiteracy, Murder, Population, and area build another cluster.</p>
+<p>Compared with other states, lots of southern states with lower Life.Exp, Income, and HS.Grad have higher Murder rates and Illiteracy, like Mississippi and Alabama. On the contrary, some northern and western states which have higher Life.Exp, Income, and HS.Grad show lower Area, Population, Murder, and Illiteracy, like Nebraska and South Dakota. Though the income of South Dakota show a little bit green.</p>
 
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb805-1" title="1"><span class="kw">row.names</span>(st) &lt;-<span class="st"> </span>sta<span class="op">$</span>State</a>
-<a class="sourceLine" id="cb805-2" title="2"><span class="kw">stars</span>(st, <span class="dt">key.loc =</span> <span class="kw">c</span>(<span class="dv">13</span>, <span class="fl">1.5</span>), <span class="dt">draw.segments =</span> T)   </a></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="the-state-dataset.html#cb803-1" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(st) <span class="ot">&lt;-</span> sta<span class="sc">$</span>State</span>
+<span id="cb803-2"><a href="the-state-dataset.html#cb803-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stars</span>(st, <span class="at">key.loc =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="fl">1.5</span>), <span class="at">draw.segments =</span> T)   </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-segment"></span>
 <img src="book_files/figure-html/state-segment-1.png" alt="Segment diagram for all states." width="768" />
 <p class="caption">
 Figure 8.13: Segment diagram for all states.
 </p>
 </div>
-<p>The segment Diagram shows us different aspects of each state. For example, South Dakota has big Frost(yellow), big Life Expectancy(blue), relative high percentage of high school graduation rate(pink) and good income(red), but has small area and really tiny population, illiteracy and murder rate comparing with other states.</p>
+<p>The segment Diagram shows us different aspects of each state. For example, South Dakota has big Frost(yellow), big Life Expectancy(blue), a relatively high percentage of high school graduation rate(pink) and good income(red), but has a small area, and very tiny population, illiteracy, and murder rate compared with the other states.</p>
 <p>We use principal components analysis to explore the data a little bit more!</p>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb806-1" title="1">pca =<span class="st"> </span><span class="kw">prcomp</span>(st, <span class="dt">scale =</span> T)  <span class="co">#scale = T to normalize the data</span></a>
-<a class="sourceLine" id="cb806-2" title="2">pca</a></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="the-state-dataset.html#cb804-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">=</span> <span class="fu">prcomp</span>(st, <span class="at">scale =</span> T)  <span class="co"># scale = T to normalize the data</span></span>
+<span id="cb804-2"><a href="the-state-dataset.html#cb804-2" aria-hidden="true" tabindex="-1"></a>pca</span></code></pre></div>
 <pre><code>## Standard deviations (1, .., p=8):
 ## [1] 1.8970755 1.2774659 1.0544862 0.8411327 0.6201949 0.5544923 0.3800642
 ## [8] 0.3364338
@@ -670,9 +687,9 @@ Figure 8.13: Segment diagram for all states.
 ## HS.Grad    -0.64464647 -0.393019181 -0.30724183
 ## Frost       0.21268413 -0.472013140  0.02834442
 ## Area        0.14836054  0.286260213  0.01320320</code></pre>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb808-1" title="1"><span class="kw">plot</span>(pca)  <span class="co"># plot the amount of variance each principal components captures</span></a></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-475-1.png" width="672" /></p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb809-1" title="1"><span class="kw">summary</span>(pca)  <span class="co">#shows the importance of the components</span></a></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="the-state-dataset.html#cb806-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca)     <span class="co"># Plot the amount of variance each principal components captures</span></span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-478-1.png" width="672" /></p>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="the-state-dataset.html#cb807-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca)  <span class="co"># Shows the importance of the components</span></span></code></pre></div>
 <pre><code>## Importance of components:
 ##                           PC1    PC2    PC3     PC4     PC5     PC6     PC7
 ## Standard deviation     1.8971 1.2775 1.0545 0.84113 0.62019 0.55449 0.38006
@@ -682,34 +699,34 @@ Figure 8.13: Segment diagram for all states.
 ## Standard deviation     0.33643
 ## Proportion of Variance 0.01415
 ## Cumulative Proportion  1.00000</code></pre>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb811-1" title="1">percentVar &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span><span class="kw">summary</span>(pca)<span class="op">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>], <span class="dv">0</span>) <span class="co"># compute % variances</span></a>
-<a class="sourceLine" id="cb811-2" title="2">percentVar</a></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="the-state-dataset.html#cb809-1" aria-hidden="true" tabindex="-1"></a>percentVar <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">summary</span>(pca)<span class="sc">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>], <span class="dv">0</span>) <span class="co"># Compute % variances</span></span>
+<span id="cb809-2"><a href="the-state-dataset.html#cb809-2" aria-hidden="true" tabindex="-1"></a>percentVar</span></code></pre></div>
 <pre><code>## PC1 PC2 PC3 PC4 PC5 PC6 PC7 
 ##  45  20  14   9   5   4   2</code></pre>
-<p>The first two components contribute 45% and 20%, together 65% of the variance. The third component is a little bit less but still over 10% of the variance. The barplot of each component’s variance shows how the each component dominate.</p>
+<p>The first two components contribute 45% and 20%, together 65% of the variance. The third component is a little bit less but still over 10% of the variance. The bar plot of each component’s variance shows how the each component dominate.</p>
 
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb813-1" title="1"><span class="kw">library</span>(ggfortify)</a>
-<a class="sourceLine" id="cb813-2" title="2"><span class="kw">row.names</span>(sta) &lt;-<span class="st"> </span>sta<span class="op">$</span>State</a>
-<a class="sourceLine" id="cb813-3" title="3"><span class="kw">autoplot</span>(<span class="kw">prcomp</span>(st,  <span class="dt">scale =</span> T), <span class="dt">data =</span> sta, </a>
-<a class="sourceLine" id="cb813-4" title="4">         <span class="dt">colour =</span> <span class="st">&#39;Region&#39;</span>, <span class="dt">shape =</span> <span class="ot">FALSE</span>, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">label.size =</span> <span class="fl">3.5</span>,</a>
-<a class="sourceLine" id="cb813-5" title="5">         <span class="dt">loadings =</span> <span class="ot">TRUE</span>, <span class="dt">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">loadings.label =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb813-6" title="6">         <span class="dt">loadings.label.size =</span> <span class="dv">4</span>, <span class="dt">loadings.label.colour =</span> <span class="st">&#39;blue&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="the-state-dataset.html#cb811-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb811-2"><a href="the-state-dataset.html#cb811-2" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(sta) <span class="ot">&lt;-</span> sta<span class="sc">$</span>State</span>
+<span id="cb811-3"><a href="the-state-dataset.html#cb811-3" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">prcomp</span>(st,  <span class="at">scale =</span> T), <span class="at">data =</span> sta, </span>
+<span id="cb811-4"><a href="the-state-dataset.html#cb811-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">colour =</span> <span class="st">&#39;Region&#39;</span>, <span class="at">shape =</span> <span class="cn">FALSE</span>, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">label.size =</span> <span class="fl">3.5</span>,</span>
+<span id="cb811-5"><a href="the-state-dataset.html#cb811-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.colour =</span> <span class="st">&#39;blue&#39;</span>, <span class="at">loadings.label =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb811-6"><a href="the-state-dataset.html#cb811-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">loadings.label.size =</span> <span class="dv">4</span>, <span class="at">loadings.label.colour =</span> <span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:state-bioplot"></span>
 <img src="book_files/figure-html/state-bioplot-1.png" alt="Biplot for PCA." width="672" />
 <p class="caption">
 Figure 8.14: Biplot for PCA.
 </p>
 </div>
-<p>The Biplot illustrate the special role of these variables to the first and second component of the variance. Illiteracy positively contribute to component of the variance PC1, while Life.Exp and Frost negatively contribute to component of the variance PC1. Area positively contribute to component of the variance PC2. The other four variables contribute to both component of the variance PC1 and PC2 positively or negatively.
-From the figure we also find that many states in south region such as Louisiana(LA) and Mississippi(MS) are mainly affected by Illiteracy and murder rate, while some north central states like Minnesota(MN) and North Dakota(ND) are mainly affected by life expectancy and frost. Area is the main effect for two states in West region, Alaska(AK) and California(CA).</p>
+<p>The Biplot illustrates the special role of these variables to the first and second components of the variance. Illiteracy positively contributes to the component of the variance PC1, while Life.Exp and Frost negatively contribute to the component of the variance PC1. Area positively contributes to the component of the variance PC2. The other four variables contribute to both components of the variance PC1 and PC2 positively or negatively.
+From the figure, we also find that many states in the south region, such as Louisiana(LA) and Mississippi(MS) are well-known for their big Illiteracy and high murder rate, while some north-central states like Minnesota(MN) and North Dakota(ND) are noticed for their high life expectancy and long frost time. Big area is the special feature for two states in the west region, Alaska(AK) and California(CA).</p>
 </div>
-<div id="linear-model-analysis" class="section level2">
+<div id="linear-model-analysis" class="section level2" number="8.5">
 <h2><span class="header-section-number">8.5</span> Linear model analysis</h2>
-<p>According to the analysis above, we try to find a model to explain murder rate. Because of the high correlation of HS.Grad with Illiteracy, Life.Exp and Income, we will not put HS.Grad in the model. Similar reason, we leave Frost out too.</p>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb814-1" title="1">lm.data &lt;-<span class="st"> </span>sta[, <span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>, <span class="dv">9</span><span class="op">:</span><span class="dv">10</span>)]</a>
-<a class="sourceLine" id="cb814-2" title="2">lm.data &lt;-<span class="st"> </span><span class="kw">within</span>(lm.data, Region &lt;-<span class="st"> </span><span class="kw">relevel</span>(Region, <span class="dt">ref =</span> <span class="st">&quot;South&quot;</span>))  <span class="co"># set region South as reference</span></a>
-<a class="sourceLine" id="cb814-3" title="3">model &lt;-<span class="st"> </span><span class="kw">lm</span>(Murder <span class="op">~</span><span class="st"> </span>.,  <span class="dt">data =</span> lm.data)</a>
-<a class="sourceLine" id="cb814-4" title="4"><span class="kw">summary</span>(model)</a></code></pre></div>
+<p>According to the analysis above, we try to find a model to explain the murder rate. Because of the high correlation of HS.Grad with Illiteracy, Life.Exp, and Income, we will not put HS.Grad in the model. For a similar reason, we leave Frost out too.</p>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="the-state-dataset.html#cb812-1" aria-hidden="true" tabindex="-1"></a>lm.data <span class="ot">&lt;-</span> sta[, <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">9</span><span class="sc">:</span><span class="dv">10</span>)]</span>
+<span id="cb812-2"><a href="the-state-dataset.html#cb812-2" aria-hidden="true" tabindex="-1"></a>lm.data <span class="ot">&lt;-</span> <span class="fu">within</span>(lm.data, Region <span class="ot">&lt;-</span> <span class="fu">relevel</span>(Region, <span class="at">ref =</span> <span class="st">&quot;South&quot;</span>))  <span class="co"># Set region South as reference</span></span>
+<span id="cb812-3"><a href="the-state-dataset.html#cb812-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Murder <span class="sc">~</span> .,  <span class="at">data =</span> lm.data)</span>
+<span id="cb812-4"><a href="the-state-dataset.html#cb812-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Murder ~ ., data = lm.data)
@@ -735,20 +752,20 @@ From the figure we also find that many states in south region such as Louisiana(
 ## Residual standard error: 1.552 on 41 degrees of freedom
 ## Multiple R-squared:  0.852,  Adjusted R-squared:  0.8232 
 ## F-statistic: 29.51 on 8 and 41 DF,  p-value: 1.168e-14</code></pre>
-<p>Murder is most related to Life.Exp and Population of the state, also affected by Illiteracy of the state. Region is another factor contributing to murder rate. The estimates illustrate that every unit of increasing in Life.Exp will decrease 1.445 unit of murder rate, while every unit of increasing in population and illiteracy will increase 0.000259 and 1.861 unit of murder rate. At the same time, if the state belongs to northeast region, the murder rate will be 2.673 unit less. The model will explain 82% of the variance of murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow:
+<p>Murder rate is most related to Life Expectancy and Population of the state, also it is affected by Illiteracy of the state. The region is another factor contributing to murder rate. The estimates illustrate that every unit of increase in Life.Exp expects 1.445 units lower of murder rate, while every unit of increase in population and illiteracy will increase 0.000259 and 1.861 units of the murder rate. At the same time, if the state belongs to the northeast region, the murder rate will be 2.673 units less. The model will explain 82% of the variance of the murder rate. If we know the population, Life.Exp, Illiteracy of the certain state in those years, we can estimate murder rate as follow:
 <span class="math inline">\(Murder = 105.9 - 1.445 * Life.Exp + 0.000259 * Population + 1.861 * Illiteracy - 2.673 * RegionNortheast\)</span></p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-477" class="exercise"><strong>Exercise 8.7  </strong></span></p>
-Do linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a> and pay attention to the high correlation between murder rate and life expectancy.
+<p><span id="exr:unnamed-chunk-480" class="exercise"><strong>Exercise 8.7  </strong></span></p>
+Do a linear model analysis for Illiteracy and interpret your result. Hint: Check the corrplot figure <a href="the-state-dataset.html#fig:state-corrplot">8.5</a> and pay attention to the high correlation between murder rate and life expectancy.
 </div>
 </blockquote>
 </div>
-<div id="conclusion" class="section level2">
+<div id="conclusion" class="section level2" number="8.6">
 <h2><span class="header-section-number">8.6</span> Conclusion</h2>
-<p>-Southern region shows higher murder rate with lower life expectancy, income, and high school gradation rate but higher illiteracy, while northern region shows lower murder rate with higher population density, life expectancy, income, and high school gradation rate but lower illiteracy.</p>
-<p>-The information of life expectancy, population, illiteracy of the state in 1970s and whether the state belongs to northeast region will help to estimate the murder rate of the state at that time.</p>
+<p>-Southern region shows a higher murder rate with lower life expectancy, income, and high school graduation rate but higher illiteracy, while northern region shows a lower murder rate with higher population density, life expectancy, income, and high school graduation rate but lower illiteracy.</p>
+<p>-The information of life expectancy, population, illiteracy of the state in the 1970s, and whether the state belongs to the northeast region will help to estimate the murder rate of the state at that time.</p>
 
 </div>
 </div>
@@ -781,6 +798,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
