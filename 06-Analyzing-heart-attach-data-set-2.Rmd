@@ -21,17 +21,17 @@ ggplot(df, aes(x = LOS, y = CHARGES))  # Specify data frame and aesthetic mappin
 ```
 
 This line does not finish the plot; it just specifies the name of the data frame, which is the required input data type, and defines the so-called **aesthetic mapping**: LOS maps to x-axis while CHARGES maps to the y-axis.  To complete the plot, we use the geom_point function to add data points, which is called **geometric objects**. 
-```{r fig.keep='none', warning=FALSE}
+```{r fig.keep='none', warning=FALSE, message=FALSE}
 ggplot(df, aes(x = LOS, y = CHARGES)) + geom_point()   # scatter plot
 ```
 
 Thus, it is a two-step process to generate a scatter plot. This seems cumbersome at first, but it is convenient to add additional features or customize the plot step by step.  Let’s add a trend line with a confidence interval. 
-```{r fig.keep='none', warning=FALSE}
+```{r fig.keep='none', warning=FALSE, message=FALSE}
 ggplot(df, aes(x = LOS, y = CHARGES)) + geom_point() + stat_smooth(method = lm)
 ```
 
 As we keep adding elements to the plot, this line of code gets longer. So we break the code into multiple lines as below. The “+” at the end of the line signifies that the plot is not finished and tell R to keep reading the next line. This code below does the same thing as the above, but it is easier to read.  I often use the tab key in the second line to remind myself that it is continued from the above line. 
-```{r fig.keep='none',warning=FALSE}
+```{r fig.keep='none',warning=FALSE, message=FALSE}
 ggplot(df, aes(x = LOS, y = CHARGES)) +  # aesthetic mapping
 	     geom_point() +                    # add data points    
        stat_smooth(method = lm)          # add trend line
@@ -43,7 +43,7 @@ We can also customize the plot by adding additional lines of code (Figure \@ref(
 
 (ref:15-1) Scatter plot using ggplot2.
 
-```{r 15-1, fig.width=5, fig.height=3, warning=FALSE, fig.cap='(ref:15-1)', fig.align='center'}
+```{r 15-1, message=FALSE, fig.width=5, fig.height=3, warning=FALSE, fig.cap='(ref:15-1)', fig.align='center'}
 ggplot(df, aes(x = LOS, y = CHARGES)) +                 # aesthetic mapping
        geom_point() +                                   # add data points    
        stat_smooth(method = lm) +                       # add trend line
@@ -169,7 +169,7 @@ ggplot(heartatk4R, ___________________) + _____________ + ______________ +
 >
        labs(x = "DRG groups", y = "Length of Stay(days)") + ylim(0, 20) 
 ```
->
+
 ```{r echo=FALSE, fig.cap='Boxplot and violin plots using ggplot2', fig.align='center'}
 knitr::include_graphics("images/img1506_boxviolin.png")
 ```
