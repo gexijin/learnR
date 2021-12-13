@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Data structures | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Data structures | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="visualizing-the-iris-flower-data-set.html"/>
 <link rel="next" href="importing-data-and-managing-files.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,22 +51,22 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -223,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Publish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
@@ -405,7 +406,7 @@ Use Google to find the function which lists all the files in the current working
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="data-structures.html#cb135-1" aria-hidden="true" tabindex="-1"></a>? sum </span></code></pre></div>
 <p>A document will pop up in the Help Window. See the Figure <a href="data-structures.html#fig:ch3-1">3.1</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:ch3-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch3-1"></span>
 <img src="images/ch3_1.png" alt="Help in formation on the sum function." width="60%" />
 <p class="caption">
 Figure 3.1: Help in formation on the sum function.
@@ -413,7 +414,7 @@ Figure 3.1: Help in formation on the sum function.
 </div>
 <p>At the bottom of the page is some example code. See the Figure <a href="data-structures.html#fig:ch3-2">3.2</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:ch3-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch3-2"></span>
 <img src="images/ch3_2.png" alt="Examples of sum code" width="60%" />
 <p class="caption">
 Figure 3.2: Examples of sum code
@@ -434,11 +435,11 @@ Figure 3.2: Examples of sum code
 ## min&gt; x &lt;- sort(rnorm(100));  cH &lt;- 1.35
 ## 
 ## min&gt; pmin(cH, quantile(x)) # no names
-## [1] -2.3120836 -0.7159541 -0.1543119  0.7091740  1.3500000
+## [1] -2.043049230 -0.745175186 -0.005626094  0.952192314  1.350000000
 ## 
 ## min&gt; pmin(quantile(x), cH) # has names
-##         0%        25%        50%        75%       100% 
-## -2.3120836 -0.7159541 -0.1543119  0.7091740  1.3500000 
+##           0%          25%          50%          75%         100% 
+## -2.043049230 -0.745175186 -0.005626094  0.952192314  1.350000000 
 ## 
 ## min&gt; plot(x, pmin(cH, pmax(-cH, x)), type = &quot;b&quot;, main =  &quot;Huber&#39;s function&quot;)</code></pre>
 <pre><code>## 
@@ -608,7 +609,7 @@ Compute 1+2+3… +1000 with one line of R code. Hint: examine the example code f
 <p>We can randomly select some elements from the vector. Run the following code more than once, do you always get the same results? The answer is “No.” Because the 3 elements are randomly selected.</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="data-structures.html#cb226-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)</span>
 <span id="cb226-2"><a href="data-structures.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(x, <span class="dv">3</span>)</span></code></pre></div>
-<pre><code>## [1]  2 22  5</code></pre>
+<pre><code>## [1]  5  5 22</code></pre>
 <p>Elements in the vector can have names. Type “x” in the command window to see the difference.</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="data-structures.html#cb228-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">22</span>, <span class="dv">11</span>, <span class="dv">5</span>)</span>
 <span id="cb228-2"><a href="data-structures.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;David&quot;</span>, <span class="st">&quot;Beck&quot;</span>, <span class="st">&quot;Zach&quot;</span>, <span class="st">&quot;Amy&quot;</span>, <span class="st">&quot;John&quot;</span>)</span>
@@ -809,7 +810,7 @@ Did Mickey catch more fishes than Tom and Jerry combined? Write R code to verify
 ##      7      4      9</code></pre>
 <div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="data-structures.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(fishes)   <span class="co"># see figure 3.3B</span></span></code></pre></div>
 
-<div class="figure" style="text-align: center"><span id="fig:6-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:6-1"></span>
 <img src="images/img0601_fish.png" alt="Simple Bar plot" width="80%" />
 <p class="caption">
 Figure 3.3: Simple Bar plot
@@ -1383,12 +1384,12 @@ For data set <em>mtcars</em>, select a subset which satisfies that the <em>cyl</
 <span id="cb458-2"><a href="data-structures.html#cb458-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(y, x.id)</span>
 <span id="cb458-3"><a href="data-structures.html#cb458-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(x2)</span></code></pre></div>
 <pre><code>##            y id Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1 -0.9206226  1          5.1         3.5          1.4         0.2  setosa
-## 2  1.1326176  2          4.9         3.0          1.4         0.2  setosa
-## 3 -1.5365198  3          4.7         3.2          1.3         0.2  setosa
-## 4 -0.8875564  4          4.6         3.1          1.5         0.2  setosa
-## 5 -0.5929933  5          5.0         3.6          1.4         0.2  setosa
-## 6  1.2505851  6          5.4         3.9          1.7         0.4  setosa</code></pre>
+## 1 -0.1082292  1          5.1         3.5          1.4         0.2  setosa
+## 2  0.4646521  2          4.9         3.0          1.4         0.2  setosa
+## 3 -0.3890817  3          4.7         3.2          1.3         0.2  setosa
+## 4  0.5027640  4          4.6         3.1          1.5         0.2  setosa
+## 5 -0.6622400  5          5.0         3.6          1.4         0.2  setosa
+## 6  0.6360769  6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Similar as cbind(), rbind() is for adding another exist row or rows with same length of columns. Now we use tail() to examine the result.</p>
 <div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="data-structures.html#cb460-1" aria-hidden="true" tabindex="-1"></a>newRow <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">&quot;setosa&quot;</span>, <span class="dv">151</span>)</span>
 <span id="cb460-2"><a href="data-structures.html#cb460-2" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(x, newRow)</span>
@@ -1546,48 +1547,41 @@ ____________
 <p>We use data.frame() function to define a new data frame with 100 rows and two columns, <em>ids</em> and <em>rand</em>.</p>
 <div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="data-structures.html#cb486-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">rand =</span> <span class="fu">rnorm</span>(<span class="dv">100</span>))</span>
 <span id="cb486-2"><a href="data-structures.html#cb486-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(y)</span></code></pre></div>
-<pre><code>##   id       rand
-## 1  1  1.9488692
-## 2  2  1.6346362
-## 3  3  0.7775292
-## 4  4  0.2825039
-## 5  5 -0.1045226
-## 6  6  0.4336594</code></pre>
+<pre><code>##   id        rand
+## 1  1  1.98846886
+## 2  2  0.09255268
+## 3  3 -0.34508309
+## 4  4 -1.21799794
+## 5  5  0.43662128
+## 6  6  0.83987981</code></pre>
 <div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="data-structures.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(y)</span></code></pre></div>
-<pre><code>##      id        rand
-## 95   95  1.09673085
-## 96   96 -0.22947222
-## 97   97  0.45333282
-## 98   98 -0.48713363
-## 99   99 -0.06911443
-## 100 100 -0.55688594</code></pre>
+<pre><code>##      id       rand
+## 95   95 -1.0813578
+## 96   96 -0.5502037
+## 97   97  0.3273459
+## 98   98  1.7272878
+## 99   99 -1.5975720
+## 100 100 -0.6227427</code></pre>
 <p>Now we merge two data frames x and y by a common column named <strong>id</strong>. Note the new data frame z has only 100 rows. We can also merge data frames by row names too.</p>
 <div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="data-structures.html#cb490-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> iris</span>
 <span id="cb490-2"><a href="data-structures.html#cb490-2" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>id <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>)</span>
 <span id="cb490-3"><a href="data-structures.html#cb490-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">merge</span>(x, y, <span class="at">by =</span> <span class="st">&quot;id&quot;</span>)</span>
 <span id="cb490-4"><a href="data-structures.html#cb490-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(z)</span></code></pre></div>
-<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species       rand
-## 1  1          5.1         3.5          1.4         0.2  setosa  1.9488692
-## 2  2          4.9         3.0          1.4         0.2  setosa  1.6346362
-## 3  3          4.7         3.2          1.3         0.2  setosa  0.7775292
-## 4  4          4.6         3.1          1.5         0.2  setosa  0.2825039
-## 5  5          5.0         3.6          1.4         0.2  setosa -0.1045226
-## 6  6          5.4         3.9          1.7         0.4  setosa  0.4336594</code></pre>
+<pre><code>##   id Sepal.Length Sepal.Width Petal.Length Petal.Width Species        rand
+## 1  1          5.1         3.5          1.4         0.2  setosa  1.98846886
+## 2  2          4.9         3.0          1.4         0.2  setosa  0.09255268
+## 3  3          4.7         3.2          1.3         0.2  setosa -0.34508309
+## 4  4          4.6         3.1          1.5         0.2  setosa -1.21799794
+## 5  5          5.0         3.6          1.4         0.2  setosa  0.43662128
+## 6  6          5.4         3.9          1.7         0.4  setosa  0.83987981</code></pre>
 <div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="data-structures.html#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(z)</span></code></pre></div>
-<pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-## 95   95          5.6         2.7          4.2         1.3 versicolor
-## 96   96          5.7         3.0          4.2         1.2 versicolor
-## 97   97          5.7         2.9          4.2         1.3 versicolor
-## 98   98          6.2         2.9          4.3         1.3 versicolor
-## 99   99          5.1         2.5          3.0         1.1 versicolor
-## 100 100          5.7         2.8          4.1         1.3 versicolor
-##            rand
-## 95   1.09673085
-## 96  -0.22947222
-## 97   0.45333282
-## 98  -0.48713363
-## 99  -0.06911443
-## 100 -0.55688594</code></pre>
+<pre><code>##      id Sepal.Length Sepal.Width Petal.Length Petal.Width    Species       rand
+## 95   95          5.6         2.7          4.2         1.3 versicolor -1.0813578
+## 96   96          5.7         3.0          4.2         1.2 versicolor -0.5502037
+## 97   97          5.7         2.9          4.2         1.3 versicolor  0.3273459
+## 98   98          6.2         2.9          4.3         1.3 versicolor  1.7272878
+## 99   99          5.1         2.5          3.0         1.1 versicolor -1.5975720
+## 100 100          5.7         2.8          4.1         1.3 versicolor -0.6227427</code></pre>
 <div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="data-structures.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z)</span></code></pre></div>
 <pre><code>##        id          Sepal.Length    Sepal.Width     Petal.Length  
 ##  Min.   :  1.00   Min.   :4.300   Min.   :2.000   Min.   :1.000  
@@ -1596,13 +1590,13 @@ ____________
 ##  Mean   : 50.50   Mean   :5.471   Mean   :3.099   Mean   :2.861  
 ##  3rd Qu.: 75.25   3rd Qu.:5.900   3rd Qu.:3.400   3rd Qu.:4.325  
 ##  Max.   :100.00   Max.   :7.000   Max.   :4.400   Max.   :5.100  
-##   Petal.Width          Species        rand         
-##  Min.   :0.100   setosa    :50   Min.   :-1.87041  
-##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.83571  
-##  Median :0.800   virginica : 0   Median :-0.06459  
-##  Mean   :0.786                   Mean   :-0.03455  
-##  3rd Qu.:1.300                   3rd Qu.: 0.65973  
-##  Max.   :1.800                   Max.   : 2.65352</code></pre>
+##   Petal.Width          Species        rand        
+##  Min.   :0.100   setosa    :50   Min.   :-2.0509  
+##  1st Qu.:0.200   versicolor:50   1st Qu.:-0.6650  
+##  Median :0.800   virginica : 0   Median : 0.1400  
+##  Mean   :0.786                   Mean   : 0.1532  
+##  3rd Qu.:1.300                   3rd Qu.: 0.8672  
+##  Max.   :1.800                   Max.   : 2.3684</code></pre>
 </div>
 <div id="strings-and-string-vectors" class="section level3" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Strings and string vectors</h3>
@@ -1709,7 +1703,7 @@ In the iris flower dataset iris, define a new column called FullName which conta
 ## [[4]]
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x0000000016919430&gt;
+## &lt;bytecode: 0x00000000163d8700&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>There are 4 components in the list y. We can associate each components with a <em>tag</em>. We add tags “height,” “name,” “BP” and “fun” to the y.</p>
 <div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="data-structures.html#cb545-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">height =</span> <span class="dv">5</span>, <span class="at">name =</span> <span class="st">&quot;John Doe&quot;</span>, <span class="at">BP =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">77</span>), <span class="at">fun =</span> mean)  </span>
@@ -1726,7 +1720,7 @@ In the iris flower dataset iris, define a new column called FullName which conta
 ## $fun
 ## function (x, ...) 
 ## UseMethod(&quot;mean&quot;)
-## &lt;bytecode: 0x0000000016919430&gt;
+## &lt;bytecode: 0x00000000163d8700&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
 <p>Here is another example for creating a list:</p>
 <div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="data-structures.html#cb547-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">9</span>), <span class="at">ncol =</span> <span class="dv">3</span>) <span class="co"># create a matrix</span></span>
@@ -2057,21 +2051,21 @@ __________(gender)
 ##  Welch Two Sample t-test
 ## 
 ## data:  r1 and r2
-## t = 0.5568, df = 197.53, p-value = 0.5783
+## t = 0.16841, df = 194.81, p-value = 0.8664
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -0.1961444  0.3504843
+##  -0.2575944  0.3056941
 ## sample estimates:
 ##  mean of x  mean of y 
-## 0.16661447 0.08944454</code></pre>
+## 0.07867002 0.05462016</code></pre>
 <div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="data-structures.html#cb620-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(t.result) <span class="co"># Returns all tags of the t test result</span></span></code></pre></div>
 <pre><code>##  [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;conf.int&quot;    &quot;estimate&quot;   
 ##  [6] &quot;null.value&quot;  &quot;stderr&quot;      &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;</code></pre>
 <div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="data-structures.html#cb622-1" aria-hidden="true" tabindex="-1"></a>t.result<span class="sc">$</span>p.value  <span class="co"># Retrieves  p-value for the test</span></span></code></pre></div>
-<pre><code>## [1] 0.5782913</code></pre>
+<pre><code>## [1] 0.866436</code></pre>
 <div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="data-structures.html#cb624-1" aria-hidden="true" tabindex="-1"></a>t.result<span class="sc">$</span>estimate  <span class="co"># Returns mean of r1 and r2</span></span></code></pre></div>
 <pre><code>##  mean of x  mean of y 
-## 0.16661447 0.08944454</code></pre>
+## 0.07867002 0.05462016</code></pre>
 <p>The help page of t.test contains information about what types of values are returned and their names. Run the ?t.test to access the help page.</p>
 <p>Let’s run a simulation using a loop. What we want to do is to generate two sets of 100 random numbers from the standard normal distribution with zero mean and unit standard deviation, then perform t-test and get the p-value. By repeating this process 500 times, we want to see the distribution of p-values and count how many times we get significant result with p &lt; 0.05.</p>
 <div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="data-structures.html#cb626-1" aria-hidden="true" tabindex="-1"></a>pvalues <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">500</span>)  <span class="co"># define a vector containing 500 numbers, all equal to 1.</span></span>
@@ -2082,10 +2076,10 @@ __________(gender)
 <span id="cb626-6"><a href="data-structures.html#cb626-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pvalues)  <span class="co"># Histogram of p-values</span></span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-338-1.png" width="672" /></p>
 <div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="data-structures.html#cb627-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pvalues)   </span></code></pre></div>
-<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0005598 0.2652773 0.4982531 0.4986760 0.7445470 0.9961809</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+## 0.001298 0.270733 0.544092 0.524757 0.775540 0.999120</code></pre>
 <div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="data-structures.html#cb629-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pvalues <span class="sc">&lt;</span> <span class="fl">0.05</span>)  <span class="co"># Number of p-value&#39;s which are less than 0.05. </span></span></code></pre></div>
-<pre><code>## [1] 25</code></pre>
+<pre><code>## [1] 16</code></pre>
 
 </div>
 </div>
@@ -2100,7 +2094,6 @@ __________(gender)
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -2140,6 +2133,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

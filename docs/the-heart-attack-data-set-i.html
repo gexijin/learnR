@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 The heart attack data set (I) | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 The heart attack data set (I) | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="importing-data-and-managing-files.html"/>
 <link rel="next" href="the-heart-attack-dataset-ii.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,22 +51,22 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -223,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Publish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
@@ -301,11 +302,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> The heart attack data set (I)</h1>
 <p>The heart attack data set (<a href="http://statland.org/R/RC/tables4R.htm" class="uri">http://statland.org/R/RC/tables4R.htm</a>), included in the ActivStats<sup>1</sup> CD, contains all 12,844 cases of hospital discharges of the patients admitted for heart attack but did not have surgery in New York State in 1993. This information is essential for the interpretation of our results, as this is a purely <strong>observational study</strong>. It is not a random sample or <strong>controlled experiment</strong>.</p>
 <p>The data set is formatted as a table (Table <a href="the-heart-attack-data-set-i.html#tab:4-01">5.1</a>) with rows representing cases and columns representing characteristics, which is a typical format for many datasets. If you download and open the file in NotePad++ or Excel, you can see that the columns are separated by tabs, and there are <strong>missing values</strong> noted by “NA.” Four columns (DIAGNOSIS, SEX, DRG, DIED) contain <strong>nominal</strong> values, representing labels of <strong>categories</strong>. See an excellent explanation of data types <a href="http://www.mymarketresearchmethods.com/types-of-data-nominal-ordinal-interval-ratio/">here</a>. DIAGNOSIS column contains codes defined in the International Classification of Diseases (IDC), 9th Edition. This is the code that your doctor sends to your insurance company for billing. The numbers, such as 41041, actually code for which part of the heart was affected. Although these are numbers, it does not make any sense to add or subtract or compute the mean. If I have a room of 30 students each with student ids, such as 732324, it does not make any sense to compute the average of these numbers. Such <strong>categorical data needs to be recognized as factors in R</strong>. Similarly, DRG column has three possible numbers, 121 for survivors with cardiovascular complications, 122 for survivors without complications, and 123 for patients who died. Moreover, DIED also codes for prognosis, it is 1 if the patient passed away, and 0 if survived.</p>
-<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="the-heart-attack-data-set-i.html#cb674-1" aria-hidden="true" tabindex="-1"></a>heartatk4R <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, </span>
-<span id="cb674-2"><a href="the-heart-attack-data-set-i.html#cb674-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb674-3"><a href="the-heart-attack-data-set-i.html#cb674-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
-<span id="cb674-4"><a href="the-heart-attack-data-set-i.html#cb674-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </span>
-<span id="cb674-5"><a href="the-heart-attack-data-set-i.html#cb674-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="the-heart-attack-data-set-i.html#cb674-1" aria-hidden="true" tabindex="-1"></a>URL <span class="ot">&lt;-</span> <span class="st">&quot;https://raw.githubusercontent.com/gexijin/learnR/master/datasets/heartatk4R.txt&quot;</span></span>
+<span id="cb674-2"><a href="the-heart-attack-data-set-i.html#cb674-2" aria-hidden="true" tabindex="-1"></a>heartatk4R <span class="ot">&lt;-</span> <span class="fu">read.table</span>(URL,</span>
+<span id="cb674-3"><a href="the-heart-attack-data-set-i.html#cb674-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb674-4"><a href="the-heart-attack-data-set-i.html#cb674-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
+<span id="cb674-5"><a href="the-heart-attack-data-set-i.html#cb674-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </span>
+<span id="cb674-6"><a href="the-heart-attack-data-set-i.html#cb674-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</span></code></pre></div>
 <table>
 <caption><span id="tab:4-01">Table 5.1: </span>First 15 rows of the heart attack dataset</caption>
 <thead>
@@ -514,7 +516,7 @@ For categorical values such as SEX and DIAGNOSIS, we can produce <strong>pie cha
 <div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb679-1"><a href="the-heart-attack-data-set-i.html#cb679-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">table</span>(DIAGNOSIS), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)  <span class="co"># tabulate&amp;sort </span></span>
 <span id="cb679-2"><a href="the-heart-attack-data-set-i.html#cb679-2" aria-hidden="true" tabindex="-1"></a>percentages <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> counts <span class="sc">/</span> <span class="fu">length</span>(DIAGNOSIS)  <span class="co"># convert to %</span></span>
 <span id="cb679-3"><a href="the-heart-attack-data-set-i.html#cb679-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(percentages, <span class="at">las =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;Percentage&quot;</span>, <span class="at">col =</span> <span class="st">&quot;green&quot;</span>)  <span class="co"># Figure 5.1</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:4-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:4-1"></span>
 <img src="book_files/figure-html/4-1-1.png" alt="Barplot by percentage." width="672" />
 <p class="caption">
 Figure 5.1: Barplot by percentage.
@@ -528,7 +530,7 @@ Figure 5.1: Barplot by percentage.
 ##    F    M 
 ## 5065 7779</code></pre>
 <div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb683-1"><a href="the-heart-attack-data-set-i.html#cb683-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(<span class="fu">table</span>(SEX))  <span class="co"># pie chart</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:14-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:14-2"></span>
 <img src="book_files/figure-html/14-2-1.png" alt="Pie chart of patients by SEX." width="50%" />
 <p class="caption">
 Figure 5.2: Pie chart of patients by SEX.
@@ -553,7 +555,7 @@ _________(counts) # pie chart
 <p>where <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are the <span class="math inline">\(i^{th}\)</span> values, <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> are sample means, and <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> are sample standard deviations.</p>
 <p>Note that Pearson’s correlation ranges from -1 to 1, with -1 and 1 indicating perfect negative and possitive correlation respectively. <strong>Negative correlations are just as important and informative as positive ones</strong>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:4-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:4-2"></span>
 <img src="images/img0402_coefficient.png" alt="Interpretation of Pearson’s correlation coefficient. The numbers are Pearson’s correlation coefficient r." width="80%" />
 <p class="caption">
 Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers are Pearson’s correlation coefficient r.
@@ -629,7 +631,7 @@ Figure 5.3: Interpretation of Pearson’s correlation coefficient. The numbers a
 <p>We already know that we could use scatter plots to visualize correlation between two numeric columns. But when there are many data points, in this case we have over 12,000, it could be hard to comprehend. This is especially the case, when the data is integers and there are a lot of data points overlap on top of each other. Yes, graphics can be misleading.</p>
 <div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="the-heart-attack-data-set-i.html#cb689-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(AGE, LOS)  <span class="co"># standard scatter plot    </span></span>
 <span id="cb689-2"><a href="the-heart-attack-data-set-i.html#cb689-2" aria-hidden="true" tabindex="-1"></a><span class="fu">smoothScatter</span>(AGE, LOS)  <span class="co"># a smoothed color density representation of a scatterplot  </span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-371"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-371"></span>
 <img src="book_files/figure-html/unnamed-chunk-371-1.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" /><img src="book_files/figure-html/unnamed-chunk-371-2.png" alt="Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points." width="50%" />
 <p class="caption">
 Figure 5.4: Smoothed Scatter plots use colors to code for the density of data points. This is useful when there are overlapping points.
@@ -709,20 +711,20 @@ __________(LOS, CHARGES) # a smoothed color density representation of a scatterp
 <div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="the-heart-attack-data-set-i.html#cb697-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">table</span>(DIED, SEX)  <span class="co"># SEX define columns now, as I want the bars to represent M or F.  </span></span>
 <span id="cb697-2"><a href="the-heart-attack-data-set-i.html#cb697-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Figure A</span></span>
 <span id="cb697-3"><a href="the-heart-attack-data-set-i.html#cb697-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">0.42</span>, <span class="dv">7500</span>, <span class="at">labels =</span> <span class="st">&quot;A&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:5-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:5-1"></span>
 <img src="book_files/figure-html/5-1-1.png" alt="Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side." width="50%" /><img src="book_files/figure-html/5-1-2.png" alt="Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side." width="50%" />
 <p class="caption">
 Figure 5.5: Barplot showing the correlation of two categorical variables. A. Stacked. B. Side by side.
 </p>
 </div>
-<p>You can add an argument, such as “<em>args.legend = list(x = "topleft")</em>,” in the function barplot() to change the position of legend. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A.</p>
+<p>You can add an argument, such as “<em>args.legend = list(x = ”topleft”)</em>,” in the function barplot() to change the position of legend. For example, we can move the legend to the top-left of Figure <a href="the-heart-attack-data-set-i.html#fig:5-1">5.5</a> A.</p>
 <div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="the-heart-attack-data-set-i.html#cb698-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(counts, <span class="at">legend =</span> <span class="fu">rownames</span>(counts), <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">2</span>), <span class="at">xlab =</span> <span class="st">&quot;DIED&quot;</span>, <span class="at">beside =</span> F,</span>
 <span id="cb698-2"><a href="the-heart-attack-data-set-i.html#cb698-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">args.legend =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>))</span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-378-1.png" width="672" /></p>
 <p>Another way of showing the proportions is mosaic plot.</p>
 
 <div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="the-heart-attack-data-set-i.html#cb699-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(<span class="fu">table</span>(SEX, DIED), <span class="at">color =</span> T)  <span class="co"># Figure 5.6</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:5-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:5-2"></span>
 <img src="book_files/figure-html/5-2-1.png" alt="Mosaic plot of DIED by SEX." width="576" />
 <p class="caption">
 Figure 5.6: Mosaic plot of DIED by SEX.
@@ -732,7 +734,7 @@ Figure 5.6: Mosaic plot of DIED by SEX.
 <p>We could use mosaic plots for multiple factors.</p>
 
 <div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="the-heart-attack-data-set-i.html#cb700-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(<span class="fu">table</span>(SEX, DIED, DRG), <span class="at">color =</span> <span class="fu">rainbow</span>(<span class="dv">3</span>))  <span class="co"># Figure 5.7</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:5-3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:5-3"></span>
 <img src="book_files/figure-html/5-3-1.png" alt="Mosaic plot of three factors." width="672" />
 <p class="caption">
 Figure 5.7: Mosaic plot of three factors.
@@ -772,7 +774,7 @@ mosaicplot(_____________________________________________)
 <span id="cb704-5"><a href="the-heart-attack-data-set-i.html#cb704-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">6</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb704-6"><a href="the-heart-attack-data-set-i.html#cb704-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(SEX <span class="sc">~</span> .) <span class="sc">+</span>   <span class="co">#split a graph according to panels defined by SEX</span></span>
 <span id="cb704-7"><a href="the-heart-attack-data-set-i.html#cb704-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:new1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:new1"></span>
 <img src="book_files/figure-html/new1-1.png" alt="Histogram of AGE by SEX using ggplot2 package" width="576" />
 <p class="caption">
 Figure 5.8: Histogram of AGE by SEX using ggplot2 package
@@ -790,7 +792,7 @@ Figure 5.8: Histogram of AGE by SEX using ggplot2 package
 <span id="cb705-7"><a href="the-heart-attack-data-set-i.html#cb705-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
 <span id="cb705-8"><a href="the-heart-attack-data-set-i.html#cb705-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(DIED <span class="sc">~</span> SEX) <span class="sc">+</span>   <span class="co">#split a graph according to matrix of panels defined by DIED*SEX</span></span>
 <span id="cb705-9"><a href="the-heart-attack-data-set-i.html#cb705-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Percent of Total&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:new2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:new2"></span>
 <img src="book_files/figure-html/new2-1.png" alt="Histogram of AGE by SEX and DIED using ggplot2 package" width="672" />
 <p class="caption">
 Figure 5.9: Histogram of AGE by SEX and DIED using ggplot2 package
@@ -799,7 +801,7 @@ Figure 5.9: Histogram of AGE by SEX and DIED using ggplot2 package
 <p>We can see that patients who did not survive heart attack tend to be older, for both men and women. This is perhaps better illustrated with density plot:</p>
 
 <div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="the-heart-attack-data-set-i.html#cb706-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heartatk4R, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">3</span>) </span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:new3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:new3"></span>
 <img src="book_files/figure-html/new3-1.png" alt="Density plot of AGE by SEX using ggplot2 package" width="576" />
 <p class="caption">
 Figure 5.10: Density plot of AGE by SEX using ggplot2 package
@@ -809,7 +811,7 @@ Figure 5.10: Density plot of AGE by SEX using ggplot2 package
 <p>Now for each gender, we further divide the patients by their survival status. Instead of splitting into multiple panels, the curves are overlaid.</p>
 
 <div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="the-heart-attack-data-set-i.html#cb707-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heartatk4R, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> DIED)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(SEX <span class="sc">~</span> .) </span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:new4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:new4"></span>
 <img src="book_files/figure-html/new4-1.png" alt="Density plot of AGE by SEX and DIED using ggplot2 package" width="576" />
 <p class="caption">
 Figure 5.11: Density plot of AGE by SEX and DIED using ggplot2 package
@@ -849,7 +851,7 @@ Use ANOVA, boxplot, and histogram and density plots to compare the charges among
 <p>We can use the ggplot2 package to investigate correlations among multiple columns by figures with multiple panels.</p>
 
 <div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="the-heart-attack-data-set-i.html#cb708-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heartatk4R, <span class="fu">aes</span>(<span class="at">x =</span> DRG, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(SEX <span class="sc">~</span> .)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:5-6"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:5-6"></span>
 <img src="book_files/figure-html/5-6-1.png" alt="Multiple boxplots of AGE by DRG and SEX using ggplot2 package" width="480" />
 <p class="caption">
 Figure 5.12: Multiple boxplots of AGE by DRG and SEX using ggplot2 package
@@ -869,7 +871,7 @@ Are the surviving women younger than the women who died? Similar question can be
 <p><span id="exr:unnamed-chunk-388" class="exercise"><strong>Exercise 5.10  </strong></span></p>
 Use the ggplot2 package to produce boxplots to compare the length of stage of men vs. women for each of the DRG categories indicating complication status. You should produce a plot similar to Figure 5.13. Offer interpretation.
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-389"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-389"></span>
 <img src="book_files/figure-html/unnamed-chunk-389-1.png" alt="Multiple boxplots using ggplot2 package" width="576" />
 <p class="caption">
 Figure 5.13: Multiple boxplots using ggplot2 package
@@ -886,7 +888,7 @@ Figure 5.13: Multiple boxplots using ggplot2 package
 <p>Here we only show the figure for third code.
 Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .) generates multiple scatterplots of LOS ~ AGE according to different values of SEX, while color = DIED will add these two color-coded scatter plots into the same figure.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:5-7"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:5-7"></span>
 <img src="book_files/figure-html/5-7-1.png" alt="A scatter plot of LOS vs. AGE, using SEX and DIED as factors." width="672" />
 <p class="caption">
 Figure 5.14: A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
@@ -898,7 +900,7 @@ Figure 5.14: A scatter plot of LOS vs. AGE, using SEX and DIED as factors.
 <div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="the-heart-attack-data-set-i.html#cb710-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12844</span>, <span class="dv">200</span>), ]   <span class="co"># randomly sample 200 patients</span></span>
 <span id="cb710-2"><a href="the-heart-attack-data-set-i.html#cb710-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y<span class="sc">$</span>AGE, y<span class="sc">$</span>LOS, <span class="at">cex =</span> y<span class="sc">$</span>CHARGES <span class="sc">/</span> <span class="dv">6000</span>, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">2</span>)[y<span class="sc">$</span>SEX], <span class="at">xlab =</span> <span class="st">&quot;AGE&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;LOS&quot;</span>)</span>
 <span id="cb710-3"><a href="the-heart-attack-data-set-i.html#cb710-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="fu">levels</span>(y<span class="sc">$</span>SEX), <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">2</span>), <span class="at">pch =</span> <span class="dv">1</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:5-8"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:5-8"></span>
 <img src="book_files/figure-html/5-8-1.png" alt="Bubble plot example." width="672" />
 <p class="caption">
 Figure 5.15: Bubble plot example.
@@ -924,7 +926,6 @@ Figure 5.15: Bubble plot example.
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -964,6 +965,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 The heart attack dataset (II) | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 The heart attack dataset (II) | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="the-heart-attack-data-set-i.html"/>
 <link rel="next" href="advanced-topics.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,22 +51,22 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -223,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Publish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
@@ -326,23 +327,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="the-heart-attack-dataset-ii.html#cb714-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>()   <span class="co"># scatter plot</span></span></code></pre></div>
 <p>Thus, it is a two-step process to generate a scatter plot. This seems cumbersome at first, but it is convenient to add additional features or customize the plot step by step. Let’s add a trend line with a confidence interval.</p>
 <div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb715-1"><a href="the-heart-attack-dataset-ii.html#cb715-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p>As we keep adding elements to the plot, this line of code gets longer. So we break the code into multiple lines as below. The “+” at the end of the line signifies that the plot is not finished and tell R to keep reading the next line. This code below does the same thing as the above, but it is easier to read. I often use the tab key in the second line to remind myself that it is continued from the above line.</p>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="the-heart-attack-dataset-ii.html#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span>  <span class="co"># aesthetic mapping</span></span>
-<span id="cb717-2"><a href="the-heart-attack-dataset-ii.html#cb717-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_point</span>() <span class="sc">+</span>                    <span class="co"># add data points    </span></span>
-<span id="cb717-3"><a href="the-heart-attack-dataset-ii.html#cb717-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)          <span class="co"># add trend line</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="the-heart-attack-dataset-ii.html#cb716-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span>  <span class="co"># aesthetic mapping</span></span>
+<span id="cb716-2"><a href="the-heart-attack-dataset-ii.html#cb716-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_point</span>() <span class="sc">+</span>                    <span class="co"># add data points    </span></span>
+<span id="cb716-3"><a href="the-heart-attack-dataset-ii.html#cb716-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm)          <span class="co"># add trend line</span></span></code></pre></div>
 <p>As you can see from this code, it also enables us to add comments for each step, making the code easy to read. This is important, as we often recycle our codes.</p>
 <p>We can also customize the plot by adding additional lines of code (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-1">6.1</a>):</p>
 
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="the-heart-attack-dataset-ii.html#cb719-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span>                 <span class="co"># aesthetic mapping</span></span>
-<span id="cb719-2"><a href="the-heart-attack-dataset-ii.html#cb719-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span>                                   <span class="co"># add data points    </span></span>
-<span id="cb719-3"><a href="the-heart-attack-dataset-ii.html#cb719-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>                       <span class="co"># add trend line</span></span>
-<span id="cb719-4"><a href="the-heart-attack-dataset-ii.html#cb719-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">25</span>) <span class="sc">+</span>                                        <span class="co"># change plotting limits of x-axis </span></span>
-<span id="cb719-5"><a href="the-heart-attack-dataset-ii.html#cb719-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Length of stay&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Charges ($)&quot;</span>) <span class="sc">+</span>  <span class="co"># change x and y labels</span></span>
-<span id="cb719-6"><a href="the-heart-attack-dataset-ii.html#cb719-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="dv">45000</span>, <span class="at">label =</span> (<span class="st">&quot;R = 0.74&quot;</span>))  <span class="co"># add text to plot coordinates</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:15-1"></span>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb717-1"><a href="the-heart-attack-dataset-ii.html#cb717-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span>                 <span class="co"># aesthetic mapping</span></span>
+<span id="cb717-2"><a href="the-heart-attack-dataset-ii.html#cb717-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>() <span class="sc">+</span>                                   <span class="co"># add data points    </span></span>
+<span id="cb717-3"><a href="the-heart-attack-dataset-ii.html#cb717-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">stat_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>                       <span class="co"># add trend line</span></span>
+<span id="cb717-4"><a href="the-heart-attack-dataset-ii.html#cb717-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">25</span>) <span class="sc">+</span>                                        <span class="co"># change plotting limits of x-axis </span></span>
+<span id="cb717-5"><a href="the-heart-attack-dataset-ii.html#cb717-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Length of stay&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Charges ($)&quot;</span>) <span class="sc">+</span>  <span class="co"># change x and y labels</span></span>
+<span id="cb717-6"><a href="the-heart-attack-dataset-ii.html#cb717-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="dv">45000</span>, <span class="at">label =</span> (<span class="st">&quot;R = 0.74&quot;</span>))  <span class="co"># add text to plot coordinates</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-1"></span>
 <img src="book_files/figure-html/15-1-1.png" alt="Scatter plot using ggplot2." width="480" />
 <p class="caption">
 Figure 6.1: Scatter plot using ggplot2.
@@ -350,12 +348,12 @@ Figure 6.1: Scatter plot using ggplot2.
 </div>
 <p>You can learn other ways to customize your plot by googling. For example, try to find a way to add title to the plot by using keyword “ggplot2 add title to plot.”</p>
 <p>It is easy to represent other characteristics of data points (columns) using additional aesthetic mappings, such as linetype, color, size, fill (“inside” color).</p>
-<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="the-heart-attack-dataset-ii.html#cb721-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>()               <span class="co"># basic scatter plot</span></span>
-<span id="cb721-2"><a href="the-heart-attack-dataset-ii.html#cb721-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES, <span class="at">color =</span> DRG)) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># map DRG to color</span></span></code></pre></div>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="the-heart-attack-dataset-ii.html#cb718-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES)) <span class="sc">+</span> <span class="fu">geom_point</span>()               <span class="co"># basic scatter plot</span></span>
+<span id="cb718-2"><a href="the-heart-attack-dataset-ii.html#cb718-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES, <span class="at">color =</span> DRG)) <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="co"># map DRG to color</span></span></code></pre></div>
 
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="the-heart-attack-dataset-ii.html#cb722-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES, <span class="at">color =</span> DRG, <span class="at">shape =</span> SEX)) <span class="sc">+</span>  <span class="co"># map SEX to shape</span></span>
-<span id="cb722-2"><a href="the-heart-attack-dataset-ii.html#cb722-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:15-2"></span>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="the-heart-attack-dataset-ii.html#cb719-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> LOS, <span class="at">y =</span> CHARGES, <span class="at">color =</span> DRG, <span class="at">shape =</span> SEX)) <span class="sc">+</span>  <span class="co"># map SEX to shape</span></span>
+<span id="cb719-2"><a href="the-heart-attack-dataset-ii.html#cb719-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-2"></span>
 <img src="book_files/figure-html/15-2-1.png" alt="Changing color and shape to represent multivariate data in ggplot2." width="576" />
 <p class="caption">
 Figure 6.2: Changing color and shape to represent multivariate data in ggplot2.
@@ -378,31 +376,31 @@ geom_point()
 <h2><span class="header-section-number">6.2</span> Histograms and density plots</h2>
 <p>In addition to data points(geom_points), there are many other <strong>geometric objects</strong>, such as histogram(geom_histogram), lines (geom_line), and bars (geom_bar), and so on. We can use these geometric objects to generate different types of plots.
 To plot a basic histogram:</p>
-<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="the-heart-attack-dataset-ii.html#cb723-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb720-1"><a href="the-heart-attack-dataset-ii.html#cb720-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <p>Then we can refine it and add a density curve (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-3">6.3</a>):</p>
 
-<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="the-heart-attack-dataset-ii.html#cb724-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">y =</span> ..density..)) <span class="sc">+</span> </span>
-<span id="cb724-2"><a href="the-heart-attack-dataset-ii.html#cb724-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;cornsilk&quot;</span>, </span>
-<span id="cb724-3"><a href="the-heart-attack-dataset-ii.html#cb724-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>, <span class="at">size =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb724-4"><a href="the-heart-attack-dataset-ii.html#cb724-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_density</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:15-3"></span>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb721-1"><a href="the-heart-attack-dataset-ii.html#cb721-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">y =</span> ..density..)) <span class="sc">+</span> </span>
+<span id="cb721-2"><a href="the-heart-attack-dataset-ii.html#cb721-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">&quot;cornsilk&quot;</span>, </span>
+<span id="cb721-3"><a href="the-heart-attack-dataset-ii.html#cb721-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">colour =</span> <span class="st">&quot;grey60&quot;</span>, <span class="at">size =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb721-4"><a href="the-heart-attack-dataset-ii.html#cb721-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_density</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-3"></span>
 <img src="book_files/figure-html/15-3-1.png" alt="Histogram with density curve." width="576" />
 <p class="caption">
 Figure 6.3: Histogram with density curve.
 </p>
 </div>
 <p>Combined density plots are useful in comparing the distribution of subgroups of data points.</p>
-<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="the-heart-attack-dataset-ii.html#cb725-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># all data</span></span></code></pre></div>
+<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="the-heart-attack-dataset-ii.html#cb722-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># all data</span></span></code></pre></div>
 <p>Use color to differentiate sex:</p>
-<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="the-heart-attack-dataset-ii.html#cb726-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">color =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4A</span></span></code></pre></div>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb723-1"><a href="the-heart-attack-dataset-ii.html#cb723-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">color =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4A</span></span></code></pre></div>
 <p>Here, we split the dataset into two portions, men and women, and plotted their density distribution on the same plot. Figure <a href="the-heart-attack-dataset-ii.html#fig:15-4">6.4</a>A shows that age distribution is very different between men and women. Women’s distribution is skewed to the right and they are on average over ten years older than men. This is surprising, given that this dataset contains all heart attack admissions in New York state in 1993.</p>
 <p>The fill mapping changes the “inside” color:</p>
-<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="the-heart-attack-dataset-ii.html#cb727-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4B</span></span></code></pre></div>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb724-1"><a href="the-heart-attack-dataset-ii.html#cb724-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)  <span class="co"># Figure 6.4B</span></span></code></pre></div>
 <p>This plot shows the same information. It looks nicer, at least to me. We can <strong>split the plot into multiple facets</strong>:</p>
-<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb728-1"><a href="the-heart-attack-dataset-ii.html#cb728-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> </span>
-<span id="cb728-2"><a href="the-heart-attack-dataset-ii.html#cb728-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span>.)  <span class="co"># Figure 6.4C</span></span></code></pre></div>
+<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb725-1"><a href="the-heart-attack-dataset-ii.html#cb725-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> AGE, <span class="at">fill =</span> SEX)) <span class="sc">+</span> </span>
+<span id="cb725-2"><a href="the-heart-attack-dataset-ii.html#cb725-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span>.)  <span class="co"># Figure 6.4C</span></span></code></pre></div>
 
-<div class="figure" style="text-align: center"><span id="fig:15-4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-4"></span>
 <img src="images/img1504_density.png" alt="Density plots." width="640" />
 <p class="caption">
 Figure 6.4: Density plots.
@@ -417,7 +415,7 @@ Figure 6.4: Density plots.
 <p>ggplot(heartatk4R, aes(_________, _________)) + ______________(alpha = 0.3) +</p>
 _________(________ ~ .) + xlim(________, _____)
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-404"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-404"></span>
 <img src="book_files/figure-html/unnamed-chunk-404-1.png" alt="Distribution of LOS by DRG groups grouped by SEX" width="576" />
 <p class="caption">
 Figure 6.5: Distribution of LOS by DRG groups grouped by SEX
@@ -428,9 +426,9 @@ Figure 6.5: Distribution of LOS by DRG groups grouped by SEX
 <div id="box-plots-and-violin-plots" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Box plots and Violin plots</h2>
 <p>We can follow the same rule to generate boxplots using the geom_boxplot ( ). Let’s start with a basic version.</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="the-heart-attack-dataset-ii.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()  <span class="co"># basic boxplot </span></span>
-<span id="cb729-2"><a href="the-heart-attack-dataset-ii.html#cb729-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span> .)  <span class="co"># Figure 6.6A</span></span>
-<span id="cb729-3"><a href="the-heart-attack-dataset-ii.html#cb729-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span> .)  <span class="co"># Figure 6.6B</span></span></code></pre></div>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb726-1"><a href="the-heart-attack-dataset-ii.html#cb726-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()  <span class="co"># basic boxplot </span></span>
+<span id="cb726-2"><a href="the-heart-attack-dataset-ii.html#cb726-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span> .)  <span class="co"># Figure 6.6A</span></span>
+<span id="cb726-3"><a href="the-heart-attack-dataset-ii.html#cb726-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> SEX, <span class="at">y =</span> AGE)) <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(DRG <span class="sc">~</span> .)  <span class="co"># Figure 6.6B</span></span></code></pre></div>
 <p>The last version is a violin plot. It shows more details about the distribution as it is essentially density plots on both left and right sides of the violins.</p>
 <blockquote>
 
@@ -440,18 +438,18 @@ Figure 6.5: Distribution of LOS by DRG groups grouped by SEX
 <p>ggplot(heartatk4R, ___________________) + _____________ + ______________ +</p>
 labs(x = “DRG groups,” y = “Length of Stay(days)”) + ylim(0, 20)
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-407"></span>
+</blockquote>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-407"></span>
 <img src="images/img1506_boxviolin.png" alt="Boxplot and violin plots using ggplot2" width="640" />
 <p class="caption">
 Figure 6.6: Boxplot and violin plots using ggplot2
 </p>
-</blockquote>
 </div>
 </div>
 <div id="bar-plot-with-error-bars" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Bar plot with error bars</h2>
 <p>Suppose we are interested in examining whether people with certain diagnosis codes stays longer or shorter in the hospital after a heart attack. We can, of course, use the aggregate function to generate a table with means LOS by category.</p>
-<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="the-heart-attack-dataset-ii.html#cb730-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(df, <span class="at">by =</span> <span class="fu">list</span>(df<span class="sc">$</span>DIAGNOSIS), <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb727-1"><a href="the-heart-attack-dataset-ii.html#cb727-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(df, <span class="at">by =</span> <span class="fu">list</span>(df<span class="sc">$</span>DIAGNOSIS), <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##   Group.1  Patient DIAGNOSIS SEX DRG DIED   CHARGES      LOS      AGE
 ## 1   41001 7130.229        NA  NA  NA   NA 10868.030 7.775161 65.56317
 ## 2   41011 6413.323        NA  NA  NA   NA 10631.803 7.728618 65.81305
@@ -463,19 +461,19 @@ Figure 6.6: Boxplot and violin plots using ggplot2
 ## 8   41081 8384.725        NA  NA  NA   NA  9633.123 7.048780 68.04181
 ## 9   41091 6165.481        NA  NA  NA   NA  9511.093 7.625743 67.10359</code></pre>
 <p>We can be happy with this table and call it quits. However, tables are often not as easy to interpret as a nicely formatted graph. Instead of the aggregate function, we use the powerful dplyr package to summarize the data and then to generate a bar plot showing both the means and standard errors. I stole some code and ideas from R graphics cookbook and this website: <a href="http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/">http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/</a>.</p>
-<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="the-heart-attack-dataset-ii.html#cb732-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  <span class="co"># load the package</span></span></code></pre></div>
+<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="the-heart-attack-dataset-ii.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  <span class="co"># load the package</span></span></code></pre></div>
 <p>To summarize data by groups/factors, the dplyr package uses a similar type of grammar like ggplot2, where operations are added sequentially. Similar to pipes in Unix, commands separated by “%&gt;%” are executed sequentially where the output of one step becomes the input of the next. The follow 6 lines are part of one command, consisting of three big steps.</p>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="the-heart-attack-dataset-ii.html#cb733-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>  <span class="co"># names of the new data frame and the data frame to be summarized</span></span>
-<span id="cb733-2"><a href="the-heart-attack-dataset-ii.html#cb733-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DIAGNOSIS) <span class="sc">%&gt;%</span>  <span class="co"># grouping variable</span></span>
-<span id="cb733-3"><a href="the-heart-attack-dataset-ii.html#cb733-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(LOS),  <span class="co"># mean of each group</span></span>
-<span id="cb733-4"><a href="the-heart-attack-dataset-ii.html#cb733-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(LOS),    <span class="co"># standard deviation of each group</span></span>
-<span id="cb733-5"><a href="the-heart-attack-dataset-ii.html#cb733-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n    =</span> <span class="fu">n</span>(),        <span class="co"># sample size per group</span></span>
-<span id="cb733-6"><a href="the-heart-attack-dataset-ii.html#cb733-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se   =</span> <span class="fu">sd</span>(LOS) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))  <span class="co"># standard error of each group</span></span></code></pre></div>
+<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb730-1"><a href="the-heart-attack-dataset-ii.html#cb730-1" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>  <span class="co"># names of the new data frame and the data frame to be summarized</span></span>
+<span id="cb730-2"><a href="the-heart-attack-dataset-ii.html#cb730-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DIAGNOSIS) <span class="sc">%&gt;%</span>  <span class="co"># grouping variable</span></span>
+<span id="cb730-3"><a href="the-heart-attack-dataset-ii.html#cb730-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(LOS),  <span class="co"># mean of each group</span></span>
+<span id="cb730-4"><a href="the-heart-attack-dataset-ii.html#cb730-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(LOS),    <span class="co"># standard deviation of each group</span></span>
+<span id="cb730-5"><a href="the-heart-attack-dataset-ii.html#cb730-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n    =</span> <span class="fu">n</span>(),        <span class="co"># sample size per group</span></span>
+<span id="cb730-6"><a href="the-heart-attack-dataset-ii.html#cb730-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se   =</span> <span class="fu">sd</span>(LOS) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))  <span class="co"># standard error of each group</span></span></code></pre></div>
 <p>The resultant data frame is a detailed summary of the data by DIAGNOSIS:</p>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="the-heart-attack-dataset-ii.html#cb734-1" aria-hidden="true" tabindex="-1"></a>stats</span></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="the-heart-attack-dataset-ii.html#cb731-1" aria-hidden="true" tabindex="-1"></a>stats</span></code></pre></div>
 <pre><code>## # A tibble: 9 x 5
 ##   DIAGNOSIS  mean    sd     n     se
-## * &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;
+##   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;
 ## 1 41001      7.78  5.69   467 0.263 
 ## 2 41011      7.73  5.34  1824 0.125 
 ## 3 41021      7.56  5.26   250 0.333 
@@ -487,10 +485,10 @@ Figure 6.6: Boxplot and violin plots using ggplot2
 ## 9 41091      7.63  5.14  5213 0.0712</code></pre>
 <p>Now we can use ggplot2 to plot these statistics (Figure <a href="the-heart-attack-dataset-ii.html#fig:15-7">6.7</a>):</p>
 
-<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb736-1"><a href="the-heart-attack-dataset-ii.html#cb736-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stats, <span class="fu">aes</span>(<span class="at">x =</span> DIAGNOSIS, <span class="at">y =</span> mean)) <span class="sc">+</span>   <span class="co"># data &amp; aesthetic mapping</span></span>
-<span id="cb736-2"><a href="the-heart-attack-dataset-ii.html#cb736-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span>            <span class="co"># bars represent average</span></span>
-<span id="cb736-3"><a href="the-heart-attack-dataset-ii.html#cb736-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>)  <span class="co"># error bars</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:15-7"></span>
+<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="the-heart-attack-dataset-ii.html#cb733-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stats, <span class="fu">aes</span>(<span class="at">x =</span> DIAGNOSIS, <span class="at">y =</span> mean)) <span class="sc">+</span>   <span class="co"># data &amp; aesthetic mapping</span></span>
+<span id="cb733-2"><a href="the-heart-attack-dataset-ii.html#cb733-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span>            <span class="co"># bars represent average</span></span>
+<span id="cb733-3"><a href="the-heart-attack-dataset-ii.html#cb733-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>)  <span class="co"># error bars</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-7"></span>
 <img src="book_files/figure-html/15-7-1.png" alt="Average LOS by DIAGNOSIS group with error bars representing standard error." width="576" />
 <p class="caption">
 Figure 6.7: Average LOS by DIAGNOSIS group with error bars representing standard error.
@@ -498,14 +496,14 @@ Figure 6.7: Average LOS by DIAGNOSIS group with error bars representing standard
 </div>
 <p>Note that the mean-se and mean+se refer to the two columns in the stats data frame and define the error bars. Because we have an extremely large sample size, the standard errors are small. People with a diagnosis of 41031 stay shorter in the hospital. By looking up the IDC code in <a href="http://www.nuemd.com">http://www.nuemd.com</a>, we notice that this code represents “Acute myocardial infarction of inferoposterior wall, initial episode of care,” which probably makes sense.</p>
 <p>As we did previously, we want to define the LOS bars for men and women separately. We first need to go back and generate different summary statistics.</p>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="the-heart-attack-dataset-ii.html#cb737-1" aria-hidden="true" tabindex="-1"></a>stats2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb737-2"><a href="the-heart-attack-dataset-ii.html#cb737-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DIAGNOSIS, SEX) <span class="sc">%&gt;%</span>   <span class="co"># two grouping variables</span></span>
-<span id="cb737-3"><a href="the-heart-attack-dataset-ii.html#cb737-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(LOS),  </span>
-<span id="cb737-4"><a href="the-heart-attack-dataset-ii.html#cb737-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(LOS), </span>
-<span id="cb737-5"><a href="the-heart-attack-dataset-ii.html#cb737-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n    =</span> <span class="fu">n</span>(),  </span>
-<span id="cb737-6"><a href="the-heart-attack-dataset-ii.html#cb737-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se   =</span> <span class="fu">sd</span>(LOS) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())) </span></code></pre></div>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb734-1"><a href="the-heart-attack-dataset-ii.html#cb734-1" aria-hidden="true" tabindex="-1"></a>stats2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb734-2"><a href="the-heart-attack-dataset-ii.html#cb734-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DIAGNOSIS, SEX) <span class="sc">%&gt;%</span>   <span class="co"># two grouping variables</span></span>
+<span id="cb734-3"><a href="the-heart-attack-dataset-ii.html#cb734-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(LOS),  </span>
+<span id="cb734-4"><a href="the-heart-attack-dataset-ii.html#cb734-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(LOS), </span>
+<span id="cb734-5"><a href="the-heart-attack-dataset-ii.html#cb734-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n    =</span> <span class="fu">n</span>(),  </span>
+<span id="cb734-6"><a href="the-heart-attack-dataset-ii.html#cb734-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">se   =</span> <span class="fu">sd</span>(LOS) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())) </span></code></pre></div>
 <p>The entire dataset was divided into 18 groups according to all possible combinations of DIAGNOSIS and SEX. For each group, the LOS numbers are summarized in terms of mean, standard deviation (sd), observations (n), and standard errors(se). Below is the resultant data frame with summary statistics:</p>
-<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="the-heart-attack-dataset-ii.html#cb738-1" aria-hidden="true" tabindex="-1"></a>stats2</span></code></pre></div>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="the-heart-attack-dataset-ii.html#cb735-1" aria-hidden="true" tabindex="-1"></a>stats2</span></code></pre></div>
 <pre><code>## # A tibble: 18 x 6
 ## # Groups:   DIAGNOSIS [9]
 ##    DIAGNOSIS SEX    mean    sd     n     se
@@ -530,19 +528,19 @@ Figure 6.7: Average LOS by DIAGNOSIS group with error bars representing standard
 ## 18 41091     M      7.15  4.63  3135 0.0826</code></pre>
 <p>Now we are ready to generate bar plot for men and women separately using the fill aesthetic mapping:</p>
 
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="the-heart-attack-dataset-ii.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stats2, <span class="fu">aes</span>(<span class="at">x =</span> DIAGNOSIS, <span class="at">y =</span> mean, <span class="at">fill =</span> SEX)) <span class="sc">+</span>  <span class="co"># mapping</span></span>
-<span id="cb740-2"><a href="the-heart-attack-dataset-ii.html#cb740-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span>    <span class="co"># bars for mean of LOS</span></span>
-<span id="cb740-3"><a href="the-heart-attack-dataset-ii.html#cb740-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Diagnosis codes&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Length of Stay&quot;</span>) <span class="sc">+</span>  <span class="co"># axes labels</span></span>
-<span id="cb740-4"><a href="the-heart-attack-dataset-ii.html#cb740-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se),  <span class="co"># error bars</span></span>
-<span id="cb740-5"><a href="the-heart-attack-dataset-ii.html#cb740-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:15-8"></span>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="the-heart-attack-dataset-ii.html#cb737-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stats2, <span class="fu">aes</span>(<span class="at">x =</span> DIAGNOSIS, <span class="at">y =</span> mean, <span class="at">fill =</span> SEX)) <span class="sc">+</span>  <span class="co"># mapping</span></span>
+<span id="cb737-2"><a href="the-heart-attack-dataset-ii.html#cb737-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span>    <span class="co"># bars for mean of LOS</span></span>
+<span id="cb737-3"><a href="the-heart-attack-dataset-ii.html#cb737-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Diagnosis codes&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Length of Stay&quot;</span>) <span class="sc">+</span>  <span class="co"># axes labels</span></span>
+<span id="cb737-4"><a href="the-heart-attack-dataset-ii.html#cb737-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> se, <span class="at">ymax =</span> mean <span class="sc">+</span> se),  <span class="co"># error bars</span></span>
+<span id="cb737-5"><a href="the-heart-attack-dataset-ii.html#cb737-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>), <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-8"></span>
 <img src="book_files/figure-html/15-8-1.png" alt="The length of stay summarized by diagnosis and sex. Error bars represent standard error." width="576" />
 <p class="caption">
 Figure 6.8: The length of stay summarized by diagnosis and sex. Error bars represent standard error.
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:15-9"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:15-9"></span>
 <img src="book_files/figure-html/15-9-1.png" alt="Mean ages for patients with different diagnosis and treatment outcome." width="576" />
 <p class="caption">
 Figure 6.9: Mean ages for patients with different diagnosis and treatment outcome.
@@ -574,8 +572,8 @@ Once again, there are many example codes and answered R coding questions online.
 <h2><span class="header-section-number">6.5</span> Statistical models are easy; interpretations and verifications are not!</h2>
 <p>By using pair-wised correlation analysis, we found that women have a much higher mortality rate than men due to heart attack. We also found that women are much older than men. These are obviously confounding effects.</p>
 <p>We need to <strong>delineate the effects of multiple factors using multiple linear regression</strong>. In our model below, we express the charges as a function of all other factors using <strong>multiple linear regression</strong>.</p>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="the-heart-attack-dataset-ii.html#cb741-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(CHARGES <span class="sc">~</span> SEX <span class="sc">+</span> LOS <span class="sc">+</span> AGE <span class="sc">+</span> DRG <span class="sc">+</span> DIAGNOSIS, <span class="at">data =</span> df)</span>
-<span id="cb741-2"><a href="the-heart-attack-dataset-ii.html#cb741-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit) </span></code></pre></div>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb738-1"><a href="the-heart-attack-dataset-ii.html#cb738-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(CHARGES <span class="sc">~</span> SEX <span class="sc">+</span> LOS <span class="sc">+</span> AGE <span class="sc">+</span> DRG <span class="sc">+</span> DIAGNOSIS, <span class="at">data =</span> df)</span>
+<span id="cb738-2"><a href="the-heart-attack-dataset-ii.html#cb738-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit) </span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = CHARGES ~ SEX + LOS + AGE + DRG + DIAGNOSIS, data = df)
@@ -608,13 +606,13 @@ Once again, there are many example codes and answered R coding questions online.
 ## Multiple R-squared:  0.569,  Adjusted R-squared:  0.5685 
 ## F-statistic:  1232 on 13 and 12131 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>As we could see from above, one level for each factor(such as female) is used as a base for comparison, so it does not show. SEXM indicates that being male, we have a marginally significant effect on charges. Everything else being equal, a male patient will incur $183 dollars more cost than female for the hospital stay. It is really small number compared to overall charges and also the p value is just marginally significant for this large sample(0.02956). This is in contrast to the <strong>t.test(CHARGES ~ SEX)</strong> shown below, when we got the opposite conclusion with much smaller p value of 4.573e-07. It is because we did not control for other factors.</p>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="the-heart-attack-dataset-ii.html#cb743-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(CHARGES <span class="sc">~</span> SEX, <span class="at">data =</span> df)</span></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="the-heart-attack-dataset-ii.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(CHARGES <span class="sc">~</span> SEX, <span class="at">data =</span> df)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
 ## data:  CHARGES by SEX
 ## t = 5.047, df = 9355.3, p-value = 4.573e-07
-## alternative hypothesis: true difference in means is not equal to 0
+## alternative hypothesis: true difference in means between group F and group M is not equal to 0
 ## 95 percent confidence interval:
 ##  384.9901 873.9597
 ## sample estimates:
@@ -622,8 +620,8 @@ Once again, there are many example codes and answered R coding questions online.
 ##       10260.660        9631.185</code></pre>
 <p>Back to our multiple linear regression model we can see that the most pronounced effect is LOS. This is not surprising, as many hospitals have charges on daily basis. Since the p values are cutoff at 2e-16, the <strong>t value</strong> is an indicator of significance. LOS has a t value of 119.7, which is way bigger than all others. If I am an insurance company CEO, I will do anything I can to push the hospitals to discharge patients as early as possible. The coefficients tell us for the average patient, one extra day of stay in the hospital the charges will go up by $989.7. Age has a negative effect, meaning older people actually will be charged less, when other factors are controlled. So there is no reason to charge older people more in terms of insurance premiums. And there is a little evidence to charge female more than males. Compared with patients who had complications (DRG = 121, the baseline), people have no complications (DRG = 122) incurred less charges on average by the amount of $916. Patients who died, on the other hand, are likely to be charged more. People with diagnosis codes 41091, 41051 and 41071 incurred less charges compared with those with 41001.</p>
 <p>To investigate mortality, which is a binary outcome, we use <strong>logistic regression</strong>.</p>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="the-heart-attack-dataset-ii.html#cb745-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(DIED <span class="sc">~</span> SEX <span class="sc">+</span> LOS <span class="sc">+</span> AGE <span class="sc">+</span> DIAGNOSIS, <span class="at">family =</span> <span class="fu">binomial</span>( ), <span class="at">data =</span> df)</span>
-<span id="cb745-2"><a href="the-heart-attack-dataset-ii.html#cb745-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb742-1"><a href="the-heart-attack-dataset-ii.html#cb742-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(DIED <span class="sc">~</span> SEX <span class="sc">+</span> LOS <span class="sc">+</span> AGE <span class="sc">+</span> DIAGNOSIS, <span class="at">family =</span> <span class="fu">binomial</span>( ), <span class="at">data =</span> df)</span>
+<span id="cb742-2"><a href="the-heart-attack-dataset-ii.html#cb742-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = DIED ~ SEX + LOS + AGE + DIAGNOSIS, family = binomial(), 
@@ -682,7 +680,6 @@ ___________(fit)
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -722,6 +719,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
