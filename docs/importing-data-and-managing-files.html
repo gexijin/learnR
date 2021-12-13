@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Importing data and managing files | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Importing data and managing files | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="data-structures.html"/>
 <link rel="next" href="the-heart-attack-data-set-i.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,22 +51,22 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -223,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Publish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
@@ -332,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Start your R script by adding comments on background information. Comments starting with “#” are ignored by R when running, but they are helpful for humans, including the future self, to understand the code. We re-cycle and re-use our codes over and over, so it is vital to add information about what a chunk of code does. Figure <a href="importing-data-and-managing-files.html#fig:9-1">4.1</a> shows a recommended workflow for beginning your script. Click “Save” button and name your file something like “Data Import.R.”</p>
 <p><strong>Write your scripts while saving your project files</strong>. If you click on the <strong>Run</strong> button, Rstudio runs the current line of code where your cursor is located. You can also select multiple lines and run them at once. You can jump back and forth but remember you are operating on the data objects sequentially. So sometimes you want to get a fresh start by running the reset line, namely:<strong>rm(list=ls())</strong>. This command lists and then deletes all data objects from R’s brain. As you develop your coding skills, following these guidelines can make you more efficient. Remember to save everything once a while by hitting the <strong>Save</strong> button on the main icon bar! Even though Rstudio saves your scripts every 5 seconds, it can crash.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:9-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:9-1"></span>
 <img src="images/img0901_rstudio.png" alt="Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder." width="80%" />
 <p class="caption">
 Figure 4.1: Beginning a project in Rstudio, a recommended workflow: commenting, resetting, checking working folder.
@@ -367,7 +368,7 @@ We have to change LOS and AGE from <strong>“character” to “integer”</str
 <span id="cb631-7"><a href="importing-data-and-managing-files.html#cb631-7" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df)</span></code></pre></div>
 <p>Before you click on the <strong>Import</strong> button, I highly recommend that you select all the codes and copy it to the script file. After clicking <strong>Import</strong>, you can paste the code into a script window. If you do not have a script window open, you can create one by clicking the <strong>File +</strong> icon on the top left. Copy and paste these code to your script file. You will need it when you want to re-run the analysis without going through the above steps. You can see the data appears as a spreadsheet, which can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on df object, which is a data frame named after the input file. You data is now available as df.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:9-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:9-2"></span>
 <img src="images/img0902m_datatype.png" alt="Changing data types while importing data into Rstudio." width="483" />
 <p class="caption">
 Figure 4.2: Changing data types while importing data into Rstudio.
@@ -378,7 +379,7 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 <h3><span class="header-section-number">4.1.5</span> Check and convert data types</h3>
 <p>Most of the times, R can guess the type of data in each column. But we always need to double check using the str command. If not satisfied, we can enforce data type conversion in R using as.numeric, as.factor, or as.character functions.</p>
 <div class="sourceCode" id="cb632"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb632-1"><a href="importing-data-and-managing-files.html#cb632-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># structure of data object, data types for each column</span></span></code></pre></div>
-<pre><code>## tibble [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<pre><code>## spec_tbl_df [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Patient  : num [1:12844] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: chr [1:12844] &quot;41041&quot; &quot;41041&quot; &quot;41091&quot; &quot;41081&quot; ...
 ##  $ SEX      : chr [1:12844] &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; ...
@@ -397,7 +398,8 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 ##   ..   CHARGES = col_double(),
 ##   ..   LOS = col_integer(),
 ##   ..   AGE = col_integer()
-##   .. )</code></pre>
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
 <p>We can reformat categorical values <strong>factors</strong>. We are going to use <code>df$SEX</code> to refer to the SEX column of the data frame df:</p>
 <div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb634-1"><a href="importing-data-and-managing-files.html#cb634-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIAGNOSIS)  <span class="co"># convert this column to factor</span></span>
 <span id="cb634-2"><a href="importing-data-and-managing-files.html#cb634-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>SEX)</span>
@@ -413,7 +415,7 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 <span id="cb639-2"><a href="importing-data-and-managing-files.html#cb639-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>DIAGNOSIS)</span></code></pre></div>
 <pre><code>## [1] &quot;41091&quot; &quot;41001&quot; &quot;41011&quot; &quot;41021&quot; &quot;41031&quot; &quot;41041&quot; &quot;41051&quot; &quot;41071&quot; &quot;41081&quot;</code></pre>
 <div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="importing-data-and-managing-files.html#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># double check structure of data</span></span></code></pre></div>
-<pre><code>## tibble [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<pre><code>## spec_tbl_df [12,844 x 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
 ##  $ Patient  : num [1:12844] 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ DIAGNOSIS: Factor w/ 9 levels &quot;41091&quot;,&quot;41001&quot;,..: 6 6 1 9 1 1 1 1 6 6 ...
 ##  $ SEX      : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 1 1 1 1 2 2 1 1 2 1 ...
@@ -432,7 +434,8 @@ Figure 4.2: Changing data types while importing data into Rstudio.
 ##   ..   CHARGES = col_double(),
 ##   ..   LOS = col_integer(),
 ##   ..   AGE = col_integer()
-##   .. )</code></pre>
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
 <div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="importing-data-and-managing-files.html#cb643-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)  <span class="co"># a summary often gives us a lot of useful information </span></span></code></pre></div>
 <pre><code>##     Patient        DIAGNOSIS    SEX       DRG       DIED         CHARGES     
 ##  Min.   :    1   41091  :5213   F:5065   121:5387   0:11434   Min.   :    3  
@@ -477,11 +480,12 @@ Some people got free treatment for heart attack? Maybe not. Missing does not mea
 <span id="cb645-10"><a href="importing-data-and-managing-files.html#cb645-10" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># show the data types of columns</span></span>
 <span id="cb645-11"><a href="importing-data-and-managing-files.html#cb645-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)  <span class="co"># show summary of dataset</span></span></code></pre></div>
 <p>Alternatively, you can skip all of the above and do this.</p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="importing-data-and-managing-files.html#cb646-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;http://statland.org/R/RC/heartatk4R.txt&quot;</span>, </span>
-<span id="cb646-2"><a href="importing-data-and-managing-files.html#cb646-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb646-3"><a href="importing-data-and-managing-files.html#cb646-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
-<span id="cb646-4"><a href="importing-data-and-managing-files.html#cb646-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </span>
-<span id="cb646-5"><a href="importing-data-and-managing-files.html#cb646-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb646-1"><a href="importing-data-and-managing-files.html#cb646-1" aria-hidden="true" tabindex="-1"></a>URL <span class="ot">&lt;-</span> <span class="st">&quot;https://raw.githubusercontent.com/gexijin/learnR/master/datasets/heartatk4R.txt&quot;</span></span>
+<span id="cb646-2"><a href="importing-data-and-managing-files.html#cb646-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(URL, </span>
+<span id="cb646-3"><a href="importing-data-and-managing-files.html#cb646-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb646-4"><a href="importing-data-and-managing-files.html#cb646-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, </span>
+<span id="cb646-5"><a href="importing-data-and-managing-files.html#cb646-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;factor&quot;</span>, </span>
+<span id="cb646-6"><a href="importing-data-and-managing-files.html#cb646-6" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>))</span></code></pre></div>
 <p>We are reading data directly from the internet with the URL. And we are specifying the data type for each column.</p>
 </div>
 <div id="general-procedure-to-read-data-into-r" class="section level2" number="4.3">
@@ -600,14 +604,14 @@ We can also create a column to represent age groups using the floor function jus
 <div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb661-1"><a href="importing-data-and-managing-files.html#cb661-1" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">subset</span>(df2, SEX <span class="sc">==</span> <span class="st">&quot;F&quot;</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span></span>
 <span id="cb661-2"><a href="importing-data-and-managing-files.html#cb661-2" aria-hidden="true" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> <span class="fu">subset</span>(df3, AGE <span class="sc">&gt;</span> <span class="dv">80</span>)  <span class="co"># only people older than 80</span></span>
 <span id="cb661-3"><a href="importing-data-and-managing-files.html#cb661-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df4)   </span></code></pre></div>
-<pre><code>##    Patient            DIAGNOSIS   SEX       DRG      DIED       CHARGES     
-##  Length:1263        41091  :564   F:1263   121:679   0:929   Min.   :   92  
-##  Class :character   41071  :224   M:   0   122:250   1:334   1st Qu.: 5179  
-##  Mode  :character   41041  :181            123:334           Median : 8580  
-##                     41011  :166                              Mean   :10143  
-##                     41001  : 41                              3rd Qu.:13347  
-##                     41081  : 38                              Max.   :46915  
-##                     (Other): 49                              NA&#39;s   :74     
+<pre><code>##     Patient        DIAGNOSIS   SEX       DRG      DIED       CHARGES     
+##  Min.   :    7   41091  :564   F:1263   121:679   0:929   Min.   :   92  
+##  1st Qu.: 3416   41071  :224   M:   0   122:250   1:334   1st Qu.: 5179  
+##  Median : 6816   41041  :181            123:334           Median : 8580  
+##  Mean   : 6624   41011  :166                              Mean   :10143  
+##  3rd Qu.: 9814   41001  : 41                              3rd Qu.:13347  
+##  Max.   :12841   41081  : 38                              Max.   :46915  
+##                  (Other): 49                              NA&#39;s   :74     
 ##       LOS              AGE              pdc                ag        
 ##  Min.   : 1.000   Min.   : 81.00   Min.   :   18.4   Min.   : 80.00  
 ##  1st Qu.: 5.000   1st Qu.: 83.00   1st Qu.:  796.7   1st Qu.: 80.00  
@@ -694,7 +698,6 @@ We can also create a column to represent age groups using the floor function jus
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -734,6 +737,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

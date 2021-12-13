@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Advanced topics | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Advanced topics | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi and Rong Fan" />
 
 
-<meta name="date" content="2021-08-11" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="the-heart-attack-dataset-ii.html"/>
 <link rel="next" href="the-state-dataset.html"/>
-<script src="libs/header-attrs-2.6/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,22 +51,22 @@
 
 
 
-
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -163,33 +164,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
-<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
-<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#looking-for-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Looking for help and example Code</a></li>
-</ul></li>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
 <li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
-<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.1</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.2</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.4</b> Lists</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
-<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file and comment (!)</a></li>
-<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
-<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
-<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.1</b> Import data files</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.2</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.3</b> Close a project when you are done</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.2</b> Reading files directly using read.table</a></li>
 <li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.3</b> General procedure to read data into R:</a></li>
@@ -223,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
-<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#pubish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Pubish your app</a></li>
+<li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Publish your app</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
 </ul></li>
@@ -309,32 +299,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Let’s start learning R Markdown from its cheat sheet. Click the RStudio IDE under <em>Help <span class="math inline">\(\rightarrow\)</span> Cheatsheets <span class="math inline">\(\rightarrow\)</span> R Markdown Cheat Sheet.</em> As the cheat sheet explained, the R Markdown (.Rmd) file can combine your code and the output in one file, and produce various formats, such as html, pdf, MS Word, or RTF documents.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label0"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label0"></span>
 <img src="images/Ch7_Adv_top_0.PNG" alt="R Markdown Cheat Sheet" width="80%" />
 <p class="caption">
 Figure 7.1: R Markdown Cheat Sheet
 </p>
 </div>
-<p>To create an R Markdown file by the following process, firstly, you need to open a new .Rmd file at File <span class="math inline">\(\rightarrow\)</span> New File <span class="math inline">\(\rightarrow\)</span>. In the open window, feel free to change the <strong>Title</strong>. For example, you can change the <strong>Untitled</strong> to <strong>MyFirstRmd</strong>. Then choose the default output format from the three options: HTML, PDF or WORD. Then click “OK.”</p>
+<p>To create an R Markdown file by the following process, firstly, you need to open a new .Rmd file at File <span class="math inline">\(\rightarrow\)</span> New File <span class="math inline">\(\rightarrow\)</span>. In the open window, feel free to change the <strong>Title</strong>. For example, you can change the <strong>Untitled</strong> to <strong>MyFirstRmd</strong>. Then choose the default output format from the three options: HTML, PDF or WORD. Then click “OK” .</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label1"></span>
 <img src="images/Ch7_Adv_top_1.PNG" alt="Create a new RMarkdown file" width="80%" />
 <p class="caption">
 Figure 7.2: Create a new RMarkdown file
 </p>
 </div>
 <p>A new .Rmd file named MyFirstRmd.Rmd is created.</p>
-<p>The first part of the file is YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes “-.” See Figure <a href="advanced-topics.html#fig:label2">7.3</a>. It specifies the key arguments for the document, such as <strong>title</strong>, <strong>author</strong>, <strong>date</strong>, and output format. The output format is html in the example. You may see the <strong>output: pdf_document</strong>, which means that the default format you have chosen is <strong>PDF</strong> when you created the file.</p>
+<p>The first part of the file is YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes “-” . See Figure <a href="advanced-topics.html#fig:label2">7.3</a>. It specifies the key arguments for the document, such as <strong>title</strong>, <strong>author</strong>, <strong>date</strong>, and output format. The output format is html in the example. You may see the <strong>output: pdf_document</strong>, which means that the default format you have chosen is <strong>PDF</strong> when you created the file.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label2"></span>
 <img src="images/Ch7_Adv_top_2.PNG" alt="YAML Header" width="80%" />
 <p class="caption">
 Figure 7.3: YAML Header
 </p>
 </div>
-<p>The second part of an .Rmd file is surrounded by three back ticks “`.” They are called chunks of R. Figure <a href="advanced-topics.html#fig:label3">7.4</a> is an example of a chunk. The “nm_cars” after r in the { } is the name of the chunk.</p>
+<p>The second part of an .Rmd file is surrounded by three back ticks “`” . They are called chunks of R. Figure <a href="advanced-topics.html#fig:label3">7.4</a> is an example of a chunk. The “nm_cars” after r in the { } is the name of the chunk.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label3"></span>
 <img src="images/Ch7_Adv_top_3.PNG" alt="Chunk of R" width="45%" />
 <p class="caption">
 Figure 7.4: Chunk of R
@@ -348,7 +338,7 @@ Figure 7.4: Chunk of R
 ##  Mean   :15.4   Mean   : 42.98  
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
 ##  Max.   :25.0   Max.   :120.00</code></pre>
-<p>You can find many options for chunks in the R Markdown Cheet Sheet. let’s take a look at some of the chunk options that you’ll use frequently.</p>
+<p>You can find many options for chunks in the R Markdown Cheat Sheet. let’s take a look at some of the chunk options that you’ll use frequently.</p>
 <p>1, <strong>eval = FALSE</strong> stops code from being evaluated. See the chunk below which displays the code only. The code won’t be evaluated and therefore does not have any result in the final document.</p>
 <p><img src="images/Ch7_Adv_top_6.PNG" width="50%" /></p>
 <p>2, <strong>include = FALSE</strong> runs the code, but does not display the code or result in the final document.</p>
@@ -371,25 +361,25 @@ Figure 7.4: Chunk of R
 </div>
 <div id="tidyverse" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Tidyverse</h2>
-<p>Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. Now Let’s explain the dplyr package in a little detail for manipulating iris data set.</p>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="advanced-topics.html#cb748-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) </span></code></pre></div>
-<div class="sourceCode" id="cb749"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb749-1"><a href="advanced-topics.html#cb749-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. Now let’s explain the dplyr package in a little detail for manipulating iris data set.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="advanced-topics.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="advanced-topics.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>In dplyr, we use the pipe operator %&gt;% to send data to the next stage. This is similar to the “+” operator we used in ggplot2. To create a new data frame for setosa with sepals longer than 4.0:</p>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="advanced-topics.html#cb750-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb750-2"><a href="advanced-topics.html#cb750-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, Sepal.Length <span class="sc">&gt;</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="advanced-topics.html#cb4-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="advanced-topics.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, Sepal.Length <span class="sc">&gt;</span> <span class="dv">4</span>)</span></code></pre></div>
 <p>Add a new column that contains the ratios of sepal length to sepal width:</p>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="advanced-topics.html#cb751-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb751-2"><a href="advanced-topics.html#cb751-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="advanced-topics.html#cb5-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="advanced-topics.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width)</span></code></pre></div>
 <p>Sort by sepal length in ascending order:</p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="advanced-topics.html#cb752-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb752-2"><a href="advanced-topics.html#cb752-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Sepal.Length)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="advanced-topics.html#cb6-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="advanced-topics.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Sepal.Length)</span></code></pre></div>
 <p>The power of dplyr is that we can connect these pipe operators to define a work flow. Suppose we want to see the Iris setosa flowers with the largest ratio of sepal length to sepal width.</p>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="advanced-topics.html#cb753-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb753-2"><a href="advanced-topics.html#cb753-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>) <span class="sc">%&gt;%</span>                  <span class="co"># filter rows</span></span>
-<span id="cb753-3"><a href="advanced-topics.html#cb753-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Sepal.Width) <span class="sc">%&gt;%</span>            <span class="co"># select two columns </span></span>
-<span id="cb753-4"><a href="advanced-topics.html#cb753-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width) <span class="sc">%&gt;%</span>   <span class="co"># add a new column</span></span>
-<span id="cb753-5"><a href="advanced-topics.html#cb753-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ratio))   <span class="sc">%&gt;%</span>                       <span class="co"># sort in descending order</span></span>
-<span id="cb753-6"><a href="advanced-topics.html#cb753-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()   <span class="co"># only show top rows. No more pipes, end of sequence.</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="advanced-topics.html#cb7-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="advanced-topics.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>) <span class="sc">%&gt;%</span>                  <span class="co"># filter rows</span></span>
+<span id="cb7-3"><a href="advanced-topics.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Sepal.Width) <span class="sc">%&gt;%</span>            <span class="co"># select two columns </span></span>
+<span id="cb7-4"><a href="advanced-topics.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width) <span class="sc">%&gt;%</span>   <span class="co"># add a new column</span></span>
+<span id="cb7-5"><a href="advanced-topics.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ratio))   <span class="sc">%&gt;%</span>                       <span class="co"># sort in descending order</span></span>
+<span id="cb7-6"><a href="advanced-topics.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()   <span class="co"># only show top rows. No more pipes, end of sequence.</span></span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width    ratio
 ## 1          4.5         2.3 1.956522
 ## 2          5.0         3.0 1.666667
@@ -399,10 +389,10 @@ Figure 7.4: Chunk of R
 ## 6          5.4         3.4 1.588235</code></pre>
 <p><strong>filter</strong>( ), <strong>mutate</strong>( ) and <strong>arrange</strong>( ) are 3 <strong>“verbs”</strong> that operate on the data frame sequentially. <strong>head</strong>( ) is the function that only shows the top rows. Notice the pipe operator %&gt;% at the end of each line. This code is much easier to read by humans, as it defines a sequence of operations.</p>
 <p>Two other useful verbs are <strong>group_by</strong>( ) and <strong>summarise</strong>( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths and width, and then combine. So it is <strong>“split-apply-combine”</strong>.</p>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="advanced-topics.html#cb755-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb755-2"><a href="advanced-topics.html#cb755-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)  <span class="sc">%&gt;%</span>  <span class="co"># split by Species </span></span>
-<span id="cb755-3"><a href="advanced-topics.html#cb755-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avgSL =</span> <span class="fu">mean</span>(Sepal.Length), <span class="at">avgSW =</span> <span class="fu">mean</span>(Sepal.Width)) <span class="sc">%&gt;%</span> </span>
-<span id="cb755-4"><a href="advanced-topics.html#cb755-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(avgSL)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="advanced-topics.html#cb9-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="advanced-topics.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)  <span class="sc">%&gt;%</span>  <span class="co"># split by Species </span></span>
+<span id="cb9-3"><a href="advanced-topics.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avgSL =</span> <span class="fu">mean</span>(Sepal.Length), <span class="at">avgSW =</span> <span class="fu">mean</span>(Sepal.Width)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="advanced-topics.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(avgSL)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   Species    avgSL avgSW
 ##   &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
@@ -415,7 +405,7 @@ For all the following exercises, you need to do them by using R Markdown. You sh
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-433" class="exercise"><strong>Exercise 7.1  </strong></span></p>
+<p><span id="exr:unnamed-chunk-14" class="exercise"><strong>Exercise 7.1  </strong></span></p>
 <p>Fill in the blanks. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the <strong>head</strong> or <strong>summary</strong> function at the end to examine if the desired data is produced.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Read in the heart attack data same as you used in chapter 4. Insert Your own Path there.<br />
@@ -427,7 +417,7 @@ For all the following exercises, you need to do them by using R Markdown. You sh
 <li>Sort the results in descending order.</li>
 <li>Use one command with multiple steps.</li>
 </ol>
-<p>heartatk4R &lt;- read.csv(“______________/heartatk4R.txt,” header = TRUE, sep = ",</p>
+<p>heartatk4R &lt;- read.csv(“______________/heartatk4R.txt,” header = TRUE, sep = “,</p>
 <p>colClasses = c(“character,” “factor,” “factor,” “factor,” “factor,” “numeric,” “numeric,” “numeric”)</p>
 <p>head(heartatk4R)</p>
 <p>library(dplyr)</p>
@@ -443,12 +433,12 @@ df
 </div>
 <div id="interactive-plots-made-easy-with-plotly" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Interactive plots made easy with Plotly</h2>
-<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="advanced-topics.html#cb757-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="advanced-topics.html#cb758-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb758-2"><a href="advanced-topics.html#cb758-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Width, Petal.Length , <span class="at">color =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span>
-<span id="cb758-3"><a href="advanced-topics.html#cb758-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
-<div id="htmlwidget-aa2df1df542d1e890771" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-aa2df1df542d1e890771">{"x":{"data":[{"x":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.1<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.0<br />Species: setosa","Petal.Width: 0.5<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.6<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 3.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.7<br />Petal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.8<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.7<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.0<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Petal.Width: 2.5<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 6.6<br />Species: virginica","Petal.Width: 1.7<br />Petal.Length: 4.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.9<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.6<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.4<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.02,2.62],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.5,2,2.5],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Petal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"698433255b4":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"698433255b4","visdat":{"698433255b4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="advanced-topics.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="advanced-topics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb12-2"><a href="advanced-topics.html#cb12-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Width, Petal.Length , <span class="at">color =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span>
+<span id="cb12-3"><a href="advanced-topics.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
+<div id="htmlwidget-41296e81e041f33497df" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-41296e81e041f33497df">{"x":{"data":[{"x":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.1<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.0<br />Species: setosa","Petal.Width: 0.5<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.6<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 3.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.7<br />Petal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.8<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.7<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.0<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Petal.Width: 2.5<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 6.6<br />Species: virginica","Petal.Width: 1.7<br />Petal.Length: 4.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.9<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.6<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.4<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.02,2.62],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.5,2,2.5],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Petal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"4b447a58105d":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"4b447a58105d","visdat":{"4b447a58105d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in.</p>
 </div>
 <div id="shiny-apps" class="section level2" number="7.4">
@@ -456,7 +446,7 @@ df
 <p>Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP <a href="http://ge-lab.org/idep/" class="uri">http://ge-lab.org/idep/</a> ) to enable biologists to analyze genomic data on their own. My blog (<a href="http://gex.netlify.com" class="uri">http://gex.netlify.com</a> ) is also created in Rstudio.</p>
 <div id="install-the-shiny-package-by-typing-this-in-the-console." class="section level3" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> Install the Shiny package by typing this in the console.</h3>
-<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="advanced-topics.html#cb759-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shiny&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="advanced-topics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shiny&quot;</span>)</span></code></pre></div>
 </div>
 <div id="create-a-shiny-web-app-is-a-piece-of-cake" class="section level3" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> Create a Shiny web app is a piece of cake</h3>
@@ -479,7 +469,7 @@ df
 <p><img src="images/Ch7_Adv_top_14_1.PNG" width="80%" /><img src="images/Ch7_Adv_top_14_2.PNG" width="80%" /><img src="images/Ch7_Adv_top_14.PNG" width="80%" /><img src="images/Ch7_Adv_top_15.PNG" width="80%" /></p>
 <p>Save the changes and run the app again. Figure <a href="advanced-topics.html#fig:label16">7.5</a> is the output of histogram of the Sepal length in iris dataset.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label16"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label16"></span>
 <img src="images/Ch7_Adv_top_16.PNG" alt="Output of the Sepal length in the iris." width="80%" />
 <p class="caption">
 Figure 7.5: Output of the Sepal length in the iris.
@@ -492,19 +482,19 @@ Figure 7.5: Output of the Sepal length in the iris.
 <p>Save the changes and run the app again, we have the histogram with 12 bins by default.</p>
 <p><img src="images/Ch7_Adv_top_19.PNG" width="80%" style="display: block; margin: auto;" /></p>
 <ol start="4" style="list-style-type: lower-alpha">
-<li>We can change ‘Sepal.Length’ to other columns by assigning x to other variables. Would it be cool if the user can choose the variable from the output? To make it, we need to add a control widget by inserting this line of code after line 20: “selectInput(”cid“,”Column“, choices = colnames(iris)),” <strong>Do not forget the comma at the very end! </strong></li>
+<li>We can change ‘Sepal.Length’ to other columns by assigning x to other variables. Would it be cool if the user can choose the variable from the output? To make it, we need to add a control widget by inserting this line of code after line 20: “selectInput(”cid”, “Column,” choices = colnames(iris)),“. <strong>Do not forget the comma at the very end! </strong></li>
 </ol>
 <p><img src="images/Ch7_Adv_top_20.PNG" width="80%" /><img src="images/Ch7_Adv_top_21.PNG" width="80%" /></p>
 <p>Save and run the app. A control widget <strong>Column</strong> presents above the <strong>Number of bins</strong>. We are able to select any of the variable in iris dataset.</p>
 <p><img src="images/Ch7_Adv_top_22.PNG" width="80%" /></p>
-<p>As you may have noticed that, the columns can be selected from the control widget <strong>Column</strong>, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the <strong>server</strong> function, on line 44, the histogram function is given as <strong>hist(x,…)</strong> where <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of column, we replace <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> by <strong>x &lt;- iris[, input$cid ]</strong> on the line 40. Note that the <strong>input$cid</strong> is consistant with the inserted code <strong>selectInput( “cid,”<span class="math inline">\(\cdots\)</span>)</strong> on line 20: “<strong>sidebarPanel(selectInput("cid", "Column", choices = colnames(iris)),</strong>”</p>
+<p>As you may have noticed that, the columns can be selected from the control widget <strong>Column</strong>, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the <strong>server</strong> function, on line 44, the histogram function is given as <strong>hist(x,…)</strong> where <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of column, we replace <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> by <strong>x &lt;- iris[, input$cid ]</strong> on the line 40. Note that the <strong>input$cid</strong> is consistant with the inserted code <strong>selectInput( “cid,”<span class="math inline">\(\cdots\)</span>)</strong> on line 20: “<strong>sidebarPanel(selectInput(”cid”, ”Column”, choices = colnames(iris)),</strong>”</p>
 <p><img src="images/Ch7_Adv_top_23.PNG" width="80%" /><img src="images/Ch7_Adv_top_24.PNG" width="80%" /></p>
 <p>Save and run the code. Select a variable from the <strong>Column</strong>, say <em>Petal.Width</em>, then the histogram of Petal width shows up correctly.</p>
 <p><img src="images/Ch7_Adv_top_25.PNG" width="80%" style="display: block; margin: auto;" /></p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-448" class="exercise"><strong>Exercise 7.2  </strong></span></p>
+<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercise 7.2  </strong></span></p>
 What happens when you choose the last Column “Species” in the app?
 Solve the error by deleting the variable Species from the data iris. Hint: Modify the code on line 20: <em>selectInput(“cid,” “Column,” choices = colnames(iris))</em>.
 </div>
@@ -513,28 +503,28 @@ Solve the error by deleting the variable Species from the data iris. Hint: Modif
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-449" class="exercise"><strong>Exercise 7.3  </strong></span></p>
-<p>Change the title from “Histogram of x” to "Histogram of __" where _ is the name of the selected variable like “Sepal.Length.” Complete the question by filling in the blanks. Your output should look like the Figure 7.6.</p>
-<p>titl &lt;- paste(“Histogram of,” <strong>input$cid</strong>, sep = " ")</p>
+<p><span id="exr:unnamed-chunk-30" class="exercise"><strong>Exercise 7.3  </strong></span></p>
+<p>Change the title from “Histogram of x” to “Histogram of __” where _ is the name of the selected variable like “Sepal.Length.” Complete the question by filling in the blanks. Your output should look like the Figure 7.6.</p>
+<p>titl &lt;- paste(“Histogram of,” <strong>input$cid</strong>, sep = ” “)</p>
 hist(x, breaks = bins, col = ‘green,’ border = ‘white,’ main = _______)
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-450"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
 <img src="images/Ch7_Adv_top_27.png" alt="Histogram output" width="80%" />
 <p class="caption">
 Figure 7.6: Histogram output
 </p>
-</blockquote>
 </div>
+</blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>We can build a more complex app by adding an approximation normal distribution line by replace the function <strong>hist(x, breaks = bins, col = ‘green,’ border = ‘white’)</strong> with the code below:</li>
 </ol>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="advanced-topics.html#cb760-1" aria-hidden="true" tabindex="-1"></a>      h <span class="ot">&lt;-</span> <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">10</span>), <span class="at">border =</span> <span class="st">&#39;white&#39;</span>)</span>
-<span id="cb760-2"><a href="advanced-topics.html#cb760-2" aria-hidden="true" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(bins, <span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x)) </span>
-<span id="cb760-3"><a href="advanced-topics.html#cb760-3" aria-hidden="true" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> yfit <span class="sc">*</span>  <span class="fu">diff</span>( h<span class="sc">$</span>mids[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">length</span>(x) </span>
-<span id="cb760-4"><a href="advanced-topics.html#cb760-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lines</span>(bins, yfit, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="advanced-topics.html#cb14-1" aria-hidden="true" tabindex="-1"></a>      h <span class="ot">&lt;-</span> <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">10</span>), <span class="at">border =</span> <span class="st">&#39;white&#39;</span>)</span>
+<span id="cb14-2"><a href="advanced-topics.html#cb14-2" aria-hidden="true" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(bins, <span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x)) </span>
+<span id="cb14-3"><a href="advanced-topics.html#cb14-3" aria-hidden="true" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> yfit <span class="sc">*</span>  <span class="fu">diff</span>( h<span class="sc">$</span>mids[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">length</span>(x) </span>
+<span id="cb14-4"><a href="advanced-topics.html#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lines</span>(bins, yfit, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
 <p>The output should be similar to Figure <a href="advanced-topics.html#fig:label28">7.7</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label28"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label28"></span>
 <img src="images/Ch7_Adv_top_28.png" alt="Output of adding an approximation normal distribution curve." width="80%" />
 <p class="caption">
 Figure 7.7: Output of adding an approximation normal distribution curve.
@@ -543,75 +533,75 @@ Figure 7.7: Output of adding an approximation normal distribution curve.
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-452" class="exercise"><strong>Exercise 7.4  </strong></span></p>
+<p><span id="exr:unnamed-chunk-33" class="exercise"><strong>Exercise 7.4  </strong></span></p>
 <p>Fill in the blanks to solve the error message in this app by plotting a pie chart when the variable <strong>Species</strong> is selected in the <strong>Column</strong>. Your output of the pie chart should be similar to Figure 7.8.</p>
 <p>Hint steps:</p>
 <p>1, Make sure the <strong>selectInput()</strong> line same as its original with all columns selected.</p>
 <p>2, Separate the variables into two groups, numeric variables (columns 1 throught 4) for histogram and categorical variables (5th column) for pie plot.</p>
 3, Use if() and }else{ for each group.
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-453"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
 <img src="images/Ch7_Adv_top_29.png" alt="Pie chart output" width="80%" />
 <p class="caption">
 Figure 7.8: Pie chart output
 </p>
+</div>
 </blockquote>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="advanced-topics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb15-2"><a href="advanced-topics.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI for application that draws a histogram</span></span>
+<span id="cb15-3"><a href="advanced-topics.html#cb15-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb15-4"><a href="advanced-topics.html#cb15-4" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb15-5"><a href="advanced-topics.html#cb15-5" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Application title</span></span>
+<span id="cb15-6"><a href="advanced-topics.html#cb15-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">titlePanel</span>(<span class="st">&quot;Interactive page for iris data&quot;</span>),</span>
+<span id="cb15-7"><a href="advanced-topics.html#cb15-7" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb15-8"><a href="advanced-topics.html#cb15-8" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Sidebar with a slider input for number of bins </span></span>
+<span id="cb15-9"><a href="advanced-topics.html#cb15-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">sidebarLayout</span>(</span>
+<span id="cb15-10"><a href="advanced-topics.html#cb15-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
+<span id="cb15-11"><a href="advanced-topics.html#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">selectInput</span>(<span class="st">&quot;cid&quot;</span>, <span class="st">&quot;Select the column&quot;</span>, <span class="at">choices =</span> ___________),</span>
+<span id="cb15-12"><a href="advanced-topics.html#cb15-12" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,</span>
+<span id="cb15-13"><a href="advanced-topics.html#cb15-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Number of bins:&quot;</span>,</span>
+<span id="cb15-14"><a href="advanced-topics.html#cb15-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">min =</span> <span class="dv">1</span>,</span>
+<span id="cb15-15"><a href="advanced-topics.html#cb15-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">max =</span> <span class="dv">50</span>,</span>
+<span id="cb15-16"><a href="advanced-topics.html#cb15-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value =</span> <span class="dv">12</span>)</span>
+<span id="cb15-17"><a href="advanced-topics.html#cb15-17" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb15-18"><a href="advanced-topics.html#cb15-18" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-19"><a href="advanced-topics.html#cb15-19" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Show a plot of the generated distribution</span></span>
+<span id="cb15-20"><a href="advanced-topics.html#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mainPanel</span>(</span>
+<span id="cb15-21"><a href="advanced-topics.html#cb15-21" aria-hidden="true" tabindex="-1"></a>         <span class="fu">plotOutput</span>(<span class="st">&quot;Plot&quot;</span>)</span>
+<span id="cb15-22"><a href="advanced-topics.html#cb15-22" aria-hidden="true" tabindex="-1"></a>      ) </span>
+<span id="cb15-23"><a href="advanced-topics.html#cb15-23" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb15-24"><a href="advanced-topics.html#cb15-24" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb15-25"><a href="advanced-topics.html#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="advanced-topics.html#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server logic required to draw a histogram and pie plot</span></span>
+<span id="cb15-27"><a href="advanced-topics.html#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="advanced-topics.html#cb15-28" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb15-29"><a href="advanced-topics.html#cb15-29" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb15-30"><a href="advanced-topics.html#cb15-30" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>Plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb15-31"><a href="advanced-topics.html#cb15-31" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb15-32"><a href="advanced-topics.html#cb15-32" aria-hidden="true" tabindex="-1"></a>      x    <span class="ot">&lt;-</span> iris[, input<span class="sc">$</span>cid]</span>
+<span id="cb15-33"><a href="advanced-topics.html#cb15-33" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-34"><a href="advanced-topics.html#cb15-34" aria-hidden="true" tabindex="-1"></a>      <span class="co"># draw the histogram with the specified number of bins for variable columns</span></span>
+<span id="cb15-35"><a href="advanced-topics.html#cb15-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">________</span> (input<span class="sc">$</span>cid <span class="sc">%in%</span> <span class="fu">colnames</span>(iris)[______]){</span>
+<span id="cb15-36"><a href="advanced-topics.html#cb15-36" aria-hidden="true" tabindex="-1"></a>      bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> input<span class="sc">$</span>bins <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb15-37"><a href="advanced-topics.html#cb15-37" aria-hidden="true" tabindex="-1"></a>      titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb15-38"><a href="advanced-topics.html#cb15-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">border =</span> <span class="st">&#39;white&#39;</span>, <span class="at">main =</span> titl)</span>
+<span id="cb15-39"><a href="advanced-topics.html#cb15-39" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-40"><a href="advanced-topics.html#cb15-40" aria-hidden="true" tabindex="-1"></a>      <span class="co"># draw the pie plot for catogorical column Species</span></span>
+<span id="cb15-41"><a href="advanced-topics.html#cb15-41" aria-hidden="true" tabindex="-1"></a>        __________</span>
+<span id="cb15-42"><a href="advanced-topics.html#cb15-42" aria-hidden="true" tabindex="-1"></a>        count <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
+<span id="cb15-43"><a href="advanced-topics.html#cb15-43" aria-hidden="true" tabindex="-1"></a>        labl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">names</span>(count), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, count, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb15-44"><a href="advanced-topics.html#cb15-44" aria-hidden="true" tabindex="-1"></a>        titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Pie plot of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb15-45"><a href="advanced-topics.html#cb15-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pie</span>(count, <span class="at">labels =</span> labl, <span class="at">main =</span> titl)</span>
+<span id="cb15-46"><a href="advanced-topics.html#cb15-46" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb15-47"><a href="advanced-topics.html#cb15-47" aria-hidden="true" tabindex="-1"></a>   })</span>
+<span id="cb15-48"><a href="advanced-topics.html#cb15-48" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="advanced-topics.html#cb761-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb761-2"><a href="advanced-topics.html#cb761-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI for application that draws a histogram</span></span>
-<span id="cb761-3"><a href="advanced-topics.html#cb761-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb761-4"><a href="advanced-topics.html#cb761-4" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb761-5"><a href="advanced-topics.html#cb761-5" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Application title</span></span>
-<span id="cb761-6"><a href="advanced-topics.html#cb761-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">titlePanel</span>(<span class="st">&quot;Interactive page for iris data&quot;</span>),</span>
-<span id="cb761-7"><a href="advanced-topics.html#cb761-7" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb761-8"><a href="advanced-topics.html#cb761-8" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Sidebar with a slider input for number of bins </span></span>
-<span id="cb761-9"><a href="advanced-topics.html#cb761-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">sidebarLayout</span>(</span>
-<span id="cb761-10"><a href="advanced-topics.html#cb761-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
-<span id="cb761-11"><a href="advanced-topics.html#cb761-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">selectInput</span>(<span class="st">&quot;cid&quot;</span>, <span class="st">&quot;Select the column&quot;</span>, <span class="at">choices =</span> ___________),</span>
-<span id="cb761-12"><a href="advanced-topics.html#cb761-12" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,</span>
-<span id="cb761-13"><a href="advanced-topics.html#cb761-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Number of bins:&quot;</span>,</span>
-<span id="cb761-14"><a href="advanced-topics.html#cb761-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">min =</span> <span class="dv">1</span>,</span>
-<span id="cb761-15"><a href="advanced-topics.html#cb761-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">max =</span> <span class="dv">50</span>,</span>
-<span id="cb761-16"><a href="advanced-topics.html#cb761-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">value =</span> <span class="dv">12</span>)</span>
-<span id="cb761-17"><a href="advanced-topics.html#cb761-17" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb761-18"><a href="advanced-topics.html#cb761-18" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb761-19"><a href="advanced-topics.html#cb761-19" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Show a plot of the generated distribution</span></span>
-<span id="cb761-20"><a href="advanced-topics.html#cb761-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mainPanel</span>(</span>
-<span id="cb761-21"><a href="advanced-topics.html#cb761-21" aria-hidden="true" tabindex="-1"></a>         <span class="fu">plotOutput</span>(<span class="st">&quot;Plot&quot;</span>)</span>
-<span id="cb761-22"><a href="advanced-topics.html#cb761-22" aria-hidden="true" tabindex="-1"></a>      ) </span>
-<span id="cb761-23"><a href="advanced-topics.html#cb761-23" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb761-24"><a href="advanced-topics.html#cb761-24" aria-hidden="true" tabindex="-1"></a> )</span>
-<span id="cb761-25"><a href="advanced-topics.html#cb761-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb761-26"><a href="advanced-topics.html#cb761-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server logic required to draw a histogram and pie plot</span></span>
-<span id="cb761-27"><a href="advanced-topics.html#cb761-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb761-28"><a href="advanced-topics.html#cb761-28" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb761-29"><a href="advanced-topics.html#cb761-29" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb761-30"><a href="advanced-topics.html#cb761-30" aria-hidden="true" tabindex="-1"></a>   output<span class="sc">$</span>Plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb761-31"><a href="advanced-topics.html#cb761-31" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb761-32"><a href="advanced-topics.html#cb761-32" aria-hidden="true" tabindex="-1"></a>      x    <span class="ot">&lt;-</span> iris[, input<span class="sc">$</span>cid]</span>
-<span id="cb761-33"><a href="advanced-topics.html#cb761-33" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb761-34"><a href="advanced-topics.html#cb761-34" aria-hidden="true" tabindex="-1"></a>      <span class="co"># draw the histogram with the specified number of bins for variable columns</span></span>
-<span id="cb761-35"><a href="advanced-topics.html#cb761-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">________</span> (input<span class="sc">$</span>cid <span class="sc">%in%</span> <span class="fu">colnames</span>(iris)[______]){</span>
-<span id="cb761-36"><a href="advanced-topics.html#cb761-36" aria-hidden="true" tabindex="-1"></a>      bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> input<span class="sc">$</span>bins <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb761-37"><a href="advanced-topics.html#cb761-37" aria-hidden="true" tabindex="-1"></a>      titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
-<span id="cb761-38"><a href="advanced-topics.html#cb761-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">border =</span> <span class="st">&#39;white&#39;</span>, <span class="at">main =</span> titl)</span>
-<span id="cb761-39"><a href="advanced-topics.html#cb761-39" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb761-40"><a href="advanced-topics.html#cb761-40" aria-hidden="true" tabindex="-1"></a>      <span class="co"># draw the pie plot for catogorical column Species</span></span>
-<span id="cb761-41"><a href="advanced-topics.html#cb761-41" aria-hidden="true" tabindex="-1"></a>        __________</span>
-<span id="cb761-42"><a href="advanced-topics.html#cb761-42" aria-hidden="true" tabindex="-1"></a>        count <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
-<span id="cb761-43"><a href="advanced-topics.html#cb761-43" aria-hidden="true" tabindex="-1"></a>        labl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">names</span>(count), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, count, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb761-44"><a href="advanced-topics.html#cb761-44" aria-hidden="true" tabindex="-1"></a>        titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Pie plot of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
-<span id="cb761-45"><a href="advanced-topics.html#cb761-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pie</span>(count, <span class="at">labels =</span> labl, <span class="at">main =</span> titl)</span>
-<span id="cb761-46"><a href="advanced-topics.html#cb761-46" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb761-47"><a href="advanced-topics.html#cb761-47" aria-hidden="true" tabindex="-1"></a>   })</span>
-<span id="cb761-48"><a href="advanced-topics.html#cb761-48" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-<div id="pubish-your-app" class="section level3" number="7.4.4">
-<h3><span class="header-section-number">7.4.4</span> Pubish your app</h3>
+<div id="publish-your-app" class="section level3" number="7.4.4">
+<h3><span class="header-section-number">7.4.4</span> Publish your app</h3>
 <p>You can publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. If this is the first time you publish a shiny app, here are the steps.</p>
 <p>Step 1: Click on “Publish” button at the top-right of the window. Then click on “ShinyApps.io” in the Connect Account window as shown in the Figure <a href="advanced-topics.html#fig:label30">7.9</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label30"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label30"></span>
 <img src="images/Ch7_Adv_top_30.png" alt="Connect Account." width="80%" />
 <p class="caption">
 Figure 7.9: Connect Account.
@@ -619,7 +609,7 @@ Figure 7.9: Connect Account.
 </div>
 <p>Step 2: Click “your account on ShinyApps” in the <strong>Connect ShinyApps.io Account</strong> window as shown in Figure <a href="advanced-topics.html#fig:label31">7.10</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label31"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label31"></span>
 <img src="images/Ch7_Adv_top_31.png" alt="Connect ShinyApps.io Account" width="80%" />
 <p class="caption">
 Figure 7.10: Connect ShinyApps.io Account
@@ -627,7 +617,7 @@ Figure 7.10: Connect ShinyApps.io Account
 </div>
 <p>Step 3: Click “Sign Up” in the new <strong>Shinyapps.io by RStudio</strong> window.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label32"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label32"></span>
 <img src="images/Ch7_Adv_top_32.png" alt="Sign up" width="80%" />
 <p class="caption">
 Figure 7.11: Sign up
@@ -635,32 +625,32 @@ Figure 7.11: Sign up
 </div>
 <p>Step 4: Type your email, password and confirm password in the window as shown in <a href="advanced-topics.html#fig:label33">7.12</a>, then click “Sign Up.”</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label33"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label33"></span>
 <img src="images/Ch7_Adv_top_33.png" alt="Registration" width="80%" />
 <p class="caption">
 Figure 7.12: Registration
 </p>
 </div>
-<p>Step 5: In the <strong>Account Setup</strong> window Figure <a href="advanced-topics.html#fig:label34">7.13</a>, type an account name that you would like to use, then click on “Save.” Everyone will have a unique accout name. For example, if you type “MyFirstShiny,” then the border of the box turn to red which is a reminder that the name is occupied. You need to pick up another name. I picked up my account name “stat415or515.”</p>
+<p>Step 5: In the <strong>Account Setup</strong> window Figure <a href="advanced-topics.html#fig:label34">7.13</a>, type an account name that you would like to use, then click on “Save.” Everyone will have a unique account name. For example, if you type “MyFirstShiny,” then the border of the box turn to red which is a reminder that the name is occupied. You need to pick up another name. I picked up my account name “stat415or515.”</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label34"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label34"></span>
 <img src="images/Ch7_Adv_top_34.png" alt="Account Setup" width="80%" />
 <p class="caption">
 Figure 7.13: Account Setup
 </p>
 </div>
 <p>Step 6: A new window will show up and show you how to finish the next steps. Firstly, install the package <strong>rsconnect</strong>. Then click the “Copy to clipboard” button in Figure <a href="advanced-topics.html#fig:label36">7.14</a>, and paste it into your console to authorize your account. Finally, replace the path in Figure <a href="advanced-topics.html#fig:label37">7.15</a> with the path where your Shiny app is saved. Note, the slash is <strong>forward</strong> not backward in the path. For example, I have a Shiny app named <em>IrisData.R</em> which is saved at ‘C:/Users/Documents/FirstShiny/,’ then I run the following code to publish my app.</p>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="advanced-topics.html#cb762-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsconnect)</span>
-<span id="cb762-2"><a href="advanced-topics.html#cb762-2" aria-hidden="true" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>(<span class="st">&#39;C:/Users/Documents/FirstShiny/IrisData&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="advanced-topics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsconnect)</span>
+<span id="cb16-2"><a href="advanced-topics.html#cb16-2" aria-hidden="true" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>(<span class="st">&#39;C:/Users/Documents/FirstShiny/IrisData&#39;</span>)</span></code></pre></div>
 
-<div class="figure" style="text-align: center"><span id="fig:label36"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label36"></span>
 <img src="images/Ch7_Adv_top_36.png" alt="Authorization" width="80%" />
 <p class="caption">
 Figure 7.14: Authorization
 </p>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:label37"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label37"></span>
 <img src="images/Ch7_Adv_top_37.png" alt="Change the path to your app" width="80%" />
 <p class="caption">
 Figure 7.15: Change the path to your app
@@ -668,7 +658,7 @@ Figure 7.15: Change the path to your app
 </div>
 <p>Step 7: You can find the link at the bottom of Figure <a href="advanced-topics.html#fig:label38">7.16</a>. The link for my iris data is <a href="https://stat415or515.shinyapps.io/IrisData/">https://stat415or515.shinyapps.io/IrisData/</a>.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:label38"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:label38"></span>
 <img src="images/Ch7_Adv_top_38.png" alt="Generating the link" width="80%" />
 <p class="caption">
 Figure 7.16: Generating the link
@@ -684,35 +674,35 @@ Figure 7.16: Generating the link
 <p>We can also easily define our own functions. For example, we have the following arithmetic function:</p>
 <p><span class="math display">\[f(x)=1.5 x^3+ x^2-2x+1\]</span></p>
 <p>Obviously, we can use the following code to do the computing:</p>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="advanced-topics.html#cb763-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb763-2"><a href="advanced-topics.html#cb763-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.57345</span> <span class="sc">*</span> x <span class="sc">^</span> <span class="dv">3</span> <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="advanced-topics.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb17-2"><a href="advanced-topics.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.57345</span> <span class="sc">*</span> x <span class="sc">^</span> <span class="dv">3</span> <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:</p>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="advanced-topics.html#cb765-1" aria-hidden="true" tabindex="-1"></a>myf <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {                           <span class="co">#Name of my function is myf</span></span>
-<span id="cb765-2"><a href="advanced-topics.html#cb765-2" aria-hidden="true" tabindex="-1"></a>       y <span class="ot">=</span> <span class="fl">1.57345</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span>     <span class="co">#Expression of the function</span></span>
-<span id="cb765-3"><a href="advanced-topics.html#cb765-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">return</span>(y)                               <span class="co">#Return vaules of the function</span></span>
-<span id="cb765-4"><a href="advanced-topics.html#cb765-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="advanced-topics.html#cb19-1" aria-hidden="true" tabindex="-1"></a>myf <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {                           <span class="co">#Name of my function is myf</span></span>
+<span id="cb19-2"><a href="advanced-topics.html#cb19-2" aria-hidden="true" tabindex="-1"></a>       y <span class="ot">=</span> <span class="fl">1.57345</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span>     <span class="co">#Expression of the function</span></span>
+<span id="cb19-3"><a href="advanced-topics.html#cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">return</span>(y)                               <span class="co">#Return vaules of the function</span></span>
+<span id="cb19-4"><a href="advanced-topics.html#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Note that “{” and “}” signify the beginning and end of a block of code. <strong>“function”</strong> tells R that a function is going to be defined. At the end, the <strong>“return”</strong> statement returns the desired values.</p>
 <p>You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:</p>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb766-1"><a href="advanced-topics.html#cb766-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value given x=5.</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="advanced-topics.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value given x=5.</span></span></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>or</p>
-<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="advanced-topics.html#cb768-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myf</span>(<span class="at">x =</span> <span class="dv">5</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="advanced-topics.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">myf</span>(<span class="at">x =</span> <span class="dv">5</span>) </span></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>The funtion applies to a vector as well. For example:</p>
-<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="advanced-topics.html#cb770-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">:</span> <span class="dv">10</span>  <span class="co"># x is a vector with integer values from -10 to 10.</span></span>
-<span id="cb770-2"><a href="advanced-topics.html#cb770-2" aria-hidden="true" tabindex="-1"></a><span class="fu">myf</span>(x)          <span class="co"># Apply the function myf() to x.</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="advanced-topics.html#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">:</span> <span class="dv">10</span>  <span class="co"># x is a vector with integer values from -10 to 10.</span></span>
+<span id="cb24-2"><a href="advanced-topics.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">myf</span>(x)          <span class="co"># Apply the function myf() to x.</span></span></code></pre></div>
 <pre><code>##  [1] -1452.45000 -1047.04505  -724.60640  -475.69335  -290.86520  -160.68125
 ##  [7]   -75.70080   -26.48315    -3.58760     2.42655     1.00000     1.57345
 ## [13]    13.58760    46.48315   109.70080   212.68125   364.86520   575.69335
 ## [19]   854.60640  1211.04505  1654.45000</code></pre>
-<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="advanced-topics.html#cb772-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">myf</span>(x)) <span class="co"># Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.</span></span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-461-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="advanced-topics.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">myf</span>(x)) <span class="co"># Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.</span></span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too.</p>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-462" class="exercise"><strong>Exercise 7.5  </strong></span></p>
+<p><span id="exr:unnamed-chunk-43" class="exercise"><strong>Exercise 7.5  </strong></span></p>
 <p>Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Write an R function to implement this arithmetic function.<br />
@@ -724,19 +714,19 @@ Figure 7.16: Generating the link
 </ol>
 </blockquote>
 <p>Let’s define a function to count even numbers in a vector.</p>
-<div class="sourceCode" id="cb773"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb773-1"><a href="advanced-topics.html#cb773-1" aria-hidden="true" tabindex="-1"></a><span class="co">#counts the number of even intergers in vec</span></span>
-<span id="cb773-2"><a href="advanced-topics.html#cb773-2" aria-hidden="true" tabindex="-1"></a>evencount <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
-<span id="cb773-3"><a href="advanced-topics.html#cb773-3" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">0</span>                      <span class="co"># assign 0 to a count varialbe k</span></span>
-<span id="cb773-4"><a href="advanced-topics.html#cb773-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Find all elements (represented by i) in vec. </span></span>
-<span id="cb773-5"><a href="advanced-topics.html#cb773-5" aria-hidden="true" tabindex="-1"></a>                              <span class="co"># Values of i are actually vec[1],vec[2],...</span></span>
-<span id="cb773-6"><a href="advanced-topics.html#cb773-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>) </span>
-<span id="cb773-7"><a href="advanced-topics.html#cb773-7" aria-hidden="true" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k <span class="sc">+</span> <span class="dv">1</span>              <span class="co"># test if i is an even or odd number. </span></span>
-<span id="cb773-8"><a href="advanced-topics.html#cb773-8" aria-hidden="true" tabindex="-1"></a>                              <span class="co"># %% is the modulo operator.</span></span>
-<span id="cb773-9"><a href="advanced-topics.html#cb773-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb773-10"><a href="advanced-topics.html#cb773-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(k)                   <span class="co">#Return the count of even numbers in vec.</span></span>
-<span id="cb773-11"><a href="advanced-topics.html#cb773-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="advanced-topics.html#cb774-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector. </span></span>
-<span id="cb774-2"><a href="advanced-topics.html#cb774-2" aria-hidden="true" tabindex="-1"></a><span class="fu">evencount</span>(x) <span class="co"># Call the function evencount(). Replace vec with defined vector x.</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="advanced-topics.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#counts the number of even intergers in vec</span></span>
+<span id="cb27-2"><a href="advanced-topics.html#cb27-2" aria-hidden="true" tabindex="-1"></a>evencount <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
+<span id="cb27-3"><a href="advanced-topics.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">0</span>                      <span class="co"># assign 0 to a count varialbe k</span></span>
+<span id="cb27-4"><a href="advanced-topics.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Find all elements (represented by i) in vec. </span></span>
+<span id="cb27-5"><a href="advanced-topics.html#cb27-5" aria-hidden="true" tabindex="-1"></a>                              <span class="co"># Values of i are actually vec[1],vec[2],...</span></span>
+<span id="cb27-6"><a href="advanced-topics.html#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>) </span>
+<span id="cb27-7"><a href="advanced-topics.html#cb27-7" aria-hidden="true" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k <span class="sc">+</span> <span class="dv">1</span>              <span class="co"># test if i is an even or odd number. </span></span>
+<span id="cb27-8"><a href="advanced-topics.html#cb27-8" aria-hidden="true" tabindex="-1"></a>                              <span class="co"># %% is the modulo operator.</span></span>
+<span id="cb27-9"><a href="advanced-topics.html#cb27-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-10"><a href="advanced-topics.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(k)                   <span class="co">#Return the count of even numbers in vec.</span></span>
+<span id="cb27-11"><a href="advanced-topics.html#cb27-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="advanced-topics.html#cb28-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector. </span></span>
+<span id="cb28-2"><a href="advanced-topics.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">evencount</span>(x) <span class="co"># Call the function evencount(). Replace vec with defined vector x.</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>A variable is called local variable if it is only visible within a function. Such as <em>k</em> and <em>vec</em> are local variables to the function <strong>evencount()</strong>. They disappear after the function returns.</p>
 <p>k</p>
@@ -744,30 +734,30 @@ Figure 7.16: Generating the link
 <p>vec</p>
 <p>Error: object ‘vec’ not found</p>
 <p>A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:</p>
-<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="advanced-topics.html#cb776-1" aria-hidden="true" tabindex="-1"></a>myfun.globle <span class="ot">&lt;-</span> <span class="cf">function</span> (x){</span>
-<span id="cb776-2"><a href="advanced-topics.html#cb776-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb776-3"><a href="advanced-topics.html#cb776-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
-<span id="cb776-4"><a href="advanced-topics.html#cb776-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb776-5"><a href="advanced-topics.html#cb776-5" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># set x=8, and do the calculation: 8-2*y = 8-2*(1)=6</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="advanced-topics.html#cb30-1" aria-hidden="true" tabindex="-1"></a>myfun.globle <span class="ot">&lt;-</span> <span class="cf">function</span> (x){</span>
+<span id="cb30-2"><a href="advanced-topics.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb30-3"><a href="advanced-topics.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
+<span id="cb30-4"><a href="advanced-topics.html#cb30-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-5"><a href="advanced-topics.html#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># set x=8, and do the calculation: 8-2*y = 8-2*(1)=6</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>Here y is a global variable.</p>
 <p>The function <em>myfun.globle2()</em> defined below returns the same value as above. But both x and y within the paratheses <em>(x, y=1)</em> in following <em>function</em>() are local variables.</p>
-<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="advanced-topics.html#cb778-1" aria-hidden="true" tabindex="-1"></a>myfun.globle2 <span class="ot">&lt;-</span> <span class="cf">function</span> (x, <span class="at">y =</span> <span class="dv">1</span>){ <span class="co">#y is set as 1 within the function by default.</span></span>
-<span id="cb778-2"><a href="advanced-topics.html#cb778-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
-<span id="cb778-3"><a href="advanced-topics.html#cb778-3" aria-hidden="true" tabindex="-1"></a> }</span>
-<span id="cb778-4"><a href="advanced-topics.html#cb778-4" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co">#8-2*y = 8-2*(1)=6</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="advanced-topics.html#cb32-1" aria-hidden="true" tabindex="-1"></a>myfun.globle2 <span class="ot">&lt;-</span> <span class="cf">function</span> (x, <span class="at">y =</span> <span class="dv">1</span>){ <span class="co">#y is set as 1 within the function by default.</span></span>
+<span id="cb32-2"><a href="advanced-topics.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
+<span id="cb32-3"><a href="advanced-topics.html#cb32-3" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb32-4"><a href="advanced-topics.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co">#8-2*y = 8-2*(1)=6</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-467" class="exercise"><strong>Exercise 7.6  </strong></span></p>
+<p><span id="exr:unnamed-chunk-48" class="exercise"><strong>Exercise 7.6  </strong></span></p>
 Define a function which returns the count of all odd numbers in the vector x &lt;- 1:99.
 </div>
 </blockquote>
 <blockquote>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-468" class="exercise"><strong>Exercise 7.7  </strong></span></p>
+<p><span id="exr:unnamed-chunk-49" class="exercise"><strong>Exercise 7.7  </strong></span></p>
 Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
 </div>
 </blockquote>
@@ -784,7 +774,6 @@ Define a function counting the values that are less than 0 for two vectors x=rno
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -824,6 +813,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
