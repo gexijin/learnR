@@ -12,11 +12,23 @@ Learning objectives:
 
 
 
-We start with base R graphics. The first import distinction should be made about
-high- and low-level graphics functions in base R. See this table below.
+We start with base R graphics. The first important distinction should be made about
+high- and low-level graphics functions in base R. See Table \@ref(tab:highlevel)).
 High-level graphics functions initiate new plots, to which new elements could be
 added using the low-level functions.
   
+Function   |  Memo
+  -----------|---------------------------------------------
+  plot       | Generic plotting function
+  boxplot	   | boxplot. Can be applied to multiple columns of a matrix, or use equations boxplot( y ~ x)
+  hist	     | histogram
+  qqnorm	   | Quantile-quantile (Q-Q) plot to check for normality
+curve	       | Graph an arithmetic function
+barplot	     | Barplot
+mosaicplot	 | Using mosaics to represent the frequencies of tabulated counts.
+heatmap	     | Using colors to visualize a matrix of numeric values.
+
+
 
   
   Function   |  Memo
@@ -76,11 +88,15 @@ plot(PL, PW)
   
 Let's change the marker type. 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = 2) # change to triangle
+plot(PL, PW, pch = 2) # pch = 2 means the marker is triangle
 ```
 
 
-The **pch** parameter can take values from 0 to 25, each corresponding to different types of marker. See a list [here.](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r)
+The **pch** parameter can take values from 0 to 25, each corresponding to a different type of symbol. The commonly used values and points symbols are shown in Figure \@ref(fig:pchsymbols).
+  
+```{r pchsymbols, echo=FALSE, out.width='100%', fig.cap='Points Symbols', fig.align='center'}
+knitr::include_graphics("images/ch2_1_pch_symbols.png")
+```
 
 There are many other parameters to the **plot** function in R. You can get these 
 from the documentation
@@ -91,26 +107,30 @@ from the documentation
 
 We can also change the color of the data points easily with the **col** parameter.
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = 2, col = "green") # change to green
+plot(PL, PW, pch = 2, col = "green") # change the symbol color to green
 ```
 
-Next, we want to use different markers according to species. First, lets get the information. 
+Next, we can use different symbols for different species. Firstly, let's get the species information. 
+```{r, fig.align='center', out.width='80%'}
+# Show the information of Species
+(iris$Species)
+```
+This output shows that the 150 observations are classed into three species *setosa*, *versicolor*, and *virginica*. We can assign different numbers to different species by using the *as.numeric()* function.  
 ```{r, fig.align='center', out.width='80%'}
 speciesID <- as.numeric(iris$Species)
 speciesID
 ```
-This is possible because Species is a **factor** with 3 predefined levels and the individual elements take 1, 2 or 3. Now we can change the symbols based on species with this:
-
+The new defined variable *speciesID* shows that numbers 1, 2, and 3 are assigned to represent the three species. Now we can assign different symbols to different species by setting *pch = speciesID*.
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = speciesID, col = "green") 
 ```
 What happens here is that the 150 integers stored in the types vector are used
-to alter symbols. The first 50 data points (setosa) are represented by open
-circles. The next 50 (versicolor) are represented by triangles, while the last
-50 in crosses.
+to alter symbols. The first 50 data points (*setosa*) are represented by open
+circles. The next 50 (*versicolor*) are represented by triangles, while the last
+50 (*virginica*) are in crosses.
 
 Follow the same thinking, we also change the color according to species. We
-generate 3 colors with rainbow() function and then alternate using the species.
+generate three colors with rainbow() function and then alternate using the species.
 
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = speciesID, col = rainbow(3)[speciesID])
@@ -140,7 +160,7 @@ It is essential to write your code so that it could be easily understood by othe
 [detailed](https://style.tidyverse.org/) style guides.  This is like checking the 
 dressing code before going to an event. 
 
-A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add a trend line using **abline**, a low level graphics function.  
+A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add a trend line using **abline()**, a low level graphics function.  
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, 
      pch = speciesID,
@@ -170,33 +190,30 @@ The **text** function is used to place strings created with the *paste* function
 PL <- iris$Petal.Length
 PW <- iris$Petal.Width
 plot(PL, PW,  
-     pch = speciesID,                # marker type
-     col = rainbow(3)[speciesID],    # color
-     xlab = "Petal length (cm)",
-     ylab = "Petal width (cm)",
-     main = "Petal width vs. length")
-abline( lm(PW ~ PL) )  # regression line
-text(5, 0.5, paste("R=", PCC) )  # add text annotation
-legend("topleft", 
-       levels(iris$Species), 
-       pch = 1:3, 
-       col = rainbow(3))
+     pch = speciesID, # assign different symbols to different species 
+     col = rainbow(3)[speciesID], # assign different colors to different species
+     xlab = "Petal length (cm)", # label x-axis
+     ylab = "Petal width (cm)", # label y-axis
+     main = "Petal width vs. length") # add a title to the plot
+abline( lm(PW ~ PL))  # add a regression line to the plot
+text(5, 0.5, paste("R=", PCC)) # add text annotation. 
+                        # PCC is the Pearson's correlation coefficient calculated above
+legend("topleft", # specify the location of the legend
+       levels(iris$Species), # specify the levels of species
+       pch = 1:3, # specify three symbols used for the three species
+       col = rainbow(3)) # specify three colors for the three species
 ```
 
-While **plot** is a high-level graphics function that starts a new plot, **abline**, **text**, and **legend** are all low-level functions that add to existing plot. This chunk of code is impressive! You should be proud of yourself if you are able to generate this plot. We know that we build it up step-by-step with some trial-and-error. 
+While **plot** is a high-level graphics function that starts a new plot, **abline**, **text**, and **legend** are all low-level functions that can be added to existing plot. This chunk of code is impressive! You should be proud of yourself if you are able to generate this plot. 
+We know that we build it up step-by-step with some trial-and-error. 
 
-
-
-Another open secret of coding is that we frequently steal each other's ideas and
-code. The textbook *R Graphics Cookbook* includes all kinds of R plots and
-example code. Some are online: <http://www.cookbook-r.com/Graphs/>. There are
-also websites lists all sorts of R graphics and example codes that you can use.
-<http://www.r-graph-gallery.com/> contains more than 200 such examples. Another
-one is here: <http://bxhorn.com/r-graphics-gallery/>. If you know what types of
-graphs you want, it is very easy to start with the template code and swap out
-the dataset.
-
-
+Another open secret of coding is that we frequently steal others ideas and
+code. The book [R Graphics Cookbook](https://r-graphics.org/) includes all kinds of R plots and
+example code. Some websites list all sorts of R graphics and example codes that you can use. For example, this [website:](http://www.r-graph-gallery.com/) <http://www.r-graph-gallery.com/> contains 
+more than 200 such examples. Another
+one is available [here:](http://bxhorn.com/r-graphics-gallery/): <http://bxhorn.com/r-graphics-gallery/>. 
+If you know what types of graphs you want, it is very easy to start with the 
+template code and swap out the dataset.
 
 
 ## Scatter plots matrix
