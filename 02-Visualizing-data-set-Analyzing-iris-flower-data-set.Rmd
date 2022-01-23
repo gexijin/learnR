@@ -86,13 +86,13 @@ PW <- iris$Petal.Width
 plot(PL, PW)
 ```
   
-Let's change the marker type. 
+Let's change the type of symbols. 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = 2) # pch = 2 means the marker is triangle
+plot(PL, PW, pch = 2) # pch = 2 means the symbol is triangle
 ```
 
 
-The **pch** parameter can take values from 0 to 25, each corresponding to a different type of symbol. The commonly used values and points symbols are shown in Figure \@ref(fig:pchsymbols).
+The **pch** parameter can take values from 0 to 25. Each value corresponds to a different type of symbol. The commonly used values and point symbols are shown in Figure \@ref(fig:pchsymbols).
   
 ```{r pchsymbols, echo=FALSE, out.width='100%', fig.cap='Points Symbols', fig.align='center'}
 knitr::include_graphics("images/ch2_1_pch_symbols.png")
@@ -105,7 +105,7 @@ from the documentation
 ```
 
 
-We can also change the color of the data points easily with the **col** parameter.
+We can also change the color of the data points easily with the **col = ** parameter.
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = 2, col = "green") # change the symbol color to green
 ```
@@ -115,39 +115,68 @@ Next, we can use different symbols for different species. Firstly, let's get the
 # Show the information of Species
 (iris$Species)
 ```
-This output shows that the 150 observations are classed into three species *setosa*, *versicolor*, and *virginica*. We can assign different numbers to different species by using the *as.numeric()* function.  
+This output shows that the 150 observations are classed into three species *setosa*, *versicolor*, and *virginica*. We can assign different values to different species by using the *as.numeric()* function.  
 ```{r, fig.align='center', out.width='80%'}
 speciesID <- as.numeric(iris$Species)
 speciesID
+class(speciesID)
 ```
-The new defined variable *speciesID* shows that numbers 1, 2, and 3 are assigned to represent the three species. Now we can assign different symbols to different species by setting *pch = speciesID*.
+The new defined variable *speciesID* shows that numbers 1, 2, and 3 are assigned 
+to three species *setosa*, *versicolor*, and *virginica* respectively. 
+We can assign different symbols to different species by letting *pch = speciesID*.
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = speciesID, col = "green") 
+plot(PL, PW, pch = speciesID, col = "green")
 ```
 What happens here is that the 150 integers stored in the types vector are used
 to alter symbols. The first 50 data points (*setosa*) are represented by open
-circles. The next 50 (*versicolor*) are represented by triangles, while the last
-50 (*virginica*) are in crosses.
+circles (pch = 1). The next 50 (*versicolor*) are represented by triangles (pch = 2), while the last
+50 (*virginica*) are in crosses (pch = 3).
 
-Follow the same thinking, we also change the color according to species. We
-generate three colors with rainbow() function and then alternate using the species.
-
+To set three different colors for three species, we let the option *col = rainbow(3)[iris$Species]*, 
+where the 3 is the number of species, *iris$Species* stores the species information for all 150 observations. 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = speciesID, col = rainbow(3)[speciesID])
+# class(iris$Species) returns a "factor"
+class(iris$Species)
+# assign 3 colors red, green, and blue to 3 species *setosa*, *versicolor*,
+# and *virginica* respectively
+plot(PL, PW, pch = speciesID, col = rainbow(3)[iris$Species])
+```
+The *class(iris$Species)* returns a "factor". This implies that the data structure 
+within the [] should be a factor. If the variable that we used to differentiate 
+colors is not a factor, we can use *as.factor()* function to convert it to a factor. 
+For example, the type of variable *cyl* in the data set *mtcars* is numeric.
+We can convert it to a factor by using *as.factor(mtcars$cyl)*.
+```{r}
+class(mtcars$cyl) # check the type of mtcars$cyl
+class(as.factor(mtcars$cyl)) # check the type of as.factor(mtcars$cyl)
 ```
 
+The *class(as.factor(mtcars$cyl))* returns a factor. This means that we
+can set colors based on the types of *cyl*. 
+```{r, fig.align='center', out.width='80%'}
+# variables contained in the dataset *mtcars*
+colnames(mtcars)
+# convert (mtcars$cyl) into a factor and check with *class()* or *str()*
+str(as.factor(mtcars$cyl))
+# assign 3 colors red, green, and blue to 3 types *4*, *6*, and *8* respectively
+plot(mtcars$mpg, mtcars$disp, pch = mtcars$cyl, col = rainbow(3)[as.factor(mtcars$cyl)])
+```
+
+
+
 This figure starts to looks nice, as the three species are easily separated by
-color and shape. But we are not done. Let us change the x- and y-labels, and also
+color and shape. But we are not done. Let's change the x- and y-labels, and
 add a main title. 
 
 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW,                               #x and y
-     pch = speciesID,                      #marker type
-     col = rainbow(3)[speciesID],          # color
-     xlab = "Petal length (cm)",           # x label
-     ylab = "Petal width (cm)",            # y label
-     main = "Petal width vs. length")      # main title
+plot(PL, PW, # x and y
+  pch = speciesID, # symbol type
+  col = rainbow(3)[speciesID], # color
+  xlab = "Petal length (cm)", # x label
+  ylab = "Petal width (cm)", # y label
+  main = "Petal width vs. length"
+) # main title
 ```
 Note that this command spans many lines. Very long lines make it hard to read.
 The benefit of multiple lines is that we can clearly see each line contain a parameter.
@@ -162,13 +191,14 @@ dressing code before going to an event.
 
 A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add a trend line using **abline()**, a low level graphics function.  
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, 
-     pch = speciesID,
-     col = rainbow(3)[speciesID],
-     xlab = "Petal length (cm)",
-     ylab = "Petal width (cm)",
-     main = "Petal width vs. length")
-abline( lm(PW ~ PL) ) # the order is reversed as we need y ~ x.
+plot(PL, PW,
+  pch = speciesID,
+  col = rainbow(3)[speciesID],
+  xlab = "Petal length (cm)",
+  ylab = "Petal width (cm)",
+  main = "Petal width vs. length"
+)
+abline(lm(PW ~ PL)) # the order is reversed as we need y ~ x.
 ```
 The ```lm(PW ~ PL)``` generates a linear model (lm) of petal width as a function petal 
 length. y ~ x is **formula notation** that used in many different situations.
@@ -177,7 +207,7 @@ This linear regression model is used to plot the trend line.
 
 We calculate the Pearson's correlation coefficient and mark it to the plot. 
 ```{r, fig.show=FALSE}
-PCC <- cor(PW, PL)  # Pearson's correlation coefficient
+PCC <- cor(PW, PL) # Pearson's correlation coefficient
 PCC <- round(PCC, 2) # round to the 2nd place after decimal point.
 PCC
 ```
@@ -189,19 +219,21 @@ The **text** function is used to place strings created with the *paste* function
 ```{r 23-5, fig.cap='(ref:23-5)', fig.align='center', out.width='80%'}
 PL <- iris$Petal.Length
 PW <- iris$Petal.Width
-plot(PL, PW,  
-     pch = speciesID, # assign different symbols to different species 
-     col = rainbow(3)[speciesID], # assign different colors to different species
-     xlab = "Petal length (cm)", # label x-axis
-     ylab = "Petal width (cm)", # label y-axis
-     main = "Petal width vs. length") # add a title to the plot
-abline( lm(PW ~ PL))  # add a regression line to the plot
-text(5, 0.5, paste("R=", PCC)) # add text annotation. 
-                        # PCC is the Pearson's correlation coefficient calculated above
+plot(PL, PW,
+  pch = speciesID, # assign different symbols to different species
+  col = rainbow(3)[speciesID], # assign different colors to different species
+  xlab = "Petal length (cm)", # label x-axis
+  ylab = "Petal width (cm)", # label y-axis
+  main = "Petal width vs. length"
+) # add a title to the plot
+abline(lm(PW ~ PL)) # add a regression line to the plot
+text(5, 0.5, paste("R=", PCC)) # add text annotation.
+# PCC is the Pearson's correlation coefficient calculated above
 legend("topleft", # specify the location of the legend
-       levels(iris$Species), # specify the levels of species
-       pch = 1:3, # specify three symbols used for the three species
-       col = rainbow(3)) # specify three colors for the three species
+  levels(iris$Species), # specify the levels of species
+  pch = 1:3, # specify three symbols used for the three species
+  col = rainbow(3)
+) # specify three colors for the three species
 ```
 
 While **plot** is a high-level graphics function that starts a new plot, **abline**, **text**, and **legend** are all low-level functions that can be added to existing plot. This chunk of code is impressive! You should be proud of yourself if you are able to generate this plot. 
@@ -216,42 +248,51 @@ If you know what types of graphs you want, it is very easy to start with the
 template code and swap out the dataset.
 
 
-## Scatter plots matrix
+## Scatter plot matrix
 
 While data frames can have a mixture of numbers and characters in different
 columns, a **matrix often only contains numbers**. Let's extract the first 4
 columns from the data frame iris and convert to a matrix:
 
 ```{r}
-ma <- as.matrix(iris[, 1:4])  # convert to matrix
-colMeans(ma)  # column means for matrix
+ma <- as.matrix(iris[, 1:4]) # convert to matrix
+colMeans(ma) # column means for matrix
 colSums(ma)
 ```
-The same thing can be done with rows via **rowMeans(x)** and **rowSums(x)**. 
+The same thing can be done with rows via *rowMeans(x)* and *rowSums(x)*. 
 
-We can generate a matrix of scatter plots simply by:
+We can generate a matrix of scatter plot by *pairs()* function.
 ```{r fig.keep="none"}
-pairs(ma) 
+pairs(ma)
 ```
 
-```{r fig.cap='Scatter plot matrix.', fig.align='center'}
-pairs(ma, col = rainbow(3)[iris$Species])  # Figure 2.4
+(ref:spm2-2) Scatter plot matrix
+
+```{r spm2-2, message=FALSE, out.width='100%', fig.cap='(ref:spm2-2)', fig.align='center'}
+pairs(ma, col = rainbow(3)[iris$Species]) # set colors by species
 ```
 
 >
 ```{exercise}
 
 >
-Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots. 
+Interpret the scatter plot matrix of Figure \@ref(fig:spm2-2) . 
+```
+>
+\ \
+>
+```{exercise}
+
+>
+Plot a scatter plot matrix for dataset **mtcars**. Set different point symbols and colors based on the types of *cyl*. 
 ```
 
-
 ## Star and segment diagrams
-**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was first used by Georg von Mayr in 1877!
+**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was firstly used by Georg von Mayr in 1877!
 ```{r fig.keep='none'}
 df <- iris[, 1:4]
-stars(df)         # do I see any diamonds?
-stars(df, key.loc = c(17,0))    # What does this tell you?
+stars(df) # do I see any diamonds?
+stars(df, key.loc = c(17, 0)) # What does this tell you?
 ```
 
 >
@@ -264,7 +305,7 @@ Based on the star plot, what is your overall impression regarding the difference
 
 The stars() function can also be used to generate segment diagrams, where each variable is used to generate colorful segments. The sizes of the segments are proportional to the measurements. 
 ```{r fig.keep='none'}
-stars(df, key.loc = c(20,0.5), draw.segments = TRUE )    
+stars(df, key.loc = c(20, 0.5), draw.segments = TRUE)
 ```
 
 (ref:12-4) Star plots and segments diagrams.
@@ -277,7 +318,7 @@ knitr::include_graphics("images/img1204n_starsegment.png")
 ```{exercise}
 
 >
-Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 <- as.data.frame(state.x77), then attach df.state.x77.
+Produce the segments diagram of the state data (state.x77) and offer some interpretation of South Dakota compared with other states. Hints: Convert the matrix to a data frame using *df.state.x77 <- as.data.frame(state.x77)*, then plot the segments diagram based on the dataset *df.state.x77*.
 ```
 
 
@@ -293,13 +334,13 @@ Graphics (hence the "gg"), a modular approach that builds complex graphics by
 adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
 
 
-The ggplot2 functions is not included in the base distribution of R. These are  available as an additional **package**, on the CRAN [website](https://cran.r-project.org/web/packages/ggplot2/index.html).
+The ggplot2 functions is not included in the base distribution of R. These are  available as an additional package, on the CRAN [website](https://cran.r-project.org/web/packages/ggplot2/index.html).
 They need to be downloaded and installed. One of the main advantages of R is that it
 is open, and users can contribute their code as packages. If you are using
 **Rstudio**, you can choose **Tools-\>Install packages** from the main menu, and
 then enter the name of the package. If you are using R software, you can install
 additional packages, by clicking **Packages** in the main menu, and select a
-mirror site. These mirror sites all work the same, but some may be faster. After
+mirror site. All these mirror sites work the same, but some may be faster. After
 choosing a mirror and clicking "OK", you can scroll down the long list to find
 your package. Alternatively, you can type this command to install packages.
 
@@ -318,11 +359,11 @@ Detailed tutorials on ggplot2 can be find [here](https://uc-r.github.io/ggplot_i
 
 ```{r eval=FALSE}
 # Install the package. You can also do it through the Packages Tab
-install.packages ("ggplot2")  
+install.packages("ggplot2")
 ```
 Packages only need to be installed once. But every time you need to use the **functions or data** in a package, you have to **load** it from your hard drive into memory. 
 ```{r message=FALSE, warning=FALSE}
-library(ggplot2)  # load the ggplot2 package
+library(ggplot2) # load the ggplot2 package
 ```
 
 
@@ -330,35 +371,36 @@ library(ggplot2)  # load the ggplot2 package
 (ref:2-6) Basic scatter plot using the ggplot2 package.
 
 ```{r 2-6, fig.cap='(ref:2-6)',fig.align='center', out.width='100%', message=FALSE}
+library(ggplot2)
 # define a canvas
 ggplot(data = iris)
 
-# map data to x and y coordinates 
-ggplot(data = iris ) + 
-  aes(x = Petal.Length, y = Petal.Width)  
+# map data to x and y coordinates
+ggplot(data = iris) +
+  aes(x = Petal.Length, y = Petal.Width)
 
 # add data points
 ggplot(data = iris) +
-  aes(x = Petal.Length, y = Petal.Width) + 
+  aes(x = Petal.Length, y = Petal.Width) +
   geom_point()
 
-# change color & marker type
+# change color & symbol type
 ggplot(data = iris) +
-  aes(x = Petal.Length, y = Petal.Width) + 
-  geom_point( aes(color = Species, shape = Species) ) 
+  aes(x = Petal.Length, y = Petal.Width) +
+  geom_point(aes(color = Species, shape = Species))
 
-# adds trend line
+# add trend line
 ggplot(data = iris) +
-  aes(x = Petal.Length, y = Petal.Width) + 
-  geom_point( aes(color = Species, shape = Species) ) +
-  geom_smooth(method =lm)
+  aes(x = Petal.Length, y = Petal.Width) +
+  geom_point(aes(color = Species, shape = Species)) +
+  geom_smooth(method = lm)
 
-# adds annotation text
+# add annotation text to a specified location by setting coordinates x = , y =
 ggplot(data = iris) +
-  aes(x = Petal.Length, y = Petal.Width) + 
-  geom_point( aes(color = Species, shape = Species) ) +
-  geom_smooth(method =lm) +
-  annotate("text", x = 5, y = 0.5, label = "R=0.96") 
+  aes(x = Petal.Length, y = Petal.Width) +
+  geom_point(aes(color = Species, shape = Species)) +
+  geom_smooth(method = lm) +
+  annotate("text", x = 5, y = 0.5, label = "R=0.96")
 ```
 
 Some ggplot2 commands span multiple lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. Also, the ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
@@ -366,13 +408,13 @@ It is also much easier to generate a plot like Figure \@ref(fig:23-5).
 
 ```{r fig.align='center', out.width='80%' }
 ggplot(iris) +
-  aes(x = Petal.Length, y = Petal.Width) +                 # define space
-  geom_point( aes(color = Species, shape = Species) ) +    # add points
-  geom_smooth(method =lm) +                                # add trend line  
-  annotate("text", x = 5, y = 0.5, label = "R=0.96") +     # annotate with text
-  xlab("Petal length (cm)") +                              # x-axis labels
-  ylab("Petal width (cm)") +                               # y-axis labels
-  ggtitle( "Correlation between petal length and width")   # title
+  aes(x = Petal.Length, y = Petal.Width) + # define space
+  geom_point(aes(color = Species, shape = Species)) + # add points
+  geom_smooth(method = lm) + # add trend line
+  annotate("text", x = 5, y = 0.5, label = "R=0.96") + # annotate with text
+  xlab("Petal length (cm)") + # x-axis labels
+  ylab("Petal width (cm)") + # y-axis labels
+  ggtitle("Correlation between petal length and width") # title
 ```
 
 
@@ -388,14 +430,6 @@ As you can see, data visualization using ggplot2 is similar to painting: we firs
 >
 Create a scatter plot of sepal length vs sepal width, change colors and shapes with species, and add trend line.
 ```
-
->
-```{exercise}
-
->
-Use boxplot, multiple panel histograms, and density plots to investigate whether petal width is the same among three subspecies. 
-```
-
 
 ## Other types of plots with ggplot2
 
@@ -428,8 +462,8 @@ On top of the boxplot, we add another layer representing the raw data points for
 
 ```{r 2-7, fig.cap='(ref:2-7)',out.width='60%', fig.align='center' }
 ggplot(data = iris) +
-  aes(x = Petal.Length, fill = Species) + 
-  geom_density( alpha = 0.3)
+  aes(x = Petal.Length, fill = Species) +
+  geom_density(alpha = 0.3)
 ```
 
 
@@ -437,15 +471,26 @@ ggplot(data = iris) +
 
 ```{r fig.cap='(ref:2-51)', out.width='80%',fig.align='center'}
 ggplot(data = iris) +
-  aes(x = Petal.Length, fill = Species) + 
-  geom_density( alpha = 0.3) +
-  facet_wrap(~ Species, nrow = 3)  
+  aes(x = Petal.Length, fill = Species) +
+  geom_density(alpha = 0.3) +
+  facet_wrap(~Species, nrow = 3)
 ```
 
+```{r dynamite, fig.cap='Dynamite Plot', out.width='80%', fig.align='center'}
+ggplot(iris) +
+  aes(x = Species, y = Sepal.Width, fill = Species) +
+  stat_summary(geom = "bar", fun = "mean") +
+  stat_summary(geom = "errorbar", fun.data = "mean_se", width = .3)
+```
 
+The bar plot with error bar in \@ref(fig:dynamite) we generated above is called dynamite plots for its similarity. **"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
 
-The bar plot with error bar in \ref@(fig:22-1) we generated above is called dynamite plots for its similarity. **"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
+>
+```{exercise}
 
+>
+Use boxplot, and density plots to investigate the similarity and differences of petal width of three species in the **iris** dataset. 
+```
 
 ## Hierarchical clustering and heat map
 Hierarchical clustering summarizes observations into trees representing the overall similarities. 
@@ -453,10 +498,10 @@ Hierarchical clustering summarizes observations into trees representing the over
 ```{r}
 ma <- as.matrix(iris[, 1:4]) # convert to matrix
 disMatarix <- dist(ma)
-plot( hclust(disMatarix) )
+plot(hclust(disMatarix))
 ```
 
-We first calculate a distance matrix using the **dist** function with the default Euclidean distance method. The distance matrix is then used by the **hclust** function to generate a hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
+We first calculate a distance matrix using the **dist()** function with the default Euclidean distance method. The distance matrix is then used by the **hclust1()** function to generate a hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
 
 The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.
 
@@ -477,12 +522,13 @@ be the complete linkage. Thus we need to change that in our final version.
 **Heat maps** with hierarchical clustering are my favorite way of visualizing data matrices. The rows and columns are reorganized based on hierarchical clustering, and the values in the matrix are coded by colors. Heat maps can directly visualize millions of numbers in one plot. The hierarchical trees also show the similarity among rows and columns. 
 
 ```{r}
-heatmap(ma, 
-        scale = "column", 
-        RowSideColors = rainbow(3)[iris$Species] )
+heatmap(ma,
+  scale = "column",
+  RowSideColors = rainbow(3)[iris$Species]
+)
 ```
 
-Scaling is handled by the **scale** function, which subtracts the mean from each
+Scaling is handled by the **scale()** function, which subtracts the mean from each
 column and then divides by the standard division. Afterward, all the columns
 have the same mean of approximately 0 and standard deviation of 1. This is also
 called standardization. The default color scheme codes bigger numbers in yellow
@@ -503,11 +549,12 @@ install.packages("pheatmap")
 library(pheatmap)
 ma <- as.matrix(iris[, 1:4]) # convert to matrix
 row.names(ma) <- row.names(iris) # assign row names in the matrix
-pheatmap(ma, 
-         scale = "column",
-         clustering_method = "average", # average linkage
-         annotation_row = iris[, 5, drop=FALSE], # the 5th column as color bar
-         show_rownames = FALSE )
+pheatmap(ma,
+  scale = "column",
+  clustering_method = "average", # average linkage
+  annotation_row = iris[, 5, drop = FALSE], # the 5th column as color bar
+  show_rownames = FALSE
+)
 ```
 
 First, we convert the first 4 columns of the iris data frame into a matrix. Then
@@ -557,32 +604,32 @@ command means that the data is normalized before conduction PCA so that each
 variable has unit variance.
 
 ```{r message=FALSE}
-pca = prcomp(iris[, 1:4], scale = TRUE)   
-pca  # Have a look at the results.
+pca <- prcomp(iris[, 1:4], scale = TRUE)
+pca # Have a look at the results.
 ```
 
 The first principal component is positively correlated with Sepal length, petal length, and petal width. Recall that these three variables are highly correlated. Sepal width is the variable that is almost the same across three species with small standard deviation. PC2 is mostly determined by sepal width, less so by sepal length.
 
 ```{r out.width='50%' }
-plot(pca)  # plot the amount of variance each principal components captures.
-str(pca)   # this shows the structure of the object, listing all parts. 
+plot(pca) # plot the amount of variance each principal components captures.
+str(pca) # this shows the structure of the object, listing all parts.
 ```
 
 ```{r }
-head(pca$x)  # the new coordinate values for each of the 150 samples
+head(pca$x) # the new coordinate values for each of the 150 samples
 ```
 
 
 To plot the PCA results, we first construct a data frame with all information, as required by ggplot2.
 ```{r fig.keep='none'}
-pcaData <- as.data.frame(pca$x[, 1:2])  # extract first two columns and convert to data frame
-pcaData <- cbind(pcaData, iris$Species)	# bind by columns
+pcaData <- as.data.frame(pca$x[, 1:2]) # extract first two columns and convert to data frame
+pcaData <- cbind(pcaData, iris$Species) # bind by columns
 colnames(pcaData) <- c("PC1", "PC2", "Species") # change column names
 
 library(ggplot2)
 ggplot(pcaData) +
-  aes(PC1, PC2, color = Species, shape = Species) +   # define plot area
-	geom_point(size = 2)                                # adding data points
+  aes(PC1, PC2, color = Species, shape = Species) + # define plot area
+  geom_point(size = 2) # adding data points
 ```
 
 Now we have a basic plot. We are adding elements one by one using the “+” sign at the end of the first line. We will add details to this plot. 
@@ -590,13 +637,13 @@ Now we have a basic plot. We are adding elements one by one using the “+” si
 (ref:13-5) PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
 
 ```{r 13-5, message=FALSE, fig.show='hold', out.width='80%', fig.cap='(ref:13-5)', fig.align='center'}
-percentVar <- round(100 * summary(pca)$importance[2, 1:2], 0)	  # compute % variances
-ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) +  # starting ggplot2
-	     geom_point(size = 2) +                                       # add data points
-	     xlab(paste0("PC1: ", percentVar[1], "% variance")) +         # x label
-	     ylab(paste0("PC2: ", percentVar[2], "% variance")) +         # y label
-	     ggtitle("Principal component analysis (PCA)") +              # title            
-    	 theme(aspect.ratio = 1)                                      # width and height ratio        
+percentVar <- round(100 * summary(pca)$importance[2, 1:2], 0) # compute % variances
+ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) + # starting ggplot2
+  geom_point(size = 2) + # add data points
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) + # x label
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) + # y label
+  ggtitle("Principal component analysis (PCA)") + # title
+  theme(aspect.ratio = 1) # width and height ratio
 ```
 
 The result (Figure \@ref(fig:13-5)) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. We can see that the first principal component alone is useful in distinguishing the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
@@ -622,11 +669,12 @@ $$ln(odds)=ln(\frac{p}{1-p})
                      =a×Sepal.Length + b×Sepal.Width + c×Petal.Length + d×Petal.Width+c+e.$$
 
 ```{r}
-df <- iris[51:150, ]  # removes the first 50 samples, which represent I. setosa
-df <- droplevels(df)  # removes setosa, an empty levels of species.
-model <- glm(Species ~ . ,  # Model: Species as a function of other variables
-             family = binomial(link = 'logit'), 
-             data = df)  
+df <- iris[51:150, ] # removes the first 50 samples, which represent I. setosa
+df <- droplevels(df) # removes setosa, an empty levels of species.
+model <- glm(Species ~ ., # Model: Species as a function of other variables
+  family = binomial(link = "logit"),
+  data = df
+)
 summary(model)
 ```
 Sepal length and width are not useful in distinguishing versicolor from
@@ -653,5 +701,3 @@ Review all the analysis we did, examine the raw data, and answer the above quest
 
 References:
 1 Beckerman, A. (2017). Getting started with r second edition. New York, NY, Oxford University Press.
-
-
