@@ -86,13 +86,13 @@ PW <- iris$Petal.Width
 plot(PL, PW)
 ```
   
-Let's change the marker type. 
+Let's change the type of symbols. 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = 2) # pch = 2 means the marker is triangle
+plot(PL, PW, pch = 2) # pch = 2 means the symbol is triangle
 ```
 
 
-The **pch** parameter can take values from 0 to 25, each corresponding to a different type of symbol. The commonly used values and points symbols are shown in Figure \@ref(fig:pchsymbols).
+The **pch** parameter can take values from 0 to 25. Each value corresponds to a different type of symbol. The commonly used values and point symbols are shown in Figure \@ref(fig:pchsymbols).
   
 ```{r pchsymbols, echo=FALSE, out.width='100%', fig.cap='Points Symbols', fig.align='center'}
 knitr::include_graphics("images/ch2_1_pch_symbols.png")
@@ -105,7 +105,7 @@ from the documentation
 ```
 
 
-We can also change the color of the data points easily with the **col** parameter.
+We can also change the color of the data points easily with the **col = ** parameter.
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = 2, col = "green") # change the symbol color to green
 ```
@@ -115,35 +115,63 @@ Next, we can use different symbols for different species. Firstly, let's get the
 # Show the information of Species
 (iris$Species)
 ```
-This output shows that the 150 observations are classed into three species *setosa*, *versicolor*, and *virginica*. We can assign different numbers to different species by using the *as.numeric()* function.  
+This output shows that the 150 observations are classed into three species *setosa*, *versicolor*, and *virginica*. We can assign different values to different species by using the *as.numeric()* function.  
 ```{r, fig.align='center', out.width='80%'}
 speciesID <- as.numeric(iris$Species)
 speciesID
+class(speciesID)
 ```
-The new defined variable *speciesID* shows that numbers 1, 2, and 3 are assigned to represent the three species. Now we can assign different symbols to different species by setting *pch = speciesID*.
+The new defined variable *speciesID* shows that numbers 1, 2, and 3 are assigned 
+to three species *setosa*, *versicolor*, and *virginica* respectively. 
+We can assign different symbols to different species by letting *pch = speciesID*.
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = speciesID, col = "green") 
 ```
 What happens here is that the 150 integers stored in the types vector are used
 to alter symbols. The first 50 data points (*setosa*) are represented by open
-circles. The next 50 (*versicolor*) are represented by triangles, while the last
-50 (*virginica*) are in crosses.
+circles (pch = 1). The next 50 (*versicolor*) are represented by triangles (pch = 2), while the last
+50 (*virginica*) are in crosses (pch = 3).
 
-Follow the same thinking, we also change the color according to species. We
-generate three colors with rainbow() function and then alternate using the species.
-
+To set three different colors for three species, we let the option *col = rainbow(3)[iris$Species]*, 
+where the 3 is the number of species, *iris$Species* stores the species information for all 150 observations. 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW, pch = speciesID, col = rainbow(3)[speciesID])
+# class(iris$Species) returns a "factor"
+class(iris$Species)
+# assign 3 colors red, green, and blue to 3 species *setosa*, *versicolor*, 
+# and *virginica* respectively 
+plot(PL, PW, pch = speciesID, col = rainbow(3)[iris$Species])
+```
+The *class(iris$Species)* returns a "factor". This implies that the data structure 
+within the [] should be a factor. If the variable that we used to differentiate 
+colors is not a factor, we can use *as.factor()* function to convert it to a factor. 
+For example, the type of variable *cyl* in the data set *mtcars* is numeric.
+We can convert it to a factor by using *as.factor(mtcars$cyl)*.
+```{r}
+class(mtcars$cyl) # check the type of mtcars$cyl
+class(as.factor(mtcars$cyl)) # check the type of as.factor(mtcars$cyl)
 ```
 
+The *class(as.factor(mtcars$cyl))* returns a factor. This means that we
+can set colors based on the types of *cyl*. 
+```{r, fig.align='center', out.width='80%'}
+# variables contained in the dataset *mtcars*
+colnames(mtcars)
+# convert (mtcars$cyl) into a factor and check with *class()* or *str()*
+str(as.factor(mtcars$cyl))
+# assign 3 colors red, green, and blue to 3 types *4*, *6*, and *8* respectively
+plot(mtcars$mpg, mtcars$disp, pch = mtcars$cyl, col = rainbow(3)[as.factor(mtcars$cyl)])
+```
+
+
+
 This figure starts to looks nice, as the three species are easily separated by
-color and shape. But we are not done. Let us change the x- and y-labels, and also
+color and shape. But we are not done. Let's change the x- and y-labels, and
 add a main title. 
 
 
 ```{r, fig.align='center', out.width='80%'}
-plot(PL, PW,                               #x and y
-     pch = speciesID,                      #marker type
+plot(PL, PW,                               # x and y
+     pch = speciesID,                      # symbol type
      col = rainbow(3)[speciesID],          # color
      xlab = "Petal length (cm)",           # x label
      ylab = "Petal width (cm)",            # y label
@@ -216,7 +244,7 @@ If you know what types of graphs you want, it is very easy to start with the
 template code and swap out the dataset.
 
 
-## Scatter plots matrix
+## Scatter plot matrix
 
 While data frames can have a mixture of numbers and characters in different
 columns, a **matrix often only contains numbers**. Let's extract the first 4
@@ -227,27 +255,36 @@ ma <- as.matrix(iris[, 1:4])  # convert to matrix
 colMeans(ma)  # column means for matrix
 colSums(ma)
 ```
-The same thing can be done with rows via **rowMeans(x)** and **rowSums(x)**. 
+The same thing can be done with rows via *rowMeans(x)* and *rowSums(x)*. 
 
-We can generate a matrix of scatter plots simply by:
+We can generate a matrix of scatter plot by *pairs()* function.
 ```{r fig.keep="none"}
 pairs(ma) 
 ```
 
-```{r fig.cap='Scatter plot matrix.', fig.align='center'}
-pairs(ma, col = rainbow(3)[iris$Species])  # Figure 2.4
+(ref:spm2-2) Scatter plot matrix
+
+```{r spm2-2, message=FALSE, out.width='100%', fig.cap='(ref:spm2-2)', fig.align='center'}
+pairs(ma, col = rainbow(3)[iris$Species])  # set colors by species
 ```
 
 >
 ```{exercise}
 
 >
-Look at this large plot for a moment. What do you see? Provide interpretation of these scatter plots. 
+Interpret the scatter plot matrix of Figure \@ref(fig:spm2-2) . 
+```
+>
+\ \
+>
+```{exercise}
+
+>
+Plot a scatter plot matrix for dataset **mtcars**. Set different point symbols and colors based on the types of *cyl*. 
 ```
 
-
 ## Star and segment diagrams
-**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was first used by Georg von Mayr in 1877!
+**Star plot uses stars to visualize multidimensional data.** Radar chart is a useful way to display multivariate observations with an arbitrary number of variables.  Each observation is represented as a star-shaped figure with one ray for each variable. For a given observation, the length of each ray is made proportional to the size of that variable. The star plot was firstly used by Georg von Mayr in 1877!
 ```{r fig.keep='none'}
 df <- iris[, 1:4]
 stars(df)         # do I see any diamonds?
@@ -277,7 +314,7 @@ knitr::include_graphics("images/img1204n_starsegment.png")
 ```{exercise}
 
 >
-Produce the segments diagram of the state data (state.x77) and offer some interpretation regarding South Dakota compared with other states. Hints: Convert the matrix to data frame using df.state.x77 <- as.data.frame(state.x77), then attach df.state.x77.
+Produce the segments diagram of the state data (state.x77) and offer some interpretation of South Dakota compared with other states. Hints: Convert the matrix to a data frame using *df.state.x77 <- as.data.frame(state.x77)*, then plot the segments diagram based on the dataset *df.state.x77*.
 ```
 
 
@@ -293,13 +330,13 @@ Graphics (hence the "gg"), a modular approach that builds complex graphics by
 adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
 
 
-The ggplot2 functions is not included in the base distribution of R. These are  available as an additional **package**, on the CRAN [website](https://cran.r-project.org/web/packages/ggplot2/index.html).
+The ggplot2 functions is not included in the base distribution of R. These are  available as an additional package, on the CRAN [website](https://cran.r-project.org/web/packages/ggplot2/index.html).
 They need to be downloaded and installed. One of the main advantages of R is that it
 is open, and users can contribute their code as packages. If you are using
 **Rstudio**, you can choose **Tools-\>Install packages** from the main menu, and
 then enter the name of the package. If you are using R software, you can install
 additional packages, by clicking **Packages** in the main menu, and select a
-mirror site. These mirror sites all work the same, but some may be faster. After
+mirror site. All these mirror sites work the same, but some may be faster. After
 choosing a mirror and clicking "OK", you can scroll down the long list to find
 your package. Alternatively, you can type this command to install packages.
 
@@ -330,6 +367,7 @@ library(ggplot2)  # load the ggplot2 package
 (ref:2-6) Basic scatter plot using the ggplot2 package.
 
 ```{r 2-6, fig.cap='(ref:2-6)',fig.align='center', out.width='100%', message=FALSE}
+library(ggplot2)
 # define a canvas
 ggplot(data = iris)
 
@@ -342,18 +380,18 @@ ggplot(data = iris) +
   aes(x = Petal.Length, y = Petal.Width) + 
   geom_point()
 
-# change color & marker type
+# change color & symbol type
 ggplot(data = iris) +
   aes(x = Petal.Length, y = Petal.Width) + 
   geom_point( aes(color = Species, shape = Species) ) 
 
-# adds trend line
+# add trend line
 ggplot(data = iris) +
   aes(x = Petal.Length, y = Petal.Width) + 
   geom_point( aes(color = Species, shape = Species) ) +
   geom_smooth(method =lm)
 
-# adds annotation text
+# add annotation text to a specified location by setting coordinates x = , y =
 ggplot(data = iris) +
   aes(x = Petal.Length, y = Petal.Width) + 
   geom_point( aes(color = Species, shape = Species) ) +
@@ -388,14 +426,6 @@ As you can see, data visualization using ggplot2 is similar to painting: we firs
 >
 Create a scatter plot of sepal length vs sepal width, change colors and shapes with species, and add trend line.
 ```
-
->
-```{exercise}
-
->
-Use boxplot, multiple panel histograms, and density plots to investigate whether petal width is the same among three subspecies. 
-```
-
 
 ## Other types of plots with ggplot2
 
@@ -442,10 +472,21 @@ ggplot(data = iris) +
   facet_wrap(~ Species, nrow = 3)  
 ```
 
+```{r dynamite, fig.cap='Dynamite Plot', out.width='80%', fig.align='center'}
+ggplot(iris) +
+  aes(x = Species, y = Sepal.Width, fill = Species) +
+  stat_summary(geom = "bar", fun = "mean") +
+  stat_summary(geom = "errorbar", fun.data = "mean_se", width = .3)
+```
 
+The bar plot with error bar in \@ref(fig:dynamite) we generated above is called dynamite plots for its similarity. **"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
 
-The bar plot with error bar in \ref@(fig:22-1) we generated above is called dynamite plots for its similarity. **"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
+>
+```{exercise}
 
+>
+Use boxplot, and density plots to investigate the similarity and differences of petal width of three species in the **iris** dataset. 
+```
 
 ## Hierarchical clustering and heat map
 Hierarchical clustering summarizes observations into trees representing the overall similarities. 
@@ -456,7 +497,7 @@ disMatarix <- dist(ma)
 plot( hclust(disMatarix) )
 ```
 
-We first calculate a distance matrix using the **dist** function with the default Euclidean distance method. The distance matrix is then used by the **hclust** function to generate a hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
+We first calculate a distance matrix using the **dist()** function with the default Euclidean distance method. The distance matrix is then used by the **hclust1()** function to generate a hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
 
 The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.
 
@@ -482,7 +523,7 @@ heatmap(ma,
         RowSideColors = rainbow(3)[iris$Species] )
 ```
 
-Scaling is handled by the **scale** function, which subtracts the mean from each
+Scaling is handled by the **scale()** function, which subtracts the mean from each
 column and then divides by the standard division. Afterward, all the columns
 have the same mean of approximately 0 and standard deviation of 1. This is also
 called standardization. The default color scheme codes bigger numbers in yellow
