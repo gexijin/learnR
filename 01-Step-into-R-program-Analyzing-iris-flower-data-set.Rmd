@@ -2,57 +2,81 @@
 
 Learning objectives:
 
-- Install R and Rstudio.
+- Use R from [Rstudio Cloud](https://rstudio.cloud/) or local install.
+- RStudio interface: Console, Script, Environment, Plots.
 - Data frames and vectors.
-- The absolute basics way to analyze data with R: import data, check data types, and then plot and analyze using column names.
+- The basics workflow: import data, check data types, define vectors from columns, plot and analyze.
 
  
 ## Getting started 
+1.  You can use R and Rstudio through a web browser via [Rstudio
+    Cloud](https://rstudio.cloud/). Create a free account, or just log-in with your Google account. Click the "New Project" button to get started. 
 
-1.  Install R from [www.R-project.org](https://www.r-project.org/).
-    Choose the cloud server or any mirror site.
+2.  Alternatively, you can install R on your laptop from [www.R-project.org](https://cloud.r-project.org/). Then install RStudio Desktop from
+    [www.RStudio.com](https://www.rstudio.com/products/rstudio/download/#download). If you have an
+    older version of R or Rstudio, we recommend uninstall them, delete the folder that holds the R packges, and reinstall the latest versions.
+    
 
-2.  Install RStudio Desktop from
-    [www.RStudio.com](https://www.rstudio.com/products/rstudio/download/#download). RStudio uses R
-     in the background but provides a more user-friendly interface. R
-    commands can be typed directly into the "Console" window. Or you can enter
-    them in the "R Script" window and click the "Run" button. If you have an
-    older version of R or Rstudio, we recommend upgrading to the latest
-    version. See Figure \@ref(fig:Rinterface).
-  
 ```{r Rinterface, echo=FALSE, out.width='80%', fig.cap='Interface of RStudio.', fig.align='center'}
 knitr::include_graphics("images/img0100_Rstudio.png")
 ```
 
-3.  Alternatively, you can use R and Rstudio through a web browser via [Rstudio
-    Cloud](https://rstudio.cloud/). Sign up to create a free account, or just log-in with your Google account. Click the "New Project" button to get started. 
 
-As a quick sample session, let's try all of these commands below in the Console window. R is case-sensitive; "Species" and "species" are two different variables. If you understand all of these, you probably do not need this book; consider more advanced books like [R for Data Science](https://r4ds.had.co.nz/). If it takes a few months to type these 243 characters,  try [www.RapidTyping.com](www.RapidTyping.com) first.  
+RStudio uses R
+in the background but provides a more user-friendly interface. R
+commands can be typed directly into the "Console" window.  See Figure \@ref(fig:Rinterface). 
+
+As a quick sample session, try all of these commands below in the Console window. 
+R is case-sensitive; "Species" and "species" are two different variables. 
+If you understand all of these, you probably do not need this book; 
+consider more advanced books like [R for Data Science](https://r4ds.had.co.nz/). 
+If it takes you a few months to type these 248 characters, try [www.RapidTyping.com](www.RapidTyping.com) first.  
 ```{r eval = FALSE}
 head(iris)
 str(iris)
 summary(iris)
-x <- iris[, 1:4]
-head(x)
-boxplot(x)
-plot(x[, 3:4])
-abline(lm(x[, 4] ~ x[, 3]))
-pairs(x)
-stars(x)
+df <- iris[, 1:4]
+boxplot(df)
+pairs(df)
+stars(df)
 
-PL <- x$Petal.Length
-PL
+PL <- df$Petal.Length
 barplot(PL)
 hist(PL)
-Species <- iris$Species
-Species
-pie(table(Species))
-boxplot(PL ~ Species)
-summary(aov(PL ~ Species))
+SP <- iris$Species
+pie(table(SP))
+boxplot(PL ~ SP)
+summary(aov(PL ~ SP))
+
+PW <- df$Petal.Width
+plot(PL, PW, col = SP)
+abline(lm(PW ~ PL))
 ```
 
 ![Animated GIF for screen shot.](https://github.com/gexijin/learnR/raw/master/images/demo.gif)
 
+
+## The proper way of using RStudio
+
+1.  Create a project. An RStudio project is a nice way to organize and compartmentalize different tasks. The idea is, for a new research project, 
+we put all related files (source code, data, results) into a designated folder. 
+ On RStudio.cloud, you have to do this to initiate an R session. 
+Click on the "Untitled Project" on the top of the window to rename it as something meaningful, such as "Workshop".  
+If you are running R locally, click File from the main menu, and select New Project. 
+Then follow directions to choose or create a folder. 
+
+2.  Create a script file by going to File -> New File -> R Script. Or click on the green plus sign. 
+Instead of typing our commands directly into the console window, we will type  in the "R Script" window, which could be saved as a record.
+To execute one line of code, click anywhere in the line and click the "Run" button. You can also highlight and run a block of code. 
+Type these two lines in the Script window, save the script as Workshop_script.R. Then click on each line and click **Run** from the icon. 
+After that, select both lines and click **Run**. 
+```{r eval = FALSE}
+head(iris)
+plot(iris)
+```
+
+3.  Copy file into project folder.  Download this dataset from
+[GitHub](https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv) and save it as iris.csv.  
 
 ## Data frames contain rows and columns: the iris flower dataset 
 In 1936, Edgar Anderson collected data to quantify the geographic variations of
@@ -74,7 +98,9 @@ Getting familiar with this dataset is vital for this and next chapters.
 knitr::include_graphics("images/img0101_iris.png")
 ```
 
-If you are using [Rstudio Cloud](https://rstudio.cloud/) through a web browser, you are using a computer on the cloud, which cannot directly access your local files. Therefore you need to first upload 
+If you are using [Rstudio Cloud](https://rstudio.cloud/) through a web browser, 
+you are using a computer on the cloud, which cannot directly access your local files. 
+Therefore you need to first upload 
 the data file to the cloud using the **Upload** button in 
 the **Files** tab in the lower right panel. 
 
@@ -83,14 +109,13 @@ in the **File** menu, and then choose **"From Text(base)..."**.  As the default
 settings work well in this case, we just need to click **Import** in the pop-up
 window. That's it! There is no need to spend half of a semester to learn how to
 import data, like some people used to complain when learning SAS. If you have trouble
-importing this data file, you can skip this step as this data set is included in
- R.
+importing this data file, you can skip this step as this data set is included in R.
 
 ```{r echo=FALSE, out.width='80%', fig.cap='Example of a data frame.', fig.align='center'}
 knitr::include_graphics("images/img0102_dataframe.png")
 ```
 
-To answer these questions, let us visualize and analyze the data with R. Type these commands without the comments marked by “#”.  
+To answer these questions, let us visualize and analyze the data with R. **Type these commands without the comments marked by “#”.**  
 ```{r echo=TRUE, eval=FALSE}
 View(iris) # show as a spreadsheet
 ```
@@ -101,7 +126,9 @@ str(iris) # show the structure
 ```
 
 The imported data is stored in a **data frame** called *iris*, which contains
-information of 5 variables for 150 observations (flowers). While the first 4 variables/columns, *Sepal.Length*, *Sepal.Width*, *Petal.Length*, and *Petal.Width*, contain **numeric** values. The 5^th^ variable/column, *Species*, contains
+information of 5 variables for 150 observations (flowers). While the first 4 variables/columns, 
+*Sepal.Length*, *Sepal.Width*, *Petal.Length*, and *Petal.Width*, contain **numeric** values. 
+The 5^th^ variable/column, *Species*, contains
 **characters** indicating which sub-species a sample belongs to. This is an
 important distinction, as they are treated differently in R.  
 Sometimes we need to overwrite data types guessed by R, which can be done during the data
@@ -110,10 +137,10 @@ importing process. If you are using the built-in iris data, the variable/column 
 ```{r echo=TRUE}
 summary(iris) # summary statistics
 ```
-The *summary* function provides us with information on the distribution of each variables. There are 50 observations for each of the three sub-species.
+The *summary* function provides us with information on the distribution of each variables. 
+There are 50 observations for each of the three sub-species.
 
 Individual values in a **data frame** can be accessed using row and column indices. 
-
 ```{r echo=TRUE, results='hide'}
 iris[3, 4] # returns the value lies at the intersection of row 3 and column 4
 iris[3, ] # returns values of row 3
@@ -121,7 +148,9 @@ iris[, 4] # returns values of column 4
 iris[3, 1:4] # returns values at the intersections of row 3 and columns from 1 to 4
 ```
 
-**To do the exercises, you need to create a blank Word document. Copy-and-paste the R code and corresponding outputs to the Word document, and then save it as a PDF file. Submit both the Word and PDF files to the Dropbox.**
+**To do the exercises, you need to create a blank Word document. 
+Copy-and-paste the R code and corresponding outputs to the Word document, 
+and then save it as a PDF file. Submit both the Word and PDF files to the Dropbox.**
 
 >
 ```{exercise }
@@ -135,7 +164,9 @@ c. Extract a subset which contains values in the 2nd through the 5th rows and th
 ```
 
 
-You can replace the **iris** data set with any of the built-in data sets as long as its data structure is **data frame**. Make sure you check the type of the data set by using **class()** or **str()** function. Note: You will need to change the variable names and ranges of rows and columns. 
+You can replace the **iris** data set with any of the built-in data sets as long as its data structure is **data frame**. 
+Make sure you check the type of the data set by using **class()** or **str()** function. 
+Note: You will need to change the variable names and ranges of rows and columns. 
 
 
 ```{r echo=FALSE, out.width='45%', fig.align='center'}
@@ -153,22 +184,25 @@ R is case-sensitive. “iris$petal.length” will not be recognized.
 iris$Petal.Length # 150 petal lengths
 ```
 
-This is the recommended, safer way of referring to columns. But if you are as
-lazy as me and do not want to type the data frame name repeatedly. This is a
-shortcut by attaching a data frame the columns can be accessed directly. One
-disadvantage is that it will cause issues if two datasets
-have the same variable names, or if the data is transformed or changed later on. 
-We typically do not recommend doing it but here we want to make things simple. 
-We should attach a dataset after we are sure that we will not making changes to it.
-
-```{r echo=TRUE, results='hide'}
-attach(iris) # forget this sneaky shortcut after chapter 3!
-Petal.Length # 150 petal lengths
+If this is too much typing, we can store the data in a new **vector** called PL.
+```{r} 
+PL <- iris$Petal.Length # define a new variable which contains only the Petal.Length values
 ```
 
+Some might complain that nothing happens after you type in this command.
+Although nothing is printed out, you have created a new **vector** called PL in
+the memory. You can find it in the top right panel in the **Environment** tab. 
+The process of programming is 
+mostly creating and modifying data objects in the memory.  
 
-```{r}
-mean(Petal.Length) # mean( ) is a function that operates on Petal.Length
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("images/environment.png")
+```
+
+Like money saved in a bank, these data can be retrieved and used:
+```{r} 
+PL  #print out 150 numbers stored in PL
+mean(PL)  #mean, duh
 ```
 
 >
@@ -194,29 +228,7 @@ b. Use R to find the maximal value of the variable *mpg* in the data set **mtcar
 
 ## Analyzing one set of numbers
 
-First, let us retrieve the 150 numbers in the petal length column and store it in
-an **vector** called PL.
-```{r} 
-PL <- iris$Petal.Length # define a new variable which contains only the Petal.Length values
-```
-
-Some might complain that nothing happens after you type in this command.
-Although nothing is printed out, you have created a new **vector** called PL in
-the memory. You can find it in the top right panel in the **Environment** tab.
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics("images/environment.png")
-```
-
-See the code below for anther two ways to view *PL*. 
-```{r}
-PL # print out PL
-(PL <- iris$Petal.Length) # view PL by adding parentheses to both sides of the code.
-```
-
-*The process of programming is all about creating and modifying data objects.*
-
-
-A **vector** holds a series of numbers or characters. R made it
+A **vector** holds a series of numbers or characters. Using various **functions**, R made it
 very easy to do the same calculations (add, subtract, multiply,...) on all of
 them at once or collectively.
 
@@ -251,7 +263,7 @@ boxplot(PL) # boxplot of Petal Length.
 text(x = 1, y = c(5.2, 4.5, 1.75), labels = c("75th pencentile", "Median", "25th pencentile"))
 text(1.45, 6.6, labels = "boxplot(PL)", col = "red")
 legend("topleft", inset = .02, legend = "A", box.lty = 0)
-boxplot(iris[, 1:4]) # boxplots of four columns for iris.
+boxplot(iris[, 1:4]) # boxplots of four columns of iris.
 text(4.1, 7.5, labels = "boxplot(iris[, 1:4])", col = "red")
 legend("topleft", inset = .001, legend = "B", box.lty = 0)
 ```
@@ -282,14 +294,15 @@ If all the measurements are close to the mean µ, then standard deviation should
 
 ```{r}
 sd(PL) # standard deviation of Petal Length
-sd(Sepal.Width) # standard deviation of Sepal Width
+SW <- iris$Sepal.Width
+sd(SW) # standard deviation of Sepal Width
 ```
 
 As we can see, these flowers have similar sepal width, but they differ widely in
 petal length. This is consistent with the boxplot above. Perhaps changes in
 petal length lead to better survival in different habitats.
 
-With R, it is easy to generate graphs. Let's try a bar plot.
+With R, it is easy to generate graphs. 
 ```{r out.width='80%', fig.cap='Barplot of petal length.', fig.align='center'}
 barplot(PL) # bar plot of Petal Length
 ```
@@ -389,17 +402,20 @@ We can perform a hypothesis test on whether a set of numbers are derived from no
 When interpreting results from hypothesis testing, it is important to state 
 the null hypothesis is. Here the null hypothesis is that the data is from a normal distribution. 
 ```{r}
-# normality test of the pental length of all species
+# normality test 
 shapiro.test(PL)
 ```
 
 If petal length is normally distributed, there is only 7.412×10^-10^ chance of getting the observed test statistic of 0.87627. In other words, it is highly unlikely that petal length follows a normal distribution. We reject the normal distribution hypothesis, which could be corroborated by our plots above. 
 
 ```{r}
-# normality test of the pental length of setosa, the first 50 observations of PL
+# normality test of  the first 50 observations of PL
 shapiro.test(PL[1:50])
 ```
-Given the significance level $\alpha=0.05$, the p-value of normality test for the pental length of setosa is 0.05481 which is greater than 0.05. Then we fail to reject the null hypothesis and conclude that we don't have strong evidence to reject the hypthoses that the pental length of setosa follows a normal distribution. In statistics, we rely on both charts and statistical models to draw a conclusion.
+Given the significance level $\alpha=0.05$, the p-value of normality test for the pental length of setosa is 0.05481 which is greater than 0.05. 
+Then we fail to reject the null hypothesis and conclude that we don't have  evidence to reject the hypthoses 
+that the pental length of setosa follows a normal distribution. 
+In statistics, we rely on both charts and statistical models to draw a conclusion.
 
 >
 ```{exercise}
@@ -412,17 +428,12 @@ b. Generate histogram and Q-Q plot for sepal width. Do the plots show a Normal a
 
 
 
-
-
-
-
-
 ## Analyzing a categorical variable
 
 In the iris dataset, the last column contains the species information. We call this a **categorical variable**. 
 Bar and Pie charts are very effective in showing proportions. We can see that the three species are each represented with 50 observations.
 ```{r echo=c(1, 2, 3, 5), fig.show='hold', out.width='50%', fig.cap='Frequencies of categorical values visualized by Pie chart (A) and bar chart (B).', fig.align='center'}
-counts <- table(Species) # tabulate the frequencies
+counts <- table(iris$Species) # tabulate the frequencies
 counts
 pie(counts) # pie chart
 legend("topleft", inset = .02, legend = "A", box.lty = 0)
@@ -459,21 +470,18 @@ dataset.
 
 ```{r 2-2, echo = c(1,2,3),out.width='80%', fig.cap='(ref:2-2)', fig.align='center'}
 SP <- as.factor(iris$Species)
-plot(PW, PL, col = rainbow(3)[SP]) # change colors based on Species
-legend("topleft", levels(SP), fill = rainbow(3)) # add legends on topleft.
+plot(PW, PL, col = SP) # change colors based on Species
+legend("topleft", levels(SP), fill = 1:3) # add legends on topleft.
 abline(lm(PL ~ PW))
 ```
 
-We generate a vector of 3 colors using the rainbow() function. The 3
-colors will correspond the 3 species.
+
 To change the color for a specific data point, we defined a new variable SP
 by converting the last column into a **factor**. 
-The **class(Species)** returns the data
-structure of SP a "factor". The **levels(Species)** function shows all
-levels of Species. The function **str(Species)** shows that the Species is a
+The function **str(SP)** shows that the SP is a
 factor with 3 levels which are internally coded as 1, 2, and 3. 
-This enables us to change the colors. This kind of base plotting has been simplified by 
-modern systems such as ggplot2, which we will discuss later. So you do not have to remember all of this.
+This enables us to use these as color codes. This kind of base plotting has been simplified by 
+modern systems such as ggplot2, which we will discuss later. So you do not have to remember any of this.
 
 ```{r}
 str(SP) # show the structure of Species.
@@ -501,7 +509,8 @@ b. Add legend to the top right.
 ```
 
 
-We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, such as Pearson’s correlation coefficient.  It ranges from -1 to 1.   Zero means no correlation.
+We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, 
+such as Pearson’s correlation coefficient.  It ranges from -1 to 1.   Zero means no linear correlation.
 ```{r}
 cor(PW, PL)
 ```
@@ -575,17 +584,18 @@ reflect real differences in the population or due to random sampling error.
 (ref:2-4) Boxplot of petal length, grouped by species.
 
 ```{r  message=FALSE, out.width='80%', fig.cap='(ref:2-4)', fig.align='center'}
+Species <- iris$Species
 # Comparing distributions of petal length of the three species by boxplot
-boxplot(Petal.Length ~ Species)
+boxplot(PL ~ Species)
 ```
-
+Here, R automatically split the dataset into three groups according to Species and created a boxplot for each. 
 
 From the boxplot, it is obvious that *Setosa* has much shorter petals. Are there differences between *versicolor* and *virginica* significant? 
 We only had a small sample of 50 flowers for each species. But we want to draw some conclusion about the two species in general. We could measure all the iris flowers across the world; Or we could use statistics to make inference. Let's extract corresponding data.
 ```{r results='hide'}
-PL1 <- Petal.Length[51:100] # extract Petal Length of versicolor
+PL1 <- PL[51:100] # extract Petal Length of versicolor
 PL1 # a vector with 50 numbers
-PL2 <- Petal.Length[101:150] # extract Petal length of virginica
+PL2 <- PL[101:150] # extract Petal length of virginica
 PL2 # y contain 50 measurements
 ```
 
@@ -617,10 +627,10 @@ As indicated by Figure \@ref(fig:2-5), sepal width has small variation across sp
 
 (ref:2-5) Boxplot of sepal width across 3 species.
 
-```{r 2-5, echo=c(1,3), fig.cap='(ref:2-5)', fig.align='center'}
-boxplot(Sepal.Width ~ Species)
-text(2.5, 4.2, labels = "boxplot(Sepal.Width ~ Species)", col = "red")
-summary(aov(Sepal.Width ~ Species))
+```{r 2-5, echo=c(1:3), fig.cap='(ref:2-5)', fig.align='center'}
+SW <- iris$Sepal.Width
+boxplot(SW ~ SP)
+summary(aov(SW ~ SP))
 ```
 Since p-value is much smaller than 0.05, we reject the null hypothesis. We can conclude that not all the 3 species have the same mean of sepal width. In other words, there are at least two of the species have different means of sepal width. This is the only thing we can conclude from  this, since this is how the hypothesis was set up. The boxplot in Figure \@ref(fig:2-5) seems to indicate  that *setosa* has wider sepals. 
 
@@ -632,7 +642,10 @@ Use boxplot and ANOVA to investigate whether the means of spetal width are the s
 ```
 
 
-I hope this give you some idea about what it is like of using R to visualize and analyze data. It is interactive and graphical interface make it easy to manipulate data. 
+I hope this give you some idea about what it is like to use R to visualize and analyze data. It is interactive and graphical. 
+If I made you feel it is complicated, I failed as a instructor. 
+Most people can learn R themselves by working on a small dataseet of their interest. 
+Just Google everything and keep trying. 
 
 ![From Tenor.com](https://github.com/gexijin/learnR/raw/master/images/tenor_typing_cat.gif)
 ```{r echo=FALSE,eval=FALSE}
