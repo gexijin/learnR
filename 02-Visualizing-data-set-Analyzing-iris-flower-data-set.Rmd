@@ -3,7 +3,7 @@
 Learning objectives:
 
 - Basic concepts of R graphics
-- Install and load R packages (ggplot2 and pheatmap)
+- Install and load R packages 
 - Basic plots with ggplot2
 - Different ways to visualize the iris flower dataset
 
@@ -13,9 +13,9 @@ Learning objectives:
 
 
 We start with base R graphics. The first important distinction should be made about
-high- and low-level graphics functions in base R. See table below.
+high- and low-level graphics functions in base R. 
 High-level graphics functions initiate new plots, to which new elements could be
-added using the low-level functions.
+added using the low-level functions. See table below.
   
   Function   |  Description
   -----------|---------------------------------------------
@@ -23,15 +23,16 @@ added using the low-level functions.
   boxplot	   | boxplot. Can be applied to multiple columns of a matrix, or use equations boxplot( y ~ x)
   hist	     | histogram
   qqnorm	   | Quantile-quantile (Q-Q) plot to check for normality
-curve	       | Graph an arithmetic function
-barplot	     | Barplot
-mosaicplot	 | Using mosaics to represent the frequencies of tabulated counts.
-heatmap	     | Using colors to visualize a matrix of numeric values.
+ curve	     | Graph an arithmetic function
+ barplot	   | Barplot
+ mosaicplot	 | Using mosaics to represent the frequencies of tabulated counts.
+ heatmap	   | Using colors to visualize a matrix of numeric values.
 
 
 
 Table: High-level graphics functions initiate a new plot. 
   
+\newline  \newline
 
 In contrast, low-level graphics functions do not wipe out the existing plot;
 they add elements to it. The functions are listed below:
@@ -50,24 +51,27 @@ they add elements to it. The functions are listed below:
 Table: Low-level graphics functions that add elements to an existing plot.
 
 
-Sometimes we generate many graphics quickly for exploratory data analysis (EDA)
+Another distinction about data visualization is between plain, exploratory plots and 
+refined, annotated ones. Both types are essential. 
+Sometimes we generate many graphics  for exploratory data analysis (EDA)
 to get some sense of what the data looks like. We can achieve this by using
 plotting functions with **default settings** to quickly generate a lot of
-"plain" plots. R is a very powerful EDA tool. However, you have to know what
-types of graphs are suitable for the data.
+"plain" plots. R is a very powerful EDA tool. 
 
-Occasionally we want to generate really "cool"-looking graphics for papers and
-presentations. Making such plots typically requires a bit more coding, as you
+If we find something interesting about a dataset, we want to generate 
+really "cool"-looking graphics for papers and
+presentations. Often we want to use a plot to convey a message to an audience. 
+Making such plots typically requires a bit more coding, as you
 have to customize different parameters. For me, it usually involves
-some Google searches of example codes, and then I revise it via trial-and-error.
-If I cannot make it work, I read the help document.
+lots of Google searches, copy-and-paste of example codes, and then lots of trial-and-error.
+
 
 One of the open secrets of R programming is that you can start from a plain
-figure and keep trying to **refine it step by step** while Googling. Let's take
+figure and  **refine it step by step**. Here is
 an example using the base R graphics. This produces a basic scatter plot with
 the petal length on the x-axis and petal width on the y-axis. Since iris is a
 data frame, we will use the ```iris$Petal.Length``` to refer to the Petal.Length
-column. This avoids using the *attach* function.
+column. 
 
 ```{r, fig.align='center', out.width='80%' }
 PL <- iris$Petal.Length
@@ -75,20 +79,22 @@ PW <- iris$Petal.Width
 plot(PL, PW)
 ```
   
-Let's change the type of symbols. 
+To hange the type of symbols: 
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = 2) # pch = 2 means the symbol is triangle
 ```
 
 
-The **pch** parameter can take values from 0 to 25. Each value corresponds to a different type of symbol. The commonly used values and point symbols are shown in Figure \@ref(fig:pchsymbols).
+The **pch** parameter can take values from 0 to 25. Each value corresponds
+ to a different type of symbol. The commonly used values and point symbols 
+ are shown in Figure \@ref(fig:pchsymbols).
   
 ```{r pchsymbols, echo=FALSE, out.width='100%', fig.cap='Points Symbols', fig.align='center'}
 knitr::include_graphics("images/ch2_1_pch_symbols.png")
 ```
 
 There are many other parameters to the **plot** function in R. You can get these 
-from the documentation
+from the documentation:
 ```{r, eval=FALSE}
 ? plot
 ```
@@ -99,69 +105,57 @@ We can also change the color of the data points easily with the **col = ** param
 plot(PL, PW, pch = 2, col = "green") # change the symbol color to green
 ```
 
-Next, we can use different symbols for different species. Firstly, let's get the species information. 
+Next, we can use different symbols for different species. First, extract the species information. 
 ```{r, fig.align='center', out.width='80%'}
-# Show the information of Species
-(iris$Species)
+iris$Species
 ```
-This output shows that the 150 observations are classed into three species *setosa*, *versicolor*, and *virginica*. We can assign different values to different species by using the *as.numeric()* function.  
+This output shows that the 150 observations are classed into three 
+species *setosa*, *versicolor*, and *virginica*. 
+If you are read theiris data from a file, like what we did in Chapter 1, 
+the data type of the Species column is character. We need to convert this column into a **factor**. 
+```{r, fig.align='center', out.width='80%'}
+iris$Species <- as.factor(iris$Species)
+str(iris$Species)
+```
+
+Once convertetd into a factor, each observation is represented by one of the three levels of  
+the three species *setosa*, *versicolor*, and *virginica*. **factors** are used to 
+store categorical variables as levels. 
+To completely convert this factor to numbers for plotting, we use the *as.numeric* function. 
+Since we do not want to change the data frame, we will define a new variable called speciesID. 
 ```{r, fig.align='center', out.width='80%'}
 speciesID <- as.numeric(iris$Species)
 speciesID
-class(speciesID)
 ```
-The new defined variable *speciesID* shows that numbers 1, 2, and 3 are assigned 
-to three species *setosa*, *versicolor*, and *virginica* respectively. 
-We can assign different symbols to different species by letting *pch = speciesID*.
+
+We can assign different markers to different species by letting *pch = speciesID*.
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, pch = speciesID, col = "green")
 ```
-What happens here is that the 150 integers stored in the types vector are used
-to alter symbols. The first 50 data points (*setosa*) are represented by open
+What happens here is that the 150 integers stored in the speciesID factor are used
+to alter marker types. The first 50 data points (*setosa*) are represented by open
 circles (pch = 1). The next 50 (*versicolor*) are represented by triangles (pch = 2), while the last
 50 (*virginica*) are in crosses (pch = 3).
 
-To set three different colors for three species, we let the option *col = rainbow(3)[iris$Species]*, 
-where the 3 is the number of species, *iris$Species* stores the species information for all 150 observations. 
+Similarily, we can set three different colors for three species.
 ```{r, fig.align='center', out.width='80%'}
-# class(iris$Species) returns a "factor"
-class(iris$Species)
 # assign 3 colors red, green, and blue to 3 species *setosa*, *versicolor*,
 # and *virginica* respectively
-plot(PL, PW, pch = speciesID, col = rainbow(3)[iris$Species])
+plot(PL, PW, pch = speciesID, col = speciesID)
 ```
-The *class(iris$Species)* returns a "factor". This implies that the data structure 
-within the [] should be a factor. If the variable that we used to differentiate 
-colors is not a factor, we can use *as.factor()* function to convert it to a factor. 
-For example, the type of variable *cyl* in the data set *mtcars* is numeric.
-We can convert it to a factor by using *as.factor(mtcars$cyl)*.
-```{r}
-class(mtcars$cyl) # check the type of mtcars$cyl
-class(as.factor(mtcars$cyl)) # check the type of as.factor(mtcars$cyl)
-```
-
-The *class(as.factor(mtcars$cyl))* returns a factor. This means that we
-can set colors based on the types of *cyl*. 
-```{r, fig.align='center', out.width='80%'}
-# variables contained in the dataset *mtcars*
-colnames(mtcars)
-# convert (mtcars$cyl) into a factor and check with *class()* or *str()*
-str(as.factor(mtcars$cyl))
-# assign 3 colors red, green, and blue to 3 types *4*, *6*, and *8* respectively
-plot(mtcars$mpg, mtcars$disp, pch = mtcars$cyl, col = rainbow(3)[as.factor(mtcars$cyl)])
-```
-
 
 
 This figure starts to looks nice, as the three species are easily separated by
-color and shape. But we are not done. Let's change the x- and y-labels, and
+color and shape. It seems redundant, but it make it easier for the reader. 
+Some people are even color blind. 
+Let us change the x- and y-labels, and
 add a main title. 
 
 
 ```{r, fig.align='center', out.width='80%'}
 plot(PL, PW, # x and y
   pch = speciesID, # symbol type
-  col = rainbow(3)[speciesID], # color
+  col = speciesID, # color
   xlab = "Petal length (cm)", # x label
   ylab = "Petal width (cm)", # y label
   main = "Petal width vs. length"
@@ -172,17 +166,19 @@ The benefit of multiple lines is that we can clearly see each line contain a par
 When you are typing in the Console window, R knows that you are not done and
 will be waiting for the second parenthesis. 
 
-It is essential to write your code so that it could be easily understood by others 
+Note that the indention is by two space characters and this chunk of code ends with a right parenthesis. 
+It is essential to write your code so that it could be easily understood, or reused by others 
 (or your future self). See 
 [breif](http://adv-r.had.co.nz/Style.html) and 
 [detailed](https://style.tidyverse.org/) style guides.  This is like checking the 
 dressing code before going to an event. 
 
-A true perfectionist never settles. We notice a strong linear correlation between petal length and width. Let's add a trend line using **abline()**, a low level graphics function.  
-```{r, fig.align='center', out.width='80%'}
+A true perfectionist never settles. We notice a strong linear correlation between 
+petal length and width. Let's add a trend line using **abline()**, a low level graphics function.  
+```{r, echo = c(2), fig.align='center', out.width='80%'}
 plot(PL, PW,
   pch = speciesID,
-  col = rainbow(3)[speciesID],
+  col = speciesID,
   xlab = "Petal length (cm)",
   ylab = "Petal width (cm)",
   main = "Petal width vs. length"
@@ -198,39 +194,41 @@ We calculate the Pearson's correlation coefficient and mark it to the plot.
 ```{r, fig.show=FALSE}
 PCC <- cor(PW, PL) # Pearson's correlation coefficient
 PCC <- round(PCC, 2) # round to the 2nd place after decimal point.
-PCC
+paste("R =", PCC)
 ```
-
-The **text** function is used to place strings created with the *paste* function at the location of coordinate of (x=5, y=0.5). To finish up this plot, we add a legend. Here is how we have everything together.
+The *paste* function glues two strings together. Then we use the **text** function  to 
+place strings at lower right by specifying the coordinate of (x=5, y=0.5). 
 
 (ref:23-5) A refined scatter plot using base R graphics.
 
-```{r 23-5, fig.cap='(ref:23-5)', fig.align='center', out.width='80%'}
-PL <- iris$Petal.Length
-PW <- iris$Petal.Width
+```{r 23-5, echo = c(2,3,4), fig.cap='(ref:23-5)', fig.align='center', out.width='80%'}
 plot(PL, PW,
   pch = speciesID, # assign different symbols to different species
-  col = rainbow(3)[speciesID], # assign different colors to different species
+  col = speciesID, # assign different colors to different species
   xlab = "Petal length (cm)", # label x-axis
   ylab = "Petal width (cm)", # label y-axis
   main = "Petal width vs. length"
 ) # add a title to the plot
 abline(lm(PW ~ PL)) # add a regression line to the plot
 text(5, 0.5, paste("R=", PCC)) # add text annotation.
-# PCC is the Pearson's correlation coefficient calculated above
 legend("topleft", # specify the location of the legend
   levels(iris$Species), # specify the levels of species
   pch = 1:3, # specify three symbols used for the three species
-  col = rainbow(3)
-) # specify three colors for the three species
+  col = 1:3 # specify three colors for the three species
+) 
 ```
+The last expression adds a legend at the top left using the *legend* function.
+While **plot** is a high-level graphics function that starts a new plot,
+**abline**, **text**, and **legend** are all low-level functions that can be 
+added to an existing plot. 
+You should be proud of yourself if you are able to generate this plot. 
+This is how we create complex plots step-by-step with trial-and-error. 
 
-While **plot** is a high-level graphics function that starts a new plot, **abline**, **text**, and **legend** are all low-level functions that can be added to existing plot. This chunk of code is impressive! You should be proud of yourself if you are able to generate this plot. 
-We know that we build it up step-by-step with some trial-and-error. 
-
-Another open secret of coding is that we frequently steal others ideas and
+Such a refinement process can be time-consuming. 
+But another open secret of coding is that we frequently steal others ideas and
 code. The book [R Graphics Cookbook](https://r-graphics.org/) includes all kinds of R plots and
-example code. Some websites list all sorts of R graphics and example codes that you can use. For example, this [website:](http://www.r-graph-gallery.com/) <http://www.r-graph-gallery.com/> contains 
+example code. Some websites list all sorts of R graphics and example codes that you can use.
+ For example, this [website:](http://www.r-graph-gallery.com/) <http://www.r-graph-gallery.com/> contains 
 more than 200 such examples. Another
 one is available [here:](http://bxhorn.com/r-graphics-gallery/): <http://bxhorn.com/r-graphics-gallery/>. 
 If you know what types of graphs you want, it is very easy to start with the 
@@ -258,7 +256,7 @@ pairs(ma)
 (ref:spm2-2) Scatter plot matrix
 
 ```{r spm2-2, message=FALSE, out.width='100%', fig.cap='(ref:spm2-2)', fig.align='center'}
-pairs(ma, col = rainbow(3)[iris$Species]) # set colors by species
+pairs(ma, col = rainbow(3)[speciesID]) # set colors by species
 ```
 
 >
@@ -314,25 +312,13 @@ Produce the segments diagram of the state data (state.x77) and offer some interp
   
 ## The ggplot2 package is intuitive and powerful
 In addition to the graphics functions in base R, there are many other packages
-we can use to create graphics. The most widely used are lattice and ggplot2,
-both implemented in additional packages. Together with base R graphics,
+we can use to create plots. The most widely used are lattice and ggplot2. 
+Together with base R graphics,
 sometimes these are referred to as the three independent paradigms of R
 graphics. The lattice package extends base R graphics and enables the creating
 of graphs in multiple facets. The ggplot2 is developed based on a Grammar of
 Graphics (hence the "gg"), a modular approach that builds complex graphics by
 adding layers. Intuitive yet powerful, ggplot2 is becoming increasingly popular.
-
-
-The ggplot2 functions is not included in the base distribution of R. These are  available as an additional package, on the CRAN [website](https://cran.r-project.org/web/packages/ggplot2/index.html).
-They need to be downloaded and installed. One of the main advantages of R is that it
-is open, and users can contribute their code as packages. If you are using
-**Rstudio**, you can choose **Tools-\>Install packages** from the main menu, and
-then enter the name of the package. If you are using R software, you can install
-additional packages, by clicking **Packages** in the main menu, and select a
-mirror site. All these mirror sites work the same, but some may be faster. After
-choosing a mirror and clicking "OK", you can scroll down the long list to find
-your package. Alternatively, you can type this command to install packages.
-
 
 ggplot2 is a modular, intuitive system for plotting, as we use different functions to refine different aspects of a chart step-by-step:
 
@@ -343,24 +329,37 @@ ggplot2 is a modular, intuitive system for plotting, as we use different functio
 -   **facets**  ( multiple plots)
 -   **Labels** and **annotations** 
 
-Detailed tutorials on ggplot2 can be find [here](https://uc-r.github.io/ggplot_intro) and by its [author](https://r4ds.had.co.nz/data-visualisation.html). Here we present a quick demo.
+Detailed tutorials on ggplot2 can be find [here](https://uc-r.github.io/ggplot_intro) and 
+by its [author](https://r4ds.had.co.nz/data-visualisation.html). 
+
+
+The ggplot2 functions is not included in the base distribution of R. 
+These are  available as an additional package, on the CRAN [website](https://cran.r-project.org/web/packages/ggplot2/index.html).
+They need to be downloaded and installed. One of the main advantages of R is that it
+is open, and users can contribute their code as packages. If you are using
+**RStudio**, you can choose **Tools-\>Install packages** from the main menu, and
+then enter the name of the package. If you are using R software, you can install
+additional packages, by clicking **Packages** in the main menu, and select a
+mirror site. All these mirror sites work the same, but some may be faster. After
+choosing a mirror and clicking "OK", you can scroll down the long list to find
+your package. Alternatively, you can type this command to install packages.
 
 
 ```{r eval=FALSE}
 # Install the package. You can also do it through the Packages Tab
 install.packages("ggplot2")
 ```
-Packages only need to be installed once. But every time you need to use the **functions or data** in a package, you have to **load** it from your hard drive into memory. 
+Packages only need to be installed once. 
+But every time you need to use the **functions or data** in a package, 
+you have to **load** it from your hard drive into memory. 
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2) # load the ggplot2 package
 ```
 
 
-
 (ref:2-6) Basic scatter plot using the ggplot2 package.
 
 ```{r 2-6, fig.cap='(ref:2-6)',fig.align='center', out.width='100%', message=FALSE}
-library(ggplot2)
 # define a canvas
 ggplot(data = iris)
 
@@ -392,7 +391,11 @@ ggplot(data = iris) +
   annotate("text", x = 5, y = 0.5, label = "R=0.96")
 ```
 
-Some ggplot2 commands span multiple lines. The first line defines the plotting space. The ending "+" signifies that another layer ( data points) of plotting is added. Also, the ggplot2 package handles a lot of the details for us. We can easily generate many different types of plots.
+Some ggplot2 commands span multiple lines. 
+The first line defines the plotting space. 
+The ending "+" signifies that another layer ( data points) of plotting is added. 
+Also, the ggplot2 package handles a lot of the details for us.
+ We can easily generate many different types of plots.
 It is also much easier to generate a plot like Figure \@ref(fig:23-5). 
 
 ```{r fig.align='center', out.width='80%' }
@@ -407,7 +410,8 @@ ggplot(iris) +
 ```
 
 
-As you can see, data visualization using ggplot2 is similar to painting: we first find a blank canvas, paint background, sketch outlines, and then add details.
+As you can see, data visualization using ggplot2 is similar to painting: 
+we first find a blank canvas, paint background, sketch outlines, and then add details.
 ![The process of painting from GIPHY by @maluduque](https://github.com/gexijin/learnR/raw/master/images/drawing.gif)
 ```{r, echo=FALSE}
 # URL https://giphy.com/gifs/l3vRnG8MctBsvAMtG
@@ -432,7 +436,8 @@ ggplot(data = iris) +
 ```
 
 Here we use Species, a categorical variable, as x-coordinate. Essentially, we 
-use it to define three groups of data. The y-axis is the sepal length, whose distribution we are interested in. The benefit of using ggplot2 is evident as we can easily refine it.
+use it to define three groups of data. The y-axis is the sepal length, 
+whose distribution we are interested in. The benefit of using ggplot2 is evident as we can easily refine it.
 
 (ref:22-1) Box plot with raw data points. This is getting increasingly popular. 
 
@@ -442,7 +447,11 @@ ggplot(data = iris) +
   geom_boxplot() +
   geom_jitter(position = position_jitter(0.2))
 ```
-On top of the boxplot, we add another layer representing the raw data points for each of the species. Since lining up data points on a straight line is hard to see, we jittered the relative x-position within each subspecies randomly. We also color-coded three species simply by adding "color = Species". Many of the low-level graphics details are handled for us by ggplot2 as the legend is generated automatically.
+On top of the boxplot, we add another layer representing the raw data 
+points for each of the species. Since lining up data points on a 
+straight line is hard to see, we jittered the relative x-position within each subspecies randomly. 
+We also color-coded three species simply by adding "color = Species". Many of the low-level 
+graphics details are handled for us by ggplot2 as the legend is generated automatically.
 
 
 
@@ -472,7 +481,11 @@ ggplot(iris) +
   stat_summary(geom = "errorbar", fun.data = "mean_se", width = .3)
 ```
 
-The bar plot with error bar in \@ref(fig:dynamite) we generated above is called dynamite plots for its similarity. **"The dynamite plots must die!"**, argued renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). Dynamite plots give very little information; the mean and standard errors just could be printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
+The bar plot with error bar in \@ref(fig:dynamite) we generated above is called
+ dynamite plots for its similarity. **"The dynamite plots must die!"**, argued 
+ renowned statistician Rafael Irizarry in his [blog](https://simplystatistics.org/2019/02/21/dynamite-plots-must-die/). 
+ Dynamite plots give very little information; the mean and standard errors just could be 
+ printed out. The outliers and overall distribution is hidden. Many scientists have chosen to use this boxplot with jittered points.
 
 >
 ```{exercise}
@@ -490,9 +503,15 @@ disMatarix <- dist(ma)
 plot(hclust(disMatarix))
 ```
 
-We first calculate a distance matrix using the **dist()** function with the default Euclidean distance method. The distance matrix is then used by the **hclust1()** function to generate a hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
+We first calculate a distance matrix using the **dist()** function with the default Euclidean 
+distance method. The distance matrix is then used by the **hclust1()** function to generate a 
+hierarchical clustering tree  with the default complete linkage method, which is then plotted in a nested command. 
 
-The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean distance, which is labeled vertically by the bar to the left side. Highly similar flowers are grouped together in smaller branches, and their distances can be found according to the vertical position of the branching point. We are often more interested in looking at the overall structure of the dendrogram. For example, we see two big clusters.
+The 150 samples of flowers are organized in this cluster dendrogram based on their Euclidean 
+distance, which is labeled vertically by the bar to the left side. Highly similar flowers are 
+grouped together in smaller branches, and their distances can be found according to the vertical 
+position of the branching point. We are often more interested in looking at the overall structure 
+of the dendrogram. For example, we see two big clusters.
 
 First, each of the flower samples is treated as a cluster. The algorithm joins
 the two most similar clusters based on a distance function. This is performed
@@ -573,9 +592,13 @@ We can gain many insights from Figure \@ref(fig:12-3). The 150 flowers in the ro
 
 
 ## Principal component analysis (PCA)
-This section can be skipped, as it contains more statistics than R programming. To visualize high-dimensional data, we use PCA to map data to l
+This section can be skipped, as it contains more statistics than R programming. 
+To visualize high-dimensional data, we use PCA to map data to lower dimensions.
 
-PCA is a linear dimension-reduction method. As illustrated in Figure \@ref(fig:13-4), it tries to define a new set of orthogonal coordinates to represent the data such that the new coordinates can be ranked by the amount of variation or information it captures in the dataset. After running PCA, you get many pieces of information: 
+PCA is a linear dimension-reduction method. As illustrated in Figure \@ref(fig:13-4), 
+it tries to define a new set of orthogonal coordinates to represent the data such that 
+the new coordinates can be ranked by the amount of variation or information it captures 
+in the dataset. After running PCA, you get many pieces of information: 
 
 -  How the new coordinates are defined, 
 -  The percentage of variances captured by each of the new coordinates,
@@ -587,7 +610,7 @@ PCA is a linear dimension-reduction method. As illustrated in Figure \@ref(fig:1
 knitr::include_graphics("images/img1304_PCA.png")
 ```
 
-Here's an example of running PCA on the first 4 columns of the iris data.
+Here  is an example of running PCA on the first 4 columns of the iris data.
 Note that "scale = TRUE" in the following
 command means that the data is normalized before conduction PCA so that each
 variable has unit variance.
@@ -621,7 +644,8 @@ ggplot(pcaData) +
   geom_point(size = 2) # adding data points
 ```
 
-Now we have a basic plot. We are adding elements one by one using the “+” sign at the end of the first line. We will add details to this plot. 
+Now we have a basic plot. We can add elements one by one using the “+” 
+sign at the end of the first line. We will add details to this plot. 
 
 (ref:13-5) PCA plot of the iris flower dataset using R base graphics (left) and ggplot2 (right).
 
@@ -635,22 +659,27 @@ ggplot(pcaData, aes(PC1, PC2, color = Species, shape = Species)) + # starting gg
   theme(aspect.ratio = 1) # width and height ratio
 ```
 
-The result (Figure \@ref(fig:13-5)) is a projection of the 4-dimensional iris flowering data on 2-dimensional space using the first two principal components. We can see that the first principal component alone is useful in distinguishing the three species. We could use simple rules like this: If PC1 <  -1, then Iris setosa. If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
+The result (Figure \@ref(fig:13-5)) is a projection of the 4-dimensional 
+iris flowering data on 2-dimensional space using the first two principal components. 
+We can see that the first principal component alone is useful in distinguishing the three species.
+ We could use simple rules like this: If PC1 <  -1, then Iris setosa. 
+ If PC1 > 1.5 then Iris virginica. If -1 < PC1 < 1, then Iris versicolor.
 
 
 >
 ```{exercise}
 
 >
-Create PCA plot of the state.x77 data set (convert matrix to data frame). Use the state.region information to color code the states. Interpret your results. Hint: do not forget normalization using the scale option. 
+Create PCA plot of the state.x77 data set (convert matrix to data frame). 
+Use the state.region information to color code the states. Interpret your results.
+Hint: do not forget normalization using the scale option. 
 ```
 
 ## Classification by predicting the odds of binary outcomes 
 This section can be skipped, as it contains more statistics than R programming.
-
 It is easy to distinguish *I. setosa* from the other two species, just based on
 petal length alone. Here we focus on building a predictive model that can
-predict between *I. versicolor* and *I. virginica*. For this we use the logistic
+predict between *I. versicolor* and *I. virginica*. For this purpose, we use the logistic
 regression to model the odds ratio of being *I. virginica* as a function of all
 of the 4 measurements:
 
