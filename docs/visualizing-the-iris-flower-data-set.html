@@ -24,7 +24,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi, and Rong Fan" />
 
 
-<meta name="date" content="2022-03-21" />
+<meta name="date" content="2022-03-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -490,8 +490,8 @@ add a main title.</p>
 <span id="cb13-3"><a href="visualizing-the-iris-flower-data-set.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> speciesID, <span class="co"># color</span></span>
 <span id="cb13-4"><a href="visualizing-the-iris-flower-data-set.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Petal length (cm)&quot;</span>, <span class="co"># x label</span></span>
 <span id="cb13-5"><a href="visualizing-the-iris-flower-data-set.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Petal width (cm)&quot;</span>, <span class="co"># y label</span></span>
-<span id="cb13-6"><a href="visualizing-the-iris-flower-data-set.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Petal width vs. length&quot;</span></span>
-<span id="cb13-7"><a href="visualizing-the-iris-flower-data-set.html#cb13-7" aria-hidden="true" tabindex="-1"></a>) <span class="co"># main title</span></span></code></pre></div>
+<span id="cb13-6"><a href="visualizing-the-iris-flower-data-set.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Petal width vs. length&quot;</span>  <span class="co"># title</span></span>
+<span id="cb13-7"><a href="visualizing-the-iris-flower-data-set.html#cb13-7" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
 <p><img src="book_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
 Note that this command spans many lines. Very long lines make it hard to read.
 The benefit of multiple lines is that we can clearly see each line contain a parameter.
@@ -518,13 +518,12 @@ This linear regression model is used to plot the trend line.</p>
 <p>The <em>paste</em> function glues two strings together. Then we use the <strong>text</strong> function to
 place strings at lower right by specifying the coordinate of (x=5, y=0.5).</p>
 
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="visualizing-the-iris-flower-data-set.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(PW <span class="sc">~</span> PL)) <span class="co"># add a regression line to the plot</span></span>
-<span id="cb17-2"><a href="visualizing-the-iris-flower-data-set.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>, <span class="fl">0.5</span>, <span class="fu">paste</span>(<span class="st">&quot;R=&quot;</span>, PCC)) <span class="co"># add text annotation.</span></span>
-<span id="cb17-3"><a href="visualizing-the-iris-flower-data-set.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="co"># specify the location of the legend</span></span>
-<span id="cb17-4"><a href="visualizing-the-iris-flower-data-set.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">levels</span>(iris<span class="sc">$</span>Species), <span class="co"># specify the levels of species</span></span>
-<span id="cb17-5"><a href="visualizing-the-iris-flower-data-set.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="co"># specify three symbols used for the three species</span></span>
-<span id="cb17-6"><a href="visualizing-the-iris-flower-data-set.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="co"># specify three colors for the three species</span></span>
-<span id="cb17-7"><a href="visualizing-the-iris-flower-data-set.html#cb17-7" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="visualizing-the-iris-flower-data-set.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">5</span>, <span class="fl">0.5</span>, <span class="fu">paste</span>(<span class="st">&quot;R=&quot;</span>, PCC)) <span class="co"># add text annotation.</span></span>
+<span id="cb17-2"><a href="visualizing-the-iris-flower-data-set.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="co"># specify the location of the legend</span></span>
+<span id="cb17-3"><a href="visualizing-the-iris-flower-data-set.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">levels</span>(iris<span class="sc">$</span>Species), <span class="co"># specify the levels of species</span></span>
+<span id="cb17-4"><a href="visualizing-the-iris-flower-data-set.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="co"># specify three symbols used for the three species</span></span>
+<span id="cb17-5"><a href="visualizing-the-iris-flower-data-set.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="co"># specify three colors for the three species</span></span>
+<span id="cb17-6"><a href="visualizing-the-iris-flower-data-set.html#cb17-6" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:23-5"></span>
 <img src="book_files/figure-html/23-5-1.png" alt="A refined scatter plot using base R graphics." width="80%" />
 <p class="caption">
@@ -1048,6 +1047,13 @@ increase in petal length will increase the log-odds of being <em>virginica</em> 
 logistic regression, do not worry about it too much. In this class, I
 just want to show you how to do these analyses in R and interpret the results. I
 do not understand how computers work. Yet I <strong>use</strong> it every day.</p>
+<p>The best way to learn R is to use it. After the first two chapters, it is entirely
+possible to start working on a your own dataset.
+If you do not have a dataset, you can find one from sources
+such as <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a>.<br />
+You do not need to finish the rest of this book.
+Set a goal or a research question. Feel free to search for
+and steal some example code.</p>
 <blockquote>
 
 <div class="exercise">
