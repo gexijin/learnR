@@ -112,7 +112,7 @@ Tidyverse is collection of powerful R packages. The packages include ggplot2, dp
 install.packages("dplyr") 
 ```
 
-``` {r message = FALSE}
+``` {r message = FALSE, warning = FALSE}
 library(dplyr)
 ```
 
@@ -158,7 +158,7 @@ iris %>%
 Here we created a new data frame with the mean sepal length and sepal width for each of the 3 species. Obviously, we can change **mean**( ) to many other functions. This makes it very easy to summarize large data sets. 
 
 Note:
-For all the following exercises, you need to do them by using R Markdown. You should submit your .Rmd file and the final document with pdf format. (You do not submit any answer key for these exercises. )
+For all the following exercises, you need to do them by using R Markdown. You should submit your .Rmd file and the final document with pdf format. (You do not submit any answer key for these exercises.)
 
 >
 ```{exercise}
@@ -327,8 +327,8 @@ titl <- paste("Histogram of", **input$cid**, sep = " ")
 hist(x, breaks = bins, col = 'green', border = 'white', main = _______)
 ```
 >
-```{r echo=F, out.width = "80%", fig.cap = "Histogram output" , fig.align='center'}
-knitr::include_graphics("images/Ch7_Adv_top_27.PNG")
+```{r echo=FALSE, out.width = "80%", fig.cap = "Histogram output" , fig.align='center'}
+knitr::include_graphics("images/Ch7_Adv_top_27.png")
 ```
 
 
@@ -629,13 +629,13 @@ evencount(x) # Call the function evencount(). Replace vec with defined vector x.
 
 A variable is called local variable if it is only visible within a function. Such as *k* and *vec* are local variables to the function **evencount()**. They disappear after the function returns.
 
+```{r}
 k
+```
 
-Error: object 'vec' not found
-
+```{r}
 vec
-
-Error: object 'vec' not found
+```
 
 A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:
 
