@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Advanced topics | Learn R through examples</title>
   <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome." />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Advanced topics | Learn R through examples" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Xijin Ge, Jianli Qi, and Rong Fan" />
 
 
-<meta name="date" content="2023-10-23" />
+<meta name="date" content="2024-01-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,8 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
@@ -126,6 +126,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 </head>
 
@@ -140,7 +144,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming–the iris flower dataset</a>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html"><i class="fa fa-check"></i><b>1</b> Step into R programming:The iris flower dataset</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
 <li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#the-proper-way-of-using-rstudio"><i class="fa fa-check"></i><b>1.2</b> The proper way of using RStudio</a></li>
@@ -149,7 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-categorical-variable"><i class="fa fa-check"></i><b>1.5</b> Analyzing a categorical variable</a></li>
 <li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#the-relationship-between-two-numerical-variables"><i class="fa fa-check"></i><b>1.6</b> The relationship between two numerical variables</a></li>
 <li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups"><i class="fa fa-check"></i><b>1.7</b> Testing the differences between two groups</a></li>
-<li class="chapter" data-level="1.8" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-the-difference-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.8</b> Testing the difference among multiple groups (ANOVA)</a></li>
+<li class="chapter" data-level="1.8" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="step-into-r-programmingthe-iris-flower-dataset.html#testing-differences-among-multiple-groups-anova"><i class="fa fa-check"></i><b>1.8</b> Testing differences among multiple groups (ANOVA)</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a>
 <ul>
@@ -160,28 +164,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#other-types-of-plots-with-ggplot2"><i class="fa fa-check"></i><b>2.5</b> Other types of plots with ggplot2</a></li>
 <li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map"><i class="fa fa-check"></i><b>2.6</b> Hierarchical clustering and heat map</a></li>
 <li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>2.7</b> Principal component analysis (PCA)</a></li>
-<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#classification-by-predicting-the-odds-of-binary-outcomes"><i class="fa fa-check"></i><b>2.8</b> Classification by predicting the odds of binary outcomes</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="visualizing-the-iris-flower-data-set.html#logistic-regression-for-binary-outcomes-prediction"><i class="fa fa-check"></i><b>2.8</b> Logistic Regression for Binary Outcomes Prediction</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data-structures.html"><a href="data-structures.html#expressions"><i class="fa fa-check"></i><b>3.1.1</b> Expressions</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data-structures.html"><a href="data-structures.html#logical-values"><i class="fa fa-check"></i><b>3.1.2</b> Logical Values</a></li>
+<li class="chapter" data-level="3.1.3" data-path="data-structures.html"><a href="data-structures.html#variables"><i class="fa fa-check"></i><b>3.1.3</b> Variables</a></li>
+<li class="chapter" data-level="3.1.4" data-path="data-structures.html"><a href="data-structures.html#functions"><i class="fa fa-check"></i><b>3.1.4</b> Functions</a></li>
+<li class="chapter" data-level="3.1.5" data-path="data-structures.html"><a href="data-structures.html#seeking-help-and-example-code"><i class="fa fa-check"></i><b>3.1.5</b> Seeking help and example Code</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.1</b> Matrices</a></li>
-<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.2</b> Data Frames</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
-<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.4</b> Lists</a></li>
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="data-structures.html#vectors"><i class="fa fa-check"></i><b>3.2.1</b> Vectors</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.2</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.3</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.4</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.5" data-path="data-structures.html"><a href="data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.5</b> Lists</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.1</b> Import data files</a></li>
-<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.2</b> Check and convert data types</a></li>
-<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.3</b> Close a project when you are done</a></li>
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#create-a-script-file-and-comment-please"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file (and Comment, Please!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#reading-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.2</b> Reading files directly using read.table</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#read-files-directly-using-read.table"><i class="fa fa-check"></i><b>4.2</b> Read files directly using read.table</a></li>
 <li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#general-procedure-to-read-data-into-r"><i class="fa fa-check"></i><b>4.3</b> General procedure to read data into R:</a></li>
 <li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.4</b> Enter data manually</a></li>
 <li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="importing-data-and-managing-files.html#data-manipulation-in-a-data-frame"><i class="fa fa-check"></i><b>4.5</b> Data manipulation in a data frame</a></li>
@@ -189,11 +204,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
-<li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
-<li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
-<li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
-<li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+<li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-individually"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column individually</a></li>
+<li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns</a></li>
+<li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-categorical-variables"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables</a></li>
+<li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables</a></li>
+<li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="the-heart-attack-data-set-i.html#associations-between-multiple-columns"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a>
 <ul>
@@ -201,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
 <li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
 <li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
-<li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+<li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="the-heart-attack-dataset-ii.html#statistical-models-easy-to-run-tricky-to-interpret"><i class="fa fa-check"></i><b>6.5</b> Statistical models: Easy to Run, tricky to interpret!</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a>
 <ul>
@@ -210,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="advanced-topics.html#interactive-plots-made-easy-with-plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
 <li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console."><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package by typing this in the console.</a></li>
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="advanced-topics.html#install-the-shiny-package"><i class="fa fa-check"></i><b>7.4.1</b> Install the Shiny package</a></li>
 <li class="chapter" data-level="7.4.2" data-path="advanced-topics.html"><a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake"><i class="fa fa-check"></i><b>7.4.2</b> Create a Shiny web app is a piece of cake</a></li>
 <li class="chapter" data-level="7.4.3" data-path="advanced-topics.html"><a href="advanced-topics.html#lets-play"><i class="fa fa-check"></i><b>7.4.3</b> Let’s play!</a></li>
 <li class="chapter" data-level="7.4.4" data-path="advanced-topics.html"><a href="advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.4</b> Publish your app</a></li>
@@ -228,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#reading-in-data-and-manage-data"><i class="fa fa-check"></i><b>9.1</b> Reading in data and manage data</a></li>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#reading-in-data-and-managing-the-dataset"><i class="fa fa-check"></i><b>9.1</b> Reading in data and managing the dataset</a></li>
 <li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#visualization-of-categorical-variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
 <li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#correlation-among-numeric-variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
 <li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
@@ -242,14 +257,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
 <li class="chapter" data-level="9.5.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-to-priciple-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type to priciple components</a></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#effect-of-platform-type-on-principle-components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type on principle components</a></li>
 <li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
 <li class="chapter" data-level="9.8" data-path="the-game-sales-dataset.html"><a href="the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#read-in-and-clean-data"><i class="fa fa-check"></i><b>10.1</b> Read in and clean data</a></li>
-<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#information-about-the-variables"><i class="fa fa-check"></i><b>10.2</b> Information about the variables</a>
+<li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#data-preparation-and-cleaning"><i class="fa fa-check"></i><b>10.1</b> Data Preparation and Cleaning</a></li>
+<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#variable-analysis"><i class="fa fa-check"></i><b>10.2</b> Variable Analysis</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
 <li class="chapter" data-level="10.2.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
@@ -262,10 +277,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
 <li class="chapter" data-level="10.3.3" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-type"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income type</a>
+<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#analysis-of-gross-income-types"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income types</a>
 <ul>
-<li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#gross-type"><i class="fa fa-check"></i><b>10.4.1</b> Gross Type</a></li>
-<li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#ethnic-and-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> Ethnic and Sex and age</a></li>
+<li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#defining-gross-income-types"><i class="fa fa-check"></i><b>10.4.1</b> Defining Gross income types</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#the-intersection-of-ethnic-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> The Intersection of Ethnic, Sex and age</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#lm-and-anova-analysis"><i class="fa fa-check"></i><b>10.5</b> LM and ANOVA analysis</a></li>
 <li class="chapter" data-level="10.6" data-path="the-messy-salary-data.html"><a href="the-messy-salary-data.html#conclusion-2"><i class="fa fa-check"></i><b>10.6</b> Conclusion</a></li>
@@ -297,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="https://github.com/gexijin/learnR/raw/master/images/RMarkdown.gif" alt="Animated GIF for R Markdown" />
 <div class="figcaption">Animated GIF for R Markdown</div>
 </div>
-<p>Let’s start learning R Markdown from its cheat sheet. Click the RStudio IDE under <em>Help <span class="math inline">\(\rightarrow\)</span> Cheatsheets <span class="math inline">\(\rightarrow\)</span> R Markdown Cheat Sheet.</em> As the cheat sheet explained, the R Markdown (.Rmd) file can combine your code and the output in one file, and produce various formats, such as html, pdf, MS Word, or RTF documents.</p>
+<p>Let’s start learning R Markdown from its cheat sheet. Here’s a fun and simple way to start: Click the RStudio IDE and navigate to <em>Help <span class="math inline">\(\rightarrow\)</span> Cheatsheets <span class="math inline">\(\rightarrow\)</span> R Markdown Cheat Sheet.</em> As the cheat sheet explained, the R Markdown (.Rmd) file can combine your code and the output in one file, and produce documents in various formats, such as html, pdf, MS Word, or RTF.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label0"></span>
 <img src="images/Ch7_Adv_top_0.PNG" alt="R Markdown Cheat Sheet" width="80%" />
@@ -305,7 +320,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 7.1: R Markdown Cheat Sheet
 </p>
 </div>
-<p>To create an R Markdown file by the following process, firstly, you need to open a new .Rmd file at File <span class="math inline">\(\rightarrow\)</span> New File <span class="math inline">\(\rightarrow\)</span>. In the open window, feel free to change the <strong>Title</strong>. For example, you can change the <strong>Untitled</strong> to <strong>MyFirstRmd</strong>. Then choose the default output format from the three options: HTML, PDF or WORD. Then click “OK” .</p>
+<p>Here is how to create an R Markdown file: Firstly, you need to open a new .Rmd file at File <span class="math inline">\(\rightarrow\)</span> New File <span class="math inline">\(\rightarrow\)</span>. Then, in the open window, feel free to change the <strong>Title</strong>. For example, you can change the <strong>Untitled</strong> to <strong>MyFirstRmd</strong>. Third, choose the default output format from the three options: HTML, PDF or WORD. Then click “OK” .</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label1"></span>
 <img src="images/Ch7_Adv_top_1.PNG" alt="Create a new RMarkdown file" width="80%" />
@@ -313,8 +328,8 @@ Figure 7.1: R Markdown Cheat Sheet
 Figure 7.2: Create a new RMarkdown file
 </p>
 </div>
-<p>A new .Rmd file named MyFirstRmd.Rmd is created.</p>
-<p>The first part of the file is YAML (Yet Another Markup Language) header. The YAML header is surrounded by dashes “-” . See Figure <a href="advanced-topics.html#fig:label2">7.3</a>. It specifies the key arguments for the document, such as <strong>title</strong>, <strong>author</strong>, <strong>date</strong>, and output format. The output format is html in the example. You may see the <strong>output: pdf_document</strong>, which means that the default format you have chosen is <strong>PDF</strong> when you created the file.</p>
+<p>Congratulations, you now have a new file named MyFirstRmd.Rmd.</p>
+<p>The first part of the file is YAML (Yet Another Markup Language) header, which is surrounded by dashes “-” . As shown in Figure <a href="advanced-topics.html#fig:label2">7.3</a>, it specifies the key arguments for the document, such as <strong>title</strong>, <strong>author</strong>, <strong>date</strong>, and output format. If it says <strong>output: pdf_document</strong>, congratulations, you have chosen <strong>PDF</strong> as the default format for your create file.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label2"></span>
 <img src="images/Ch7_Adv_top_2.PNG" alt="YAML Header" width="80%" />
@@ -322,7 +337,7 @@ Figure 7.2: Create a new RMarkdown file
 Figure 7.3: YAML Header
 </p>
 </div>
-<p>The second part of an .Rmd file is surrounded by three back ticks “`” . They are called chunks of R. Figure <a href="advanced-topics.html#fig:label3">7.4</a> is an example of a chunk. The “nm_cars” after r in the { } is the name of the chunk.</p>
+<p>The second part of an .Rmd file is called chunks of R, surrounded by three back ticks “`”. Figure <a href="advanced-topics.html#fig:label3">7.4</a> is an example of a chunk. The “nm_cars” after r in the { } is the name of the chunk.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label3"></span>
 <img src="images/Ch7_Adv_top_3.PNG" alt="Chunk of R" width="45%" />
@@ -330,7 +345,7 @@ Figure 7.3: YAML Header
 Figure 7.4: Chunk of R
 </p>
 </div>
-<p>A chunk is a collection of r code. You can run each chunk by clicking the right arrow on the top-right of the chunk or by pressing the shortcut Ctrl+Shift+Enter. Then R executes the code and displays the outputs inline with the code. The output of chunk in Figure <a href="advanced-topics.html#fig:label3">7.4</a> is shown below.</p>
+<p>A chunk is a collection of r code. You can run each chunk by clicking the right arrow on the top-right or using the Ctrl+Shift+Enter shortcut. R executes the code and displays the outputs along with the code，as illustrated in Figure <a href="advanced-topics.html#fig:label3">7.4</a>.</p>
 <pre><code>##      speed           dist       
 ##  Min.   : 4.0   Min.   :  2.00  
 ##  1st Qu.:12.0   1st Qu.: 26.00  
@@ -338,48 +353,49 @@ Figure 7.4: Chunk of R
 ##  Mean   :15.4   Mean   : 42.98  
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
 ##  Max.   :25.0   Max.   :120.00</code></pre>
-<p>You can find many options for chunks in the R Markdown Cheat Sheet. let’s take a look at some of the chunk options that you’ll use frequently.</p>
-<p>1, <strong>eval = FALSE</strong> stops code from being evaluated. See the chunk below which displays the code only. The code won’t be evaluated and therefore does not have any result in the final document.</p>
+<p>Many chunk options are available in the R Markdown Cheat Sheet. let’s explore some common chunk options that you’ll use frequently.</p>
+<p>1, <strong>eval = FALSE</strong> behaves like a display case, showing the code but not evaluating it. The final document will only show the code, sans results.</p>
 <p><img src="images/Ch7_Adv_top_6.PNG" width="50%" /></p>
-<p>2, <strong>include = FALSE</strong> runs the code, but does not display the code or result in the final document.</p>
+<p>2, <strong>include = FALSE</strong> is like a ninja, running the code, without displaying the code or result in the final document.</p>
 <p><img src="images/Ch7_Adv_top_7.PNG" width="50%" /></p>
-<p>3, <strong>echo = FALSE</strong> hides the code from the final document, and only presents the output obtained from the chunk.</p>
+<p>3, <strong>echo = FALSE</strong> acts like a stagehand, hiding the code from the final document, and revealing only the output.</p>
 <p><img src="images/Ch7_Adv_top_8.PNG" width="50%" /></p>
-<p>Another chunk below displays only the plot in the final document. The code does not show up in the final document since the <code>echo = FALSE</code> parameter was added to the code chunk.</p>
+<p>Another chunk below displays only the plot in the final document. The code does not show up since the <code>echo = FALSE</code> parameter was added to the code chunk.</p>
 <p><img src="images/Ch7_Adv_top_9.PNG" width="50%" /></p>
-<p>4, <strong>message = FALSE</strong> prevents messages from apprearing in the final document.</p>
-<p>5, <strong>warning = FALSE</strong> prevents warnings from showing up in the final document.</p>
-<p>6, <strong>results = ‘hide’</strong> hides printed output.</p>
-<p>7, <strong>fig.show = ‘hide’</strong> hides plots.</p>
-<p>8, <strong>error = TRUE</strong> allows the render to continue even if code returns an error.</p>
-<p>The third part of an .Rmd file is the text mixed with symbols like # or *.</p>
+<p>4, <strong>message = FALSE</strong> prevents messages from appearing in the final document.</p>
+<p>5, <strong>warning = FALSE</strong> is like a “Do Not Disturb” sign, preventing warnings from showing up in the final document.</p>
+<p>6, <strong>results = ‘hide’</strong> is a bit of a tease, Concealing printed output.</p>
+<p>7, <strong>fig.show = ‘hide’</strong> is like a magician, hiding plots in sleeve and out of sight.</p>
+<p>8, <strong>error = TRUE</strong> acts as a brave soul, allowing the render to continue even if code returns an error.</p>
+<p>The third part of an .Rmd file included the text mixed with symbols like # or *.</p>
 <p><img src="images/Ch7_Adv_top_4.PNG" width="100%" /></p>
-<p>You can type your text like how you do in MS Word files. The pound symbol <strong>#</strong> implies a heading. The number of pounders indicates the heading level, it runs from 1 to 6. One <strong>#</strong> presents the first level header, two <strong>#</strong>s imply the second level header, and etc. Here is an output of various level headers.</p>
+<p>You can type your text like how you do in MS Word. The pound symbol <strong>#</strong> implies a heading. The number of pounds indicates the heading level; It runs from 1 to 6. One <strong>#</strong> presents the first level header, two <strong>#</strong>s imply the second level header, and etc. Here is an output displaying various levels.</p>
 <p><img src="images/Ch7_Adv_top_5.PNG" width="60%" /></p>
-<p>The symbol * around a word before and after will give an italic text format. Two *s around a word before and after will bold the word. Such as, *Italic* and **bold** will be <em>Italic</em> and <strong>bold</strong> in the output file.</p>
-<p>The last step is to obtain the output by clicking the <strong>Knit</strong> button on the top of the .Rmd file. You will be asked to name the file and save it to your PC if it is the first time you knit the file. Do as instructed, then an output file will be opened automatically.</p>
+<p>To italicize a word, surround it with a single asterisk: *Italic* becomes <em>Italic</em>. For bolding, use two asterisks: **bold** turns into <strong>bold</strong>.</p>
+<p>The final step is to obtain the whole output by clicking the <strong>Knit</strong> button on the top of the .Rmd file. You will be asked to name the file and save it to your PC if it is the first time you knit the file.</p>
+<p>Follow these simple steps as instructed, your output file will magically appear on your screen.</p>
 </div>
 <div id="tidyverse" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Tidyverse<a href="advanced-topics.html#tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Tidyverse is collection of powerful R packages. The packages include ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these powerful packages are designed to make R code easier to read. As they are more intuitive, some people argue that beginners should start by learning them, instead of the base R. Now let’s explain the dplyr package in a little detail for manipulating iris data set.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="advanced-topics.html#cb2-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) </span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="advanced-topics.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
-<p>In dplyr, we use the pipe operator %&gt;% to send data to the next stage. This is similar to the “+” operator we used in ggplot2. To create a new data frame for setosa with sepals longer than 4.0:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="advanced-topics.html#cb4-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="advanced-topics.html#cb4-2" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, Sepal.Length <span class="sc">&gt;</span> <span class="dv">4</span>)</span></code></pre></div>
-<p>Add a new column that contains the ratios of sepal length to sepal width:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="advanced-topics.html#cb5-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="advanced-topics.html#cb5-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width)</span></code></pre></div>
+<p>Tidyverse is a collection of powerful R packages, including superheros like ggplot2, dplyr, readr, purr, tidyr, and tibble. They were all written by Hadley Wickham, a true hero in the open-source R world. Following the same design philosophy and grammar, these mighty packages are designed to make R code more readable, intuitive, and just plain fun. As they are so user-friendly, some people argue that beginners should start by learning them, instead of the base R. Now let’s explain the dplyr package in a little detail using the classic iris data set.</p>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="advanced-topics.html#cb750-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="advanced-topics.html#cb751-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>In dplyr, we use the pipe operator ‘%&gt;%’ like a magic wand, sending data to the next stage. This is similar to the “+” operator we used in ggplot2 but for data manipulation. For example: to create a new data frame for setosa with sepals longer than 4.0:</p>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb752-1"><a href="advanced-topics.html#cb752-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb752-2"><a href="advanced-topics.html#cb752-2" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>, Sepal.Length <span class="sc">&gt;</span> <span class="dv">4</span>)</span></code></pre></div>
+<p>Add a new column for the ratios of sepal length to sepal width:</p>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="advanced-topics.html#cb753-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb753-2"><a href="advanced-topics.html#cb753-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width)</span></code></pre></div>
 <p>Sort by sepal length in ascending order:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="advanced-topics.html#cb6-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a href="advanced-topics.html#cb6-2" tabindex="-1"></a>  <span class="fu">arrange</span>(Sepal.Length)</span></code></pre></div>
-<p>The power of dplyr is that we can connect these pipe operators to define a work flow. Suppose we want to see the Iris setosa flowers with the largest ratio of sepal length to sepal width.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="advanced-topics.html#cb7-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="advanced-topics.html#cb7-2" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>) <span class="sc">%&gt;%</span>                  <span class="co"># filter rows</span></span>
-<span id="cb7-3"><a href="advanced-topics.html#cb7-3" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Sepal.Width) <span class="sc">%&gt;%</span>            <span class="co"># select two columns </span></span>
-<span id="cb7-4"><a href="advanced-topics.html#cb7-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width) <span class="sc">%&gt;%</span>   <span class="co"># add a new column</span></span>
-<span id="cb7-5"><a href="advanced-topics.html#cb7-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ratio))   <span class="sc">%&gt;%</span>                       <span class="co"># sort in descending order</span></span>
-<span id="cb7-6"><a href="advanced-topics.html#cb7-6" tabindex="-1"></a>  <span class="fu">head</span>()   <span class="co"># only show top rows. No more pipes, end of sequence.</span></span></code></pre></div>
+<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="advanced-topics.html#cb754-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb754-2"><a href="advanced-topics.html#cb754-2" tabindex="-1"></a>  <span class="fu">arrange</span>(Sepal.Length)</span></code></pre></div>
+<p>The power of dplyr is that we can connect these pipe operators to define a work flow. Imagine we’re looking for the Iris setosa flowers with the largest sepal ratio.</p>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb755-1"><a href="advanced-topics.html#cb755-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb755-2"><a href="advanced-topics.html#cb755-2" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;setosa&quot;</span>) <span class="sc">%&gt;%</span>                  <span class="co"># Filter rows</span></span>
+<span id="cb755-3"><a href="advanced-topics.html#cb755-3" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Sepal.Width) <span class="sc">%&gt;%</span>            <span class="co"># Select two columns </span></span>
+<span id="cb755-4"><a href="advanced-topics.html#cb755-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ratio =</span> Sepal.Length <span class="sc">/</span> Sepal.Width) <span class="sc">%&gt;%</span>   <span class="co"># Add a new column</span></span>
+<span id="cb755-5"><a href="advanced-topics.html#cb755-5" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(ratio))   <span class="sc">%&gt;%</span>                       <span class="co"># Sort in descending order</span></span>
+<span id="cb755-6"><a href="advanced-topics.html#cb755-6" tabindex="-1"></a>  <span class="fu">head</span>()   <span class="co"># Show top rows. No more pipes, end of sequence.</span></span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width    ratio
 ## 1          4.5         2.3 1.956522
 ## 2          5.0         3.0 1.666667
@@ -387,32 +403,32 @@ Figure 7.4: Chunk of R
 ## 4          4.8         3.0 1.600000
 ## 5          4.8         3.0 1.600000
 ## 6          5.4         3.4 1.588235</code></pre>
-<p><strong>filter</strong>( ), <strong>mutate</strong>( ) and <strong>arrange</strong>( ) are 3 <strong>“verbs”</strong> that operate on the data frame sequentially. <strong>head</strong>( ) is the function that only shows the top rows. Notice the pipe operator %&gt;% at the end of each line. This code is much easier to read by humans, as it defines a sequence of operations.</p>
-<p>Two other useful verbs are <strong>group_by</strong>( ) and <strong>summarise</strong>( ). They can be used to generate summary statistics. Below, we use group_by to split the data frame into 3 data frames by the species information, compute the mean of sepal lengths and width, and then combine. So it is <strong>“split-apply-combine”</strong>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="advanced-topics.html#cb9-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="advanced-topics.html#cb9-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)  <span class="sc">%&gt;%</span>  <span class="co"># split by Species </span></span>
-<span id="cb9-3"><a href="advanced-topics.html#cb9-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avgSL =</span> <span class="fu">mean</span>(Sepal.Length), <span class="at">avgSW =</span> <span class="fu">mean</span>(Sepal.Width)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="advanced-topics.html#cb9-4" tabindex="-1"></a>  <span class="fu">arrange</span>(avgSL)</span></code></pre></div>
+<p>Here, <strong>filter</strong>( ), <strong>mutate</strong>( ) and <strong>arrange</strong>( ) are 3 magical <strong>“verbs”</strong> that operate on the data frame sequentially. <strong>head</strong>( ) is the function that only shows the top rows. Notice the pipe operator ‘%&gt;%’ at the end of each line, leading us through the enchantment sequence, making the code a delight to read.</p>
+<p>Two other useful verbs are <strong>group_by</strong>( ) and <strong>summarise</strong>( ), perfect for generating summary statistics. Below, we use group_by to split the dataset into 3 groups by the species, compute the means of sepal length and width, and then recombine. It is a <strong>“split-apply-combine”</strong> magic.</p>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="advanced-topics.html#cb757-1" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb757-2"><a href="advanced-topics.html#cb757-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Species)  <span class="sc">%&gt;%</span>  <span class="co"># Split by Species </span></span>
+<span id="cb757-3"><a href="advanced-topics.html#cb757-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avgSL =</span> <span class="fu">mean</span>(Sepal.Length), <span class="at">avgSW =</span> <span class="fu">mean</span>(Sepal.Width)) <span class="sc">%&gt;%</span> </span>
+<span id="cb757-4"><a href="advanced-topics.html#cb757-4" tabindex="-1"></a>  <span class="fu">arrange</span>(avgSL)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   Species    avgSL avgSW
 ##   &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
 ## 1 setosa      5.01  3.43
 ## 2 versicolor  5.94  2.77
 ## 3 virginica   6.59  2.97</code></pre>
-<p>Here we created a new data frame with the mean sepal length and sepal width for each of the 3 species. Obviously, we can change <strong>mean</strong>( ) to many other functions. This makes it very easy to summarize large data sets.</p>
-<p>Note:
-For all the following exercises, you need to do them by using R Markdown. You should submit your .Rmd file and the final document with pdf format. (You do not submit any answer key for these exercises.)</p>
+<p>Here we’ve created a bouquet of new data frames, each displaying the mean sepal length and sepal width for each species. Obviously, we can change <strong>mean</strong>( ) to many other functions. This makes it very easy to summarize large data sets.</p>
+<p>Exercise Instructions:
+For all the following exercises, you need to use R Markdown. Please submit both your .Rmd file and the final document in pdf format. (No answer key is required.)</p>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-14}</p>
+<p>::: {.exercise #unnamed-chunk-406}</p>
 </blockquote>
 <blockquote>
-<p>Fill in the blanks. Hint: Build your code step by step. Test each step to make sure they work separately as desired. You can use the <strong>head</strong> or <strong>summary</strong> function at the end to examine if the desired data is produced.</p>
+<p>Fill in the blanks. Hint: Build your code piece by piece, testing each step. Use <strong>head</strong> or <strong>summary</strong> to check your work.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Read in the heart attack data same as you used in chapter 4. Insert Your own Path there.<br />
+<li>Read in the heart attack data from chapter 4. Insert Your own Path there.<br />
 </li>
 <li>Calculate the average cost per day for patients with different DIAGNOSIS codes.<br />
 </li>
-<li>Restrict to females aged older than 20 and younger than 70 who stayed at least one day.<br />
+<li>Focus on females older than 20 and younger than 70 who stayed in the hospital at least one day.<br />
 </li>
 <li>Sort the results in descending order.</li>
 <li>Use one command with multiple steps.</li>
@@ -433,82 +449,84 @@ For all the following exercises, you need to do them by using R Markdown. You sh
 </div>
 <div id="interactive-plots-made-easy-with-plotly" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Interactive plots made easy with Plotly<a href="advanced-topics.html#interactive-plots-made-easy-with-plotly" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="advanced-topics.html#cb11-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="advanced-topics.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb12-2"><a href="advanced-topics.html#cb12-2" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Width, Petal.Length , <span class="at">color =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span>
-<span id="cb12-3"><a href="advanced-topics.html#cb12-3" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
-<div id="htmlwidget-0c34467991b5e2012c92" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0c34467991b5e2012c92">{"x":{"data":[{"x":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.1<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.0<br />Species: setosa","Petal.Width: 0.5<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.6<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 3.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.7<br />Petal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.8<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.7<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.0<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Petal.Width: 2.5<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 6.6<br />Species: virginica","Petal.Width: 1.7<br />Petal.Length: 4.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.9<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.6<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.4<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.02,2.62],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.5,2,2.5],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Petal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"50bc7ac87298":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"50bc7ac87298","visdat":{"50bc7ac87298":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<p>We first generated the plot using ggplot2 and stored it in an object g, which is rendered interactive with Plotly. If you mouse over the plot, the values are highlighted. You can also select an area on the chart to zoom in.</p>
+<p>Ever wished your ggplot2 creations could come alive? Let’s dive into ‘plotly’.</p>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb759-1"><a href="advanced-topics.html#cb759-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="advanced-topics.html#cb760-1" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb760-2"><a href="advanced-topics.html#cb760-2" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(Petal.Width, Petal.Length , <span class="at">color =</span> Species)) <span class="sc">+</span> <span class="fu">geom_point</span>() </span>
+<span id="cb760-3"><a href="advanced-topics.html#cb760-3" tabindex="-1"></a><span class="fu">ggplotly</span>(g)</span></code></pre></div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ef9e2158af55fbe472c8" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-ef9e2158af55fbe472c8">{"x":{"data":[{"x":[0.20000000000000001,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.40000000000000002,0.29999999999999999,0.20000000000000001,0.20000000000000001,0.10000000000000001,0.20000000000000001,0.20000000000000001,0.10000000000000001,0.10000000000000001,0.20000000000000001,0.40000000000000002,0.40000000000000002,0.29999999999999999,0.29999999999999999,0.29999999999999999,0.20000000000000001,0.40000000000000002,0.20000000000000001,0.5,0.20000000000000001,0.20000000000000001,0.40000000000000002,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.40000000000000002,0.10000000000000001,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.10000000000000001,0.20000000000000001,0.20000000000000001,0.29999999999999999,0.29999999999999999,0.20000000000000001,0.59999999999999998,0.40000000000000002,0.29999999999999999,0.20000000000000001,0.20000000000000001,0.20000000000000001,0.20000000000000001],"y":[1.3999999999999999,1.3999999999999999,1.3,1.5,1.3999999999999999,1.7,1.3999999999999999,1.5,1.3999999999999999,1.5,1.5,1.6000000000000001,1.3999999999999999,1.1000000000000001,1.2,1.5,1.3,1.3999999999999999,1.7,1.5,1.7,1.5,1,1.7,1.8999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.3999999999999999,1.6000000000000001,1.6000000000000001,1.5,1.5,1.3999999999999999,1.5,1.2,1.3,1.3999999999999999,1.3,1.5,1.3,1.3,1.3,1.6000000000000001,1.8999999999999999,1.3999999999999999,1.6000000000000001,1.3999999999999999,1.5,1.3999999999999999],"text":["Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.1<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.0<br />Species: setosa","Petal.Width: 0.5<br />Petal.Length: 1.7<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.2<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.1<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.3<br />Species: setosa","Petal.Width: 0.6<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.4<br />Petal.Length: 1.9<br />Species: setosa","Petal.Width: 0.3<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.6<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.5<br />Species: setosa","Petal.Width: 0.2<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.3999999999999999,1.5,1.5,1.3,1.5,1.3,1.6000000000000001,1,1.3,1.3999999999999999,1,1.5,1,1.3999999999999999,1.3,1.3999999999999999,1.5,1,1.5,1.1000000000000001,1.8,1.3,1.5,1.2,1.3,1.3999999999999999,1.3999999999999999,1.7,1.5,1,1.1000000000000001,1,1.2,1.6000000000000001,1.5,1.6000000000000001,1.5,1.3,1.3,1.3,1.2,1.3999999999999999,1.2,1,1.3,1.2,1.3,1.3,1.1000000000000001,1.3],"y":[4.7000000000000002,4.5,4.9000000000000004,4,4.5999999999999996,4.5,4.7000000000000002,3.2999999999999998,4.5999999999999996,3.8999999999999999,3.5,4.2000000000000002,4,4.7000000000000002,3.6000000000000001,4.4000000000000004,4.5,4.0999999999999996,4.5,3.8999999999999999,4.7999999999999998,4,4.9000000000000004,4.7000000000000002,4.2999999999999998,4.4000000000000004,4.7999999999999998,5,4.5,3.5,3.7999999999999998,3.7000000000000002,3.8999999999999999,5.0999999999999996,4.5,4.5,4.7000000000000002,4.4000000000000004,4.0999999999999996,4,4.4000000000000004,4.5999999999999996,4,3.2999999999999998,4.2000000000000002,4.2000000000000002,4.2000000000000002,4.2999999999999998,3,4.0999999999999996],"text":["Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 3.6<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.9<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.8<br />Species: versicolor","Petal.Width: 1.7<br />Petal.Length: 5.0<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.5<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.8<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.7<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 3.9<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 5.1<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.6<br />Petal.Length: 4.5<br />Species: versicolor","Petal.Width: 1.5<br />Petal.Length: 4.7<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.4<br />Species: versicolor","Petal.Width: 1.4<br />Petal.Length: 4.6<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.0<br />Species: versicolor","Petal.Width: 1.0<br />Petal.Length: 3.3<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.2<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.2<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.3<br />Species: versicolor","Petal.Width: 1.1<br />Petal.Length: 3.0<br />Species: versicolor","Petal.Width: 1.3<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.5,1.8999999999999999,2.1000000000000001,1.8,2.2000000000000002,2.1000000000000001,1.7,1.8,1.8,2.5,2,1.8999999999999999,2.1000000000000001,2,2.3999999999999999,2.2999999999999998,1.8,2.2000000000000002,2.2999999999999998,1.5,2.2999999999999998,2,2,1.8,2.1000000000000001,1.8,1.8,1.8,2.1000000000000001,1.6000000000000001,1.8999999999999999,2,2.2000000000000002,1.5,1.3999999999999999,2.2999999999999998,2.3999999999999999,1.8,1.8,2.1000000000000001,2.3999999999999999,2.2999999999999998,1.8999999999999999,2.2999999999999998,2.5,2.2999999999999998,1.8999999999999999,2,2.2999999999999998,1.8],"y":[6,5.0999999999999996,5.9000000000000004,5.5999999999999996,5.7999999999999998,6.5999999999999996,4.5,6.2999999999999998,5.7999999999999998,6.0999999999999996,5.0999999999999996,5.2999999999999998,5.5,5,5.0999999999999996,5.2999999999999998,5.5,6.7000000000000002,6.9000000000000004,5,5.7000000000000002,4.9000000000000004,6.7000000000000002,4.9000000000000004,5.7000000000000002,6,4.7999999999999998,4.9000000000000004,5.5999999999999996,5.7999999999999998,6.0999999999999996,6.4000000000000004,5.5999999999999996,5.0999999999999996,5.5999999999999996,6.0999999999999996,5.5999999999999996,5.5,4.7999999999999998,5.4000000000000004,5.5999999999999996,5.0999999999999996,5.0999999999999996,5.9000000000000004,5.7000000000000002,5.2000000000000002,5,5.2000000000000002,5.4000000000000004,5.0999999999999996],"text":["Petal.Width: 2.5<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 6.6<br />Species: virginica","Petal.Width: 1.7<br />Petal.Length: 4.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.3<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.9<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 6.0<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.9<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.6<br />Petal.Length: 5.8<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 6.4<br />Species: virginica","Petal.Width: 2.2<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.5<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 6.1<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.5<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 4.8<br />Species: virginica","Petal.Width: 2.1<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 2.4<br />Petal.Length: 5.6<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.1<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.9<br />Species: virginica","Petal.Width: 2.5<br />Petal.Length: 5.7<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 1.9<br />Petal.Length: 5.0<br />Species: virginica","Petal.Width: 2.0<br />Petal.Length: 5.2<br />Species: virginica","Petal.Width: 2.3<br />Petal.Length: 5.4<br />Species: virginica","Petal.Width: 1.8<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.228310502283104,"r":7.3059360730593621,"b":40.182648401826491,"l":31.415525114155255},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.01999999999999999,2.6200000000000001],"tickmode":"array","ticktext":["0.0","0.5","1.0","1.5","2.0","2.5"],"tickvals":[0,0.5,1,1.4999999999999998,2,2.5],"categoryorder":"array","categoryarray":["0.0","0.5","1.0","1.5","2.0","2.5"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Petal.Width","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.70499999999999996,7.1950000000000003],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"5084e2f2d87":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"5084e2f2d87","visdat":{"5084e2f2d87":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>We first generated the plot using ggplot2 and stored it in an object ‘g’, which was rendered interactively with plotly. If you mouse over the plot, the values are highlighted. Want a closer look? You can also select an area on the chart to zoom in.</p>
 </div>
 <div id="shiny-apps" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Shiny Apps<a href="advanced-topics.html#shiny-apps" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R ( iDEP <a href="http://ge-lab.org/idep/" class="uri">http://ge-lab.org/idep/</a> ) to enable biologists to analyze genomic data on their own. My blog (<a href="http://gex.netlify.com" class="uri">http://gex.netlify.com</a> ) is also created in Rstudio.</p>
-<div id="install-the-shiny-package-by-typing-this-in-the-console." class="section level3 hasAnchor" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> Install the Shiny package by typing this in the console.<a href="advanced-topics.html#install-the-shiny-package-by-typing-this-in-the-console." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="advanced-topics.html#cb13-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shiny&quot;</span>)</span></code></pre></div>
+<p>Recent developments in R made it easy to create interactive charts and even complex websites. Without any web development experience, I created a site entirely in R (iDEP <a href="http://ge-lab.org/idep/" class="uri">http://ge-lab.org/idep/</a>) to enable biologists to analyze genomic data on their own. My blog (<a href="http://gex.netlify.com" class="uri">http://gex.netlify.com</a>) is another RStudio creation.</p>
+<div id="install-the-shiny-package" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> Install the Shiny package<a href="advanced-topics.html#install-the-shiny-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To start your own magical journey, invoke Shiny by typing this in the console:</p>
+<div class="sourceCode" id="cb761"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb761-1"><a href="advanced-topics.html#cb761-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;shiny&quot;</span>)</span></code></pre></div>
 </div>
 <div id="create-a-shiny-web-app-is-a-piece-of-cake" class="section level3 hasAnchor" number="7.4.2">
 <h3><span class="header-section-number">7.4.2</span> Create a Shiny web app is a piece of cake<a href="advanced-topics.html#create-a-shiny-web-app-is-a-piece-of-cake" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="images/img1201_shiny.png" width="60%" /></p>
-<p>Start a new Shiny app usING the shortcut shown above. Or, select <strong>File -&gt; New File -&gt; Shiny Web App</strong> from the RStudio main menu. Give your app a name, such as <em>test1</em>. Save the app to your local PC. The nice nerds at Rstudio understand the power of an example. A small, but functional app is shown, defined in a file called test1.app.R. Click on <strong>Run App</strong> on the top-right of the script window, a histogram will pop up. We can custermize the number of bins of the histogram by moving the sliding bar.</p>
+<p>Start a new Shiny app by either using the shortcut above or navigating through <strong>File -&gt; New File -&gt; Shiny Web App</strong> from the RStudio main menu. Give your app a name, such as <em>test1</em>, and save it to your local PC. RStudio, being the helpful elf it is, provides a small, but functional sample app in a file named test1.app.R. Click on <strong>Run App</strong> on the top-right of the script window, a histogram will pop up. We can customize the histogram bins by moving the sliding bar, just like a DJ tweaking the soundboard.</p>
 <p><img src="images/Ch7_Adv_top_10.PNG" width="60%" style="display: block; margin: auto;" /></p>
-<p>We can further custermize the outputs by editing the code. In the app.R file, there are two <strong>functions</strong>: <em>ui()</em> and <em>server()</em> . The <em>ui()</em> defines the user interface, and <em>server()</em> specifies the logic.</p>
 </div>
 <div id="lets-play" class="section level3 hasAnchor" number="7.4.3">
 <h3><span class="header-section-number">7.4.3</span> Let’s play!<a href="advanced-topics.html#lets-play" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can further customize the outputs by editing the code. In the app.R file, there are two <strong>functions</strong>: <em>ui()</em> and <em>server()</em> . The <em>ui()</em> defines the user interface, and <em>server()</em> specifies the logic.</p>
 <ol style="list-style-type: lower-alpha">
-<li>Change the color by changing the col = <strong>‘darkgray’</strong> in line 44 to your favorite color, such as <strong>‘green’, ‘red’</strong>, etc. To make it colorful, set it to col = <strong>rainbow(10)</strong> so we can use ten colors on a rolling basis. See the highlignted code.</li>
+<li>Personalize the color by changing the col = <strong>‘darkgray’</strong> in line 44 to your favorite color, such as <strong>‘green’, ‘red’</strong>, etc. For a rainbow effect, set it to col = <strong>rainbow(10)</strong> so that we can use ten colors on a rolling basis.</li>
 </ol>
 <p><img src="images/Ch7_Adv_top_11.PNG" width="80%" /><img src="images/Ch7_Adv_top_12.PNG" width="80%" /></p>
 <p>After saving the correction, run the app again.</p>
 <p><img src="images/Ch7_Adv_top_13.PNG" width="80%" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
-<li>Switch the data. To replace the original dataset Old Faithful Geyser to a new dataset iris, we need to change the columns and dataset specified on line 40. Meanwhile we need to change the content after <strong>titlePanel</strong> on line 16 to get a new title. See the hignlighted code in the following graphs.</li>
+<li>Switch the dataset. To replace the original dataset Old Faithful Geyser to a new dataset iris, we need to modify the columns and dataset specified on line 40. Meanwhile, by updating the content after <strong>titlePanel</strong> on line 16, we get a new title. See the hignlighted code in the following graphs.</li>
 </ol>
 <p><img src="images/Ch7_Adv_top_14_1.PNG" width="80%" /><img src="images/Ch7_Adv_top_14_2.PNG" width="80%" /><img src="images/Ch7_Adv_top_14.PNG" width="80%" /><img src="images/Ch7_Adv_top_15.PNG" width="80%" /></p>
-<p>Save the changes and run the app again. Figure <a href="advanced-topics.html#fig:label16">7.5</a> is the output of histogram of the Sepal length in iris dataset.</p>
+<p>Save the changes and run the app again. Figure <a href="advanced-topics.html#fig:label16">7.5</a> is the histogram of iris’s Sepal length.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label16"></span>
-<img src="images/Ch7_Adv_top_16.PNG" alt="Output of the Sepal length in the iris." width="80%" />
+<img src="images/Ch7_Adv_top_16.PNG" alt="Output of the Sepal length in the iris" width="80%" />
 <p class="caption">
-Figure 7.5: Output of the Sepal length in the iris.
+Figure 7.5: Output of the Sepal length in the iris
 </p>
 </div>
 <ol start="3" style="list-style-type: lower-alpha">
-<li>The default number of bins of 30, specified at line 25, is probably too big. We can change the defaul value to 12 by setting value = 12.</li>
+<li>Adjust default bins. The default number of bins of 30, specified at line 25, is probably too big. Let’s reduce it to 12 by setting value = 12.</li>
 </ol>
 <p><img src="images/Ch7_Adv_top_17.PNG" width="80%" style="display: block; margin: auto;" /><img src="images/Ch7_Adv_top_18.PNG" width="80%" style="display: block; margin: auto;" /></p>
-<p>Save the changes and run the app again, we have the histogram with 12 bins by default.</p>
+<p>Save and rerun the app, now we have the histogram with 12 bins by default.</p>
 <p><img src="images/Ch7_Adv_top_19.PNG" width="80%" style="display: block; margin: auto;" /></p>
 <ol start="4" style="list-style-type: lower-alpha">
-<li>We can change ‘Sepal.Length’ to other columns by assigning x to other variables. Would it be cool if the user can choose the variable from the output? To make it, we need to add a control widget by inserting this line of code after line 20: “selectInput(”cid”, “Column”, choices = colnames(iris)),“. <strong>Do not forget the comma at the very end! </strong></li>
+<li>Add column selection. Would it be cool if the user can choose the variable from the output? Yes, it’s possible! We can change ‘Sepal.Length’ to other columns by assigning x to other variables. To make it, add a control widget by inserting this line of code after line 20: “selectInput(”cid”, “Column”, choices = colnames(iris)),“. <strong>Do not forget the comma at the very end! </strong> Remember, it is crucial!</li>
 </ol>
 <p><img src="images/Ch7_Adv_top_20.PNG" width="80%" /><img src="images/Ch7_Adv_top_21.PNG" width="80%" /></p>
-<p>Save and run the app. A control widget <strong>Column</strong> presents above the <strong>Number of bins</strong>. We are able to select any of the variable in iris dataset.</p>
+<p>Save and run the app. A <strong>Column</strong> control widget presents above the <strong>Number of bins</strong>. You are now able to select any of the variable in iris dataset.</p>
 <p><img src="images/Ch7_Adv_top_22.PNG" width="80%" /></p>
-<p>As you may have noticed that, the columns can be selected from the control widget <strong>Column</strong>, but the histogram does not change correspondingly. This is because that we have not changed the code with respect to the histogram. Take a look at the <strong>server</strong> function, on line 44, the histogram function is given as <strong>hist(x,…)</strong> where <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> sepecified on line 40. That is why the histogram produces only the histogram of Sepal length. To let the histogram change according to the selection of column, we replace <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> by <strong>x &lt;- iris[, input$cid ]</strong> on the line 40. Note that the <strong>input$cid</strong> is consistant with the inserted code <strong>selectInput( “cid”,<span class="math inline">\(\cdots\)</span>)</strong> on line 20: “<strong>sidebarPanel(selectInput(”cid”, ”Column”, choices = colnames(iris)),</strong>”.</p>
+<p>But wait, the histogram does not change correspondingly. This is because we have not changed the code with respect to the histogram. Take a look at the <strong>server</strong> function, on line 44, the histogram function is given as <strong>hist(x,…)</strong>, where <strong>x &lt;- iris[, ‘Sepal.Length’]</strong>, specified on line 40. That’s why only the histogram of Sepal length is produced. To let the histogram change according to the selection of column, we replace <strong>x &lt;- iris[, ‘Sepal.Length’]</strong> with <strong>x &lt;- iris[, input$cid ]</strong> on the line 40. Note that the <strong>cid</strong> is consistent with the inserted code <strong>selectInput( “cid”,<span class="math inline">\(\cdots\)</span>)</strong> on line 20: “<strong>sidebarPanel(selectInput(”cid”, ”Column”, choices = colnames(iris)),</strong>”.</p>
 <p><img src="images/Ch7_Adv_top_23.PNG" width="80%" /><img src="images/Ch7_Adv_top_24.PNG" width="80%" /></p>
-<p>Save and run the code. Select a variable from the <strong>Column</strong>, say <em>Petal.Width</em>, then the histogram of Petal width shows up correctly.</p>
+<p>Save and rerun the code. Then select a variable from the <strong>Column</strong>, say <em>Petal.Width</em>, now, the histogram of Petal width shows up accordingly.</p>
 <p><img src="images/Ch7_Adv_top_25.PNG" width="80%" style="display: block; margin: auto;" /></p>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-29}</p>
+<p>::: {.exercise #unnamed-chunk-421}</p>
 </blockquote>
 <blockquote>
-<p>What happens when you choose the last Column “Species” in the app?
-Solve the error by deleting the variable Species from the data iris. Hint: Modify the code on line 20: <em>selectInput(“cid”, “Column”, choices = colnames(iris))</em>.
+<p>What happens when you choose the last Column of “Species” in the app?
+Solve the issue by deleting the variable ‘Species’ from the data iris. Hint: Modify the code on line 20: <em>selectInput(“cid”, “Column”, choices = colnames(iris))</em>.
 :::</p>
 </blockquote>
-<p>To change the title, let’s define a main title as <em>titl &lt;- </em>, then assign it to the option “main =___” in the hist() function.</p>
+<p>To modify the title, let’s define a main title as <em>titl &lt;- </em>, and then assign it to the option “main =___” in the hist() function.</p>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-30}</p>
+<p>::: {.exercise #unnamed-chunk-422}</p>
 </blockquote>
 <blockquote>
 <p>Change the title from “Histogram of x” to “Histogram of __” where _ is the name of the selected variable like “Sepal.Length”. Complete the question by filling in the blanks. Your output should look like the Figure 7.6.</p>
 <p>titl &lt;- paste(“Histogram of”, <strong>input$cid</strong>, sep = ” “)</p>
 <p>hist(x, breaks = bins, col = ‘green’, border = ‘white’, main = _______)
 :::</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-423"></span>
 <img src="images/Ch7_Adv_top_27.png" alt="Histogram output" width="80%" />
 <p class="caption">
 Figure 7.6: Histogram output
@@ -516,95 +534,95 @@ Figure 7.6: Histogram output
 </div>
 </blockquote>
 <ol start="5" style="list-style-type: lower-alpha">
-<li>We can build a more complex app by adding an approximation normal distribution line by replace the function <strong>hist(x, breaks = bins, col = ‘green’, border = ‘white’)</strong> with the code below:</li>
+<li>Enhance your app with a more complex feature. Let’s add an approximation normal distribution line by replacing the function <strong>hist(x, breaks = bins, col = ‘green’, border = ‘white’)</strong> with the code below:</li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="advanced-topics.html#cb14-1" tabindex="-1"></a>      h <span class="ot">&lt;-</span> <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">10</span>), <span class="at">border =</span> <span class="st">&#39;white&#39;</span>)</span>
-<span id="cb14-2"><a href="advanced-topics.html#cb14-2" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(bins, <span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x)) </span>
-<span id="cb14-3"><a href="advanced-topics.html#cb14-3" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> yfit <span class="sc">*</span>  <span class="fu">diff</span>( h<span class="sc">$</span>mids[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">length</span>(x) </span>
-<span id="cb14-4"><a href="advanced-topics.html#cb14-4" tabindex="-1"></a>      <span class="fu">lines</span>(bins, yfit, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p>The output should be similar to Figure <a href="advanced-topics.html#fig:label28">7.7</a>.</p>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="advanced-topics.html#cb762-1" tabindex="-1"></a>      h <span class="ot">&lt;-</span> <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="fu">rainbow</span>(<span class="dv">10</span>), <span class="at">border =</span> <span class="st">&#39;white&#39;</span>)</span>
+<span id="cb762-2"><a href="advanced-topics.html#cb762-2" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(bins, <span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x)) </span>
+<span id="cb762-3"><a href="advanced-topics.html#cb762-3" tabindex="-1"></a>      yfit <span class="ot">&lt;-</span> yfit <span class="sc">*</span>  <span class="fu">diff</span>( h<span class="sc">$</span>mids[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) <span class="sc">*</span> <span class="fu">length</span>(x) </span>
+<span id="cb762-4"><a href="advanced-topics.html#cb762-4" tabindex="-1"></a>      <span class="fu">lines</span>(bins, yfit, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p>The output should mirror Figure <a href="advanced-topics.html#fig:label28">7.7</a>.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label28"></span>
-<img src="images/Ch7_Adv_top_28.png" alt="Output of adding an approximation normal distribution curve." width="80%" />
+<img src="images/Ch7_Adv_top_28.png" alt="Output of adding an approximation normal distribution curve" width="80%" />
 <p class="caption">
-Figure 7.7: Output of adding an approximation normal distribution curve.
+Figure 7.7: Output of adding an approximation normal distribution curve
 </p>
 </div>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-33}</p>
+<p>::: {.exercise #unnamed-chunk-425}</p>
 </blockquote>
 <blockquote>
-<p>Fill in the blanks to solve the error message in this app by plotting a pie chart when the variable <strong>Species</strong> is selected in the <strong>Column</strong>. Your output of the pie chart should be similar to Figure 7.8.</p>
+<p>Fill in the blanks to solve the error message when selecting <strong>Species</strong> in the <strong>Column</strong> in this app by plotting a pie chart instead. Your pie chart should be similar to Figure 7.8.</p>
 <p>Hint steps:</p>
-<p>1, Make sure the <strong>selectInput()</strong> line same as its original with all columns selected.</p>
-<p>2, Separate the variables into two groups, numeric variables (columns 1 throught 4) for histogram and categorical variables (5th column) for pie plot.</p>
-<p>3, Use if() and }else{ for each group.
+<p>1, Ensure the <strong>selectInput()</strong> line the same as its original with all columns selected.</p>
+<p>2, Separate the variables into two groups, numeric variables (columns 1 through 4) for histogram and categorical variable (5th column) for pie plot.</p>
+<p>3, Use ‘if()’ and ‘}else{’ to differentiate the groups.
 :::</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-426"></span>
 <img src="images/Ch7_Adv_top_29.png" alt="Pie chart output" width="80%" />
 <p class="caption">
 Figure 7.8: Pie chart output
 </p>
 </div>
 </blockquote>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="advanced-topics.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb15-2"><a href="advanced-topics.html#cb15-2" tabindex="-1"></a><span class="co"># Define UI for application that draws a histogram</span></span>
-<span id="cb15-3"><a href="advanced-topics.html#cb15-3" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb15-4"><a href="advanced-topics.html#cb15-4" tabindex="-1"></a>   </span>
-<span id="cb15-5"><a href="advanced-topics.html#cb15-5" tabindex="-1"></a>   <span class="co"># Application title</span></span>
-<span id="cb15-6"><a href="advanced-topics.html#cb15-6" tabindex="-1"></a>   <span class="fu">titlePanel</span>(<span class="st">&quot;Interactive page for iris data&quot;</span>),</span>
-<span id="cb15-7"><a href="advanced-topics.html#cb15-7" tabindex="-1"></a>   </span>
-<span id="cb15-8"><a href="advanced-topics.html#cb15-8" tabindex="-1"></a>   <span class="co"># Sidebar with a slider input for number of bins </span></span>
-<span id="cb15-9"><a href="advanced-topics.html#cb15-9" tabindex="-1"></a>   <span class="fu">sidebarLayout</span>(</span>
-<span id="cb15-10"><a href="advanced-topics.html#cb15-10" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
-<span id="cb15-11"><a href="advanced-topics.html#cb15-11" tabindex="-1"></a>        <span class="fu">selectInput</span>(<span class="st">&quot;cid&quot;</span>, <span class="st">&quot;Select the column&quot;</span>, <span class="at">choices =</span> ___________),</span>
-<span id="cb15-12"><a href="advanced-topics.html#cb15-12" tabindex="-1"></a>         <span class="fu">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,</span>
-<span id="cb15-13"><a href="advanced-topics.html#cb15-13" tabindex="-1"></a>                     <span class="st">&quot;Number of bins:&quot;</span>,</span>
-<span id="cb15-14"><a href="advanced-topics.html#cb15-14" tabindex="-1"></a>                     <span class="at">min =</span> <span class="dv">1</span>,</span>
-<span id="cb15-15"><a href="advanced-topics.html#cb15-15" tabindex="-1"></a>                     <span class="at">max =</span> <span class="dv">50</span>,</span>
-<span id="cb15-16"><a href="advanced-topics.html#cb15-16" tabindex="-1"></a>                     <span class="at">value =</span> <span class="dv">12</span>)</span>
-<span id="cb15-17"><a href="advanced-topics.html#cb15-17" tabindex="-1"></a>      ),</span>
-<span id="cb15-18"><a href="advanced-topics.html#cb15-18" tabindex="-1"></a>      </span>
-<span id="cb15-19"><a href="advanced-topics.html#cb15-19" tabindex="-1"></a>      <span class="co"># Show a plot of the generated distribution</span></span>
-<span id="cb15-20"><a href="advanced-topics.html#cb15-20" tabindex="-1"></a>      <span class="fu">mainPanel</span>(</span>
-<span id="cb15-21"><a href="advanced-topics.html#cb15-21" tabindex="-1"></a>         <span class="fu">plotOutput</span>(<span class="st">&quot;Plot&quot;</span>)</span>
-<span id="cb15-22"><a href="advanced-topics.html#cb15-22" tabindex="-1"></a>      ) </span>
-<span id="cb15-23"><a href="advanced-topics.html#cb15-23" tabindex="-1"></a>   )</span>
-<span id="cb15-24"><a href="advanced-topics.html#cb15-24" tabindex="-1"></a> )</span>
-<span id="cb15-25"><a href="advanced-topics.html#cb15-25" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="advanced-topics.html#cb15-26" tabindex="-1"></a><span class="co"># Define server logic required to draw a histogram and pie plot</span></span>
-<span id="cb15-27"><a href="advanced-topics.html#cb15-27" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="advanced-topics.html#cb15-28" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb15-29"><a href="advanced-topics.html#cb15-29" tabindex="-1"></a>   </span>
-<span id="cb15-30"><a href="advanced-topics.html#cb15-30" tabindex="-1"></a>   output<span class="sc">$</span>Plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb15-31"><a href="advanced-topics.html#cb15-31" tabindex="-1"></a>     </span>
-<span id="cb15-32"><a href="advanced-topics.html#cb15-32" tabindex="-1"></a>      x    <span class="ot">&lt;-</span> iris[, input<span class="sc">$</span>cid]</span>
-<span id="cb15-33"><a href="advanced-topics.html#cb15-33" tabindex="-1"></a>      </span>
-<span id="cb15-34"><a href="advanced-topics.html#cb15-34" tabindex="-1"></a>      <span class="co"># draw the histogram with the specified number of bins for variable columns</span></span>
-<span id="cb15-35"><a href="advanced-topics.html#cb15-35" tabindex="-1"></a>      <span class="fu">________</span> (input<span class="sc">$</span>cid <span class="sc">%in%</span> <span class="fu">colnames</span>(iris)[______]){</span>
-<span id="cb15-36"><a href="advanced-topics.html#cb15-36" tabindex="-1"></a>      bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> input<span class="sc">$</span>bins <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb15-37"><a href="advanced-topics.html#cb15-37" tabindex="-1"></a>      titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
-<span id="cb15-38"><a href="advanced-topics.html#cb15-38" tabindex="-1"></a>      <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">border =</span> <span class="st">&#39;white&#39;</span>, <span class="at">main =</span> titl)</span>
-<span id="cb15-39"><a href="advanced-topics.html#cb15-39" tabindex="-1"></a>      </span>
-<span id="cb15-40"><a href="advanced-topics.html#cb15-40" tabindex="-1"></a>      <span class="co"># draw the pie plot for catogorical column Species</span></span>
-<span id="cb15-41"><a href="advanced-topics.html#cb15-41" tabindex="-1"></a>        __________</span>
-<span id="cb15-42"><a href="advanced-topics.html#cb15-42" tabindex="-1"></a>        count <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
-<span id="cb15-43"><a href="advanced-topics.html#cb15-43" tabindex="-1"></a>        labl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">names</span>(count), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, count, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb15-44"><a href="advanced-topics.html#cb15-44" tabindex="-1"></a>        titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Pie plot of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
-<span id="cb15-45"><a href="advanced-topics.html#cb15-45" tabindex="-1"></a>        <span class="fu">pie</span>(count, <span class="at">labels =</span> labl, <span class="at">main =</span> titl)</span>
-<span id="cb15-46"><a href="advanced-topics.html#cb15-46" tabindex="-1"></a>      }</span>
-<span id="cb15-47"><a href="advanced-topics.html#cb15-47" tabindex="-1"></a>   })</span>
-<span id="cb15-48"><a href="advanced-topics.html#cb15-48" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="advanced-topics.html#cb763-1" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb763-2"><a href="advanced-topics.html#cb763-2" tabindex="-1"></a><span class="co"># Define UI for application that draws a histogram</span></span>
+<span id="cb763-3"><a href="advanced-topics.html#cb763-3" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb763-4"><a href="advanced-topics.html#cb763-4" tabindex="-1"></a>   </span>
+<span id="cb763-5"><a href="advanced-topics.html#cb763-5" tabindex="-1"></a>   <span class="co"># Application title</span></span>
+<span id="cb763-6"><a href="advanced-topics.html#cb763-6" tabindex="-1"></a>   <span class="fu">titlePanel</span>(<span class="st">&quot;Interactive page for iris data&quot;</span>),</span>
+<span id="cb763-7"><a href="advanced-topics.html#cb763-7" tabindex="-1"></a>   </span>
+<span id="cb763-8"><a href="advanced-topics.html#cb763-8" tabindex="-1"></a>   <span class="co"># Sidebar with a slider input for number of bins </span></span>
+<span id="cb763-9"><a href="advanced-topics.html#cb763-9" tabindex="-1"></a>   <span class="fu">sidebarLayout</span>(</span>
+<span id="cb763-10"><a href="advanced-topics.html#cb763-10" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
+<span id="cb763-11"><a href="advanced-topics.html#cb763-11" tabindex="-1"></a>        <span class="fu">selectInput</span>(<span class="st">&quot;cid&quot;</span>, <span class="st">&quot;Select the column&quot;</span>, <span class="at">choices =</span> ___________),</span>
+<span id="cb763-12"><a href="advanced-topics.html#cb763-12" tabindex="-1"></a>         <span class="fu">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,</span>
+<span id="cb763-13"><a href="advanced-topics.html#cb763-13" tabindex="-1"></a>                     <span class="st">&quot;Number of bins:&quot;</span>,</span>
+<span id="cb763-14"><a href="advanced-topics.html#cb763-14" tabindex="-1"></a>                     <span class="at">min =</span> <span class="dv">1</span>,</span>
+<span id="cb763-15"><a href="advanced-topics.html#cb763-15" tabindex="-1"></a>                     <span class="at">max =</span> <span class="dv">50</span>,</span>
+<span id="cb763-16"><a href="advanced-topics.html#cb763-16" tabindex="-1"></a>                     <span class="at">value =</span> <span class="dv">12</span>)</span>
+<span id="cb763-17"><a href="advanced-topics.html#cb763-17" tabindex="-1"></a>      ),</span>
+<span id="cb763-18"><a href="advanced-topics.html#cb763-18" tabindex="-1"></a>      </span>
+<span id="cb763-19"><a href="advanced-topics.html#cb763-19" tabindex="-1"></a>      <span class="co"># Show a plot of the generated distribution</span></span>
+<span id="cb763-20"><a href="advanced-topics.html#cb763-20" tabindex="-1"></a>      <span class="fu">mainPanel</span>(</span>
+<span id="cb763-21"><a href="advanced-topics.html#cb763-21" tabindex="-1"></a>         <span class="fu">plotOutput</span>(<span class="st">&quot;Plot&quot;</span>)</span>
+<span id="cb763-22"><a href="advanced-topics.html#cb763-22" tabindex="-1"></a>      ) </span>
+<span id="cb763-23"><a href="advanced-topics.html#cb763-23" tabindex="-1"></a>   )</span>
+<span id="cb763-24"><a href="advanced-topics.html#cb763-24" tabindex="-1"></a> )</span>
+<span id="cb763-25"><a href="advanced-topics.html#cb763-25" tabindex="-1"></a></span>
+<span id="cb763-26"><a href="advanced-topics.html#cb763-26" tabindex="-1"></a><span class="co"># Define server logic required to draw a histogram and pie plot</span></span>
+<span id="cb763-27"><a href="advanced-topics.html#cb763-27" tabindex="-1"></a></span>
+<span id="cb763-28"><a href="advanced-topics.html#cb763-28" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb763-29"><a href="advanced-topics.html#cb763-29" tabindex="-1"></a>   </span>
+<span id="cb763-30"><a href="advanced-topics.html#cb763-30" tabindex="-1"></a>   output<span class="sc">$</span>Plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb763-31"><a href="advanced-topics.html#cb763-31" tabindex="-1"></a>     </span>
+<span id="cb763-32"><a href="advanced-topics.html#cb763-32" tabindex="-1"></a>      x    <span class="ot">&lt;-</span> iris[, input<span class="sc">$</span>cid]</span>
+<span id="cb763-33"><a href="advanced-topics.html#cb763-33" tabindex="-1"></a>      </span>
+<span id="cb763-34"><a href="advanced-topics.html#cb763-34" tabindex="-1"></a>      <span class="co"># Draw the histogram with the specified number of bins for variable columns</span></span>
+<span id="cb763-35"><a href="advanced-topics.html#cb763-35" tabindex="-1"></a>      <span class="fu">________</span> (input<span class="sc">$</span>cid <span class="sc">%in%</span> <span class="fu">colnames</span>(iris)[______]){</span>
+<span id="cb763-36"><a href="advanced-topics.html#cb763-36" tabindex="-1"></a>      bins <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(x), <span class="fu">max</span>(x), <span class="at">length.out =</span> input<span class="sc">$</span>bins <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb763-37"><a href="advanced-topics.html#cb763-37" tabindex="-1"></a>      titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Histogram of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb763-38"><a href="advanced-topics.html#cb763-38" tabindex="-1"></a>      <span class="fu">hist</span>(x, <span class="at">breaks =</span> bins, <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">border =</span> <span class="st">&#39;white&#39;</span>, <span class="at">main =</span> titl)</span>
+<span id="cb763-39"><a href="advanced-topics.html#cb763-39" tabindex="-1"></a>      </span>
+<span id="cb763-40"><a href="advanced-topics.html#cb763-40" tabindex="-1"></a>      <span class="co"># Draw the pie plot for categorical column Species</span></span>
+<span id="cb763-41"><a href="advanced-topics.html#cb763-41" tabindex="-1"></a>        __________</span>
+<span id="cb763-42"><a href="advanced-topics.html#cb763-42" tabindex="-1"></a>        count <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
+<span id="cb763-43"><a href="advanced-topics.html#cb763-43" tabindex="-1"></a>        labl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">names</span>(count), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, count, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb763-44"><a href="advanced-topics.html#cb763-44" tabindex="-1"></a>        titl <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Pie plot of&quot;</span>, input<span class="sc">$</span>cid, <span class="at">sep =</span> <span class="st">&quot; &quot;</span>)</span>
+<span id="cb763-45"><a href="advanced-topics.html#cb763-45" tabindex="-1"></a>        <span class="fu">pie</span>(count, <span class="at">labels =</span> labl, <span class="at">main =</span> titl)</span>
+<span id="cb763-46"><a href="advanced-topics.html#cb763-46" tabindex="-1"></a>      }</span>
+<span id="cb763-47"><a href="advanced-topics.html#cb763-47" tabindex="-1"></a>   })</span>
+<span id="cb763-48"><a href="advanced-topics.html#cb763-48" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div id="publish-your-app" class="section level3 hasAnchor" number="7.4.4">
 <h3><span class="header-section-number">7.4.4</span> Publish your app<a href="advanced-topics.html#publish-your-app" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>You can publish your app online by clicking on the Publish button at the top right of the app window and following the instructions. If this is the first time you publish a shiny app, here are the steps.</p>
-<p>Step 1: Click on “Publish” button at the top-right of the window. Then click on “ShinyApps.io” in the Connect Account window as shown in the Figure <a href="advanced-topics.html#fig:label30">7.9</a>.</p>
+<p>Ready to share your magical Shiny app with the world? Just follow these steps to publish it online. If it’s your first time, fear not; It’s easier than baking a pie(and less messy)!</p>
+<p>Step 1: Click the “Publish” button at the top-right of the window. Then choose “ShinyApps.io” in the Connect Account window as shown in the Figure <a href="advanced-topics.html#fig:label30">7.9</a>.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label30"></span>
-<img src="images/Ch7_Adv_top_30.png" alt="Connect Account." width="80%" />
+<img src="images/Ch7_Adv_top_30.png" alt="Connect Account" width="80%" />
 <p class="caption">
-Figure 7.9: Connect Account.
+Figure 7.9: Connect Account
 </p>
 </div>
 <p>Step 2: Click “your account on ShinyApps” in the <strong>Connect ShinyApps.io Account</strong> window as shown in Figure <a href="advanced-topics.html#fig:label31">7.10</a>.</p>
@@ -615,7 +633,7 @@ Figure 7.9: Connect Account.
 Figure 7.10: Connect ShinyApps.io Account
 </p>
 </div>
-<p>Step 3: Click “Sign Up” in the new <strong>Shinyapps.io by RStudio</strong> window.</p>
+<p>Step 3: In the <strong>Shinyapps.io by RStudio</strong> window, hit “Sign Up”.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label32"></span>
 <img src="images/Ch7_Adv_top_32.png" alt="Sign up" width="80%" />
@@ -631,7 +649,7 @@ Figure 7.11: Sign up
 Figure 7.12: Registration
 </p>
 </div>
-<p>Step 5: In the <strong>Account Setup</strong> window Figure <a href="advanced-topics.html#fig:label34">7.13</a>, type an account name that you would like to use, then click on “Save”. Everyone will have a unique account name. For example, if you type “MyFirstShiny”, then the border of the box turn to red which is a reminder that the name is occupied. You need to pick up another name. I picked up my account name “stat415or515”.</p>
+<p>Step 5: In the <strong>Account Setup</strong> window (Figure <a href="advanced-topics.html#fig:label34">7.13</a>), type an account name that you would like to use and click “Save”. Remember, everyone will have a unique account name. If the name is already taken (like “MyFirstShiny”), the border of the box will turn to red. You need to pick up another name and keep it cool. I named my account “stat415or515”.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label34"></span>
 <img src="images/Ch7_Adv_top_34.png" alt="Account Setup" width="80%" />
@@ -639,128 +657,133 @@ Figure 7.12: Registration
 Figure 7.13: Account Setup
 </p>
 </div>
-<p>Step 6: A new window will show up and show you how to finish the next steps. Firstly, install the package <strong>rsconnect</strong>. Then click the “Copy to clipboard” button in Figure <a href="advanced-topics.html#fig:label36">7.14</a>, and paste it into your console to authorize your account. Finally, replace the path in Figure <a href="advanced-topics.html#fig:label37">7.15</a> with the path where your Shiny app is saved. Note, the slash is <strong>forward</strong> not backward in the path. For example, I have a Shiny app named <em>IrisData.R</em> which is saved at ‘C:/Users/Documents/FirstShiny/’, then I run the following code to publish my app.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="advanced-topics.html#cb16-1" tabindex="-1"></a><span class="fu">library</span>(rsconnect)</span>
-<span id="cb16-2"><a href="advanced-topics.html#cb16-2" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>(<span class="st">&#39;C:/Users/Documents/FirstShiny/IrisData&#39;</span>)</span></code></pre></div>
+<p>Step 6: A new window will pop up, showing you how to finish the final steps. Start by installing the package <strong>rsconnect</strong>. Then click the “Copy to clipboard” button in Figure <a href="advanced-topics.html#fig:label36">7.14</a>, and paste it into your console to authorize your account. Lastly, replace the path in Figure <a href="advanced-topics.html#fig:label37">7.15</a> with the path where your Shiny app is saved. Remember, the slash is <strong>forward</strong> not backward in the path. For example, my shiny app <em>IrisData.R</em> saved at ‘C:/Users/Documents/FirstShiny/’ is published with the following code:</p>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb764-1"><a href="advanced-topics.html#cb764-1" tabindex="-1"></a><span class="fu">library</span>(rsconnect)</span>
+<span id="cb764-2"><a href="advanced-topics.html#cb764-2" tabindex="-1"></a>rsconnect<span class="sc">::</span><span class="fu">deployApp</span>(<span class="st">&#39;C:/Users/Documents/FirstShiny/IrisData&#39;</span>)</span></code></pre></div>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label36"></span>
-<img src="images/Ch7_Adv_top_36.png" alt="Authorization" width="80%" />
+<img src="images/Ch7_Adv_top_36.png" alt="Authorization steps" width="80%" />
 <p class="caption">
-Figure 7.14: Authorization
+Figure 7.14: Authorization steps
 </p>
 </div>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label37"></span>
-<img src="images/Ch7_Adv_top_37.png" alt="Change the path to your app" width="80%" />
+<img src="images/Ch7_Adv_top_37.png" alt="Specify the path of your app" width="80%" />
 <p class="caption">
-Figure 7.15: Change the path to your app
+Figure 7.15: Specify the path of your app
 </p>
 </div>
-<p>Step 7: You can find the link at the bottom of Figure <a href="advanced-topics.html#fig:label38">7.16</a>. The link for my iris data is <a href="https://stat415or515.shinyapps.io/IrisData/">https://stat415or515.shinyapps.io/IrisData/</a>.</p>
+<p>Step 7: Find your app’s URL link at the bottom of Figure <a href="advanced-topics.html#fig:label38">7.16</a>. The link to my iris data is <a href="https://stat415or515.shinyapps.io/IrisData/">https://stat415or515.shinyapps.io/IrisData/</a>.</p>
 
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:label38"></span>
-<img src="images/Ch7_Adv_top_38.png" alt="Generating the link" width="80%" />
+<img src="images/Ch7_Adv_top_38.png" alt="Generate the link" width="80%" />
 <p class="caption">
-Figure 7.16: Generating the link
+Figure 7.16: Generate the link
 </p>
 </div>
-<p>Show it off by sending the URL of your data to your friends or your adviser. More instructions can be found in these excellent tutorials:
-<a href="https://docs.rstudio.com/shinyapps.io/getting-started.html">https://docs.rstudio.com/shinyapps.io/getting-started.html</a>, and <a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/">https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</a>.</p>
-<p>Solutions to these exercises can be found at GitHub <a href="https://github.com/gexijin/teach/blob/master/app.R">https://github.com/gexijin/teach/blob/master/app.R</a>.</p>
+<p>Show off your creation by sending the URL of your data to your friends or your adviser. For more detailed instructions, check out these excellent tutorials:</p>
+<p><a href="https://docs.rstudio.com/shinyapps.io/getting-started.html">https://docs.rstudio.com/shinyapps.io/getting-started.html</a></p>
+<p><a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson1">https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</a></p>
+<p>Looking for solutions to these exercises? They’re hiding out at GitHub:</p>
+<p><a href="https://github.com/gexijin/teach/blob/master/app.R">https://github.com/gexijin/teach/blob/master/app.R</a></p>
 </div>
 </div>
 <div id="define-your-own-function" class="section level2 hasAnchor" number="7.5">
 <h2><span class="header-section-number">7.5</span> Define your own function<a href="advanced-topics.html#define-your-own-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We can also easily define our own functions. For example, we have the following arithmetic function:</p>
+<p>Creating your own functions in R is like having a personal chef for your data – it cooks up exactly what you need, whenever you need it!</p>
+<p>Take the following arithmetic function as a starter:</p>
 <p><span class="math display">\[f(x)=1.57345 x^3+ x^2-2x+1\]</span></p>
-<p>Obviously, we can use the following code to do the computing:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="advanced-topics.html#cb17-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb17-2"><a href="advanced-topics.html#cb17-2" tabindex="-1"></a><span class="fl">1.57345</span> <span class="sc">*</span> x <span class="sc">^</span> <span class="dv">3</span> <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>Sure, you can compute it manually:</p>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb765-1"><a href="advanced-topics.html#cb765-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb765-2"><a href="advanced-topics.html#cb765-2" tabindex="-1"></a><span class="fl">1.57345</span> <span class="sc">*</span> x <span class="sc">^</span> <span class="dv">3</span> <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
-<p>This will work, but every time we have to re-write this code. Let’s define our own function without repeating same code everytime:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="advanced-topics.html#cb19-1" tabindex="-1"></a>myf <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {                           <span class="co">#Name of my function is myf</span></span>
-<span id="cb19-2"><a href="advanced-topics.html#cb19-2" tabindex="-1"></a>       y <span class="ot">=</span> <span class="fl">1.57345</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span>     <span class="co">#Expression of the function</span></span>
-<span id="cb19-3"><a href="advanced-topics.html#cb19-3" tabindex="-1"></a>       <span class="fu">return</span>(y)                               <span class="co">#Return vaules of the function</span></span>
-<span id="cb19-4"><a href="advanced-topics.html#cb19-4" tabindex="-1"></a>}</span></code></pre></div>
-<p>Note that “{” and “}” signify the beginning and end of a block of code. <strong>“function”</strong> tells R that a function is going to be defined. At the end, the <strong>“return”</strong> statement returns the desired values.</p>
-<p>You can copy and paste the 4 lines of code to R and it defines a function called myf, which you can call the function by:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="advanced-topics.html#cb20-1" tabindex="-1"></a><span class="fu">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value given x=5.</span></span></code></pre></div>
+<p>This will work, but why go through the hassle every time? Let’s define our own function without repeating same code every time:</p>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb767-1"><a href="advanced-topics.html#cb767-1" tabindex="-1"></a>myf <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {                           <span class="co"># Name the function myf</span></span>
+<span id="cb767-2"><a href="advanced-topics.html#cb767-2" tabindex="-1"></a>       y <span class="ot">=</span> <span class="fl">1.57345</span> <span class="sc">*</span> x<span class="sc">^</span><span class="dv">3</span> <span class="sc">+</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">1</span>     <span class="co"># Define the function</span></span>
+<span id="cb767-3"><a href="advanced-topics.html#cb767-3" tabindex="-1"></a>       <span class="fu">return</span>(y)                               <span class="co"># Return the function result</span></span>
+<span id="cb767-4"><a href="advanced-topics.html#cb767-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Note that “{” and “}” signify the beginning and end of a block of code. <strong>“function”</strong> is the magic word, telling R that a function is going to be defined. At the end, the <strong>“return”</strong> statement reveals the desired result.</p>
+<p>Now you can call the function easily:</p>
+<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb768-1"><a href="advanced-topics.html#cb768-1" tabindex="-1"></a><span class="fu">myf</span>(<span class="dv">5</span>)     <span class="co"># Obtain the y value for x=5</span></span></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
 <p>or</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="advanced-topics.html#cb22-1" tabindex="-1"></a><span class="fu">myf</span>(<span class="at">x =</span> <span class="dv">5</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb770-1"><a href="advanced-topics.html#cb770-1" tabindex="-1"></a><span class="fu">myf</span>(<span class="at">x =</span> <span class="dv">5</span>) </span></code></pre></div>
 <pre><code>## [1] 212.6813</code></pre>
-<p>The funtion applies to a vector as well. For example:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="advanced-topics.html#cb24-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">:</span> <span class="dv">10</span>  <span class="co"># x is a vector with integer values from -10 to 10.</span></span>
-<span id="cb24-2"><a href="advanced-topics.html#cb24-2" tabindex="-1"></a><span class="fu">myf</span>(x)          <span class="co"># Apply the function myf() to x.</span></span></code></pre></div>
+<p>It even works with vectors! For example:</p>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb772-1"><a href="advanced-topics.html#cb772-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">:</span> <span class="dv">10</span>  <span class="co"># A vector with integer values from -10 to 10</span></span>
+<span id="cb772-2"><a href="advanced-topics.html#cb772-2" tabindex="-1"></a><span class="fu">myf</span>(x)          <span class="co"># Apply the function myf() to x</span></span></code></pre></div>
 <pre><code>##  [1] -1452.45000 -1047.04505  -724.60640  -475.69335  -290.86520  -160.68125
 ##  [7]   -75.70080   -26.48315    -3.58760     2.42655     1.00000     1.57345
 ## [13]    13.58760    46.48315   109.70080   212.68125   364.86520   575.69335
 ## [19]   854.60640  1211.04505  1654.45000</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="advanced-topics.html#cb26-1" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">myf</span>(x)) <span class="co"># Plot function f(x) = 1.57345 * x ^ 3 + x ^ 2 - 2 * x + 1.</span></span></code></pre></div>
-<p><img src="book_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
-<p>Functions can handle many different calculations beyond arithmetic functions. It can take in one or more inputs and return a list of complex data objects too.</p>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb774-1"><a href="advanced-topics.html#cb774-1" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">myf</span>(x)) <span class="co"># Plot the function</span></span></code></pre></div>
+<p><img src="book_files/figure-html/unnamed-chunk-434-1.png" width="672" /></p>
+<p>Function can handle many different calculations beyond arithmetic functions. More than just numbers, it can take in one or more various data types and return a list of complex data objects.</p>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-43}</p>
+<p>::: {.exercise #unnamed-chunk-435}</p>
 </blockquote>
 <blockquote>
 <p>Suppose f(x)= |x|+5x-6, where |x| means the absolute value of x.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Write an R function to implement this arithmetic function.<br />
 </li>
-<li>Use this function to find f(-4.534).<br />
+<li>Use this function to calculate f(-4.534).<br />
 </li>
-<li>Obtain the graph of the function.<br />
+<li>Plot the function’s graph.<br />
 :::</li>
 </ol>
 </blockquote>
-<p>Let’s define a function to count even numbers in a vector.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="advanced-topics.html#cb27-1" tabindex="-1"></a><span class="co">#counts the number of even intergers in vec</span></span>
-<span id="cb27-2"><a href="advanced-topics.html#cb27-2" tabindex="-1"></a>evencount <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
-<span id="cb27-3"><a href="advanced-topics.html#cb27-3" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">0</span>                      <span class="co"># assign 0 to a count varialbe k</span></span>
-<span id="cb27-4"><a href="advanced-topics.html#cb27-4" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Find all elements (represented by i) in vec. </span></span>
-<span id="cb27-5"><a href="advanced-topics.html#cb27-5" tabindex="-1"></a>                              <span class="co"># Values of i are actually vec[1],vec[2],...</span></span>
-<span id="cb27-6"><a href="advanced-topics.html#cb27-6" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>) </span>
-<span id="cb27-7"><a href="advanced-topics.html#cb27-7" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k <span class="sc">+</span> <span class="dv">1</span>              <span class="co"># test if i is an even or odd number. </span></span>
-<span id="cb27-8"><a href="advanced-topics.html#cb27-8" tabindex="-1"></a>                              <span class="co"># %% is the modulo operator.</span></span>
-<span id="cb27-9"><a href="advanced-topics.html#cb27-9" tabindex="-1"></a>  }</span>
-<span id="cb27-10"><a href="advanced-topics.html#cb27-10" tabindex="-1"></a>  <span class="fu">return</span>(k)                   <span class="co">#Return the count of even numbers in vec.</span></span>
-<span id="cb27-11"><a href="advanced-topics.html#cb27-11" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="advanced-topics.html#cb28-1" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector. </span></span>
-<span id="cb28-2"><a href="advanced-topics.html#cb28-2" tabindex="-1"></a><span class="fu">evencount</span>(x) <span class="co"># Call the function evencount(). Replace vec with defined vector x.</span></span></code></pre></div>
+<p>Now, let’s define a function to count even numbers in a vector.</p>
+<div class="sourceCode" id="cb775"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb775-1"><a href="advanced-topics.html#cb775-1" tabindex="-1"></a><span class="co"># Count the number of even integers in vec</span></span>
+<span id="cb775-2"><a href="advanced-topics.html#cb775-2" tabindex="-1"></a>evencount <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
+<span id="cb775-3"><a href="advanced-topics.html#cb775-3" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="dv">0</span>                      <span class="co"># Assign 0 to a count variable k</span></span>
+<span id="cb775-4"><a href="advanced-topics.html#cb775-4" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> vec) {            <span class="co"># Loop through all elements (represented by i) in vec</span></span>
+<span id="cb775-5"><a href="advanced-topics.html#cb775-5" tabindex="-1"></a>                              <span class="co"># Values of i are actually vec[1],vec[2],...</span></span>
+<span id="cb775-6"><a href="advanced-topics.html#cb775-6" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>)          <span class="co"># Test if i is an even or odd number</span></span>
+<span id="cb775-7"><a href="advanced-topics.html#cb775-7" tabindex="-1"></a>                              <span class="co"># %% is the modulo operator</span></span>
+<span id="cb775-8"><a href="advanced-topics.html#cb775-8" tabindex="-1"></a>      k <span class="ot">&lt;-</span> k <span class="sc">+</span> <span class="dv">1</span>              <span class="co"># Add to count if the number is even</span></span>
+<span id="cb775-9"><a href="advanced-topics.html#cb775-9" tabindex="-1"></a>                            </span>
+<span id="cb775-10"><a href="advanced-topics.html#cb775-10" tabindex="-1"></a>  }</span>
+<span id="cb775-11"><a href="advanced-topics.html#cb775-11" tabindex="-1"></a>  <span class="fu">return</span>(k)                   <span class="co"># Return the count of even numbers</span></span>
+<span id="cb775-12"><a href="advanced-topics.html#cb775-12" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb776-1"><a href="advanced-topics.html#cb776-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">14</span>, <span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">3</span>) <span class="co"># Define a new vector x</span></span>
+<span id="cb776-2"><a href="advanced-topics.html#cb776-2" tabindex="-1"></a><span class="fu">evencount</span>(x)                     <span class="co"># Count even numbers in &#39;x&#39;</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<p>A variable is called local variable if it is only visible within a function. Such as <em>k</em> and <em>vec</em> are local variables to the function <strong>evencount()</strong>. They disappear after the function returns.</p>
-<p>k</p>
+<p>A variable is called local variable if it is only visible within a function. For instance, <em>k</em> and <em>vec</em> are local variables to the function <strong>evencount()</strong>. They disappear after the function returns. Trying to access them outside will leave you empty-handed:</p>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="advanced-topics.html#cb778-1" tabindex="-1"></a>k  <span class="co"># Poof!</span></span></code></pre></div>
+<p>Error: object ‘k’ not found</p>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="advanced-topics.html#cb779-1" tabindex="-1"></a>vec  <span class="co"># Gone with the wind!</span></span></code></pre></div>
 <p>Error: object ‘vec’ not found</p>
-<p>vec</p>
-<p>Error: object ‘vec’ not found</p>
-<p>A variable is called global variable if it is defined outside of functions. A global variable is also available within functions. Here is an example:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="advanced-topics.html#cb30-1" tabindex="-1"></a>myfun.globle <span class="ot">&lt;-</span> <span class="cf">function</span> (x){</span>
-<span id="cb30-2"><a href="advanced-topics.html#cb30-2" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb30-3"><a href="advanced-topics.html#cb30-3" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
-<span id="cb30-4"><a href="advanced-topics.html#cb30-4" tabindex="-1"></a>}</span>
-<span id="cb30-5"><a href="advanced-topics.html#cb30-5" tabindex="-1"></a><span class="fu">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># set x=8, and do the calculation: 8-2*y = 8-2*(1)=6</span></span></code></pre></div>
+<p>A variable is called global variable if it is defined outside of a function and is accessible within the function. Here is an example:</p>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="advanced-topics.html#cb780-1" tabindex="-1"></a>myfun.globle <span class="ot">&lt;-</span> <span class="cf">function</span> (x){</span>
+<span id="cb780-2"><a href="advanced-topics.html#cb780-2" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb780-3"><a href="advanced-topics.html#cb780-3" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
+<span id="cb780-4"><a href="advanced-topics.html#cb780-4" tabindex="-1"></a>}</span>
+<span id="cb780-5"><a href="advanced-topics.html#cb780-5" tabindex="-1"></a><span class="fu">myfun.globle</span>(<span class="dv">8</span>)    <span class="co"># Calculate 8-2*y = 8-2*(1) = 6</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<p>Here y is a global variable.</p>
-<p>The function <em>myfun.globle2()</em> defined below returns the same value as above. But both x and y within the paratheses <em>(x, y=1)</em> in following <em>function</em>() are local variables.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="advanced-topics.html#cb32-1" tabindex="-1"></a>myfun.globle2 <span class="ot">&lt;-</span> <span class="cf">function</span> (x, <span class="at">y =</span> <span class="dv">1</span>){ <span class="co">#y is set as 1 within the function by default.</span></span>
-<span id="cb32-2"><a href="advanced-topics.html#cb32-2" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
-<span id="cb32-3"><a href="advanced-topics.html#cb32-3" tabindex="-1"></a> }</span>
-<span id="cb32-4"><a href="advanced-topics.html#cb32-4" tabindex="-1"></a><span class="fu">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co">#8-2*y = 8-2*(1)=6</span></span></code></pre></div>
+<p>y is a global variable here.</p>
+<p>The function <em>myfun.globle2()</em> defined below returns the same value as above. But both x and y within the parentheses <em>(x, y=1)</em> in <em>function</em>() are local variables.</p>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="advanced-topics.html#cb782-1" tabindex="-1"></a>myfun.globle2 <span class="ot">&lt;-</span> <span class="cf">function</span> (x, <span class="at">y =</span> <span class="dv">1</span>){ <span class="co"># y is set as 1 within the function by default</span></span>
+<span id="cb782-2"><a href="advanced-topics.html#cb782-2" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> y)</span>
+<span id="cb782-3"><a href="advanced-topics.html#cb782-3" tabindex="-1"></a> }</span>
+<span id="cb782-4"><a href="advanced-topics.html#cb782-4" tabindex="-1"></a><span class="fu">myfun.globle2</span>(<span class="dv">8</span>)    <span class="co"># Calculate 8-2*y = 8-2*(1) = 6</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-48}</p>
+<p>::: {.exercise #unnamed-chunk-442}</p>
 </blockquote>
 <blockquote>
 <p>Define a function which returns the count of all odd numbers in the vector x &lt;- 1:99.
 :::</p>
 </blockquote>
 <blockquote>
-<p>::: {.exercise #unnamed-chunk-49}</p>
+<p>::: {.exercise #unnamed-chunk-443}</p>
 </blockquote>
 <blockquote>
-<p>Define a function counting the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000) respectively. Define another function to calculate the proportion that values are less than 0 for x and y respectively. Compare calculated proportions with theoretical proportion 0.5, what conclusions can you make?
+<p>Create a function to count the values that are less than 0 for two vectors x=rnorm(50) and y=rnorm(5000), respectively. Then craft another function to calculate the proportion of such values for x and y respectively. Compare the calculated proportions with theoretical proportion 0.5, what conclusions can you make?
 :::</p>
 </blockquote>
+<p>So, except basic R skills, now you go through advance topics like R Markdown, Tidyverse, Plotly, ShinyApp, and function. Each topic is like a magical spell; use them wisely and watch your data dance to your tunes!</p>
 
 </div>
 </div>

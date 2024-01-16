@@ -1,20 +1,23 @@
-# Step into R programming--the iris flower dataset  
+# Step into R programming:The iris flower dataset  
 
 Learning objectives:
 
-- Use R from [Rstudio Cloud](https://rstudio.cloud/) or local install.
-- RStudio interface: Console, Script, Environment, Plots.
-- Data frames and vectors.
-- The basics workflow: import data, check data types, define vectors from columns, plot and analyze.
+- Utilize R via [Rstudio Cloud](https://rstudio.cloud/) or through a local installation.
+- Familiarize yourself with the RStudio interface, including Console, Script, Environment, Plots panels.
+- Understand and manipulate data frames and vectors.
+- Master the basics workflow: importing data, checking data types, defining vectors from columns, and data through plotting.
 
  
 ## Getting started 
-1.  You can use R and Rstudio through a web browser via [Rstudio
-    Cloud](https://rstudio.cloud/). Create a free account, or just log-in with your Google account. Click the **New Project** button to get started. 
+**1. Using RStudio Cloud:**
 
-2.  Alternatively, you can install R on your laptop from [www.R-project.org](https://cloud.r-project.org/). Then install RStudio Desktop from
-    [www.RStudio.com](https://www.rstudio.com/products/rstudio/download/#download). If you have an
-    older version of R or Rstudio, we recommend uninstall them, delete the folder that holds the R packges, and reinstall the latest versions.
+R and RStudio are accessible through a web browser via [Rstudio
+    Cloud](https://rstudio.cloud/). You can create a free account, or simply log in using your Google account. Begin by clicking the **New Project** button. 
+
+**2. Local Installation:**
+
+Alternatively, you can install R on your laptop from [www.R-project.org](https://cloud.r-project.org/). Then install RStudio Desktop from
+    [www.RStudio.com](https://www.rstudio.com/products/rstudio/download/#download). If you're using older versions of R or Rstudio, it's wise to uninstall them, delete the folder containing R packages, and install the latest versions for an optimal experience.
     
 
 ```{r Rinterface, echo=FALSE, out.width='80%', fig.cap='Interface of RStudio.', fig.align='center'}
@@ -22,15 +25,14 @@ knitr::include_graphics("images/img0100_Rstudio.png")
 ```
 
 
-RStudio uses R
-in the background but provides a more user-friendly interface. R
-commands can be typed directly into the "Console" window.  See Figure \@ref(fig:Rinterface). 
+RStudio uses R in the background but provides a more user-friendly interface. R
+commands can be typed directly into the "Console" window, as shown in Figure \@ref(fig:Rinterface). 
 
-As a quick sample session, try all of these commands below in the Console window. 
-R is case-sensitive; "Species" and "species" are two different variables. 
-If you understand all of these, you probably do not need this book; 
-consider more advanced books like [R for Data Science](https://r4ds.had.co.nz/). 
-If it takes you a few months to type these 248 characters, try [www.RapidTyping.com](www.RapidTyping.com) first.  
+For a quick demonstration, try executing the following commands in the Console window. 
+Remember, R is case-sensitive: "Species" and "species" are two different variables. 
+If these commands seem like a breeze,  perhaps this book is too basic for you. 
+Consider exploring more advanced books like [R for Data Science](https://r4ds.had.co.nz/). 
+Conversely, if typing these 248 characters feels like a multi-month project, consider a typing tutorial at [www.RapidTyping.com](www.RapidTyping.com).  
 ```{r eval = FALSE}
 head(iris)
 str(iris)
@@ -58,213 +60,172 @@ abline(lm(PW ~ PL))
 
 ## The proper way of using RStudio
 
-1.  Create a project. An RStudio project is a nice way to organize and compartmentalize different tasks. The idea is, for a new research project, 
-we put all related files (source code, data, results) into a designated folder. 
- On RStudio.cloud, you have to do this to initiate an R session. 
-Click on the **Untitled Project** on the top of the window to rename it as something meaningful, such as "Workshop". If you are running R locally, click **File** from the main menu, and select **New Project**. 
-Then follow directions to choose or create a folder. 
+1.  **Create a project**: In RStudio, a project serves as a convenient means to organize your work. For each new research project, we put all related files (source code, data, results) into a designated folder. On RStudio.cloud, this is a must for starting an R session. 
+Click the **Untitled Project** on the top of the window to rename it as something meaningful, such as "Workshop". For local R users, navigate to **File** in the main menu, select **New Project**, then follow the instructions to choose or create a new folder. 
 
-2.  Create a script file by going to **File > New File > R Script**. Or click on the green plus sign. 
-Instead of typing our commands directly into the console window, we will type  in the **R Script** window, which could be saved as a record.
-To execute one line of code, click anywhere in the line and click the **Run** button. You can also highlight and run a block of code. 
-Type these two lines in the Script window, save the script as Workshop_script.R. Then click on each line and click **Run** from the icon. 
-After that, select both lines and click **Run**. 
+2.  **Create a script file**: Begin by going to **File > New File > R Script**, or by clicking on the green plus icon. Instead of directly typing commands into the console window, we will use the **R Script** window. This allows us to save our work. To execute one line of code, simply click anywhere on the line and then click the **Run** button. You can also execute a block of code by highlighting it and clicking Run. For practice, type these two lines into the Script window, save the script as 'Workshop_script.R'. Then click each line and **Run** from the icon. After that, highlight both lines and click **Run**. 
 ```{r eval = FALSE}
 head(iris)
 plot(iris)
 ```
 
-3.  Copy file into project folder.  Download this dataset from
-[GitHub](https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv) and save it as iris.csv.  
+3.  **Copy file into project folder**: To integrate the dataset into your project, download it from
+[GitHub](https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv) and save it as 'iris.csv'.  
 
 ## Data frames contain rows and columns: the iris flower dataset 
-In 1936, Edgar Anderson collected data to quantify the geographic variations of
-[*iris* flowers](https://en.wikipedia.org/wiki/iris_flower_data_set). 
-The data set consists of 50 samples from each of the three
-sub-species ( *iris setosa*, *iris virginica,* and *iris versicolor*). Four
-features were measured in centimeters (cm): the lengths and the widths of both sepals
-and petals. This is one of many built-in datasets in R. Download
-this dataset from
-[GitHub](https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv),
-and open it in Excel. Have a quick look at the data, think about what
-distinguishes the three species. If we have a flower with sepals of 6.5cm long
-and 3.0cm wide, petals of 6.2cm long, and 2.2cm wide, which species does it most
-likely belong to? **Think** (!) for a few minutes while eyeballing the data. 
-Write down your guessed species.
-Getting familiar with this dataset is vital for this and next chapters.
+In 1936, Edgar Anderson collected data on [*iris* flowers] to quantify the geographic variations
+(https://en.wikipedia.org/wiki/iris_flower_data_set). 
+The dataset includes 50 samples from each of the three
+sub-species ( *iris setosa*, *iris virginica,* and *iris versicolor*), with measurements in centimeters (cm) for lengths and widths of sepals and petals. This is one of many built-in datasets in R. You can also **download** the dataset from
+[GitHub](https://raw.githubusercontent.com/gexijin/learnR/master/datasets/iris.csv).
 
 ```{r echo=FALSE, out.width='50%', fig.cap='iris flower. Photo from Wikipedia.', fig.align='center' }
 knitr::include_graphics("images/img0101_iris.png")
 ```
 
 If you are using [Rstudio Cloud](https://rstudio.cloud/) through a web browser, 
-you are using a computer on the cloud, which cannot directly access your local files. 
-Therefore you need to first upload 
-the data file to the cloud using the **Upload** button in 
-the **Files** tab in the lower right panel. 
+remember that it operates on cloud-based servers. This means you cannot directly access 
+local files, and must first upload them using the **Upload** button in the **Files** 
+tab of the lower right panel. 
 
-The data file can be imported into R by selecting **Import Dataset**
-in the **File** menu, and then choose **"From Text(base)..."**.  As the default
-settings work well in this case, we just need to click **Import** in the pop-up
-window. That's it! There is no need to spend half of a semester to learn how to
-import data, like some people used to complain when learning SAS. If you have trouble
-importing this data file, you can skip this step as this data set is included in R.
+To **import** the dataset into R, go to **Import Dataset** in the **File** menu, then 
+select **"From Text(base)..."**. The default settings should suffice; just click 
+**Import** in the pop-up window. Thankfully, importing data in R isn't a lengthy process like in some other software(says SAS). If you have trouble with importing, skip this step as this dataset is already included in R.
 
 ```{r echo=FALSE, out.width='80%', fig.cap='Example of a data frame.', fig.align='center'}
 knitr::include_graphics("images/img0102_dataframe.png")
 ```
 
-To answer these questions, let us visualize and analyze the data with R. **Type these commands without the comments marked by “#”.**  
+Let's open the dataset in Excel for a quick review. Think about what distinguishes the three species. Imagine you find an iris flower with sepals of 6.5cm long by 3.0cm wide, and petals of 6.2cm long by 2.2cm wide. Which species do you think it belongs to?  **Think** (!) for a few minutes while eyeballing the data in Excel. Write down your guess about the species. Getting familiar with this dataset is crucial for this chapter and those that follow.
+
+To answer these questions, let's visualize and analyze the data with R. **Type the commands, omit those marked by “#”**.
 ```{r echo=TRUE, eval=FALSE}
-View(iris) # show as a spreadsheet
+View(iris) # View as a spreadsheet
 ```
 ```{r echo=TRUE}
-head(iris) # first few rows
-class(iris) # show the data type
-str(iris) # show the structure
+head(iris) # Display the first few rows
+class(iris) # Reveal the data type
+str(iris) # Expose the structure
 ```
 
-The imported data is stored in a **data frame** called *iris*, which contains
-information of 5 variables for 150 observations (flowers). While the first 4 variables/columns, 
-*Sepal.Length*, *Sepal.Width*, *Petal.Length*, and *Petal.Width*, contain **numeric** values. 
-The 5^th^ variable/column, *Species*, contains
-**characters** indicating which sub-species a sample belongs to. This is an
-important distinction, as they are treated differently in R.  
-Sometimes we need to overwrite data types guessed by R, which can be done during the data
-importing process. If you are using the built-in iris data, the variable/column *Species* is a **factor** with three levels.
+The imported data is stored in a **data frame** named *iris*, which contains
+information for 150 observations (flowers) across 5 variables. The first 4 variables/columns, 
+*Sepal.Length*, *Sepal.Width*, *Petal.Length*, and *Petal.Width*, are **numeric**. 
+The 5^th^ variable/column, *Species*, consists of **character** strings indicating the sub-species of each sample. It's important to note that numeric and character data are treated differently in R. Sometimes we need to overwrite data types guessed by R, which can be done during the data importing process. If you are using the built-in iris data, the variable/column *Species* is a **factor** with three levels.
 
 ```{r echo=TRUE}
-summary(iris) # summary statistics
+summary(iris) # Provide summary statistics
 ```
-The *summary* function provides us with information on the distribution of each variables. 
-There are 50 observations for each of the three sub-species.
+The *summary* function offers insights into the distribution of each variables, highlighting that there are 50 observations for each of the three subspecies.
 
 Individual values in a **data frame** can be accessed using row and column indices. 
 ```{r echo=TRUE, results='hide'}
-iris[3, 4] # returns the value lies at the intersection of row 3 and column 4
-iris[3, ] # returns values of row 3
-iris[, 4] # returns values of column 4
-iris[3, 1:4] # returns values at the intersections of row 3 and columns from 1 to 4
+iris[3, 4] # Value at row 3 and column 4
+iris[3, ] # All values in row 3
+iris[, 4] # All values in column 4
+iris[3, 1:4] # Values in row 3 for columns 1 to 4
 ```
 
-**To do the exercises, you need to create a blank Word document. 
-Copy-and-paste the R code and corresponding outputs to the Word document, 
-and then save it as a PDF file. Submit both the Word and PDF files to the Dropbox.**
+**To do the exercises, you need to start with a blank Word document. Copy-and-paste the R code and corresponding outputs into the document, then save it as both a Word and a PDF file. Submit these files to the Dropbox.**
 
 >
 ```{exercise }
 
 >
-Type **data()** in the R Console window. The pop-up window - R data sets - contain all built-in data sets in package **datasets**. Choose a data set whose structure is data frame, then answer the following questions:
+
+Type **data()** in the R Console window. The pop-up window - "R data sets" - contains all built-in data sets in package **datasets**. Choose a data set whose structure is data frame, then answer the following questions:
+
 >
-a. Display the first few rows of the data set. **NOT** all values in your data set.      
-b. Show the dimension of the data set.        
-c. Extract a subset which contains values in the 2nd through the 5th rows and the 1st through the 4th columns. If your data set contains fewer rows or columns, please choose another data set.
+a. Display the first few rows of the data set. **NOT** the entire set.      
+b. Show the dimensions of the data set.        
+c. Extract a subset containing values from rows 2 to 5 and columns 1 to 4. Choose another data set if yours has fewer rows or columns.
 ```
 
-
-You can replace the **iris** data set with any of the built-in data sets as long as its data structure is **data frame**. 
-Make sure you check the type of the data set by using **class()** or **str()** function. 
-Note: You will need to change the variable names and ranges of rows and columns. 
+Feel free to replace the **iris** data set with any of the built-in data sets as long as it's a **data frame**. Make sure to check the type of the data set using **class()** or **str()** function. Note that you will need to change the variable names and row/column ranges accordingly. 
 
 ```{r}
-colnames(iris) # Column names
+colnames(iris) # Display column names
 ```
 
-Remember these column names, as we are going to use them in our analysis. Note that sepal 
-length information is contained in the column named **Sepal.Length**. 
-We can retrieve an entire column by using the data frame name followed by the column name. 
-R is case-sensitive. “iris$petal.length” will not be recognized.
+Memorize these column names; they are essential for our analysis. We can retrieve an entire column by using the data frame name followed by the column name. For example, sepal length information is under the column **Sepal.Length**. Be mindful that R is case-sensitive; a term like “iris$petal.length” will not be recognized.
 ```{r echo=TRUE, results='hide'}
-iris$Petal.Length # 150 petal lengths
+iris$Petal.Length # Display 150 petal lengths
 ```
 
-If this is too much typing, we can store the data in a new **vector** called PL.
+To minimize typing, let’s store the data in a new **vector** named PL.
+
 ```{r} 
-PL <- iris$Petal.Length # define a new variable which contains only the Petal.Length values
+PL <- iris$Petal.Length # Store Petal.Length values in a new vector
 ```
 
-Some might complain that nothing happens after you type in this command.
-Although nothing is printed out, you have created a new **vector** called PL in
-the memory. You can find it in the top right panel in the **Environment** tab. 
-The process of programming is 
-mostly creating and modifying data objects in the memory.  
-
+Someone might complain that nothing happens after typing in this command. Actually, you have already created a new **vector** called PL in the memory. You can find it in the **Environment** tab in the top right panel. Programming mainly involves creating and modifying data objects in memory.
 ```{r echo=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics("images/environment.png")
 ```
 
-Like money saved in a bank, these data can be retrieved and used:
+Like withdrawing money saved in a bank, these data can be retrieved and used.
 ```{r} 
-PL  #print out 150 numbers stored in PL
-mean(PL)  #mean, duh
+PL  # Output the 150 numbers stored in PL
+mean(PL)  # Calculate the mean. Pretty straightforward!
 ```
 
 >
 ```{exercise}
 
 >
-a. Compute the mean of the sepal length in the data set **iris**.             
-b. Compute the mean of speed in the built-in data set **cars**.
+a. Calculate the mean of the sepal length in the data set **iris**.             
+b. Find the mean of speed in the built-in data set **cars**.
 ```
 
 
-The best way to find and learn R functions is Google search. The R community is uniquely supportive. 
-There are many example codes and answers to even the dumbest questions on sites like [StackOverflow.com](https://stackoverflow.com/). 
+The best way to discover and learn R functions is through a Google search. The R community is incredibly supportive. Websites like [StackOverflow.com](https://stackoverflow.com/) are treasure troves for code examples and answers to even the most basic questions.
 
 >
 ```{exercise}
 
 >
-a. Google “R square root function” to find the R code, then compute the value of $\sqrt{56.7}$.     
-b. Use R to find the maximal value of the variable *mpg* in the data set **mtcars**. 
+a. Look up “R square root function” on Google, then compute the value of $\sqrt{56.7}$.     
+b. Find the maximum value of the variable *mpg* in the data set **mtcars**. 
 ```
 
 
 ## Analyzing one set of numbers
 
-A **vector** holds a series of numbers or characters. Using various **functions**, R made it
-very easy to do the same calculations (add, subtract, multiply,...) on all of
-them at once or collectively.
+A **vector** in R holds a series of numbers or characters, and R's diverse **functions** make it simple to perform calculations (like addition, subtraction, multiplication, etc.) on these elements, either individually or collectively.
 
 ```{r}
 summary(PL)
 ```
 
-This produces a lot of useful information about the distribution of petal length:
+The **summary** function provides a detailed overview of the petal length distribution:
 
--   The minimum is 1.000, and the maximum is 6.900.
+-   The minimum is 1.000, while the maximum reaches 6.900.
 
--   Average petal length is 3.758.
+-   The average petal length stands at 3.758.
 
--   The mid-point, or median, is 4.350, as about half of the numbers are smaller
-    than 4.350. Why the median is different from the mean? What happens if there
-    is a typo and one number is entered 340cm instead of 3.40cm?
+-   The mid-point, or median, at 4.350, indicates that half the values are smaller than this. Ever wonder why the median and mean differ? Imagine if there's a typo and a petal length is erroneously entered as 340cm instead of 3.40cm. That would skew things quite a bit!
 
--   The 3rd quartile, or 75^th^ percentile, is 5.100, as 75% of the flowers have
-    petals shorter than 5.100. If a student's GPA ranks 5^th^ in a class of 25,
-    he/she is at 80^th^ percentile. The minimum is the 0^th^ percentile and the
-    maximum is the 100^th^ percentile.
+-   The 3rd quartile, or 75^th^ percentile, is 5.100, meaning 75% of the petals are shorter than this. Conversely, a student ranked 5th in a class of 25 would be in the 80th percentile. The minimum is the 0^th^ percentile and the maximum is the 100^th^ percentile.
     
--   The 1st quartile, or 25^th^ percentile, is 1.600. Only 25% of the flowers have
-    petals shorter than 1.600. These summary statistics are graphically
-    represented as a boxplot in the Figure \@ref(fig:1-3)A. Boxplots are more
-    useful when multiple sets of numbers are compared.
+-   The 1st quartile, or 25^th^ percentile, is at 1.600, indicating that Only 25% of the flowers have
+    petals shorter than this. 
+    
+  These summary statistics are visually represented in a boxplot (Figure \@ref(fig:1-3)A). Boxplots are particularly useful when comparing multiple data sets.
 
 (ref:1-3) Boxplot of petal length (A) and of all 4 columns (B).
 
 ```{r 1-3, echo=c(1, 5), fig.show='hold', out.width='50%', fig.cap='(ref:1-3)', fig.align='center'}
-boxplot(PL) # boxplot of Petal Length.
+boxplot(PL) # Boxplot of Petal Length.
 text(x = 1, y = c(5.2, 4.5, 1.75), labels = c("75th pencentile", "Median", "25th pencentile"))
 text(1.45, 6.6, labels = "boxplot(PL)", col = "red")
 legend("topleft", inset = .02, legend = "A", box.lty = 0)
-boxplot(iris[, 1:4]) # boxplots of four columns of iris.
+boxplot(iris[, 1:4]) # Boxplots of four columns of iris.
 text(4.1, 7.5, labels = "boxplot(iris[, 1:4])", col = "red")
 legend("topleft", inset = .001, legend = "B", box.lty = 0)
 ```
 
 In RStudio, you can copy a plot to the clipboard using the **Export** button on
-top of the plot area. Or you can click **zoom**, right click on the pop-up plot
+top of the plot area. Or you can click **zoom**, right-click on the pop-up plot, 
 and select **"Copy Image"**. Then you can paste the plot into Word. 
 
 >
@@ -272,78 +233,73 @@ and select **"Copy Image"**. Then you can paste the plot into Word.
 
 >
 a. Check the data structure of the built-in data set **mtcars**.     
-b. Get the boxplot of Mile Per Gallon (*mpg*) in the data set **mtcars**.
+b. Create a boxplot of Mile Per Gallon (*mpg*) in **mtcars**.
 ```
 
   
-To quantify the variance, we can compute the **standard deviation** σ:
+To quantify the variance, we compute the **standard deviation** σ as follows:
 \begin{align}
 σ=\sqrt{\frac{1}{N-1}[(x_{1}-\bar x)^2+(x_{2}-\bar x)^2+...+(x_{N}-\bar x)^2]}    
 \end{align}
-where N is the sample size and
+where N is the sample size and $\bar{x}$ is the mean:
 \begin{align}
 \bar x=\frac{1}{N}(x_{1}+x_{2}+\cdots+x_{N}) 
 
 \end{align}
-If all the measurements are close to the mean µ, then standard deviation should be small. 
+A small standard deviation implies that the measurements cluster closely around the mean.
 
 ```{r}
-sd(PL) # standard deviation of Petal Length
+sd(PL) # Standard deviation of Petal Length
 SW <- iris$Sepal.Width
-sd(SW) # standard deviation of Sepal Width
+sd(SW) # Standard deviation of Sepal Width
 ```
 
-As we can see, these flowers have similar sepal width, but they differ widely in
-petal length. This is consistent with the boxplot above. Perhaps changes in
-petal length lead to better survival in different habitats.
+The results suggest that these flowers have similar sepal width but exhibit significant variation in
+petal length, as indicated by the boxplot above. This variation might be an adaptation survival in different habitats.
 
-With R, it is easy to generate graphs. 
+With R, it is straightforward to generate graphs. 
 ```{r out.width='80%', fig.cap='Barplot of petal length.', fig.align='center'}
-barplot(PL) # bar plot of Petal Length
+barplot(PL) # Bar plot of Petal Length
 ```
 
-This figure suggests that the first 50 flowers (iris setosa) have much shorter
-petals than the other two species. The last 50 flowers (iris virginica) have
-slightly longer petals than those of iris versicolor.
+This bar plot suggests that the first 50 flowers (iris setosa) have much shorter
+petals than the other two species, and the last 50 flowers (iris virginica) have
+slightly longer petals than iris versicolor.
 
 (ref:1-4) Scatter plot, histogram, lag plot and normal Q-Q plot. 
 
 ```{r 1-4, echo=c(1, 4, 6, 9, 10), fig.show='hold', out.width='50%', fig.cap='(ref:1-4)', fig.align='center'}
-plot(PL) # Run scatter plot
+plot(PL) # Scatter plot
 legend("topleft", inset = .02, cex = 2, legend = "plot(PL)", box.lty = 0)
 title("Scatter plot of Petal Length")
-hist(PL) # histogram
+hist(PL) # Histogram
 legend(1.6, 36, cex = 2, legend = "hist(PL)", box.lty = 0)
-lag.plot(PL) # lag plot
+lag.plot(PL) # Lag plot
 legend("topleft", inset = .02, cex = 2, legend = "lag.plot(PL)", box.lty = 0)
 title("Lag plot of Pental Length")
 qqnorm(PL) # Q-Q plot for normal distribution
-qqline(PL) # add the regression line
+qqline(PL) #Add the regression line
 legend("topleft", inset = .02, cex = 2, legend = "qqnorm(PL)", box.lty = 0)
 ```
-There are three different groups in the scatter plot. The petal length of one group is much smaller than the other two groups.
+In the scatter plot, three distinct groups are apparent, with one group having much smaller petal lengths. 
 
 Histogram shows the distribution of data by plotting the frequency of data in bins.
-The histogram top right of Figure \@ref(fig:1-4) shows that there are more flowers
-with Petal Length between 1 cm and 1.5 cm. It also shows that the data does not show a bell-curved distribution.
+Figure \@ref(fig:1-4) reveals that there are more flowers with Petal Length between 1 cm and 1.5 cm. It also indicates that the data does not show a bell-curved distribution.
 
 The lag plot is a scatter plot against the same set of number with an offset of
 1. Any structure in a lag plot indicates non-randomness in the order in which
-the data is presented. We can clearly see three  clusters, indicating that
+the data is presented. We can clearly see three clusters, indicating that
 values are centered around three levels sequentially.
 
-Q-Q (quantile-quantile) plots can help check if data follows a Normal distribution, which is widely observed in many situations. 
-It is the pre-requisite for many statistical methods. See Figure \@ref(fig:1-5) for an example of normal distribution. 
-Quantiles of the data is compared against those in a normal distribution. If the data points on a Q-Q plot form a straight line, 
-the data has a normal distribution.
+Q-Q (quantile-quantile) plots are used to check if data follows a normal distribution, a pre-requisite for many statistical methods. Quantiles of the data are compared against those in a normal distribution. If the data points on a Q-Q plot form a straight line, the data likely adheres to a normal distribution. See Figure \@ref(fig:1-5) for an example. 
 
 
 >
 ```{exercise}
 
 >
-a. Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution    
-b. Generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should like those in Figure \@ref(fig:1-5).      
+a. Run x = rnorm(500) to generate 500 random numbers following the Standard Normal distribution.    
+b. Generate scatter plot, histogram, lag plot, and Q-Q plot of these numbers. Your plots should resemble those in Figure \@ref(fig:1-5).      
 ```
 
 
@@ -351,10 +307,10 @@ b. Generate scatter plot, histogram, lag plot, and Q-Q plot. Your plots should l
 
 ```{r 1-5, echo=FALSE, fig.show='hold', out.width='50%', out.length='50%', fig.cap='(ref:1-5)', fig.align='center'}
 x <- rnorm(500)
-plot(x) # Run sequence plot
+plot(x) # Scatter plot
 title("Scatter plot of x")
-hist(x) # histogram
-lag.plot(x)
+hist(x) # Histogram
+lag.plot(x) # Lag plot
 title("Lag plot of x")
 qqnorm(x) # Q-Q plot for normal distribution
 qqline(x)
@@ -365,199 +321,170 @@ qqline(x)
 ```{exercise}
 
 >
-Generate scatter plot, histogram, lag plot, and Q-Q plot for the Septal Length in the iris dataset.
+Create scatter plot, histogram, lag plot, and Q-Q plot for the Septal Length in the iris dataset.
 ```
 
 
-We can do a one-sample t-test for the mean of a normally distributed data. 
+A one-sample t-test is ideal for testing the mean of a normally distributed data. 
 Suppose the pental length of the species *setosa*, the first 50 observations of *PL*, 
-follows a normal distribution. We want to test if its mean is different from 1.5 cm at the significance level $\alpha = 0.05$. 
-Below is the code for the testing.
+follows a normal distribution. We aim to test if its mean is different from 1.5 cm at the significance level of $\alpha = 0.05$. 
+Here is the code to perform this test:
 ```{r}
-t.test(PL[1:50], mu = 1.5) # two sided t-test for the mean of petal length of setosa
+t.test(PL[1:50], mu = 1.5) # Two-sided t-test for the mean petal length of setosa
 ```
 
-In this case, our null hypothesis is that the mean of petal length of *setosa* is 1.5 cm. 
+In this case, our null hypothesis is that the mean petal length of *setosa* is 1.5 cm. 
 Since p-value 0.1282 is greater than the significance level 0.05, 
 there is no strong evidence to reject the null hypothesis. 
-This function also tells us the 95% confidence interval for the mean. 
-Based on our sample of the 50 observations, we have 95% confidence to conclude 
-that the mean of petal length of setosa (if we were to measure all setosa in the world) 
-is between 1.412645 cm and 1.511355 cm. 
+This function also provides the 95% confidence interval for the mean. 
+Based on our sample of the 50 observations, we are 95% confident that the actual mean petal length of setosa (if we were to measure all setosa in the world) lies between 1.412645 cm and 1.511355 cm. 
 
 >
 ```{exercise}
 
 >
-Compute 95% confidence interval of sepal length of setosa.
+Compute the 95% confidence interval for the sepal length of setosa.
 ```
 
 
-We can perform a hypothesis test on whether a set of numbers are derived from normal distribution. 
-When interpreting results from hypothesis testing, it is important to state 
-the null hypothesis is. Here the null hypothesis is that the data is from a normal distribution. 
+Hypothesis testing can also determine whether a set of numbers is derived from normal distribution. 
+It's crucial to clearly state the null hypothesis when interpreting results. Here the null hypothesis is that the data comes from a normal distribution. 
 ```{r}
-# normality test 
+# Normality test 
 shapiro.test(PL)
 ```
 
-If petal length is normally distributed, there is only 7.412×10^-10^ chance of getting the observed test statistic of 0.87627. In other words, it is highly unlikely that petal length follows a normal distribution. We reject the normal distribution hypothesis, which could be corroborated by our plots above. 
+Given the test statistic of 0.87627, the chance that the petal length is normally distributed is only 7.412×10^-10^. In other words, it is highly unlikely that the petal length follows a normal distribution. We reject the normal distribution hypothesis, corroborating our earlier plots.
 
 ```{r}
-# normality test of  the first 50 observations of PL
+# Normality test of the first 50 observations of PL
 shapiro.test(PL[1:50])
 ```
-Given the significance level $\alpha=0.05$, the p-value of normality test for the pental length of setosa is 0.05481 which is greater than 0.05. 
-Then we fail to reject the null hypothesis and conclude that we don't have  evidence to reject the hypthoses 
-that the pental length of setosa follows a normal distribution. 
-In statistics, we rely on both charts and statistical models to draw a conclusion.
+With a p-value of 0.05481, slightly above the threshold of $\alpha=0.05$, we fail to reject the null hypothesis. This indicates that we don't have sufficient evidence to refute the claim that the petal length of setosa follows a normal distribution. 
+
+In statistics, combining graphical insights with statistical models leads to well-rounded conclusions.
 
 >
 ```{exercise}
 
 >
-a. Run Shapiro’s test on sepal width. Does it follow a normal distribution given the significant level $\alpha = 0.05$?    
-b. Generate histogram and Q-Q plot for sepal width. Do the plots show a Normal approximation?    
+a. Conduct Shapiro’s test on sepal width. Does it follow a normal distribution given the significant level $\alpha = 0.05$?    
+b. Generate histogram and Q-Q plot for sepal width. Do these plots show a normal distribution?    
 ```
-
-
 
 
 ## Analyzing a categorical variable
 
-In the iris dataset, the last column contains the species information. We call this a **categorical variable**. 
-Bar and Pie charts are very effective in showing proportions. We can see that the three species are each represented with 50 observations.
+In the iris dataset, the species information in the last column is what we call a **categorical variable**. 
+Bar and Pie charts are excellent for displaying proportions. In this case, they display equal representation of the three species, with 50 observations each.
 ```{r echo=c(1, 2, 3, 5), fig.show='hold', out.width='50%', fig.cap='Frequencies of categorical values visualized by Pie chart (A) and bar chart (B).', fig.align='center'}
-counts <- table(iris$Species) # tabulate the frequencies
+counts <- table(iris$Species) # Tabulate the frequencies
 counts
-pie(counts) # pie chart
+pie(counts) # Create a pie chart
 legend("topleft", inset = .02, legend = "A", box.lty = 0)
-barplot(counts) # bar plot
+barplot(counts) # Generate a bar plot
 text(3.71, 48, labels = "B")
 ```
 
 
 ## The relationship between two numerical variables 
-Scatter plot is very effective in visualizing the correlation between two columns of numbers. 
+Scatter plot is very effective in visualizing the correlation between two numerical variables.
 
 (ref:2-1) Scatter plot of petal width and petal length.
 
 ```{r 2-1, message=FALSE, out.width='80%', fig.cap='(ref:2-1)', fig.align='center'}
-PW <- iris$Petal.Width # just lazy
-plot(PW, PL) # scatterplot of pental width vs pental length
+PW <- iris$Petal.Width # Shortcut for petal width
+plot(PW, PL) # Scatter plot of petal width vs petal length
 ```
 
 Figure \@ref(fig:2-1) shows that there is a positive correlation between petal
-length and petal width. In other words, flowers with longer petals are often
-wider. So the petals are getting bigger substantially when both dimensions
-increase.
+length and width. This implies that flowers with longer petals are also
+wider, suggesting a proportional increase in both dimensions.
 
-Another unusual feature is that there seem to be two clusters of points. Do the
-points in the small cluster represent one particular species of iris? We need to
-further investigate this. The following will produce a plot with the species
-information color-coded. The resultant Figure \@ref(fig:2-2) clearly shows that
-indeed one particular species, *setosa* constitutes the smaller cluster in
-the low left. The other two species also show a difference in this plot, even
-though they are not easily separated. This is a very important insight into this
-dataset.
+Another unusual feature is that there seem to be two distinct clusters. Do the
+points in the small cluster represent one particular species of iris? To explore 
+this, we can color-code the species in the plot.  The resultant Figure \@ref(fig:2-2) clearly  demonstrates that one particular species, *setosa* forms the smaller cluster in
+the low left corner. The other two species, while not as distinctly separated, also exhibit a notable differences. This insight is crucial for understanding the dataset.
 
-(ref:2-2) Scatter plot shows the correlation of petal width and petal length.
+(ref:2-2) Scatter plot showing the correlation of petal width and petal length.
 
 ```{r 2-2, echo = c(1,2,3),out.width='80%', fig.cap='(ref:2-2)', fig.align='center'}
 SP <- as.factor(iris$Species)
-plot(PW, PL, col = SP) # change colors based on Species
-legend("topleft", levels(SP), fill = 1:3) # add legends on topleft.
-abline(lm(PL ~ PW))
+plot(PW, PL, col = SP) # Colors based on Species
+legend("topleft", levels(SP), fill = 1:3) # Add legends on top left.
+abline(lm(PL ~ PW)) # Linear model line
 ```
 
 
-To change the color for a specific data point, we defined a new variable SP
-by converting the last column into a **factor**. 
-The function **str(SP)** shows that the SP is a
-factor with 3 levels which are internally coded as 1, 2, and 3. 
-This enables us to use these as color codes. This kind of base plotting has been simplified by 
-modern systems such as ggplot2, which we will discuss later. So you do not have to remember any of this.
+To enable species-based color coding, we defined a new variable SP by converting the last column into a **factor**. The function **str(SP)** shows that the SP is a factor with 3 levels, internally coded as 1, 2, and 3, which we use for color coding. This method of base plotting in R has been simplified by 
+modern systems such as ggplot2, which we will discuss later. So it's not necessary to remember any of these steps.
 
 ```{r}
-str(SP) # show the structure of Species.
+str(SP) # Display the structure of Species.
 ```
 
-Perhaps due to adaption to the environment, change in petal length leads to
-better survival. With the smallest petals, *setosa* is found in Arctic
+The variation in petal length might be an adaptation to different environments. For instance, *setosa*, with the smallest petals, is typically found in Arctic
 regions. *versicolor* is often found in the Eastern United States and
-Eastern Canada. *virginica* "is common along the coastal plain from Florida
-to Georgia in the Southeastern United States--*Wikipedia*." It appears the iris
-flowers in warmer places are much larger than those in colder ones. With R, it
-is very easy to generate lots of graphics. But we still have to do the thinking.
-It requires us to interpret the charts in the context.
+Eastern Canada. While *virginica* is common along the coastal plain from Florida
+to Georgia in the Southeastern United States--*Wikipedia*." It appears that the iris
+flowers in warmer places are much larger than those in colder ones. R makes graph creation easy, but interpreting these graphs in context still requires thoughtful analysis.
 
 >
 ```{exercise}
 
 >
-The **mtcars** data description can be found here: [https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html](https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html). 
+Explore the **mtcars** dataset available at: [https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html](https://stat.ethz.ch/R-manual/R-patched/RHOME/library/datasets/html/mtcars.html). Create a scatter plot to analyze the correlation between Miles/(US) gallon and Displacement (cu.in.). Since the type of cyl is numeric, you will need to use function newcyl -> as.factor(cyl) to convert it into factor. Replace all 'mtcars$cyl' with 'newcyl'.
 >
-Based on mtcars data set, plot a scatter plot which shows the correlation between Miles/(US) gallon and Displacement (cu.in.). In this data set, the type of cyl is numeric. You will need to use function newcyl -> as.factor(cyl) to transfer the type to factor. Then replace all mtcars$cyl with newcyl.
->
-a. Color the scatter plot by Number of cylinders;
-b. Add legend to the top right.
+a. Color-code the scatter plot by the Number of cylinders;
+b. Include a legend to the top right corner.
 ```
 
-
-We can quantitatively characterize the strength of the correlation using several types of correlation coefficients, 
-such as Pearson’s correlation coefficient.  It ranges from -1 to 1.   Zero means no linear correlation.
+We can quantitatively measure the strength of a correlation using metrics like Pearson's correlation coefficient, which ranges from -1 to 1. A value of zero signifies no linear correlation.
 ```{r}
 cor(PW, PL)
 ```
 
-This means the petal width and petal length are strongly and positively correlated. we can add this information to the plot as text:
+This outcome indicates a strong, positive correlation between petal width and petal length. To visually represent this on a plot, we can add a text annotation:
 ```{r eval=FALSE}
 text(1.5, 1.5, paste("R=0.96"))
 ```
 
-
+A correlation test can further assess the statistical significance of the correlation:
 ```{r}
 cor.test(PW, PL)
 ```
 
-Through hypothesis testing, we reject the null hypothesis that the true correlation is zero (no correlation). 
-That means the correlation is statistically significant.
-Note that Pearson’s correlation coefficient is not robust against outliers 
-and other methods such as Spearman’s exists. See help info:
+This test allows us to reject the null hypothesis that the true correlation is zero (no correlation), which indicates that the correlation is statistically significant. It's worth noting that Pearson’s coefficient can be influenced by outliers, and alternatives like Spearman’s coefficient may be used for more robust analysis. For more information, consult the help documentation:
 ```{r eval=FALSE, echo=TRUE, message=FALSE}
-?cor # show help info on the function of cor()
+?cor # Display help information for the cor() function
 ```
-We can also determine the equation that links petal length and petal width. This is so called regression analysis. We assume
+
+Regression analysis can further reveal the relationship between petal length and width using an equation. We consider a linear model:
 
    $Petal.Length = \alpha × Petal.Width + c + \epsilon$,
 
-where $\alpha$ is the slope parameter, $c$ is a constant, and $\epsilon$ is some random error.   This linear model can be determined by a method that minimizes the least squared-error:
+where $\alpha$ is the slope parameter, $c$ is a constant, and $\epsilon$ represents random error. This model can be established using a least squared-error method:
 ```{r}
 model <- lm(PL ~ PW) # Linear Model (lm)
-summary(model) # shows the details
+summary(model) # Display model details
 ```
 
-Note that in the regression model, the tilde(~) links a response variable 
-on the left with one or more independent variables on the right side.
-It is a shortcut for an operator. We are defining a statistical model where
-the PL is modeled as a function of PW. In addition to regression models, we also use formula in plots.
-
-
-As we can see, we estimated that $\alpha=2.22944$ and $c=1.08356$. Both parameters are significantly 
-different from zero as the p-values are <2×10^-16^ in both cases. In other words, we can reliably predict 
+In the regression model, the tilde(~) links a response variable on the left with one or more independent variables on the right side. We are defining a statistical model where PL is modeled as a function of PW.
+Our analysis estimates $\alpha=2.22944$ and $c=1.08356$, with both parameters significantly 
+different from zero (p-values<2×10^-16^) in both cases. Consequently, we can reliably predict the petal length with the equation: 
 
 $Petal.Length = 2.22944 × Petal.Width + 1.08356$.
 
-This model can be put on the scatter plot as a line.
+Formulas like this are also used in plots. This model can be visualized on a scatter plot as a regression line:
 ```{r fig.keep='none', eval = FALSE}
-abline(model) # add regression line to plot.
+abline(model) # Add the regression line to plot
 ```
 
-And we can get the diagnostic plots for regression analysis:
+To analyze the model's accuracy and assumptions, diagnostic plots are useful:
 ```{r fig.keep='none', eval = FALSE}
-plot(model) # diagnostic plots for regression
+plot(model) # Diagnostic plots for regression
 ```
-Sometimes, we use this type of regression analysis to investigate whether variables are significantly associated. 
+Regression analysis is a powerful tool for examining the significance of relationships between variables. 
 
 >
 ```{exercise}
@@ -565,60 +492,54 @@ Sometimes, we use this type of regression analysis to investigate whether variab
 >
 Investigate the relationship between sepal length and sepal width using scatter plots, 
 correlation coefficients, test of correlation, and linear regression. 
-Again interpret all your results in PLAIN and proper English.
+Again interpret all your results in clear and straightforward English.
 ```
 
 
 
 ## Testing the differences between two groups
-Are boys taller than girls of the same age? Such situations are common. 
-We have measurements of a random **sample** from a **population**. From the sample we want 
-to know if the observed differences among the two groups 
-reflect real differences in the population or due to random sampling error.   
+In research, we often encounter questions like "Are boys taller than girls of the same age?" To address such queries, we analyze a random **sample** from a **population** to determine if observed differences between two groups reflect actual population differences or are merely due to random sampling errors.
 
 (ref:2-4) Boxplot of petal length, grouped by species.
 
 ```{r  message=FALSE, out.width='80%', fig.cap='(ref:2-4)', fig.align='center'}
 Species <- iris$Species
-# Comparing distributions of petal length of the three species by boxplot
+# Compare distributions of petal length for the three species via boxplot
 boxplot(PL ~ Species)
 ```
-Here, R automatically split the dataset into three groups according to Species and created a boxplot for each. 
-
-From the boxplot, it is obvious that *Setosa* has much shorter petals. Are there differences between *versicolor* and *virginica* significant? 
-We only had a small sample of 50 flowers for each species. But we want to draw some conclusion about the two species in general. We could measure all the iris flowers across the world; Or we could use statistics to make inference. Let's extract corresponding data.
+Here, R automatically splits the dataset into three groups based on species and creates a boxplot for each. The boxplot clearly shows that *Setosa* has much shorter petals. But are the differences between *versicolor* and *virginica* statistically significant? Despite our limited sample size of 50 flowers per species, we seek to draw broader conclusions. We could measure all the iris flowers across the world or **use statistical inference**. Let's extract corresponding data.
 ```{r results='hide'}
-PL1 <- PL[51:100] # extract Petal Length of versicolor
-PL1 # a vector with 50 numbers
-PL2 <- PL[101:150] # extract Petal length of virginica
-PL2 # y contain 50 measurements
+PL1 <- PL[51:100] # Petal Length of versicolor
+PL1 
+PL2 <- PL[101:150] # Petal length of virginica
+PL2 
 ```
 
 ```{r fig.keep='none'}
-boxplot(PL1, PL2) # a boxplot of the two groups of values
-t.test(PL1, PL2) # two sample t-test
+boxplot(PL1, PL2) # Boxplot of the two groups
+t.test(PL1, PL2) # Two-sample t-test
 ```
-In this two sample t-test, our null hypothesis is that the mean of petal length for *versicolor* is the same as *virginica*. A small p-value of 2.2x10^-16^ indicates under this hypothesis, it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence we reject that hypothesis and conclude that the means for the two species are significantly different. If we measure all *versicolor* and *virginica* flowers in the world and compute their average petal lengths, it is very likely that the two averages are different. On the other hand, if the p-value is larger than a given significance level, let's say $\alpha = 0.05$, we fail to reject the null hypothesis and conclude that we don't have strong evidence to reject the means are same. 
+In this two sample t-test, our null hypothesis states that the mean petal length for *versicolor* is the same as for *virginica*. The small p-value of 2.2x10^-16^ indicates that it is extremely unlikely to observe the difference of 1.292cm through random sampling. Hence, we reject this hypothesis and conclude that the means for the two species are significantly different. If we measure all *versicolor* and *virginica* flowers in the world and compute their average petal lengths, it is very likely that the two averages are different. Conversely, a p-value larger than a chosen significance level, let's say $\alpha = 0.05$, would imply insufficient evidence to reject the hypothesis of equal means.
 
-We actually do not need to separate two set of numbers into two data objects in order to do a t-test. We can do it right within the data frame. R can separate data points by columns.
+Interestingly, we do not need separate data objects for a t-test. It can be performed directly within the dataframe, with R separateing data points by columns.
 ```{r results='hide', fig.keep='none'}
-# Extract observations of versicolor which are lined at rows from 51 to 150
+# Extract observations of species versicolor which are lined at rows from 51 to 150
 df <- iris[51:150, ]
-t.test(Petal.Length ~ Species, data = df) # t-test
-boxplot(Petal.Length ~ Species, data = droplevels(df)) # removes empty levels in Species
+t.test(Petal.Length ~ Species, data = df) # t-test within the data frame
+boxplot(Petal.Length ~ Species, data = droplevels(df)) # Boxplot with adjusted species levels
 ```
 
 >
 ```{exercise}
 
 >
-Use boxplot and t-test to investigate whether the means of
-sepal width between versicolor and virginica are different. Interpret your results.
+Use boxplot and t-test to investigate whether there are significant differences in 
+sepal width between *versicolor* and *virginica*. Interpret your results.
 ```
 
 
-## Testing the difference among multiple groups (ANOVA)
-As indicated by Figure \@ref(fig:2-5), sepal width has small variation across species. We want to know if the means of sepal width for the 3 species are same or not. This can be done through Analysis of Variance (ANOVA).
+## Testing differences among multiple groups (ANOVA)
+As indicated in Figure \@ref(fig:2-5), sepal width variation across species is small. We aim to determine if the mean sepal widths for the 3 species are equal. This is a perfect task for Analysis of Variance (ANOVA).
 
 (ref:2-5) Boxplot of sepal width across 3 species.
 
@@ -627,20 +548,16 @@ SW <- iris$Sepal.Width
 boxplot(SW ~ SP)
 summary(aov(SW ~ SP))
 ```
-Since p-value is much smaller than 0.05, we reject the null hypothesis. We can conclude that not all the 3 species have the same mean of sepal width. In other words, there are at least two of the species have different means of sepal width. This is the only thing we can conclude from  this, since this is how the hypothesis was set up. The boxplot in Figure \@ref(fig:2-5) seems to indicate  that *setosa* has wider sepals. 
+With the p-value significantly below 0.05, we reject the null hypothesis, concluding that not all the 3 species share the same mean sepal width. The boxplot in Figure \@ref(fig:2-5) suggests that *setosa* has wider sepals, though ANOVA only confirms that at least two species differ in mean sepal width, this is how the hypothesis was set up. 
 
 >
 ```{exercise}
 
 >
-Use boxplot and ANOVA to investigate whether the means of spetal width are the same for the 3 species. 
+Explore if the mean spetal widths are the same across the 3 species using boxplot and ANOVA. 
 ```
 
-
-I hope this give you some idea about what it is like to use R to visualize and analyze data. It is interactive and graphical. 
-If I made you feel it is complicated, I failed as a instructor. 
-Most people can learn R themselves by working on a small dataseet of their interest. 
-Just Google everything and keep trying. 
+Hopefully, this chapter has given you a taste of what it's like to use R for data visualization and analysis. It's an interactive and graphical process. If I've made this seem overly complex, I apologize; that's not my intention as an instructor. Many individuals can learn R independently by working on a small dataset of personal interest. The key is to Google everything and keep trying. 
 
 ![From Tenor.com](https://github.com/gexijin/learnR/raw/master/images/tenor_typing_cat.gif)
 ```{r echo=FALSE,eval=FALSE}

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html -->
+<html lang="" xml:lang=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Importing data and managing files | Learn R through examples</title>
+  <meta name="description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome.">
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Importing data and managing files | Learn R through examples">
+  <meta property="og:type" content="book">
+  
+  <meta property="og:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome.">
+  <meta name="github-repo" content="gexijin/learnR">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chapter 4 Importing data and managing files | Learn R through examples">
+  
+  <meta name="twitter:description" content="This is a draft of a book for learning data analysis with the R language. This book emphasizes hands activities. Comments and suggestions are welcome.">
+  
+
+<meta name="author" content="Xijin Ge, Jianli Qi, and Rong Fan">
+
+
+<meta name="date" content="2023-12-27">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="file:///C:/Ge%20working/learnR/docs/data-structures.html">
+<link rel="next" href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html">
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/jquery-3.6.0.min.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/fuse.min.js.download"></script>
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/style.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-table.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-bookdown.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-highlight.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-search.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-fontsettings.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-clipboard.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/anchor-sections.css" rel="stylesheet">
+<link href="./Chapter 4 Importing data and managing files _ Learn R through examples_files/anchor-sections-hash.css" rel="stylesheet">
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/anchor-sections.js.download"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<script type="text/javascript" async="" src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/MathJax.js.download"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888; display: contents}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.mjx-chtml {display: inline-block; line-height: 0; text-indent: 0; text-align: left; text-transform: none; font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; letter-spacing: normal; word-wrap: normal; word-spacing: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; margin: 0; padding: 1px 0}
+.MJXc-display {display: block; text-align: center; margin: 1em 0; padding: 0}
+.mjx-chtml[tabindex]:focus, body :focus .mjx-chtml[tabindex] {display: inline-table}
+.mjx-full-width {text-align: center; display: table-cell!important; width: 10000em}
+.mjx-math {display: inline-block; border-collapse: separate; border-spacing: 0}
+.mjx-math * {display: inline-block; -webkit-box-sizing: content-box!important; -moz-box-sizing: content-box!important; box-sizing: content-box!important; text-align: left}
+.mjx-numerator {display: block; text-align: center}
+.mjx-denominator {display: block; text-align: center}
+.MJXc-stacked {height: 0; position: relative}
+.MJXc-stacked > * {position: absolute}
+.MJXc-bevelled > * {display: inline-block}
+.mjx-stack {display: inline-block}
+.mjx-op {display: block}
+.mjx-under {display: table-cell}
+.mjx-over {display: block}
+.mjx-over > * {padding-left: 0px!important; padding-right: 0px!important}
+.mjx-under > * {padding-left: 0px!important; padding-right: 0px!important}
+.mjx-stack > .mjx-sup {display: block}
+.mjx-stack > .mjx-sub {display: block}
+.mjx-prestack > .mjx-presup {display: block}
+.mjx-prestack > .mjx-presub {display: block}
+.mjx-delim-h > .mjx-char {display: inline-block}
+.mjx-surd {vertical-align: top}
+.mjx-surd + .mjx-box {display: inline-flex}
+.mjx-mphantom * {visibility: hidden}
+.mjx-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 2px 3px; font-style: normal; font-size: 90%}
+.mjx-annotation-xml {line-height: normal}
+.mjx-menclose > svg {fill: none; stroke: currentColor; overflow: visible}
+.mjx-mtr {display: table-row}
+.mjx-mlabeledtr {display: table-row}
+.mjx-mtd {display: table-cell; text-align: center}
+.mjx-label {display: table-row}
+.mjx-box {display: inline-block}
+.mjx-block {display: block}
+.mjx-span {display: inline}
+.mjx-char {display: block; white-space: pre}
+.mjx-itable {display: inline-table; width: auto}
+.mjx-row {display: table-row}
+.mjx-cell {display: table-cell}
+.mjx-table {display: table; width: 100%}
+.mjx-line {display: block; height: 0}
+.mjx-strut {width: 0; padding-top: 1em}
+.mjx-vsize {width: 0}
+.MJXc-space1 {margin-left: .167em}
+.MJXc-space2 {margin-left: .222em}
+.MJXc-space3 {margin-left: .278em}
+.mjx-chartest {display: block; visibility: hidden; position: absolute; top: 0; line-height: normal; font-size: 500%}
+.mjx-chartest .mjx-char {display: inline}
+.mjx-chartest .mjx-box {padding-top: 1000px}
+.MJXc-processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MJXc-processed {display: none}
+.mjx-test {font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-transform: none; letter-spacing: normal; word-spacing: normal; overflow: hidden; height: 1px}
+.mjx-test.mjx-test-display {display: table!important}
+.mjx-test.mjx-test-inline {display: inline!important; margin-right: -1px}
+.mjx-test.mjx-test-default {display: block!important; clear: both}
+.mjx-ex-box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60ex}
+.mjx-test-inline .mjx-left-box {display: inline-block; width: 0; float: left}
+.mjx-test-inline .mjx-right-box {display: inline-block; width: 0; float: right}
+.mjx-test-display .mjx-right-box {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+#MathJax_CHTML_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.mjx-chtml .mjx-noError {line-height: 1.2; vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+.MJXc-TeX-unknown-R {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: normal; font-weight: normal}
+.MJXc-TeX-unknown-I {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: italic; font-weight: normal}
+.MJXc-TeX-unknown-B {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: normal; font-weight: bold}
+.MJXc-TeX-unknown-BI {font-family: STIXGeneral,'Cambria Math','Arial Unicode MS',serif; font-style: italic; font-weight: bold}
+.MJXc-TeX-ams-R {font-family: MJXc-TeX-ams-R,MJXc-TeX-ams-Rw}
+.MJXc-TeX-cal-B {font-family: MJXc-TeX-cal-B,MJXc-TeX-cal-Bx,MJXc-TeX-cal-Bw}
+.MJXc-TeX-frak-R {font-family: MJXc-TeX-frak-R,MJXc-TeX-frak-Rw}
+.MJXc-TeX-frak-B {font-family: MJXc-TeX-frak-B,MJXc-TeX-frak-Bx,MJXc-TeX-frak-Bw}
+.MJXc-TeX-math-BI {font-family: MJXc-TeX-math-BI,MJXc-TeX-math-BIx,MJXc-TeX-math-BIw}
+.MJXc-TeX-sans-R {font-family: MJXc-TeX-sans-R,MJXc-TeX-sans-Rw}
+.MJXc-TeX-sans-B {font-family: MJXc-TeX-sans-B,MJXc-TeX-sans-Bx,MJXc-TeX-sans-Bw}
+.MJXc-TeX-sans-I {font-family: MJXc-TeX-sans-I,MJXc-TeX-sans-Ix,MJXc-TeX-sans-Iw}
+.MJXc-TeX-script-R {font-family: MJXc-TeX-script-R,MJXc-TeX-script-Rw}
+.MJXc-TeX-type-R {font-family: MJXc-TeX-type-R,MJXc-TeX-type-Rw}
+.MJXc-TeX-cal-R {font-family: MJXc-TeX-cal-R,MJXc-TeX-cal-Rw}
+.MJXc-TeX-main-B {font-family: MJXc-TeX-main-B,MJXc-TeX-main-Bx,MJXc-TeX-main-Bw}
+.MJXc-TeX-main-I {font-family: MJXc-TeX-main-I,MJXc-TeX-main-Ix,MJXc-TeX-main-Iw}
+.MJXc-TeX-main-R {font-family: MJXc-TeX-main-R,MJXc-TeX-main-Rw}
+.MJXc-TeX-math-I {font-family: MJXc-TeX-math-I,MJXc-TeX-math-Ix,MJXc-TeX-math-Iw}
+.MJXc-TeX-size1-R {font-family: MJXc-TeX-size1-R,MJXc-TeX-size1-Rw}
+.MJXc-TeX-size2-R {font-family: MJXc-TeX-size2-R,MJXc-TeX-size2-Rw}
+.MJXc-TeX-size3-R {font-family: MJXc-TeX-size3-R,MJXc-TeX-size3-Rw}
+.MJXc-TeX-size4-R {font-family: MJXc-TeX-size4-R,MJXc-TeX-size4-Rw}
+.MJXc-TeX-vec-R {font-family: MJXc-TeX-vec-R,MJXc-TeX-vec-Rw}
+.MJXc-TeX-vec-B {font-family: MJXc-TeX-vec-B,MJXc-TeX-vec-Bx,MJXc-TeX-vec-Bw}
+@font-face {font-family: MJXc-TeX-ams-R; src: local('MathJax_AMS'), local('MathJax_AMS-Regular')}
+@font-face {font-family: MJXc-TeX-ams-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_AMS-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_AMS-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_AMS-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-cal-B; src: local('MathJax_Caligraphic Bold'), local('MathJax_Caligraphic-Bold')}
+@font-face {font-family: MJXc-TeX-cal-Bx; src: local('MathJax_Caligraphic'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-cal-Bw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Bold.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Bold.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-frak-R; src: local('MathJax_Fraktur'), local('MathJax_Fraktur-Regular')}
+@font-face {font-family: MJXc-TeX-frak-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-frak-B; src: local('MathJax_Fraktur Bold'), local('MathJax_Fraktur-Bold')}
+@font-face {font-family: MJXc-TeX-frak-Bx; src: local('MathJax_Fraktur'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-frak-Bw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Bold.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Bold.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-math-BI; src: local('MathJax_Math BoldItalic'), local('MathJax_Math-BoldItalic')}
+@font-face {font-family: MJXc-TeX-math-BIx; src: local('MathJax_Math'); font-weight: bold; font-style: italic}
+@font-face {font-family: MJXc-TeX-math-BIw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Math-BoldItalic.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Math-BoldItalic.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Math-BoldItalic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-R; src: local('MathJax_SansSerif'), local('MathJax_SansSerif-Regular')}
+@font-face {font-family: MJXc-TeX-sans-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-B; src: local('MathJax_SansSerif Bold'), local('MathJax_SansSerif-Bold')}
+@font-face {font-family: MJXc-TeX-sans-Bx; src: local('MathJax_SansSerif'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-sans-Bw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Bold.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Bold.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-I; src: local('MathJax_SansSerif Italic'), local('MathJax_SansSerif-Italic')}
+@font-face {font-family: MJXc-TeX-sans-Ix; src: local('MathJax_SansSerif'); font-style: italic}
+@font-face {font-family: MJXc-TeX-sans-Iw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Italic.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Italic.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-script-R; src: local('MathJax_Script'), local('MathJax_Script-Regular')}
+@font-face {font-family: MJXc-TeX-script-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Script-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Script-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Script-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-type-R; src: local('MathJax_Typewriter'), local('MathJax_Typewriter-Regular')}
+@font-face {font-family: MJXc-TeX-type-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Typewriter-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Typewriter-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Typewriter-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-cal-R; src: local('MathJax_Caligraphic'), local('MathJax_Caligraphic-Regular')}
+@font-face {font-family: MJXc-TeX-cal-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-B; src: local('MathJax_Main Bold'), local('MathJax_Main-Bold')}
+@font-face {font-family: MJXc-TeX-main-Bx; src: local('MathJax_Main'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-main-Bw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Main-Bold.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-I; src: local('MathJax_Main Italic'), local('MathJax_Main-Italic')}
+@font-face {font-family: MJXc-TeX-main-Ix; src: local('MathJax_Main'); font-style: italic}
+@font-face {font-family: MJXc-TeX-main-Iw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Main-Italic.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-R; src: local('MathJax_Main'), local('MathJax_Main-Regular')}
+@font-face {font-family: MJXc-TeX-main-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Main-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-math-I; src: local('MathJax_Math Italic'), local('MathJax_Math-Italic')}
+@font-face {font-family: MJXc-TeX-math-Ix; src: local('MathJax_Math'); font-style: italic}
+@font-face {font-family: MJXc-TeX-math-Iw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Math-Italic.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size1-R; src: local('MathJax_Size1'), local('MathJax_Size1-Regular')}
+@font-face {font-family: MJXc-TeX-size1-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Size1-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size2-R; src: local('MathJax_Size2'), local('MathJax_Size2-Regular')}
+@font-face {font-family: MJXc-TeX-size2-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Size2-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size3-R; src: local('MathJax_Size3'), local('MathJax_Size3-Regular')}
+@font-face {font-family: MJXc-TeX-size3-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Size3-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size4-R; src: local('MathJax_Size4'), local('MathJax_Size4-Regular')}
+@font-face {font-family: MJXc-TeX-size4-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Size4-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-vec-R; src: local('MathJax_Vector'), local('MathJax_Vector-Regular')}
+@font-face {font-family: MJXc-TeX-vec-Rw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Vector-Regular.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Vector-Regular.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Vector-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-vec-B; src: local('MathJax_Vector Bold'), local('MathJax_Vector-Bold')}
+@font-face {font-family: MJXc-TeX-vec-Bx; src: local('MathJax_Vector'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-vec-Bw; src /*1*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/eot/MathJax_Vector-Bold.eot'); src /*2*/: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/woff/MathJax_Vector-Bold.woff') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/fonts/HTML-CSS/TeX/otf/MathJax_Vector-Bold.otf') format('opentype')}
+</style></head>
+
+<body><div id="MathJax_Message" style="display: none;"></div>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="file:///C:/Ge%20working/learnR/docs/index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html" title="1 Step into R programming:The iris flower dataset"><i class="fa fa-check"></i><b>1</b> Step into R programming:The iris flower dataset</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting started</a></li>
+<li class="chapter" data-level="1.2" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#the-proper-way-of-using-rstudio" title="1.2 The proper way of using RStudio"><i class="fa fa-check"></i><b>1.2</b> The proper way of using RStudio</a></li>
+<li class="chapter" data-level="1.3" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#data-frames-contain-rows-and-columns-the-iris-flower-dataset" title="1.3 Data frames contain rows and columns: the iris flower dataset"><i class="fa fa-check"></i><b>1.3</b> Data frames contain rows and columns: the iris flower dataset</a></li>
+<li class="chapter" data-level="1.4" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#analyzing-one-set-of-numbers"><i class="fa fa-check"></i><b>1.4</b> Analyzing one set of numbers</a></li>
+<li class="chapter" data-level="1.5" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#analyzing-a-categorical-variable"><i class="fa fa-check"></i><b>1.5</b> Analyzing a categorical variable</a></li>
+<li class="chapter" data-level="1.6" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#the-relationship-between-two-numerical-variables" title="1.6 The relationship between two numerical variables"><i class="fa fa-check"></i><b>1.6</b> The relationship between two numerical variables</a></li>
+<li class="chapter" data-level="1.7" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#testing-the-differences-between-two-groups" title="1.7 Testing the differences between two groups"><i class="fa fa-check"></i><b>1.7</b> Testing the differences between two groups</a></li>
+<li class="chapter" data-level="1.8" data-path="step-into-r-programmingthe-iris-flower-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/step-into-r-programmingthe-iris-flower-dataset.html#testing-differences-among-multiple-groups-anova" title="1.8 Testing differences among multiple groups (ANOVA)"><i class="fa fa-check"></i><b>1.8</b> Testing differences among multiple groups (ANOVA)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html"><i class="fa fa-check"></i><b>2</b> Visualizing the iris flower data set</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#basic-concepts-of-r-graphics"><i class="fa fa-check"></i><b>2.1</b> Basic concepts of R graphics</a></li>
+<li class="chapter" data-level="2.2" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#scatter-plot-matrix"><i class="fa fa-check"></i><b>2.2</b> Scatter plot matrix</a></li>
+<li class="chapter" data-level="2.3" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#star-and-segment-diagrams"><i class="fa fa-check"></i><b>2.3</b> Star and segment diagrams</a></li>
+<li class="chapter" data-level="2.4" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#the-ggplot2-package-is-intuitive-and-powerful" title="2.4 The ggplot2 package is intuitive and powerful"><i class="fa fa-check"></i><b>2.4</b> The ggplot2 package is intuitive and powerful</a></li>
+<li class="chapter" data-level="2.5" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#other-types-of-plots-with-ggplot2"><i class="fa fa-check"></i><b>2.5</b> Other types of plots with ggplot2</a></li>
+<li class="chapter" data-level="2.6" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#hierarchical-clustering-and-heat-map" title="2.6 Hierarchical clustering and heat map"><i class="fa fa-check"></i><b>2.6</b> Hierarchical clustering and heat map</a></li>
+<li class="chapter" data-level="2.7" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#principal-component-analysis-pca" title="2.7 Principal component analysis (PCA)"><i class="fa fa-check"></i><b>2.7</b> Principal component analysis (PCA)</a></li>
+<li class="chapter" data-level="2.8" data-path="visualizing-the-iris-flower-data-set.html"><a href="file:///C:/Ge%20working/learnR/docs/visualizing-the-iris-flower-data-set.html#logistic-regression-for-binary-outcomes-prediction" title="2.8 Logistic Regression for Binary Outcomes Prediction"><i class="fa fa-check"></i><b>2.8</b> Logistic Regression for Binary Outcomes Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html"><i class="fa fa-check"></i><b>3</b> Data structures</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html#basic-concepts"><i class="fa fa-check"></i><b>3.1</b> Basic concepts</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html#data-structures-1"><i class="fa fa-check"></i><b>3.2</b> Data structures</a>
+<ul style="display: none;">
+<li class="chapter" data-level="3.2.1" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html#matrices"><i class="fa fa-check"></i><b>3.2.1</b> Matrices</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html#data-frames"><i class="fa fa-check"></i><b>3.2.2</b> Data Frames</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html#strings-and-string-vectors"><i class="fa fa-check"></i><b>3.2.3</b> Strings and string vectors</a></li>
+<li class="chapter" data-level="3.2.4" data-path="data-structures.html"><a href="file:///C:/Ge%20working/learnR/docs/data-structures.html#lists"><i class="fa fa-check"></i><b>3.2.4</b> Lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter active" data-level="4" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html"><i class="fa fa-check"></i><b>4</b> Importing data and managing files</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#project-oriented-workflow"><i class="fa fa-check"></i><b>4.1</b> Project-oriented workflow</a>
+<ul style="display: none;">
+<li class="chapter" data-level="4.1.1" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#create-a-project-in-a-new-folder"><i class="fa fa-check"></i><b>4.1.1</b> Create a project in a new folder</a></li>
+<li class="chapter" data-level="4.1.2" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#create-a-script-file-and-comment-please"><i class="fa fa-check"></i><b>4.1.2</b> Create a script file (and Comment, Please!)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#copy-data-files-to-the-new-directory"><i class="fa fa-check"></i><b>4.1.3</b> Copy data files to the new directory</a></li>
+<li class="chapter" data-level="4.1.4" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#import-data-files"><i class="fa fa-check"></i><b>4.1.4</b> Import data files</a></li>
+<li class="chapter" data-level="4.1.5" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#check-and-convert-data-types"><i class="fa fa-check"></i><b>4.1.5</b> Check and convert data types</a></li>
+<li class="chapter" data-level="4.1.6" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#close-a-project-when-you-are-done"><i class="fa fa-check"></i><b>4.1.6</b> Close a project when you are done</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#read-files-directly-using-read.table" title="4.2 Read files directly using read.table"><i class="fa fa-check"></i><b>4.2</b> Read files directly using read.table</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#general-procedure-to-read-data-into-r" title="4.3 General procedure to read data into R:"><i class="fa fa-check"></i><b>4.3</b> General procedure to read data into R:</a></li>
+<li class="chapter" data-level="4.4" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#enter-data-manually"><i class="fa fa-check"></i><b>4.4</b> Enter data manually</a></li>
+<li class="chapter" data-level="4.5" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#data-manipulation-in-a-data-frame" title="4.5 Data manipulation in a data frame"><i class="fa fa-check"></i><b>4.5</b> Data manipulation in a data frame</a></li>
+<li class="chapter" data-level="4.6" data-path="importing-data-and-managing-files.html"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#data-transformation-using-the-dplyr" title="4.6 Data transformation using the dplyr"><i class="fa fa-check"></i><b>4.6</b> Data transformation using the dplyr</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-heart-attack-data-set-i.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html"><i class="fa fa-check"></i><b>5</b> The heart attack data set (I)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="the-heart-attack-data-set-i.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html#begin-your-analysis-by-examining-each-column-separately" title="5.1 Begin your analysis by examining each column separately"><i class="fa fa-check"></i><b>5.1</b> Begin your analysis by examining each column separately</a></li>
+<li class="chapter" data-level="5.2" data-path="the-heart-attack-data-set-i.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html#possible-correlation-between-two-numeric-columns" title="5.2 Possible correlation between two numeric columns?"><i class="fa fa-check"></i><b>5.2</b> Possible correlation between two numeric columns?</a></li>
+<li class="chapter" data-level="5.3" data-path="the-heart-attack-data-set-i.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html#associations-between-categorical-variables" title="5.3 Associations between categorical variables?"><i class="fa fa-check"></i><b>5.3</b> Associations between categorical variables?</a></li>
+<li class="chapter" data-level="5.4" data-path="the-heart-attack-data-set-i.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html#associations-between-a-categorical-and-a-numeric-variables" title="5.4 Associations between a categorical and a numeric variables?"><i class="fa fa-check"></i><b>5.4</b> Associations between a categorical and a numeric variables?</a></li>
+<li class="chapter" data-level="5.5" data-path="the-heart-attack-data-set-i.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html#associations-between-multiple-columns" title="5.5 Associations between multiple columns?"><i class="fa fa-check"></i><b>5.5</b> Associations between multiple columns?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="the-heart-attack-dataset-ii.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-dataset-ii.html"><i class="fa fa-check"></i><b>6</b> The heart attack dataset (II)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="the-heart-attack-dataset-ii.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-dataset-ii.html#scatter-plot-in-ggplot2"><i class="fa fa-check"></i><b>6.1</b> Scatter plot in ggplot2</a></li>
+<li class="chapter" data-level="6.2" data-path="the-heart-attack-dataset-ii.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-dataset-ii.html#histograms-and-density-plots"><i class="fa fa-check"></i><b>6.2</b> Histograms and density plots</a></li>
+<li class="chapter" data-level="6.3" data-path="the-heart-attack-dataset-ii.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-dataset-ii.html#box-plots-and-violin-plots"><i class="fa fa-check"></i><b>6.3</b> Box plots and Violin plots</a></li>
+<li class="chapter" data-level="6.4" data-path="the-heart-attack-dataset-ii.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-dataset-ii.html#bar-plot-with-error-bars"><i class="fa fa-check"></i><b>6.4</b> Bar plot with error bars</a></li>
+<li class="chapter" data-level="6.5" data-path="the-heart-attack-dataset-ii.html"><a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-dataset-ii.html#statistical-models-are-easy-interpretations-and-verifications-are-not" title="6.5 Statistical models are easy; interpretations and verifications are not!"><i class="fa fa-check"></i><b>6.5</b> Statistical models are easy; interpretations and verifications are not!</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html"><i class="fa fa-check"></i><b>7</b> Advanced topics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html#introduction-to-r-markdown"><i class="fa fa-check"></i><b>7.1</b> Introduction to R Markdown</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html#tidyverse"><i class="fa fa-check"></i><b>7.2</b> Tidyverse</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html#interactive-plots-made-easy-with-plotly" title="7.3 Interactive plots made easy with Plotly"><i class="fa fa-check"></i><b>7.3</b> Interactive plots made easy with Plotly</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html#shiny-apps"><i class="fa fa-check"></i><b>7.4</b> Shiny Apps</a>
+<ul style="display: none;">
+<li class="chapter" data-level="7.4.1" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html#publish-your-app"><i class="fa fa-check"></i><b>7.4.1</b> Publish your app</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="advanced-topics.html"><a href="file:///C:/Ge%20working/learnR/docs/advanced-topics.html#define-your-own-function"><i class="fa fa-check"></i><b>7.5</b> Define your own function</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html"><i class="fa fa-check"></i><b>8</b> State dataset</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html#data-import-and-manipulation"><i class="fa fa-check"></i><b>8.1</b> Data Import and Manipulation</a></li>
+<li class="chapter" data-level="8.2" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html#visualizing-data"><i class="fa fa-check"></i><b>8.2</b> Visualizing data</a></li>
+<li class="chapter" data-level="8.3" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html#analyzing-the-relationship-among-variables" title="8.3 Analyzing the relationship among variables"><i class="fa fa-check"></i><b>8.3</b> Analyzing the relationship among variables</a></li>
+<li class="chapter" data-level="8.4" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html#the-whole-picture-of-the-data-set" title="8.4 The whole picture of the data set"><i class="fa fa-check"></i><b>8.4</b> The whole picture of the data set</a></li>
+<li class="chapter" data-level="8.5" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html#linear-model-analysis"><i class="fa fa-check"></i><b>8.5</b> Linear model analysis</a></li>
+<li class="chapter" data-level="8.6" data-path="state-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/state-dataset.html#conclusion"><i class="fa fa-check"></i><b>8.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html"><i class="fa fa-check"></i><b>9</b> The game sales dataset</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#reading-in-data-and-managing-the-dataset" title="9.1 Reading in data and managing the dataset"><i class="fa fa-check"></i><b>9.1</b> Reading in data and managing the dataset</a></li>
+<li class="chapter" data-level="9.2" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#visualization-of-categorical-variables" title="9.2 Visualization of categorical variables"><i class="fa fa-check"></i><b>9.2</b> Visualization of categorical variables</a></li>
+<li class="chapter" data-level="9.3" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#correlation-among-numeric-variables" title="9.3 Correlation among numeric variables"><i class="fa fa-check"></i><b>9.3</b> Correlation among numeric variables</a></li>
+<li class="chapter" data-level="9.4" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#analysis-of-score-and-count"><i class="fa fa-check"></i><b>9.4</b> Analysis of score and count</a></li>
+<li class="chapter" data-level="9.5" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#analysis-of-sales"><i class="fa fa-check"></i><b>9.5</b> Analysis of sales</a>
+<ul style="display: none;">
+<li class="chapter" data-level="9.5.1" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-year.release"><i class="fa fa-check"></i><b>9.5.1</b> By Year.Release</a></li>
+<li class="chapter" data-level="9.5.2" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-region"><i class="fa fa-check"></i><b>9.5.2</b> By Region</a></li>
+<li class="chapter" data-level="9.5.3" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-rating"><i class="fa fa-check"></i><b>9.5.3</b> By Rating</a></li>
+<li class="chapter" data-level="9.5.4" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-genre"><i class="fa fa-check"></i><b>9.5.4</b> By Genre</a></li>
+<li class="chapter" data-level="9.5.5" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-score"><i class="fa fa-check"></i><b>9.5.5</b> by Score</a></li>
+<li class="chapter" data-level="9.5.6" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-rating-genre-critic-score"><i class="fa fa-check"></i><b>9.5.6</b> By Rating &amp; Genre &amp; Critic score</a></li>
+<li class="chapter" data-level="9.5.7" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#by-platform"><i class="fa fa-check"></i><b>9.5.7</b> By Platform</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#effect-of-platform-type-on-principle-components" title="9.6 Effect of platform type on principle components"><i class="fa fa-check"></i><b>9.6</b> Effect of platform type on principle components</a></li>
+<li class="chapter" data-level="9.7" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#models-for-global-sales"><i class="fa fa-check"></i><b>9.7</b> Models for global sales</a></li>
+<li class="chapter" data-level="9.8" data-path="the-game-sales-dataset.html"><a href="file:///C:/Ge%20working/learnR/docs/the-game-sales-dataset.html#conclusion-1"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html"><i class="fa fa-check"></i><b>10</b> The messy salary data</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#data-preparation-and-cleaning"><i class="fa fa-check"></i><b>10.1</b> Data Preparation and Cleaning</a></li>
+<li class="chapter" data-level="10.2" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#variable-analysis"><i class="fa fa-check"></i><b>10.2</b> Variable Analysis</a>
+<ul style="display: none;">
+<li class="chapter" data-level="10.2.1" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#income-and-age"><i class="fa fa-check"></i><b>10.2.1</b> Income and age</a></li>
+<li class="chapter" data-level="10.2.2" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#ethnic-group"><i class="fa fa-check"></i><b>10.2.2</b> Ethnic group</a></li>
+<li class="chapter" data-level="10.2.3" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#sex"><i class="fa fa-check"></i><b>10.2.3</b> Sex</a></li>
+<li class="chapter" data-level="10.2.4" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#union-descreption"><i class="fa fa-check"></i><b>10.2.4</b> Union descreption</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#analysis-of-gross-income"><i class="fa fa-check"></i><b>10.3</b> Analysis of gross income</a>
+<ul style="display: none;">
+<li class="chapter" data-level="10.3.1" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#age"><i class="fa fa-check"></i><b>10.3.1</b> Age</a></li>
+<li class="chapter" data-level="10.3.2" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#sex-1"><i class="fa fa-check"></i><b>10.3.2</b> Sex</a></li>
+<li class="chapter" data-level="10.3.3" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#ethnic-group-1"><i class="fa fa-check"></i><b>10.3.3</b> Ethnic Group</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#analysis-of-gross-income-types"><i class="fa fa-check"></i><b>10.4</b> Analysis of gross income types</a>
+<ul style="display: none;">
+<li class="chapter" data-level="10.4.1" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#defining-gross-income-types"><i class="fa fa-check"></i><b>10.4.1</b> Defining Gross income types</a></li>
+<li class="chapter" data-level="10.4.2" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#the-intersection-of-ethnic-sex-and-age"><i class="fa fa-check"></i><b>10.4.2</b> The Intersection of Ethnic, Sex and age</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#lm-and-anova-analysis"><i class="fa fa-check"></i><b>10.5</b> LM and ANOVA analysis</a></li>
+<li class="chapter" data-level="10.6" data-path="the-messy-salary-data.html"><a href="file:///C:/Ge%20working/learnR/docs/the-messy-salary-data.html#conclusion-2"><i class="fa fa-check"></i><b>10.6</b> Conclusion</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body fixed">
+      <div class="body-inner">
+        <div class="book-header fixed" role="navigation" style="background-color: rgb(255, 255, 255);">
+          <a class="btn pull-left js-toolbar-action" aria-label="Toggle Sidebar" title="Toggle Sidebar" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-align-justify"></i></a><a class="btn pull-left js-toolbar-action" aria-label="Search" title="Search" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-search"></i></a><div class="dropdown pull-right js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Share" title="Share" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-share-alt"></i></a><div class="dropdown-menu dropdown-left"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-5 ">Facebook</button><button class="button size-5 ">Twitter</button><button class="button size-5 ">LinkedIn</button><button class="button size-5 ">Weibo</button><button class="button size-5 ">Instapaper</button></div></div></div><a class="btn pull-right js-toolbar-action" aria-label="Facebook" title="Facebook" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-facebook"></i></a><a class="btn pull-right js-toolbar-action" aria-label="Twitter" title="Twitter" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-twitter"></i></a><div class="dropdown pull-left font-settings js-toolbar-action"><a class="btn toggle-dropdown" aria-label="Font Settings" title="Font Settings" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-font"></i></a><div class="dropdown-menu dropdown-right"><div class="dropdown-caret"><span class="caret-outer"></span><span class="caret-inner"></span></div><div class="buttons"><button class="button size-2 font-reduce">A</button><button class="button size-2 font-enlarge">A</button></div><div class="buttons"><button class="button size-2 ">Serif</button><button class="button size-2 ">Sans</button></div><div class="buttons"><button class="button size-3 ">White</button><button class="button size-3 ">Sepia</button><button class="button size-3 ">Night</button></div></div></div><a class="btn pull-left js-toolbar-action" aria-label="Information about the toolbar" title="Information about the toolbar" href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#"><i class="fa fa-info"></i></a><h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="file:///C:/Ge%20working/learnR/docs/">Learn R through examples</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importing-data-and-managing-files" class="section level1" number="4">
+<h1 class="hasAnchor"><span class="header-section-number">Chapter 4</span> Importing data and managing files<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#importing-data-and-managing-files" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Learning objectives:</p>
+<ul>
+<li>Create projects in Rstudio</li>
+<li>Understand the proper steps to import data</li>
+<li>Get introduced to data transformation using dplyr</li>
+</ul>
+<div id="project-oriented-workflow" class="section level2" number="4.1">
+<h2 class="hasAnchor"><span class="header-section-number">4.1</span> Project-oriented workflow<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#project-oriented-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When embarking on your data journey, it’s smart to create a separate folder for each project that contains all related files. This approach is especially handy for research projects. Each of these folders, known in RStudio as a <strong>Project</strong>. For example, you can create a project for each chapter in this book. Projects are self-contained universe, making your code robust and portable across different computers and directories.</p>
+<blockquote>
+<p>If the first line of your R script is</p>
+<p>setwd(“C:\Users\jenny\path\that\only\I\have”)</p>
+<p>I will come into your office and SET YOUR COMPUTER ON FIRE</p>
+<p>—@JennyBryan on Twitter</p>
+</blockquote>
+<p>Here’s a helpful video guiding you through creating a project and importing data in RStudio.</p>
+<iframe width="851" height="638" src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/Hm8Fc5HbXXQ.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>And down here the process is illustrated in detail.</p>
+<div class="float">
+<img src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/dataImport.gif" alt="Animated GIF for creating project and import data.">
+<div class="figcaption">Animated GIF for creating project and import data.</div>
+</div>
+<div id="create-a-project-in-a-new-folder" class="section level3" number="4.1.1">
+<h3 class="hasAnchor"><span class="header-section-number">4.1.1</span> Create a project in a new folder<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#create-a-project-in-a-new-folder" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, let’s set up a new project. In RStudio, go to <strong>File-&gt;New project-&gt;New Directory-&gt;Empty Project</strong>. Then choose the directory’s house on your hard drive where the project will be created. For instance, create a directory named “Chapter4” under “D:\RBook”. Rstudio will then whip up a project file “Chapter4.Rproj”, which contains essential information such as scripts files and working folders. Project file can be saved and reopened later from <strong>File-&gt;Open</strong> or just simply by double-clicking on it in Windows. This folder becomes your <strong>working folder</strong>, a default folder for reading files, writing outputs, etc. Now you get everything ready to go on a particular assignment or research project.</p>
+<p>Advanced users should consider create a project using version control for an extra layer of magic, so that all versions of your code is backup and easily shared by <a href="https://github.com/">GitHub</a>. Check out <a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a> by Jenny Bryan for more enchantments.</p>
+</div>
+<div id="create-a-script-file-and-comment-please" class="section level3" number="4.1.2">
+<h3 class="hasAnchor"><span class="header-section-number">4.1.2</span> Create a script file (and Comment, Please!)<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#create-a-script-file-and-comment-please" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Once you have set up a new project, the first step is to start a new script file by clicking the <strong>File +</strong> button or go to <strong>File-&gt;New file</strong> and choose <strong>R script file</strong>. By default, the script file is called Untitled1.R. Rstudio awaits you to rename it at the first time you hit “Save” button.</p>
+<p>Start your R script by adding comments with background information. Comments starting with “#” are ignored by R when running, but they are helpful for your future self and others to understand the code. We re-cycle and re-use our codes over and over, so it is vital to add information about the background and purpose of your code segments. Figure <a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#fig:9-1">4.1</a> shows a recommended workflow for starting your script. Click “Save” button and name your file something like “Data Import.R”.</p>
+<p>Efficient coding in R requires a systematic approach to writing and executing scripts, also, <strong>write your scripts while saving your project files</strong>.
+In RStudio, executing code is straightforward. If you click on the <strong>Run</strong> button, Rstudio runs the current line of code where your cursor is located. If you select multiple lines and hit <strong>Run</strong>, you can run them all at once. You can even jump back and forth when editing and rerunning sections of code. But remember that you are operating on the data objects sequentially. It is crucial to maintain awareness of this order. Run the reset line <strong>rm(list=ls())</strong> if you want to get a fresh start. This command lists and then deletes all data objects from R’s brain. Don’t forget to save everything once a while by hitting the <strong>Save</strong> button on the main icon bar! Even though Rstudio saves your scripts every 5 seconds, unforeseen crashes may occur.</p>
+<p>As you develop your coding skills, following these above guidelines can make you more efficient when you start a R script.</p>
+
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:9-1"></span>
+<img src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/img0901_rstudio.png" alt="A recommended workflow for starting a project in Rstudio: commenting, resetting, checking the working folder." width="80%">
+<p class="caption">
+Figure 4.1: A recommended workflow for starting a project in Rstudio: commenting, resetting, checking the working folder.
+</p>
+</div>
+</div>
+<div id="copy-data-files-to-the-new-directory" class="section level3" number="4.1.3">
+<h3 class="hasAnchor"><span class="header-section-number">4.1.3</span> Copy data files to the new directory<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#copy-data-files-to-the-new-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This step is a little field trip outside RStudio on Windows or Mac interface. Download the the necessary files, like heartatk4R.txt file from <a href="https://raw.githubusercontent.com/gexijin/learnR/master/datasets/heartatk4R.txt">here</a>. It is a tab-delimited text file, meaning its columns are separated by tabs. We need to get some context about the data and how it is collected. Knowing what each column represents is crucial, like decoding a treasure map.</p>
+<p><strong>File unzipping, conversion, and context.</strong>
+If your data is compressed, use 7-zip, WinRAR, Winzip, or gzip to unzip it. Check if your file is text file (CSV, txt, …) or Binary file (XLS, XLSX, …), and convert binary to text file using corresponding application. Remember, CSV files separate the columns by commas, while tab-delimited files use the invisible character tab, <span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-1-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mtext mathcolor=&quot;red&quot;&gt;\t&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-1" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-2" class="mjx-mrow"><span id="MJXc-Node-3" class="mjx-mtext" style="color: red;"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.483em; padding-bottom: 0.59em;">\t</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtext mathcolor="red">\t</mtext></math></span></span><script type="math/tex" id="MathJax-Element-1">\t</script></span>.</p>
+<p><strong>Checking the file with text editor and Excel.</strong>
+Before reading files into R, we often need to open the files to take a look. Plain text files only contain text without any formatting, links, and images. The file names can be “poems.txt”, “poems.tex”, “students.csv”, or just “data” without extension. I often save my R scripts as text files with names like “code_1-22-2017.R”.</p>
+<p>To peek inside the data, avoid the limited (and amateur) editors like Notepad or WordPad , and definitely don’t invite Microsoft Word for this purpose! I strongly recommend that you install a powerful text editor such as NotePad++ (<a href="https://notepad-plus-plus.org/" class="uri">https://notepad-plus-plus.org/</a>), or TextPad (<a href="https://www.textpad.com/" class="uri">https://www.textpad.com/</a>). If you are a Mac user, try TextMate, TextWrangler etc. I use NotePad++ almost every day to look into data, and also write R programs, as it can highlight R commands based on R syntax. I even use a tool called NppToR (<a href="https://sourceforge.net/projects/npptor/" class="uri">https://sourceforge.net/projects/npptor/</a>) to send R commands from NotePad++ directly to R, and I love it! Regardless of the extensions(.txt, .tex, .csv, etc.) in file names, all <strong>plain text files</strong> can be opened by these text editors.</p>
+<p>Excel can also be a handy sidekick. You can import text files, regardless of file names, to Microsoft Excel, which can properly parse your file into columns if the correct delimiter is specified. Comma separated values (CSV) files can also be conveniently opened by Excel.</p>
+<p>Rstudio favors CSV files and tab-delimited text files. Other types of files such as Excel, .xls, or .xlsx files are often needed to be saved as CSV files for smoother journeys.</p>
+</div>
+<div id="import-data-files" class="section level3" number="4.1.4">
+<h3 class="hasAnchor"><span class="header-section-number">4.1.4</span> Import data files<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#import-data-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In Rstudio, click <strong>File-&gt;Import Dataset-&gt;From text(readr)…</strong>, and find the file on your hard drive. You should change the <strong>Delimiter</strong> to “tab” for a correct read. The preview shows that the data is correctly parsed into multiple columns. You can rename your data object for ease. For instance, change the default “heartatk4R” to simple <strong>“df”</strong> on the lower left of the import interface.</p>
+<p>We need to check each of the columns to ensure the data types match their intended purpose.</p>
+<p>The first column is just patient id number runs from 1 to 12844. It will not be useful in our analysis. The numbers in DIAGNOSIS, DRG, and DIED are integers but they actually <strong>code for certain categories</strong>. They are not measurements. It does not make sense, for example, to add them or average them. Most of the times, there is no particular order. The same is true for SEX.
+So in this dialog interface, DIAGNOSIS, DRG, and DIED should be changed from <strong>“double”</strong> to <strong>“character”</strong>.
+As shown in Figure <a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#fig:9-2">4.2</a>, you can click on the automatically guessed data type under each of the column names. By selecting “character” from the drop down list, you can successfully format the column as character.</p>
+<p>On the other hand, LOS (length of stay in days) and AGE should be numbers. But because 10 is presented as “0010”, these columns are automatically recognized as characters. We have to force R to read these columns as integers by clicking on the column title and select <strong>integer</strong>. So that we change LOS and AGE from <strong>“character”</strong> to <strong>“integer”</strong>.</p>
+<p>Rstudio, like an awesome apprentice, actually helped you generating these 3 lines of code:</p>
+<div class="sourceCode" id="cb1"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/heartatk4R.txt"</span>, </span>
+<span id="cb1-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-3" tabindex="-1"></a>    <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">AGE =</span> <span class="fu">col_integer</span>(), </span>
+<span id="cb1-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-4" tabindex="-1"></a>        <span class="at">DIAGNOSIS =</span> <span class="fu">col_character</span>(), <span class="at">DIED =</span> <span class="fu">col_character</span>(), </span>
+<span id="cb1-5"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-5" tabindex="-1"></a>        <span class="at">DRG =</span> <span class="fu">col_character</span>(), <span class="at">LOS =</span> <span class="fu">col_integer</span>()), </span>
+<span id="cb1-6"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-6" tabindex="-1"></a>    <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb1-7" tabindex="-1"></a><span class="fu">View</span>(df)</span></code></pre></div>
+<p>Before you click on the <strong>Import</strong> button, I highly recommend that you select all the codes and copy them to the script file for future use. If you already have a script window open, you can directly paste the code into a script window after clicking <strong>Import</strong>. If not, create one by clicking the <strong>File +</strong> icon on the top left, then copy and paste these codes to your script file. You will need them if you want to re-run the analysis without going through the above steps. You can view the data which now appears as a spreadsheet after importing. It can be sorted by clicking on the column names. This spreadsheet can be closed. To reopen, click on ‘df’ object in your workspace, which is the data frame named for the imported file. You data is now available as <strong>df</strong>.</p>
+
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:9-2"></span>
+<img src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/img0902m_datatype.png" alt="Adjusting data types while importing data into Rstudio.">
+<p class="caption">
+Figure 4.2: Adjusting data types while importing data into Rstudio.
+</p>
+</div>
+</div>
+<div id="check-and-convert-data-types" class="section level3" number="4.1.5">
+<h3 class="hasAnchor"><span class="header-section-number">4.1.5</span> Check and convert data types<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#check-and-convert-data-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R usually guesses column types correctly, but you always need to verify using the str() command. If the types aren’t quite right, you can enforce data type conversion using functions like as.numeric, as.factor, or as.character.</p>
+<div class="sourceCode" id="cb2"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb2-1" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># Structure and data types for each column</span></span></code></pre></div>
+<pre><code>## spc_tbl_ [12,844 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Patient  : num [1:12844] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ DIAGNOSIS: chr [1:12844] "41041" "41041" "41091" "41081" ...
+##  $ SEX      : chr [1:12844] "F" "F" "F" "F" ...
+##  $ DRG      : chr [1:12844] "122" "122" "122" "122" ...
+##  $ DIED     : chr [1:12844] "0" "0" "0" "0" ...
+##  $ CHARGES  : num [1:12844] 4752 3941 3657 1481 1681 ...
+##  $ LOS      : int [1:12844] 10 6 5 2 1 9 15 15 2 1 ...
+##  $ AGE      : int [1:12844] 79 34 76 80 55 84 84 70 76 65 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Patient = col_double(),
+##   ..   DIAGNOSIS = col_character(),
+##   ..   SEX = col_character(),
+##   ..   DRG = col_character(),
+##   ..   DIED = col_character(),
+##   ..   CHARGES = col_double(),
+##   ..   LOS = col_integer(),
+##   ..   AGE = col_integer()
+##   .. )
+##  - attr(*, "problems")=&lt;externalptr&gt;</code></pre>
+<p>Categorical values can be reformatted as <strong>factors</strong> using as.factor() function. Here use <code>df$SEX</code> to refer to the SEX column of the data frame df:</p>
+<div class="sourceCode" id="cb4"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb4-1" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIAGNOSIS)  <span class="co"># Convert this column to a factor</span></span>
+<span id="cb4-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb4-2" tabindex="-1"></a>df<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>SEX)</span>
+<span id="cb4-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb4-3" tabindex="-1"></a>df<span class="sc">$</span>DRG <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DRG)</span>
+<span id="cb4-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb4-4" tabindex="-1"></a>df<span class="sc">$</span>DIED <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIED)</span></code></pre></div>
+<p>Factors are very similar to character vectors but with superpowers of defined levels and integer storage.</p>
+<div class="sourceCode" id="cb5"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb5-1" tabindex="-1"></a><span class="fu">nlevels</span>(df<span class="sc">$</span>DIAGNOSIS)  <span class="co"># Explore the number of levels</span></span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb7"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb7-1" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>DIAGNOSIS)  <span class="co"># Display the levels</span></span></code></pre></div>
+<pre><code>## [1] "41001" "41011" "41021" "41031" "41041" "41051" "41071" "41081" "41091"</code></pre>
+<p>Note “41001” is the <strong>reference level</strong> for this factor and it is coded as 1. The reference level for factors is important when we interpret results from regression, as effects are represented relative to the reference level. The reference level is defined automatically based on the order of the factors appear in the dataset. Sometimes we need to change the reference level:</p>
+<div class="sourceCode" id="cb9"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb9-1" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">relevel</span>(df<span class="sc">$</span>DIAGNOSIS, <span class="st">"41091"</span>)</span>
+<span id="cb9-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb9-2" tabindex="-1"></a><span class="fu">levels</span>(df<span class="sc">$</span>DIAGNOSIS)</span></code></pre></div>
+<pre><code>## [1] "41091" "41001" "41011" "41021" "41031" "41041" "41051" "41071" "41081"</code></pre>
+<div class="sourceCode" id="cb11"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb11-1" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># Recheck the structure</span></span></code></pre></div>
+<pre><code>## spc_tbl_ [12,844 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Patient  : num [1:12844] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ DIAGNOSIS: Factor w/ 9 levels "41091","41001",..: 6 6 1 9 1 1 1 1 6 6 ...
+##  $ SEX      : Factor w/ 2 levels "F","M": 1 1 1 1 2 2 1 1 2 1 ...
+##  $ DRG      : Factor w/ 3 levels "121","122","123": 2 2 2 2 2 1 1 1 1 3 ...
+##  $ DIED     : Factor w/ 2 levels "0","1": 1 1 1 1 1 1 1 1 1 2 ...
+##  $ CHARGES  : num [1:12844] 4752 3941 3657 1481 1681 ...
+##  $ LOS      : int [1:12844] 10 6 5 2 1 9 15 15 2 1 ...
+##  $ AGE      : int [1:12844] 79 34 76 80 55 84 84 70 76 65 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Patient = col_double(),
+##   ..   DIAGNOSIS = col_character(),
+##   ..   SEX = col_character(),
+##   ..   DRG = col_character(),
+##   ..   DIED = col_character(),
+##   ..   CHARGES = col_double(),
+##   ..   LOS = col_integer(),
+##   ..   AGE = col_integer()
+##   .. )
+##  - attr(*, "problems")=&lt;externalptr&gt;</code></pre>
+<div class="sourceCode" id="cb13"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb13-1" tabindex="-1"></a><span class="fu">summary</span>(df)   <span class="co"># Summarize the data for a quick overview</span></span></code></pre></div>
+<pre><code>##     Patient        DIAGNOSIS    SEX       DRG       DIED         CHARGES     
+##  Min.   :    1   41091  :5213   F:5065   121:5387   0:11434   Min.   :    3  
+##  1st Qu.: 3212   41041  :2665   M:7779   122:6047   1: 1410   1st Qu.: 5422  
+##  Median : 6422   41011  :1824            123:1410             Median : 8445  
+##  Mean   : 6422   41071  :1703                                 Mean   : 9879  
+##  3rd Qu.: 9633   41001  : 467                                 3rd Qu.:12569  
+##  Max.   :12844   41081  : 287                                 Max.   :47910  
+##                  (Other): 685                                 NA's   :699    
+##       LOS              AGE        
+##  Min.   : 0.000   Min.   : 20.00  
+##  1st Qu.: 4.000   1st Qu.: 57.00  
+##  Median : 7.000   Median : 67.00  
+##  Mean   : 7.569   Mean   : 66.29  
+##  3rd Qu.:10.000   3rd Qu.: 77.00  
+##  Max.   :38.000   Max.   :103.00  
+## </code></pre>
+<p>The summary( ) function is very useful to get basic information about data frame. It distinguishes numeric columns by statistics like mean and median, and factors by frequency counts. This reassured us that the data types are correctly recognized. It also shows missing values in CHARGES.
+Did some people get free treatment for heart attack? Maybe not. Missing does not mean zero. Maybe the data was not entered for some patients.</p>
+<p>Just a reminder: Except enforcing data type conversion by as.factor, as.numeric and so on, we can also reformat the columns before clicking <strong>Import</strong> as we described in 4.2.4.</p>
+</div>
+<div id="close-a-project-when-you-are-done" class="section level3" number="4.1.6">
+<h3 class="hasAnchor"><span class="header-section-number">4.1.6</span> Close a project when you are done<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#close-a-project-when-you-are-done" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Think of RStudio as a friendly but slightly clingy companion. So, when you’re done with a project, it’s necessary to say goodbye politely by navigating to <strong>File <span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-2-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x2192;&lt;/mo&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-4" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-5" class="mjx-mrow"><span id="MJXc-Node-6" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.216em; padding-bottom: 0.377em;">→</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></span></span><script type="math/tex" id="MathJax-Element-2">\rightarrow</script></span>Close Project</strong>. If not, <em>RStudio assumes that you will be continue working on the same project</em>; even after your close Rstudio, the same project and files will be open the next time you start Rstudio. It is convenient, most of times. But I’ve seen some students’ Rstudio environment cluttered with all the things they have been doing for an entire semester. This is not only confusing, but could also lead to errors. For this class, consider starting a fresh project for each chapter.</p>
+<p>To open a project, use <strong>File <span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-3-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x2192;&lt;/mo&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-7" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-8" class="mjx-mrow"><span id="MJXc-Node-9" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.216em; padding-bottom: 0.377em;">→</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></span></span><script type="math/tex" id="MathJax-Element-3">\rightarrow</script></span>Open Project</strong> and then navigate to the project. Alternatively you can double-click on the project file (like “Chapter4.Rproj”) from your file explorer in Windows or Mac. When a project file is loaded, the entire computing environment is kindly set for you, including the working directory and any script files you left open. If a script file is not open, you can easily access it by clicking on it from the <strong>Files</strong> tab in the lower right window.</p>
+</div>
+</div>
+<div id="read-files-directly-using-read.table" class="section level2" number="4.2">
+<h2 class="hasAnchor"><span class="header-section-number">4.2</span> Read files directly using read.table<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#read-files-directly-using-read.table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As you get more experience with R programming, you’ll find multiple ways to import data, beyond the friendly Import Dataset feature in RStudio.</p>
+<p>Here’s the code to bring in our heart attack dataset, ensuring it’s in the current working directory. To set working directory from the Rstudio main menu, go to Session -&gt; Set Working Directory.</p>
+<div class="sourceCode" id="cb15"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())  <span class="co"># Erase all objects in memory</span></span>
+<span id="cb15-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-2" tabindex="-1"></a><span class="fu">getwd</span>()  <span class="co"># Display the current working directory</span></span>
+<span id="cb15-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"datasets/heartatk4R.txt"</span>, <span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-4" tabindex="-1"></a><span class="fu">head</span>(df)  <span class="co"># Peek at the first few rows</span></span>
+<span id="cb15-5"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-5" tabindex="-1"></a><span class="co"># Convert several columns to factors</span></span>
+<span id="cb15-6"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-6" tabindex="-1"></a>df<span class="sc">$</span>DRG <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DRG)</span>
+<span id="cb15-7"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-7" tabindex="-1"></a>df<span class="sc">$</span>DIED <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIED)</span>
+<span id="cb15-8"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-8" tabindex="-1"></a>df<span class="sc">$</span>DIAGNOSIS <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>DIAGNOSIS)</span>
+<span id="cb15-9"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-9" tabindex="-1"></a>df<span class="sc">$</span>SEX <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>SEX)</span>
+<span id="cb15-10"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-10" tabindex="-1"></a><span class="fu">str</span>(df)  <span class="co"># Check the data types of columns</span></span>
+<span id="cb15-11"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb15-11" tabindex="-1"></a><span class="fu">summary</span>(df)  <span class="co"># Get a summary overview of the dataset</span></span></code></pre></div>
+<p>Alternatively, for the digital explorer, try this:</p>
+<div class="sourceCode" id="cb16"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb16-1" tabindex="-1"></a>URL <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/gexijin/learnR/master/datasets/heartatk4R.txt"</span></span>
+<span id="cb16-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb16-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(URL, </span>
+<span id="cb16-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb16-3" tabindex="-1"></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb16-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb16-4" tabindex="-1"></a>                 <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, </span>
+<span id="cb16-5"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb16-5" tabindex="-1"></a>                 <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="st">"character"</span>, <span class="st">"factor"</span>, <span class="st">"factor"</span>, <span class="st">"factor"</span>, </span>
+<span id="cb16-6"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb16-6" tabindex="-1"></a>                               <span class="st">"factor"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>))</span></code></pre></div>
+<p>This way, you’re directly importing data from the internet using the URL and defining column data types right off the bat.</p>
+</div>
+<div id="general-procedure-to-read-data-into-r" class="section level2" number="4.3">
+<h2 class="hasAnchor"><span class="header-section-number">4.3</span> General procedure to read data into R:<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#general-procedure-to-read-data-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Unzip files using 7-zip, WinRAR, Winzip, gzip, etc, if data is compressed. Any of these will work.</li>
+<li>Identify if it’s a text file (CSV, txt, …) or Binary file (XLS, XLSX, …). Convert binary to text file using corresponding application. Comma separated values (CSV) files use comma to separate the columns. While tab-delimited text files(txt) use the tab, or the invisible character <span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-4-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mtext mathcolor=&quot;red&quot;&gt;\t&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-10" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-11" class="mjx-mrow"><span id="MJXc-Node-12" class="mjx-mtext" style="color: red;"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.483em; padding-bottom: 0.59em;">\t</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtext mathcolor="red">\t</mtext></math></span></span><script type="math/tex" id="MathJax-Element-4">\t</script></span>.<br>
+</li>
+<li>Preview the file using a text editor like TexPad or NotePad++.</li>
+<li>Check for rows and columns and their names. Use <strong>row.names = 1, header = T</strong> if needed.</li>
+<li>Identify the delimiters between columns (space, comma, tab…). Use <strong>sep = “<span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-5-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mtext mathcolor=&quot;red&quot;&gt;\t&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-13" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-14" class="mjx-mrow"><span id="MJXc-Node-15" class="mjx-mtext" style="color: red;"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.483em; padding-bottom: 0.59em;">\t</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtext mathcolor="red">\t</mtext></math></span></span><script type="math/tex" id="MathJax-Element-5">\t</script></span>”</strong> for tabs.</li>
+<li>Missing values? Look for NA, na, NULL, blank, NaN, and 0. Specify them using <strong>missingstring = </strong>.</li>
+<li>Open as text file in Excel, choosing the appropriate delimiter while importing, or using the <strong>Text to Column</strong> under ‘Data’ in Excel. Beware of the annoying automatic conversion in Excel (e.g., “OCT4” to “4-OCT”). Edit column names by removing spaces, or shorten them for easy of reference in R. And save as CSV.</li>
+<li>Read data using read.table( ), or read.csv( ). For example,
+<code>x &lt;- read.table(“somefile.txt”, sep = “\t”, header = TRUE, missingstring = “NA”)</code></li>
+<li>Double check data types with <strong>str(x)</strong>, make sure each column is recognized correctly as <strong>“character”</strong>, <strong>“factor”</strong> and <strong>“numeric”</strong>. Pay special attention to numbers that are actually IDs or categories; as they need specific treatments.
+IDs (i.e.&nbsp;student IDs) should be treated as character. For example, <code>x$ids &lt;- as.character(x$ids)</code>, here x is the data frame and ids is the column name. Codes for some discrete categories (1, 2, 3, representing treatment 1, treatment 2 and treatment 3), need to be reformatted as <strong>factors</strong>. This could be done with something like <code>x$treatment &lt;- as.factor(x$treatment)</code>.</li>
+</ol>
+<p>Check out cheat sheets for a quick refresher, which summarize many R functions and are available here: <a href="https://www.rstudio.com/resources/cheatsheets/">https://www.rstudio.com/resources/cheatsheets/</a>. Remember, it is important to understand the different types of R objects: <strong>scalars, vectors, data frames, matrix, and lists</strong>.</p>
+<blockquote>
+<p>::: {.exercise #unnamed-chunk-10}</p>
+</blockquote>
+<blockquote>
+<p>Create a project for chapter 4 if you haven’t yet. Download the tab-delimited text file <em>pulse.txt</em> from [this link] (<a href="http://statland.org/R/R/pulse.txt" class="uri">http://statland.org/R/R/pulse.txt</a>). Import pulse.txt into R using two methods: R menu (Show the process with necessary screenshots) and R script.<br>
+a. Rename the file as <em>chapter4Pulse</em>.<br>
+b. Change the class of ActivityL from double to integer.<br>
+c.&nbsp;After importing <em>pulse.txt</em> into R, convert the class of Sex from charater to factor using R code. Don’t forget using class() function to check your answer.
+:::</p>
+</blockquote>
+<blockquote>
+<p>::: {.exercise #unnamed-chunk-11}</p>
+</blockquote>
+<blockquote>
+<p>Type the data from Table <a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#tab:9-01">4.1</a> in Excel and save as both CSV file and tab-delimited text file. Start a new Rstudio project as previously described. Copy the files to the new folder, and import the CSV file to Rstudio. Create a script file which includes the command for preparing the workspace (rm(list = ls()) and getwd()), the generated R code when importing the CSV file (similar to those shown in Figure <a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#fig:9-2">4.2</a>), and the code to convert data types (Age, BloodPressure and Weight should be numeric, LastName should be character, and HeartAttack should be factor). Name the data set as <em>patients</em>. Submit your R script, the data structure of <em>patients</em>, and the output from <strong>head(patients)</strong>.
+:::</p>
+</blockquote>
+<table>
+<caption><span id="tab:9-01">Table 4.1: </span>An example of a multivariate dataset.</caption>
+<thead>
+<tr class="header">
+<th align="left">LastName</th>
+<th align="left">Age</th>
+<th align="left">Sex</th>
+<th align="left">BloodPressure</th>
+<th align="left">Weight</th>
+<th align="left">HeartAttack</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Smith</td>
+<td align="left">19</td>
+<td align="left">M</td>
+<td align="left">100</td>
+<td align="left">130.2</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">Bird</td>
+<td align="left">55</td>
+<td align="left">F</td>
+<td align="left">86</td>
+<td align="left">300</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Wilson</td>
+<td align="left">23</td>
+<td align="left">M</td>
+<td align="left">200</td>
+<td align="left">212.7</td>
+<td align="left">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="enter-data-manually" class="section level2" number="4.4">
+<h2 class="hasAnchor"><span class="header-section-number">4.4</span> Enter data manually<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#enter-data-manually" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are many different ways to invite data into R. You can enter data manually (see below), or semi-manually (see below), or read data from a local file or a file on the internet. R can also retrieve data from databases, local or remote. The most important thing is to read data set <strong>correctly</strong> into R. A dataset misread by R is like a mischievous elf - it will never be analyzed or visualized correctly.</p>
+<p><img src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/img0900_note.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb17"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb17-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.1</span>, <span class="fl">3.1</span>, <span class="fl">3.2</span>, <span class="fl">5.4</span>)</span>
+<span id="cb17-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb17-2" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div>
+<pre><code>## [1] 13.8</code></pre>
+<div class="sourceCode" id="cb19"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb19-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb19-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb19-2" tabindex="-1"></a>       <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>),  <span class="co"># Data elements </span></span>
+<span id="cb19-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb19-3" tabindex="-1"></a>       <span class="at">nrow =</span> <span class="dv">2</span>,             <span class="co"># Number of rows </span></span>
+<span id="cb19-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb19-4" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">3</span>)             <span class="co"># Number of columns                     </span></span>
+<span id="cb19-5"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb19-5" tabindex="-1"></a>A                            <span class="co"># Display the matrix</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    3    5
+## [2,]    4    1    7</code></pre>
+<p>And for a twist, you can even use the scan() function to manually input values, or simply copy and paste a column of numbers from Excel.</p>
+<div class="sourceCode" id="cb21"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb21-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">scan</span>()  <span class="co"># Manually enter values from keyboard, separated by Return key. End by empty line. </span></span>
+<span id="cb21-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb21-2" tabindex="-1"></a><span class="fl">2.1</span></span></code></pre></div>
+<pre><code>## [1] 2.1</code></pre>
+<div class="sourceCode" id="cb23"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb23-1" tabindex="-1"></a><span class="fl">3.1</span></span></code></pre></div>
+<pre><code>## [1] 3.1</code></pre>
+<div class="sourceCode" id="cb25"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb25-1" tabindex="-1"></a><span class="fl">4.1</span></span></code></pre></div>
+<pre><code>## [1] 4.1</code></pre>
+</div>
+<div id="data-manipulation-in-a-data-frame" class="section level2" number="4.5">
+<h2 class="hasAnchor"><span class="header-section-number">4.5</span> Data manipulation in a data frame<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#data-manipulation-in-a-data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s take our heart attack dataset <em>df</em> and give it a spin. Here’s a golden rule: always type commands in the Script window, not directly into the Console. And Make it a habit to save your work frequently – there’s nothing sadder than losing data!</p>
+<p>Now imagine we want to sort our patients by age:</p>
+<div class="sourceCode" id="cb27"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb27-1" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df[<span class="fu">order</span>(df<span class="sc">$</span>AGE), ]  <span class="co"># Sort by ascending order by AGE</span></span></code></pre></div>
+<p><strong>Global Environment</strong> window is like a digital pantry, storing the names and sizes of all the variables or objects in the computer memory. R programming is essentially a culinary art of creating and modifying these objects with crystal-clear, step-by-step instructions. And yes, you can also sort the data by clicking on the column names in spreadsheet view in the Global Environment, just like in Excel.</p>
+<p>Speaking of Excel, you can add a new column with computed results in R too:</p>
+<div class="sourceCode" id="cb28"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb28-1" tabindex="-1"></a>df2<span class="sc">$</span>pdc <span class="ot">&lt;-</span> df2<span class="sc">$</span>CHARGES <span class="sc">/</span> df2<span class="sc">$</span>LOS</span></code></pre></div>
+<p>Here we created a new column pdc to represent per day cost.
+You can also create a column to represent age groups using the <em>floor</em> function which just returns the integer part.</p>
+<div class="sourceCode" id="cb29"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb29-1" tabindex="-1"></a>df2<span class="sc">$</span>ag <span class="ot">&lt;-</span> <span class="fu">floor</span>(df2<span class="sc">$</span>AGE<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span></span></code></pre></div>
+<p>You can now do nifty things like this:</p>
+<div class="sourceCode" id="cb30"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb30-1" tabindex="-1"></a><span class="fu">boxplot</span>(df2<span class="sc">$</span>CHARGES <span class="sc">~</span> df2<span class="sc">$</span>ag) <span class="co"># Boxplot of charges by age groups</span></span></code></pre></div>
+<p><img src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/unnamed-chunk-18-1.png" width="672"></p>
+<p>Each box represents an age group’s hospital stay during the post-heart attack. Older patients tend to stay longer in the hospital after heart attack.</p>
+<p>For a more focused analysis, extract a specific subset:</p>
+<div class="sourceCode" id="cb31"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb31-1" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">subset</span>(df2, SEX <span class="sc">==</span> <span class="st">"F"</span>)  <span class="co">#  Only females. “==” is for comparison and “=” is for assign value.</span></span>
+<span id="cb31-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb31-2" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> <span class="fu">subset</span>(df3, AGE <span class="sc">&gt;</span> <span class="dv">80</span>)  <span class="co"># Only people older than 80</span></span>
+<span id="cb31-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb31-3" tabindex="-1"></a><span class="fu">summary</span>(df4)   <span class="co"># What's the story here?</span></span></code></pre></div>
+<pre><code>##     Patient        DIAGNOSIS   SEX       DRG      DIED       CHARGES     
+##  Min.   :    7   41091  :564   F:1263   121:679   0:929   Min.   :   92  
+##  1st Qu.: 3416   41071  :224   M:   0   122:250   1:334   1st Qu.: 5179  
+##  Median : 6816   41041  :181            123:334           Median : 8580  
+##  Mean   : 6624   41011  :166                              Mean   :10143  
+##  3rd Qu.: 9814   41001  : 41                              3rd Qu.:13347  
+##  Max.   :12841   41081  : 38                              Max.   :46915  
+##                  (Other): 49                              NA's   :74     
+##       LOS              AGE              pdc                ag        
+##  Min.   : 1.000   Min.   : 81.00   Min.   :   18.4   Min.   : 80.00  
+##  1st Qu.: 5.000   1st Qu.: 83.00   1st Qu.:  796.7   1st Qu.: 80.00  
+##  Median : 8.000   Median : 85.00   Median : 1113.7   Median : 80.00  
+##  Mean   : 9.457   Mean   : 85.92   Mean   : 1331.4   Mean   : 81.96  
+##  3rd Qu.:13.000   3rd Qu.: 89.00   3rd Qu.: 1523.8   3rd Qu.: 80.00  
+##  Max.   :38.000   Max.   :102.00   Max.   :11246.1   Max.   :100.00  
+##                                    NA's   :74</code></pre>
+<p>Remember, it’s best to avoid attaching data during such manipulations.</p>
+</div>
+<div id="data-transformation-using-the-dplyr" class="section level2" number="4.6">
+<h2 class="hasAnchor"><span class="header-section-number">4.6</span> Data transformation using the dplyr<a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#data-transformation-using-the-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Following the same style of ggplot, the dplyr package, a part of the <a href="https://www.tidyverse.org/">Tidyverse</a>, makes data transformation more intuitive.</p>
+<p>First let’s install the dplyr package.</p>
+<div class="sourceCode" id="cb33"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb33-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span></code></pre></div>
+<p>With dplyr, data transformation becomes more of a dance than a chore.</p>
+<div class="sourceCode" id="cb34"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb34-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb34-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb34-2" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb34-3" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span>  <span class="co"># Pipe operator; data is send to the next step</span></span>
+<span id="cb34-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb34-4" tabindex="-1"></a>  <span class="fu">arrange</span>(AGE) <span class="co"># Sort AGE in ascending order; desc(AGE) for descending order</span></span>
+<span id="cb34-5"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb34-5" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
+<pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE
+## 1    5411     41041   M 122    0  6214.00   4  20
+## 2   10853     41091   F 122    0  6726.27   4  21
+## 3    4126     41041   M 122    0 10781.00   8  23
+## 4   10738     41011   M 121    0       NA   8  23
+## 5    4247     41091   F 122    0 10672.00   6  24
+## 6    5199     41041   M 121    0  7596.00   8  24</code></pre>
+<div class="sourceCode" id="cb36"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb36-1" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb36-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">pdc =</span> CHARGES <span class="sc">/</span> LOS) <span class="co"># New column for per day cost</span></span>
+<span id="cb36-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb36-3" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
+<pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE      pdc
+## 1    5411     41041   M 122    0  6214.00   4  20 1553.500
+## 2   10853     41091   F 122    0  6726.27   4  21 1681.568
+## 3    4126     41041   M 122    0 10781.00   8  23 1347.625
+## 4   10738     41011   M 121    0       NA   8  23       NA
+## 5    4247     41091   F 122    0 10672.00   6  24 1778.667
+## 6    5199     41041   M 121    0  7596.00   8  24  949.500</code></pre>
+<div class="sourceCode" id="cb38"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb38-1" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb38-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">ag =</span> <span class="fu">floor</span>(AGE<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>) <span class="co"># New column for age groups</span></span>
+<span id="cb38-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb38-3" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
+<pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE      pdc ag
+## 1    5411     41041   M 122    0  6214.00   4  20 1553.500 20
+## 2   10853     41091   F 122    0  6726.27   4  21 1681.568 20
+## 3    4126     41041   M 122    0 10781.00   8  23 1347.625 20
+## 4   10738     41011   M 121    0       NA   8  23       NA 20
+## 5    4247     41091   F 122    0 10672.00   6  24 1778.667 20
+## 6    5199     41041   M 121    0  7596.00   8  24  949.500 20</code></pre>
+<div class="sourceCode" id="cb40"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb40-1" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb40-2" tabindex="-1"></a>  <span class="fu">filter</span>(SEX <span class="sc">==</span> <span class="st">"F"</span>, AGE <span class="sc">&gt;</span> <span class="dv">80</span>) <span class="co"># Filtering for females over 80</span></span>
+<span id="cb40-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb40-3" tabindex="-1"></a><span class="fu">head</span>(df3)</span></code></pre></div>
+<pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE
+## 1       7     41091   F 121    0 10958.52  15  84
+## 2      13     41091   F 122    0       NA   9  83
+## 3      27     41011   F 123    1  3214.90   4  83
+## 4      36     41041   F 121    0  2584.10   9  81
+## 5      51     41011   F 121    0  7589.00  11  81
+## 6      67     41011   F 123    1 16428.80   8  81</code></pre>
+<p>The real power and efficiency of dplyr comes when you connect the pipes to do data transformation in multiple steps, like a chain of dominoes.</p>
+<div class="sourceCode" id="cb42"><button type="button" class="copy-to-clipboard-button" title="Copy to clipboard" aria-label="Copy to clipboard"><i class="fa fa-copy"></i></button><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb42-1" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb42-2" tabindex="-1"></a>  <span class="fu">arrange</span>(AGE) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb42-3" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">pdc =</span> CHARGES <span class="sc">/</span> LOS) <span class="sc">%&gt;%</span>   </span>
+<span id="cb42-4"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb42-4" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">ag =</span> <span class="fu">floor</span>(AGE<span class="sc">/</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb42-5" tabindex="-1"></a>  <span class="fu">filter</span>(SEX <span class="sc">==</span> <span class="st">"F"</span>, AGE <span class="sc">&gt;</span> <span class="dv">80</span>)</span>
+<span id="cb42-6"><a href="file:///C:/Ge%20working/learnR/docs/importing-data-and-managing-files.html#cb42-6" tabindex="-1"></a><span class="fu">head</span>(df2)</span></code></pre></div>
+<pre><code>##   Patient DIAGNOSIS SEX DRG DIED  CHARGES LOS AGE       pdc ag
+## 1      36     41041   F 121    0  2584.10   9  81  287.1222 80
+## 2      51     41011   F 121    0  7589.00  11  81  689.9091 80
+## 3      67     41011   F 123    1 16428.80   8  81 2053.6000 80
+## 4     225     41041   F 123    1  4674.50   7  81  667.7857 80
+## 5     265     41091   F 122    0  9401.05   9  81 1044.5611 80
+## 6     284     41041   F 121    0  7240.30   7  81 1034.3286 80</code></pre>
+<p><strong>arrange, mutate, filter</strong> are called <strong>action verbs</strong> in the dplyr realm. For more action verbs, check out the dplyr cheat sheet from the Rstudio main menu: <em>Help <span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-6-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x2192;&lt;/mo&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-16" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-17" class="mjx-mrow"><span id="MJXc-Node-18" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.216em; padding-bottom: 0.377em;">→</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></span></span><script type="math/tex" id="MathJax-Element-6">\rightarrow</script></span> Cheatsheets <span class="math inline"><span class="MathJax_Preview" style="color: inherit;"></span><span id="MathJax-Element-7-Frame" class="mjx-chtml MathJax_CHTML" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x2192;&lt;/mo&gt;&lt;/math&gt;" role="presentation" style="font-size: 117%; position: relative;"><span id="MJXc-Node-19" class="mjx-math" aria-hidden="true"><span id="MJXc-Node-20" class="mjx-mrow"><span id="MJXc-Node-21" class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.216em; padding-bottom: 0.377em;">→</span></span></span></span><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></span></span><script type="math/tex" id="MathJax-Element-7">\rightarrow</script></span> R Markdown Cheat Sheet.</em> It is also available online at <a href="https://www.rstudio.com/resources/cheatsheets/#dplyr">dplyr cheat Sheet</a>.</p>
+<p>So there you have it! With tools like dplyr, you’re transforming data analysis into a harmonious symphony of insights. Enjoy the rhythm of data exploration!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="file:///C:/Ge%20working/learnR/docs/data-structures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="file:///C:/Ge%20working/learnR/docs/the-heart-attack-data-set-i.html" class="navigation navigation-next " aria-label="Next page" style="margin-right: 17px;"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/app.min.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/clipboard.min.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-search.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-sharing.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-fontsettings.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-bookdown.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/jquery.highlight.js.download"></script>
+<script src="./Chapter 4 Importing data and managing files _ Learn R through examples_files/plugin-clipboard.js.download"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+
+</body></html>
