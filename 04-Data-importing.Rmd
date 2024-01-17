@@ -86,19 +86,19 @@ Rstudio, like an awesome apprentice, actually helped you generating these 3 line
 ```{r warning=FALSE, echo=FALSE, results='hide', message=FALSE}
 library(readr)
 df <- read_delim("datasets/heartatk4R.txt", 
-    "\t", escape_double = FALSE, col_types = cols(AGE = col_integer(), 
-        DIAGNOSIS = col_character(), DIED = col_character(), 
-        DRG = col_character(), LOS = col_integer()), 
-    trim_ws = TRUE)
+  "\t", escape_double = FALSE, col_types = cols(AGE = col_integer(), 
+  DIAGNOSIS = col_character(), DIED = col_character(), 
+  DRG = col_character(), LOS = col_integer()), 
+  trim_ws = TRUE)
 ```
 
 ```{r eval=FALSE, results='hide', message=FALSE}
 library(readr)
 df <- read_delim("datasets/heartatk4R.txt", 
-    "\t", escape_double = FALSE, col_types = cols(AGE = col_integer(), 
-        DIAGNOSIS = col_character(), DIED = col_character(), 
-        DRG = col_character(), LOS = col_integer()), 
-    trim_ws = TRUE)
+  "\t", escape_double = FALSE, col_types = cols(AGE = col_integer(), 
+  DIAGNOSIS = col_character(), DIED = col_character(), 
+  DRG = col_character(), LOS = col_integer()), 
+  trim_ws = TRUE)
 View(df)
 ```
 
@@ -132,7 +132,7 @@ Factors are very similar to character vectors but with superpowers of defined le
 
 ```{r}
 nlevels(df$DIAGNOSIS)  # Explore the number of levels
-levels(df$DIAGNOSIS)  # Display the levels
+levels(df$DIAGNOSIS)   # Display the levels
 ```
 Note  "41001" is the **reference level** for this factor and it is coded as 1. The reference level for factors is important when we interpret results from regression, as effects are represented relative to the reference level. The reference level is defined automatically based on the order of the factors appear in the dataset. Sometimes we need to change the reference level:
 
@@ -254,10 +254,10 @@ knitr::include_graphics("images/img0900_note.png")
 x <- c(2.1, 3.1, 3.2, 5.4)
 sum(x)
 A <- matrix(
-       c(2, 4, 3, 1, 5, 7),  # Data elements 
-       nrow = 2,             # Number of rows 
-       ncol = 3)             # Number of columns                     
-A                            # Display the matrix
+  c(2, 4, 3, 1, 5, 7),  # Data elements 
+  nrow = 2,             # Number of rows 
+  ncol = 3)             # Number of columns                     
+A                       # Display the matrix
 ```
 
 And for a twist, you can even use the scan() function to manually input values, or simply copy and paste a column of numbers from Excel.
@@ -288,7 +288,7 @@ df2$pdc <- df2$CHARGES / df2$LOS
 Here we created a new column pdc to represent per day cost. 
 You can also create a column to represent age groups using the *floor* function which just returns the integer part.
 ```{r}
-df2$ag <- floor(df2$AGE/10) * 10
+df2$ag <- floor(df2$AGE / 10) * 10
 ```
 
 You can now do nifty things like this:

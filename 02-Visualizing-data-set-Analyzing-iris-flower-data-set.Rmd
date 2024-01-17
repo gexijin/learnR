@@ -367,7 +367,6 @@ Create a scatter plot of sepal length vs sepal width, differentiate species by c
 Creating box plots, a fundamental data visualization tool, is straightforward with ggplot2. For instance, examining sepal length across different iris species:
 
 ```{r out.width='80%',fig.align='center'}
-library(ggplot2) # Load ggplot2
 ggplot(data = iris) +
   aes(x = Species, y = Sepal.Length, color = Species) +
   geom_boxplot() # Classic box plot
@@ -552,7 +551,6 @@ pcaData <- as.data.frame(pca$x[, 1:2]) # Extract first two components
 pcaData <- cbind(pcaData, iris$Species) # Add species information
 colnames(pcaData) <- c("PC1", "PC2", "Species") # Rename columns
 
-library(ggplot2)
 ggplot(pcaData) +
   aes(PC1, PC2, color = Species, shape = Species) + # Define plot area
   geom_point(size = 2) # Add data points
@@ -597,7 +595,7 @@ $$ln(odds)=ln(\frac{p}{1-p})
                      =a×Sepal.Length + b×Sepal.Width + c×Petal.Length + d×Petal.Width+c+e.$$
 
 ```{r}
-df <- iris[51:150, ] # ocus on versicolor and virginica.
+df <- iris[51:150, ] # Focus on versicolor and virginica.
 df <- droplevels(df) # Removes setosa, now an empty levels of species
 model <- glm(Species ~ ., # Model: Species as a function of other variables
   family = binomial(link = "logit"),

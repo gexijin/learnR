@@ -96,7 +96,7 @@ ggplot(sta, aes(x = State, y = Population)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) # Rotate axis label
 ```
 
-Even back in the early days, California and New York were the hotspots, while South Dakota was more of a quiet retreat.
+Even back in the early days, California and New York were the hot-spots, while South Dakota was more of a quiet retreat.
 
 More Questions to Ponder: How did the murder rate vary across states and regions in those days? What influenced it? Could other factors explain the murder rate?
  
@@ -107,7 +107,6 @@ A choropleth map may give us an overall view.
 
 ```{r state-map, warning=FALSE, fig.cap='(ref:state-map)', fig.align='center'}
 library(maps)
-library(ggplot2)
 sta$region <- tolower(state.name)  # Lowercase states' names
 states <- map_data("state")        # Extract state data
 map <- merge(states, sta, by = "region", all.x = T)  # Merge states and state.x77 data
@@ -227,7 +226,7 @@ Because of the relationship of Murder with both Population and Area, now We add 
 (ref:state-population) Box plot of population density by region.
 
 ```{r state-population, fig.cap='(ref:state-population)', fig.align='center'}
-sta$Pop.Density <- sta$Population/sta$Area
+sta$Pop.Density <- sta$Population / sta$Area
 boxplot(sta$Pop.Density ~ sta$Region, xlab = "Region", ylab = "Population Density")
 model <- aov(sta$Pop.Density ~ sta$Region, sta)
 summary(model)
@@ -268,7 +267,8 @@ First we categorize the income into 5 IncomeTypes.
 ```{r state-LifeMurder, warning=FALSE, message=FALSE, fig.cap='(ref:state-LifeMurder)', fig.align='center'}
 library(dplyr)
 # Group income into IncomeType first
-sta.income <- sta %>% mutate(IncomeType = factor(ifelse(Income < 3500, "Under3500",  
+sta.income <- sta %>% 
+  mutate(IncomeType = factor(ifelse(Income < 3500, "Under3500",  
                              ifelse(Income < 4000 & Income >= 3500, "3500-4000",
                                ifelse(Income < 4500 & Income >= 4000, "4000-4500",
                                  ifelse(Income < 5000 & Income >= 4500, "4500-5000", 
@@ -298,16 +298,16 @@ We’ve been analyzing the connections between murder rate and the various other
 ```{r state-heatmap, message=FALSE, warning=FALSE, fig.width=8, fig.height=10, fig.cap='(ref:state-heatmap)', fig.align='center'}
 library(gplots)
 st.matrix <- as.matrix(st)    # Transfer the data frame to matrix
-s <- apply(st.matrix, 2, function(y)(y - mean(y)) / sd(y))  # Standardize data
+s <- apply(st.matrix, 2, function(y) (y - mean(y)) / sd(y))  # Standardize data
 a <- heatmap.2(s, 
-          col = greenred(75), # Color green red
-          density.info = "none", 
-          trace = "none", 
-          scale = "none", 
-          RowSideColors = rainbow(4)[sta$Region],  
-          srtCol = 45,        # Column labels at 45 degree
-          margins = c(5, 8),  # Bottom and right margins
-          lhei = c(5, 15)     # Relative heights of the rows
+               col = greenred(75), # Color green red
+               density.info = "none", 
+               trace = "none", 
+               scale = "none", 
+               RowSideColors = rainbow(4)[sta$Region],  
+               srtCol = 45,        # Column labels at 45 degree
+               margins = c(5, 8),  # Bottom and right margins
+               lhei = c(5, 15)     # Relative heights of the rows
 ) 
 legend("topright", levels(sta$Region), fill = rainbow(4), cex = 0.8)  # Add legend 
 ```
@@ -355,7 +355,8 @@ Drama ensues as Southern states like Louisiana (LA) and Mississippi (MS) showcas
 Ready to play detective with numbers? Let's explore the fascinating realm of linear models to unravel the mystery behind the murder rate. We're dropping HS.Grad and Frost out of our suspect list due to their high correlation with other variables.
 ```{r}
 lm.data <- sta[, c(2:6, 9:10)]
-lm.data <- within(lm.data, Region <- relevel(Region, ref = "South"))  # Set region South as reference
+# Set region South as reference
+lm.data <- within(lm.data, Region <- relevel(Region, ref = "South"))  
 model <- lm(Murder ~ .,  data = lm.data)
 summary(model)
 ```

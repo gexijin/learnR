@@ -46,35 +46,29 @@ After downloading the data, we transmuted N/A into NA first using Excel and save
 tem <- read.csv("datasets/video-game-sales-at-22-Dec-2016.csv")
 tem <- na.omit(tem)  # Remove NA
 
-# Keep games with ratings and remove redundant levels
-library(dplyr)
-game <- tem %>% filter(Rating != "") %>% droplevels() 
+# Keep games with ratings
+game <- subset(tem, Rating != "")
 
+ 
 # Convert sales to actual figures by multiplying 1000000 
 # Plus one to avoid the curse of negative log (sneaky!)
-game$Year_of_Release <- as.factor(as.character(game$Year_of_Release))
-game$NA_Sales <- game$NA_Sales * 1000000 + 1
-game$EU_Sales <- game$EU_Sales * 1000000 + 1
-game$JP_Sales <- game$JP_Sales * 1000000 + 1
-game$Other_Sales <- game$Other_Sales * 1000000 + 1
-game$Global_Sales <- game$Global_Sales * 1000000 + 1
+sales_columns <- c("NA_Sales", "EU_Sales", "JP_Sales", "Other_Sales", "Global_Sales")
+game[sales_columns] <- lapply(game[sales_columns], function(x) x * 1000000 + 1)
 
 # Harmonizing Critic Scores to match the User Score scale by dividing by 10
 game$Critic_Score <- as.numeric(as.character(game$Critic_Score)) / 10  
-game$User_Score <- as.numeric(as.character(game$User_Score))
-game$Critic_Count <- as.numeric(game$Critic_Count)
-game$User_Count <- as.numeric(game$User_Count)
+sales_columns <- c("User_Score", "Critic_Count", "User_Count")
+game[sales_columns] <- lapply(game[sales_columns], function(x) as.numeric(as.character(x)))
 
 # Set category variables as factor variables 
-game$Name <- as.factor(game$Name)
-game$Platform <- as.factor(game$Platform)
-game$Genre <- as.factor(game$Genre)
-game$Publisher <- as.factor(game$Publisher)
-game$Developer <- as.factor(game$Developer)
-game$Rating <- as.factor(game$Rating)
+sales_columns <- c("Year_of_Release", "Name", "Platform", "Genre", "Publisher", "Developer", "Rating")
+game[sales_columns] <- lapply(game[sales_columns], function(x) as.factor(as.character(x)))
 
 # Format column names for clarity
-colnames(game) <- c("Name", "Platform", "Year.Release", "Genre", "Publisher", "NA.Sales", "EU.Sales", "JP.Sales", "Other.Sales", "Global.Sales", "Critic.Score", "Critic.Count", "User.Score", "User.Count", "Developer", "Rating")
+colnames(game) <- c("Name", "Platform", "Year.Release", "Genre", "Publisher", 
+                     "NA.Sales", "EU.Sales", "JP.Sales", "Other.Sales", 
+                     "Global.Sales", "Critic.Score", "Critic.Count", 
+                     "User.Score", "User.Count", "Developer", "Rating")
 
 # Display the structure and a summary of the dataset
 str(game)
@@ -83,23 +77,13 @@ summary(game)
 
 The summary reveals the existence of games published under the same banner (or name) but across various platforms; PlayStation 2(PS2) is the Goliath among platform; Action claims the throne as the genre of choice; Electronic Arts boasts the highest frequency among publishers; Rating T and E lead the rating pack; The sales data display small minimums, quantiles, and medians but boast heroic maximums, indicating the presence of superstar games; Exceedingly big maximum User Count hints at a cult-like following for certain titles. 
 
-Our pre-analysis shows that these variables are shy away from normality, notably the sales and score counts. To remedy this, we shall wield the power of logarithms!
+Our pre-analysis shows that these variables are shy away from normality, notably the sales and score counts. To remedy this, we shall wield the power of logarithms! let's bind the log-transformed variables with their original counterparts.
 ```{r}
-NA.Sales.Log <- log(game$NA.Sales)   
-EU.Sales.Log <- log(game$EU.Sales)  
-JP.Sales.Log <- log(game$JP.Sales)   
-Other.Sales.Log <- log(game$Other.Sales)  
-Global.Sales.Log <- log(game$Global.Sales) 
-Critic.Count.Log <- log(game$Critic.Count)
-User.Count.Log <- log(game$User.Count)
+sales_columns <- c("NA.Sales", "EU.Sales", "JP.Sales", "Other.Sales", 
+                   "Global.Sales", "Critic.Count", "User.Count")
+game[paste0(sales_columns, ".Log")] <- lapply(game[sales_columns], function(x) log(x))
 ```
 
-Now let's bind the log-transformed variables with their original counterparts.
-```{r}
-game.log <- cbind.data.frame(NA.Sales.Log, EU.Sales.Log, JP.Sales.Log, Other.Sales.Log,
-Global.Sales.Log, Critic.Count.Log, User.Count.Log)
-game <- cbind.data.frame(game, game.log)  # The data we use for analysis
-```
 
 Time to conjure histograms and QQ plots for our transformed dataset.
 ```{r message=FALSE, fig.width=8, fig.height=10}
@@ -115,8 +99,10 @@ for (i in 1:length(name)){
   abline(v = submean, col = "blue", lwd = 1)
   qqnorm(sub, main = paste("Q-Q Plot of", name[i], sep = " "))
   qqline(sub) 
-  if (i == 1) {s.t <- shapiro.test(sub)
-  } else {s.t <- rbind(s.t, shapiro.test(sub))
+  if (i == 1) {
+    s.t <- shapiro.test(sub)
+  } else {
+    s.t <- rbind(s.t, shapiro.test(sub))
  }
 }
 # Extract the essence of the Shapiro-Wilk test results
@@ -135,17 +121,21 @@ Now let's wave our wands for some visual magic!
 ## Visualization of categorical variables
 
 To simplify platform analysis, we regroup platform into a new variable called Platform.type.
-```{r}
+```{r message=FALSE}
 # Regroup platform into Platform.type categories
 pc <- c("PC")
 xbox <- c("X360", "XB", "XOne")
 nintendo <- c("Wii", "WiiU", "N64", "GC", "NES", "3DS", "DS") 
 playstation <- c("PS", "PS2", "PS3", "PS4", "PSP", "PSV")
+library(dplyr)
 game <- game %>%
-  mutate(Platform.type = ifelse(Platform %in% pc, "PC",
-                           ifelse(Platform %in% xbox, "Xbox",
-                             ifelse(Platform %in% nintendo, "Nintendo", 
-                               ifelse(Platform %in% playstation, "Playstation", "Others"))))) 
+  mutate(Platform.type = case_when(
+                         Platform %in% pc ~ "PC",
+                         Platform %in% xbox ~ "Xbox",
+                         Platform %in% nintendo ~ "Nintendo", 
+                         Platform %in% playstation ~ "Playstation",
+                         TRUE ~ "Others"))
+
 ```
 
 
@@ -166,7 +156,7 @@ dat <- dat[order(dat$fraction), ]
 dat$ymax <- cumsum(dat$fraction)
 dat$ymin <- c(0, head(dat$ymax, n = -1))
 names(dat)[1] <- "Genre"
-library(ggplot2)
+
 ggplot(dat, aes(fill = Genre, ymax = ymax, ymin = ymin, xmax = 4, xmin = 3)) +
   geom_rect(colour = "grey30") +  # Background color
   coord_polar(theta = "y") +  # Coordinate system to polar
@@ -403,11 +393,11 @@ game %>%
   group_by(Year.Release, Genre) %>%
   summarise(Total.Sales.Log = sum(Global.Sales.Log)) %>%
   ggplot(aes(x = Year.Release, y = Total.Sales.Log, group = Genre, fill = Genre)) +
-         geom_area() +
-         theme(legend.position = "right", axis.text.x = element_text(angle = 90),
-               panel.background = element_rect(fill = "blue"),
-               panel.grid.major = element_blank(),
-               panel.grid.minor=element_blank()) 
+    geom_area() +
+    theme(legend.position = "right", axis.text.x = element_text(angle = 90),
+          panel.background = element_rect(fill = "blue"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor=element_blank()) 
 ```
 
 Behold the tapestry of sales across genres, with 2007-2009 as the golden era—years when the sales towered above 7000 (log value) annually. Action and sports genres have reigned supreme over the two-decade span, while adventure, puzzle, and strategy genres remained relatively niche.

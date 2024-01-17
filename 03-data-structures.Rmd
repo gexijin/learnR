@@ -904,7 +904,9 @@ mosaic.plot <- function(image, yrange, xrange){
   length.y <- length(yrange)
   length.x <- length(xrange)
   image2 <- image
-  whitenoise <- matrix(nrow = length.y, ncol = length.x, runif(length.y * length.x))
+  whitenoise <- matrix(nrow = length.y, 
+                       ncol = length.x, 
+                       runif(length.y * length.x))
   image2@grey[yrange, xrange] <- whitenoise
   return(image2)
 }
@@ -1587,13 +1589,13 @@ To find out the days and the total number of days that each customer visited the
 
 ```{r}
 loc.names <- function(f){
-y <- unlist(f)                      # Flatten a list x into a vector y
-x <- list()                         # Create an empty list
-for (i in 1:length(y)){        
-  c.name <- y[i]                    # Assign the ith element to c.name. 
-  x[[c.name]] <- c(x[[c.name]], i)  # Assign values to x[[c.name]]. c.name is the name of x
-}
-return(x)
+  y <- unlist(f)                      # Flatten a list x into a vector y
+  x <- list()                         # Create an empty list
+  for (i in 1:length(y)){        
+    c.name <- y[i]                    # Assign the ith element to c.name. 
+    x[[c.name]] <- c(x[[c.name]], i)  # Assign values to x[[c.name]]. c.name is the name of x
+  }
+  return(x)
 }
 ```
 
@@ -1660,16 +1662,16 @@ Where F, M, and I represent Female, Male, and Infant, respectively.
 
 >
 my.fun <- function(f){
-y <- unlist(f)                         
-x <- ___________                                     
-for (i in 1:____){                      
-  g1 <- y[i]                        
-  x[[______]] <- c(x[[____]],i)                 
-}
-freq <- _________(x, length)                       
-z <- sort(________, decreasing = ____)                      
-lst <- list(x, z)                      
-___________(lst)                      
+  y <- unlist(f)                         
+  x <- ___________                                     
+  for (i in 1:____){                      
+    g1 <- y[i]                        
+    x[[______]] <- c(x[[____]],i)                 
+  }
+  freq <- _________(x, length)                       
+  z <- sort(________, decreasing = ____)                      
+  lst <- list(x, z)                      
+  ___________(lst)                      
 }                          
 gender <- list( "F", ________________________________, "F")                    
 __________(gender)                                                                 
@@ -1696,8 +1698,8 @@ Finally, let’s run a simulation with lists, using a loop. We will generate two
 ```{r }
 pvalues <- rep(1, 500)  # Define a vector containing 500 numbers, all equal to 1
 for (i in 1:500) {  # Loop: The values of i takes values from 1,2,3, …, 500
-     result = t.test(rnorm(100), rnorm(100))    
-     pvalues[i] = result$p.value  # p-values are stored in the i-th element in the vector
+  result = t.test(rnorm(100), rnorm(100))    
+  pvalues[i] = result$p.value  # p-values are stored in the i-th element in the vector
 }  
 hist(pvalues)  # Histogram of p-values
 summary(pvalues)   

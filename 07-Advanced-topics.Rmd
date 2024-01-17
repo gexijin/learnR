@@ -177,7 +177,8 @@ e. Use one command with multiple steps.
 >
 heartatk4R <- read.csv("______________/heartatk4R.txt",  header = TRUE, sep = "\t",  
 >          
-    colClasses = c("character", "factor", "factor", "factor", "factor", "numeric", "numeric", "numeric")
+  colClasses = c("character", "factor", "factor", "factor", "factor", 
+                 "numeric", "numeric", "numeric")
 >                           
 head(heartatk4R)      
 >
@@ -341,10 +342,10 @@ knitr::include_graphics("images/Ch7_Adv_top_27.png")
 e.	Enhance your app with a more complex feature. Let's add an approximation normal distribution line by replacing the function **hist(x, breaks = bins, col = 'green', border = 'white')** with the code below:
 
 ```{r eval=F}
-      h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
-      yfit <- dnorm(bins, mean = mean(x), sd = sd(x)) 
-      yfit <- yfit *  diff( h$mids[1:2]) * length(x) 
-      lines(bins, yfit, col = "blue")
+h <- hist(x, breaks = bins, col = rainbow(10), border = 'white')
+yfit <- dnorm(bins, mean = mean(x), sd = sd(x)) 
+yfit <- yfit *  diff( h$mids[1:2]) * length(x) 
+lines(bins, yfit, col = "blue")
 ```
 
 The output should mirror Figure \@ref(fig:label28).
@@ -387,11 +388,11 @@ ui <- fluidPage(
    sidebarLayout(
       sidebarPanel(
         selectInput("cid", "Select the column", choices = ___________),
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 12)
+          sliderInput("bins",
+                      "Number of bins:",
+                      min = 1,
+                      max = 50,
+                      value = 12)
       ),
       
       # Show a plot of the generated distribution
@@ -399,7 +400,7 @@ ui <- fluidPage(
          plotOutput("Plot")
       ) 
    )
- )
+)
 
 # Define server logic required to draw a histogram and pie plot
 
@@ -407,7 +408,7 @@ server <- function(input, output) {
    
    output$Plot <- renderPlot({
      
-      x    <- iris[, input$cid]
+      x <- iris[, input$cid]
       
       # Draw the histogram with the specified number of bins for variable columns
       ________ (input$cid %in% colnames(iris)[______]){
@@ -416,11 +417,12 @@ server <- function(input, output) {
       hist(x, breaks = bins, col = 'green', border = 'white', main = titl)
       
       # Draw the pie plot for categorical column Species
-        __________
-        count <- table(x)
-        labl <- paste(names(count), "\n", count, sep = "")
-        titl <- paste("Pie plot of", input$cid, sep = " ")
-        pie(count, labels = labl, main = titl)
+      __________
+      count <- table(x)
+      labl <- paste(names(count), "\n", count, sep = "")
+      titl <- paste("Pie plot of", input$cid, sep = " ")
+      pie(count, labels = labl, main = titl)
+      
       }
    })
 }
@@ -434,51 +436,50 @@ library(shiny)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
    
-   # Application title
-   titlePanel("Interactive page for iris data"),
+  # Application title
+  titlePanel("Interactive page for iris data"),
    
-   # Sidebar with a slider input for number of bins 
-   sidebarLayout(
-      sidebarPanel(
-        selectInput("cid", "Select the column", choices = colnames(iris)),
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 12)
-      ),
+  # Sidebar with a slider input for number of bins 
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("cid", "Select the column", choices = colnames(iris)),
+        sliderInput("bins",
+                    "Number of bins:",
+                    min = 1,
+                    max = 50,
+                    value = 12)
+    ),
       
-      # Show a plot of the generated distribution
-      mainPanel(
-         plotOutput("Plot")
-      ) 
-   )
- )
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("Plot")
+    ) 
+  )
+)
 
 # Define server logic required to draw a histogram and pie plot
 
 server <- function(input, output) {
    
-   output$Plot <- renderPlot({
+  output$Plot <- renderPlot({
      
-      x    <- iris[, input$cid]
+    x <- iris[, input$cid]
       
-      # Draw the histogram with the specified number of bins for variable columns
-      if (input$cid %in% colnames(iris)[1:4]){
+    # Draw the histogram with the specified number of bins for variable columns
+    if (input$cid %in% colnames(iris)[1:4]){
       bins <- seq(min(x), max(x), length.out = input$bins + 1)
       titl <- paste("Histogram of", input$cid, sep = " ")
       hist(x, breaks = bins, col = 'green', border = 'white', main = titl)
       
-      # Draw the pie plot for categorical column Species
-      } else {
-        count <- table(x)
-        labl <- paste(names(count), "\n", count, sep = "")
-        titl <- paste("Pie plot of", input$cid, sep = " ")
-        pie(count, labels = labl, main = titl)
-      }
-   })
+    # Draw the pie plot for categorical column Species
+    } else {
+      count <- table(x)
+      labl <- paste(names(count), "\n", count, sep = "")
+      titl <- paste("Pie plot of", input$cid, sep = " ")
+      pie(count, labels = labl, main = titl)
+    }
+  })
 }
-
 
 # Run the application 
 #shinyApp(ui = ui, server = server)
@@ -582,9 +583,9 @@ x <- 5
 
 This will work, but why go through the hassle every time? Let’s define our own function without repeating same code every time:
 ```{r}
-myf <- function(x) {                           # Name the function myf
-       y = 1.57345 * x^3 + x^2 - 2 * x + 1     # Define the function
-       return(y)                               # Return the function result
+myf <- function(x) {                      # Name the function myf
+  y = 1.57345 * x^3 + x^2 - 2 * x + 1     # Define the function
+  return(y)                               # Return the function result
 }
 ```
 

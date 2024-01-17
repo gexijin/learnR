@@ -48,8 +48,10 @@ Now we will explore the pay checks' distribution.
 EmplId.Empl.Rcd <- as.character(salary$EmplId.Empl.Rcd)
 counts <- data.frame(table(EmplId.Empl.Rcd))
 PersonOccurCount <- table(counts[, 2])
-plot(PersonOccurCount, col = rainbow(30), 
-     xlab = "Occurance of employee", ylab = "Count of employee")
+plot(PersonOccurCount, 
+     col = rainbow(30), 
+     xlab = "Occurance of employee", 
+     ylab = "Count of employee")
 ```
 
 Most employees were paid 26 times. Let’s remove the employees not receiving 26 pay checks.
@@ -150,7 +152,8 @@ Finally, with our data now squeaky clean, let's take one last look, focusing on 
 ```{r message=FALSE}
 salary <- salary %>% 
   group_by(EmplId.Empl.Rcd, Sex, Ethnic.Grp, Union.Descr) %>% 
-  summarise(Age = round(mean(Age), 0), Tot.Gross = mean(Tot.Gross), 
+  summarise(Age = round(mean(Age), 0), 
+            Tot.Gross = mean(Tot.Gross), 
             Bi.Weekly.Rate = mean(Bi.Weekly.Comp.Rate)) %>%
   group_by(EmplId.Empl.Rcd) %>% 
   filter(n() == 1) %>% 
@@ -235,8 +238,12 @@ counts <- sort(table(salary$Sex), decreasing = TRUE)
 # Labels with count number and percentage
 percentage <- paste(round(counts/sum(counts), 2)*100, "%", sep = "")
 labels <- paste(names(counts), "\n", counts, percentage, sep = "  ") 
-pie3D(counts, labels = labels, explode = 0.05,
-    main = "Pie chart of sex", labelcex = 1.0, labelpos = c(1.8, 5.0))
+pie3D(counts, 
+      labels = labels, 
+      explode = 0.05,
+      main = "Pie chart of sex", 
+      labelcex = 1.0, 
+      labelpos = c(1.8, 5.0))
 ```
 
 Interestingly, females outnumber males by about 4% in our dataset.
@@ -244,18 +251,21 @@ Interestingly, females outnumber males by about 4% in our dataset.
 ### Union descreption
 Lastly, let's analyze the top unions both by count and average gross income.
 ```{r warning=FALSE}
-top10Union <- data.frame(sort(table(salary$Union.Descr), decreasing = TRUE)[1:10]) # By count
+top10Union <- data.frame(sort(table(salary$Union.Descr), 
+                              decreasing = TRUE)[1:10]) # By count
 names(top10Union)[1] <- "Union.Descr"
 topUnion <- salary %>%
   group_by(Union.Descr) %>%
   summarise(Avg.Gross.Log = round(mean(Gross.Log), 3)) %>%
   arrange(desc(Avg.Gross.Log)) %>%
-  head(10)   #by average gross sales
+  head(10)   # Head of average gross sales
 UnionCountGross <- data.frame(top10Union, topUnion) 
 names(UnionCountGross)[1]<- "Top unions by count"
 names(UnionCountGross)[3]<- "Top unions by log of gross"
 library(knitr)
-kable(UnionCountGross, booktabs = TRUE, caption = "Top unions by count and average log value of gross")
+kable(UnionCountGross, 
+      booktabs = TRUE, 
+      caption = "Top unions by count and average log value of gross")
 ```
 
 The most populous unions include Service Maintain, Correctional officers, and Social & Human Services. However, when ranked by average gross, the top unions largely consist of those from universities or colleges. Interestingly, except for the Managerial union, the top 10 unions by count are significantly different from those by average gross income.
@@ -277,7 +287,10 @@ AgeBar <- salary %>%
   labs(y = "Average gross income")
 # Get density2D plot
 AgeDensity <- ggplot(salary, aes(x = Age, y = Gross.Log)) + 
-  stat_density2d(aes(fill = ..density..^0.25), geom = "tile", contour = FALSE, n = 200) +  
+  stat_density2d(aes(fill = ..density..^0.25), 
+                 geom = "tile", 
+                 contour = FALSE, 
+                 n = 200) +  
   scale_fill_continuous(low = "white", high = "dodgerblue3") +
   scale_x_continuous(breaks = seq(10, 100, 10)) +
   scale_y_continuous(breaks = seq(2, 12, 1)) +
@@ -297,18 +310,22 @@ salary$AgeGroup <- cut(salary$Age, breaks = c(10, 20, 30, 40, 50, 60, 70, 80, 90
 (ref:salary-LogGrossAge1) Distribution of log gross income by age group.
 
 ```{r salary-LogGrossAge1, fig.cap='(ref:salary-LogGrossAge1)', fig.align='center'}
-stat <- salary %>% group_by(AgeGroup) %>% summarise(Avg.Gross.Log = mean(Gross.Log)) 
+stat <- salary %>% 
+  group_by(AgeGroup) %>% 
+  summarise(Avg.Gross.Log = mean(Gross.Log)) 
 ggplot() + 
   geom_boxplot(data = salary, aes(x = AgeGroup, y = Gross.Log, fill = AgeGroup)) + 
   geom_point(data = stat, aes(x = AgeGroup, y = Avg.Gross.Log), color = "brown") +
   geom_text(data = stat, 
-            aes(label = round(Avg.Gross.Log, 2), x = AgeGroup, y = Avg.Gross.Log - 0.1))
+            aes(label = round(Avg.Gross.Log, 2), 
+                x = AgeGroup, 
+                y = Avg.Gross.Log - 0.1))
 ```
 
 With each decade, there's a steady increase in log gross income, except in the 80-90 age group，reflecting the progression and experience gained over years of service. 
 
 ```{r}
-model <- aov(salary$Gross.Log~salary$AgeGroup)
+model <- aov(salary$Gross.Log ~ salary$AgeGroup)
 summary(model)
 ```
 
@@ -316,9 +333,12 @@ A p-value significantly less than 0.05 in our ANOVA analysis reveals significant
 
 ```{r message=FALSE, warning=FALSE}
 library(agricolae)
-# LSD.test needs to provide degrees of freedom and mean square for errors. We can get it from aov.
-res <- LSD.test(salary$Gross.Log, salary$AgeGroup, 
-                DFerror = model$df.residual, MSerror = anova(model)[["Mean Sq"]][2])  
+# LSD.test needs to provide degrees of freedom and mean square for errors. 
+#   We can get it from aov.
+res <- LSD.test(salary$Gross.Log, 
+                salary$AgeGroup, 
+                DFerror = model$df.residual, 
+                MSerror = anova(model)[["Mean Sq"]][2])  
 res$groups
 ```
 
@@ -341,7 +361,8 @@ AgePercBar <- salary %>%
   scale_x_continuous(breaks = seq(10, 100, 10)) +
   labs(y = "Percentage") +
   theme(panel.background = element_rect(fill = "black"),
-  panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+  panel.grid.major = element_blank(), 
+  panel.grid.minor = element_blank())
 ggplotly(AgePercBar)
 ```
 
@@ -359,14 +380,19 @@ SubFemale <- salary[which(salary$Sex == "F"), ]
 SubMale <- salary[which(salary$Sex == "M"), ]
 plot(density(SubFemale$Gross.Log), col = "red", xlab = "Log of Gross", 
      main = "Density plot for each sex")
-lines(density(SubMale$Gross.Log), col = "blue")  # Add density line of SubMale to density plot of SubFemale
+# Add density line of SubMale to density plot of SubFemale
+lines(density(SubMale$Gross.Log), col = "blue")  
 legend("topright", c("M","F"), lty = c(1, 1), col = c("blue", "red"))  # Add legend
 # LSD comparison for sex group
-model <- aov(salary$Gross.Log~salary$Sex)
-res <- LSD.test(salary$Gross.Log, salary$Sex, 
-                DFerror = model$df.residual, MSerror = anova(model)[["Mean Sq"]][2]) 
+model <- aov(salary$Gross.Log ~ salary$Sex)
+res <- LSD.test(salary$Gross.Log, 
+                salary$Sex, 
+                DFerror = model$df.residual, 
+                MSerror = anova(model)[["Mean Sq"]][2]) 
 gross <- round(res$groups[, "salary$Gross.Log"], 2)
-plot(res, xlab = "Sex Group", ylab = "Range between max and min", 
+plot(res, 
+     xlab = "Sex Group", 
+     ylab = "Range between max and min", 
      main = "Sex groups and variation range")
 text(x = c(seq(from = 1, to = 10, by = 1.2)), y = 8, gross)
 ```
@@ -441,12 +467,13 @@ EthnicBar <- salary %>%
   geom_errorbar(aes(ymin =mean - se, ymax =mean + se), color = "black", width = 0.3) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # Density ridges for different ethnic group
-EthnicDensity <- salary %>% group_by(Ethnic.Grp) %>%
+EthnicDensity <- salary %>% 
+  group_by(Ethnic.Grp) %>%
   ggplot(aes(x = Gross.Log, y = Ethnic.Grp, color = Ethnic.Grp, fill = Ethnic.Grp)) +
-  geom_density_ridges(alpha = 0.5) +
-  xlim(6.0, 10.0) +
-  coord_flip() +
-  theme(legend.position = "none")
+    geom_density_ridges(alpha = 0.5) +
+    xlim(6.0, 10.0) +
+    coord_flip() +
+    theme(legend.position = "none")
 # Display two plots in same row 
 grid.arrange(EthnicBar, EthnicDensity, nrow = 1)
 ```
@@ -468,19 +495,25 @@ GrossEthnic <- salary %>%
   arrange(desc(Avg.Gross)) %>%
   pull(Ethnic.Grp)
 
-# build data frame for rank of these two ethnic order
+# Build data frame for rank of these two ethnic order
 EthnicGroup <- unlist(list(CountEthnic[, 1], GrossEthnic))
 Rank <- rep(1:8, 2)
 EthnicType <- rep(c("CountEthnic","GrossEthnic"), each = 8)
 EthnicRank <- data.frame(Rank, EthnicType, EthnicGroup)
 
-# point plot two set of ethnics according rank and connect same ethnic by line
-ggplot(EthnicRank, aes(y = Rank, x = EthnicType, label = EthnicGroup, group = EthnicGroup) )+
+# Point plot two set of ethnics according rank and connect same ethnic by line
+ggplot(EthnicRank, 
+       aes(y = Rank, 
+           x = EthnicType, 
+           label = EthnicGroup, 
+           group = EthnicGroup)) +
   geom_line(size = 1) +
   geom_point(aes(color = EthnicGroup), size = 5) +
   scale_y_continuous(breaks = seq(0, 10, 1)) +
-  annotate("text", x = 0.7, y = Rank[1:8], label = EthnicGroup[1:8], hjust = 0, cex = 3.5) +
-  annotate("text", x = 2.1, y = Rank[9:16], label = EthnicGroup[9:16], hjust = 0, cex = 3.5)
+  annotate("text", x = 0.7, y = Rank[1:8], 
+           label = EthnicGroup[1:8], hjust = 0, cex = 3.5) +
+  annotate("text", x = 2.1, y = Rank[9:16], 
+           label = EthnicGroup[9:16], hjust = 0, cex = 3.5)
 ```
 White and Black employees dominate the workforce in numbers, while Asians lead in average gross income. Pacif consistently ranks lowest in both categories. Interestingly, the ranking by income notably differs from those by count.
 
@@ -491,7 +524,7 @@ par(mar = c(4, 10, 2, 1))
 psig <- as.numeric(apply(tukey$Ethnic.Grp[, 2:3], 1, prod) >= 0) + 1
 plot(tukey, col = psig, las = 1, cex.axis = 0.7, yaxt = "n")
 for (j in 1:length(psig)){
-  axis(2, at = j,labels = rownames(tukey$Ethnic.Grp)[length(psig) - j + 1],
+  axis(2, at = j, labels = rownames(tukey$Ethnic.Grp)[length(psig) - j + 1],
        las = 1, cex.axis = .8, col.axis = psig[length(psig) - j + 1])
 }
 ```
@@ -503,7 +536,8 @@ ggplot(salary, aes(x = Age, y = Gross.Log, colour = Sex, shape = Sex)) +
   geom_point() +
   ggtitle("Scatterplot of log of gross vs Age by Sex and Ethnic") +
   facet_wrap(~ Ethnic.Grp) +  # Arrange panels by Ethnic Group
-  geom_smooth(aes(colour = Sex), method = 'lm',formula = y ~ x)  +  # Add the regression line
+  # Add the regression line
+  geom_smooth(aes(colour = Sex), method = 'lm', formula = y ~ x)  + 
   theme(plot.title = element_text(hjust = 0.5), legend.position = c(0.85, 0.15))
 ```
 
@@ -559,12 +593,18 @@ kable(GrossIncome, booktabs = TRUE, caption = "Table of gross type")
 
 ```{r}
 GrossIncome$Gross.Type <- factor(GrossIncome$Gross.Type, levels = GrossIncome$Gross.Type)
-ggplot(GrossIncome, aes(x = Gross.Type,
-       label = paste(Avg.Tot.Gross, paste(Percent*100, "%", sep = ""), sep = ",   "))) +
+ggplot(GrossIncome, 
+       aes(x = Gross.Type,
+         label = paste(Avg.Tot.Gross, 
+                       paste(Percent*100, "%", sep = ""), 
+                       sep = ",   "))) +
   geom_bar(aes(y = Count), stat = "identity", fill = rainbow(3)) +
-  geom_line(aes(y = Avg.Log.Gross*250, group = 1, colour = "Avg.Tot.Gross*250"), size = 2) +
-  geom_point(aes(y = Avg.Log.Gross*250, group = 1, colour = "Avg.Tot.Gross*250"), size = 4) +
-  labs(x = "Gross Type", y = "Employee Number", 
+  geom_line(aes(y = Avg.Log.Gross*250, group = 1, colour = "Avg.Tot.Gross*250"), 
+            size = 2) +
+  geom_point(aes(y = Avg.Log.Gross*250, group = 1, colour = "Avg.Tot.Gross*250"), 
+             size = 4) +
+  labs(x = "Gross Type", 
+       y = "Employee Number", 
        title = "Average gross and employee distribution for each gross type") +
   theme(plot.title = element_text(hjust = 0.5)) +
   geom_text(x = c(1, 2, 3), y = c(2000, 1900, 1800), size = 4, color = "black")
@@ -592,11 +632,14 @@ Over half of the employees in most ethnic groups fall into the middle gross type
 library(ggmosaic)
 h_mosaic <- ggplot(data = salary) +
   geom_mosaic(aes(x = product(Sex, Ethnic.Grp), fill = AgeGroup), 
-              na.rm = T, divider = mosaic("h")) +
+              na.rm = T, 
+              divider = mosaic("h")) +
   theme(plot.title = element_text(hjust = 0.5), 
         axis.text.x = element_text(angle = 90, size = 6),
-        legend.position="top",legend.text=element_text(size = 6),
-        panel.background = element_rect(fill="black"), panel.grid.major = element_blank()) + 
+        legend.position="top",
+        legend.text=element_text(size = 6),
+        panel.background = element_rect(fill="black"), 
+        panel.grid.major = element_blank()) + 
   labs(x = "", y = "", title= "Mosaic Plot for Gross Group by Ethnic and Sex Group") +
   facet_grid(Gross.Type ~ .)
 ggplotly(h_mosaic, width = 750, height = 500) %>%
@@ -620,10 +663,13 @@ We employ a linear model (LM) and an ANOVA analysis to dissect the relationship 
 ```{r warning=FALSE }
 modelLM <- lm(Gross.Log ~ ., data = salaryglm)
 ss <- coef(summary(modelLM))  # Take only coefficient of summary
-ss.sig <- ss[ss[, "Pr(>|t|)"] < 0.05, ][1:20, ]  # Show first 20 coefficient with p < 0.05
+# Show first 20 coefficient with p < 0.05
+ss.sig <- ss[ss[, "Pr(>|t|)"] < 0.05, ][1:20, ]  
 ss.sig
 # Show Adjusted R-squared value
-statistic <- paste("Adjusted R-squared",round(summary(modelLM)$adj.r.squared, 4), sep = ": ")
+statistic <- paste("Adjusted R-squared",
+                   round(summary(modelLM)$adj.r.squared, 4), 
+                   sep = ": ")
 statistic
 modelANOVA <- aov(Gross.Log ~ ., data = salaryglm)
 summary(modelANOVA)

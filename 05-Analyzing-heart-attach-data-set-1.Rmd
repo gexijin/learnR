@@ -114,10 +114,10 @@ Figure \@ref(fig:4-2) provides visual examples of Pearson’s correlation with v
 Table \@ref(tab:4-02) below gives some guidelines for interpreting Pearson’s correlation coefficient. 
 
 ```{r echo=FALSE, message=FALSE}
-  Correlation <- c("-", "Small", "Medium", "Large")
-  Negative <- c("-0.09 to 0.0", "-0.3 to -0.1", "-0.5 to -0.3", "-1.0 to -0.5")
-  Positive <- c("0.0 to 0.09", "0.1 to 0.3", "0.3 to 0.5", "0.5 to 1.0")
-  dat <- data.frame(Correlation, Negative, Positive)
+Correlation <- c("-", "Small", "Medium", "Large")
+Negative <- c("-0.09 to 0.0", "-0.3 to -0.1", "-0.5 to -0.3", "-1.0 to -0.5")
+Positive <- c("0.0 to 0.09", "0.1 to 0.3", "0.3 to 0.5", "0.5 to 1.0")
+dat <- data.frame(Correlation, Negative, Positive)
 ```
 
 ```{r 4-02, echo=FALSE}
@@ -247,8 +247,8 @@ text(1, 7000, labels = "B")
 To change the position of legend, add an argument such as "*args.legend = list(x = "topleft")*", in the function barplot(). For example, we can move the legend to the top-left of Figure \@ref(fig:5-1) A.
 
 ```{r}
-barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", beside = F,
-        args.legend = list(x = "topleft"))
+barplot(counts, legend = rownames(counts), col = rainbow(2), xlab = "DIED", 
+        beside = F, args.legend = list(x = "topleft"))
 ```
 
 
@@ -335,7 +335,8 @@ heartatk4R$GROUP <- paste(heartatk4R$DIED, heartatk4R$SEX, sep = "-")
 ggplot(heartatk4R, aes(x = AGE, group = GROUP)) +
   geom_histogram(
     aes(y = after_stat(count / tapply(count, PANEL, sum)[PANEL] * 100), fill = GROUP), 
-    binwidth = 5, color = "black"
+    binwidth = 5, 
+    color = "black"
   ) +
   facet_grid(DIED ~ SEX) + # Split a graph according to a matrix of panels defined by DIED and SEX
   labs(y = "Percent of Total", x = "Age") 
@@ -356,7 +357,9 @@ Now for each gender, we further divide the patients by their survival status.
 (ref:new4) Density plot of AGE by SEX and DIED.
 
 ```{r new4, fig.width=6, fig.height=4, fig.cap='(ref:new4)', fig.align='center'}
-ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + geom_density(alpha = .3) + facet_grid(SEX ~ .) 
+ggplot(heartatk4R, aes(x = AGE, fill = DIED)) + 
+  geom_density(alpha = .3) + 
+  facet_grid(SEX ~ .) 
 ```
 Overlaying survival curves indicates a clear age-related trend in survival rates: younger patients tend to survive for both men and women.
 
@@ -394,7 +397,9 @@ The ggplot2 package can also shed light on correlations between multiple variabl
 (ref:5-6) Multiple boxplots of AGE by DRG and SEX.
 
 ```{r 5-6, fig.width=5, fig.height=3, fig.cap='(ref:5-6)', fig.align='center'}
-ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_boxplot(color = "blue") + facet_grid(SEX ~ .)
+ggplot(heartatk4R, aes(x = DRG, y = AGE)) + 
+  geom_boxplot(color = "blue") + 
+  facet_grid(SEX ~ .)
 ```
 
 Recall that 121 indicates survivors with complication, 122 for survivors with no complication, and 123 for died. This visualization suggests older patients are more likely to die in hospital and those with complications are generally older. It raises the question: Does this mean they also had longer hospital stays?
@@ -415,7 +420,9 @@ Use ggplot2 to create boxplots comparing the lengths of stay across different DR
 >
 ```{r echo=FALSE, fig.width=6, fig.height=4, fig.cap='Multiple boxplots.', fig.align='center'}
 ggplot(heartatk4R, aes(x = SEX, y = AGE)) + 
-  geom_boxplot(color = "blue") + coord_flip() + facet_grid(DRG ~ .) +
+  geom_boxplot(color = "blue") + 
+  coord_flip() + 
+  facet_grid(DRG ~ .) +
   ggtitle("Multiple boxplots using ggplot2 package") +
   theme(plot.title = element_text(hjust = 0.5))
 ```
@@ -427,7 +434,9 @@ ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point()
 # Scatterplot of LOS vs. AGE, divided by SEX
 ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(SEX ~ .)  
 # Scatterplot colored by DIED
-ggplot(heartatk4R, aes(x = AGE, y = LOS, color = DIED)) + geom_point() + facet_grid(SEX ~ .)  
+ggplot(heartatk4R, aes(x = AGE, y = LOS, color = DIED)) + 
+  geom_point() + 
+  facet_grid(SEX ~ .)  
 ```
 
 Here we only show the figure for the third code.
@@ -437,7 +446,9 @@ Note that ggplot(heartatk4R, aes(x = DRG, y = AGE)) + geom_point() + facet_grid(
 
 ```{r 5-7, echo=FALSE, fig.cap='(ref:5-7)', fig.align='center'}
 # Scatterplot of LOS vs. AGE, divided by SEX and DIED
-ggplot(heartatk4R, aes(x = AGE, y = LOS)) + geom_point(color = "blue") + facet_grid(SEX ~ DIED)  
+ggplot(heartatk4R, aes(x = AGE, y = LOS)) + 
+  geom_point(color = "blue") + 
+  facet_grid(SEX ~ DIED)  
 ```
 
 Figure \@ref(fig:5-7) suggests the positive association between age and length of stay in hospital for the survivors, regardless of sex. This is a statistician’s language. Try this instead that could be understood by both the statistician and his/her grandmother: Older patients tend to stay longer in the hospital after surviving a heart attack. This is true for both men and women. 
@@ -448,7 +459,8 @@ Another way to visualize complex correlation is **bubble plot**.  It's an enhanc
 
 ```{r 5-8, fig.cap='(ref:5-8)', fig.align='center'}
 y <- x[sample(1:12844, 200), ]   # Randomly sample 200 patients
-plot(y$AGE, y$LOS, cex = y$CHARGES / 6000, col = rainbow(2)[y$SEX], xlab = "AGE", ylab = "LOS")
+plot(y$AGE, y$LOS, cex = y$CHARGES / 6000, col = rainbow(2)[y$SEX], 
+     xlab = "AGE", ylab = "LOS")
 legend("topleft", levels(y$SEX), col = rainbow(2), pch = 1)
 ```
 
